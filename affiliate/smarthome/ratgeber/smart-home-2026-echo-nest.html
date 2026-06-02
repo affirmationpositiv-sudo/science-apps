@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Home 2026: Die besten Amazon Echo & Google Nest Modelle im Vergleich</title>
+  <meta name="description" content="Amazon Echo vs. Google Nest 2026: Welcher Smart Speaker passt zu dir? Alle Modelle, Preise & Unterschiede im großen Vergleich – inklusive Affiliate-Links.">
+  <link rel="canonical" href="https://lichtundschatten.de/affiliate/smarthome/ratgeber/smart-home-2026-echo-nest.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Smart Home 2026: Die besten Amazon Echo & Google Nest Modelle">
+  <meta property="og:description" content="Amazon Echo vs. Google Nest 2026: Welcher Smart Speaker passt zu dir? Alle Modelle im Vergleich.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://lichtundschatten.de/affiliate/smarthome/ratgeber/smart-home-2026-echo-nest.html">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0A0A;
+      --bg-card: #141414;
+      --bg-card-hover: #1A1A1A;
+      --text: #E5E5E5;
+      --text-muted: #8A8A8A;
+      --accent: #06B6D4;
+      --accent-hover: #0891B2;
+      --accent-glow: rgba(6, 182, 212, 0.25);
+      --border: #222;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --max-width: 800px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header {
+      padding: 60px 0 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.3;
+    }
+    .back-link {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .back-link:hover { text-decoration: underline; }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      position: relative;
+    }
+    header h1 span { color: var(--accent); }
+    header p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-top: 12px;
+      position: relative;
+    }
+    .meta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      position: relative;
+    }
+
+    /* Content */
+    .content { padding: 20px 0 60px; }
+    .content h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 40px 0 16px;
+      color: var(--accent);
+    }
+    .content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 28px 0 12px;
+    }
+    .content p {
+      margin-bottom: 16px;
+      color: var(--text-muted);
+    }
+    .content strong { color: var(--text); }
+    .content ul, .content ol {
+      margin: 0 0 16px 20px;
+      color: var(--text-muted);
+    }
+    .content li { margin-bottom: 8px; }
+    .content a { color: var(--accent); text-decoration: underline; }
+    .content a:hover { color: var(--accent-hover); }
+
+    /* Affiliate Disclosure */
+    .disclosure {
+      background: rgba(6, 182, 212, 0.06);
+      border: 1px solid rgba(6, 182, 212, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      margin-bottom: 32px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .disclosure strong { color: var(--text); }
+
+    /* Product Box */
+    .product-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin: 24px 0;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .product-box:hover { border-color: var(--accent); }
+    .product-box .info { flex: 1; }
+    .product-box h3 { margin: 0 0 6px; font-size: 1.1rem; }
+    .product-box .price {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .product-box .desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+    .product-btn {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .product-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    /* Vergleichstabelle */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.9rem;
+    }
+    .compare-table th, .compare-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .compare-table th {
+      background: var(--bg-card);
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .compare-table td { color: var(--text-muted); }
+    .compare-table tr:hover td { background: rgba(6, 182, 212, 0.04); }
+
+    /* Fazit */
+    .fazit {
+      background: rgba(6, 182, 212, 0.06);
+      border-left: 4px solid var(--accent);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 20px 24px;
+      margin: 32px 0;
+    }
+    .fazit h3 { margin: 0 0 8px; color: var(--accent); }
+    .fazit p { margin: 0; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+    }
+    footer p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 6px; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 1.7rem; }
+      .product-box { flex-direction: column; }
+      .compare-table { font-size: 0.8rem; }
+      .compare-table th, .compare-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="container">
+    <a class="back-link" href="../index.html">← Zurück zur Startseite</a>
+    <h1>Smart Home 2026: Die besten <span>Amazon Echo</span> & <span>Google Nest</span> Modelle</h1>
+    <p>Welcher Smart Speaker passt zu deinem Zuhause? Alle Modelle, Preise und Unterschiede – kompakt erklärt.</p>
+    <div class="meta">📅 Juni 2026 · 📖 ca. 8 Minuten</div>
+  </div>
+</header>
+
+<!-- Content -->
+<section class="content">
+  <div class="container">
+
+    <div class="disclosure">
+      <strong>Affiliate-Offenlegung:</strong> Die mit ★ markierten Links sind Affiliate-Links. Wenn du über einen solchen Link etwas kaufst, erhalten wir eine kleine Provision – für dich bleibt der Preis gleich. Vielen Dank! 🙏
+    </div>
+
+    <h2>Amazon Echo oder Google Nest – die große Frage 2026</h2>
+    <p>Ob Musik, Nachrichten, smarte Lampen oder die Heizung – ein smarter Lautsprecher ist das Herzstück jedes modernen Zuhauses. 2026 liefern sich <strong>Amazon Echo</strong> und <strong>Google Nest</strong> ein enges Rennen. Beide Ökosysteme sind enorm gewachsen, beide haben ihre Stärken – und beide haben in den letzten Monaten wichtige Updates erhalten.</p>
+    <p>In diesem Ratgeber zeigen wir dir die aktuellen Modelle beider Serien, erklären die Unterschiede und helfen dir bei der Entscheidung, welcher Assistent am besten in deinen Alltag passt.</p>
+
+    <h2>Amazon Echo (2026) – die Modellübersicht</h2>
+    <p>Amazon hat sein Echo-Portfolio 2025/2026 grundlegend überarbeitet. Die aktuelle Generation glänzt mit schnellerer Verarbeitung, besserem Klang und tieferer Integration in das Matter-Smart-Home-Protokoll.</p>
+
+    <h3>Echo Dot (5. Gen) – Der Einstieg</h3>
+    <div class="product-box">
+      <div class="info">
+        <h3>Echo Dot 5. Generation</h3>
+        <div class="price">ca. 59,99 €</div>
+        <p class="desc">Kompakter Alexa-Lautsprecher mit verbessertem Klang, Temperatur- & Bewegungssensor. Ideal für Einsteiger und kleine Räume.</p>
+        <a class="product-btn" href="https://www.amazon.de/dp/B09B8X8L1P?tag=ikune21-21" target="_blank" rel="noopener sponsored">★ Bei Amazon ansehen</a>
+      </div>
+    </div>
+    <p>Der Echo Dot 5. Gen ist nach wie vor der Bestseller unter den Smart Speakern. Der <strong>Temperatursensor</strong> und der <strong>Bewegungssensor</strong> ermöglichen smarte Automationen – etwa „Licht ausschalten, wenn niemand im Raum ist". Das LED-Display zeigt Uhrzeit, Wetter oder Songtitel an. Für den Einstieg in Alexa unschlagbar.</p>
+
+    <h3>Echo Show 8 (3. Gen) – Der Allrounder mit Display</h3>
+    <div class="product-box">
+      <div class="info">
+        <h3>Echo Show 8 (3. Gen)</h3>
+        <div class="price">ca. 149,99 €</div>
+        <p class="desc">8-Zoll-Display mit HD-Kamera für Videoanrufe, smarte Widgets und Mediensteuerung. Die Zentrale für dein Smart Home.</p>
+        <a class="product-btn" href="https://www.amazon.de/dp/B0B4PJ8G3L?tag=ikune21-21" target="_blank" rel="noopener sponsored">★ Bei Amazon ansehen</a>
+      </div>
+    </div>
+    <p>Der Echo Show 8 ist der meistverkaufte Smart Display. Die 13-MP-Kamera schwenkt und zoomt automatisch, sodass du bei Videoanrufen immer im Bild bleibst. Dank <strong>Zigbee</strong>- und <strong>Matter</strong>-Support kannst du viele Geräte direkt koppeln – ohne zusätzlichen Hub.</p>
+
+    <h3>Echo Studio – Der HiFi-Genuss</h3>
+    <div class="product-box">
+      <div class="info">
+        <h3>Echo Studio</h3>
+        <div class="price">ca. 199,99 €</div>
+        <p class="desc">High-End-Smart-Speaker mit 3D-Audio (Dolby Atmos), 330-Watt-System & Zigbee-Hub. Für Musikliebhaber.</p>
+        <a class="product-btn" href="https://www.amazon.de/dp/B08Z2LJP3R?tag=ikune21-21" target="_blank" rel="noopener sponsored">★ Bei Amazon ansehen</a>
+      </div>
+    </div>
+    <p>Der Echo Studio ist die erste Wahl, wenn dir Klangqualität wichtig ist. Mit einem <strong>330-Watt-Verstärker</strong>, einem 5,25-Zoll-Tiefmitteltöner und Dolby Atmos liefert er einen satten, räumlichen Sound. Gleichzeitig dient er als Zigbee-Smart-Home-Hub.</p>
+
+    <h2>Google Nest (2026) – die Modellübersicht</h2>
+    <p>Google setzt 2026 verstärkt auf KI-gestützte Interaktion. Der Google Assistant versteht Kontexte besser, beantwortet Folgefragen und integriert sich nahtlos in Googles Dienste-Ökosystem (Kalender, Maps, Gmail).</p>
+
+    <h3>Google Nest Audio – Der Klassiker</h3>
+    <div class="product-box">
+      <div class="info">
+        <h3>Google Nest Audio</h3>
+        <div class="price">ca. 99,99 €</div>
+        <p class="desc">Voller, klarer Sound mit 75-mm-Lautsprecher. Perfekt für Musik, Podcasts und smarte Steuerung über Google Assistant.</p>
+        <a class="product-btn" href="https://www.amazon.de/dp/B08F8H2J1R?tag=ikune21-21" target="_blank" rel="noopener sponsored">★ Bei Amazon ansehen</a>
+      </div>
+    </div>
+    <p>Der Nest Audio ist Googles Antwort auf den Echo Dot – nur mit deutlich mehr Volumen. Der <strong>75-mm-Neodym-Lautsprecher</strong> liefert satte Bässe und klare Höhen. Dank <strong>Matter-Unterstützung</strong> kannst du ihn mit tausenden Smart-Home-Geräten verbinden.</p>
+
+    <h3>Google Nest Hub (2. Gen) – Smarte Übersicht</h3>
+    <div class="product-box">
+      <div class="info">
+        <h3>Google Nest Hub (2. Gen)</h3>
+        <div class="price">ca. 109,99 €</div>
+        <p class="desc">7-Zoll-Smart-Display mit Sleep Sensing, Gestensteuerung & Google Fotos. Das Schaltzentrum für dein Zuhause.</p>
+        <a class="product-btn" href="https://www.amazon.de/dp/B08HR7J3X8?tag=ikune21-21" target="_blank" rel="noopener sponsored">★ Bei Amazon ansehen</a>
+      </div>
+    </div>
+    <p>Der Nest Hub 2. Gen kann noch mehr als nur smarte Steuerung: Die integrierte <strong>Sleep-Sensing</strong>-Funktion analysiert (ohne Kamera!) deine Schlafqualität über Bewegung und Atmung. Perfekt fürs Nachttischchen. Die <strong>Gestensteuerung</strong> erlaubt es, Musik zu pausieren oder Wecker zu stellen – ganz ohne Berührung.</p>
+
+    <h3>Google Nest Hub Max – Der Große</h3>
+    <div class="product-box">
+      <div class="info">
+        <h3>Google Nest Hub Max</h3>
+        <div class="price">ca. 229,99 €</div>
+        <p class="desc">10-Zoll-Display mit Nest Cam integriert, Videoanrufe & intelligente Kamera. Die Kommandozentrale für Profis.</p>
+        <a class="product-btn" href="https://www.amazon.de/dp/B07QQQ2H1J?tag=ikune21-21" target="_blank" rel="noopener sponsored">★ Bei Amazon ansehen</a>
+      </div>
+    </div>
+    <p>Der Nest Hub Max kombiniert ein großes 10-Zoll-Display mit einer integrierten Nest-Kamera. Du kannst nicht nur per Sprache steuern, sondern auch Videoanrufe tätigen und über die <strong>intelligente Kamera</strong> Personen erkennen – etwa, um zu sehen, wer an der Tür klingelt.</p>
+
+    <h2>Echo vs. Nest: Die Unterschiede auf einen Blick</h2>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Kriterium</th>
+          <th>Amazon Echo</th>
+          <th>Google Nest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sprachassistent</strong></td>
+          <td>Alexa</td>
+          <td>Google Assistant</td>
+        </tr>
+        <tr>
+          <td><strong>Musikdienste</strong></td>
+          <td>Amazon Music, Spotify, Apple Music</td>
+          <td>YouTube Music, Spotify, Apple Music</td>
+        </tr>
+        <tr>
+          <td><strong>Smart-Home-Protokoll</strong></td>
+          <td>Zigbee, Matter, WLAN</td>
+          <td>Matter, WLAN, Thread</td>
+        </tr>
+        <tr>
+          <td><strong>Videoanrufe</strong></td>
+          <td>Alexa Calling, Skype, Zoom</td>
+          <td>Google Meet, Duo</td>
+        </tr>
+        <tr>
+          <td><strong>KI-Intelligenz</strong></td>
+          <td>Alexa+ mit generativer KI</td>
+          <td>Google Gemini Integration</td>
+        </tr>
+        <tr>
+          <td><strong>Einstiegspreis</strong></td>
+          <td>ab 59,99 € (Echo Dot)</td>
+          <td>ab 99,99 € (Nest Audio)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Welches Ökosystem passt zu dir?</h2>
+    <p>Die Entscheidung hängt vor allem von deiner bestehenden Technik-Umgebung ab:</p>
+    <ul>
+      <li><strong>Du nutzt Prime, Fire TV und Amazon Music?</strong> Dann ist Alexa die logische Wahl. Die Integration in Amazons Ökosystem ist tief und nahtlos.</li>
+      <li><strong>Du lebst mit Google-Diensten (Gmail, Kalender, YouTube, Maps)?</strong> Google Nest fühlt sich hier wie die natürliche Erweiterung an. Der Google Assistant kennt deinen Kalender und deine Routinen.</li>
+      <li><strong>Dir sind Datenschutz & Offenheit wichtig?</strong> Google Nest punktet mit der Sleep-Sensing-Funktion ohne Kamera und transparenten Datenschutzeinstellungen. Amazon hat mit Alexa+ nachgebessert, bleibt aber umstritten.</li>
+      <li><strong>Du willst den günstigsten Einstieg?</strong> Der Echo Dot 5. Gen ist mit ca. 59,99 € das preiswerteste Tor zur Smart-Home-Welt – und trotzdem enorm leistungsfähig.</li>
+    </ul>
+
+    <div class="fazit">
+      <h3>Fazit</h3>
+      <p>Für 2026 gilt: Beide Ökosysteme sind erwachsen geworden. Amazon Echo bietet die größere Gerätevielfalt und den günstigeren Einstieg, Google Nest überzeugt mit smarter KI und tiefer Google-Integration. Unser Tipp: Starte mit einem <a href="https://www.amazon.de/dp/B09B8X8L1P?tag=ikune21-21" target="_blank" rel="sponsored">Echo Dot 5. Gen</a> fürs Kinderzimmer und einem <a href="https://www.amazon.de/dp/B08HR7J3X8?tag=ikune21-21" target="_blank" rel="sponsored">Nest Hub 2. Gen</a> fürs Wohnzimmer – so profitierst du vom Besten beider Welten.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p><strong>Smart Home unter 50€</strong> – Ein Ratgeber von <a href="https://lichtundschatten.de">Licht und Schatten</a></p>
+    <p>Alle Preise sind unverbindliche Richtwerte. ★ Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</p>
+    <p style="margin-top:12px;font-size:0.8rem;">Letzte Aktualisierung: Juni 2026 · <a href="../index.html">Startseite</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

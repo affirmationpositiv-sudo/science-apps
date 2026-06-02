@@ -12,44 +12,44 @@
     <meta property="og:description" content="Die besten Coaching- und Selbsthilfe-Produkte. Achtsamkeit, Resilienz und persönliches Wachstum.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lifecoach.de/">
-    <meta name="theme-color" content="#0d1a0d">
+    <meta name="theme-color" content="#0d0d14">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #0d140d;
+            background: #0d0d14;
             color: #e0e0e0;
             line-height: 1.6;
         }
-        a { color: #22c55e; text-decoration: none; }
-        a:hover { color: #4ade80; }
+        a { color: #A855F7; text-decoration: none; }
+        a:hover { color: #c084fc; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         header {
-            background: #111a11;
-            border-bottom: 1px solid #1a2a1a;
+            background: #11101a;
+            border-bottom: 1px solid #1a1a2a;
             padding: 16px 0;
             position: sticky; top: 0; z-index: 100;
         }
         header .container { display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
-        .logo span { color: #22c55e; }
+        .logo span { color: #A855F7; }
         nav a { margin-left: 24px; font-size: 0.9rem; color: #aaa; transition: color 0.2s; }
-        nav a:hover { color: #22c55e; }
+        nav a:hover { color: #A855F7; }
 
         .hero {
-            background: linear-gradient(135deg, #0d140d 0%, #112211 50%, #0d140d 100%);
+            background: linear-gradient(135deg, #0d0d14 0%, #1a1030 50%, #0d0d14 100%);
             padding: 80px 0 60px;
             text-align: center;
         }
         .hero h1 { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-        .hero h1 span { color: #22c55e; }
+        .hero h1 span { color: #A855F7; }
         .hero p { font-size: 1.15rem; color: #999; max-width: 680px; margin: 0 auto 32px; }
         .hero .badge {
             display: inline-block;
-            background: #22c55e;
-            color: #0d140d;
+            background: #A855F7;
+            color: #fff;
             font-weight: 700;
             font-size: 0.85rem;
             padding: 6px 18px;
@@ -64,7 +64,7 @@
             color: #fff;
             margin: 60px 0 40px;
         }
-        .section-title span { color: #22c55e; }
+        .section-title span { color: #A855F7; }
 
         .product-grid {
             display: grid;
@@ -73,8 +73,8 @@
             margin-bottom: 60px;
         }
         .product-card {
-            background: #141a14;
-            border: 1px solid #1a2a1a;
+            background: #141024;
+            border: 1px solid #1a1a2a;
             border-radius: 16px;
             padding: 24px;
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
@@ -83,13 +83,13 @@
         }
         .product-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(34,197,94,0.08);
-            border-color: #22c55e;
+            box-shadow: 0 12px 40px rgba(168,85,247,0.08);
+            border-color: #A855F7;
         }
         .product-card .img-placeholder {
             width: 100%;
             aspect-ratio: 1 / 1;
-            background: #1a261a;
+            background: #1a1030;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -101,8 +101,8 @@
         .product-card .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
         .product-card .badge-rating {
             display: inline-block;
-            background: #1a3a1a;
-            color: #22c55e;
+            background: #2a1a3a;
+            color: #c084fc;
             font-size: 0.75rem;
             font-weight: 700;
             padding: 3px 10px;
@@ -115,14 +115,14 @@
         .product-card .price {
             font-size: 1.4rem;
             font-weight: 800;
-            color: #22c55e;
+            color: #A855F7;
             margin-bottom: 16px;
         }
         .product-card .price small { font-size: 0.8rem; color: #666; font-weight: 400; }
         .btn-amazon {
             display: block;
-            background: #22c55e;
-            color: #0d140d;
+            background: #A855F7;
+            color: #fff;
             text-align: center;
             font-weight: 700;
             font-size: 1rem;
@@ -132,9 +132,48 @@
             margin-top: auto;
         }
         .btn-amazon:hover {
-            background: #4ade80;
-            color: #0d140d;
+            background: #c084fc;
+            color: #fff;
             transform: scale(1.02);
+        }
+
+        .ratgeber-section {
+            margin: 60px 0;
+        }
+        .ratgeber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .ratgeber-card {
+            background: #141024;
+            border: 1px solid #1a1a2a;
+            border-radius: 14px;
+            padding: 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .ratgeber-card:hover {
+            transform: translateY(-4px);
+            border-color: #A855F7;
+        }
+        .ratgeber-card .emoji { font-size: 2rem; margin-bottom: 10px; }
+        .ratgeber-card h3 { font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
+        .ratgeber-card p { font-size: 0.88rem; color: #999; margin-bottom: 14px; }
+        .ratgeber-card .btn-read {
+            display: inline-block;
+            background: transparent;
+            color: #A855F7;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid #A855F7;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .ratgeber-card .btn-read:hover {
+            background: #A855F7;
+            color: #fff;
         }
 
         .disclaimer {
@@ -148,8 +187,8 @@
         .disclaimer a { color: #777; }
 
         footer {
-            background: #080f08;
-            border-top: 1px solid #1a1a1a;
+            background: #08080f;
+            border-top: 1px solid #1a1a2a;
             padding: 30px 0;
             text-align: center;
             color: #555;
@@ -162,6 +201,7 @@
             .hero { padding: 50px 0 40px; }
             nav a { margin-left: 14px; font-size: 0.8rem; }
             .product-grid { grid-template-columns: 1fr; }
+            .ratgeber-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -173,6 +213,7 @@
         <nav>
             <a href="#buecher">Bücher</a>
             <a href="#tools">Coaching-Tools</a>
+            <a href="#ratgeber">Ratgeber</a>
             <a href="#top">Top-Empfehlung</a>
         </nav>
     </div>
@@ -268,6 +309,54 @@
             <div class="price">329,00 € <small>UVP</small></div>
             <a class="btn-amazon" href="https://www.amazon.de/dp/B09XS7JWHH/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
         </div>
+
+    </div>
+
+    <!-- Ratgeber-Sektion -->
+    <h2 id="ratgeber" class="section-title">📖 <span>Ratgeber-Artikel</span></h2>
+    <div class="ratgeber-grid">
+
+        <a href="ratgeber/coaching-buecher-2026.html" class="ratgeber-card" style="text-decoration:none">
+            <div class="emoji">📚</div>
+            <h3>Die besten Coaching-Bücher 2026</h3>
+            <p>Persönlichkeitsentwicklung pur – die Top-Titel des Jahres im großen Vergleich. Von „Das Café am Rande der Welt" bis zu den modernen Klassikern.</p>
+            <span class="btn-read">👉 Weiterlesen</span>
+        </a>
+
+        <a href="ratgeber/tagebuch-schreiben-journaling.html" class="ratgeber-card" style="text-decoration:none">
+            <div class="emoji">📓</div>
+            <h3>Tagebuch schreiben: So startest du mit Journaling</h3>
+            <p>Der ultimative Leitfaden für Einsteiger. Methoden, Tipps und die besten Journaling-Produkte für eine nachhaltige Praxis.</p>
+            <span class="btn-read">👉 Weiterlesen</span>
+        </a>
+
+        <a href="ratgeber/selbstbewusstsein-staerken.html" class="ratgeber-card" style="text-decoration:none">
+            <div class="emoji">💪</div>
+            <h3>Selbstbewusstsein stärken: Die 7 besten Methoden</h3>
+            <p>Wissenschaftlich fundierte Methoden und die besten Bücher für mehr Selbstvertrauen. Mit Übungen für den Alltag.</p>
+            <span class="btn-read">👉 Weiterlesen</span>
+        </a>
+
+        <a href="ratgeber/mindset-training.html" class="ratgeber-card" style="text-decoration:none">
+            <div class="emoji">🧠</div>
+            <h3>Mindset Training: Tools für mentale Stärke</h3>
+            <p>Die 5 Säulen des Mindset-Trainings. Mit Produktempfehlungen für Journaling, Meditation, Fokus und Visualisierung.</p>
+            <span class="btn-read">👉 Weiterlesen</span>
+        </a>
+
+        <a href="ratgeber/stressbewaeltigung-entspannungsprodukte.html" class="ratgeber-card" style="text-decoration:none">
+            <div class="emoji">🧘</div>
+            <h3>Stressbewältigung: Entspannungsprodukte, die helfen</h3>
+            <p>Die 7 besten Produkte gegen Stress: Von Yoga-Matte über Noise-Cancelling bis Aromatherapie. Inkl. Sofort-Übungen.</p>
+            <span class="btn-read">👉 Weiterlesen</span>
+        </a>
+
+        <a href="ratgeber/ziele-setzen-erreichen-planer-methoden.html" class="ratgeber-card" style="text-decoration:none">
+            <div class="emoji">🎯</div>
+            <h3>Ziele setzen & erreichen: Die besten Planer</h3>
+            <p>SMART, OKR, 12-Wochen-Jahres-Methode – die effektivsten Methoden und die passenden Planer für deine Ziele 2026.</p>
+            <span class="btn-read">👉 Weiterlesen</span>
+        </a>
 
     </div>
 

@@ -22,8 +22,8 @@
             color: #e0e0e0;
             line-height: 1.6;
         }
-        a { color: #a855f7; text-decoration: none; }
-        a:hover { color: #c084fc; }
+        a { color: #EC4899; text-decoration: none; }
+        a:hover { color: #f472b6; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         header {
@@ -34,9 +34,9 @@
         }
         header .container { display: flex; align-items: center; justify-content: space-between; }
         .logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
-        .logo span { color: #a855f7; }
+        .logo span { color: #EC4899; }
         nav a { margin-left: 24px; font-size: 0.9rem; color: #aaa; transition: color 0.2s; }
-        nav a:hover { color: #a855f7; }
+        nav a:hover { color: #EC4899; }
 
         .hero {
             background: linear-gradient(135deg, #0d0d1a 0%, #1a0a2e 50%, #0d0d1a 100%);
@@ -44,11 +44,11 @@
             text-align: center;
         }
         .hero h1 { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-        .hero h1 span { color: #a855f7; }
+        .hero h1 span { color: #EC4899; }
         .hero p { font-size: 1.15rem; color: #999; max-width: 680px; margin: 0 auto 32px; }
         .hero .badge {
             display: inline-block;
-            background: #a855f7;
+            background: #EC4899;
             color: #fff;
             font-weight: 700;
             font-size: 0.85rem;
@@ -64,7 +64,7 @@
             color: #fff;
             margin: 60px 0 40px;
         }
-        .section-title span { color: #a855f7; }
+        .section-title span { color: #EC4899; }
 
         .product-grid {
             display: grid;
@@ -83,8 +83,8 @@
         }
         .product-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(168,85,247,0.08);
-            border-color: #a855f7;
+            box-shadow: 0 12px 40px rgba(236,72,153,0.08);
+            border-color: #EC4899;
         }
         .product-card .img-placeholder {
             width: 100%;
@@ -102,7 +102,7 @@
         .product-card .badge-rating {
             display: inline-block;
             background: #2d1555;
-            color: #a855f7;
+            color: #EC4899;
             font-size: 0.75rem;
             font-weight: 700;
             padding: 3px 10px;
@@ -115,13 +115,13 @@
         .product-card .price {
             font-size: 1.4rem;
             font-weight: 800;
-            color: #a855f7;
+            color: #EC4899;
             margin-bottom: 16px;
         }
         .product-card .price small { font-size: 0.8rem; color: #666; font-weight: 400; }
         .btn-amazon {
             display: block;
-            background: #a855f7;
+            background: #EC4899;
             color: #fff;
             text-align: center;
             font-weight: 700;
@@ -132,7 +132,7 @@
             margin-top: auto;
         }
         .btn-amazon:hover {
-            background: #c084fc;
+            background: #f472b6;
             color: #fff;
             transform: scale(1.02);
         }
@@ -146,6 +146,50 @@
             margin-top: 40px;
         }
         .disclaimer a { color: #777; }
+
+        .article-card {
+            background: #151525;
+            border: 1px solid #2a2a3a;
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(236,72,153,0.08);
+            border-color: #EC4899;
+        }
+        .article-card .cat-badge {
+            display: inline-block;
+            background: #2d1555;
+            color: #EC4899;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            align-self: flex-start;
+        }
+        .article-card h3 { font-size: 1.1rem; color: #fff; margin-bottom: 8px; }
+        .article-card h3 a { color: #fff; }
+        .article-card h3 a:hover { color: #EC4899; }
+        .article-card .desc { font-size: 0.9rem; color: #999; margin-bottom: 12px; flex: 1; }
+        .article-card .read-more {
+            color: #EC4899;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .article-card .read-more:hover { color: #f472b6; }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
 
         footer {
             background: #080810;
@@ -171,6 +215,7 @@
     <div class="container">
         <div class="logo"><span>MIND</span>MASTER</div>
         <nav>
+            <a href="#ratgeber">Ratgeber</a>
             <a href="#mindset">Mindset</a>
             <a href="#psychologie">Psychologie</a>
             <a href="#top">Top-Empfehlung</a>
@@ -187,6 +232,55 @@
 </section>
 
 <div class="container">
+
+    <!-- Ratgeber -->
+    <h2 id="ratgeber" class="section-title">📚 <span>Ratgeber-Artikel</span> – Tipps & Tests</h2>
+    <div class="article-grid">
+
+        <div class="article-card">
+            <span class="cat-badge">🧘 Achtsamkeit</span>
+            <h3><a href="ratgeber/meditation-fuer-anfaenger.html">Meditation für Anfänger: Die besten Produkte 2026</a></h3>
+            <p class="desc">Meditieren lernen leicht gemacht: Sitzkissen, Apps, Duftlampen & mehr – die besten Produkte für den Einstieg in die Meditation.</p>
+            <a class="read-more" href="ratgeber/meditation-fuer-anfaenger.html">Weiterlesen →</a>
+        </div>
+
+        <div class="article-card">
+            <span class="cat-badge">😴 Schlaf</span>
+            <h3><a href="ratgeber/schlaf-verbessern-matratzen-kissen-schlafmasken.html">Schlaf verbessern: Matratzen, Kissen & Schlafmasken im Test</a></h3>
+            <p class="desc">Besser schlafen mit den richtigen Produkten. Matratzen-Testsieger, orthopädische Kissen und lichtdichte Schlafmasken im Vergleich.</p>
+            <a class="read-more" href="ratgeber/schlaf-verbessern-matratzen-kissen-schlafmasken.html">Weiterlesen →</a>
+        </div>
+
+        <div class="article-card">
+            <span class="cat-badge">🎯 Produktivität</span>
+            <h3><a href="ratgeber/konzentration-steigern-tools-buecher.html">Konzentration steigern: Die besten Tools & Bücher</a></h3>
+            <p class="desc">Mehr Fokus im Alltag: Pomodoro-Technik, Deep Work, Fokustimer, Noise-Cancelling-Kopfhörer und die besten Konzentrations-Bücher.</p>
+            <a class="read-more" href="ratgeber/konzentration-steigern-tools-buecher.html">Weiterlesen →</a>
+        </div>
+
+        <div class="article-card">
+            <span class="cat-badge">📖 Buchrezension</span>
+            <h3><a href="ratgeber/buchrezension-7-wege-zur-effektivitaet.html">Buchrezension: Die 7 Wege zur Effektivität von Stephen Covey</a></h3>
+            <p class="desc">Ausführliche Rezension des Klassikers: Zusammenfassung aller sieben Wege, Bewertung und Kaufempfehlung für das zeitlose Meisterwerk.</p>
+            <a class="read-more" href="ratgeber/buchrezension-7-wege-zur-effektivitaet.html">Weiterlesen →</a>
+        </div>
+
+        <div class="article-card">
+            <span class="cat-badge">🌿 Achtsamkeit</span>
+            <h3><a href="ratgeber/achtsamkeit-im-alltag-produkte.html">Achtsamkeit im Alltag: Diese Produkte helfen dir</a></h3>
+            <p class="desc">Dankbarkeitstagebücher, Achtsamkeitskarten, Duftkerzen und Bücher für mehr Bewusstsein und Gelassenheit im stressigen Alltag.</p>
+            <a class="read-more" href="ratgeber/achtsamkeit-im-alltag-produkte.html">Weiterlesen →</a>
+        </div>
+
+        <div class="article-card">
+            <span class="cat-badge">📚 Mindset</span>
+            <h3><a href="ratgeber/erfolgsgewohnheiten-5-buecher.html">Erfolgsgewohnheiten: Die 5 Bücher, die dein Leben verändern</a></h3>
+            <p class="desc">Atomic Habits, Die 7 Wege, Das 5-Uhr-Club, Think and Grow Rich und Emotionale Intelligenz – die 5 wichtigsten Erfolgsbücher.</p>
+            <a class="read-more" href="ratgeber/erfolgsgewohnheiten-5-buecher.html">Weiterlesen →</a>
+        </div>
+
+    </div>
+
     <!-- Mindset -->
     <h2 id="mindset" class="section-title">🔥 Top <span>Mindset-Bücher</span></h2>
     <div class="product-grid">

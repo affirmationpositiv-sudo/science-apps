@@ -22,9 +22,9 @@
       --bg-card-hover: #1A1A1A;
       --text: #E5E5E5;
       --text-muted: #8A8A8A;
-      --accent: #0D9488;
-      --accent-hover: #0F766E;
-      --accent-glow: rgba(13, 148, 136, 0.25);
+      --accent: #06B6D4;
+      --accent-hover: #0891B2;
+      --accent-glow: rgba(6, 182, 212, 0.25);
       --border: #222;
       --radius: 16px;
       --radius-sm: 10px;
@@ -244,10 +244,66 @@
       transform: translateY(-1px);
     }
 
+    /* ---- RATGEBER SECTION ---- */
+    .ratgeber-section {
+      padding: 40px 0 60px;
+    }
+    .ratgeber-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .ratgeber-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .ratgeber-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    .ratgeber-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: rgba(6, 182, 212, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .ratgeber-info { flex: 1; }
+    .ratgeber-info h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .ratgeber-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .ratgeber-link {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* ---- AFFILIATE DISCLOSURE ---- */
     .disclosure-banner {
-      background: rgba(13, 148, 136, 0.06);
-      border: 1px solid rgba(13, 148, 136, 0.15);
+      background: rgba(6, 182, 212, 0.06);
+      border: 1px solid rgba(6, 182, 212, 0.15);
       border-radius: var(--radius-sm);
       padding: 16px 20px;
       margin-bottom: 40px;
@@ -483,6 +539,76 @@
   </div>
 </section>
 
+<!-- ====== RATGEBER ====== -->
+<section class="ratgeber-section" id="ratgeber">
+  <div class="container">
+    <h2 class="section-title">📚 Ratgeber & Vergleiche</h2>
+    <p class="section-sub">Ausführliche Testberichte und Kaufberatungen rund ums Smart Home – von uns recherchiert und für dich zusammengefasst.</p>
+
+    <div class="disclosure-banner">
+      <strong>Affiliate-Offenlegung:</strong> Die mit ★ markierten Links in den Artikeln sind Affiliate-Links. Wenn du über einen solchen Link etwas kaufst, erhalten wir eine kleine Provision – für dich bleibt der Preis gleich. Vielen Dank! 🙏
+    </div>
+
+    <div class="ratgeber-grid">
+
+      <a class="ratgeber-card" href="ratgeber/smart-home-2026-echo-nest.html">
+        <div class="ratgeber-icon">🔊</div>
+        <div class="ratgeber-info">
+          <h3>Smart Home 2026: Die besten Amazon Echo & Google Nest Modelle</h3>
+          <p>Welcher Smart Speaker passt zu dir? Alle Modelle, Preise und Unterschiede – kompakt erklärt.</p>
+          <span class="ratgeber-link">Weiterlesen →</span>
+        </div>
+      </a>
+
+      <a class="ratgeber-card" href="ratgeber/smarte-beleuchtung-philips-hue-ikea-tradfri.html">
+        <div class="ratgeber-icon">💡</div>
+        <div class="ratgeber-info">
+          <h3>Smarte Beleuchtung: Philips Hue vs IKEA Tradfri</h3>
+          <p>Welches System bringt dein Zuhause zum Leuchten? Qualität, Preis und Funktionen im Vergleich.</p>
+          <span class="ratgeber-link">Weiterlesen →</span>
+        </div>
+      </a>
+
+      <a class="ratgeber-card" href="ratgeber/sicherheitskameras-vergleich.html">
+        <div class="ratgeber-icon">📹</div>
+        <div class="ratgeber-info">
+          <h3>Sicherheitskameras für Zuhause: Top Modelle im Vergleich</h3>
+          <p>Ring, Eufy, TP-Link Tapo, Blink & Google Nest Cam – die besten Überwachungskameras 2026.</p>
+          <span class="ratgeber-link">Weiterlesen →</span>
+        </div>
+      </a>
+
+      <a class="ratgeber-card" href="ratgeber/smarte-heizung-thermostate.html">
+        <div class="ratgeber-icon">🌡️</div>
+        <div class="ratgeber-info">
+          <h3>Smarte Heizung: Thermostate die Geld sparen</h3>
+          <p>tado°, Eve, Bosch & Netatmo: Spare bis zu 30% Heizkosten mit intelligenten Thermostaten.</p>
+          <span class="ratgeber-link">Weiterlesen →</span>
+        </div>
+      </a>
+
+      <a class="ratgeber-card" href="ratgeber/sprachassistenten-2026-alexa-google-siri.html">
+        <div class="ratgeber-icon">🎙️</div>
+        <div class="ratgeber-info">
+          <h3>Sprachassistenten 2026: Alexa vs Google vs Siri</h3>
+          <p>Wer kann mehr? Direkter Vergleich von Kompatibilität, KI-Funktionen und Datenschutz.</p>
+          <span class="ratgeber-link">Weiterlesen →</span>
+        </div>
+      </a>
+
+      <a class="ratgeber-card" href="ratgeber/smarte-tuerklingeln-ring-eufy.html">
+        <div class="ratgeber-icon">🔔</div>
+        <div class="ratgeber-info">
+          <h3>Smarte Türklingeln: Ring, Eufy und die Alternativen</h3>
+          <p>Nie wieder den Paketboten verpassen! Alle Top-Modelle mit und ohne Abo im großen Vergleich.</p>
+          <span class="ratgeber-link">Weiterlesen →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
 <!-- ====== FAQ ====== -->
 <section class="faq-section" id="faq">
   <div class="container">
@@ -538,7 +664,7 @@
   <div class="container">
     <p><strong>Smart Home unter 50 €</strong> – Eine Seite von <a href="https://lichtundschatten.de">Licht und Schatten</a></p>
     <p>Alle Preise sind unverbindliche Richtwerte und können abweichen. ★ Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
-    <p style="margin-top:12px;font-size:0.8rem;">Letzte Aktualisierung: Juni 2026 &nbsp;·&nbsp; <a href="#produkte">Produkte</a> &nbsp;·&nbsp; <a href="#faq">FAQ</a></p>
+    <p style="margin-top:12px;font-size:0.8rem;">Letzte Aktualisierung: Juni 2026 &nbsp;·&nbsp; <a href="#produkte">Produkte</a> &nbsp;·&nbsp; <a href="#ratgeber">Ratgeber</a> &nbsp;·&nbsp; <a href="#faq">FAQ</a></p>
   </div>
 </footer>
 

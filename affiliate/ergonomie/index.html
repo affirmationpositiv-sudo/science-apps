@@ -22,8 +22,8 @@
             line-height: 1.6;
             min-height: 100vh;
         }
-        a { color: #8B5CF6; text-decoration: none; transition: color 0.2s; }
-        a:hover, a:focus { color: #A78BFA; }
+        a { color: #14B8A6; text-decoration: none; transition: color 0.2s; }
+        a:hover, a:focus { color: #2DD4BF; }
         img { max-width: 100%; height: auto; display: block; }
 
         /* ── Container ── */
@@ -32,6 +32,26 @@
             margin: 0 auto;
             padding: 0 1.5rem;
         }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ── Navigation ── */
+        .nav-bar {
+            background: rgba(17,17,17,0.95);
+            border-bottom: 1px solid #1E1E1E;
+            padding: 0.9rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(8px);
+        }
+        .nav-bar .logo { color: #FFF; font-weight: 700; font-size: 1.1rem; }
+        .nav-bar .logo span { color: #14B8A6; }
+        .nav-bar .nav-links a { color: #A0A0A0; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-bar .nav-links a:hover { color: #14B8A6; }
 
         /* ── Hero ── */
         .hero {
@@ -47,7 +67,7 @@
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
         }
-        .hero h1 .accent { color: #8B5CF6; }
+        .hero h1 .accent { color: #14B8A6; }
         .hero h1 .gold { color: #FFD700; }
         .hero p {
             font-size: 1.125rem;
@@ -57,9 +77,9 @@
         }
         .hero .badge {
             display: inline-block;
-            background: rgba(139, 92, 246, 0.15);
-            color: #8B5CF6;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(20, 184, 166, 0.15);
+            color: #14B8A6;
+            border: 1px solid rgba(20, 184, 166, 0.3);
             padding: 0.4rem 1.2rem;
             border-radius: 999px;
             font-size: 0.875rem;
@@ -96,8 +116,8 @@
         }
         .product-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.15);
-            border-color: #8B5CF6;
+            box-shadow: 0 12px 40px rgba(20, 184, 166, 0.15);
+            border-color: #14B8A6;
         }
         .product-card .card-image {
             background: #1A1A1A;
@@ -111,7 +131,7 @@
             width: 100%;
             max-width: 160px;
             height: auto;
-            color: #8B5CF6;
+            color: #14B8A6;
             opacity: 0.7;
         }
         .product-card .card-body {
@@ -146,7 +166,7 @@
         }
         .product-card .card-body .btn {
             display: inline-block;
-            background: #8B5CF6;
+            background: #14B8A6;
             color: #FFF;
             font-weight: 700;
             font-size: 0.95rem;
@@ -158,7 +178,7 @@
             cursor: pointer;
         }
         .product-card .card-body .btn:hover {
-            background: #7C3AED;
+            background: #0D9488;
             color: #FFF;
             transform: scale(1.02);
         }
@@ -183,6 +203,69 @@
         .faq-section {
             padding: 2rem 0 4rem;
         }
+
+        /* ── Ratgeber Section ── */
+        .ratgeber-section {
+            padding: 1rem 0 3rem;
+        }
+        .ratgeber-intro {
+            text-align: center;
+            color: #A0A0A0;
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin: -1.5rem auto 2rem;
+        }
+        .ratgeber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+        .ratgeber-card {
+            background: #111;
+            border: 1px solid #1E1E1E;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            color: inherit;
+            text-decoration: none;
+        }
+        .ratgeber-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(20, 184, 166, 0.12);
+            border-color: #14B8A6;
+        }
+        .ratgeber-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .ratgeber-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFF;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+        .ratgeber-card p {
+            font-size: 0.9rem;
+            color: #999;
+            flex: 1;
+            margin-bottom: 1rem;
+        }
+        .ratgeber-link {
+            color: #14B8A6;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .ratgeber-card:hover .ratgeber-link { color: #2DD4BF; }
+        .ratgeber-footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+        }
+        .ratgeber-footer strong { color: #14B8A6; }
         .faq-item {
             background: #111;
             border: 1px solid #1E1E1E;
@@ -205,9 +288,9 @@
             align-items: center;
             transition: background 0.2s;
         }
-        .faq-question:hover { background: rgba(139, 92, 246, 0.05); }
+        .faq-question:hover { background: rgba(20, 184, 166, 0.05); }
         .faq-question .icon {
-            color: #8B5CF6;
+            color: #14B8A6;
             font-size: 1.25rem;
             transition: transform 0.3s;
             flex-shrink: 0;
@@ -243,11 +326,11 @@
             margin-bottom: 1rem;
         }
         footer .footer-links a {
-            color: #8B5CF6;
+            color: #14B8A6;
             margin: 0 0.75rem;
             font-size: 0.85rem;
         }
-        footer .footer-links a:hover { color: #A78BFA; }
+        footer .footer-links a:hover { color: #2DD4BF; }
         footer .copyright {
             margin-top: 1rem;
             color: #555;
@@ -256,19 +339,43 @@
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
+            .nav-bar .nav-links a { margin-left: 1rem; font-size: 0.8rem; }
             .hero { padding: 3rem 1rem 2rem; }
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
             .section-title { font-size: 1.6rem; }
             .product-grid { grid-template-columns: 1fr; }
+            .ratgeber-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 1.5rem; }
             .product-card .card-body { padding: 1rem 1.25rem 1.25rem; }
         }
     </style>
+    <!-- schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Ergonomie fürs Homeoffice",
+        "url": "https://affirmationpositiv-sudo.github.io/science-apps/affiliate/ergonomie/"
+    }
+    </script>
 </head>
 <body>
+
+<!-- ──── NAV ──── -->
+<nav class="nav-bar">
+    <div class="container nav-container">
+        <a href="index.html" class="logo">Ergonomie <span>Homeoffice</span></a>
+        <div class="nav-links">
+            <a href="index.html">Startseite</a>
+            <a href="#produkte">Produkte</a>
+            <a href="ratgeber/">Ratgeber</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </div>
+</nav>
 
 <!-- ──── HERO ──── -->
 <section class="hero">
@@ -282,8 +389,8 @@
     </p>
 </section>
 
-<!-- ──── PRODUCT GRID ──── -->
-<main class="container">
+<!-- ──── PRODUKTE ──── -->
+<main class="container" id="produkte">
     <h2 class="section-title">Empfohlene <span class="gold">Produkte</span></h2>
     <div class="product-grid">
 
@@ -439,8 +546,60 @@
 
     </div>
 
+    <!-- ──── RATGEBER ──── -->
+    <section class="ratgeber-section" id="ratgeber">
+        <h2 class="section-title">Ratgeber &amp; <span class="gold">Tests</span></h2>
+        <p class="ratgeber-intro">Ausführliche Ratgeber, Testberichte und Vergleiche – damit du die perfekte ergonomische Ausstattung für deinen Arbeitsplatz findest.</p>
+        <div class="ratgeber-grid">
+
+            <a href="ratgeber/buero-stuehle-2026.html" class="ratgeber-card">
+                <div class="ratgeber-icon">🪑</div>
+                <h3>Bürostühle 2026 im Test</h3>
+                <p>Die besten ergonomischen Bürostühle im Vergleich – vom Budget-Tipp bis zum Premium-Modell.</p>
+                <span class="ratgeber-link">Weiterlesen →</span>
+            </a>
+
+            <a href="ratgeber/hoehenverstellbare-schreibtische-2026.html" class="ratgeber-card">
+                <div class="ratgeber-icon">📐</div>
+                <h3>Höhenverstellbare Schreibtische</h3>
+                <p>Elektrisch vs. manuell, Vor- und Nachteile, Top-Modelle 2026 – der große Vergleich.</p>
+                <span class="ratgeber-link">Weiterlesen →</span>
+            </a>
+
+            <a href="ratgeber/ergonomische-maus-tastatur.html" class="ratgeber-card">
+                <div class="ratgeber-icon">🖱️</div>
+                <h3>Ergonomische Maus &amp; Tastatur</h3>
+                <p>Was bringen vertikale Mäuse und Split-Tastaturen wirklich? Die Wissenschaft hinter der Ergonomie.</p>
+                <span class="ratgeber-link">Weiterlesen →</span>
+            </a>
+
+            <a href="ratgeber/rueckenschmerzen-buero-produkte.html" class="ratgeber-card">
+                <div class="ratgeber-icon">💪</div>
+                <h3>Rückenschmerzen im Büro</h3>
+                <p>Diese 5 Produkte helfen gegen Rückenschmerzen am Arbeitsplatz – von Kissen bis Massagegerät.</p>
+                <span class="ratgeber-link">Weiterlesen →</span>
+            </a>
+
+            <a href="ratgeber/bildschirmhaltung-monitorarme.html" class="ratgeber-card">
+                <div class="ratgeber-icon">🖥️</div>
+                <h3>Bildschirmhalterung &amp; Monitorarme</h3>
+                <p>Der ultimative Guide zu Monitorarmen – Vorteile, Montage, Top-Modelle und ergonomische Tipps.</p>
+                <span class="ratgeber-link">Weiterlesen →</span>
+            </a>
+
+            <a href="ratgeber/stehpult-vs-sitzpult.html" class="ratgeber-card">
+                <div class="ratgeber-icon">⚖️</div>
+                <h3>Stehpult vs. Sitzpult</h3>
+                <p>Was ist besser für den Rücken? Der große Vergleich mit wissenschaftlichen Studien.</p>
+                <span class="ratgeber-link">Weiterlesen →</span>
+            </a>
+
+        </div>
+        <p class="ratgeber-footer">Alle Ratgeber enthalten geprüfte Amazon-Produktempfehlungen mit <strong>tag=ikune21-21</strong>.</p>
+    </section>
+
     <!-- ──── FAQ ──── -->
-    <section class="faq-section">
+    <section class="faq-section" id="faq">
         <h2 class="section-title">Häufig gestellte <span class="gold">Fragen</span></h2>
 
         <div class="faq-item">
