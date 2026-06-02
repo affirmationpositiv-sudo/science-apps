@@ -1,26 +1,354 @@
 <!DOCTYPE html>
-<html>
-<head><title>T-Shirt Designs - Licht und Schatten</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{background:#1a1a2e;color:#e0e0e0;font-family:system-ui;max-width:900px;margin:auto;padding:20px;text-align:center}
-h1{color:#4a6cf7}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px}
-.card{background:#16213e;border-radius:12px;padding:15px}
-.card img{width:100%;border-radius:8px}
-.card h3{color:#ffd700;margin:10px 0 0}
-</style></head>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unique T-Shirt Designs – Gallery</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #0d0d0f;
+      color: #e8e8ed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Hero Header ── */
+    .hero {
+      width: 100%;
+      padding: 60px 24px 40px;
+      text-align: center;
+      background: linear-gradient(160deg, #111114 0%, #1a1a20 50%, #0d0d0f 100%);
+      border-bottom: 1px solid #2a2a32;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at 30% 40%, rgba(120, 80, 255, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f0f0ff 0%, #a78bfa 50%, #6ee7b7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .hero p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      color: #8888aa;
+      position: relative;
+    }
+    .hero .badge {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 8px 20px;
+      border-radius: 100px;
+      background: rgba(167, 139, 250, 0.12);
+      border: 1px solid rgba(167, 139, 250, 0.25);
+      color: #a78bfa;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+
+    /* ── Grid ── */
+    .gallery {
+      max-width: 1300px;
+      width: 100%;
+      padding: 48px 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #17171c;
+      border-radius: 18px;
+      border: 1px solid #282830;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.4s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(167, 139, 250, 0.15);
+      border-color: #3c3c4a;
+    }
+
+    .card-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      background: #1e1e26;
+      border-bottom: 1px solid #282830;
+      transition: filter 0.4s ease;
+    }
+    .card:hover .card-image {
+      filter: brightness(1.08);
+    }
+
+    .card-body {
+      padding: 20px 20px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f0f0ff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: #8888aa;
+      line-height: 1.55;
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .card-price {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #6ee7b7;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .card-price small {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #5a5a72;
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+
+    .spreadshirt-note {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: #6a6a88;
+      padding: 8px 0 12px;
+      border-top: 1px solid #282830;
+      margin-top: auto;
+    }
+    .spreadshirt-note::before {
+      content: '⏳';
+      font-size: 0.9rem;
+    }
+
+    .amazon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f9a825, #f57c00);
+      color: #0d0d0f !important;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      margin-top: 4px;
+    }
+    .amazon-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 20px rgba(249, 168, 37, 0.4);
+    }
+    .amazon-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      width: 100%;
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid #1e1e26;
+      color: #555570;
+      font-size: 0.82rem;
+    }
+    .footer a {
+      color: #a78bfa;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px 16px 60px;
+      }
+      .hero { padding: 40px 16px 28px; }
+    }
+  </style>
+</head>
 <body>
-<h1>👕 T-Shirt Designs – Licht und Schatten</h1>
-<p>Kontaktiere uns für Print-on-Demand Bestellungen.</p>
-<div class="gallery">
-  <div class="card"><img src="design1_minimal.png" alt="Minimal"><h3>Minimal</h3></div>
-  <div class="card"><img src="design2_ki_ai.png" alt="KI"><h3>KI-Theme</h3></div>
-  <div class="card"><img src="design3_money.png" alt="Money"><h3>Money Vibe</h3></div>
-  <div class="card"><img src="design4_gamer.png" alt="Gamer"><h3>Gamer</h3></div>
-  <div class="card"><img src="design5_geometric.png" alt="Geometric"><h3>Geometric</h3></div>
-  <div class="card"><img src="design6_pets.png" alt="Pets"><h3>Pets</h3></div>
-  <div class="card"><img src="design7_mountain.png" alt="Mountain"><h3>Mountain</h3></div>
-  <div class="card"><img src="design8_cosmos.png" alt="Cosmos"><h3>Cosmos</h3></div>
-</div>
-</body></html>
+
+<!-- ═══════════ HERO ═══════════ -->
+<header class="hero">
+  <h1>✦ Unique T-Shirt Designs</h1>
+  <p>Original designs – handcrafted for style, tech, nature &amp; pop culture</p>
+  <span class="badge">🔥 8 Designs &nbsp;·&nbsp; €19,99 pro Stück</span>
+</header>
+
+<!-- ═══════════ GALLERY ═══════════ -->
+<main class="gallery">
+
+  <!-- ─── 1. Minimal ─── -->
+  <article class="card">
+    <img class="card-image" src="design1_minimal.png" alt="Minimal Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Minimal Wave</h2>
+      <p class="card-desc">Clean, reduziertes Linien-Design – perfekt für den puristischen Look im Alltag. Weniger ist mehr.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=minimal+wave+t-shirt&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 2. KI / AI ─── -->
+  <article class="card">
+    <img class="card-image" src="design2_ki_ai.png" alt="KI AI Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">KI · Artificial Intelligence</h2>
+      <p class="card-desc">Futuristisches AI-Motiv für Tech-Enthusiasten, Entwickler &amp; alle, die die Zukunft gestalten.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=artificial+intelligence+t-shirt&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 3. Money ─── -->
+  <article class="card">
+    <img class="card-image" src="design3_money.png" alt="Money Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Money Mindset</h2>
+      <p class="card-desc">Stylisches Finance-Design für alle mit Vision – Erfolg, Wohlstand und smarter Style vereint.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=money+money+money+t-shirt&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 4. Gamer ─── -->
+  <article class="card">
+    <img class="card-image" src="design4_gamer.png" alt="Gamer Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Gamer Mode</h2>
+      <p class="card-desc">Für echte Zocker – retro-inspiriertes Gaming-Design mit Controller-Vibe und Pixel-Feeling.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=gamer+t-shirt+motiv&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 5. Geometric ─── -->
+  <article class="card">
+    <img class="card-image" src="design5_geometric.png" alt="Geometric Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Geometric Vision</h2>
+      <p class="card-desc">Moderne Formen und Linien – abstrakte Geometrie trifft auf minimalistischen Streetwear-Style.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=geometric+pattern+t-shirt&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 6. Pets ─── -->
+  <article class="card">
+    <img class="card-image" src="design6_pets.png" alt="Pets Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Pet Love</h2>
+      <p class="card-desc">Herzerwärmendes Tier-Design für alle, die ihre Vierbeiner über alles lieben. Inkl. Katzen &amp; Hunde.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=pet+love+t-shirt+design&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 7. Mountain ─── -->
+  <article class="card">
+    <img class="card-image" src="design7_mountain.png" alt="Mountain Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Mountain Calling</h2>
+      <p class="card-desc">Majestätische Bergsilhouette für Naturliebhaber und Abenteurer – Gipfelgefühl für jeden Tag.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=mountain+landscape+t-shirt&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+  <!-- ─── 8. Cosmos ─── -->
+  <article class="card">
+    <img class="card-image" src="design8_cosmos.png" alt="Cosmos Design T-Shirt" loading="lazy">
+    <div class="card-body">
+      <h2 class="card-title">Cosmos Explorer</h2>
+      <p class="card-desc">Atemberaubendes Weltall-Design mit Sternen, Nebeln und unendlicher Weite – für Träumer &amp; Entdecker.</p>
+      <div class="card-price">€19,99 <small>€24,99</small></div>
+      <a class="amazon-btn" href="https://www.amazon.de/s?k=cosmos+universe+t-shirt&tag=ikune21-21" target="_blank" rel="noopener sponsored">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 2c-5.62 0-10.05 4.15-10.05 9.24 0 2.62 1.22 4.97 3.16 6.53l-.87 2.67 2.94-1.74c.93.39 1.95.6 3.02.6 4.49 0 8.25-3.44 8.25-8.06C20.05 6.15 16.22 2 13.5 2m0 14.77c-.97 0-1.87-.23-2.66-.62l-1.93 1.1.62-1.88C8.2 14.57 7.35 13.02 7.35 11.24c0-3.37 2.75-6.1 6.15-6.1 3.37 0 6.1 2.73 6.1 6.1 0 3.4-2.73 6.13-6.1 6.13m1.37-5.96c.31-.13.57-.23.9-.23.5 0 1.02.25 1.02.76 0 .26-.17.45-.38.58-.2.13-.47.24-.74.37-.73.33-1.63.73-1.63 1.81 0 .95.69 1.53 1.43 1.53.4 0 .83-.12 1.15-.36l.06.58h.85v-1.45c-.11-.06-.55-.2-.9-.2-.25 0-.5.12-.5.43 0 .24.17.37.36.48l.05.03c.13.08.27.18.27.36 0 .28-.26.45-.58.45-.66 0-1.04-.6-1.04-1.13 0-.86.65-1.14 1.26-1.42.3-.14.58-.27.58-.56 0-.34-.28-.58-.67-.58-.43 0-.83.17-1.11.38l-.06-.52h-.86v1.37zM3.55 21c.81.96 2.75 1.57 4.43 1.57 3.5 0 6.44-1.7 8.52-4.03-.7.2-1.7.32-2.6.32-4.14 0-7.76-2.2-9.46-5.33-.18.47-.54 1.73-.54 1.73s-.43-1.18-.58-1.73c-.83 1.3-1.44 2.75-1.44 4.24 0 .15.07 2.23 1.53 3.3z"/></svg>
+        Auf Amazon ansehen
+      </a>
+      <div class="spreadshirt-note">Coming soon to Spreadshirt</div>
+    </div>
+  </article>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer">
+  <p>© 2025 Unique T‑Shirt Designs &nbsp;·&nbsp; Alle Preise inkl. MwSt. &nbsp;·&nbsp; *Affiliate-Links (Amazon) &nbsp;·&nbsp; <a href="https://www.spreadshirt.de/" target="_blank" rel="noopener">Spreadshirt</a></p>
+</footer>
+
+</body>
+</html>

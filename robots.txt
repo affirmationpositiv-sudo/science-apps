@@ -1,0 +1,13 @@
+# robots.txt für science-apps GitHub Pages
+# https://affirmationpositiv-sudo.github.io/science-apps/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://affirmationpositiv-sudo.github.io/science-apps/sitemap.xml
+
+# Crawl-Delay für schonendes Crawling (Empfehlung)
+Crawl-Delay: 10
+
+# Disallow: Keine Seiten blockiert – gesamte Seite soll indexiert werden
