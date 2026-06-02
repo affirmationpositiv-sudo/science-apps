@@ -240,6 +240,23 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/krypto-ki-handel-2026.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/smart-home-2026.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- LifeCoach AI App -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/lifecoach-ai/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- Money -->
   <url>
