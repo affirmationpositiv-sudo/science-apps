@@ -210,3 +210,53 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 2. 🔴 **Cross-Link-Audit**: Alle 27 Artikel auf fehlende Verknüpfungen prüfen
 3. 🟡 **KDP Account erstellen** (User-Aktion nötig)
 4. 🟡 **Google Search Console einrichten**
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.14)
+
+### Previous State (R2.13):
+- 17 Blog-Artikel live, KI-Quiz-Tool, 5 FINAL V2 PDFs (KDP-ready)
+- 19+ KDP Bücher DOCX/MD/PDF, 8 T-Shirt Designs unveröffentlicht
+- Alle Änderungen gepusht, nichts offen
+
+### Actions This Tick (R2.14):
+- [x] **Survey:** 17 Artikel live (alle HTTP 200), Quiz-Tool live, alles gepusht
+- [x] **Entdeckt:** Artikel #18 (KI-Produktivität 2026) war lokal erstellt aber **nie committed**
+- [x] **Blog-Artikel #19 NEU geschrieben:** "Online-Business ohne Startkapital 2026: 7 Strategien für 0€ Start" – 25 KB HTML, ~2.500 Wörter, 10+ Amazon-Affiliate-Links (tag=ikune21-21), Cross-Links zu Artikeln #1-17, 30-Tage-Startplan inkludiert.
+- [x] **Blog-Index:** Stats 18→19, +Artikel-Karte #19 (Online-Business)
+- [x] **Main-Index:** Stats 18→19
+- [x] **Sitemap.xml:** +Blog-Artikel #19 URL (priority 0.8)
+- [x] **Git commit + push ✅** (main + gh-pages, 5 Dateien, 1.013 Zeilen neu)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 19 | ✅ LIVE (2 NEU in R2.14) |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| GalaxyBlog-Artikel | 11 | ✅ LIVE |
+| Affiliate-Shops | 7 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| KI-Quiz-Tool | 1 | ✅ LIVE |
+| Gesamt (in Sitemap) | 50+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 19 Artikel + Quiz + 50+ Seiten |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert, kein Traffic |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** – 19 Bücher = €250-500/Monat
+2. 🔴 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs = €50-500/Monat
+3. 🔴 **LinkedIn/X/Twitter Profile** – Posts fertig, unveröffentlicht
+4. 🟡 **Google Search Console** – Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #20**: Neues Trend-Thema (z.B. KI-Startups 2026, No-Code, Workflow Automation)
+2. 🔴 **Cross-Link-Audit**: Alle 19 Artikel auf fehlende Verknüpfungen prüfen
+3. 🟡 **Neues Tool bauen**: Interaktiver Rechner oder Konfigurator
+4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
