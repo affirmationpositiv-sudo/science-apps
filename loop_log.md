@@ -1,5 +1,29 @@
 ---
-## Tick: 2026-06-03 AUTOMATISCH (RUN 2.60)
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.61)
+
+### Previous State (R2.60):
+- 80 Blog-Artikel, 32 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher
+- Site live (HTTP 200), Git working tree with 6 pending changes
+- Stats: 296 HTML-Seiten, 80 Blog, 32 KI-Tools, 295 Sitemap URLs
+
+### Actions This Tick (R2.61):
+- [x] **Survey:** Site live (HTTP 200), Git clean, 80 Blog-Artikel, 32 Tools, 295 Sitemap URLs
+- [x] **Blog-Artikel #81 erstellt:** "Sommer & Garten 2026: Die 40+ besten Produkte für Terrasse, Balkon & Garten – Möbel, Grills, Bewässerung, Solarleuchten" (~750 Zeilen HTML, ~6.000 Wörter, 10 Sektionen: Gartenmöbel, Grills & BBQ, Sonnenschutz, Bewässerungssysteme, Gartengeräte, Solarleuchten, Hochbeete & Gewächshäuser, Pool & Wellness, Mückenschutz, 5 Budget-Stufen (50€ bis 5.000€+), Vergleichstabelle mit 15 Produkten, 7-Tage-Startplan, 7 FAQ, 30+ Amazon-Affiliate-Links (tag=ikune21-21))
+- [x] **Garten-Planer Tool gebaut:** tools/garten-planer.html (~500 Zeilen, 8 Kategorien, Budget-Slider 100-5.000€, 4 Garten-Größen, interaktive Budget-Aufteilung mit Farbbalken, personalisierte Produktempfehlungen, 30+ Amazon-Affiliate-Links)
+- [x] **Blog-Index aktualisiert:** +Blog-Karte #81 (Sommer & Garten), Stats 80→81
+- [x] **Tools-Index aktualisiert:** +Garten-Planer (32→33 Tools)
+- [x] **Sitemap.xml aktualisiert:** +2 URLs (Blog #81 + Garten-Planer) → 297 URLs
+- [x] **Git pushed:** 6 files, 2.385 insertions (Commit: R2.61)
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 81 | ✅ LIVE (1 NEU: #81 Sommer & Garten) |
+| Interaktive Tools | 33 | ✅ LIVE (1 NEU: Garten-Planer) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15 | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| Sitemap URLs | 297 | ✅ LIVE (2 NEU)
 
 ### Previous State (R2.59):
 - 79 Blog-Artikel, 31 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher

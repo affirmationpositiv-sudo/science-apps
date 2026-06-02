@@ -1,248 +1,186 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Licht und Schatten – KI-Produkte, Bücher, Spiele & Mehr</title>
-  <meta name="description" content="Licht und Schatten Verlag: KI-Produkte, Bücher, T-Shirt Designs, Prompt-Packs, Spiele, Blog und Affiliate-Angebote. Alles aus einer Hand.">
-  <meta name="keywords" content="KI, Künstliche Intelligenz, Bücher, T-Shirt Designs, Prompt-Packs, Affiliate, Fitness, Mindset, Finanzen, Spiele, Blog">
-  <meta property="og:title" content="Licht und Schatten Verlag">
-  <meta property="og:description" content="KI-Produkte, Bücher, T-Shirts, Spiele, Blog und mehr – von Licht und Schatten.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/">
-  <meta name="twitter:card" content="summary_large_image">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #fff; line-height: 1.6; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
-    header { text-align: center; padding: 60px 20px 40px; background: linear-gradient(135deg, #0A0A0A 0%, #1a0a2e 50%, #0A0A0A 100%); }
-    h1 { font-size: 3em; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-    .subtitle { color: #888; font-size: 1.2em; margin-bottom: 32px; }
-    .badge { display: inline-block; background: #8B5CF6; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.85em; margin-bottom: 16px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 30px 0; }
-    .card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 28px 24px; text-decoration: none; color: #fff; transition: all 0.3s ease; display: flex; flex-direction: column; }
-    .card:hover { transform: translateY(-4px); border-color: #8B5CF6; box-shadow: 0 10px 30px rgba(139, 92, 246, 0.2); }
-    .card-icon { font-size: 42px; margin-bottom: 12px; }
-    .card h3 { font-size: 1.3em; margin-bottom: 4px; }
-    .card p { color: #888; font-size: 0.9em; flex: 1; }
-    .card .count { color: #FFD700; font-weight: 600; margin-top: 12px; }
-    .section { margin: 50px 0; }
-    .section-title { font-size: 2em; font-weight: 700; margin-bottom: 4px; }
-    .section-sub { color: #666; margin-bottom: 24px; }
-    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 30px 0; }
-    .feature { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 20px; text-align: center; }
-    .feature .num { font-size: 2em; font-weight: 700; color: #8B5CF6; }
-    .feature .label { color: #888; font-size: 0.85em; }
-    footer { text-align: center; padding: 40px 20px; color: #555; font-size: 0.85em; border-top: 1px solid #1A1A1A; }
-    footer a { color: #8B5CF6; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-    .disclaimer { background: #141414; border: 1px solid #2A2A2A; border-radius: 8px; padding: 16px; margin: 30px 0; font-size: 0.8em; color: #666; }
-    @media (max-width: 600px) { h1 { font-size: 2em; } .grid { grid-template-columns: 1fr; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licht und Schatten Verlag – eBooks & Ratgeber</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  
+  header { padding: 60px 0 40px; text-align: center; border-bottom: 1px solid #1a1a1a; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3em; font-weight: 700; color: #d4a843; letter-spacing: 2px; }
+  header p { color: #888; margin-top: 10px; font-size: 1.1em; }
+  
+  .hero { padding: 80px 0; text-align: center; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+  .hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2em; color: #fff; margin-bottom: 20px; }
+  .hero p { max-width: 600px; margin: 0 auto; color: #999; font-size: 1.1em; }
+  
+  .books { padding: 60px 0; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2em; color: #d4a843; text-align: center; margin-bottom: 50px; }
+  
+  .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+  
+  .book-card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: all .3s; }
+  .book-card:hover { border-color: #d4a843; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.4); }
+  
+  .book-cover { width: 100%; height: 380px; object-fit: cover; display: block; background: #1a1a1a; }
+  .book-info { padding: 20px; }
+  .book-info h3 { font-size: 1.15em; color: #fff; margin-bottom: 8px; font-weight: 600; }
+  .book-info p { color: #888; font-size: .9em; margin-bottom: 15px; }
+  .book-price { color: #d4a843; font-weight: 600; font-size: 1.1em; margin-bottom: 10px; }
+  .book-actions { display: flex; gap: 10px; }
+  .btn { padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: .9em; font-weight: 600; transition: all .3s; display: inline-block; }
+  .btn-primary { background: #d4a843; color: #0a0a0a; }
+  .btn-primary:hover { background: #e0b84f; }
+  .btn-secondary { background: #222; color: #e0e0e0; border: 1px solid #333; }
+  .btn-secondary:hover { background: #2a2a2a; }
+  
+  .coming-soon { background: #111; border: 1px solid #222; border-radius: 12px; padding: 40px; text-align: center; }
+  .coming-soon h3 { color: #d4a843; margin-bottom: 10px; }
+  .coming-soon p { color: #666; }
+  
+  .newsletter { padding: 60px 0; text-align: center; border-top: 1px solid #1a1a1a; }
+  .newsletter h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: #fff; margin-bottom: 15px; }
+  .newsletter p { color: #888; margin-bottom: 25px; }
+  .newsletter-form { display: flex; max-width: 400px; margin: 0 auto; gap: 10px; }
+  .newsletter-form input { flex: 1; padding: 12px 15px; border-radius: 6px; border: 1px solid #333; background: #111; color: #fff; font-size: 1em; }
+  .newsletter-form button { padding: 12px 25px; border-radius: 6px; border: none; background: #d4a843; color: #0a0a0a; font-weight: 600; cursor: pointer; }
+  
+  footer { padding: 40px 0; text-align: center; border-top: 1px solid #1a1a1a; color: #555; font-size: .9em; }
+  
+  @media (max-width: 768px) {
+    header h1 { font-size: 2em; }
+    .book-grid { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <span class="badge">📍 Live auf GitHub Pages – Shop, Blog, Spiele & Mehr</span>
-    <h1>🏪 Licht & Schatten</h1>
-    <p class="subtitle">KI-Produkte · Bücher · T-Shirts · Spiele · Blog · Affiliate</p>
-  </header>
 
+<header>
   <div class="container">
-    <!-- Stats -->
-    <div class="features">
-      <div class="feature"><div class="num">15</div><div class="label">📚 Bücher</div></div>
-      <div class="feature"><div class="num">12</div><div class="label">🎮 Spiele</div></div>
-      <div class="feature"><div class="num">8</div><div class="label">👕 T-Shirt Designs</div></div>
-      <div class="feature"><div class="num">70</div><div class="label">📝 Blog-Artikel</div></div>
-      <div class="feature"><div class="num">32</div><div class="label">🌐 KI-Websites</div></div>
-      <div class="feature"><div class="num">9</div><div class="label">🌐 Affiliate-Shops</div></div>
-      <div class="feature"><div class="num">20</div><div class="label">🎬 Video-Skripte</div></div>
-      <div class="feature"><div class="num">3</div><div class="label">🤖 Prompt-Packs</div></div>
-    </div>
-
-    <!-- Hauptkategorien -->
-    <div class="section">
-      <h2 class="section-title">🛒 Alles auf einen Blick</h2>
-      <p class="section-sub">Stöbern, spielen, kaufen – alles mit Amazon Affiliate-Links</p>
-      <div class="grid">
-        <a href="store.html" class="card">
-          <div class="card-icon">🏪</div>
-          <h3>Shop</h3>
-          <p>Alle Produkte: Bücher, T-Shirts, Prompt-Packs. Mit Amazon-Affiliate-Links.</p>
-          <span class="count">→ Jetzt stöbern</span>
-        </a>
-        <a href="buecher/" class="card">
-          <div class="card-icon">📚</div>
-          <h3>Bücher</h3>
-          <p>15 Ratgeber: KI, Finanzen, Fitness, Minimalismus, Steuern & mehr. Preview + Download.</p>
-          <span class="count">→ Bücher entdecken</span>
-        </a>
-        <a href="games/" class="card">
-          <div class="card-icon">🎮</div>
-          <h3>Spiele & Tools</h3>
-          <p>12 interaktive Spiele, Memory, TicTacToe, Crossword, Budget-Rechner & mehr.</p>
-          <span class="count">→ Spiele entdecken</span>
-        </a>
-        <a href="lifecoach-ai/" class="card">
-          <div class="card-icon">🐉</div>
-          <h3>LifeCoach AI</h3>
-          <p>Deine persönliche KI-App für persönliche Transformation & tägliche Motivation.</p>
-          <span class="count">→ LifeCoach starten</span>
-        </a>
-        <a href="blog/" class="card">
-          <div class="card-icon">📝</div>
-          <h3>Blog</h3>
-          <p>48 Ratgeber: KI, Fitness, Finanzen, Homeoffice, passives Einkommen & mehr.</p>
-          <span class="count">→ Blog lesen</span>
-        </a>
-        <a href="youtube/" class="card">
-          <div class="card-icon">🎬</div>
-          <h3>YouTube-Kanal</h3>
-          <p>20 Videos: KI verstehen, nutzen & Geld verdienen. Video #1: Die 3 größten Lügen über KI.</p>
-          <span class="count">→ Kanal ansehen</span>
-        </a>
-        <a href="tshirt_designs/" class="card">
-          <div class="card-icon">👕</div>
-          <h3>T-Shirt Designs</h3>
-          <p>8 exklusive Designs: Minimalist, KI, Gamer, Kosmos, Pet Love & mehr.</p>
-          <span class="count">→ Designs ansehen</span>
-        </a>
-        <a href="money/" class="card">
-          <div class="card-icon">💰</div>
-          <h3>Geld verdienen</h3>
-          <p>Finanz-Ratgeber: Budget, Sparen, Investieren, KI-Einkommen, 10.000€ Plan.</p>
-          <span class="count">→ 10.000€ Plan</span>
-        </a>
-        <a href="affiliate/" class="card">
-          <div class="card-icon">🌐</div>
-          <h3>Affiliate-Shops</h3>
-          <p>5 Spezial-Shops: Fitness, Finanzen, Mindset, KI-Tools, Life Coaching.</p>
-          <span class="count">→ Shops besuchen</span>
-        </a>
-        <a href="ScienceApps/" class="card">
-          <div class="card-icon">🧪</div>
-          <h3>Science Apps</h3>
-          <p>Wissenschaftliche Tools: BioLab, ChemBase, MedCalc, PhysData & mehr.</p>
-          <span class="count">→ Tools nutzen</span>
-        </a>
-        <a href="leadgen/" class="card">
-          <div class="card-icon">🎯</div>
-          <h3>LeadGen AI</h3>
-          <p>Findet Entscheider-Kontakte aus Firmen-Websites. Interne Nummern von CEOs, GF, Abteilungsleitern.</p>
-          <span class="count">→ Leads generieren</span>
-        </a>
-        <a href="branchen-ki/" class="card">
-          <div class="card-icon">🏭</div>
-          <h3>10 Branchen-KIs</h3>
-          <p>Spezialisierte KI-Tools: Heizungsbau, Immobilien, Recht, Medizin, Handwerk, Steuern, Logistik & mehr.</p>
-          <span class="count">→ Branchen-KIs entdecken</span>
-        </a>
-        <a href="tools/" class="card">
-          <div class="card-icon">🧰</div>
-          <h3>KI-Tools & Analysen</h3>
-          <p>23 interaktive Tools: Budget-Rechner, SEO-Generator, Persönlichkeitsanalyse, Heimwerker-Bedarfsrechner & mehr.</p>
-          <span class="count">→ Tools nutzen</span>
-        </a>
-        <a href="learning-tracker/" class="card">
-          <div class="card-icon">📊</div>
-          <h3>Lernfortschritt-Tracker</h3>
-          <p>Kostenloser Tracker für deine Online-Kurse. Setze Lernziele, tracke tägliche Lernzeit & verfolge deinen Fortschritt.</p>
-          <span class="count">→ Lern-Tracker starten</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Hermes AI Suite -->
-    <div class="section">
-      <h2 class="section-title">🤖 Hermes AI Suite</h2>
-      <p class="section-sub">KI-gestützte Tools – Lead-Generierung, Branchen-KIs & Blog</p>
-      <div class="grid">
-        <a href="/leadgen/" class="card">
-          <div class="card-icon">🎯</div>
-          <h3>LeadGen AI</h3>
-          <p>Findet Entscheider-Kontakte aus Firmen-Websites. Interne Nummern von CEOs, GF, Abteilungsleitern.</p>
-          <span class="count">→ Leads generieren</span>
-        </a>
-        <a href="/branchen-ki/" class="card">
-          <div class="card-icon">🏭</div>
-          <h3>10 Branchen-KIs</h3>
-          <p>Spezialisierte KI-Tools: Heizungsbau, Immobilien, Recht, Medizin, Handwerk, Steuern, Logistik & mehr.</p>
-          <span class="count">→ Branchen-KIs entdecken</span>
-        </a>
-        <a href="/blog/" class="card">
-          <div class="card-icon">📝</div>
-          <h3>Blog</h3>
-          <p>KI-Tools 2026, Fitness-Trends, passives Einkommen, Minimalismus & mehr.</p>
-          <span class="count">→ Blog lesen</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Direktlinks Affiliate -->
-    <div class="section">
-      <h2 class="section-title">⭐ Empfohlen auf Amazon</h2>
-      <p class="section-sub">Handverlesene Produkte – Affiliate-Links (tag=ikune21-21)</p>
-      <div class="grid">
-        <a href="affiliate/fitnesspro/" class="card">
-          <div class="card-icon">💪</div>
-          <h3>FitnessPro</h3>
-          <p>Fitnessgeräte, Supplemente, Zubehör für dein Training.</p>
-          <span class="count">→ Bei Amazon entdecken</span>
-        </a>
-        <a href="affiliate/wealthlab/" class="card">
-          <div class="card-icon">💰</div>
-          <h3>WealthLab</h3>
-          <p>Finanzbücher, Trading-Tools, Börsenwissen.</p>
-          <span class="count">→ Bei Amazon entdecken</span>
-        </a>
-        <a href="affiliate/aibiz/" class="card">
-          <div class="card-icon">🤖</div>
-          <h3>AI Business</h3>
-          <p>KI-Tools, Tech-Produkte, Hardware.</p>
-          <span class="count">→ Bei Amazon entdecken</span>
-        </a>
-        <a href="affiliate/mindmaster/" class="card">
-          <div class="card-icon">🧠</div>
-          <h3>MindMaster</h3>
-          <p>Mindset-Bücher, Psychologie, Selbstoptimierung.</p>
-          <span class="count">→ Bei Amazon entdecken</span>
-        </a>
-        <a href="affiliate/lifecoach/" class="card">
-          <div class="card-icon">🌟</div>
-          <h3>LifeCoach</h3>
-          <p>Coaching, Achtsamkeit, erfülltes Leben.</p>
-          <span class="count">→ Bei Amazon entdecken</span>
-        </a>
-        <a href="money/" class="card">
-          <div class="card-icon">📈</div>
-          <h3>10.000€ Plan</h3>
-          <p>Budget → Sparen → Investieren → passives Einkommen. Schritt für Schritt.</p>
-          <span class="count">→ Plan ansehen</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Affiliate Disclaimer -->
-    <div class="disclaimer">
-      ⚠️ <strong>Affiliate-Hinweis:</strong> Einige Links sind Affiliate-Links (Amazon-Partner). Bei Kauf erhalten wir eine kleine Provision – für dich keine Mehrkosten. Danke für deine Unterstützung! 🎯
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <p>
-        <a href="store.html">Shop</a> · 
-        <a href="buecher/">Bücher</a> · 
-        <a href="games/">Spiele</a> · 
-        <a href="blog/">Blog</a> · 
-        <a href="youtube/">YouTube</a> · 
-        <a href="branchen-ki/">Branchen-KI</a> · 
-        <a href="leadgen/">LeadGen</a> · 
-        <a href="affiliate/">Affiliate</a> · 
-        <a href="impressum/">Impressum</a> · 
-        <a href="datenschutz/">Datenschutz</a>
-      </p>
-      <p style="margin-top: 8px;">© 2026 <strong>Licht und Schatten</strong> Verlag. Alle Rechte vorbehalten.</p>
-    </footer>
+    <h1>Licht &amp; Schatten Verlag</h1>
+    <p>Praktische Ratgeber f&uuml;r ein besseres Leben – mit und ohne KI</p>
   </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h2>Dein Wissen. Dein Erfolg. Deine Zukunft.</h2>
+    <p>Hochwertige eBooks zu den Themen KI, Finanzen, Minimalismus, Studium und pers&ouml;nliche Entwicklung – praxisnah, ehrlich, umsetzbar.</p>
+  </div>
+</section>
+
+<section class="books">
+  <div class="container">
+    <h2 class="section-title">Unsere B&uuml;cher</h2>
+    <div class="book-grid" id="bookGrid">
+      <!-- Books injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container">
+    <h2>Bleib auf dem Laufenden</h2>
+    <p>Erhalte kostenlose Tipps, neue Buchank&uuml;ndigungen und exklusive Rabatte.</p>
+    <form class="newsletter-form" action="mailto:affirmation.positiv@gmail.com" method="post" enctype="text/plain">
+      <input type="email" placeholder="Deine E-Mail-Adresse" required>
+      <button type="submit">Abonnieren</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Licht und Schatten Verlag. Alle Rechte vorbehalten.</p>
+    <p style="margin-top: 5px;">Kontakt: affirmation.positiv@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+const books = [
+  {
+    title: 'Passives Einkommen mit KI 2026',
+    desc: 'Praktische Strategien f&uuml;r den Aufbau automatisierter Einkommensquellen mit K&uuml;nstlicher Intelligenz.',
+    cover: 'KDP_Books/cover_Passives_Einkommen_mit_KI_2026.png',
+    docx: 'KDP_Books/Passives_Einkommen_mit_KI_2026.docx',
+    price: '9,99 €',
+    category: 'KI &amp; Geld'
+  },
+  {
+    title: 'KI-Tools f&uuml;r Anf&auml;nger 2026',
+    desc: 'Der praktische Einstieg in die Welt der K&uuml;nstlichen Intelligenz – von ChatGPT bis Bildgenerierung.',
+    cover: 'KDP_Books/cover_KI_Tools_fuer_Anfaenger_2026.png',
+    docx: 'KDP_Books/KI_Tools_fuer_Anfaenger_2026.docx',
+    price: '8,99 €',
+    category: 'KI &amp; Technik'
+  },
+  {
+    title: 'Duales Studium 2026',
+    desc: 'Der komplette Guide f&uuml;r Studium &amp; Karriere – von der Bewerbung bis zum Berufseinstieg.',
+    cover: 'KDP_Books/cover_Duales_Studium_2026.png',
+    docx: 'KDP_Books/Duales_Studium_2026.docx',
+    price: '9,99 €',
+    category: 'Karriere'
+  },
+  {
+    title: 'Steuererkl&auml;rung 2026',
+    desc: 'F&uuml;r Freiberufler und Selbstst&auml;ndige – Schritt f&uuml;r Schritt zu mehr R&uuml;ckerstattung.',
+    cover: 'KDP_Books/cover_Steuererklaerung_2026_Freiberufler.png',
+    docx: 'KDP_Books/Steuererklaerung_2026_Freiberufler.docx',
+    price: '9,99 €',
+    category: 'Finanzen'
+  },
+  {
+    title: 'Notvorrat f&uuml;r Familien 2026',
+    desc: '14 Tage Autarkie mit Kindern – inkl. vegetarischer &amp; veganer Optionen. Der praktische Notfall-Plan.',
+    cover: 'KDP_Books/cover_Notvorrat_fuer_Familien_2026.png',
+    docx: 'KDP_Books/Notvorrat_fuer_Familien_2026.docx',
+    price: '7,99 €',
+    category: 'Leben'
+  },
+  {
+    title: 'Krypto f&uuml;r Anf&auml;nger 2026',
+    desc: 'Bitcoin, Ethereum, Altcoins &amp; KI-Trading verst&auml;ndlich erkl&auml;rt. Der sichere Einstieg.',
+    cover: 'KDP_Books/cover_notvorrat_fuer_familien_2026.png',
+    docx: 'KDP_Books/Krypto_fuer_Anfaenger_2026.docx',
+    price: '8,99 €',
+    category: 'Finanzen'
+  },
+  {
+    title: 'KI-Kunst 2026',
+    desc: 'Midjourney, DALL-E und Stable Diffusion – KI-Bilder erstellen und erfolgreich verkaufen.',
+    cover: 'KDP_Books/cover_KI_Tools_fuer_Anfaenger_2026.png',
+    docx: 'KDP_Books/ki_kunst_2026.docx',
+    price: '8,99 €',
+    category: 'KI &amp; Kreativ'
+  }
+];
+
+const grid = document.getElementById('bookGrid');
+books.forEach(b => {
+  const card = document.createElement('div');
+  card.className = 'book-card';
+  card.innerHTML = `
+    <img class="book-cover" src="${b.cover}" alt="${b.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22380%22><rect fill=%22%231a1a1a%22 width=%22280%22 height=%22380%22/><text x=%22140%22 y=%22190%22 text-anchor=%22middle%22 fill=%22%23d4a843%22 font-size=%2220%22 font-family=%22serif%22>${b.title}</text></svg>'">
+    <div class="book-info">
+      <div style="color:#666;font-size:.8em;margin-bottom:5px">${b.category}</div>
+      <h3>${b.title}</h3>
+      <p>${b.desc}</p>
+      <div class="book-price">${b.price}</div>
+      <div class="book-actions">
+        <a class="btn btn-primary" href="#" onclick="alert('Bald bei Amazon KDP verfuegbar!')">Jetzt kaufen</a>
+        <a class="btn btn-secondary" href="${b.docx}" download>PDF lesen</a>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+
 </body>
 </html>
