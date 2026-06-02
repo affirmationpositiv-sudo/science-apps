@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard – Licht und Schatten Portfolio</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height:1.6; }
+.container { max-width:1200px; margin:0 auto; padding:20px; }
+h1 { font-size:2.2em; font-weight:800; background:linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:4px; }
+.sub { color:#888; margin-bottom:30px; font-size:1em; }
+.stats { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:12px; margin-bottom:30px; }
+.stat-card { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:12px; padding:16px; text-align:center; }
+.stat-card .num { font-size:2em; font-weight:800; color:#8B5CF6; }
+.stat-card .label { color:#888; font-size:.85em; }
+.section { margin-bottom:30px; }
+.section h2 { font-size:1.4em; font-weight:700; color:#fff; border-bottom:1px solid #2A2A2A; padding-bottom:8px; margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.badge { display:inline-block; font-size:.7em; padding:2px 10px; border-radius:10px; font-weight:600; }
+.badge-live { background:#0d3d0d; color:#4ade80; border:1px solid #22c55e; }
+.badge-blocked { background:#3d0d0d; color:#f87171; border:1px solid #ef4444; }
+.badge-draft { background:#3d3d0d; color:#facc15; border:1px solid #eab308; }
+.badge-ready { background:#0d1d3d; color:#60a5fa; border:1px solid #3b82f6; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:14px; }
+.card { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:14px; padding:18px; transition:all .3s; }
+.card:hover { border-color:#8B5CF6; transform:translateY(-2px); }
+.card h3 { font-size:1em; font-weight:700; color:#fff; margin-bottom:4px; }
+.card .desc { color:#888; font-size:.85em; margin-bottom:10px; }
+.card .meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.card .actions { }
+.card .actions a { color:#A78BFA; font-size:.85em; text-decoration:none; margin-right:12px; }
+.card .actions a:hover { color:#FFD700; }
+.status-row { display:flex; align-items:center; gap:12px; background:#151515; border-radius:10px; padding:12px 16px; margin-bottom:8px; }
+.status-row .name { flex:1; font-weight:600; }
+.blocker-section { background:#1a0d0d; border:1px solid #3d1d1d; border-radius:14px; padding:20px; margin-bottom:30px; }
+.blocker-section h2 { color:#f87171; border-color:#3d1d1d; }
+.blocker-item { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #1d1d1d; }
+.blocker-item:last-child { border-bottom:none; }
+.blocker-item .problem { color:#f87171; font-size:.9em; }
+.blocker-item .solution { color:#4ade80; font-size:.85em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>⚡ LICHT UND SCHATTEN</h1>
+<p class="sub">Admin-Dashboard – Alle Produkte, Apps & Assets auf einen Blick</p>
+
+<div class="stats">
+  <div class="stat-card"><div class="num">169</div><div class="label">HTML-Seiten</div></div>
+  <div class="stat-card"><div class="num">5</div><div class="label">KDP-Bücher (PDF)</div></div>
+  <div class="stat-card"><div class="num">15</div><div class="label">Buch-Landingpages</div></div>
+  <div class="stat-card"><div class="num">50</div><div class="label">Affiliate-Artikel</div></div>
+  <div class="stat-card"><div class="num">34</div><div class="label">Blog-Artikel</div></div>
+  <div class="stat-card"><div class="num">8</div><div class="label">T-Shirt Designs</div></div>
+  <div class="stat-card"><div class="num">14</div><div class="label">KI-Tools/Apps</div></div>
+  <div class="stat-card"><div class="num">9</div><div class="label">Spiele</div></div>
+  <div class="stat-card"><div class="num">3</div><div class="label">Prompt Packs</div></div>
+  <div class="stat-card"><div class="num">148</div><div class="label">Sitemap URLs</div></div>
+</div>
+
+<!-- ============ BLOCKERS ============ -->
+<div class="blocker-section">
+  <h2>🔴 Blockaden & Lösungen</h2>
+  <div class="blocker-item">
+    <div><strong>Amazon KDP Upload</strong><br><span class="problem">❌ Kein API-Zugriff – Einloggen notwendig</span></div>
+    <span class="solution">DU musst dich auf kdp.amazon.de einloggen & 5 PDFs hochladen</span>
+  </div>
+  <div class="blocker-item">
+    <div><strong>Gumroad Shop</strong><br><span class="problem">❌ Cloudflare blockiert API</span></div>
+    <span class="solution">DU musst manuell hochladen (gumroad.com)</span>
+  </div>
+  <div class="blocker-item">
+    <div><strong>Redbubble Shop</strong><br><span class="problem">❌ Cloudflare blockiert API</span></div>
+    <span class="solution">DU musst 8 Designs auf redbubble.com hochladen</span>
+  </div>
+  <div class="blocker-item">
+    <div><strong>Play Store Veröffentlichung</strong><br><span class="problem">❌ $25 Gebühr – kein Geld</span></div>
+    <span class="solution">APK liegt bereit. Warten auf Finanzierung.</span>
+  </div>
+  <div class="blocker-item">
+    <div><strong>Google Search Console</strong><br><span class="problem">❌ Sitemap nicht eingereicht</span></div>
+    <span class="solution">Kann ich heute machen → via HTTP Ping</span>
+  </div>
+</div>
+
+<!-- ============ KDP BÜCHER ============ -->
+<div class="section">
+  <h2>📚 KDP Bücher <span class="badge badge-live">5 PDFs ready</span></h2>
+  <div class="grid">
+    <div class="card"><h3>01 – KI-Tools für Anfänger 2026</h3><div class="meta"><span class="badge badge-live">PDF ✅</span><span class="badge badge-ready">DOCX ✅</span><span class="badge badge-draft">Cover ✅</span></div><div class="desc">Einstieg in KI für absolute Anfänger</div><div class="actions"><a href="KDP_Books/01_KI-Tools_fuer_Anfaenger_2026.pdf">📄 PDF</a></div></div>
+    <div class="card"><h3>02 – Passives Einkommen mit KI</h3><div class="meta"><span class="badge badge-live">PDF ✅</span><span class="badge badge-ready">DOCX ✅</span><span class="badge badge-draft">Cover ✅</span></div><div class="desc">KI-gestützte Einkommensquellen</div><div class="actions"><a href="KDP_Books/02_Passives_Einkommen_mit_KI.pdf">📄 PDF</a></div></div>
+    <div class="card"><h3>03 – KI-Revolution im Alltag</h3><div class="meta"><span class="badge badge-live">PDF ✅</span><span class="badge badge-ready">DOCX ✅</span><span class="badge badge-draft">Cover ✅</span></div><div class="desc">Wie KI den Alltag verändert</div><div class="actions"><a href="KDP_Books/03_KI-Revolution_im_Alltag.pdf">📄 PDF</a></div></div>
+    <div class="card"><h3>04 – KI für Unternehmer</h3><div class="meta"><span class="badge badge-live">PDF ✅</span><span class="badge badge-ready">DOCX ✅</span><span class="badge badge-draft">Cover ✅</span></div><div class="desc">KI-Tools und Strategien für Business</div><div class="actions"><a href="KDP_Books/04_KI_fuer_Unternehmer.pdf">📄 PDF</a></div></div>
+    <div class="card"><h3>05 – Steuererklärung 2026</h3><div class="meta"><span class="badge badge-live">PDF ✅</span><span class="badge badge-ready">DOCX ✅</span><span class="badge badge-draft">Cover ✅</span></div><div class="desc">Steuer-Guide für Freiberufler</div><div class="actions"><a href="KDP_Books/05_Steuererklaerung_2026.pdf">📄 PDF</a></div></div>
+  </div>
+</div>
+
+<!-- ============ BÜCHER LANDINGPAGES ============ -->
+<div class="section">
+  <h2>📖 Buch-Landingpages (15) <span class="badge badge-live">Alle live</span></h2>
+  <div class="grid">
+    <div class="card"><h3>Minimalismus</h3><div class="desc">Minimalismus für Männer</div><div class="actions"><a href="buecher/buch-01-minimalismus.html">🔗</a></div></div>
+    <div class="card"><h3>Steuererklärung</h3><div class="desc">Steuererklärung für Freiberufler</div><div class="actions"><a href="buecher/buch-02-steuererklaerung.html">🔗</a></div></div>
+    <div class="card"><h3>ChatGPT für Handwerker</h3><div class="actions"><a href="buecher/buch-03-chatgpt-handwerker.html">🔗</a></div></div>
+    <div class="card"><h3>Notvorrat</h3><div class="actions"><a href="buecher/buch-04-notvorrat.html">🔗</a></div></div>
+    <div class="card"><h3>Calisthenics</h3><div class="actions"><a href="buecher/buch-05-calisthenics.html">🔗</a></div></div>
+    <div class="card"><h3>KI im Alltag</h3><div class="actions"><a href="buecher/buch-06-ki-im-alltag.html">🔗</a></div></div>
+    <div class="card"><h3>100 KI Prompts</h3><div class="actions"><a href="buecher/buch-07-100-ki-prompts.html">🔗</a></div></div>
+    <div class="card"><h3>Krypto+KI</h3><div class="actions"><a href="buecher/buch-08-kryptowaehrungen-ki.html">🔗</a></div></div>
+    <div class="card"><h3>KI Bewerbung</h3><div class="actions"><a href="buecher/buch-09-ki-bewerbung.html">🔗</a></div></div>
+    <div class="card"><h3>Crypto Anfänger</h3><div class="actions"><a href="buecher/buch-10-crypto-anfaenger.html">🔗</a></div></div>
+    <div class="card"><h3>KI Kunst</h3><div class="actions"><a href="buecher/buch-11-ki-kunst.html">🔗</a></div></div>
+    <div class="card"><h3>KI Freundschaften</h3><div class="actions"><a href="buecher/buch-12-ki-freundschaften.html">🔗</a></div></div>
+    <div class="card"><h3>KI Unternehmer</h3><div class="actions"><a href="buecher/buch-13-ki-unternehmer.html">🔗</a></div></div>
+    <div class="card"><h3>Passives Einkommen</h3><div class="actions"><a href="buecher/buch-14-passives-einkommen.html">🔗</a></div></div>
+    <div class="card"><h3>KI Revolution</h3><div class="actions"><a href="buecher/buch-15-ki-revolution.html">🔗</a></div></div>
+  </div>
+</div>
+
+<!-- ============ AFFILIATE NISCHEN ============ -->
+<div class="section">
+  <h2>🛍️ Affiliate-Nischen (8) <span class="badge badge-live">50 Artikel</span></h2>
+  <div class="grid">
+    <div class="card"><h3>💪 FitnessPro</h3><div class="meta"><span class="badge badge-live">8 Seiten</span></div><div class="desc">Fitnessgeräte, Supplements, Heimtraining</div><div class="actions"><a href="affiliate/fitnesspro/">🔗 Start</a> <a href="affiliate/fitnesspro/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>💰 WealthLab</h3><div class="meta"><span class="badge badge-live">8 Seiten</span></div><div class="desc">Finanzen, Trading, ETFs, Bücher</div><div class="actions"><a href="affiliate/wealthlab/">🔗 Start</a> <a href="affiliate/wealthlab/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>🤖 AiBiz</h3><div class="meta"><span class="badge badge-live">7 Seiten</span></div><div class="desc">KI-Tools, ChatGPT, Business</div><div class="actions"><a href="affiliate/aibiz/">🔗 Start</a> <a href="affiliate/aibiz/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>🪑 Ergonomie</h3><div class="meta"><span class="badge badge-live">7 Seiten</span></div><div class="desc">Bürostühle, Schreibtische, Rücken</div><div class="actions"><a href="affiliate/ergonomie/">🔗 Start</a> <a href="affiliate/ergonomie/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>🧠 LifeCoach</h3><div class="meta"><span class="badge badge-live">7 Seiten</span></div><div class="desc">Coaching, Journaling, Mindset</div><div class="actions"><a href="affiliate/lifecoach/">🔗 Start</a> <a href="affiliate/lifecoach/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>🧘 MindMaster</h3><div class="meta"><span class="badge badge-live">7 Seiten</span></div><div class="desc">Meditation, Schlaf, Achtsamkeit</div><div class="actions"><a href="affiliate/mindmaster/">🔗 Start</a> <a href="affiliate/mindmaster/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>🌱 Nachhaltig</h3><div class="meta"><span class="badge badge-live">7 Seiten</span></div><div class="desc">Öko-Produkte, Solar, Zero Waste</div><div class="actions"><a href="affiliate/nachhaltig/">🔗 Start</a> <a href="affiliate/nachhaltig/ratgeber/">📰 Ratgeber</a></div></div>
+    <div class="card"><h3>🏠 SmartHome</h3><div class="meta"><span class="badge badge-live">7 Seiten</span></div><div class="desc">Echo, Hue, Kameras, Heizung</div><div class="actions"><a href="affiliate/smarthome/">🔗 Start</a> <a href="affiliate/smarthome/ratgeber/">📰 Ratgeber</a></div></div>
+  </div>
+</div>
+
+<!-- ============ BLOG ============ -->
+<div class="section">
+  <h2>📝 Blog <span class="badge badge-live">34 Artikel</span></h2>
+  <div class="grid">
+    <div class="card"><h3>Blog-Übersicht</h3><div class="desc">Alle 34 Artikel auf einer Seite</div><div class="actions"><a href="blog/">🔗 Zum Blog</a></div></div>
+  </div>
+</div>
+
+<!-- ============ TOOLS / APPS ============ -->
+<div class="section">
+  <h2>🛠️ KI-Tools & Apps <span class="badge badge-live">14 live</span></h2>
+  <div class="grid">
+    <div class="card"><h3>💪 KI Fitness-Trainer</h3><div class="actions"><a href="tools/ki-fitness-trainer.html">🔗</a></div></div>
+    <div class="card"><h3>🎮 KI Gaming-Berater</h3><div class="actions"><a href="tools/ki-gaming-berater.html">🔗</a></div></div>
+    <div class="card"><h3>🏠 KI Smart Home Rechner</h3><div class="actions"><a href="tools/ki-smart-home-rechner.html">🔗</a></div></div>
+    <div class="card"><h3>⚽ KI Sport-Analyzer</h3><div class="actions"><a href="tools/ki-sport-analyzer.html">🔗</a></div></div>
+    <div class="card"><h3>🎓 KI Studienberater</h3><div class="actions"><a href="tools/ki-studienberater.html">🔗</a></div></div>
+    <div class="card"><h3>📊 SEO Generator</h3><div class="actions"><a href="tools/seo-generator.html">🔗</a></div></div>
+    <div class="card"><h3>📈 SEO Traffic Rechner</h3><div class="actions"><a href="tools/seo-traffic-rechner.html">🔗</a></div></div>
+    <div class="card"><h3>💵 Passive Income Rechner</h3><div class="actions"><a href="tools/passive-income-calculator.html">🔗</a></div></div>
+    <div class="card"><h3>💰 Budget-Rechner</h3><div class="actions"><a href="tools/budget-rechner.html">🔗</a></div></div>
+    <div class="card"><h3>📦 Dropshipping-Rechner</h3><div class="actions"><a href="tools/dropshipping-rechner.html">🔗</a></div></div>
+    <div class="card"><h3>🏥 Health Score</h3><div class="actions"><a href="tools/health-score-calculator.html">🔗</a></div></div>
+    <div class="card"><h3>✈️ Reisekostenrechner</h3><div class="actions"><a href="tools/reisekostenrechner.html">🔗</a></div></div>
+    <div class="card"><h3>💡 Startup-Ideen Generator</h3><div class="actions"><a href="tools/startup-ideen-generator.html">🔗</a></div></div>
+    <div class="card"><h3>🧠 LifeCoach AI (Web)</h3><div class="desc">Vollständige LifeCoach-App</div><div class="actions"><a href="lifecoach-ai/">🔗</a></div></div>
+  </div>
+</div>
+
+<!-- ============ SPIELE ============ -->
+<div class="section">
+  <h2>🎮 Spiele <span class="badge badge-live">9 live</span></h2>
+  <div class="grid">
+    <div class="card"><h3>⚽ Penalty Kick</h3><div class="actions"><a href="PenaltyKick/">🔗</a></div></div>
+    <div class="card"><h3>🔢 Zahlenraten</h3><div class="actions"><a href="Zahlenraten/">🔗</a></div></div>
+    <div class="card"><h3>🔫 Weapon Evolution</h3><div class="actions"><a href="WeaponEvo/">🔗</a></div></div>
+    <div class="card"><h3>🪐 Galaxy Miner</h3><div class="actions"><a href="GalaxyMiner/">🔗</a></div></div>
+    <div class="card"><h3>🔤 Crossword</h3><div class="actions"><a href="Crossword/">🔗</a></div></div>
+    <div class="card"><h3>🔢 Sudoku</h3><div class="actions"><a href="Sudoku/">🔗</a></div></div>
+    <div class="card"><h3>🔍 WordSearch</h3><div class="actions"><a href="WordSearch/">🔗</a></div></div>
+    <div class="card"><h3>🃏 Memory</h3><div class="actions"><a href="Memory/">🔗</a></div></div>
+    <div class="card"><h3>❌ TicTacToe</h3><div class="actions"><a href="tictactoe/">🔗</a></div></div>
+  </div>
+</div>
+
+<!-- ============ TSHIRTS & PROMPTS ============ -->
+<div class="section">
+  <h2>👕 T-Shirt Designs <span class="badge badge-live">8 Designs</span></h2>
+  <div class="grid">
+    <div class="card"><h3>Minimalist</h3><div class="actions"><a href="tshirt_designs/design1_minimal.png">🖼️</a></div></div>
+    <div class="card"><h3>KI Thema</h3><div class="actions"><a href="tshirt_designs/design2_ki_ai.png">🖼️</a></div></div>
+    <div class="card"><h3>Money Vibe</h3><div class="actions"><a href="tshirt_designs/design3_money.png">🖼️</a></div></div>
+    <div class="card"><h3>Gamer</h3><div class="actions"><a href="tshirt_designs/design4_gamer.png">🖼️</a></div></div>
+    <div class="card"><h3>Geometrisch</h3><div class="actions"><a href="tshirt_designs/design5_geometric.png">🖼️</a></div></div>
+    <div class="card"><h3>Haustiere</h3><div class="actions"><a href="tshirt_designs/design6_pets.png">🖼️</a></div></div>
+    <div class="card"><h3>Berglandschaft</h3><div class="actions"><a href="tshirt_designs/design7_mountain.png">🖼️</a></div></div>
+    <div class="card"><h3>Weltraum</h3><div class="actions"><a href="tshirt_designs/design8_cosmos.png">🖼️</a></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📦 Prompt Packs <span class="badge badge-live">3 Packs</span></h2>
+  <div class="grid">
+    <div class="card"><h3>📝 Textprompts</h3><div class="desc">50+ KI-Textvorlagen</div><div class="actions"><a href="PromptPack1/">🔗</a></div></div>
+    <div class="card"><h3>💻 Coding-Prompts</h3><div class="desc">40+ Entwickler-Prompts</div><div class="actions"><a href="PromptPack2/">🔗</a></div></div>
+    <div class="card"><h3>💼 Business-Prompts</h3><div class="desc">45+ Geschäfts-Prompts</div><div class="actions"><a href="PromptPack3/">🔗</a></div></div>
+  </div>
+</div>
+
+<!-- ============ SCIENCE APPS ============ -->
+<div class="section">
+  <h2>🔬 Science Apps <span class="badge badge-live">12 live</span></h2>
+  <div class="grid">
+    <div class="card"><h3>🧬 BioLab</h3><div class="actions"><a href="BioLab/">🔗</a></div></div>
+    <div class="card"><h3>🧪 ChemBase</h3><div class="actions"><a href="ChemBase/">🔗</a></div></div>
+    <div class="card"><h3>📊 PhysData</h3><div class="actions"><a href="PhysData/">🔗</a></div></div>
+    <div class="card"><h3>💊 MedCalc</h3><div class="actions"><a href="MedCalc/">🔗</a></div></div>
+    <div class="card"><h3>📐 MathTool</h3><div class="actions"><a href="MathTool/">🔗</a></div></div>
+    <div class="card"><h3>🧮 ScienceApps</h3><div class="actions"><a href="ScienceApps/">🔗</a></div></div>
+  </div>
+</div>
+
+<!-- ============ KEY LINKS ============ -->
+<div class="section">
+  <h2>🔗 Wichtige Links</h2>
+  <div class="grid">
+    <div class="card"><h3>🏪 Shop</h3><div class="actions"><a href="store.html">🔗</a></div></div>
+    <div class="card"><h3>📋 SHOP.md</h3><div class="actions"><a href="SHOP.md">🔗</a></div></div>
+    <div class="card"><h3>🏠 Startseite</h3><div class="actions"><a href="index.html">🔗</a></div></div>
+    <div class="card"><h3>📱 Affiliate Hub</h3><div class="actions"><a href="affiliate/">🔗</a></div></div>
+    <div class="card"><h3>🤖 Yesar Bot</h3><div class="desc">@Yesaryour_bot – Telegram</div></div>
+  </div>
+</div>
+
+<footer style="text-align:center;padding:40px 0;color:#555;font-size:.85em;border-top:1px solid #1a1a1a;">
+  Erstellt von <strong>Licht und Schatten</strong> 🌘 · Hermes Agent · Letztes Update: Juni 2026
+</footer>
+
+</div>
+</body>
+</html>
