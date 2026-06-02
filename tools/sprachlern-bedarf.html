@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Sprachlern-Bedarfsrechner 2026 – Finde dein ideales Sprachlern-Setup</title>
+<meta name="description" content="Interaktiver KI-Sprachlern-Bedarfsrechner: 5 Fragen zu Zielsprache, Budget, Lerntyp, Zeit & Hardware – erhalte personalisierte App-, Kurs- & Hardware-Empfehlungen mit Amazon-Affiliate-Links.">
+<meta name="keywords" content="Sprachlern-Bedarfsrechner, KI Sprachenlernen, Sprachlern-App Empfehlung, Duolingo, Babbel, Sprachlern-Kopfhörer, Kindle Sprachen lernen, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-size: 2.4em; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; text-align: center; }
+.subtitle { text-align: center; color: #6B7280; margin-bottom: 10px; }
+.progress { background: #1A1A1A; border-radius: 20px; height: 12px; margin: 20px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #8B5CF6, #FFD700); border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+.progress-text { text-align: center; color: #6B7280; font-size: 0.85em; margin-bottom: 24px; }
+
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+
+h2 { font-size: 1.4em; font-weight: 700; color: #fff; margin-bottom: 20px; text-align: center; }
+
+.options { display: grid; gap: 10px; }
+.option { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+.option:hover { border-color: #8B5CF6; background: #242424; }
+.option.selected { border-color: #8B5CF6; background: #1a0a2e; box-shadow: 0 0 15px rgba(139,92,246,.2); }
+.option input { display: none; }
+.option .icon { font-size: 24px; }
+.option .label { flex: 1; }
+.option .label strong { display: block; color: #fff; font-size: 1em; }
+.option .label span { color: #888; font-size: 0.85em; }
+
+.btn-row { text-align: center; margin-top: 24px; }
+.btn { display: inline-block; background: linear-gradient(135deg, #8B5CF6, #FFD700); color: #000; font-weight: 700; padding: 12px 32px; border-radius: 30px; font-size: 1.1em; border: none; cursor: pointer; transition: all 0.3s; }
+.btn:hover { transform: scale(1.05); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Result */
+.result { display: none; }
+.result.active { display: block; }
+.result-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 24px; margin-bottom: 16px; transition: all 0.3s; }
+.result-card:hover { border-color: #8B5CF6; }
+.result-card h3 { color: #FFD700; font-size: 1.2em; margin-bottom: 8px; }
+.result-card .price { color: #A78BFA; font-size: 0.9em; font-weight: 600; }
+.result-card p { color: #9CA3AF; font-size: 0.9em; margin: 6px 0 10px; }
+.result-card .buy { display: inline-block; background: #8B5CF6; color: #fff; padding: 5px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; text-decoration: none; }
+.result-card .buy:hover { background: #7C3AED; }
+.summary-box { background: linear-gradient(135deg, #1a0a2e, #0A0A0A); border: 1px solid #8B5CF6; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; }
+.summary-box h3 { color: #fff; font-size: 1.3em; margin-bottom: 8px; }
+.summary-box .big { font-size: 2.5em; font-weight: 800; color: #FFD700; }
+.summary-box p { color: #9CA3AF; }
+.reset-btn { display: inline-block; background: #2A2A2A; color: #fff; padding: 10px 24px; border-radius: 30px; text-decoration: none; margin-top: 16px; font-weight: 600; transition: all 0.3s; }
+.reset-btn:hover { background: #8B5CF6; }
+
+.tip { background: #141414; border-left: 3px solid #FFD700; border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 0.9em; }
+.tip strong { color: #FFD700; }
+
+footer { text-align: center; padding: 30px; color: #555; font-size: 0.8em; }
+footer a { color: #8B5CF6; text-decoration: none; }
+
+.disclaimer { background: #141414; border: 1px solid #2A2A2A; border-radius: 8px; padding: 12px; margin: 20px 0; font-size: 0.8em; color: #6B7280; text-align: center; }
+
+@media (max-width: 600px) { h1 { font-size: 1.6em; } .container { padding: 24px 16px; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>🎯 KI-Sprachlern-Bedarfsrechner</h1>
+<p class="subtitle">5 Fragen – 30 Sekunden – personalisierte Empfehlungen</p>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-text" id="progressText">Schritt 1 von 5</div>
+
+<!-- Quiz Steps -->
+<div class="quiz-step active" id="step1">
+<h2>🌍 Welche Sprache möchtest du lernen?</h2>
+<div class="options">
+<div class="option" onclick="selectOption(this,'step1','Englisch')"><input type="radio" name="q1"><span class="icon">🇬🇧</span><div class="label"><strong>Englisch</strong><span>Beruf, Reisen & Alltag – die wichtigste Sprache weltweit</span></div></div>
+<div class="option" onclick="selectOption(this,'step1','Spanisch')"><input type="radio" name="q1"><span class="icon">🇪🇸</span><div class="label"><strong>Spanisch</strong><span>2. meistgesprochene Sprache, boomende Wirtschaftsregionen</span></div></div>
+<div class="option" onclick="selectOption(this,'step1','Französisch')"><input type="radio" name="q1"><span class="icon">🇫🇷</span><div class="label"><strong>Französisch</strong><span>Geschäftssprache, Kultur, Reisen in Europa & Afrika</span></div></div>
+<div class="option" onclick="selectOption(this,'step1','Italienisch')"><input type="radio" name="q1"><span class="icon">🇮🇹</span><div class="label"><strong>Italienisch</strong><span>Kultur, Küche, Urlaub – melodische Sprache für Genießer</span></div></div>
+<div class="option" onclick="selectOption(this,'step1','Andere')"><input type="radio" name="q1"><span class="icon">🌐</span><div class="label"><strong>Andere Sprache</strong><span>Japanisch, Koreanisch, Portugiesisch, Russisch, Chinesisch & mehr</span></div></div>
+</div>
+<div class="btn-row"><button class="btn" id="next1" disabled onclick="nextStep(2)">Weiter →</button></div>
+</div>
+
+<div class="quiz-step" id="step2">
+<h2>💰 Wie viel Budget hast du für dein Sprachlern-Setup?</h2>
+<div class="options">
+<div class="option" onclick="selectOption(this,'step2','0-20€')"><input type="radio" name="q2"><span class="icon">🆓</span><div class="label"><strong>0-20€ – Minimal</strong><span>Nur kostenlose Apps & vorhandene Hardware – kein Cent investieren</span></div></div>
+<div class="option" onclick="selectOption(this,'step2','50-150€')"><input type="radio" name="q2"><span class="icon">💛</span><div class="label"><strong>50-150€ – Einsteiger</strong><span>Eine Premium-App + vernünftige Kopfhörer oder E-Reader</span></div></div>
+<div class="option" onclick="selectOption(this,'step2','200-400€')"><input type="radio" name="q2"><span class="icon">💙</span><div class="label"><strong>200-400€ – Fortgeschritten</strong><span>Kombi aus Premium-Apps, guter Hardware & Übersetzungs-Tools</span></div></div>
+<div class="option" onclick="selectOption(this,'step2','500€+')"><input type="radio" name="q2"><span class="icon">💜</span><div class="label"><strong>500€+ – Premium</strong><span>Alles aus einer Hand: beste Apps, Hardware & KI-Übersetzer</span></div></div>
+</div>
+<div class="btn-row"><button class="btn" id="next2" disabled onclick="nextStep(3)">Weiter →</button></div>
+</div>
+
+<div class="quiz-step" id="step3">
+<h2>🧠 Welcher Lerntyp bist du?</h2>
+<div class="options">
+<div class="option" onclick="selectOption(this,'step3','App-Lerner')"><input type="radio" name="q3"><span class="icon">📱</span><div class="label"><strong>App-Lerner (Gamification)</strong><span>Kurze, spielerische Einheiten – am liebsten täglich 5-15 Minuten</span></div></div>
+<div class="option" onclick="selectOption(this,'step3','Strukturiert')"><input type="radio" name="q3"><span class="icon">📚</span><div class="label"><strong>Strukturierter Lerner</strong><span>Kurse mit klarem Lehrplan, Grammatik & Hausaufgaben</span></div></div>
+<div class="option" onclick="selectOption(this,'step3','Konversation')"><input type="radio" name="q3"><span class="icon">💬</span><div class="label"><strong>Konversations-Lerner</strong><span>Sprechen, zuhören, Fehler machen – am besten live oder per KI</span></div></div>
+<div class="option" onclick="selectOption(this,'step3','Immersion')"><input type="radio" name="q3"><span class="icon">🌊</span><div class="label"><strong>Immersionstyp</strong><span>Lesen, Hören, Eintauchen – Content in der Zielsprache konsumieren</span></div></div>
+</div>
+<div class="btn-row"><button class="btn" id="next3" disabled onclick="nextStep(4)">Weiter →</button></div>
+</div>
+
+<div class="quiz-step" id="step4">
+<h2>⏱️ Wie viel Zeit hast du täglich?</h2>
+<div class="options">
+<div class="option" onclick="selectOption(this,'step4','5-10 Min')"><input type="radio" name="q4"><span class="icon">⚡</span><div class="label"><strong>5-10 Minuten</strong><span>Nebenbei lernen – in der Bahn, in der Pause, vor dem Schlafengehen</span></div></div>
+<div class="option" onclick="selectOption(this,'step4','15-30 Min')"><input type="radio" name="q4"><span class="icon">🌤️</span><div class="label"><strong>15-30 Minuten</strong><span>Feste Lernroutine – genug Zeit für eine komplette Lektion</span></div></div>
+<div class="option" onclick="selectOption(this,'step4','30-60 Min')"><input type="radio" name="q4"><span class="icon">🔥</span><div class="label"><strong>30-60 Minuten</strong><span>Intensiv lernen – mehrere Methoden kombinieren</span></div></div>
+<div class="option" onclick="selectOption(this,'step4','1h+')"><input type="radio" name="q4"><span class="icon">🚀</span><div class="label"><strong>1 Stunde oder mehr</strong><span>Volles Immersionstraining oder strukturierter Intensivkurs</span></div></div>
+</div>
+<div class="btn-row"><button class="btn" id="next4" disabled onclick="nextStep(5)">Weiter →</button></div>
+</div>
+
+<div class="quiz-step" id="step5">
+<h2>🎧 Welche Hardware hast du bereits?</h2>
+<div class="options">
+<div class="option" onclick="selectOption(this,'step5','Nur Smartphone')"><input type="radio" name="q5"><span class="icon">📱</span><div class="label"><strong>Nur Smartphone + billige In-Ears</strong><span>Standard-Kopfhörer vom letzten Flug oder die mitgelieferten</span></div></div>
+<div class="option" onclick="selectOption(this,'step5','Gute Kopfhörer')"><input type="radio" name="q5"><span class="icon">🎧</span><div class="label"><strong>Bereits gute ANC-Kopfhörer</strong><span>Sony XM4/5, Bose QC, AirPods Pro, Soundcore oder ähnlich</span></div></div>
+<div class="option" onclick="selectOption(this,'step5','Plus E-Reader')"><input type="radio" name="q5"><span class="icon">📖</span><div class="label"><strong>Kopfhörer + E-Reader / Tablet</strong><span>Mindestens Sony/Soundcore + Kindle/iPad</span></div></div>
+<div class="option" onclick="selectOption(this,'step5','Voll ausgestattet')"><input type="radio" name="q5"><span class="icon">🏆</span><div class="label"><strong>Alles vorhanden + Bereitschaft zu investieren</strong><span>Gute Kopfhörer, Tablet, E-Reader – jetzt will ich die beste Kombi</span></div></div>
+</div>
+<div class="btn-row"><button class="btn" id="next5" disabled onclick="showResults()">→ Ergebnisse anzeigen</button></div>
+</div>
+
+<!-- Results -->
+<div class="result" id="results">
+<div class="summary-box" id="summaryBox">
+<h3>🎯 Dein persönliches KI-Sprachlern-Setup</h3>
+<div class="big" id="setupName">Empfehlung wird berechnet...</div>
+<p id="setupDesc">Basierend auf deinen Angaben haben wir die optimale Kombination für dich zusammengestellt.</p>
+</div>
+
+<div id="resultCards"></div>
+
+<div class="tip" id="learnTip">
+<strong>💡 KI-Tipp:</strong> Kombiniere immer aktives Lernen (App-Übungen) mit passivem (Podcasts, Hörbücher). Das Gehirn lernt Sprachen am besten durch abwechslungsreiche Wiederholung.
+</div>
+
+<div class="disclaimer">
+<strong>📢 Affiliate-Hinweis:</strong> Dieser Rechner enthält Affiliate-Links (Amazon-Partnerprogramm). 
+Wenn du über einen dieser Links ein Produkt kaufst, erhalten wir eine kleine Provision – 
+für dich entstehen keine zusätzlichen Kosten.
+<a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" rel="noopener">→ Alle Angebote bei Amazon</a>
+</div>
+
+<div style="text-align:center;margin-top:20px;">
+<a href="../blog/ki-sprachenlernen-uebersetzung-2026.html" class="btn" style="text-decoration:none;">📖 Zum Blog-Artikel</a>
+<a href="#" onclick="resetQuiz();return false;" class="reset-btn">↻ Rechner zurücksetzen</a>
+</div>
+</div>
+</div>
+
+<script>
+let answers = {};
+
+function selectOption(el, step, value) {
+  el.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked = true;
+  answers[step] = value;
+  document.getElementById('next' + step.charAt(4)).disabled = false;
+}
+
+function nextStep(num) {
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + num).classList.add('active');
+  updateProgress(num);
+}
+
+function updateProgress(step) {
+  const pct = ((step - 1) / 5) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'Schritt ' + step + ' von 5';
+}
+
+function showResults() {
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '✅ Fertig!';
+
+  const lang = answers['step1'];
+  const budget = answers['step2'];
+  const type = answers['step3'];
+  const time = answers['step4'];
+  const hw = answers['step5'];
+
+  let cards = [];
+  let setupName = '';
+  let setupDesc = '';
+  let tip = '';
+
+  // Determine setup
+  if (budget === '0-20€') {
+    setupName = '🆓 0€-Starter-Kit';
+    setupDesc = 'Mit kostenlosen KI-Tools lernst du jede Sprache – ohne einen Cent auszugeben.';
+    cards = [
+      {icon:'🦉', name:'Duolingo (Basis)', price:'Kostenlos', desc:'Gamifizierte KI-Lektionen, tägliche Challenges, 40+ Sprachen. Beste kostenlose App 2026.', url:'https://www.amazon.de/s?k=duolingo+sprachen+lernen&tag=ikune21-21'},
+      {icon:'🌐', name:'Google Übersetzer', price:'Kostenlos', desc:'108 Sprachen, Echtzeit-Kamera-Übersetzung, Gesprächsmodus. Dein digitaler Dolmetscher.', url:'https://www.amazon.de/s?k=google+übersetzer+app&tag=ikune21-21'},
+      {icon:'🃏', name:'Anki (Open Source)', price:'Kostenlos', desc:'KI-gestütztes Lernkarten-System mit optimalen Wiederholungsintervallen.', url:'https://www.amazon.de/s?k=anki+lernkarten+sprachen&tag=ikune21-21'},
+      {icon:'🤖', name:'ChatGPT Free', price:'Kostenlos', desc:'KI-Konversationspartner zum Üben. Führe Gespräche auf deiner Zielsprache – jederzeit.', url:'https://www.amazon.de/s?k=chatgpt+ki+guide+buch&tag=ikune21-21'},
+    ];
+    tip = '💡 Nutze ChatGPT Voice auf dem Smartphone für tägliche 5-Minuten-Gespräche. Kombiniere mit Duolingo-Lektionen (10 Min/Tag) und erstelle Anki-Karten für neue Vokabeln.';
+  } else if (budget === '50-150€') {
+    setupName = '💛 Einsteiger-Setup (50-150€)';
+    setupDesc = 'Eine Premium-App + gute Kopfhörer – der optimale Einstieg ins KI-unterstützte Sprachenlernen.';
+    if (type === 'App-Lerner' || type === 'Strukturiert') {
+      cards = [
+        {icon:'📱', name:'Babbel Premium (1 Jahr)', price:'ca. 89€/Jahr', desc:'Strukturierte Kurse mit KI-Konversationssimulation. Der beste Kurs-basierte Ansatz.', url:'https://www.amazon.de/s?k=babbel+sprachkurs+gutschein&tag=ikune21-21'},
+        {icon:'🎧', name:'Soundcore Space Q45', price:'ca. 99€', desc:'40dB ANC, 50h Akku, Multipoint – beste Preis-Leistung für Sprachlerner.', url:'https://www.amazon.de/s?k=soundcore+space+q45&tag=ikune21-21'},
+        {icon:'🃏', name:'Anki + KI-Addon', price:'Kostenlos', desc:'Erstelle eigene Vokabeldecks aus Babbel-Lektionen. KI optimiert die Wiederholung.', url:'https://www.amazon.de/s?k=anki+lernkarten+sprachen&tag=ikune21-21'},
+        {icon:'🤖', name:'ChatGPT Plus (1 Monat)', price:'20€', desc:'Premium-KI-Konversation mit Voice Mode. Bessere Aussprache-Analyse und längere Gespräche.', url:'https://www.amazon.de/s?k=chatgpt+ki+guide+buch&tag=ikune21-21'},
+      ];
+    } else {
+      cards = [
+        {icon:'🗣️', name:'Busuu Premium', price:'ca. 60€/Jahr', desc:'KI + Community-Bewertung von Muttersprachlern. McGraw-Hill-Zertifikate für den Beruf.', url:'https://www.amazon.de/s?k=busuu+sprachkurs&tag=ikune21-21'},
+        {icon:'🎧', name:'Soundcore Space Q45', price:'ca. 99€', desc:'40dB ANC, klare Mikrofone für Spracherkennung, 50h Akku.', url:'https://www.amazon.de/s?k=soundcore+space+q45&tag=ikune21-21'},
+        {icon:'📖', name:'Kindle Paperwhite', price:'ca. 159€', desc:'KI-Übersetzung per Touch, Wörterbuch in 40+ Sprachen. Lese Bücher auf deiner Zielsprache.', url:'https://www.amazon.de/s?k=kindle+paperwhite+2026&tag=ikune21-21'},
+        {icon:'✍️', name:'LanguageTool Premium', price:'ca. 3€/Monat', desc:'KI-Grammatikprüfung für 30+ Sprachen. Schreibe fehlerfrei auf deiner Zielsprache.', url:'https://www.amazon.de/s?k=language+tool+grammatik&tag=ikune21-21'},
+      ];
+    }
+    tip = '💡 Tägliche Routine: 15 Min Babbel/Busuu + 5 Min Anki-Wiederholung + 10 Min Hörverständnis mit Kopfhörern. Nutze ChatGPT Voice 1x pro Woche für echte Konversation.';
+  } else if (budget === '200-400€') {
+    setupName = '💙 Fortgeschrittenes Setup (200-400€)';
+    setupDesc = 'Premium-Apps + Profi-Hardware + KI-Übersetzung – für ernsthafte Lernende mit Ambitionen.';
+    cards = [
+      {icon:'🦉', name:'Duolingo Max + Babbel', price:'ca. 180€/Jahr', desc:'Beste Kombi: Duolingo für tägliche Gamification + Babbel für strukturierte Kurse.', url:'https://www.amazon.de/s?k=duolingo+babbel+sprachkurs&tag=ikune21-21'},
+      {icon:'🎧', name:'Sony WH-1000XM5', price:'ca. 329€', desc:'Branchenführendes ANC, kristallklare Mikrofone für KI-Spracherkennung.', url:'https://www.amazon.de/s?k=sony+wh-1000xm5&tag=ikune21-21'},
+      {icon:'📖', name:'Kindle Paperwhite', price:'ca. 159€', desc:'KI-Übersetzung, Vokabel-Export nach Anki, entspiegeltes Display für Lesekomfort.', url:'https://www.amazon.de/s?k=kindle+paperwhite+2026&tag=ikune21-21'},
+      {icon:'🤖', name:'ChatGPT Plus', price:'20€/Monat', desc:'Voice Mode für tägliche KI-Konversation, längere Gespräche, kulturelle Nuancen.', url:'https://www.amazon.de/s?k=chatgpt+ki+guide+buch&tag=ikune21-21'},
+      {icon:'🌐', name:'DeepL Pro', price:'ca. 9€/Monat', desc:'Unbegrenzte KI-Übersetzungen für Texte, Dokumente & E-Mails. Präzision auf Profi-Niveau.', url:'https://www.amazon.de/s?k=deepl+pro+übersetzer&tag=ikune21-21'},
+    ];
+    tip = '💡 Tägliche Routine: 15 Min Duolingo + 15 Min Babbel + Kindle-Lesen (20 Min) + ChatGPT Voice (10 Min). Nutze DeepL für professionelle Texte und LanguageTool für Grammatik-Korrekturen.';
+  } else {
+    setupName = '💜 Premium-Sprachlabor (500€+)';
+    setupDesc = 'Die beste Technologie für maximale Lerneffizienz – kein Kompromiss bei Qualität.';
+    cards = [
+      {icon:'🎧', name:'Bose QuietComfort Ultra', price:'ca. 349€', desc:'Legendärer Komfort, immersives Audio, beste Mikrofone für KI-Spracherkennung.', url:'https://www.amazon.de/s?k=bose+quietcomfort+ultra&tag=ikune21-21'},
+      {icon:'📖', name:'Kindle Scribe', price:'ca. 369€', desc:'Notizen in Büchern, KI-Vokabellisten, handschriftliche Übersetzungen. Der beste E-Reader für Sprachlerner.', url:'https://www.amazon.de/s?k=kindle+scribe&tag=ikune21-21'},
+      {icon:'🗣️', name:'Timekettle WT2 Pro', price:'ca. 259€', desc:'Echtzeit-Übersetzung in 40 Sprachen via Ohrhörer. Perfekt für Reisen & Geschäftstermine.', url:'https://www.amazon.de/s?k=timekettle+wt2+pro&tag=ikune21-21'},
+      {icon:'🦉', name:'Alle Premium-Apps', price:'ca. 500€/Jahr', desc:'Duolingo Max + Babbel + Rosetta Stone + ChatGPT Plus + DeepL Pro + Memrise Pro – volle Kraft voraus.', url:'https://www.amazon.de/s?k=sprachen+lernen+bücher+kindle&tag=ikune21-21'},
+      {icon:'📱', name:'iPad + Apple Pencil', price:'ab 399€', desc:'KI-Notizen, Sprachlern-Apps in Vollbild, Video-Anrufe mit Sprachpartnern.', url:'https://www.amazon.de/s?k=ipad+apple+pencil+sprachen+lernen&tag=ikune21-21'},
+    ];
+    tip = '💡 Deine tägliche Premium-Routine: 20 Min Rosetta Stone (Aussprache) + 15 Min Babbel + 30 Min Kindle Scribe Lesen + 15 Min ChatGPT Voice. Am Wochenende: Timekettle für Reise-Vorbereitung oder echte Konversation mit Muttersprachlern auf iTalki.';
+  }
+
+  document.getElementById('setupName').textContent = setupName;
+  document.getElementById('setupDesc').textContent = setupDesc;
+
+  if (time === '5-10 Min') {
+    tip += ' ⏱️ Da du wenig Zeit hast: Fokussiere auf Duolingo (morgens 5 Min) + KI-Podcasts auf dem Weg zur Arbeit (passiv lernen).';
+  } else if (time === '1h+') {
+    tip += ' 🔥 Du hast viel Zeit – nutze sie! Strukturierte Morgen-Routine (30 Min App) + Mittagspause (15 Min Lesen) + Abend (15 Min KI-Konversation).';
+  }
+
+  document.getElementById('learnTip').innerHTML = '<strong>💡 KI-Tipp:</strong> ' + tip;
+
+  let html = '';
+  cards.forEach(c => {
+    html += '<div class="result-card"><div style="display:flex;align-items:flex-start;gap:12px;">';
+    html += '<div style="font-size:36px;">' + c.icon + '</div>';
+    html += '<div style="flex:1;"><h3>' + c.name + '</h3>';
+    html += '<div class="price">' + c.price + '</div>';
+    html += '<p>' + c.desc + '</p>';
+    html += '<a href="' + c.url + '" class="buy" target="_blank">→ Bei Amazon ansehen</a>';
+    html += '</div></div></div>';
+  });
+  document.getElementById('resultCards').innerHTML = html;
+  document.getElementById('results').classList.add('active');
+}
+
+function resetQuiz() {
+  answers = {};
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('results').classList.remove('active');
+  document.querySelectorAll('.btn').forEach(b => b.disabled = true);
+  updateProgress(1);
+}
+</script>
+
+<footer>
+<a href="../blog/ki-sprachenlernen-uebersetzung-2026.html">📖 Zum Blog-Artikel</a> · 
+<a href="../tools/">🔧 Alle Tools</a> · 
+<a href="../index.html">🏪 Startseite</a> · 
+<a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">🛒 Amazon-Shop</a>
+</footer>
+</body>
+</html>
