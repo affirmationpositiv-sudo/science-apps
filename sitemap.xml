@@ -574,4 +574,12 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Artikel #33: KI für mentale Gesundheit & Wellness 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-mentale-gesundheit-wellness-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
