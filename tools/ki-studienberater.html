@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Studienberater 2026 – Finde deinen perfekten KI-Bildungsweg</title>
+<meta name="description" content="Interaktiver KI-Studienberater: Beantworte 5 Fragen und erhalte deinen personalisierten KI-Bildungsweg – kostenlos, keine Anmeldung. Inkl. Kurs-Empfehlungen mit Amazon-Links.">
+<meta name="keywords" content="KI Studienberater, KI Kurs finden, KI Ausbildung Test, KI Weiterbildung Beratung, Machine Learning Kurs Empfehlung">
+<meta property="og:title" content="KI-Studienberater 2026 – Kostenloser Bildungsweg-Finder">
+<meta property="og:description" content="Finde in 2 Minuten deinen idealen KI-Bildungsweg. 5 Fragen – personalisierte Empfehlung mit Kursen, Zertifikaten und Hardware-Tipps.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-studienberater.html">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#0A0A0A; color:#E5E5E5; line-height:1.6; min-height:100vh; }
+  .container { max-width:700px; margin:0 auto; padding:40px 24px; }
+  h1 { font-size:2.5em; font-weight:800; background:linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-align:center; margin-bottom:8px; }
+  .subtitle { text-align:center; color:#888; font-size:1.1em; margin-bottom:32px; }
+  .badge { display:inline-block; background:rgba(139,92,246,0.15); color:#A78BFA; padding:4px 14px; border-radius:20px; font-size:0.85em; margin-bottom:12px; text-align:center; display:block; width:fit-content; margin:0 auto 24px; }
+
+  /* Quiz card */
+  .quiz-card { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:16px; padding:32px; margin-bottom:24px; }
+  .quiz-card .question-num { color:#8B5CF6; font-size:0.85rem; font-weight:600; margin-bottom:4px; }
+  .quiz-card .question { font-size:1.2em; font-weight:600; margin-bottom:20px; }
+  .quiz-card .options { display:flex; flex-direction:column; gap:10px; }
+  .quiz-card .option {
+    background:#141414; border:1px solid #2A2A2A; border-radius:10px; padding:14px 18px;
+    cursor:pointer; transition:all 0.3s; color:#D1D5DB; font-size:0.95em;
+  }
+  .quiz-card .option:hover { border-color:#8B5CF6; background:rgba(139,92,246,0.08); }
+  .quiz-card .option.selected { border-color:#8B5CF6; background:rgba(139,92,246,0.15); color:#fff; }
+  .quiz-card .option .emoji { margin-right:8px; }
+  .quiz-card .option .desc { display:block; font-size:0.82em; color:#6B7280; margin-top:4px; }
+
+  /* Progress */
+  .progress-bar { height:4px; background:#2A2A2A; border-radius:2px; margin-bottom:24px; overflow:hidden; }
+  .progress-bar .fill { height:100%; background:linear-gradient(90deg,#8B5CF6,#FFD700); border-radius:2px; transition:width 0.5s ease; }
+
+  /* Buttons */
+  .btn-row { display:flex; gap:12px; justify-content:space-between; margin-top:24px; }
+  .btn { padding:12px 28px; border:none; border-radius:10px; font-size:1em; font-weight:600; cursor:pointer; transition:all 0.3s; }
+  .btn-primary { background:linear-gradient(135deg,#8B5CF6,#6D28D9); color:#fff; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(139,92,246,0.3); }
+  .btn-primary:disabled { opacity:0.4; cursor:not-allowed; transform:none; box-shadow:none; }
+  .btn-secondary { background:#2A2A2A; color:#888; }
+  .btn-secondary:hover { background:#333; color:#fff; }
+  .btn-secondary:disabled { opacity:0.3; cursor:not-allowed; }
+
+  /* Result */
+  .result { display:none; }
+  .result-card { background:#1A1A1A; border:1px solid #8B5CF6; border-radius:16px; padding:32px; margin-bottom:20px; }
+  .result-card h2 { font-size:1.6em; color:#A78BFA; margin-bottom:8px; }
+  .result-card .path-icon { font-size:48px; margin-bottom:8px; }
+  .result-card .path-desc { color:#D1D5DB; margin-bottom:16px; line-height:1.7; }
+  .result-card .detail { background:#141414; border-radius:8px; padding:16px; margin:12px 0; }
+  .result-card .detail strong { color:#A78BFA; display:block; margin-bottom:4px; }
+  .result-card .detail p { color:#9CA3AF; font-size:0.9em; margin:0; }
+  .result-card .detail a { color:#FFD700; }
+  .result-card .detail a:hover { color:#fff; }
+
+  .affiliate-section { background:#141414; border:1px solid #2A2A2A; border-radius:12px; padding:20px; margin:16px 0; }
+  .affiliate-section h3 { color:#FFD700; font-size:1em; margin-bottom:8px; }
+  .affiliate-section ul { list-style:none; margin:0; }
+  .affiliate-section li { padding:6px 0; border-bottom:1px solid #222; }
+  .affiliate-section li:last-child { border-bottom:none; }
+  .affiliate-section a { color:#A78BFA; text-decoration:none; font-size:0.9em; }
+  .affiliate-section a:hover { color:#FFD700; text-decoration:underline; }
+  .affiliate-badge { display:inline-block; background:#FFD700; color:#000; padding:2px 8px; border-radius:4px; font-size:0.7em; font-weight:700; margin-left:6px; }
+
+  .restart-btn { text-align:center; margin-top:24px; }
+  .restart-btn .btn-primary { display:inline-block; }
+
+  .disclaimer { background:#141414; border:1px solid #2A2A2A; border-radius:8px; padding:16px; margin:24px 0; font-size:0.82em; color:#6B7280; }
+  footer { text-align:center; padding:32px; color:#555; font-size:0.85em; }
+  footer a { color:#8B5CF6; text-decoration:none; }
+  footer a:hover { text-decoration:underline; }
+
+  @media(max-width:600px){ h1{font-size:1.8em;} .container{padding:24px 16px;} .quiz-card{padding:24px;} }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <span class="badge">🎓 Kostenloser KI-Studienberater</span>
+  <h1>KI-Studienberater 2026</h1>
+  <p class="subtitle">Beantworte 5 Fragen – erhalte deinen personalisierten Bildungsweg inkl. Kurse, Zertifikate & Hardware-Tipps</p>
+
+  <div class="progress-bar"><div class="fill" id="progressFill" style="width:20%"></div></div>
+
+  <!-- Quiz -->
+  <div id="quizArea">
+    <div class="quiz-card" id="questionCard">
+      <div class="question-num" id="questionNum">Frage 1 von 5</div>
+      <div class="question" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+      <div class="btn-row">
+        <button class="btn btn-secondary" id="prevBtn" disabled>← Zurück</button>
+        <button class="btn btn-primary" id="nextBtn" disabled>Weiter →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="resultArea" class="result">
+    <div class="result-card" id="resultCard">
+      <div class="path-icon" id="resultIcon">🎓</div>
+      <h2 id="resultTitle">Dein Weg</h2>
+      <div class="path-desc" id="resultDesc"></div>
+      <div id="resultDetails"></div>
+      <div class="affiliate-section" id="affiliateSection">
+        <h3>📚 Empfohlene Produkte für deinen KI-Bildungsweg</h3>
+        <ul id="affiliateLinks"></ul>
+      </div>
+    </div>
+    <div class="restart-btn">
+      <button class="btn btn-primary" onclick="restartQuiz()">🔄 Nochmal starten</button>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>📢 Affiliate-Hinweis:</strong> Dieser KI-Studienberater enthält Affiliate-Links zum Amazon-Partnerprogramm (tag=ikune21-21). Wenn du über einen dieser Links ein Produkt kaufst, erhalten wir eine kleine Provision – für dich entstehen keine zusätzlichen Kosten.
+  </div>
+</div>
+
+<footer>
+  <p><a href="../">← Zurück zur Startseite</a> · <a href="../blog/">📝 Blog</a> · <a href="../blog/ki-studium-ki-ausbildung-2026.html">📖 Artikel: KI-Studium 2026</a></p>
+  <p style="margin-top:8px;">© 2026 Licht und Schatten</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "Was ist dein aktuelles Bildungsniveau?",
+    options: [
+      { value: "anfaenger", label: "🤷 Keine Vorkenntnisse", desc: "Ich habe noch nie mit KI gearbeitet" },
+      { value: "grundlagen", label: "📖 Grundlagen vorhanden", desc: "Ich kenne die Basics, will tiefer einsteigen" },
+      { value: "fortgeschritten", label: "🔬 Fortgeschritten", desc: "Ich habe bereits Programmier- oder ML-Erfahrung" },
+      { value: "profi", label: "🎯 Profi / Quereinsteiger", desc: "Ich will mich spezialisieren oder zertifizieren" }
+    ]
+  },
+  {
+    q: "Was ist dein Hauptziel?",
+    options: [
+      { value: "nebenjob", label: "💰 Nebenverdienst / Freelancing", desc: "Mit KI-Tools Geld verdienen" },
+      { value: "karriere", label: "💼 Karrierewechsel / Neuer Job", desc: "In die KI-Branche einsteigen" },
+      { value: "studium", label: "🎓 Akademischer Abschluss", desc: "Bachelor/Master in KI oder Data Science" },
+      { value: "wissen", label: "📚 Allgemeinbildung / Hobby", desc: "Einfach verstehen, wie KI funktioniert" }
+    ]
+  },
+  {
+    q: "Wieviel Zeit kannst du pro Woche investieren?",
+    options: [
+      { value: "wenig", label: "⏰ 2–4 Stunden", desc: "Neben Vollzeitjob/Familie" },
+      { value: "mittel", label: "⚡ 5–10 Stunden", desc: "Abends und am Wochenende" },
+      { value: "viel", label: "🔥 10–20 Stunden", desc: "Teilzeit / intensiv" },
+      { value: "vollzeit", label: "🚀 Vollzeit (40h)", desc: "Studium, Bootcamp oder Auszeit" }
+    ]
+  },
+  {
+    q: "Welches Budget kannst du investieren?",
+    options: [
+      { value: "null", label: "💸 0€ (nur kostenlos)", desc: "Nur kostenlose Ressourcen" },
+      { value: "klein", label: "💳 Bis 200€", desc: "Für Kurse und Bücher" },
+      { value: "mittel", label: "💎 Bis 2.000€", desc: "Zertifikate, Kurse, Hardware" },
+      { value: "hoch", label: "🏆 2.000€+", desc: "Komplette Ausbildung inkl. Hardware" }
+    ]
+  },
+  {
+    q: "Welcher Lernstil passt am besten zu dir?",
+    options: [
+      { value: "strukturiert", label: "📋 Strukturiert & geführt", desc: "Kurs mit festem Lehrplan" },
+      { value: "praktisch", label: "🔧 Hands-on / Projekte", desc: "Learning by Doing" },
+      { value: "akademisch", label: "🎓 Akademisch / wissenschaftlich", desc: "Studium mit Prüfungen" },
+      { value: "flexibel", label: "🔄 Flexibel / Selbstbestimmt", desc: "Wann und wo ich will" }
+    ]
+  }
+];
+
+const results = {
+  anfaenger_wissen_wenig_null_flexibel: {
+    icon: "🧑‍💻",
+    title: "Kostenloser KI-Schnupperkurs",
+    desc: "Perfekt für Einsteiger ohne Vorkenntnisse! Starte mit den kostenlosen Kursen auf KI-Campus.de – staatlich gefördert, auf Deutsch und komplett gratis. In 2-4 Wochen hast du die Grundlagen verstanden.",
+    details: [
+      { title: "📚 Schritt 1: KI-Campus.de", text: "50+ kostenlose Kurse auf Deutsch. Starte mit 'Einführung in KI & Machine Learning' (8 Wochen). Staatlich gefördert durch das BMBF." },
+      { title: "🤖 Schritt 2: ChatGPT ausprobieren", text: "Öffne ChatGPT oder Claude und probiere unsere <a href='../blog/ki-prompting-einsteiger-2026.html'>Prompting-Techniken</a> aus." },
+      { title: "📖 Schritt 3: Fachbuch lesen", text: "<a href='https://www.amazon.de/s?k=ki+fuer+anfaenger+buch+2026&tag=ikune21-21' target='_blank'>KI für Anfänger Buch bei Amazon 📚</a>" }
+    ],
+    affiliate: [
+      { text: "📖 KI für Anfänger – Das Standardwerk", url: "https://www.amazon.de/s?k=ki+f%C3%BCr+anf%C3%A4nger+buch&tag=ikune21-21" },
+      { text: "💻 Günstiger Laptop für Online-Kurse", url: "https://www.amazon.de/s?k=laptop+f%C3%BCr+online+lernen+g%C3%BCnstig&tag=ikune21-21" },
+      { text: "🎧 Noise-Cancelling-Kopfhörer für konzentriertes Lernen", url: "https://www.amazon.de/s?k=noise+cancelling+kopfh%C3%B6rer+g%C3%BCnstig&tag=ikune21-21" }
+    ]
+  },
+  anfaenger_karriere_viel_mittel_strukturiert: {
+    icon: "🚀",
+    title: "KI-Bootcamp + Zertifikat (Job Ready in 3-6 Monaten)",
+    desc: "Du willst schnell in die KI-Branche einsteigen? Ein Data-Science-Bootcamp (z.B. neuefische, Spiced Academy) kombiniert mit einem Microsoft/Google KI-Zertifikat ist der schnellste Weg. Kostenübernahme per Bildungsgutschein möglich!",
+    details: [
+      { title: "🔥 Schritt 1: Bootcamp wählen", text: "neuefische oder Spiced Academy Data Science (12 Wochen, 8.900-9.900€). Bildungsgutschein von der Agentur für Arbeit beantragen → Kosten = 0€." },
+      { title: "🏅 Schritt 2: Zertifikat ablegen", text: "Microsoft Azure AI-102 oder Google ML Engineer (~165-200€ Prüfungsgebühr). Schau dir unsere <a href='../blog/ki-jobs-karriere-2026.html'>KI-Job-Strategien</a> an." },
+      { title: "💻 Schritt 3: Leistungsstarken Laptop besorgen", text: "<a href='https://www.amazon.de/s?k=laptop+ki+entwicklung+deep+learning&tag=ikune21-21' target='_blank'>Laptop für ML-Entwicklung bei Amazon 🖥️</a>" }
+    ],
+    affiliate: [
+      { text: "💻 MacBook Pro M4 Max für ML-Entwicklung", url: "https://www.amazon.de/s?k=macbook+pro+m4+max&tag=ikune21-21" },
+      { text: "📖 Hands-On Machine Learning (Géron)", url: "https://www.amazon.de/s?k=hands+on+machine+learning+geron+deutsch&tag=ikune21-21" },
+      { text: "🖱️ Ergonomisches Zubehör fürs Home-Office", url: "https://www.amazon.de/s?k=ergonomisches+b%C3%BCroset+ki&tag=ikune21-21" }
+    ]
+  },
+  fortgeschritten_karriere_mittel_mittel_strukturiert: {
+    icon: "🏅",
+    title: "Big-Tech KI-Zertifikat + Portfolio",
+    desc: "Mit deinen Vorkenntnissen ist der schnellste Weg zum KI-Job ein Big-Tech-Zertifikat (Azure AI Engineer, Google ML Engineer, AWS ML Specialty) kombiniert mit einem starken GitHub-Portfolio. In 3-6 Monaten bist du bereit für den Arbeitsmarkt.",
+    details: [
+      { title: "🏅 Schritt 1: Zertifikat wählen", text: "Empfehlung: Microsoft Azure AI-102 (165€ Prüfung) oder Google Professional ML Engineer (200€). Beide stark nachgefragt in Deutschland." },
+      { title: "📁 Schritt 2: GitHub-Portfolio aufbauen", text: "3 KI-Projekte: Chatbot, Bildklassifikator, Datenanalyse. Jedes Projekt mit README, Code und Live-Demo." },
+      { title: "💼 Schritt 3: Bewerben", text: "Mit Zertifikat + Portfolio dich bei LinkedIn als verfügbar markieren. Gehalt: 55.000-85.000€ Einstieg. Tipps in unserem <a href='../blog/ki-jobs-karriere-2026.html'>KI-Jobs-Guide</a>." }
+    ],
+    affiliate: [
+      { text: "📖 Deep Learning Buch (Goodfellow)", url: "https://www.amazon.de/s?k=deep+learning+goodfellow+bengio&tag=ikune21-21" },
+      { text: "💻 Leistungsstarker Laptop für KI-Entwicklung", url: "https://www.amazon.de/s?k=laptop+ki+entwicklung+2026&tag=ikune21-21" },
+      { text: "📚 KI-Fachbücher-Sammlung bei Amazon", url: "https://www.amazon.de/s?k=ki+fachb%C3%BCcher+deutsch+2026&tag=ikune21-21" }
+    ]
+  },
+  grundlagen_studium_vollzeit_mittel_akademisch: {
+    icon: "🎓",
+    title: "KI-Studium (Bachelor/Master) an einer Uni",
+    desc: "Du strebst einen akademischen Abschluss an? Deutschland bietet 120+ akkreditierte KI-Studiengänge. TUM, HU Berlin, KIT und RWTH Aachen sind die Top-Adressen. Berufsbegleitend geht es an der FernUni Hagen oder IU.",
+    details: [
+      { title: "🏛️ Schritt 1: Studiengang wählen", text: "Top-5 Bachelor: TUM München (NC 1,3), HU Berlin (NC 1,5), KIT Karlsruhe, RWTH Aachen, Uni Saarland. Oder berufsbegleitend an der FernUni Hagen." },
+      { title: "💰 Schritt 2: Finanzierung klären", text: "BAföG, Deutschlandstipendium (300€/Monat), Begabtenförderung, EXIST-Gründerstipendium (1.000€+). Semesterbeiträge 150-350€." },
+      { title: "📖 Schritt 3: Vorbereitend lernen", text: "Starte jetzt mit kostenlosen Kursen auf KI-Campus.de. Unser <a href='../blog/ki-studium-ki-ausbildung-2026.html'>KI-Studium-Guide</a> hilft dir bei der Entscheidung." }
+    ],
+    affiliate: [
+      { text: "📖 Pattern Recognition & ML (Bishop)", url: "https://www.amazon.de/s?k=pattern+recognition+machine+learning+bishop&tag=ikune21-21" },
+      { text: "💻 MacBook Pro oder ThinkPad fürs Studium", url: "https://www.amazon.de/s?k=laptop+f%C3%BCr+studium+informatik&tag=ikune21-21" },
+      { text: "📱 iPad + Apple Pencil für Mitschriften", url: "https://www.amazon.de/s?k=ipad+apple+pencil+studium&tag=ikune21-21" },
+      { text: "📚 Fachbücher-Bundle bei Amazon", url: "https://www.amazon.de/s?k=ki+fachliteratur+bundle&tag=ikune21-21" }
+    ]
+  },
+  grundlagen_wissen_wenig_null_flexibel: {
+    icon: "🧑‍💻",
+    title: "Kostenloser KI-Schnupperkurs",
+    desc: "Perfekt für Einsteiger ohne große Zeitinvestition! Starte mit den kostenlosen Kursen auf KI-Campus.de und Elements of AI (Uni Helsinki). In 4-6 Wochen hast du ein solides Grundverständnis – komplett kostenlos und flexibel.",
+    details: [
+      { title: "📚 Schritt 1: KI-Campus.de", text: "50+ kostenlose Kurse auf Deutsch. Starte mit 'ChatGPT & Co. für den Alltag' (2 Wochen) oder 'Einführung in KI' (8 Wochen)." },
+      { title: "🌍 Schritt 2: Elements of AI", text: "Kostenloser Kurs der Uni Helsinki. In 6 Wochen die Grundlagen verstehen. Auf Deutsch verfügbar." },
+      { title: "🤖 Schritt 3: Praktisch werden", text: "Probiere ChatGPT, Claude oder Gemini aus. Lies unseren <a href='../blog/ki-prompting-einsteiger-2026.html'>Prompting-Guide</a> für den perfekten Start." }
+    ],
+    affiliate: [
+      { text: "📖 KI für Einsteiger Buch", url: "https://www.amazon.de/s?k=ki+f%C3%BCr+einsteiger+buch+2026&tag=ikune21-21" },
+      { text: "🎧 Kopfhörer für konzentriertes Lernen", url: "https://www.amazon.de/s?k=kopfh%C3%B6rer+lernen+konzentration&tag=ikune21-21" },
+      { text: "📚 KI-Bildung bei Amazon entdecken", url: "https://www.amazon.de/s?k=ki+bildung+buch&tag=ikune21-21" }
+    ]
+  },
+  grundlagen_nebenjob_mittel_klein_praktisch: {
+    icon: "💰",
+    title: "KI-Freelancer-Pfad (Nebenverdienst in 2-3 Monaten)",
+    desc: "Du willst mit KI-Tools Geld verdienen? Baue praktische KI-Fähigkeiten auf: Prompt Engineering, KI-Content-Erstellung, KI-Design-Tools. Mit einem günstigen Online-Kurs und den richtigen Tools kannst du in 2-3 Monaten erste Freelance-Aufträge annehmen.",
+    details: [
+      { title: "📚 Schritt 1: Kurs belegen", text: "Empfehlung: Andrew Ngs 'AI for Everyone' auf Coursera (49€/Monat) + 'Deep Learning Specialization' (49€/Monat). Bestes Preis-Leistungs-Verhältnis." },
+      { title: "🛠️ Schritt 2: Praktische Tools lernen", text: "Canva KI, ChatGPT/Claude Prompting, Midjourney, RunwayML. Unser <a href='../blog/ki-content-creation-2026.html'>Content-Creation-Guide</a> zeigt dir die Workflows." },
+      { title: "💼 Schritt 3: Erste Aufträge", text: "Auf Fiverr, Upwork oder LinkedIn als KI-Spezialist anbieten. Dein <a href='../blog/online-business-ohne-startkapital-2026.html'>Online-Business-Guide</a> hilft beim Einstieg." }
+    ],
+    affiliate: [
+      { text: "💻 Günstiger Laptop für KI-Freelancing", url: "https://www.amazon.de/s?k=laptop+f%C3%BCr+freelancer+g%C3%BCnstig&tag=ikune21-21" },
+      { text: "📖 KI-Business-Prompts (Prompt Pack)", url: "https://www.amazon.de/s?k=ki+prompts+f%C3%BCr+business&tag=ikune21-21" },
+      { text: "🖱️ Ergonomisches Home-Office-Set", url: "https://www.amazon.de/s?k=ergonomisches+home+office+set&tag=ikune21-21" }
+    ]
+  },
+  profi_karriere_viel_mittel_strukturiert: {
+    icon: "🏆",
+    title: "KI-Experten-Zertifikat (Top-Zertifikat für Top-Gehalt)",
+    desc: "Als erfahrener Profi fehlt dir nur das offizielle Zertifikat für den nächsten Karrieresprung. Wähle zwischen Azure AI Engineer (AI-102, ~165€), Google ML Engineer (~200€) oder AWS ML Specialty (~300€). In 3-4 Monaten Vorbereitung erreichst du ein Gehaltsplus von 15-30%.",
+    details: [
+      { title: "🏅 Schritt 1: Zertifikat auswählen", text: "Azure AI-102: Beste Wahl für deutsche Unternehmen (Microsoft-Ökosystem). Google ML Engineer: Stärker bei Data Science & ML. AWS ML: Beste Wahl für Cloud-native KI." },
+      { title: "📚 Schritt 2: Vorbereitung", text: "Offizielle Microsoft Learn-Pfade, Practice Tests auf Udemy, Fachbücher fürs Selbststudium. Unser <a href='../blog/ki-produktivitaet-2026.html'>KI-Produktivitäts-Guide</a> hilft mit Lern-Workflows." },
+      { title: "💼 Schritt 3: Karriere-Boost", text: "Zertifikat auf LinkedIn veröffentlichen, Gehaltsverhandlung starten. Lies den <a href='../blog/ki-jobs-karriere-2026.html'>KI-Jobs & Karriere-Guide</a> für Verhandlungsstrategien." }
+    ],
+    affiliate: [
+      { text: "💻 High-End-Laptop für KI-Entwicklung", url: "https://www.amazon.de/s?k=high+end+laptop+ki+entwicklung&tag=ikune21-21" },
+      { text: "📖 Deep Learning + ML-Fachbücher", url: "https://www.amazon.de/s?k=deep+learning+fachbuch&tag=ikune21-21" },
+      { text: "📚 KI-Zertifikats-Vorbereitung bei Amazon", url: "https://www.amazon.de/s?k=azure+ai+102+vorbereitung+buch&tag=ikune21-21" }
+    ]
+  }
+};
+
+const questionsState = { answers: [], current: 0 };
+let selectedOption = null;
+
+function renderQuestion(index) {
+  const q = questions[index];
+  document.getElementById('questionNum').textContent = `Frage ${index+1} von 5`;
+  document.getElementById('questionText').textContent = q.q;
+  
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  selectedOption = null;
+  document.getElementById('nextBtn').disabled = true;
+
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.innerHTML = `<span class="emoji">${opt.label}</span><span class="desc">${opt.desc}</span>`;
+    div.addEventListener('click', () => selectOption(i));
+    container.appendChild(div);
+  });
+
+  // Restore previous selection if any
+  if (questionsState.answers[index] !== undefined) {
+    selectOption(q.options.findIndex(o => o.value === questionsState.answers[index]));
+  }
+
+  document.getElementById('prevBtn').disabled = index === 0;
+  document.getElementById('progressFill').style.width = `${((index+1) / questions.length) * 100}%`;
+}
+
+function selectOption(idx) {
+  const options = document.querySelectorAll('.option');
+  options.forEach(o => o.classList.remove('selected'));
+  options[idx].classList.add('selected');
+  selectedOption = questions[questionsState.current].options[idx].value;
+  questionsState.answers[questionsState.current] = selectedOption;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  if (questionsState.current < questions.length - 1) {
+    questionsState.current++;
+    renderQuestion(questionsState.current);
+    if (questionsState.current === questions.length - 1) {
+      document.getElementById('nextBtn').textContent = '🔍 Ergebnis anzeigen';
+    }
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (questionsState.current > 0) {
+    questionsState.current--;
+    renderQuestion(questionsState.current);
+    document.getElementById('nextBtn').textContent = 'Weiter →';
+  }
+}
+
+function showResult() {
+  document.getElementById('quizArea').style.display = 'none';
+  document.getElementById('resultArea').style.display = 'block';
+  document.getElementById('progressFill').style.width = '100%';
+
+  const a = questionsState.answers;
+  // Try exact match first, then fuzzy match
+  const key = `${a[0]}_${a[1]}_${a[2]}_${a[3]}_${a[4]}`;
+  const keys = Object.keys(results);
+
+  // Find best match
+  let bestKey = keys[0];
+  let bestScore = -1;
+  
+  keys.forEach(k => {
+    const parts = k.split('_');
+    let score = 0;
+    for (let i = 0; i < Math.min(parts.length, a.length); i++) {
+      if (parts[i] === a[i]) score += 1;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      bestKey = k;
+    }
+  });
+
+  const result = results[bestKey];
+  document.getElementById('resultIcon').textContent = result.icon;
+  document.getElementById('resultTitle').textContent = result.title;
+  document.getElementById('resultDesc').textContent = result.desc;
+
+  const detailsDiv = document.getElementById('resultDetails');
+  detailsDiv.innerHTML = '';
+  result.details.forEach(d => {
+    const div = document.createElement('div');
+    div.className = 'detail';
+    div.innerHTML = `<strong>${d.title}</strong><p>${d.text}</p>`;
+    detailsDiv.appendChild(div);
+  });
+
+  const affList = document.getElementById('affiliateLinks');
+  affList.innerHTML = '';
+  result.affiliate.forEach(a => {
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="${a.url}" target="_blank" rel="noopener">${a.text} <span class="affiliate-badge">Amazon</span></a>`;
+    affList.appendChild(li);
+  });
+}
+
+function restartQuiz() {
+  questionsState.answers = [];
+  questionsState.current = 0;
+  document.getElementById('quizArea').style.display = 'block';
+  document.getElementById('resultArea').style.display = 'none';
+  document.getElementById('nextBtn').textContent = 'Weiter →';
+  renderQuestion(0);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') {
+    if (!document.getElementById('nextBtn').disabled) nextQuestion();
+  }
+  if (e.key === 'ArrowLeft') {
+    if (!document.getElementById('prevBtn').disabled) prevQuestion();
+  }
+  if (e.key >= '1' && e.key <= '4') {
+    const idx = parseInt(e.key) - 1;
+    const options = document.querySelectorAll('.option');
+    if (options[idx]) selectOption(idx);
+  }
+});
+
+// Init
+renderQuestion(0);
+</script>
+
+</body>
+</html>

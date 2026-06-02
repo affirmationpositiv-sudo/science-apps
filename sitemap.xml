@@ -487,4 +487,20 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Artikel #26: KI-Studium & KI-Ausbildung 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-studium-ki-ausbildung-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- KI-Studienberater Tool (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-studienberater.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
