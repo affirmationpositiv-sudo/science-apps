@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cold Outreach Navigator – Renaissance Coaching</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 0 30px;
+            border-bottom: 1px solid #2a2a3e;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #ff6b35, #f7c948);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+        .header .badge {
+            display: inline-block;
+            background: rgba(247, 201, 72, 0.15);
+            color: #f7c948;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        .header p {
+            color: #9a9a9a;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 12px auto 0;
+        }
+
+        /* Phase tabs */
+        .phase-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .phase-tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 14px 18px;
+            text-align: center;
+            background: #141420;
+            border: 1px solid #2a2a3e;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .phase-tab:hover { border-color: #555; }
+        .phase-tab.active {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(247, 201, 72, 0.2));
+            border-color: #f7c948;
+            color: #f7c948;
+        }
+        .phase-tab .phase-num {
+            display: block;
+            font-size: 0.7rem;
+            color: #666;
+            font-weight: 400;
+            margin-bottom: 2px;
+        }
+
+        /* Phase content */
+        .phase-content { display: none; }
+        .phase-content.active { display: block; }
+
+        /* Card */
+        .card {
+            background: linear-gradient(145deg, #141420, #1a1a2e);
+            border: 1px solid #2a2a3e;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 24px;
+        }
+        .card h2 {
+            font-size: 1.2rem;
+            color: #f7c948;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #2a2a3e;
+        }
+        .card h3 {
+            font-size: 1rem;
+            color: #ff6b35;
+            margin: 20px 0 10px;
+        }
+        .card h3:first-of-type { margin-top: 0; }
+
+        /* Script blocks */
+        .script-block {
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin: 12px 0;
+            position: relative;
+        }
+        .script-block .script-label {
+            position: absolute;
+            top: -10px;
+            left: 12px;
+            background: #ff6b35;
+            color: #0a0a0f;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .script-block pre {
+            font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #ccc;
+            white-space: pre-wrap;
+            margin: 4px 0 0;
+            line-height: 1.5;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #2a2a3e;
+            border: none;
+            color: #999;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover {
+            background: #f7c948;
+            color: #0a0a0f;
+        }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .metric-card {
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .metric-card .metric-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f7c948;
+        }
+        .metric-card .metric-label {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        .metric-card .metric-daily {
+            font-size: 0.7rem;
+            color: #444;
+            margin-top: 2px;
+        }
+
+        /* Calculator */
+        .calc-section {
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .calc-section h3 {
+            color: #f7c948;
+            margin-bottom: 16px;
+        }
+        .calc-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+        }
+        .calc-row label {
+            min-width: 180px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+        .calc-row input {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px 14px;
+            background: #141420;
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 0.9rem;
+            max-width: 120px;
+        }
+        .calc-row input:focus { outline: none; border-color: #f7c948; }
+        .calc-row .calc-hint {
+            font-size: 0.75rem;
+            color: #555;
+        }
+        .calc-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(247, 201, 72, 0.1));
+            border: 1px solid #f7c948;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .calc-result .result-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f7c948;
+        }
+        .calc-result .result-label {
+            font-size: 0.9rem;
+            color: #9a9a9a;
+            margin-top: 4px;
+        }
+        .calc-result .result-breakdown {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Tracking table */
+        .tracking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.85rem;
+        }
+        .tracking-table th {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 2px solid #f7c948;
+            color: #f7c948;
+            font-weight: 600;
+        }
+        .tracking-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #2a2a3e;
+        }
+        .tracking-table tr:hover td {
+            background: rgba(247, 201, 72, 0.03);
+        }
+        .tracking-table .editable {
+            background: transparent;
+            border: 1px solid #2a2a3e;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: #e0e0e0;
+            width: 60px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .tracking-table .editable:focus { outline: none; border-color: #f7c948; }
+
+        /* Daily targets */
+        .target-bar {
+            display: flex;
+            gap: 12px;
+            margin: 16px 0;
+            flex-wrap: wrap;
+        }
+        .target-item {
+            flex: 1;
+            min-width: 100px;
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+        }
+        .target-item .target-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+        .target-item .target-desc {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        .target-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #444;
+        }
+
+        /* Table */
+        .table-wrap { overflow-x: auto; }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 1.6rem; }
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .phase-tab { min-width: 100px; font-size: 0.75rem; padding: 10px 12px; }
+            .card { padding: 18px; }
+            .target-bar { flex-direction: column; }
+            .target-arrow { transform: rotate(90deg); }
+            .calc-row { flex-direction: column; align-items: stretch; }
+            .calc-row label { min-width: auto; }
+            .calc-row input { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚡ Cold Outreach Navigator</h1>
+            <div class="badge">INTERNES TOOL · RENAISSANCE COACHING</div>
+            <p>Dein Skript für Kaltakquise – von der Vorbereitung bis zum Follow-up. Tracke deine Zahlen und berechne dein Einkommenspotenzial.</p>
+        </div>
+
+        <!-- Phase Tabs -->
+        <div class="phase-tabs">
+            <div class="phase-tab active" onclick="switchPhase(0)">
+                <span class="phase-num">PHASE 1</span>
+                📋 Vorbereitung
+            </div>
+            <div class="phase-tab" onclick="switchPhase(1)">
+                <span class="phase-num">PHASE 2</span>
+                🗣️ Gespräch
+            </div>
+            <div class="phase-tab" onclick="switchPhase(2)">
+                <span class="phase-num">PHASE 3</span>
+                🔄 Follow-up
+            </div>
+        </div>
+
+        <!-- PHASE 1: Vorbereitung -->
+        <div class="phase-content active" id="phase0">
+            <div class="card">
+                <h2>📋 Vorbereitung – Die Basis für erfolgreiche Kaltakquise</h2>
+                <p style="color:#9a9a9a; margin-bottom:16px;">Bevor du einen einzigen Kontakt machst, brauchst du diese 3 Dinge:</p>
+
+                <h3>1. Zielgruppen-Definition</h3>
+                <p style="color:#999; margin-bottom:12px; font-size:0.9rem;">
+                    Wen sprichst du an? Sei konkret: <strong>Branche · Position · Unternehmensgröße · Schmerzpunkt</strong>
+                </p>
+                <div class="script-block">
+                    <div class="script-label">DEINE ZIELGRUPPE</div>
+                    <pre>Beispiel: Führungskräfte (Team Lead +) in Tech-Unternehmen (10–500 MA), 
+die unter hohem Stress stehen und Burnout-Risiko haben.
+→ Schmerzpunkt: Überlastung, keine Work-Life-Balance, sinkende Leistung</pre>
+                </div>
+
+                <h3>2. Dein Elevator Pitch</h3>
+                <p style="color:#999; margin-bottom:12px; font-size:0.9rem;">
+                    In 15 Sekunden: Wer du bist, was du machst, wem du hilfst, welches Ergebnis.
+                </p>
+                <div class="script-block">
+                    <div class="script-label">ELEVATOR PITCH</div>
+                    <pre>"Ich bin [Name], Renaissance Coach. Ich helfe [Zielgruppe], [Problem] zu lösen, 
+damit sie [Ergebnis] erreichen. In 30 Minuten zeige ich dir, wie das geht."</pre>
+                </div>
+
+                <h3>3. Tägliche Ziele</h3>
+                <p style="color:#999; margin-bottom:12px; font-size:0.9rem;">
+                    Das 10-3-1-0.3 System – deine tägliche Erfolgsformel.
+                </p>
+                <div class="target-bar">
+                    <div class="target-item">
+                        <div class="target-num" style="color:#f7c948;">10</div>
+                        <div class="target-desc">Kontakte/Tag</div>
+                    </div>
+                    <div class="target-arrow">→</div>
+                    <div class="target-item">
+                        <div class="target-num" style="color:#f7c948;">3</div>
+                        <div class="target-desc">Responses</div>
+                    </div>
+                    <div class="target-arrow">→</div>
+                    <div class="target-item">
+                        <div class="target-num" style="color:#f7c948;">1</div>
+                        <div class="target-desc">Free Call</div>
+                    </div>
+                    <div class="target-arrow">→</div>
+                    <div class="target-item">
+                        <div class="target-num" style="color:#f7c948;">0.3</div>
+                        <div class="target-desc">Clients</div>
+                    </div>
+                </div>
+                <p style="color:#555; font-size:0.8rem; text-align:center;">
+                    10 Kontakte → 3 Responses → 1 Call → 0,3 Kunden/Tag = ~6 Kunden/Monat
+                </p>
+            </div>
+
+            <!-- Metrics Dashboard -->
+            <div class="card">
+                <h2>📊 Deine Outreach-Metriken (Woche)</h2>
+                <div class="table-wrap">
+                    <table class="tracking-table" id="trackingTable">
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Kontakte</th>
+                                <th>Responses</th>
+                                <th>Calls</th>
+                                <th>Clients</th>
+                                <th>€ verdient</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Montag</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Dienstag</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Mittwoch</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Donnerstag</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Freitag</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Samstag</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                            <tr>
+                                <td>Sonntag</td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><input class="editable" type="number" value="0" onchange="updateWeek()"></td>
+                                <td><span class="day-earnings">€0</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="border-top:2px solid #f7c948;">
+                                <td style="font-weight:600; color:#f7c948;">Woche</td>
+                                <td id="weekContacts" style="font-weight:600; color:#f7c948;">0</td>
+                                <td id="weekResponses" style="font-weight:600; color:#f7c948;">0</td>
+                                <td id="weekCalls" style="font-weight:600; color:#f7c948;">0</td>
+                                <td id="weekClients" style="font-weight:600; color:#f7c948;">0</td>
+                                <td id="weekEarnings" style="font-weight:600; color:#f7c948;">€0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <p style="color:#555; font-size:0.75rem; margin-top:8px;">
+                    Preise: durchschnittlich €150/Session · 4 Sessions/Kunde = €600/Kunde
+                </p>
+            </div>
+
+            <!-- Cashflow Rechner -->
+            <div class="card">
+                <h2>💰 Cashflow-Rechner – Dein Einkommenspotenzial</h2>
+                <p style="color:#9a9a9a; margin-bottom:16px;">Gib deine Zahlen ein und sieh, wie viel du verdienen kannst.</p>
+
+                <div class="calc-section">
+                    <h3>Deine realen Zahlen</h3>
+                    <div class="calc-row">
+                        <label>Kontakte pro Tag:</label>
+                        <input type="number" id="contactsPerDay" value="10" oninput="calculateEarnings()">
+                        <span class="calc-hint">10 = Zielwert</span>
+                    </div>
+                    <div class="calc-row">
+                        <label>Response-Rate (%):</label>
+                        <input type="number" id="responseRate" value="30" oninput="calculateEarnings()" min="0" max="100">
+                        <span class="calc-hint">30% = realistisch</span>
+                    </div>
+                    <div class="calc-row">
+                        <label>Call-Conversion (%):</label>
+                        <input type="number" id="callConversion" value="40" oninput="calculateEarnings()" min="0" max="100">
+                        <span class="calc-hint">40% = Calls → Paid</span>
+                    </div>
+                    <div class="calc-row">
+                        <label>Preis pro Session (€):</label>
+                        <input type="number" id="pricePerSession" value="150" oninput="calculateEarnings()" min="0">
+                        <span class="calc-hint">€150 = Einstieg</span>
+                    </div>
+                    <div class="calc-row">
+                        <label>Sessions pro Kunde:</label>
+                        <input type="number" id="sessionsPerClient" value="6" oninput="calculateEarnings()" min="1">
+                        <span class="calc-hint">6 = durchschnittlich</span>
+                    </div>
+                    <div class="calc-row">
+                        <label>Arbeitstage pro Woche:</label>
+                        <input type="number" id="workDays" value="5" oninput="calculateEarnings()" min="1" max="7">
+                    </div>
+
+                    <div class="calc-result" id="calcResult">
+                        <div class="result-value" id="monthlyIncome">€9.000</div>
+                        <div class="result-label">Geschätztes Monatseinkommen</div>
+                        <div class="result-breakdown" id="resultBreakdown">
+                            10 Kontakte/Tag → 3 Responses → 1 Call → 0,4 Kunden/Tag<br>
+                            ≈ 8 Kunden/Monat × 6 Sessions × €150 = €7.200/Monat
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 2: Gespräch -->
+        <div class="phase-content" id="phase1">
+            <div class="card">
+                <h2>🗣️ Skript-Vorlagen für die Kaltakquise</h2>
+                <p style="color:#9a9a9a; margin-bottom:16px;">Passe jedes Skript an deine Zielgruppe an. <strong>Personalisiere immer!</strong></p>
+
+                <h3>📱 LinkedIn Nachricht</h3>
+                <div class="script-block">
+                    <div class="script-label">LINKEDIN</div>
+                    <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                    <pre>Hey [Name],
+
+mir ist aufgefallen, dass du bei [Firma] im Bereich [Bereich] arbeitest und dich für [Thema aus Profil] interessierst.
+
+Ich coache [Zielgruppe] zu [Thema]. Letzte Woche hat mir ein Kunde gesagt: "Endlich habe ich eine klare Richtung." 
+
+Hättest du 15 Minuten für einen kurzen Austausch? Ich schicke dir danach eine kostenlose Einschätzung zu [deren Thema] – kein Verkaufsgespräch, nur Mehrwert.
+
+LG, [Dein Name]</pre>
+                </div>
+
+                <h3>📧 E-Mail</h3>
+                <div class="script-block">
+                    <div class="script-label">E-MAIL</div>
+                    <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                    <pre>Betreff: Idee für [deren Thema/Problem]
+
+Hallo [Name],
+
+ich habe [Firma] auf [LinkedIn/Website] gesehen und war beeindruckt von [deren Erfolg].
+
+Ich coache [Zielgruppe] zu [Thema]. Ein Kunde in einer ähnlichen Situation hat in 6 Wochen [konkretes Ergebnis] erreicht.
+
+Hätten Sie 20 Minuten für ein kurzes Kennenlernen? Ich schicke Ihnen danach eine kostenlose Einschätzung.
+
+Beste Grüße,
+[Dein Name]
+[Link: Website/LinkedIn]</pre>
+                </div>
+
+                <h3>📞 Telefon</h3>
+                <div class="script-block">
+                    <div class="script-label">TELEFON</div>
+                    <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                    <pre>"Hallo [Name], mein Name ist [Dein Name] von Renaissance Coaching.
+Ich habe [Firma] gefunden und war beeindruckt von [deren Erfolg].
+
+Ich coache [Zielgruppe] zu [Thema] und habe letzte Woche einem 
+ähnlichen Unternehmen geholfen, [Problem] zu lösen.
+
+Darf ich Ihnen eine kurze Idee schicken, die für Sie relevant sein könnte?"
+
+[Wenn nein:] "Darf ich in 3 Monaten nochmal fragen?"</pre>
+                </div>
+
+                <h3>💬 WhatsApp</h3>
+                <div class="script-block">
+                    <div class="script-label">WHATSAPP</div>
+                    <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                    <pre>Hey [Name], lange nichts gehört! Hoffe dir geht's gut.
+
+Ich bin gerade dabei, mein Coaching-Angebot zu starten 
+und suche 3 Testpersonen für ein kostenloses Erstgespräch.
+
+Du wärst perfekt, weil [gemeinsames Thema/Erfahrung].
+
+Hättest du 30 Minuten Zeit in den nächsten Tagen?
+
+LG, [Dein Name]</pre>
+                </div>
+            </div>
+
+            <!-- Free Call Guide -->
+            <div class="card">
+                <h2>🎯 Free Call – Die 30-Minuten-Formel</h2>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">0–5</div>
+                        <div class="metric-label">Min: Rapport</div>
+                        <div class="metric-daily">Kennenlernen, Small Talk, Vertrauen aufbauen</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">5–15</div>
+                        <div class="metric-label">Min: Diagnose</div>
+                        <div class="metric-daily">Fragen stellen, zuhören, Problem präzise benennen</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">15–25</div>
+                        <div class="metric-label">Min: Lösung</div>
+                        <div class="metric-daily">Deine Lösung skizzieren + Outcome beschreiben</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">25–30</div>
+                        <div class="metric-label">Min: Abschluss</div>
+                        <div class="metric-daily">Angebot präsentieren, Preis nennen, Frage stellen</div>
+                    </div>
+                </div>
+
+                <h3>Die 3 Regeln des Free Calls:</h3>
+                <div style="background:#0a0a0f; border:1px solid #2a2a3e; border-radius:10px; padding:16px; margin:12px 0;">
+                    <p style="margin-bottom:8px;"><strong style="color:#f7c948;">1. Kein Verkaufen</strong> – Nur Diagnose und Mehrwert.</p>
+                    <p style="margin-bottom:8px;"><strong style="color:#f7c948;">2. Das Problem präzise benennen</strong> – "Sie haben X versucht, aber es hat nicht funktioniert, weil Y."</p>
+                    <p><strong style="color:#f7c948;">3. Die Brücke bauen</strong> – "Was ich mache, ist genau das: [Lösung]. Möchtest du das ausprobieren?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PHASE 3: Follow-up -->
+        <div class="phase-content" id="phase2">
+            <div class="card">
+                <h2>🔄 Follow-up – Die Kunst des Nachfassens</h2>
+                <p style="color:#9a9a9a; margin-bottom:16px;">
+                    <strong>80% der Verkäufe passieren nach dem 5. Kontakt.</strong> Die meisten geben nach dem 2. auf.
+                </p>
+
+                <h3>Follow-up Sequenz (nach Erstkontakt)</h3>
+                <div style="display:grid; gap:12px;">
+                    <div class="script-block" style="margin:0;">
+                        <div class="script-label">TAG 1</div>
+                        <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                        <pre>"Hey [Name], danke für den Austausch gestern! 
+Hier ist die Zusammenfassung unserer Idee:
+
+[2-3 Stichpunkte]
+
+Hast du Lust, das in einem kostenlosen 30-minütigen 
+Erstgespräch zu vertiefen?"</pre>
+                    </div>
+                    <div class="script-block" style="margin:0;">
+                        <div class="script-label">TAG 3</div>
+                        <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                        <pre>"Hey [Name], ich habe nochmal über unser Gespräch 
+nachgedacht. Besonders [konkreter Punkt] könnte 
+ein echter Game-Changer für dich sein.
+
+Hättest du diese Woche 30 Minuten?"</pre>
+                    </div>
+                    <div class="script-block" style="margin:0;">
+                        <div class="script-label">TAG 7</div>
+                        <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                        <pre>"Hey [Name], ich wollte nur kurz Bescheid sagen: 
+Ich habe nächste Woche noch 2 Plätze frei für 
+kostenlose Erstgespräche.
+
+Soll ich dir einen reservieren?"</pre>
+                    </div>
+                    <div class="script-block" style="margin:0;">
+                        <div class="script-label">TAG 14</div>
+                        <button class="copy-btn" onclick="copyScript(this)">Kopieren</button>
+                        <pre>"Hey [Name], letzte Chance für dieses Jahr! 
+Ich schließe meine Kalender für Neukunden 
+in 2 Wochen.
+
+Letztes Angebot für ein kostenloses Gespräch – 
+sag einfach Bescheid."</pre>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:24px;">💡 Follow-up Dos & Don'ts</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;">
+                    <div style="background:#0a0a0f; border:1px solid #2a2a3e; border-radius:10px; padding:16px;">
+                        <p style="color:#4ade80; font-weight:600; margin-bottom:8px;">✓ Dos</p>
+                        <ul style="list-style:none; padding:0; font-size:0.85rem; color:#999;">
+                            <li style="padding:4px 0;">• Nach 24h nachfassen</li>
+                            <li style="padding:4px 0;">• Mehrwert bieten (Tipp, Artikel)</li>
+                            <li style="padding:4px 0;">• Persönlich bleiben</li>
+                            <li style="padding:4px 0;">• Dranbleiben (7–10 Kontakte)</li>
+                            <li style="padding:4px 0;">• Variiere Medium (Mail, LinkedIn, Call)</li>
+                        </ul>
+                    </div>
+                    <div style="background:#0a0a0f; border:1px solid #2a2a3e; border-radius:10px; padding:16px;">
+                        <p style="color:#ff6b35; font-weight:600; margin-bottom:8px;">✗ Don'ts</p>
+                        <ul style="list-style:none; padding:0; font-size:0.85rem; color:#999;">
+                            <li style="padding:4px 0;">• Nicht aufdringlich sein</li>
+                            <li style="padding:4px 0;">• Kein Copy-Paste</li>
+                            <li style="padding:4px 0;">• Nicht diskutieren</li>
+                            <li style="padding:4px 0;">• Kein "Nur kurz" nach Tag 7</li>
+                            <li style="padding:4px 0;">• Niemals auf "Nein" drängen</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategie -->
+            <div class="card">
+                <h2>📈 Outreach-Strategie – Wöchentlicher Plan</h2>
+                <div class="table-wrap">
+                    <table class="tracking-table">
+                        <thead>
+                            <tr>
+                                <th>Tag</th>
+                                <th>Aufgabe</th>
+                                <th>Zeit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Montag</td><td>10 LinkedIn-Connections + 5 Kommentare</td><td>30 Min</td></tr>
+                            <tr><td>Dienstag</td><td>5 personalisierte E-Mails an Wunschkunden</td><td>30 Min</td></tr>
+                            <tr><td>Mittwoch</td><td>1 Post + Networking-Event (lokal/online)</td><td>60 Min</td></tr>
+                            <tr><td>Donnerstag</td><td>Nachfassaktion – alle offenen Leads</td><td>30 Min</td></tr>
+                            <tr><td>Freitag</td><td>Partner-Ansprache + Content-Plan</td><td>30 Min</td></tr>
+                            <tr><td>Samstag</td><td>Free Calls durchführen</td><td>Nach Bedarf</td></tr>
+                            <tr><td>Sonntag</td><td>Reflektion + Plan für nächste Woche</td><td>15 Min</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="color:#555; font-size:0.75rem; margin-top:12px;">
+                    Gesamtzeit: ~3–4 Stunden/Woche für Akquise
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align:center; padding:40px 0 20px; color:#444; font-size:0.75rem;">
+            Renaissance Coaching · Cold Outreach Navigator · Internes Tool
+        </div>
+    </div>
+
+    <script>
+        function switchPhase(index) {
+            document.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.phase-tab')[index].classList.add('active');
+            document.getElementById('phase' + index).classList.add('active');
+        }
+
+        function copyScript(btn) {
+            const pre = btn.parentElement.querySelector('pre');
+            if (!pre) return;
+            const text = pre.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '✓ Kopiert';
+                setTimeout(() => { btn.textContent = 'Kopieren'; }, 2000);
+            }).catch(() => {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                btn.textContent = '✓ Kopiert';
+                setTimeout(() => { btn.textContent = 'Kopieren'; }, 2000);
+            });
+        }
+
+        function updateWeek() {
+            const rows = document.querySelectorAll('#trackingTable tbody tr');
+            let totalContacts = 0, totalResponses = 0, totalCalls = 0, totalClients = 0, totalEarnings = 0;
+
+            rows.forEach(row => {
+                const inputs = row.querySelectorAll('.editable');
+                const earnings = row.querySelector('.day-earnings');
+                const contacts = parseInt(inputs[0].value) || 0;
+                const responses = parseInt(inputs[1].value) || 0;
+                const calls = parseInt(inputs[2].value) || 0;
+                const clients = parseInt(inputs[3].value) || 0;
+
+                const earned = clients * 600;
+                earnings.textContent = '€' + earned;
+
+                totalContacts += contacts;
+                totalResponses += responses;
+                totalCalls += calls;
+                totalClients += clients;
+                totalEarnings += earned;
+            });
+
+            document.getElementById('weekContacts').textContent = totalContacts;
+            document.getElementById('weekResponses').textContent = totalResponses;
+            document.getElementById('weekCalls').textContent = totalCalls;
+            document.getElementById('weekClients').textContent = totalClients;
+            document.getElementById('weekEarnings').textContent = '€' + totalEarnings;
+        }
+
+        function calculateEarnings() {
+            const contacts = parseInt(document.getElementById('contactsPerDay').value) || 0;
+            const rate = parseInt(document.getElementById('responseRate').value) || 0;
+            const conversion = parseInt(document.getElementById('callConversion').value) || 0;
+            const price = parseInt(document.getElementById('pricePerSession').value) || 0;
+            const sessions = parseInt(document.getElementById('sessionsPerClient').value) || 0;
+            const days = parseInt(document.getElementById('workDays').value) || 0;
+
+            const weeksPerMonth = 4.33;
+            const dailyResponses = contacts * (rate / 100);
+            const dailyCalls = dailyResponses * (conversion / 100);
+            const dailyClients = dailyCalls * 0.8; // 80% close rate on calls
+            const monthlyClients = Math.round(dailyClients * days * weeksPerMonth);
+            const income = Math.round(monthlyClients * sessions * price);
+
+            document.getElementById('monthlyIncome').textContent = '€' + income.toLocaleString('de-DE');
+
+            document.getElementById('resultBreakdown').innerHTML =
+                contacts + ' Kontakte/Tag → ' + Math.round(dailyResponses) + ' Responses → ' +
+                Math.round(dailyCalls) + ' Calls → ' + (Math.round(dailyClients * 10) / 10) + ' Kunden/Tag<br>' +
+                '≈ ' + monthlyClients + ' Kunden/Monat × ' + sessions + ' Sessions × €' + price +
+                ' = €' + income.toLocaleString('de-DE') + '/Monat';
+        }
+
+        // Initial calculations
+        updateWeek();
+        calculateEarnings();
+    </script>
+</body>
+</html>
