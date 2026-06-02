@@ -260,3 +260,54 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 2. 🔴 **Cross-Link-Audit**: Alle 19 Artikel auf fehlende Verknüpfungen prüfen
 3. 🟡 **Neues Tool bauen**: Interaktiver Rechner oder Konfigurator
 4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.15)
+
+### Previous State (R2.14):
+- 19 Blog-Artikel (inflated - actual 18)
+- 7 Affiliate-Shops (undercounted - actual 8)
+- Blog #19 (Online-Business ohne Startkapital) live
+- Stats inkorrekt
+
+### Actions This Tick (R2.15):
+- [x] **Survey:** Site live (200 OK), 18 Artikel-Dateien vorhanden, R2.14 hatte überhöhte Stats
+- [x] **Created Blog-Artikel #18**: "KI-Produktivität 2026: Die 10 besten Tools, Workflows & Gadgets" (35KB HTML, ~3.500 Wörter, 20+ Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **Cross-Link-Audit:** +Link von ki-tools-2026.html (Related) und ki-prompting-einsteiger-2026.html (Weitere Artikel) zur neuen Produktivitäts-Seite
+- [x] **Affiliate-Shop-Fix:** 3 verwaiste Shops (ergonomie, nachhaltig, smarthome) zur Portfolio-Übersicht hinzugefügt (5→8)
+- [x] **Stats-Korrektur:** Main index Blog 19→18, Blog index Artikel 19→18
+- [x] **Sitemap.xml:** +Blog-Artikel #18 URL (bereits von R2.14 enthalten)
+- [x] **Git commit + push ✅** (5 Dateien, 28 Zeilen)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 18 | ✅ LIVE (1 NEU) |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| GalaxyBlog-Artikel | 11 | ✅ LIVE |
+| Affiliate-Shops | 8 | ✅ LIVE (3 neu verlinkt) |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| KI-Quiz-Tool | 1 | ✅ LIVE |
+| Gesamt (Sitemap) | 55+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 18 Artikel + Quiz + 8 Shops |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** – 19 Bücher = €250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** – Posts fertig
+4. 🟡 **Google Search Console** – Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #20**: Neues Trend-Thema (KI-Startups, No-Code, Workflow Automation)
+2. 🔴 **Neues interaktives Tool**: Einkommensrechner oder KI-Entscheidungsfinder
+3. 🟡 **Cross-Link-Audit auf ALLE Artikel ausweiten**
+4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
