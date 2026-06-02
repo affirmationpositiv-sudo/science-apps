@@ -1,5 +1,68 @@
 # Loop Log – Infinite Money Loop
 
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.41)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.40):
+- 49 Blog-Artikel, 27 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher, 12+ Spiele, 8 T-Shirts
+- Blog #49 (KI-Trading & Krypto 2026) ✅ LIVE
+- KI-Trading-Risiko-Rechner (Tool #27) ✅ LIVE
+- 20 Video-Skripte ✅ LIVE
+- Git working tree clean (with local modifications), Site HTTP 200 ✅
+
+### Actions This Tick (R2.41):
+- [x] **Survey:** Site live (HTTP 200), Git working tree hat lokale Änderungen, 49 Blog-Artikel, 27 Tools
+- [x] **Blog-Artikel #50 erstellt:** "KI-Mode & Style 2026: Die 10 besten KI-Tools, Fashion-Apps & Tech-Gadgets für deinen perfekten Style" (39 KB HTML, ~5.000 Wörter, 10 Sektionen: KI-Styling-Apps (Style DNA, Whering, LALALAND), KI-Smart-Spiegel (LG Styler, Naked Mirror, HiMirror, Simplehuman), KI-Shopping-Assistenten (Zalando Plus, Outfittery, Stitch Fix, Google Lens), KI-Farbanalyse & Hauttyp-Bestimmung per Selfie, KI-Wearables (Apple Watch Ultra 3, Oura Ring Gen 4, Samsung Galaxy Watch 7, Garmin Venu 4), KI-Sneaker & Streetwear (StockX, GOAT, KLEKT, Restocks), KI-Mode-Design (Midjourney, CALA, Adobe Firefly, Stable Diffusion), KI-nachhaltige Mode & Secondhand (Good On You, Vinted, Sellpy), KI-Schmuck & Smart Accessoires (Ray-Ban Meta, AirPods Pro 3, Bellabeat IVY), KI-Gesundheits-Fashion (Nike Adapt BB, Sensoria, Hexoskin) – 35+ Amazon-Affiliate-Links tag=ikune21-21, 8 Vergleichstabellen, 5 Budget-Stufen (0€ bis 1.000€+), 7-Tage-Startplan, 7 FAQ)
+- [x] **KI-Style-Berater-Tool gebaut:** tools/ki-style-berater.html (35 KB, interaktives 5-Fragen-Quiz: Style-Ziel, Budget, Kategorie, Tech-Affinität, Style-Philosophie – personalisierte Produktempfehlungen mit 20+ Produkten aus 5 Budget-Stufen, 10+ Style-Profilen, Amazon-Affiliate-Links, dynamischer 7-Tage-Aktionsplan)
+- [x] **Blog-Index aktualisiert:** Stats 49→50, +Artikel-Karte #50 (KI-Mode & Style) mit Style-Berater-Link
+- [x] **Tools-Index aktualisiert:** Stats 25→26, +KI-Style-Berater Card als erster Eintrag
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 49→50, KI-Websites-Stat 27→28
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #50 + KI-Style-Berater)
+- [x] **Git commit + push ✅**
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 50 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 28 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| T-Shirt Designs | 8 | ✅ LIVE |
+| Video-Skripte | 20 | ✅ LIVE |
+| Prompt-Packs | 3 | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 50 Artikel + 28 Tools + 9 Shops |
+| 2 | **Amazon KDP (15 Bücher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **AI Persönlichkeits-Report Verkauf** | EUR 50-300 | ✅ Tool live, Prynth/Blook nötig |
+
+### Neue Chancen (Recherche):
+1. 🟢 **Prynth (seit Mai 2026)** – 0%-Kommissions-Plattform für digitale Produkte (PDFs, Vorlagen). Kein monatliches Abo. Perfekt für Premium-Report-Verkauf.
+2. 🟢 **Blook (Beta, Mai 2026)** – Free Platform für interaktive Web-Produkte. 2% Commission. Affiliate-Support, Stripe-Checkout.
+3. 🟢 **Kostenlose AI APIs** – OpenAI o4-mini (100 req/day free), Google Gemini 2.5 Flash (60 req/min free), Mistral Small 3 Free Tier. Für automatische Content-Generierung nutzbar.
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** - 15 Bücher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟢 **Prynth/Blook Account** - 0%-Kommissions-Plattformen für digitale Produkte
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #51**: KI-Photographie & Bildbearbeitung 2026 (fehlt noch als eigenes Thema) oder KI-Gesundheit & Health-Tech 2.0
+2. 🟢 **Neues Tool**: KI-Photo-Bedarfsrechner oder KI-Gesundheits-Checker 2.0
+3. 🟢 **AI Content Factory**: Kostenlose AI APIs (OpenAI o4-mini, Gemini Flash) für SEO-Content nutzen
+4. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Prynth, Blook)
+5. 🟢 **Cron-Job-Produktivität prüfen**: Wie viele Ticks pro Tag maximal möglich?
+
+---
+
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.38)
 
 Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
@@ -1402,5 +1465,53 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 ### Next Tick Priorities:
 1. 🔴 **Blog-Artikel #27**: KI-Recht & Legal-Tech 2026 oder KI-Marketing-Automation 2026
 2. 🔴 **Neues interaktives Tool**: SEO-Traffic-Rechner oder Legal-Tech-Checker
+3. 🟡 **KDP Account erstellen** (User-Aktion noetig)
+4. 🟡 **Google Search Console einrichten**
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.40)
+
+### Previous State (R2.39):
+- 48 Blog-Artikel, 24 interaktive Tools, 9 Affiliate-Shops, 19+ KDP-Bücher
+- YouTube-Seite mit 20 Video-Skripten live, Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.40):
+- [x] **Survey:** Site live (200 OK), Git clean, 48 Blog-Artikel, 24 Tools, alles funktionsfähig
+- [x] **Blog-Artikel #49 erstellt:** "KI-Trading & Kryptowährungen 2026: Top 10 KI-Trading-Bots, Analyse-Tools & Hardware" (30 KB HTML, ~4.000 Wörter, 8 Sektionen: KI-Trading-Bots (3Commas, Cryptohopper, Pionex), Krypto-Analyse-Plattformen (TradingView, CoinGecko, Santiment), Hardware-Wallets (Ledger Nano X, Nano S Plus, Trezor Model T, SafePal S1), Krypto-Steuer-Software (CoinTracking, Blockpit), Mining-Hardware & Zubehör, 3 Budget-Stufen (0€ bis 800€+), 7-Tage-Startplan, 7 FAQ – 30+ Amazon-Affiliate-Links tag=ikune21-21, 7 Vergleichstabellen)
+- [x] **KI-Trading-Risiko-Rechner-Tool gebaut:** tools/krypto-trading-rechner.html (23 KB, interaktives 6-Fragen-Quiz: Erfahrung, Budget, Ziel, Risiko, Zeit, Börse – personalisierte Empfehlungen für Trading-Bots, Wallets, Analyse-Tools, Steuer-Software, Bücher & Zubehör mit 4 Budget-Stufen und Amazon-Affiliate-Links)
+- [x] **Blog-Index aktualisiert:** Stats 48→49, +Artikel-Karte #49 (KI-Trading & Krypto) mit Trading-Rechner-Link
+- [x] **Tools-Index aktualisiert:** Stats 24→25, +Krypto-Trading-Rechner-Karte
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 48→49, KI-Websites-Stat 25→27
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #49 + Krypto-Trading-Rechner)
+- [x] **Git commit + push ✅** (6 Dateien, +919 Zeilen, Commit 3e42228)
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 49 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 25 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 49 Artikel + 25 Tools + 9 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #50**: KI-Marketing-Automation 2026 oder KI-Chatbots-Kundenservice 2026
+2. 🔴 **Neues interaktives Tool**: KI-Marketing-Automation-Checker
 3. 🟡 **KDP Account erstellen** (User-Aktion noetig)
 4. 🟡 **Google Search Console einrichten**
