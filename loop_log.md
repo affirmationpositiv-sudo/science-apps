@@ -174,3 +174,39 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 3. 🟡 **Interne Cross-Links prüfen**: Artikel #1-15 auf fehlende Verknüpfungen untersuchen
 4. 🟡 **KDP Account erstellen** (User-Aktion nötig!)
 5. 🟡 **Google Search Console einrichten**
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.12)
+
+### Previous State (R2.11):
+- 15 Blog-Artikel, 19+ Bücher, 14+ Apps
+- Sitemap.xml + SEO Cross-Links aktualisiert
+- Quiz-Tool war geplant, aber noch nicht gebaut
+
+### Actions This Tick (R2.12):
+- [x] **KI-Quiz-Tool gebaut:** 5-Fragen-Quiz "Welches KI-Tool passt zu dir?" mit 7 KI-Tool-Ergebnissen (Claude, ChatGPT, DeepSeek, Gemini, Canva, Midjourney, Copilot)
+- [x] **Monetarisierung:** Amazon Affiliate-Links (tag=ikune21-21) + Ko-fi + Social-Sharing-Buttons eingebaut
+- [x] **Deployed:** `/quiz/` – Single-Page-App, 350 Zeilen, 7 Ergebniskarten mit Profi-Tipps
+- [x] **Sitemap.xml aktualisiert:** + quiz/ URL (priority 0.8)
+- [x] **Tools-Index aktualisiert:** Quiz-Karte auf tools/index.html hinzugefügt
+- [x] **Git commit + push ✅**
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 15 Artikel + 1 Quiz + 16 Blog-Seiten |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert, kein Traffic |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** (kdp.amazon.de) – 19 Bücher = €250-500/Monat
+2. 🔴 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs = €50-500/Monat
+3. 🔴 **LinkedIn/X/Twitter Profile** – 3 Social-Media-Posts fertig, unveröffentlicht
+4. 🟡 **Google Search Console** – Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #16**: KI-Jobs & Karriere 2026
+2. 🔴 **Cross-Link-Audit**: Alle 27 Artikel auf fehlende Verknüpfungen prüfen
+3. 🟡 **KDP Account erstellen** (User-Aktion nötig)
+4. 🟡 **Google Search Console einrichten**

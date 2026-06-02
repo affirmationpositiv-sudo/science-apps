@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="description" content="Finde heraus welches KI-Tool 2026 am besten zu dir passt. Kostenloser Test mit persönlicher Empfehlung in 2 Minuten.">
+<meta property="og:title" content="KI-Quiz 2026: Welches KI-Tool passt zu dir?">
+<meta property="og:description" content="Finde in 2 Minuten dein perfektes KI-Tool – mit persönlicher Empfehlung & Affiliate-Angeboten.">
+<meta property="og:type" content="website">
+<title>🤖 KI-Quiz 2026 – Welches KI-Tool passt zu dir? | Licht und Schatten</title>
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/quiz/">
+<link rel="manifest" href="../manifest.json">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a1a;--panel:#12122a;--panel-border:#2a2a5a;--accent:#4a6cf7;--accent-glow:#4a6cf740;--gold:#ffd700;--gold-dim:#b8960f;--green:#4ade80;--red:#ef4444;--text:#e0e0f0;--text-dim:#8080a0;--text-muted:#5a5a7a;--card:#1a1a3e;--radius:12px;--font:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;--max-w:640px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px}
+.container{max-width:var(--max-w);width:100%}
+header{text-align:center;margin-bottom:24px}
+header h1{font-size:28px;font-weight:800;background:linear-gradient(90deg,#e0e0f0,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+header p{color:var(--text-dim);font-size:14px}
+.progress-bar{background:var(--panel);border-radius:99px;height:8px;overflow:hidden;margin-bottom:24px;border:1px solid var(--panel-border)}
+.progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:99px;transition:width .4s ease}
+.progress-text{text-align:center;font-size:13px;color:var(--text-dim);margin-bottom:16px}
+.card{background:var(--panel);border:1px solid var(--panel-border);border-radius:var(--radius);padding:32px 24px;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.card h2{font-size:18px;font-weight:700;color:var(--gold);margin-bottom:8px}
+.card p{color:var(--text-dim);font-size:14px;margin-bottom:20px}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{background:var(--card);border:1px solid var(--panel-border);border-radius:10px;padding:14px 18px;cursor:pointer;transition:all .2s;font-size:15px;color:var(--text);text-align:left}
+.option:hover{background:#252555;border-color:var(--accent);transform:translateX(4px)}
+.option.selected{background:#1a1a5e;border-color:var(--accent);box-shadow:0 0 20px var(--accent-glow)}
+.option .opt-label{font-weight:600;color:var(--accent);margin-right:8px}
+.result-card{display:none}
+.result-card.visible{display:block}
+.result-header{text-align:center;margin-bottom:20px}
+.result-header .emoji{font-size:48px;display:block;margin-bottom:8px}
+.result-header h2{color:var(--gold);font-size:22px;margin-bottom:4px}
+.result-header p{color:var(--text-dim);font-size:14px}
+.result-detail{background:var(--card);border-radius:10px;padding:16px;margin-bottom:16px;border-left:3px solid var(--accent)}
+.result-detail h3{font-size:16px;color:var(--accent);margin-bottom:6px}
+.result-detail p{font-size:14px;color:var(--text-dim);line-height:1.7}
+.affiliate-link{display:block;background:linear-gradient(135deg,var(--gold-dim),var(--gold));color:#000;font-weight:700;text-align:center;padding:14px 24px;border-radius:10px;text-decoration:none;font-size:16px;transition:transform .15s;margin:12px 0}
+.affiliate-link:hover{transform:scale(1.03)}
+.tip-box{background:linear-gradient(135deg,#0d0d25,var(--card));border:1px solid var(--accent);border-radius:var(--radius);padding:14px;margin:12px 0;border-left:3px solid var(--accent)}
+.tip-box strong{color:var(--accent)}
+.promo-link{color:var(--gold);font-weight:600;text-decoration:none;border-bottom:1px dashed var(--gold-dim)}
+.promo-link:hover{color:#fff}
+.reset-btn{background:transparent;border:1px solid var(--panel-border);color:var(--text-dim);padding:12px 24px;border-radius:10px;cursor:pointer;font-size:14px;width:100%;margin-top:16px;transition:all .2s}
+.reset-btn:hover{border-color:var(--accent);color:var(--text)}
+.social-share{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.social-share a{flex:1;text-align:center;padding:10px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:opacity .2s;min-width:100px}
+.social-share a:hover{opacity:.85}
+.share-twitter{background:#1da1f2;color:#fff}
+.share-linkedin{background:#0a66c2;color:#fff}
+.share-whatsapp{background:#25d366;color:#fff}
+.cta-section{background:linear-gradient(135deg,var(--gold-dim),var(--gold));padding:20px;border-radius:var(--radius);text-align:center;margin-top:16px}
+.cta-section h3{color:#000;margin-bottom:8px}
+.cta-section p{color:#222;font-size:13px;margin-bottom:12px}
+.cta-section .cta-btn{display:inline-block;background:#000;color:var(--gold);padding:10px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px}
+.hidden{display:none!important}
+.tag{display:inline-block;background:var(--accent);color:#fff;font-size:11px;padding:2px 8px;border-radius:99px;margin:8px 0}
+footer{text-align:center;padding:24px 16px;color:var(--text-muted);font-size:12px;margin-top:32px;width:100%;max-width:var(--max-w)}
+footer a{color:var(--accent);text-decoration:none}
+@media(max-width:480px){.card{padding:20px 16px}.result-header .emoji{font-size:36px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🤖 KI-Quiz 2026</h1>
+<p>Beantworte 5 Fragen und finde dein perfektes KI-Tool</p>
+</header>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="progress-text" id="progressText">Frage 1 von 5</div>
+
+<div id="quizCard" class="card"></div>
+<div id="resultCard" class="card result-card"></div>
+
+<footer>
+<p>Ein Projekt von <strong>Licht und Schatten</strong></p>
+<p style="margin-top:4px"><a href="../index.html">← Zurück zum Portal</a> · <a href="../datenschutz/">Datenschutz</a> · <a href="../impressum/">Impressum</a></p>
+<p style="margin-top:8px;font-size:11px">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+</footer>
+</div>
+
+<script>
+const QUIZ = {
+  questions: [
+    {
+      q: "Was möchtest du mit KI hauptsächlich machen?",
+      options: [
+        { id: "content", text: "📝 Texte schreiben & Content erstellen", points: { claude:3, chatgpt:3, deepseek:1, gemini:1, canva:1 } },
+        { id: "code", text: "💻 Programmieren & Code schreiben", points: { claude:3, chatgpt:2, deepseek:3, gemini:2, copilot:3 } },
+        { id: "design", text: "🎨 Bilder & Designs erstellen", points: { claude:0, chatgpt:1, deepseek:0, gemini:2, canva:3, midjourney:3 } },
+        { id: "analyse", text: "📊 Daten analysieren & recherchieren", points: { claude:2, chatgpt:2, deepseek:2, gemini:3, copilot:0 } }
+      ]
+    },
+    {
+      q: "Wie viel Budget hast du für KI-Tools?",
+      options: [
+        { id: "zero", text: "💰 Nichts – alles muss kostenlos sein", points: { claude:2, chatgpt:3, deepseek:3, gemini:3, canva:2, copilot:0, midjourney:0 } },
+        { id: "low", text: "💵 Maximal 10-20€ pro Monat", points: { claude:3, chatgpt:3, deepseek:2, gemini:2, canva:2, copilot:2, midjourney:0 } },
+        { id: "mid", text: "💶 20-50€ pro Monat – ich brauche Qualität", points: { claude:3, chatgpt:2, deepseek:1, gemini:1, canva:2, copilot:2, midjourney:2 } },
+        { id: "pro", text: "💎 Kein Limit – nur das Beste", points: { claude:3, chatgpt:2, deepseek:1, gemini:1, canva:1, midjourney:3, copilot:3 } }
+      ]
+    },
+    {
+      q: "Welche Plattform nutzt du hauptsächlich?",
+      options: [
+        { id: "desktop", text: "🖥️ PC/Laptop (Windows/Mac/Linux)", points: { claude:3, chatgpt:3, deepseek:2, gemini:2, canva:2, midjourney:3, copilot:3 } },
+        { id: "mobile", text: "📱 Smartphone & Tablet", points: { claude:1, chatgpt:3, deepseek:3, gemini:3, canva:2, midjourney:0, copilot:0 } },
+        { id: "web", text: "🌐 Im Browser – ohne Installation", points: { claude:3, chatgpt:3, deepseek:3, gemini:3, canva:3, midjourney:1, copilot:0 } },
+        { id: "all", text: "🔄 Alles – je nach Situation", points: { claude:3, chatgpt:3, deepseek:2, gemini:3, canva:2, midjourney:1, copilot:1 } }
+      ]
+    },
+    {
+      q: "Wie wichtig ist deutscher Sprachsupport?",
+      options: [
+        { id: "native", text: "🇩🇪 Sehr wichtig – perfektes Deutsch nötig", points: { claude:3, chatgpt:2, deepseek:2, gemini:3, canva:3, midjourney:0, copilot:0 } },
+        { id: "ok", text: "🌍 Gut zu haben, aber nicht kritisch", points: { claude:3, chatgpt:3, deepseek:3, gemini:3, canva:2, midjourney:0, copilot:1 } },
+        { id: "english", text: "🇬🇧 Englisch ist völlig in Ordnung", points: { claude:3, chatgpt:3, deepseek:3, gemini:2, canva:1, midjourney:0, copilot:2 } },
+        { id: "tech", text: "🔧 Nur Fach-Englisch nötig (Code/Docs)", points: { claude:3, chatgpt:2, deepseek:3, gemini:1, canva:0, midjourney:0, copilot:3 } }
+      ]
+    },
+    {
+      q: "Wie technisch bist du im Umgang mit KI?",
+      options: [
+        { id: "beginner", text: "🌟 Anfänger – einfache Bedienung nötig", points: { claude:3, chatgpt:3, deepseek:1, gemini:3, canva:3, midjourney:1, copilot:0 } },
+        { id: "intermediate", text: "📚 Grundkenntnisse – ich finde mich zurecht", points: { claude:3, chatgpt:2, deepseek:2, gemini:2, canva:2, midjourney:2, copilot:2 } },
+        { id: "advanced", text: "⚡ Fortgeschritten – ich experimentiere gern", points: { claude:3, chatgpt:1, deepseek:3, gemini:1, canva:1, midjourney:2, copilot:3 } },
+        { id: "pro", text: "🤓 Profi – API, Prompt Engineering, Fine-Tuning", points: { claude:3, chatgpt:1, deepseek:3, gemini:1, canva:0, midjourney:1, copilot:2 } }
+      ]
+    }
+  ],
+  results: {
+    claude: {
+      emoji: "🟣",
+      name: "Claude (Anthropic)",
+      desc: "Claude ist dein perfekter KI-Assistent! Er glänzt bei langen Texten, Programmierung, Analyse und kreativem Schreiben. Besonders stark: 200K-Token-Kontextfenster – du kannst ganze Bücher oder Codebasen hochladen.",
+      why: "Du legst Wert auf Qualität, Tiefe und deutsche Sprache. Claude liefert die besten deutschsprachigen Ergebnisse für komplexe Aufgaben.",
+      amazonLink: "https://www.amazon.de/dp/B0D5M9V9QN?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Kindle Paperwhite fürs Lesen unterwegs",
+      tips: [
+        "Nutze Project-Feature in Claude für langfristige Projekte",
+        "Lade PDFs & Bilder direkt hoch – Claude liest sie mit",
+        "Mein Tipp: Starte mit dem kostenlosen Plan, upgrade später"
+      ]
+    },
+    chatgpt: {
+      emoji: "💚",
+      name: "ChatGPT (OpenAI)",
+      desc: "ChatGPT ist der Allrounder unter den KI-Tools. Perfekt für Einsteiger, mobile Nutzer und alle, die eine einfache, zuverlässige KI für den Alltag suchen.",
+      why: "Du brauchst eine KI, die überall funktioniert – auf dem Handy, im Browser, unterwegs. ChatGPT hat die beste App und die größte Community.",
+      amazonLink: "https://www.amazon.de/dp/B09B8X8L1P?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Echo Dot für KI-Sprachsteuerung im Alltag",
+      tips: [
+        "ChatGPT App auf dem Handy ist kostenlos und extrem gut",
+        "Nutze GPTs aus dem Store für spezialisierte Aufgaben",
+        "ChatGPT Search ersetzt dir Google für viele Fragen"
+      ]
+    },
+    deepseek: {
+      emoji: "🔵",
+      name: "DeepSeek (深度求索)",
+      desc: "DeepSeek ist der Geheimtipp für Entwickler und Sparfüchse. Extrem günstig (fast kostenlos), open-source und mit starken Code-Fähigkeiten – die chinesische KI-Revolution.",
+      why: "Du willst maximale Leistung für minimales Geld. DeepSeek ist oft besser als ChatGPT, aber deutlich günstiger. Perfekt für technisch Versierte.",
+      amazonLink: "https://www.amazon.de/dp/B0B5QK4KZ2?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Kindle (11. Gen.) für KI-Recherche",
+      tips: [
+        "DeepSeek ist perfekt für Code-Generierung & Übersetzungen",
+        "Open Source – du kannst es selbst hosten (falls nötig)",
+        "Die mobile App ist überraschend gut und komplett kostenlos"
+      ]
+    },
+    gemini: {
+      emoji: "💙",
+      name: "Google Gemini",
+      desc: "Gemini ist Googles KI – perfekt integriert in den Google-Kosmos (Gmail, Docs, Search). Stärkste Konkurrenz für ChatGPT mit deutschsprachigen Stärken.",
+      why: "Du lebst im Google-Universum. Gemini arbeitet nahtlos mit Gmail, Google Docs und der Google-Suche zusammen – das spart dir täglich Stunden.",
+      amazonLink: "https://www.amazon.de/dp/B0CGX3XQM5?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Fire HD 10 Tablet für Gemini-Nutzung",
+      tips: [
+        "Gemini Advanced (Google One) gibt dir Zugriff auf Ultra-Modell",
+        "In Google Docs schreibt Gemini direkt mit dir zusammen",
+        "Gemini Live-App auf Android ist extrem praktisch"
+      ]
+    },
+    canva: {
+      emoji: "🎨",
+      name: "Canva (KI-Design)",
+      desc: "Canva Magic Studio ist der beste Freund für alle, die schnell professionelle Designs brauchen – ohne Design-Erfahrung. Perfekt für Social Media, Marketing &Business.",
+      why: "Du brauchst Bilder, Grafiken und Marketing-Material. Canva liefert KI-generierte Designs in Sekunden – Tausende Vorlagen inklusive.",
+      amazonLink: "https://www.amazon.de/dp/B08N36XNTT?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Kindle Paperwhite für Design-Inspiration",
+      tips: [
+        "Magic Studio hat KI-Bildgenerierung, Magic Erase & mehr",
+        "Canva Teams ist perfekt für Content-Kalender & Templates",
+        "Starte kostenlos – die Free-Version ist schon extrem mächtig"
+      ]
+    },
+    midjourney: {
+      emoji: "🎭",
+      name: "Midjourney + DALL-E 3",
+      desc: "Du bist ein kreativer Profi! Midjourney liefert die besten KI-Bilder überhaupt – fotorealistisch, künstlerisch, atemberaubend. DALL-E 3 ergänzt mit präziser Texttreue.",
+      why: "Dir reicht gut nicht – du willst atemberaubend. Midjourney setzt den Standard für KI-Kunst und Design.",
+      amazonLink: "https://www.amazon.de/dp/B09TTP7TBP?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Fire HD 10 Tablet als zweiter Bildschirm",
+      tips: [
+        "Midjourney läuft über Discord – die Community ist großartig",
+        "Lerne Prompt-Engineering für Midjourney (völlig andere Syntax)",
+        "Mein Workflow: Midjourney fürs Bild + Canva für Layout"
+      ]
+    },
+    copilot: {
+      emoji: "💻",
+      name: "GitHub Copilot + Cursor",
+      desc: "Du bist voll auf Code fokussiert. GitHub Copilot und Cursor sind die mächtigsten KI-Programmierassistenten – sie schreiben Code mit dir, nicht für dich.",
+      why: "Programmieren ist dein Kern. Copilot und Cursor verdoppeln deine Produktivität und fangen Fehler, bevor sie passieren.",
+      amazonLink: "https://www.amazon.de/dp/B0B5QK4KZ2?tag=ikune21-21",
+      amazonLabel: "🔗 Empfohlen: Kindle fürs Lernen während Wartezeiten",
+      tips: [
+        "Copilot ist kostenlos für Open-Source-Maintainer (seit 2025)",
+        "Cursor mit Claude 3.5 Sonnet ist die beste Kombi für Code",
+        "Nutze Copilot Chat inline – spart dir die Hälfte der Googlesuche"
+      ]
+    }
+  }
+};
+
+let currentQuestion = 0;
+const scores = {};
+for (const key of Object.keys(QUIZ.results)) scores[key] = 0;
+
+function renderQuestion() {
+  const q = QUIZ.questions[currentQuestion];
+  const total = QUIZ.questions.length;
+  
+  document.getElementById('progressFill').style.width = ((currentQuestion + 1) / total * 100) + '%';
+  document.getElementById('progressText').textContent = `Frage ${currentQuestion + 1} von ${total}`;
+  
+  const card = document.getElementById('quizCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeIn .3s ease';
+  
+  card.innerHTML = `
+    <span class="tag">Frage ${currentQuestion + 1}</span>
+    <h2>${q.q}</h2>
+    <p>Wähle die Antwort, die am besten zu dir passt.</p>
+    <div class="options">
+      ${q.options.map((opt, i) => `
+        <button class="option" data-id="${opt.id}" onclick="selectOption(this)">
+          ${opt.text}
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function selectOption(el) {
+  // Remove selection from siblings
+  el.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  
+  // Find the answer data
+  const q = QUIZ.questions[currentQuestion];
+  const opt = q.options.find(o => o.id === el.dataset.id);
+  
+  // Add points
+  for (const [key, val] of Object.entries(opt.points)) {
+    if (scores[key] !== undefined) scores[key] += val;
+  }
+  
+  currentQuestion++;
+  if (currentQuestion < QUIZ.questions.length) {
+    setTimeout(renderQuestion, 200);
+  } else {
+    setTimeout(showResult, 300);
+  }
+}
+
+function showResult() {
+  document.getElementById('quizCard').classList.add('hidden');
+  
+  // Find the winner
+  let winner = null;
+  let maxScore = -1;
+  for (const [key, val] of Object.entries(scores)) {
+    if (val > maxScore) { maxScore = val; winner = key; }
+  }
+  
+  const r = QUIZ.results[winner];
+  const card = document.getElementById('resultCard');
+  card.classList.add('visible');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeIn .4s ease';
+  
+  const shareUrl = encodeURIComponent('https://affirmationpositiv-sudo.github.io/science-apps/quiz/');
+  const shareText = encodeURIComponent(`🤖 Ich habe "${r.name}" im KI-Quiz 2026 bekommen! Welches KI-Tool passt zu dir?`);
+  
+  card.innerHTML = `
+    <div class="result-header">
+      <span class="emoji">${r.emoji}</span>
+      <h2>${r.name}</h2>
+      <p>${r.desc}</p>
+    </div>
+    <div class="result-detail">
+      <h3>🎯 Warum dieses Tool?</h3>
+      <p>${r.why}</p>
+    </div>
+    <a class="affiliate-link" href="${r.amazonLink}" target="_blank" rel="nofollow">${r.amazonLabel}</a>
+    <div class="tip-box">
+      <strong>💡 Profi-Tipps für ${r.name}:</strong>
+      <ul style="margin-top:8px;list-style:none">
+        ${r.tips.map(t => `<li style="padding:4px 0">→ ${t}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="cta-section">
+      <h3>🚀 Bereit für mehr?</h3>
+      <p>Entdecke alle KI-Tools und Affiliate-Angebote auf dem Portal</p>
+      <a class="cta-btn" href="../GalaxyBlog/" target="_blank">Zum GalaxyBlog →</a>
+    </div>
+    <div class="social-share">
+      <a class="share-twitter" href="https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}" target="_blank" rel="noopener">🐦 Twitter/X</a>
+      <a class="share-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}" target="_blank" rel="noopener">💼 LinkedIn</a>
+      <a class="share-whatsapp" href="https://wa.me/?text=${shareText}%20${shareUrl}" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Quiz wiederholen</button>
+    <p style="text-align:center;margin-top:12px;font-size:11px;color:var(--text-muted)">Als Amazon-Partner verdiene ich an qualifizierten Verkäufen. #Werbung</p>
+  `;
+}
+
+function resetQuiz() {
+  currentQuestion = 0;
+  for (const key of Object.keys(scores)) scores[key] = 0;
+  document.getElementById('resultCard').classList.remove('visible');
+  document.getElementById('resultCard').innerHTML = '';
+  document.getElementById('quizCard').classList.remove('hidden');
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('progressText').textContent = 'Frage 1 von 5';
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
