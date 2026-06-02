@@ -137,6 +137,33 @@
             transform: scale(1.02);
         }
 
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        .article-card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 28px 24px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+        .article-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(59,130,246,0.08);
+            border-color: #3b82f6;
+        }
+        .article-icon { font-size: 2.5rem; margin-bottom: 14px; }
+        .article-card h3 { font-size: 1.1rem; color: #fff; margin-bottom: 10px; font-weight: 700; }
+        .article-card p { font-size: 0.9rem; color: #999; margin-bottom: 14px; flex: 1; line-height: 1.5; }
+        .article-meta { font-size: 0.8rem; color: #3b82f6; font-weight: 600; }
+
         .disclaimer {
             text-align: center;
             color: #555;
@@ -162,6 +189,7 @@
             .hero { padding: 50px 0 40px; }
             nav a { margin-left: 14px; font-size: 0.8rem; }
             .product-grid { grid-template-columns: 1fr; }
+            .article-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -173,6 +201,7 @@
         <nav>
             <a href="#tools">KI-Tools</a>
             <a href="#hardware">Tech-Hardware</a>
+            <a href="#ratgeber">Ratgeber</a>
             <a href="#top">Top-Empfehlung</a>
         </nav>
     </div>
@@ -268,6 +297,55 @@
             <div class="price">119,99 € <small>UVP</small></div>
             <a class="btn-amazon" href="https://www.amazon.de/dp/B01N5UOYC4/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
         </div>
+
+    </div>
+
+    <!-- Ratgeber-Artikel -->
+    <h2 id="ratgeber" class="section-title">📖 KI <span>Ratgeber</span></h2>
+    <p style="text-align:center; color:#999; margin-bottom:36px;">Tiefergehende Artikel, Praxis-Guides und Vergleiche rund um Künstliche Intelligenz für dein Business.</p>
+    <div class="article-grid">
+
+        <a class="article-card" href="ratgeber/ki-tools-selbstaendige-2026.html">
+            <div class="article-icon">🛠️</div>
+            <h3>KI-Tools für Selbstständige 2026: Die Top 10</h3>
+            <p>Die besten KI-Produktivitätstools im Vergleich – von ChatGPT bis Notion AI.</p>
+            <span class="article-meta">8 Min Lesezeit · KI-Tools</span>
+        </a>
+
+        <a class="article-card" href="ratgeber/chatgpt-business-guide.html">
+            <div class="article-icon">🤖</div>
+            <h3>ChatGPT fürs Business: So nutzt du KI richtig</h3>
+            <p>Konkrete Prompt-Strategien und Workflows für Unternehmer. Inklusive Vorlagen.</p>
+            <span class="article-meta">9 Min Lesezeit · KI-Praxis</span>
+        </a>
+
+        <a class="article-card" href="ratgeber/ki-automatisierung-workflows.html">
+            <div class="article-icon">⚡</div>
+            <h3>Automatisierung mit KI: Workflows die Geld sparen</h3>
+            <p>5 Workflows für E-Mail, Rechnungswesen, Kundenservice und mehr mit ROI-Rechnung.</p>
+            <span class="article-meta">8 Min Lesezeit · Automatisierung</span>
+        </a>
+
+        <a class="article-card" href="ratgeber/ki-bildgeneratoren-vergleich.html">
+            <div class="article-icon">🎨</div>
+            <h3>KI-Bildgeneratoren im Vergleich</h3>
+            <p>Midjourney, DALL-E & Stable Diffusion: Qualität, Preis und Anwendungsfälle im Test.</p>
+            <span class="article-meta">8 Min Lesezeit · KI-Tools</span>
+        </a>
+
+        <a class="article-card" href="ratgeber/ki-social-media-marketing.html">
+            <div class="article-icon">📱</div>
+            <h3>KI für Social Media Marketing</h3>
+            <p>Tools, Strategien und der optimale Redaktions-Workflow mit KI für 2026.</p>
+            <span class="article-meta">9 Min Lesezeit · Marketing</span>
+        </a>
+
+        <a class="article-card" href="ratgeber/beste-ki-buecher-2026.html">
+            <div class="article-icon">📚</div>
+            <h3>Die besten KI-Bücher 2026 für Unternehmer</h3>
+            <p>10 empfehlenswerte Bücher zu KI-Grundlagen, Prompt Engineering und Strategie.</p>
+            <span class="article-meta">8 Min Lesezeit · Buchtipps</span>
+        </a>
 
     </div>
 

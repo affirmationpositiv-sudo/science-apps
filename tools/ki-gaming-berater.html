@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Gaming-Berater 2026 – Finde dein perfektes Gaming-Setup</title>
+<meta name="description" content="Kostenloser KI-Gaming-Berater 2026. Beantworte 6 Fragen und erhalte eine personalisierte Gaming-PC-, Konsolen- und Peripherie-Empfehlung mit Amazon-Affiliate-Links.">
+<meta name="keywords" content="Gaming-Berater, Gaming-Setup, Gaming-PC, Konsole, Gaming-Peripherie, Gaming-Monitor, Gaming-Headset, Gaming-Stuhl, Budget-Gaming, KI-Gaming">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-gaming-berater.html">
+
+<!-- Open Graph -->
+<meta property="og:title" content="KI-Gaming-Berater 2026 – Interaktiver Setup-Finder">
+<meta property="og:description" content="Beantworte 6 Fragen und erhalte dein perfektes Gaming-Setup – mit Amazon-Preisvergleich.">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-gaming-berater.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Licht und Schatten Tools">
+<meta property="og:locale" content="de_DE">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;padding:20px}
+.container{max-width:750px;margin:0 auto;background:#111118;border-radius:16px;padding:30px;border:1px solid #1a1a2e}
+h1{font-size:1.8em;color:#fff;margin-bottom:6px;text-align:center}
+.subtitle{text-align:center;color:#888;font-size:.95em;margin-bottom:25px}
+.badge{display:inline-block;background:#7c3aed;color:#fff;padding:4px 16px;border-radius:20px;font-size:.8em;margin-bottom:12px;text-align:center}
+.steps{display:flex;justify-content:center;gap:8px;margin:20px 0 30px;flex-wrap:wrap}
+.dot{width:12px;height:12px;border-radius:50%;background:#2a2a3e;transition:all .3s}
+.dot.active{background:#7c3aed;box-shadow:0 0 8px rgba(124,58,237,.5)}
+.dot.done{background:#4ade80}
+.question{display:none;animation:fadeIn .4s}
+.question.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q-num{color:#7c3aed;font-weight:600;font-size:.9em;margin-bottom:4px}
+.q-title{font-size:1.2em;color:#fff;margin-bottom:20px;font-weight:600}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:10px;padding:14px 18px;cursor:pointer;transition:all .2s;color:#ccc;font-size:.95em}
+.opt:hover{border-color:#7c3aed;background:#1e1e32}
+.opt.selected{border-color:#7c3aed;background:#2a1a4e;color:#fff;font-weight:500}
+.opt .tag{float:right;background:#7c3aed22;color:#a78bfa;padding:2px 8px;border-radius:4px;font-size:.8em}
+.nav-btns{display:flex;justify-content:space-between;margin-top:25px;gap:12px}
+button{background:#7c3aed;color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:1em;cursor:pointer;font-weight:600;transition:all .2s;flex:1}
+button:hover{background:#6d28d9}
+button:disabled{background:#2a2a3e;color:#555;cursor:not-allowed}
+button.secondary{background:#2a2a3e;color:#ccc}
+button.secondary:hover{background:#3a3a4e}
+.result{display:none;animation:fadeIn .4s}
+.result.active{display:block}
+.result h2{color:#fff;font-size:1.5em;margin-bottom:10px;text-align:center}
+.result-sub{text-align:center;color:#888;font-size:.9em;margin-bottom:25px}
+.setup-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:12px;padding:20px;margin-bottom:15px}
+.setup-card h3{color:#a78bfa;font-size:1.05em;margin-bottom:8px}
+.setup-card p{color:#ccc;font-size:.9em;margin-bottom:8px}
+.setup-card a{display:inline-block;background:#1a1a3e;color:#a78bfa;padding:6px 14px;border-radius:6px;text-decoration:none;font-size:.85em;margin:2px 4px 2px 0;border:1px solid #2a2a3e}
+.setup-card a:hover{background:#7c3aed;color:#fff}
+.setup-card .price{color:#4ade80;font-weight:600;margin-top:6px}
+.price-total{background:#1a2a1e;border:1px solid #4ade8044;border-radius:12px;padding:20px;text-align:center;margin:25px 0}
+.price-total .big{font-size:2em;color:#4ade80;font-weight:700}
+.price-total .small{color:#888;font-size:.85em}
+.reset-btn{background:#2a2a3e;color:#ccc;border:1px solid #3a3a4e;padding:12px 24px;border-radius:8px;cursor:pointer;font-size:1em;margin-top:20px;width:100%}
+.reset-btn:hover{background:#3a3a4e}
+.affiliate-box{background:#0a0a1a;border:1px solid #2a2a3e;border-radius:8px;padding:14px;margin:20px 0;font-size:.8em;color:#666;text-align:center}
+.affiliate-box a{color:#a78bfa;text-decoration:none}
+.budget-bar{height:8px;background:#2a2a3e;border-radius:4px;margin:15px 0;overflow:hidden}
+.budget-fill{height:100%;border-radius:4px;transition:width .5s,background .5s}.budget-low{background:#4ade80}.budget-mid{background:#fbbf24}.budget-high{background:#f97316}.budget-ultra{background:#ef4444}
+.reset-link{text-align:center;margin:15px 0 0;font-size:.85em}
+.reset-link a{color:#888;text-decoration:none;cursor:pointer}
+.reset-link a:hover{color:#a78bfa}
+@media(max-width:600px){.container{padding:20px}h1{font-size:1.3em}}
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <div style="text-align:center"><span class="badge">🎮 Interaktiver Berater</span></div>
+  <h1>KI-Gaming-Berater 2026</h1>
+  <p class="subtitle">6 Fragen – dein perfektes Gaming-Setup in 2 Minuten</p>
+
+  <!-- Progress dots -->
+  <div class="steps" id="steps"></div>
+
+  <!-- Questions -->
+  <form id="quizForm" onsubmit="return false">
+    <!-- Q1: Budget -->
+    <div class="question active" data-q="0">
+      <div class="q-num">Frage 1 von 6</div>
+      <div class="q-title">💰 Was ist dein Budget für das gesamte Gaming-Setup?</div>
+      <div class="options">
+        <div class="opt" data-val="sparsam" onclick="select(this)"><span class="tag">bis 500€</span>💸 Sparsam – Cloud-Gaming + Basis-Peripherie</div>
+        <div class="opt" data-val="einsteiger" onclick="select(this)"><span class="tag">500-1.000€</span>🎮 Einsteiger – Gute Konsole oder Einsteiger-PC</div>
+        <div class="opt" data-val="mittel" onclick="select(this)"><span class="tag">1.000-1.800€</span>🖥️ Mittelklasse – Solider Gaming-PC + Monitor</div>
+        <div class="opt" data-val="high" onclick="select(this)"><span class="tag">1.800-3.000€</span>🔥 High-End – Top-PC + Peripherie + Streaming</div>
+        <div class="opt" data-val="ultra" onclick="select(this)"><span class="tag">3.000€+</span>👑 Ultra-Premium – Keine Kompromisse</div>
+      </div>
+    </div>
+
+    <!-- Q2: Gaming-Präferenz -->
+    <div class="question" data-q="1">
+      <div class="q-num">Frage 2 von 6</div>
+      <div class="q-title">🎯 Welche Spiele spielst du am liebsten?</div>
+      <div class="options">
+        <div class="opt" data-val="shooter" onclick="select(this)"><span class="tag">Hohe FPS</span>🔫 Shooter (CoD, Valorant, CS2, Overwatch)</div>
+        <div class="opt" data-val="openworld" onclick="select(this)"><span class="tag">Grafik-Bombe</span>🌍 Open World & Story (GTA, Starfield, TES, Cyberpunk)</div>
+        <div class="opt" data-val="strategie" onclick="select(this)"><span class="tag">Taktik</span>♟️ Strategie & Simulation (Civilization, Anno, Cities Skylines)</div>
+        <div class="opt" data-val="indie" onclick="select(this)"><span class="tag">Kreativ</span>🎨 Indie & Retro (Stardew Valley, Hollow Knight, Minecraft)</div>
+        <div class="opt" data-val="mixed" onclick="select(this)"><span class="tag">Allrounder</span>🔄 Alles – Ich spiele querbeet</div>
+      </div>
+    </div>
+
+    <!-- Q3: Plattform -->
+    <div class="question" data-q="2">
+      <div class="q-num">Frage 3 von 6</div>
+      <div class="q-title">🖥️ Welche Plattform bevorzugst du?</div>
+      <div class="options">
+        <div class="opt" data-val="pc" onclick="select(this)"><span class="tag">PC Master Race</span>💻 Gaming-PC (Desktop, Upgrade-fähig)</div>
+        <div class="opt" data-val="laptop" onclick="select(this)"><span class="tag">Mobil</span>💻 Gaming-Laptop (Mobil, platzsparend)</div>
+        <div class="opt" data-val="console" onclick="select(this)"><span class="tag">Couch</span>🎮 Konsole (PS5, Xbox, Nintendo Switch)</div>
+        <div class="opt" data-val="cloud" onclick="select(this)"><span class="tag">Keine Hardware</span>☁️ Cloud-Gaming (GeForce NOW, Xbox Cloud, Luna)</div>
+        <div class="opt" data-val="streaming" onclick="select(this)"><span class="tag">Content Creator</span>📹 PC + Streaming (Gaming + Content Creation)</div>
+      </div>
+    </div>
+
+    <!-- Q4: Monitore -->
+    <div class="question" data-q="3">
+      <div class="q-num">Frage 4 von 6</div>
+      <div class="q-title">🖥️ Welche Monitor-Auflösung/-Leistung wünschst du dir?</div>
+      <div class="options">
+        <div class="opt" data-val="1080p" onclick="select(this)"><span class="tag">144Hz+</span>⚡ 1080p – Volle FPS für kompetitives Gaming</div>
+        <div class="opt" data-val="1440p" onclick="select(this)"><span class="tag">144-240Hz</span>⭐ WQHD – Die beste Balance aus Details & FPS</div>
+        <div class="opt" data-val="4k" onclick="select(this)"><span class="tag">60-144Hz</span>🌟 4K – Maximale Grafikpracht für Story-Spiele</div>
+        <div class="opt" data-val="ultrawide" onclick="select(this)"><span class="tag">Immersion</span>📏 Ultrawide/Curved – Immersives Gaming</div>
+        <div class="opt" data-val="egal" onclick="select(this)"><span class="tag">Egal</span>🤷 Egal – Hauptsache es läuft</div>
+      </div>
+    </div>
+
+    <!-- Q5: Peripherie -->
+    <div class="question" data-q="4">
+      <div class="q-num">Frage 5 von 6</div>
+      <div class="q-title">🎧 Welche Peripherie brauchst du noch?</div>
+      <div class="options">
+        <div class="opt" data-val="alles" onclick="select(this)"><span class="tag">Komplett</span>🆕 Brauche alles: Maus, Tastatur, Headset, Mauspad</div>
+        <div class="opt" data-val="headset" onclick="select(this)"><span class="tag">Audio</span>🎧 Nur Headset/Mikrofon fehlt noch</div>
+        <div class="opt" data-val="maus" onclick="select(this)"><span class="tag">Präzision</span>🖱️ Nur eine gute Gaming-Maus fehlt</div>
+        <div class="opt" data-val="stuhl" onclick="select(this)"><span class="tag">Komfort</span>🪑 Gaming-Stuhl oder ergonomischer Bürostuhl</div>
+        <div class="opt" data-val="habe" onclick="select(this)"><span class="tag">Bereit</span>✅ Habe schon alles – will nur PC/Konsole upgraden</div>
+      </div>
+    </div>
+
+    <!-- Q6: Zukunft -->
+    <div class="question" data-q="5">
+      <div class="q-num">Frage 6 von 6</div>
+      <div class="q-title">🔮 Wie zukunftssicher soll dein Setup sein?</div>
+      <div class="options">
+        <div class="opt" data-val="minimal" onclick="select(this)"><span class="tag">1-2 Jahre</span>⏳ Minimal – Soll jetzt laufen, Upgrade später</div>
+        <div class="opt" data-val="solide" onclick="select(this)"><span class="tag">3-4 Jahre</span>💪 Solide – Aktuelle Spiele flüssig, mittelfristig gut</div>
+        <div class="opt" data-val="zukunft" onclick="select(this)"><span class="tag">5-7 Jahre</span>🔮 Zukunftssicher – High-End für die nächste Konsolengeneration</div>
+      </div>
+    </div>
+  </form>
+
+  <!-- Navigation -->
+  <div class="nav-btns" id="navBtns">
+    <button class="secondary" id="prevBtn" onclick="prevQ()">← Zurück</button>
+    <button id="nextBtn" onclick="nextQ()">Weiter →</button>
+  </div>
+
+  <!-- Result -->
+  <div class="result" id="result">
+    <h2>🎮 Dein persönliches Gaming-Setup</h2>
+    <p class="result-sub">Basierend auf deinen Antworten – alle Preise ca., inkl. Amazon-Affiliate-Links</p>
+    <div id="setupContent"></div>
+    <div class="affiliate-box">
+      <strong>📢 Affiliate-Hinweis:</strong> Die folgenden Links sind Amazon-Partnerlinks (tag=ikune21-21). 
+      Wenn du über einen Link ein Produkt kaufst, erhalten wir eine kleine Provision – für dich entstehen keine Kosten.
+      <br><a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" rel="noopener">→ Alle Gaming-Produkte bei Amazon entdecken</a>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">🔄 Neu starten</button>
+  </div>
+</div>
+
+<script>
+const answers = {};
+let currentQ = 0;
+const totalQ = 6;
+
+function init() {
+  const steps = document.getElementById('steps');
+  for (let i = 0; i < totalQ; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot-' + i;
+    steps.appendChild(dot);
+  }
+  updateNav();
+}
+
+function select(el) {
+  const qEl = el.closest('.question');
+  qEl.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function getVal(qIdx) {
+  const qEl = document.querySelector(`.question[data-q="${qIdx}"]`);
+  const sel = qEl.querySelector('.opt.selected');
+  return sel ? sel.dataset.val : null;
+}
+
+function nextQ() {
+  const val = getVal(currentQ);
+  if (!val) return;
+  answers[['budget','genre','platform','monitor','peripherie','zukunft'][currentQ]] = val;
+  
+  document.querySelector(`.question[data-q="${currentQ}"]`).classList.remove('active');
+  document.getElementById('dot-'+currentQ).classList.remove('active');
+  document.getElementById('dot-'+currentQ).classList.add('done');
+  
+  currentQ++;
+  
+  if (currentQ < totalQ) {
+    document.querySelector(`.question[data-q="${currentQ}"]`).classList.add('active');
+    document.getElementById('dot-'+currentQ).classList.add('active');
+    updateNav();
+  } else {
+    showResult();
+  }
+}
+
+function prevQ() {
+  if (currentQ <= 0) return;
+  document.querySelector(`.question[data-q="${currentQ}"]`).classList.remove('active');
+  document.getElementById('dot-'+currentQ).classList.remove('active');
+  document.getElementById('dot-'+(currentQ-1)).classList.remove('done');
+  
+  currentQ--;
+  document.querySelector(`.question[data-q="${currentQ}"]`).classList.add('active');
+  document.getElementById('dot-'+currentQ).classList.add('active');
+  updateNav();
+}
+
+function updateNav() {
+  document.getElementById('prevBtn').disabled = (currentQ === 0);
+  document.getElementById('nextBtn').textContent = (currentQ === totalQ - 1) ? '🎮 Setup finden!' : 'Weiter →';
+}
+
+function showResult() {
+  document.getElementById('quizForm').style.display = 'none';
+  document.getElementById('navBtns').style.display = 'none';
+  document.getElementById('steps').style.display = 'none';
+  
+  const r = document.getElementById('result');
+  r.classList.add('active');
+  
+  const b = answers.budget;
+  const g = answers.genre;
+  const p = answers.platform;
+  const m = answers.monitor;
+  const pe = answers.peripherie;
+  const z = answers.zukunft;
+  
+  let html = '';
+  let totalPrice = 0;
+  
+  // === PLATFORM EMPFEHLUNG ===
+  html += '<div class="setup-card">';
+  html += '<h3>🖥️ Deine Plattform-Empfehlung</h3>';
+  
+  if (p === 'cloud') {
+    html += '<p>Cloud-Gaming ist deine beste Wahl! Kein teurer PC nötig – du streamst Spiele auf dein vorhandenes Gerät.</p>';
+    html += '<p><strong>Empfohlen:</strong> GeForce NOW Ultimate (19,99€/Monat) oder Xbox Game Pass Ultimate (17,99€)</p>';
+    html += '<a href="https://www.amazon.de/s?k=geforce+now+ultimate+mitgliedschaft&tag=ikune21-21" target="_blank">☁️ GeForce NOW Ultimate bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=xbox+game+pass+ultimate+geschenkkarte&tag=ikune21-21" target="_blank">🎮 Xbox Game Pass Ultimate bei Amazon</a>';
+    totalPrice += 217; // Jahresabo
+  } else if (p === 'console') {
+    if (g === 'shooter' || g === 'mixed') {
+      html += '<p>Für Shooter und Allround-Gaming: Die <strong>Xbox Series X</strong> oder <strong>PlayStation 5 Pro</strong> sind ideal.</p>';
+      html += '<a href="https://www.amazon.de/s?k=playstation+5+pro+konsole+2026&tag=ikune21-21" target="_blank">🎮 PlayStation 5 Pro bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=xbox+series+x+konsole+2026&tag=ikune21-21" target="_blank">🎮 Xbox Series X bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=nintendo+switch+2+2026&tag=ikune21-21" target="_blank">🎮 Nintendo Switch 2 bei Amazon</a>';
+      totalPrice += 550;
+    } else if (g === 'openworld' || g === 'strategie') {
+      html += '<p>Für Story-Spiele und Strategie: <strong>PlayStation 5 Pro</strong> mit KI-Upscaling (PSSR) für gestochen scharfe 4K-Grafik.</p>';
+      html += '<a href="https://www.amazon.de/s?k=playstation+5+pro+2026&tag=ikune21-21" target="_blank">🎮 PlayStation 5 Pro bei Amazon</a>';
+      totalPrice += 600;
+    } else {
+      html += '<p>Die <strong>PlayStation 5 Pro</strong> oder <strong>Nintendo Switch 2</strong> sind perfekt für Indie- und Retro-Spiele.</p>';
+      html += '<a href="https://www.amazon.de/s?k=nintendo+switch+2+2026&tag=ikune21-21" target="_blank">🎮 Nintendo Switch 2 bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=playstation+5+digital+2026&tag=ikune21-21" target="_blank">🎮 PlayStation 5 Digital bei Amazon</a>';
+      totalPrice += 450;
+    }
+  } else if (p === 'pc') {
+    if (b === 'sparsam' || b === 'einsteiger') {
+      html += '<p>Ein <strong>Einsteiger-Gaming-PC mit RTX 5060 oder RX 9060</strong> – ideal für 1080p-Gaming.</p>';
+      html += '<a href="https://www.amazon.de/s?k=gaming+pc+rtx+5060+2026&tag=ikune21-21" target="_blank">🖥️ RTX 5060 Gaming-PC bei Amazon</a>';
+      totalPrice += 700;
+    } else if (b === 'mittel') {
+      html += '<p>Ein <strong>Gaming-PC mit RTX 5070 oder RX 9070</strong> – perfekt für 1440p/High-Details.</p>';
+      html += '<a href="https://www.amazon.de/s?k=rtx+5070+gaming+pc+2026&tag=ikune21-21" target="_blank">🖥️ RTX 5070 Gaming-PC bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=amd+rx+9070+gaming+pc&tag=ikune21-21" target="_blank">🖥️ AMD RX 9070 Gaming-PC bei Amazon</a>';
+      totalPrice += 1200;
+    } else {
+      html += '<p>Ein <strong>High-End-PC mit RTX 5090</strong> – maximale Leistung für 4K/Ultra/Streaming.</p>';
+      html += '<a href="https://www.amazon.de/s?k=rtx+5090+gaming+pc+komplett+2026&tag=ikune21-21" target="_blank">🖥️ RTX 5090 Gaming-PC bei Amazon</a>';
+      totalPrice += 2500;
+    }
+  } else if (p === 'laptop') {
+    if (b === 'sparsam' || b === 'einsteiger') {
+      html += '<p>Ein <strong>Gaming-Laptop mit RTX 4060</strong> – mobil und leistungsstark für unterwegs.</p>';
+      html += '<a href="https://www.amazon.de/s?k=gaming+laptop+rtx+4060+2026&tag=ikune21-21" target="_blank">💻 RTX 4060 Gaming-Laptop bei Amazon</a>';
+      totalPrice += 1000;
+    } else {
+      html += '<p>Ein <strong>Gaming-Laptop mit RTX 5070 Ti</strong> – High-End mobil für 1440p-Gaming.</p>';
+      html += '<a href="https://www.amazon.de/s?k=gaming+laptop+rtx+5070+ti+2026&tag=ikune21-21" target="_blank">💻 RTX 5070 Ti Gaming-Laptop bei Amazon</a>';
+      totalPrice += 1800;
+    }
+  } else if (p === 'streaming') {
+    html += '<p>Ein <strong>Streaming-PC mit RTX 5080</strong> – doppelt so viele KI-Kerne für GPU-beschleunigtes Encoding.</p>';
+    html += '<a href="https://www.amazon.de/s?k=streaming+pc+rtx+5080+2026&tag=ikune21-21" target="_blank">🖥️ RTX 5080 Streaming-PC bei Amazon</a>';
+    totalPrice += 1800;
+  }
+  html += '</div>';
+  
+  // === MONITOR EMPFEHLUNG ===
+  if (m !== 'egal' && p !== 'cloud') {
+    html += '<div class="setup-card">';
+    html += '<h3>🖥️ Monitor-Empfehlung</h3>';
+    
+    if (m === '1080p') {
+      html += '<p>Für maximale FPS: <strong>1080p 240Hz+ Monitor</strong> – ideal für Shooter und kompetitives Gaming.</p>';
+      html += '<a href="https://www.amazon.de/s?k=gaming+monitor+1080p+240hz+2026&tag=ikune21-21" target="_blank">⚡ 1080p 240Hz Monitor bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=gaming+monitor+1080p+360hz+2026&tag=ikune21-21" target="_blank">⚡ 1080p 360Hz (Profi) bei Amazon</a>';
+      totalPrice += 200;
+    } else if (m === '1440p') {
+      html += '<p>Die beste Balance: <strong>1440p (WQHD) 165-240Hz</strong> – gestochen scharf und butterweich.</p>';
+      html += '<a href="https://www.amazon.de/s?k=1440p+gaming+monitor+240hz+2026&tag=ikune21-21" target="_blank">⭐ WQHD 240Hz Monitor bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=1440p+oled+gaming+monitor+2026&tag=ikune21-21" target="_blank">⭐ WQHD OLED (Premium) bei Amazon</a>';
+      totalPrice += 400;
+    } else if (m === '4k') {
+      html += '<p>Für maximale Grafikpracht: <strong>4K 144Hz+ OLED/Mini-LED</strong> – atemberaubende Details.</p>';
+      html += '<a href="https://www.amazon.de/s?k=4k+oled+gaming+monitor+144hz+2026&tag=ikune21-21" target="_blank">🌟 4K OLED 144Hz Monitor bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=4k+gaming+monitor+240hz+2026&tag=ikune21-21" target="_blank">🌟 4K 240Hz (High-End) bei Amazon</a>';
+      totalPrice += 800;
+    } else if (m === 'ultrawide') {
+      html += '<p>Für maximale Immersion: <strong>Ultrawide 34-49" Curved</strong> – wie ein eigenes Kino.</p>';
+      html += '<a href="https://www.amazon.de/s?k=ultrawide+gaming+monitor+34+2026&tag=ikune21-21" target="_blank">📏 34" Ultrawide Curved bei Amazon</a>';
+      html += '<a href="https://www.amazon.de/s?k=49+ultrawide+gaming+monitor+2026&tag=ikune21-21" target="_blank">📏 49" Super-Ultrawide bei Amazon</a>';
+      totalPrice += 600;
+    }
+    html += '</div>';
+  }
+  
+  // === PERIPHERIE ===
+  if (pe === 'alles') {
+    html += '<div class="setup-card">';
+    html += '<h3>🎮 Peripherie-Empfehlung (Komplett-Set)</h3>';
+    html += '<p>Alles was du für den Start brauchst:</p>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+maus+leicht+2026&tag=ikune21-21" target="_blank">🖱️ Leichte Gaming-Maus bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=mechanische+gaming+tastatur+2026&tag=ikune21-21" target="_blank">⌨️ Mechanische Tastatur bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+headset+kabellos+2026&tag=ikune21-21" target="_blank">🎧 Gaming-Headset bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+mauspad+gross+2026&tag=ikune21-21" target="_blank">🟩 Großes Mauspad bei Amazon</a>';
+    totalPrice += 200;
+    html += '</div>';
+  } else if (pe === 'headset') {
+    html += '<div class="setup-card">';
+    html += '<h3>🎧 Headset-Empfehlung</h3>';
+    html += '<p>Kristallklarer Sound für bessere Performance und Immersion:</p>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+headset+ki+rauschunterdrueckung+2026&tag=ikune21-21" target="_blank">🎧 KI-Noise-Cancelling Headset bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+headset+kabellos+2026&tag=ikune21-21" target="_blank">🎧 Kabelloses Gaming-Headset bei Amazon</a>';
+    totalPrice += 100;
+    html += '</div>';
+  } else if (pe === 'maus') {
+    html += '<div class="setup-card">';
+    html += '<h3>🖱️ Gaming-Maus-Empfehlung</h3>';
+    html += '<p>Eine gute Maus ist die wichtigste Investition für kompetitives Gaming:</p>';
+    html += '<a href="https://www.amazon.de/s?k=leichte+gaming+maus+wireless+2026&tag=ikune21-21" target="_blank">🖱️ Leichte Wireless Gaming-Maus bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+maus+ergonomisch+2026&tag=ikune21-21" target="_blank">🖱️ Ergonomische Gaming-Maus bei Amazon</a>';
+    totalPrice += 90;
+    html += '</div>';
+  } else if (pe === 'stuhl') {
+    html += '<div class="setup-card">';
+    html += '<h3>🪑 Gaming-Stuhl-Empfehlung</h3>';
+    html += '<p>Die richtige Ergonomie für stundenlangen Gaming-Komfort:</p>';
+    html += '<a href="https://www.amazon.de/s?k=ergonomischer+gaming+stuhl+2026&tag=ikune21-21" target="_blank">🪑 Ergonomischer Gaming-Stuhl bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=gaming+stuhl+mittelklasse+2026&tag=ikune21-21" target="_blank">🪑 Gaming-Stuhl (Preis-Leistung) bei Amazon</a>';
+    totalPrice += 200;
+    html += '</div>';
+  }
+  
+  // === STREAMING ZUBEHÖR (falls streaming) ===
+  if (p === 'streaming') {
+    html += '<div class="setup-card">';
+    html += '<h3>📹 Streaming-Equipment</h3>';
+    html += '<p>Für hochwertige Streams und Content Creation:</p>';
+    html += '<a href="https://www.amazon.de/s?k=4k+webcam+streaming+2026&tag=ikune21-21" target="_blank">📹 4K-Webcam bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=xlr+mikrofon+streaming+2026&tag=ikune21-21" target="_blank">🎙️ XLR-Mikrofon bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=stream+deck+2026&tag=ikune21-21" target="_blank">🎛️ Stream Deck bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=led+streaming+beleuchtung+2026&tag=ikune21-21" target="_blank">💡 Streaming-Beleuchtung bei Amazon</a>';
+    totalPrice += 400;
+    html += '</div>';
+  }
+  
+  // === GAMES (Spiele-Empfehlungen nach Genre) ===
+  html += '<div class="setup-card">';
+  html += '<h3>🎮 Spiele-Empfehlungen für dich</h3>';
+  if (g === 'shooter') {
+    html += '<p>Die besten Shooter 2026 für dein Setup:</p>';
+    html += '<a href="https://www.amazon.de/s?k=call+of+duty+2026&tag=ikune21-21" target="_blank">🔫 Call of Duty 2026 bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=valorant+geschenkkarte&tag=ikune21-21" target="_blank">🎮 Valorant Points bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=overwatch+2+münzen&tag=ikune21-21" target="_blank">🎮 Overwatch 2 Coins bei Amazon</a>';
+    totalPrice += 80;
+  } else if (g === 'openworld') {
+    html += '<p>Die epischsten Open-World-Spiele 2026:</p>';
+    html += '<a href="https://www.amazon.de/s?k=starfield+premium+edition+2026&tag=ikune21-21" target="_blank">🌍 Starfield bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=cyberpunk+2077+phantom+liberty+2026&tag=ikune21-21" target="_blank">🌍 Cyberpunk 2077 + DLC bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=the+elder+scrolls+vi+vorbestellung&tag=ikune21-21" target="_blank">🌍 The Elder Scrolls VI (Vorbestellung)</a>';
+    totalPrice += 150;
+  } else if (g === 'strategie') {
+    html += '<p>Die besten Strategie-Spiele 2026:</p>';
+    html += '<a href="https://www.amazon.de/s?k=civilization+7+2026&tag=ikune21-21" target="_blank">♟️ Civilization VII bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=anno+117+2026&tag=ikune21-21" target="_blank">♟️ Anno 117 bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=cities+skylines+2+2026&tag=ikune21-21" target="_blank">♟️ Cities Skylines II bei Amazon</a>';
+    totalPrice += 100;
+  } else if (g === 'indie') {
+    html += '<p>Die schönsten Indie-Spiele 2026:</p>';
+    html += '<a href="https://www.amazon.de/s?k=minecraft+2026&tag=ikune21-21" target="_blank">🎨 Minecraft bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=stardew+valley+switch+2026&tag=ikune21-21" target="_blank">🎨 Stardew Valley bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=hollow+knight+silksong+2026&tag=ikune21-21" target="_blank">🎨 Hollow Knight: Silksong bei Amazon</a>';
+    totalPrice += 60;
+  } else {
+    html += '<p>Für den Allrounder – die besten Spiele 2026:</p>';
+    html += '<a href="https://www.amazon.de/s?k=gta+6+2026&tag=ikune21-21" target="_blank">🎮 GTA VI bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=starfield+2026&tag=ikune21-21" target="_blank">🎮 Starfield bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=microsoft+flight+simulator+2026&tag=ikune21-21" target="_blank">🎮 MS Flight Simulator 2026 bei Amazon</a>';
+    html += '<a href="https://www.amazon.de/s?k=call+of+duty+2026&tag=ikune21-21" target="_blank">🎮 Call of Duty 2026 bei Amazon</a>';
+    totalPrice += 200;
+  }
+  html += '</div>';
+  
+  // === AMAZON ALL-SHOP ===
+  html += '<div class="setup-card">';
+  html += '<h3>🛒 Alles auf einmal bei Amazon</h3>';
+  html += '<p>Finde Gaming-PCs, Monitore, Peripherie und Spiele auf einen Klick:</p>';
+  html += '<a href="https://www.amazon.de/s?k=gaming+pc+2026&tag=ikune21-21" target="_blank">🖥️ Alle Gaming-PCs</a>';
+  html += '<a href="https://www.amazon.de/s?k=gaming+monitor+2026&tag=ikune21-21" target="_blank">🖥️ Gaming-Monitore</a>';
+  html += '<a href="https://www.amazon.de/s?k=gaming+maus+tastatur+headset+set+2026&tag=ikune21-21" target="_blank">🎮 Peripherie-Sets</a>';
+  html += '<a href="https://www.amazon.de/s?k=gaming+stuhl+ergonomisch+2026&tag=ikune21-21" target="_blank">🪑 Gaming-Stühle</a>';
+  html += '<a href="https://www.amazon.de/s?k=playstation+5+pro+spiele+2026&tag=ikune21-21" target="_blank">🎮 PlayStation 5 Spiele</a>';
+  html += '<a href="https://www.amazon.de/s?k=xbox+series+x+spiele+2026&tag=ikune21-21" target="_blank">🎮 Xbox Series X Spiele</a>';
+  html += '</div>';
+  
+  // === BUDGET BAR ===
+  let budgetColor = 'budget-low';
+  let budgetLabel = '€ Sparsam';
+  if (totalPrice > 3000) { budgetColor = 'budget-ultra'; budgetLabel = '👑 Ultra-Premium'; }
+  else if (totalPrice > 1800) { budgetColor = 'budget-high'; budgetLabel = '🔥 High-End'; }
+  else if (totalPrice > 1000) { budgetColor = 'budget-mid'; budgetLabel = '⭐ Mittelklasse'; }
+  else { budgetColor = 'budget-low'; budgetLabel = '💸 Einstieg'; }
+  
+  html += '<div class="price-total">';
+  html += '<div class="small">Geschätzte Gesamtkosten</div>';
+  html += '<div class="big">ca. ' + totalPrice.toLocaleString('de-DE') + '€</div>';
+  html += '<div class="small">' + budgetLabel + ' · Alle Preise ca. inkl. MwSt.</div>';
+  html += '<div class="budget-bar"><div class="budget-fill ' + budgetColor + '" style="width:' + Math.min(100, (totalPrice/4000)*100) + '%"></div></div>';
+  html += '</div>';
+  
+  // === BLOG-LINK ===
+  html += '<div class="setup-card" style="border-left:4px solid #a78bfa">';
+  html += '<h3>📖 Mehr erfahren</h3>';
+  html += '<p>Unser ausführlicher Ratgeber: <strong>KI-Gaming & Entertainment 2026</strong> – KI-Spiele, Cloud Gaming, Streaming & Gaming Tech im Detail.</p>';
+  html += '<a href="../blog/ki-gaming-entertainment-2026.html" target="_blank">📖 Zum vollständigen Ratgeber</a>';
+  html += '</div>';
+  
+  document.getElementById('setupContent').innerHTML = html;
+}
+
+function resetAll() {
+  for (let k in answers) delete answers[k];
+  currentQ = 0;
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('quizForm').style.display = '';
+  document.getElementById('navBtns').style.display = '';
+  document.getElementById('steps').style.display = '';
+  
+  document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.question').forEach((q, i) => {
+    q.classList.toggle('active', i === 0);
+  });
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+  });
+  document.getElementById('setupContent').innerHTML = '';
+  updateNav();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

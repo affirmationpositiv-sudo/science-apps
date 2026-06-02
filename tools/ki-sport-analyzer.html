@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Sport-Analyzer 2026 – Finde dein perfektes KI-Sport-Setup</title>
+<meta name="description" content="Interaktiver KI-Sport-Analyzer. Beantworte 5 Fragen und erhalte personalisierte Produktempfehlungen für KI-Sport-Tech, Wearables & Gadgets für deine Sportart.">
+<meta name="keywords" content="KI-Sport, Wearables Finder, Sport-Tech Quiz, KI-Coach Finder, Fitness Gadgets, Laufuhr, Smartwatch, Sport-Analyzer, ikune21-21">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-sport-analyzer.html">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.container{max-width:720px;width:100%;background:#111118;border-radius:20px;padding:40px;border:1px solid #1a1a2e}
+h1{font-size:1.8em;color:#fff;margin-bottom:8px;text-align:center}
+.sub{color:#666;text-align:center;margin-bottom:30px;font-size:0.95em}
+.step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:32px}
+.dot{width:12px;height:12px;border-radius:50%;background:#2a2a3e;transition:all 0.3s}
+.dot.active{background:#0ea5e9;box-shadow:0 0 12px rgba(14,165,233,0.5)}
+.dot.done{background:#22c55e}
+.question{display:none}
+.question.active{display:block}
+.question h2{font-size:1.3em;color:#fff;margin-bottom:8px}
+.question .desc{color:#888;margin-bottom:24px;font-size:0.95em}
+.options{display:grid;gap:12px}
+.option{background:#1a1a2e;border:2px solid #2a2a3e;border-radius:14px;padding:18px 20px;cursor:pointer;transition:all 0.25s;display:flex;align-items:center;gap:16px}
+.option:hover{border-color:#0ea5e9;background:#1a2a3e;transform:translateY(-1px)}
+.option.selected{border-color:#0ea5e9;background:#0a1a2e;box-shadow:0 0 20px rgba(14,165,233,0.15)}
+.option .emoji{font-size:2em;min-width:48px;text-align:center}
+.option .label h3{font-size:1em;color:#fff;margin-bottom:2px}
+.option .label p{font-size:0.85em;color:#888}
+.nav{display:flex;justify-content:space-between;margin-top:30px;gap:12px}
+.btn{background:#2a2a3e;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:1em;cursor:pointer;transition:all 0.2s;font-weight:600}
+.btn:hover{background:#3a3a4e}
+.btn.primary{background:#0ea5e9;color:#fff}
+.btn.primary:hover{background:#0284c7}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.result{display:none}
+.result.active{display:block}
+.result h2{font-size:1.5em;color:#fff;margin-bottom:16px;text-align:center}
+.result .summary{background:#1a1a2e;border-radius:14px;padding:24px;margin-bottom:24px;text-align:center}
+.result .summary .sport-icon{font-size:3em;margin-bottom:8px}
+.result .summary .level-text{font-size:1.1em;color:#0ea5e9;font-weight:600}
+.result .summary .budget-text{color:#f97316;font-weight:600;margin-top:4px}
+.recommendations{display:grid;gap:14px;margin:20px 0}
+.rec-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:14px;padding:20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#e0e0e0;transition:all 0.25s}
+.rec-card:hover{border-color:#0ea5e9;transform:translateY(-2px);box-shadow:0 8px 24px rgba(14,165,233,0.12)}
+.rec-card .icon{font-size:2.2em;min-width:44px;text-align:center}
+.rec-card .info{flex:1}
+.rec-card .info h3{font-size:1em;color:#fff;margin-bottom:2px}
+.rec-card .info p{font-size:0.85em;color:#888}
+.rec-card .price{color:#0ea5e9;font-weight:600;white-space:nowrap;font-size:0.9em}
+.rec-card .badge{display:inline-block;background:#0ea5e9;color:#fff;font-size:.7em;padding:1px 10px;border-radius:10px;margin-left:8px;font-weight:600}
+.affiliate-note{text-align:center;color:#555;font-size:0.8em;margin-top:24px;padding:16px;border-top:1px solid #1a1a1a}
+.affiliate-note a{color:#0ea5e9}
+.restart-btn{display:block;margin:24px auto 0;background:#2a2a3e;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:1em;cursor:pointer;transition:all 0.2s}
+.restart-btn:hover{background:#3a3a4e}
+@media(max-width:600px){.container{padding:20px}h1{font-size:1.4em}.option{padding:14px 16px}.option .emoji{font-size:1.5em;min-width:36px}}
+</style>
+</head>
+<body>
+
+<div class="container" id="app">
+  <h1>🤖 KI-Sport-Analyzer</h1>
+  <p class="sub">Beantworte 5 Fragen – erhalte personalisierte KI-Sport-Empfehlungen</p>
+
+  <!-- Step dots -->
+  <div class="step-indicator" id="dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <!-- Q1: Sportart -->
+  <div class="question active" id="q1">
+    <h2>🏅 Welche Sportart betreibst du hauptsächlich?</h2>
+    <p class="desc">Wähle die Sportart, die du am meisten ausübst oder trainieren möchtest.</p>
+    <div class="options">
+      <div class="option" data-val="laufen" onclick="select(this,'q1')">
+        <div class="emoji">🏃</div>
+        <div class="label"><h3>Laufen / Marathon</h3><p>Joggen, Trailrunning, Wettkampf, 5k–Marathon</p></div>
+      </div>
+      <div class="option" data-val="kraft" onclick="select(this,'q1')">
+        <div class="emoji">🏋️</div>
+        <div class="label"><h3>Krafttraining / Bodybuilding</h3><p>Gym, Kraftdreikampf, Calisthenics</p></div>
+      </div>
+      <div class="option" data-val="golf" onclick="select(this,'q1')">
+        <div class="emoji">🏌️</div>
+        <div class="label"><h3>Golf</h3><p>Schwungtraining, Driving Range, Turnier</p></div>
+      </div>
+      <div class="option" data-val="schwimmen" onclick="select(this,'q1')">
+        <div class="emoji">🏊</div>
+        <div class="label"><h3>Schwimmen / Triathlon</h3><p>Bahnenschwimmen, Freiwasser, Triathlon</p></div>
+      </div>
+      <div class="option" data-val="teamsport" onclick="select(this,'q1')">
+        <div class="emoji">⚽</div>
+        <div class="label"><h3>Teamsport (Fußball, Basketball, Tennis)</h3><p>Mannschaftssport, Rückschlagspiele</p></div>
+      </div>
+      <div class="option" data-val="mixed" onclick="select(this,'q1')">
+        <div class="emoji">🎯</div>
+        <div class="label"><h3>Allround / Mehrere Sportarten</h3><p>Ich mache verschiedene Sportarten</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Level -->
+  <div class="question" id="q2">
+    <h2>📊 Welches Trainingslevel hast du?</h2>
+    <p class="desc">Wie lange trainierst du schon? Bist du Anfänger, Fortgeschrittener oder ambitioniert?</p>
+    <div class="options">
+      <div class="option" data-val="anfaenger" onclick="select(this,'q2')">
+        <div class="emoji">🌱</div>
+        <div class="label"><h3>Anfänger</h3><p>Starte neu oder trainiere gelegentlich, suche Motivation & Orientierung</p></div>
+      </div>
+      <div class="option" data-val="fortgeschritten" onclick="select(this,'q2')">
+        <div class="emoji">🔥</div>
+        <div class="label"><h3>Fortgeschritten</h3><p>Regelmäßiges Training, erste Wettkämpfe, möchte mich verbessern</p></div>
+      </div>
+      <div class="option" data-val="profi" onclick="select(this,'q2')">
+        <div class="emoji">🏆</div>
+        <div class="label"><h3>Profisportler / Ambitioniert</h3><p>Wettkampforientiert, maximiere Leistung mit allen verfügbaren Mitteln</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: Budget -->
+  <div class="question" id="q3">
+    <h2>💰 Welches Budget hast du für Sport-Tech?</h2>
+    <p class="desc">Wie viel möchtest du in Wearables, Gadgets & KI-Tools investieren?</p>
+    <div class="options">
+      <div class="option" data-val="mini" onclick="select(this,'q3')">
+        <div class="emoji">🪙</div>
+        <div class="label"><h3>Minimal (unter €60)</h3><p>Nur Smartphone + günstigste Gadgets</p></div>
+      </div>
+      <div class="option" data-val="mittel" onclick="select(this,'q3')">
+        <div class="emoji">💵</div>
+        <div class="label"><h3>Mittel (€60–€300)</h3><p>Ein gutes Wearable oder mehrere kleinere Gadgets</p></div>
+      </div>
+      <div class="option" data-val="hoch" onclick="select(this,'q3')">
+        <div class="emoji">💰</div>
+        <div class="label"><h3>Hoch (€300–€800)</h3><p>Premium-Smartwatch + Zubehör</p></div>
+      </div>
+      <div class="option" data-val="premium" onclick="select(this,'q3')">
+        <div class="emoji">💎</div>
+        <div class="label"><h3>Premium (€800+)</h3><p>High-End-Setup: Top-Wearable + Erholungs-Geräte + Sensorik</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: Ziele -->
+  <div class="question" id="q4">
+    <h2>🎯 Was ist dein Hauptziel?</h2>
+    <p class="desc">Wofür möchtest du KI-Sport-Tech hauptsächlich einsetzen?</p>
+    <div class="options">
+      <div class="option" data-val="leistung" onclick="select(this,'q4')">
+        <div class="emoji">📈</div>
+        <div class="label"><h3>Leistung steigern</h3><p>Schneller, stärker, besser werden – PBs und Wettkampfziele</p></div>
+      </div>
+      <div class="option" data-val="gesundheit" onclick="select(this,'q4')">
+        <div class="emoji">💚</div>
+        <div class="label"><h3>Gesundheit & Wohlbefinden</h3><p>Regeneration, Stressabbau, besser schlafen, langfristig fit bleiben</p></div>
+      </div>
+      <div class="option" data-val="technik" onclick="select(this,'q4')">
+        <div class="emoji">🎯</div>
+        <div class="label"><h3>Technik verbessern</h3><p>bessere Ausführung, sauberere Bewegung, Formkorrektur</p></div>
+      </div>
+      <div class="option" data-val="motivation" onclick="select(this,'q4')">
+        <div class="emoji">🔥</div>
+        <div class="label"><h3>Motivation & Routine</h3><p>Dranbleiben, Gewohnheiten aufbauen, Spielerisch trainieren</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5: Tech-Affinität -->
+  <div class="question" id="q5">
+    <h2>📱 Wie technikaffin bist du?</h2>
+    <p class="desc">Wie wohl fühlst du dich mit Apps, Wearables und Datenanalyse?</p>
+    <div class="options">
+      <div class="option" data-val="einfach" onclick="select(this,'q5')">
+        <div class="emoji">📱</div>
+        <div class="label"><h3>Einfach & intuitiv</h3><p>Am liebsten auspacken, anlegen, loslegen – keine Konfiguration</p></div>
+      </div>
+      <div class="option" data-val="normal" onclick="select(this,'q5')">
+        <div class="emoji">📊</div>
+        <div class="label"><h3>Normaler Smartphone-Nutzer</h3><p>Apps nutzen, ab und zu ein Dashboard checken, Wearable-Sync</p></div>
+      </div>
+      <div class="option" data-val="profi" onclick="select(this,'q5')">
+        <div class="emoji">🤓</div>
+        <div class="label"><h3>Data-Nerd / Gadget-Fan</h3><p>Ich will alle Daten, API-Export, tiefe Analysen, Custom-Dashboards</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <h2>🎉 Deine persönlichen KI-Sport-Empfehlungen</h2>
+    <div class="summary" id="resultSummary"></div>
+    <h3 style="color:#fff;margin-bottom:12px">📦 Empfohlene Produkte für dich:</h3>
+    <div class="recommendations" id="recs"></div>
+
+    <div class="cta-box" style="background:#1a1a2e;border:1px solid #0ea5e9;border-radius:12px;padding:20px;margin:24px 0;text-align:center">
+      <p style="margin-bottom:8px"><strong>Mehr erfahren?</strong></p>
+      <p style="color:#888;font-size:0.9em">Lies den vollständigen Ratgeber zu KI-Sport-Tech 2026 mit detaillierten Vergleichen, Testberichten und Schritt-für-Schritt-Anleitungen.</p>
+      <a href="../blog/ki-sport-wettkampf-2026.html" style="display:inline-block;background:#0ea5e9;color:#fff;padding:12px 30px;border-radius:8px;font-weight:600;margin-top:12px;text-decoration:none">→ Zum vollständigen Ratgeber</a>
+    </div>
+
+    <div class="affiliate-note">
+      <p>🔗 <strong>Amazon-Partnerlinks (tag=ikune21-21):</strong> Wenn du über die Links einkaufst, erhalte ich eine kleine Provision – für dich entstehen keine Extrakosten. Danke für deine Unterstützung! 🙏</p>
+    </div>
+    <button class="restart-btn" onclick="restart()">🔄 Neu starten</button>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav" id="nav">
+    <button class="btn" id="prevBtn" onclick="prev()" disabled>← Zurück</button>
+    <button class="btn primary" id="nextBtn" onclick="next()">Weiter →</button>
+  </div>
+</div>
+
+<script>
+// ---- STATE ----
+const state = {
+  currentStep: 0,
+  answers: { q1: null, q2: null, q3: null, q4: null, q5: null },
+  totalSteps: 5
+};
+
+// ---- SELECT ----
+function select(el, qId) {
+  const parent = document.getElementById(qId);
+  parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const qNum = parseInt(qId.replace('q',''));
+  state.answers['q'+qNum] = el.dataset.val;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+// ---- NAVIGATION ----
+function next() {
+  if (state.currentStep < state.totalSteps - 1) {
+    showStep(state.currentStep + 1);
+  } else {
+    showResult();
+  }
+}
+
+function prev() {
+  if (state.currentStep > 0) showStep(state.currentStep - 1);
+}
+
+function showStep(n) {
+  state.currentStep = n;
+  document.querySelectorAll('.question').forEach((q,i) => q.classList.toggle('active', i===n));
+  document.getElementById('prevBtn').disabled = (n === 0);
+  const nextBtn = document.getElementById('nextBtn');
+  const hasAnswer = state.answers['q'+(n+1)] !== null;
+  nextBtn.disabled = !hasAnswer;
+  nextBtn.textContent = (n === state.totalSteps - 1) ? '🎯 Empfehlungen anzeigen' : 'Weiter →';
+
+  // Update dots
+  document.querySelectorAll('.dot').forEach((d,i) => {
+    d.className = 'dot';
+    if (i < n) d.classList.add('done');
+    else if (i === n) d.classList.add('active');
+  });
+}
+
+// ---- RESULT ----
+function showResult() {
+  document.getElementById('q5').classList.remove('active');
+  document.getElementById('nav').style.display = 'none';
+  document.querySelector('.step-indicator').style.display = 'none';
+  document.getElementById('result').classList.add('active');
+
+  const a = state.answers;
+  renderSummary(a);
+  renderRecommendations(a);
+}
+
+function renderSummary(a) {
+  const sportNames = {
+    laufen: '🏃 Laufen/Marathon',
+    kraft: '🏋️ Krafttraining',
+    golf: '🏌️ Golf',
+    schwimmen: '🏊 Schwimmen/Triathlon',
+    teamsport: '⚽ Teamsport',
+    mixed: '🎯 Allround'
+  };
+  const levelNames = { anfaenger: '🌱 Anfänger', fortgeschritten: '🔥 Fortgeschritten', profi: '🏆 Profi/Ambitioniert' };
+  const budgetNames = { mini: '🪙 Minimal', mittel: '💵 Mittel', hoch: '💰 Hoch', premium: '💎 Premium' };
+  const goalNames = { leistung: '📈 Leistung', gesundheit: '💚 Gesundheit', technik: '🎯 Technik', motivation: '🔥 Motivation' };
+
+  const el = document.getElementById('resultSummary');
+  el.innerHTML = `
+    <div class="sport-icon">${sportNames[a.q1]?.split(' ')[0] || '🏅'}</div>
+    <div class="level-text">${sportNames[a.q1] || 'Sport'}</div>
+    <div style="margin-top:8px;color:#888">${levelNames[a.q2]} · ${budgetNames[a.q3]}</div>
+    <div style="color:#888;font-size:0.9em">Ziel: ${goalNames[a.q4]}</div>
+  `;
+}
+
+function renderRecommendations(a) {
+  const recs = document.getElementById('recs');
+  const products = getProducts(a);
+  recs.innerHTML = products.map(p => `
+    <a href="${p.url}" class="rec-card" target="_blank" rel="noopener">
+      <div class="icon">${p.icon}</div>
+      <div class="info">
+        <h3>${p.name} ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}</h3>
+        <p>${p.desc}</p>
+      </div>
+      <div class="price">${p.price}</div>
+    </a>
+  `).join('');
+}
+
+function getProducts(a) {
+  const sport = a.q1;
+  const budget = a.q3;
+  const level = a.q2;
+  const goal = a.q4;
+
+  // Universal products (everyone gets these, tailored)
+  const baseProducts = [
+    {
+      icon: '⌚', name: 'Garmin Forerunner 265',
+      desc: 'Beste KI-Laufuhr für ambitionierte Sportler mit Trainingsbereitschaftsanalyse.',
+      price: '€449', badge: 'BESTSELLER',
+      url: 'https://amazon.de/dp/B0BNWZ1MFY/?tag=ikune21-21',
+      condition: () => (sport === 'laufen' || sport === 'mixed') && (budget === 'mittel' || budget === 'hoch')
+    },
+    {
+      icon: '⌚', name: 'Apple Watch Ultra 2',
+      desc: 'KI-Trainingsanalyse, Dual-Frequency-GPS, ideal für Ausdauersportler.',
+      price: '€799', badge: 'TOP',
+      url: 'https://amazon.de/dp/B0CHX9S1QT/?tag=ikune21-21',
+      condition: () => budget === 'premium' || (sport === 'laufen' && budget !== 'mini')
+    },
+    {
+      icon: '⌚', name: 'Garmin Forerunner 965',
+      desc: 'Premium-Multisportuhr mit Amoled, Karten, KI-Race-Predictor.',
+      price: '€599', badge: 'PRO',
+      url: 'https://amazon.de/dp/B0BNWZ1KVB/?tag=ikune21-21',
+      condition: () => budget === 'hoch' || budget === 'premium'
+    },
+    {
+      icon: '💍', name: 'Oura Ring Gen 3',
+      desc: 'KI-Schlaf & Recovery-Tracker – unsichtbar, wasserdicht, präzise.',
+      price: '€329', badge: 'TREND',
+      url: 'https://amazon.de/dp/B09K3HWCT8/?tag=ikune21-21',
+      condition: () => goal === 'gesundheit' || goal === 'leistung' || budget === 'hoch' || budget === 'premium'
+    },
+    {
+      icon: '🔫', name: 'Theragun Pro 6. Gen',
+      desc: 'KI-Massagepistole mit Intensitätsanpassung, leise & kraftvoll.',
+      price: '€549', badge: 'REGENERATION',
+      url: 'https://amazon.de/dp/B09BBYN9QF/?tag=ikune21-21',
+      condition: () => (budget === 'hoch' || budget === 'premium') && (sport !== 'schwimmen')
+    },
+    {
+      icon: '🦵', name: 'Hyperice Normatec 3',
+      desc: 'KI-Kompressionsstiefel für schnelle Regeneration nach Belastung.',
+      price: '€649', badge: 'PRO',
+      url: 'https://amazon.de/dp/B09DG4DM9Z/?tag=ikune21-21',
+      condition: () => budget === 'premium' && (sport === 'laufen' || sport === 'mixed')
+    },
+    {
+      icon: '⌚', name: 'Whoop 4.0',
+      desc: 'KI-Recovery-Coach ohne Display, genutzt von Spitzensportlern.',
+      price: 'Abo', badge: 'RECOVERY',
+      url: 'https://amazon.de/dp/B09JCKWRP7/?tag=ikune21-21',
+      condition: () => goal === 'leistung' || goal === 'gesundheit'
+    },
+    {
+      icon: '⌚', name: 'Fitbit Charge 6',
+      desc: 'KI-gestützter Fitness-Tracker, tägliche Bereitschaft, günstiger Einstieg.',
+      price: '€149', badge: 'EINSTEIGER',
+      url: 'https://amazon.de/dp/B0C1N3G26T/?tag=ikune21-21',
+      condition: () => budget === 'mini' || budget === 'mittel'
+    },
+    {
+      icon: '🏋️', name: 'Verstellbare Kurzhanteln',
+      desc: 'Platzsparend, 10–40 kg, für KI-geführtes Krafttraining zuhause.',
+      price: '€269',
+      url: 'https://amazon.de/dp/B07L2WN2SV/?tag=ikune21-21',
+      condition: () => sport === 'kraft' && budget !== 'mini'
+    },
+    {
+      icon: '🧘', name: 'Yogamatte Premium',
+      desc: 'Rutschfest, 6 mm, ideal für Stretching, Mobility & Krafttraining.',
+      price: '€39',
+      url: 'https://amazon.de/dp/B08QDS3QT3/?tag=ikune21-21',
+      condition: () => true
+    },
+    {
+      icon: '🏌️', name: 'Garmin Approach R10',
+      desc: 'KI-Golf-Swing-Analyzer, 360° Schwunganalyse, Launch Monitor.',
+      price: '€579', badge: 'GOLF',
+      url: 'https://amazon.de/dp/B08J7GJ77Z/?tag=ikune21-21',
+      condition: () => sport === 'golf'
+    },
+    {
+      icon: '🏌️', name: 'Rapsodo MLM2Pro',
+      desc: 'KI-Golf-Simulator mit Kamera-Tracking, Ballfluganalyse, 3D-Modell.',
+      price: '€799', badge: 'GOLF',
+      url: 'https://amazon.de/dp/B09THX5H2H/?tag=ikune21-21',
+      condition: () => sport === 'golf' && budget === 'premium'
+    },
+    {
+      icon: '🏌️', name: 'Golf-Übungsmatte Indoor',
+      desc: 'Pro-Matte für Driving-Range-Training zuhause + Flugbälle.',
+      price: '€79',
+      url: 'https://amazon.de/dp/B08CXT6MR7/?tag=ikune21-21',
+      condition: () => sport === 'golf'
+    },
+    {
+      icon: '🥽', name: 'FORM Swim Goggles 2',
+      desc: 'KI-Schwimmbrille mit HUD, Echtzeit-Daten, Zuganalyse.',
+      price: '€219', badge: 'SCHWIMMEN',
+      url: 'https://amazon.de/dp/B09XV2YW7G/?tag=ikune21-21',
+      condition: () => sport === 'schwimmen'
+    },
+    {
+      icon: '📿', name: 'Garmin HRM-Swim Brustgurt',
+      desc: 'Wasserdichter HR-Brustgurt für präzise Schwimm-Daten.',
+      price: '€139',
+      url: 'https://amazon.de/dp/B07VMM5124/?tag=ikune21-21',
+      condition: () => sport === 'schwimmen' && budget !== 'mini'
+    },
+    {
+      icon: '⚽', name: 'Playermaker Fußballsensoren',
+      desc: 'KI-Sensoren für Schienbeinschoner, analysiert Tritte, Geschwindigkeit, Ballkontakte.',
+      price: '€249', badge: 'FUSSBALL',
+      url: 'https://amazon.de/dp/B09FBRSRSL/?tag=ikune21-21',
+      condition: () => sport === 'teamsport' && level !== 'anfaenger'
+    },
+    {
+      icon: '📱', name: 'Smartphone-Stativ',
+      desc: 'Für KI-Formanalyse, Videoaufnahmen deiner Übungen.',
+      price: '€29',
+      url: 'https://amazon.de/dp/B081KJ2N6L/?tag=ikune21-21',
+      condition: () => sport === 'kraft' || goal === 'technik'
+    },
+    {
+      icon: '💪', name: 'Widerstandsbänder-Set',
+      desc: '5 Stufen, 10–50 kg, ideal für Warm-up, Reha & Kraftausdauer.',
+      price: '€29',
+      url: 'https://amazon.de/dp/B093K2TTX5/?tag=ikune21-21',
+      condition: () => budget === 'mini' || budget === 'mittel' || level === 'anfaenger'
+    },
+    {
+      icon: '🥤', name: 'Smart Water Bottle',
+      desc: 'Trackt Flüssigkeitsaufnahme, erinnert ans Trinken, App-Sync.',
+      price: '€49',
+      url: 'https://amazon.de/dp/B09YW9D9DM/?tag=ikune21-21',
+      condition: () => true
+    },
+    {
+      icon: '📿', name: 'Polar H10 Brustgurt',
+      desc: 'Medizinisch zertifizierter HR-Sensor, Goldstandard für präzise Daten.',
+      price: '€89',
+      url: 'https://amazon.de/dp/B07JG3VV2T/?tag=ikune21-21',
+      condition: () => (budget === 'mittel' || budget === 'hoch') && (sport === 'laufen' || sport === 'schwimmen' || goal === 'leistung')
+    }
+  ];
+
+  // Filter by conditions
+  let filtered = baseProducts.filter(p => p.condition());
+
+  // Ensure min 4 recommendations, fall back to universal
+  if (filtered.length < 4) {
+    const fallbacks = baseProducts.filter(p => p.condition.toString() === 'function(){return true}'.toString() || p.name === 'Yogamatte Premium' || p.name === 'Smart Water Bottle' || p.name === 'Widerstandsbänder-Set');
+    fallbacks.forEach(f => { if (!filtered.includes(f)) filtered.push(f); });
+  }
+
+  // Sort by relevance: higher budget/level products first
+  const budgetRank = { mini: 0, mittel: 1, hoch: 2, premium: 3 };
+  const score = p => {
+    let s = 0;
+    if (p.price && p.price.includes('€')) {
+      const n = parseInt(p.price.replace(/[^0-9]/g,''));
+      if (n > 500) s += 10;
+      else if (n > 200) s += 5;
+    }
+    if (p.badge === 'BESTSELLER' || p.badge === 'TOP') s += 8;
+    if (p.badge === 'REGENERATION' || p.badge === 'RECOVERY') s += 3;
+    return s;
+  };
+  filtered.sort((a,b) => score(b) - score(a));
+
+  return filtered.slice(0, 6);
+}
+
+function restart() {
+  state.currentStep = 0;
+  state.answers = { q1: null, q2: null, q3: null, q4: null, q5: null };
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('nav').style.display = 'flex';
+  document.querySelector('.step-indicator').style.display = 'flex';
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.getElementById('nextBtn').disabled = true;
+  showStep(0);
+}
+
+// Initial
+showStep(0);
+</script>
+</body>
+</html>
