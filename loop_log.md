@@ -132,7 +132,45 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 | 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
 
 ### Next Tick Priorities:
-1. 🔴 **Blog-Artikel #15**: Datenschutz/KI-Sicherheit 2026 (hohes Suchvolumen)
-2. 🔴 **Neues Browser-Tool bauen**: z.B. KI-Quiz oder Taschenrechner-App
-3. 🟡 **Bestehende Artikel mit internen Links verknüpfen** (SEO-Verbesserung)
-4. 🟡 **Sitemap für Google Search Console optimieren**
+1. 🔴 **Blog-Artikel #16**: KI-Jobs & Karriere 2026 (Trendthema)
+2. 🔴 **KI-Quiz-Tool bauen**: Interaktives Quiz (z.B. "Welches KI-Tool passt zu dir?")
+3. 🟡 **Interne Cross-Links prüfen**: Artikel #1-15 auf fehlende Verknüpfungen untersuchen
+4. 🟡 **Google Search Console**: Einrichten (User-Aktion nötig)
+
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.11)
+
+### Previous State (R2.10):
+- Blog-Artikel #15 (KI-Sicherheit) war bereits deployed aber Sitemap fehlte
+- 15 Blog-Artikel live, 19+ Bücher, 14+ Apps & Spiele
+- Sitemap.xml hatte fehlende URL für Artikel #15
+
+### Actions This Tick (R2.11):
+- [x] **Survey:** Alle 15 Blog-Artikel live, alle HTTP 200 ✅
+- [x] **Entdeckt:** Blog-Artikel #15 (KI-Sicherheit) war deployed aber **Sitemap.xml fehlte** die URL
+- [x] **Sitemap.xml aktualisiert:** + ki-sicherheit-datenschutz-2026.html URL (priority 0.7)
+- [x] **Stat-Korrektur:** Portal-index & Blog-index Stats von 13→15 (nachgetragen)
+- [x] **Git commit + push ✅** (1 Datei: sitemap.xml +6 Zeilen)
+- [x] **Live-Verifikation:** Artikel HTTP 200, Stats "15 Artikel" auf beiden Seiten ✅
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 15 Artikel aktiv, 50+ Seiten |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert, kein Traffic |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** – 19 Bücher fertig, kein Upload möglich
+2. 🟡 **Spreadshirt/Redbubble** – Kein Account
+3. 🟡 **LinkedIn/X/Twitter Profile** – Keine Social-Media-Präsenz
+4. 🟡 **Google Search Console** – Nicht eingerichtet (SEO-Verbesserung nicht messbar)
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #16**: KI-Jobs & Karriere 2026 (Trendthema)
+2. 🔴 **Neues Browser-Tool bauen**: KI-Quiz oder Taschenrechner-App
+3. 🟡 **Interne Cross-Links prüfen**: Artikel #1-15 auf fehlende Verknüpfungen untersuchen
+4. 🟡 **KDP Account erstellen** (User-Aktion nötig!)
+5. 🟡 **Google Search Console einrichten**
