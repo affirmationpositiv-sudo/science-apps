@@ -1,5 +1,66 @@
 # Loop Log – Infinite Money Loop
 
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.42)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.41):
+- 50 Blog-Artikel, 28 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher
+- Blog #50 (KI-Mode & Style 2026) ✅ LIVE
+- KI-Style-Berater (Tool #28) ✅ LIVE
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.42):
+- [x] **Survey:** Site live (HTTP 200), Git clean, 50 Blog-Artikel, 28 Tools, alles funktionsfähig
+- [x] **Blog-Artikel #51 erstellt:** "KI für Bewerbung & Vorstellungsgespräch 2026: Die 10 besten KI-Tools, ChatGPT-Strategien & Tech-Gadgets für deine Traumkarriere" (49 KB HTML, ~5.000 Wörter, 10 Sektionen: KI-Lebenslauf-Tools (Kickresume, Zety, Rezi, Enhancv, Teal), ChatGPT-Bewerbungsstrategien (Prompt-Vorlagen für Anschreiben, Lebenslauf, LinkedIn), KI-Interview-Training (Google Interview Warmup, Yoodli, Huru AI), KI-Job-Suchmaschinen (LinkedIn AI, Indeed, Stepstone, Monster, Glassdoor), KI-Portfolio & Persönliche Website (Midjourney, Canva AI, Wix ADI), KI-Gehaltsverhandlung (ChatGPT, Levels.fyi, Glassdoor), KI-Netzwerk-Aufbau (LinkedIn AI, Taplio, Circle), Hardware für Remote-Interviews (Logitech C920, Blue Yeti, Elgato Ring Light, Sony WH-1000XM5, Logitech Brio 4K), KI-Bewerbungsanalyse & Optimierung (Kickresume AI, Jobscan, Skillroads), KI-Karriereplanung & Weiterbildung (Coursera, Udemy AI, LinkedIn Learning) – 25+ Amazon-Affiliate-Links tag=ikune21-21, 10 Vergleichstabellen, 5 Budget-Stufen (0€ bis 500€+), 7-Tage-Startplan, 7 FAQ)
+- [x] **KI-Bewerbungs-Bedarfsrechner-Tool gebaut:** tools/ki-bewerbungs-berater.html (50 KB, interaktives 5-Fragen-Quiz: Karriere-Level, Bewerbungsphase, Budget, Branche, Tech-Affinität – personalisierte Produktempfehlungen mit 30+ Produkten aus 5 Budget-Stufen, Amazon-Affiliate-Links, dynamischem Aktionsplan)
+- [x] **Blog-Index aktualisiert:** Stats 49→50, +Artikel-Karte #51 (KI-Bewerbung & Karriere) mit Bedarfsrechner-Link
+- [x] **Tools-Index aktualisiert:** Stats 26→27, +KI-Bewerbungs-Bedarfsrechner-Karte
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 50→51, KI-Websites-Stat 28→29
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #51 + KI-Bewerbungs-Bedarfsrechner)
+- [x] **Git commit + push ✅**
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 51 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 29 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| T-Shirt Designs | 8 | ✅ LIVE |
+| Video-Skripte | 20 | ✅ LIVE |
+| Prompt-Packs | 3 | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 51 Artikel + 29 Tools + 9 Shops |
+| 2 | **Amazon KDP (15 Bücher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **AI Persönlichkeits-Report Verkauf** | EUR 50-300 | ✅ Tool live, Prynth/Blook nötig |
+
+### Neue Chancen (Recherche):
+1. 🟢 **Prynth (seit Mai 2026)** – 0%-Kommissions-Plattform für digitale Produkte (PDFs, Vorlagen). Kein monatliches Abo. Perfekt für Premium-Report-Verkauf.
+2. 🟢 **Blook (Beta, Mai 2026)** – Free Platform für interaktive Web-Produkte. 2% Commission. Affiliate-Support, Stripe-Checkout.
+3. 🟢 **Kostenlose AI APIs** – OpenAI o4-mini (100 req/day free), Google Gemini 2.5 Flash (60 req/min free), Mistral Small 3 Free Tier. Für automatische Content-Generierung nutzbar.
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** - 15 Bücher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟢 **Prynth/Blook Account** - 0%-Kommissions-Plattformen für digitale Produkte
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #52**: KI für Autos & Mobilität 2026 oder KI für Eltern & Familie 2026
+2. 🟢 **Neues Tool**: KI-Auto-Bedarfsrechner oder KI-Familien-Bedarfsrechner
+3. 🟢 **Obsidian Vault**: Brain Expansion mit bestehendem Wissen, neue Fusionsnotizen
+4. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Prynth, Blook)
+
+---
+
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.41)
 
 Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/

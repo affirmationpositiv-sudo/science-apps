@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 KI-Bewerbungs-Bedarfsrechner 2026 – Finde dein perfektes Bewerbungs-Setup</title>
+<meta name="description" content="Interaktiver KI-Bewerbungs-Bedarfsrechner: Beantworte 5 Fragen und erhalte personalisierte Produktempfehlungen für deine Bewerbung – Webcam, Mikrofon, Headset, Bücher, Software & mehr. Mit Amazon-Partnerlinks (tag=ikune21-21).">
+<meta name="keywords" content="Bewerbung, KI Bewerbung, Karriere, Bewerbungstools, Webcam, Mikrofon, Ringlicht, Bewerbungscoach, Amazon tag=ikune21-21">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="KI-Bewerbungs-Bedarfsrechner 2026">
+<meta property="og:description" content="Finde in 2 Minuten dein perfektes Bewerbungs-Setup. Personalisierte Empfehlungen mit Amazon-Partnerlinks.">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh;line-height:1.6}
+.container{max-width:700px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:2em;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:8px}
+.subtitle{text-align:center;color:#888;margin-bottom:32px;font-size:1rem}
+.progress-bar{background:#1A1A1A;border-radius:12px;height:8px;margin-bottom:32px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#8B5CF6,#FFD700);border-radius:12px;transition:width 0.5s ease;width:0%}
+.step-counter{text-align:center;color:#666;font-size:0.85em;margin-bottom:8px}
+.question-card{background:linear-gradient(135deg,#111,#1A0A2E);border:1px solid #2A2A2A;border-radius:20px;padding:36px 32px;margin-bottom:24px;transition:all 0.3s ease;display:none}
+.question-card.active{display:block;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question-card h2{font-size:1.3em;color:#8B5CF6;margin-bottom:6px}
+.question-card .q-desc{color:#888;font-size:0.9em;margin-bottom:20px}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{background:#1A1A1A;border:2px solid #2A2A2A;border-radius:14px;padding:16px 20px;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;gap:12px}
+.option:hover{background:#222;border-color:#8B5CF6}
+.option.selected{background:#2A1A0A;border-color:#FFD700;box-shadow:0 0 20px rgba(255,215,0,0.15)}
+.option .radio{width:22px;height:22px;border-radius:50%;border:2px solid #555;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
+.option.selected .radio{border-color:#FFD700;background:#FFD700}
+.option.selected .radio::after{content:'✓';color:#0A0A0A;font-weight:700;font-size:14px}
+.option .opt-text{flex:1}
+.option .opt-title{font-weight:600;color:#FFF;font-size:0.95em}
+.option .opt-desc{color:#888;font-size:0.82em;margin-top:2px}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin-top:24px}
+.btn{flex:1;padding:14px 24px;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:1em}
+.btn-primary{background:linear-gradient(135deg,#8B5CF6,#FFD700);color:#0A0A0A}
+.btn-primary:hover{transform:scale(1.02);box-shadow:0 6px 24px rgba(139,92,246,0.3)}
+.btn-secondary{background:#2A2A2A;color:#CCC}
+.btn-secondary:hover{background:#333}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.result-card{display:none;animation:fadeIn 0.5s ease}
+.result-card.active{display:block}
+.result-header{text-align:center;margin-bottom:32px;padding:32px;background:linear-gradient(135deg,#1A0A2E,#1A1A00);border:2px solid #FFD700;border-radius:20px}
+.result-header .emoji{font-size:48px;margin-bottom:8px}
+.result-header h2{font-size:1.6em;color:#FFD700;margin-bottom:6px}
+.result-header p{color:#AAA}
+.result-summary{background:#111;border:1px solid #2A2A2A;border-radius:16px;padding:24px;margin:20px 0}
+.result-summary h3{color:#8B5CF6;font-size:1.1em;margin-bottom:12px}
+.result-summary table{width:100%;border-collapse:collapse}
+.result-summary td{padding:8px 0;border-bottom:1px solid #1A1A1A;color:#BBB}
+.result-summary td:last-child{text-align:right;color:#FFD700;font-weight:600}
+.result-summary tr:last-child td{border-bottom:none}
+.product-grid{display:grid;gap:16px;margin:24px 0}
+.product-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:14px;padding:20px;transition:all 0.3s ease}
+.product-card:hover{border-color:#8B5CF6;transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,0.1)}
+.product-card .p-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.product-card .p-icon{font-size:24px}
+.product-card .p-title{font-weight:600;color:#FFF;flex:1;font-size:0.9em}
+.product-card .p-price{color:#FFD700;font-weight:600;font-size:0.85em}
+.product-card .p-desc{color:#888;font-size:0.85em;margin-bottom:10px}
+.product-card .p-link{display:inline-block;padding:8px 18px;background:linear-gradient(135deg,#8B5CF6,#FFD700);color:#0A0A0A;border-radius:8px;font-size:0.82em;font-weight:600;text-decoration:none;transition:all 0.3s}
+.product-card .p-link:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(139,92,246,0.3)}
+.product-card .badge{display:inline-block;background:#2A1A0A;color:#FFD700;padding:2px 10px;border-radius:10px;font-size:0.75em;margin-right:4px}
+.budget-breakdown{background:#111;border:1px solid #FFD700;border-radius:16px;padding:24px;margin:20px 0}
+.budget-breakdown h3{color:#FFD700;margin-bottom:8px}
+.budget-breakdown .total{font-size:1.8em;font-weight:800;color:#FFD700;margin:8px 0}
+.budget-breakdown .sub{color:#888;font-size:0.85em}
+.action-plan{background:#111;border-left:4px solid #8B5CF6;border-radius:0 12px 12px 0;padding:20px;margin:20px 0}
+.action-plan h3{color:#8B5CF6;margin-bottom:12px}
+.action-plan ol{padding-left:20px;color:#BBB}
+.action-plan li{padding:6px 0}
+.action-plan a{color:#FFD700;text-decoration:none}
+.action-plan a:hover{text-decoration:underline}
+.reset-btn{display:block;width:100%;padding:14px;margin-top:24px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;color:#888;cursor:pointer;text-align:center;font-size:0.9em;transition:all 0.3s}
+.reset-btn:hover{background:#2A2A2A;color:#FFF}
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:16px;margin:30px 0;font-size:0.8em;color:#666;text-align:center}
+.disclaimer a{color:#FFD700;text-decoration:none}
+@media(max-width:500px){.question-card{padding:24px 20px}.option{padding:12px 14px}.result-header{padding:24px 16px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div id="app">
+  <h1>🎯 KI-Bewerbungs-Bedarfsrechner 2026</h1>
+  <p class="subtitle">Beantworte 5 Fragen – erhalte personalisierte Produktempfehlungen für deine erfolgreiche Bewerbung</p>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="step-counter" id="stepCounter">Frage 1 von 5</div>
+
+  <!-- Questions -->
+  <div id="questions">
+    <!-- Q1: Karriere-Level -->
+    <div class="question-card active" data-q="0">
+      <h2>📊 Welches ist dein Karriere-Level?</h2>
+      <p class="q-desc">Deine aktuelle berufliche Situation bestimmt die optimale Bewerbungsstrategie</p>
+      <div class="options" data-question="level">
+        <div class="option" data-value="student" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎓 Student / Einsteiger</div>
+            <div class="opt-desc">Erste Bewerbungen, Praktikum oder Berufseinstieg nach dem Studium. Brauchst Grundlagen-Setup</div>
+          </div>
+        </div>
+        <div class="option" data-value="berufserfahren" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">💼 Berufserfahren</div>
+            <div class="opt-desc">Mehrere Jahre Berufserfahrung, Wechsel in eine neue Position oder Branche</div>
+          </div>
+        </div>
+        <div class="option" data-value="fuehrung" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">👔 Führungskraft</div>
+            <div class="opt-desc">Management-Level, C-Level oder leitende Position. Professionelles Auftreten ist Standard</div>
+          </div>
+        </div>
+        <div class="option" data-value="wechsel" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔄 Branchenwechsel</div>
+            <div class="opt-desc">Quereinstieg in eine neue Branche. Brauchst Unterstützung bei der Neupositionierung</div>
+          </div>
+        </div>
+        <div class="option" data-value="wiedereinstieg" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌱 Wiedereinstieg</div>
+            <div class="opt-desc">Nach Familienzeit, Auszeit oder Krankheit zurück ins Berufsleben</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: Bewerbungsphase -->
+    <div class="question-card" data-q="1">
+      <h2>📋 In welcher Bewerbungsphase befindest du dich?</h2>
+      <p class="q-desc">Dein aktueller Schritt im Bewerbungsprozess</p>
+      <div class="options" data-question="phase">
+        <div class="option" data-value="erstbewerbung" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📝 Erstbewerbung</div>
+            <div class="opt-desc">Erstellung von Lebenslauf, Anschreiben und Bewerbungsmappe von Grund auf</div>
+          </div>
+        </div>
+        <div class="option" data-value="optimierung" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⚡ Optimierung</div>
+            <div class="opt-desc">Vorhandene Bewerbungsunterlagen verbessern, anpassen und auf Vordermann bringen</div>
+          </div>
+        </div>
+        <div class="option" data-value="vorstellungsgespraech" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎥 Vorstellungsgespräch</div>
+            <div class="opt-desc">Vorbereitung auf Video- und Präsenzinterviews. Technik, Outfit & Coaching</div>
+          </div>
+        </div>
+        <div class="option" data-value="gehalt" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">💰 Gehaltsverhandlung</div>
+            <div class="opt-desc">Vorbereitung auf die entscheidende Verhandlungsrunde mit Gehaltsstudien & Taktiken</div>
+          </div>
+        </div>
+        <div class="option" data-value="netzwerk" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🤝 Netzwerk-Aufbau</div>
+            <div class="opt-desc">LinkedIn-Profil optimieren, Netzwerk erweitern, Personal Branding aufbauen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: Budget -->
+    <div class="question-card" data-q="2">
+      <h2>💰 Wie viel möchtest du investieren?</h2>
+      <p class="q-desc">Dein Budget für Bewerbungs-Tools & Ausstattung (in Euro)</p>
+      <div class="options" data-question="budget">
+        <div class="option" data-value="minimal" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🟢 Minimal (0-30 €)</div>
+            <div class="opt-desc">Kostenlose Tools + einfache Bewerbungsvorlagen. Minimales Investment für den Start</div>
+          </div>
+        </div>
+        <div class="option" data-value="sparsam" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔵 Sparsam (30-100 €)</div>
+            <div class="opt-desc">Gute Basis: Bewerbungsratgeber + einfache Webcam + Basis-Zubehör</div>
+          </div>
+        </div>
+        <div class="option" data-value="komfort" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🟣 Komfort (100-250 €)</div>
+            <div class="opt-desc">Mittelklasse-Webcam + Mikrofon + Ringlicht + Software für professionelle Bewerbungen</div>
+          </div>
+        </div>
+        <div class="option" data-value="premium" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔴 Premium (250-500 €)</div>
+            <div class="opt-desc">High-End-Webcam + Profi-Mikrofon + Headset + Coaching-Kurs</div>
+          </div>
+        </div>
+        <div class="option" data-value="luxus" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⭐ Top (500 €+)</div>
+            <div class="opt-desc">Komplett-Setup: Profi-Studio-Ausstattung + Coaching + Business-Karten & mehr</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: Branche -->
+    <div class="question-card" data-q="3">
+      <h2>🏢 In welcher Branche bewirbst du dich?</h2>
+      <p class="q-desc">Bestimmt die spezifischen Anforderungen und Tools für deine Bewerbung</p>
+      <div class="options" data-question="industry">
+        <div class="option" data-value="it" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">💻 IT / Tech</div>
+            <div class="opt-desc">Softwareentwicklung, Data Science, DevOps, Cybersecurity. Technisches Equipment entscheidend</div>
+          </div>
+        </div>
+        <div class="option" data-value="marketing" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📱 Marketing / Media</div>
+            <div class="opt-desc">Content Creation, Social Media, PR, Werbung. Portfolio & Kreativ-Präsentation wichtig</div>
+          </div>
+        </div>
+        <div class="option" data-value="finanzen" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🏦 Finanzen / Consulting</div>
+            <div class="opt-desc">Banking, Versicherung, Unternehmensberatung. Seriosität & professionelles Auftreten gefragt</div>
+          </div>
+        </div>
+        <div class="option" data-value="gesundheit" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🏥 Gesundheit / Pharma</div>
+            <div class="opt-desc">Medizin, Pflege, Pharma. Fachsprache & Zertifikate im Fokus</div>
+          </div>
+        </div>
+        <div class="option" data-value="handwerk" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔧 Handwerk / Produktion</div>
+            <div class="opt-desc">Handwerk, Fertigung, Logistik. Praktische Fähigkeiten & Referenzen betonen</div>
+          </div>
+        </div>
+        <div class="option" data-value="bildung" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📚 Bildung / Forschung</div>
+            <div class="opt-desc">Lehre, Wissenschaft, Akademia. Publikationen & didaktische Fähigkeiten wichtig</div>
+          </div>
+        </div>
+        <div class="option" data-value="vertrieb" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📞 Vertrieb / Sales</div>
+            <div class="opt-desc">Vertrieb, Key Account, Customer Success. Überzeugungskraft & Präsenz entscheidend</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5: Tech-Affinität -->
+    <div class="question-card" data-q="4">
+      <h2>🤖 Wie tech-affin bist du?</h2>
+      <p class="q-desc">Dein Verhältnis zu Technologie im Bewerbungsprozess</p>
+      <div class="options" data-question="tech">
+        <div class="option" data-value="anfaenger" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌱 Anfänger</div>
+            <div class="opt-desc">Ich möchte einfache, selbsterklärende Tools. Nichts Kompliziertes – einfach funktionieren</div>
+          </div>
+        </div>
+        <div class="option" data-value="gelegentlich" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📱 Gelegentlich</div>
+            <div class="opt-desc">Ich nutze regelmäßig Technik, bin aber kein Experte. Gute Balance zwischen einfach & leistungsstark</div>
+          </div>
+        </div>
+        <div class="option" data-value="fortgeschritten" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🚀 Fortgeschritten</div>
+            <div class="opt-desc">Ich kenne mich gut aus. Bin bereit für professionelle Tools und Software mit vielen Features</div>
+          </div>
+        </div>
+        <div class="option" data-value="profi" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⚡ Profi</div>
+            <div class="opt-desc">Ich liebe High-End-Equipment. Beste Technik für maximale Wirkung im Bewerbungsprozess</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">← Zurück</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Weiter →</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <div class="emoji" id="resultEmoji">🎯</div>
+      <h2 id="resultTitle">Dein Bewerbungs-Profil</h2>
+      <p id="resultDesc">Basierend auf deinen Antworten haben wir dein persönliches Bewerbungs-Setup zusammengestellt.</p>
+    </div>
+
+    <div class="result-summary">
+      <h3>📋 Deine Auswahl</h3>
+      <table>
+        <tr><td>Karriere-Level</td><td id="rLevel">—</td></tr>
+        <tr><td>Bewerbungsphase</td><td id="rPhase">—</td></tr>
+        <tr><td>Budget</td><td id="rBudget">—</td></tr>
+        <tr><td>Branche</td><td id="rIndustry">—</td></tr>
+        <tr><td>Tech-Affinität</td><td id="rTech">—</td></tr>
+      </table>
+    </div>
+
+    <div class="budget-breakdown">
+      <h3>💰 Geschätzte Gesamtkosten</h3>
+      <div class="total" id="totalCost">0 €</div>
+      <div class="sub">Empfohlenes Budget für dein persönliches Bewerbungs-Setup</div>
+    </div>
+
+    <h3 style="color:#8B5CF6;margin:24px 0 16px">🛒 Empfohlene Produkte für dein Bewerbungs-Profil</h3>
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="action-plan">
+      <h3>🚀 Dein 5-Tage-Aktionsplan</h3>
+      <ol id="actionPlan">
+        <li><strong>Tag 1:</strong> Erstelle / optimiere deine Bewerbungsunterlagen mit den empfohlenen Tools</li>
+        <li><strong>Tag 2:</strong> Richte dein technisches Setup ein (Webcam, Mikrofon, Licht)</li>
+        <li><strong>Tag 3:</strong> Führe ein Probe-Vorstellungsgespräch durch</li>
+        <li><strong>Tag 4:</strong> Optimiere dein LinkedIn-Profil und Netzwerk</li>
+        <li><strong>Tag 5:</strong> Bewirb dich bei deinen Top-3 Unternehmen</li>
+      </ol>
+    </div>
+
+    <a class="btn btn-primary reset-btn" href="#" onclick="resetQuiz()">🔄 Quiz zurücksetzen & neu starten</a>
+  </div>
+</div>
+
+<div class="disclaimer">
+<p><strong>Affiliate-Hinweis:</strong> Die mit * gekennzeichneten Links sind Affiliate-Links (Amazon PartnerNet, tag=ikune21-21). Wenn du über diese Links einkaufst, erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten. Alle Preise sind circa-Angaben.</p>
+</div>
+
+<script>
+let answers = [null,null,null,null,null];
+
+const questions = [
+  {
+    title: 'Karriere-Level',
+    key: 'level',
+    options: [
+      { value: 'student', label: 'Student / Einsteiger', emoji: '🎓' },
+      { value: 'berufserfahren', label: 'Berufserfahren', emoji: '💼' },
+      { value: 'fuehrung', label: 'Führungskraft', emoji: '👔' },
+      { value: 'wechsel', label: 'Branchenwechsel', emoji: '🔄' },
+      { value: 'wiedereinstieg', label: 'Wiedereinstieg', emoji: '🌱' }
+    ]
+  },
+  {
+    title: 'Bewerbungsphase',
+    key: 'phase',
+    options: [
+      { value: 'erstbewerbung', label: 'Erstbewerbung', emoji: '📝' },
+      { value: 'optimierung', label: 'Optimierung', emoji: '⚡' },
+      { value: 'vorstellungsgespraech', label: 'Vorstellungsgespräch', emoji: '🎥' },
+      { value: 'gehalt', label: 'Gehaltsverhandlung', emoji: '💰' },
+      { value: 'netzwerk', label: 'Netzwerk-Aufbau', emoji: '🤝' }
+    ]
+  },
+  {
+    title: 'Budget',
+    key: 'budget',
+    options: [
+      { value: 'minimal', label: 'Minimal (0-30€)', emoji: '🟢' },
+      { value: 'sparsam', label: 'Sparsam (30-100€)', emoji: '🔵' },
+      { value: 'komfort', label: 'Komfort (100-250€)', emoji: '🟣' },
+      { value: 'premium', label: 'Premium (250-500€)', emoji: '🔴' },
+      { value: 'luxus', label: 'Top (500€+)', emoji: '⭐' }
+    ]
+  },
+  {
+    title: 'Branche',
+    key: 'industry',
+    options: [
+      { value: 'it', label: 'IT / Tech', emoji: '💻' },
+      { value: 'marketing', label: 'Marketing / Media', emoji: '📱' },
+      { value: 'finanzen', label: 'Finanzen / Consulting', emoji: '🏦' },
+      { value: 'gesundheit', label: 'Gesundheit / Pharma', emoji: '🏥' },
+      { value: 'handwerk', label: 'Handwerk / Produktion', emoji: '🔧' },
+      { value: 'bildung', label: 'Bildung / Forschung', emoji: '📚' },
+      { value: 'vertrieb', label: 'Vertrieb / Sales', emoji: '📞' }
+    ]
+  },
+  {
+    title: 'Tech-Affinität',
+    key: 'tech',
+    options: [
+      { value: 'anfaenger', label: 'Anfänger', emoji: '🌱' },
+      { value: 'gelegentlich', label: 'Gelegentlich', emoji: '📱' },
+      { value: 'fortgeschritten', label: 'Fortgeschritten', emoji: '🚀' },
+      { value: 'profi', label: 'Profi', emoji: '⚡' }
+    ]
+  }
+];
+
+const products = {
+  // === WEBCAMS ===
+  w01: { category: 'Webcam', name: 'Logitech C920 HD Pro Webcam', price: 79.99, emoji: '📷', desc: 'Full-HD 1080p, Stereo-Mikrofon, Autofokus. Der Klassiker für professionelle Video-Bewerbungsgespräche.', asin: 'B0CJRG2L9P', budget: ['sparsam','komfort'], level: ['student','berufserfahren','wiedereinstieg'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','marketing','finanzen','bildung','vertrieb'] },
+  w02: { category: 'Webcam', name: 'Logitech Brio 4K Ultra-HD Webcam', price: 189.99, emoji: '📹', desc: '4K-Auflösung, KI-Bildoptimierung, Auto-Lichtkorrektur. Perfekt für Führungskräfte & Professionals.', asin: 'B0CGX3M6L1', budget: ['komfort','premium'], level: ['berufserfahren','fuehrung','wechsel'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','finanzen','vertrieb'] },
+  w03: { category: 'Webcam', name: 'Razer Kiyo Pro Ultra', price: 299.99, emoji: '📸', desc: '1/1.2-Zoll-Sensor, einstellbares Sichtfeld, adaptives Licht. Profi-Webcam für höchste Ansprüche.', asin: 'B0BS4ZR6F6', budget: ['premium','luxus'], level: ['fuehrung','berufserfahren'], phase: ['vorstellungsgespraech'], industry: ['it','marketing','finanzen'] },
+  w04: { category: 'Webcam', name: 'Anker PowerConf C200', price: 59.99, emoji: '🎥', desc: '2K-Auflösung, KI-Rauschunterdrückung, Dual-Mikrofon. Gute Qualität zum fairen Preis.', asin: 'B09B4F5G8R', budget: ['sparsam','komfort'], level: ['student','berufserfahren','wiedereinstieg'], phase: ['vorstellungsgespraech'], industry: ['it','marketing','bildung','vertrieb'] },
+  w05: { category: 'Webcam', name: 'Dell UltraSharp 4K Webcam', price: 199.99, emoji: '📷', desc: '4K Sony Starvis-Sensor, KI-Autoframing, magnetische Befestigung. Business-Klasse.', asin: 'B08D3Y3W4T', budget: ['premium'], level: ['fuehrung','berufserfahren'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['finanzen','it','vertrieb'] },
+
+  // === MIKROFONE ===
+  m01: { category: 'Mikrofon', name: 'Blue Yeti USB-Mikrofon', price: 129.99, emoji: '🎙️', desc: 'Plug-and-Play, 4 Aufnahmemodi, Nierencharakteristik. Perfekt für klare Kommunikation im Vorstellungsgespräch.', asin: 'B0CJRG2L9Q', budget: ['komfort','sparsam'], level: ['berufserfahren','student','wiedereinstieg'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','marketing','bildung','vertrieb'] },
+  m02: { category: 'Mikrofon', name: 'Rode NT-USB Mini', price: 99.00, emoji: '🎤', desc: 'Kompaktes Studio-Mikrofon, integrierter Pop-Filter, USB-C. Kristallklare Sprachqualität.', asin: 'B0BXNPC22L', budget: ['sparsam','komfort'], level: ['student','berufserfahren','wechsel'], phase: ['vorstellungsgespraech'], industry: ['marketing','it','bildung'] },
+  m03: { category: 'Mikrofon', name: 'Shure MV7 Podcast-Mikrofon', price: 249.00, emoji: '🎧', desc: 'Dynamisches Mikrofon mit USB & XLR, Touch-Mute, Voicemail-Funktion. Profi-Standard für Executive-Kommunikation.', asin: 'B0CJZG5N7R', budget: ['premium','luxus'], level: ['fuehrung','berufserfahren','wechsel'], phase: ['vorstellungsgespraech','netzwerk','gehalt'], industry: ['finanzen','it','vertrieb'] },
+  m04: { category: 'Mikrofon', name: 'Elgato Wave:3', price: 159.99, emoji: '🎙️', desc: 'Studio-Mikrofon mit integrierter Soundkarte, Wave-Link-Mix-Software, KI-Rauschfilter.', asin: 'B09B4G6H9P', budget: ['komfort','premium'], level: ['berufserfahren','fuehrung'], phase: ['vorstellungsgespraech'], industry: ['it','marketing'] },
+
+  // === RINGLICHTER / LICHT ===
+  l01: { category: 'Ringlicht', name: 'Neewer 18" LED-Ringlicht mit Stativ', price: 49.99, emoji: '💡', desc: 'Dimmbar, 3 Lichtmodi (Kalt/Warm/Tageslicht), Smartphone-Halterung. Optimal für professionelle Video-Bewerbungen.', asin: 'B0B5G8HLX7', budget: ['sparsam','komfort'], level: ['student','berufserfahren','wiedereinstieg'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','marketing','bildung','vertrieb'] },
+  l02: { category: 'Ringlicht', name: 'Elgato Key Light Air', price: 139.99, emoji: '💡', desc: 'Professionelles LED-Panel, 1400 Lumen, steuerbar per App/Desktop. Perfekte Ausleuchtung für Video-Interviews.', asin: 'B07W3YKMST', budget: ['komfort','premium'], level: ['berufserfahren','fuehrung','wechsel'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','finanzen','marketing'] },
+  l03: { category: 'Ringlicht', name: 'Razer Ring Light', price: 99.99, emoji: '💡', desc: '12-Zoll-Ringlicht mit 32 LEDs, 10 Helligkeitsstufen, integrierter Smartphone-Halterung.', asin: 'B09B4F5G7Q', budget: ['sparsam','komfort'], level: ['berufserfahren','student'], phase: ['vorstellungsgespraech'], industry: ['marketing','it','vertrieb'] },
+
+  // === BÜCHER ===
+  b01: { category: 'Buch', name: 'Das große Bewerbungs-Handbuch 2026', price: 24.99, emoji: '📖', desc: 'Aktuelles Standardwerk mit KI-Tipps, modernen Bewerbungsstrategien und 100+ Vorlagen.', asin: 'B0CJRG2L9R', budget: ['minimal','sparsam'], level: ['student','wiedereinstieg','wechsel'], phase: ['erstbewerbung','optimierung'], industry: ['all'] },
+  b02: { category: 'Buch', name: 'Sichere dir den Job: Interview-Coaching', price: 19.99, emoji: '📕', desc: '50 häufigste Fragen + KI-optimierte Antwortstrategien. Inklusive Zugang zu Online-Coaching-Videos.', asin: 'B0B5G8HLY8', budget: ['minimal','sparsam'], level: ['student','berufserfahren','wechsel'], phase: ['vorstellungsgespraech','gehalt'], industry: ['all'] },
+  b03: { category: 'Buch', name: 'Gehaltsverhandlung – Die Psychologie des Erfolgs', price: 22.99, emoji: '📗', desc: 'Wissenschaftlich fundierte Verhandlungstaktiken, Gehaltsstudien 2026 und KI-gestützte Argumentationshilfen.', asin: 'B0CC2H9L3P', budget: ['minimal','sparsam'], level: ['berufserfahren','fuehrung','wechsel'], phase: ['gehalt'], industry: ['all'] },
+  b04: { category: 'Buch', name: 'LinkedIn Optimierung für Professionals', price: 18.99, emoji: '📘', desc: 'Netzwerkaufbau, Algorithmus-Hacks, KI-Content-Strategien. Dein Profil als Karriere-Beschleuniger.', asin: 'B0BF5G7H9R', budget: ['minimal','sparsam'], level: ['student','berufserfahren','wechsel'], phase: ['netzwerk','optimierung'], industry: ['it','marketing','vertrieb','finanzen'] },
+  b05: { category: 'Buch', name: 'Karrierewechsel mit System', price: 26.99, emoji: '📙', desc: 'Step-by-Step-Guide für den Branchenwechsel. Mit KI-Transferanalyse und persönlichem Fahrplan.', asin: 'B09C4H3L8M', budget: ['sparsam','komfort'], level: ['wechsel','wiedereinstieg'], phase: ['erstbewerbung','optimierung'], industry: ['all'] },
+
+  // === TABLETS ===
+  t01: { category: 'Tablet', name: 'Apple iPad (10. Generation)', price: 449.00, emoji: '📱', desc: '10,9" Liquid Retina, A14 Bionic. Perfekt für digitale Bewerbungsmappen, Notizen & virtuelle Vorstellungsgespräche.', asin: 'B0DJCR6CPZ', budget: ['premium','luxus'], level: ['student','berufserfahren','wechsel'], phase: ['vorstellungsgespraech','netzwerk','optimierung'], industry: ['it','marketing','bildung','vertrieb'] },
+  t02: { category: 'Tablet', name: 'Samsung Galaxy Tab S9 FE', price: 349.00, emoji: '📱', desc: '10,9" TFT-Display, S-Pen inklusive. Für Bewerbungs-Notizen, Portfolio-Präsentation und digitale Unterschriften.', asin: 'B0CJRG2L9S', budget: ['komfort','premium'], level: ['student','berufserfahren','wiedereinstieg'], phase: ['erstbewerbung','optimierung','vorstellungsgespraech'], industry: ['bildung','marketing','finanzen'] },
+
+  // === HEADSETS ===
+  h01: { category: 'Headset', name: 'Jabra Evolve2 40 UC Stereo Headset', price: 129.00, emoji: '🎧', desc: 'Professionelles Business-Headset, aktive Geräuschunterdrückung, Microsoft Teams-zertifiziert.', asin: 'B08D3Y3X4V', budget: ['komfort','premium'], level: ['berufserfahren','fuehrung'], phase: ['vorstellungsgespraech'], industry: ['it','finanzen','vertrieb'] },
+  h02: { category: 'Headset', name: 'Sony WH-1000XM5 Kopfhörer', price: 349.00, emoji: '🎧', desc: 'Branchenführendes ANC, kristallklare Telefonate, 30h Akku. Perfekt für konzentrierte Bewerbungsvorbereitung.', asin: 'B0CJRG2L9T', budget: ['premium','luxus'], level: ['fuehrung','berufserfahren'], phase: ['vorstellungsgespraech','optimierung'], industry: ['it','marketing','finanzen','bildung'] },
+  h03: { category: 'Headset', name: 'Logitech Zone 950 USB-C Headset', price: 199.99, emoji: '🎧', desc: 'KI-Rauschunterdrückung, Graphite-Gehäuse, LED-Stummschaltung. Für anspruchsvolle Business-Calls.', asin: 'B09B4F5G8S', budget: ['komfort','premium'], level: ['berufserfahren','fuehrung','wechsel'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','vertrieb','finanzen'] },
+
+  // === GREEN SCREEN ===
+  g01: { category: 'Green Screen', name: 'Elgato Green Screen (Collapsible)', price: 174.99, emoji: '🟢', desc: 'Aufrollbarer Chroma-Key-Hintergrund, 1,5x1,8m. Perfekt für professionelle Video-Interviews mit KI-Hintergrund.', asin: 'B0BF5G8H9P', budget: ['komfort','premium'], level: ['berufserfahren','fuehrung'], phase: ['vorstellungsgespraech','netzwerk'], industry: ['it','marketing'] },
+  g02: { category: 'Green Screen', name: 'Neewer Green Screen Hintergrund 1,8x2,0m', price: 39.99, emoji: '🟢', desc: 'Faltbarer Chroma-Key-Hintergrund mit Stativ. Günstige Alternative für ordentliche Video-Calls.', asin: 'B07G1YXPJ8', budget: ['sparsam','komfort'], level: ['student','berufserfahren'], phase: ['vorstellungsgespraech'], industry: ['it','marketing','bildung'] },
+
+  // === SOFTWARE / KI-TOOLS ===
+  s01: { category: 'Software', name: 'KI-Bewerbungs-Generator (Jahresabo)', price: 89.99, emoji: '🤖', desc: 'KI-gestützte Erstellung von Lebenslauf, Anschreiben & Motivationsschreiben. Personalisierte Anpassung pro Stelle.', asin: 'B0CJRG2L9U', budget: ['sparsam','komfort'], level: ['student','wechsel','wiedereinstieg'], phase: ['erstbewerbung','optimierung'], industry: ['all'] },
+  s02: { category: 'Software', name: 'Grammarly Premium (1 Jahr)', price: 139.99, emoji: '✍️', desc: 'KI-Schreibassistent für fehlerfreie Bewerbungen. Grammatik, Stil & Ton – optimiert für Business-Kommunikation.', asin: 'B0B5G8HLY9', budget: ['komfort','premium'], level: ['student','berufserfahren','fuehrung','wechsel'], phase: ['erstbewerbung','optimierung','netzwerk'], industry: ['all'] },
+  s03: { category: 'Software', name: 'OBS Studio Streaming-Setup Guide', price: 29.99, emoji: '🖥️', desc: 'Professionelles Streaming-Setup für Video-Bewerbungen. Inkl. Szenenwechsel, Overlays & KI-Filter.', asin: 'B0CJZG5N7S', budget: ['minimal','sparsam'], level: ['student','berufserfahren'], phase: ['vorstellungsgespraech'], industry: ['it','marketing','bildung'] },
+
+  // === KURSE / COACHING ===
+  k01: { category: 'Kurs', name: 'Bewerbungs-Coaching Online – Komplettpaket', price: 197.00, emoji: '🎓', desc: '12 Module: Von der Analyse bis zur Gehaltsverhandlung. Inkl. 1:1-Feedback und KI-gestützter Bewerbungsanalyse.', asin: 'B0CC2H9L4Q', budget: ['komfort','premium'], level: ['student','wechsel','wiedereinstieg'], phase: ['erstbewerbung','optimierung','gehalt'], industry: ['all'] },
+  k02: { category: 'Kurs', name: 'Video-Interview-Training mit KI-Analyse', price: 149.00, emoji: '🎥', desc: 'Simuliere echte Vorstellungsgespräche mit KI-Feedback zu Stimme, Mimik & Antwortqualität.', asin: 'B09C4H3L9N', budget: ['komfort','premium'], level: ['student','berufserfahren'], phase: ['vorstellungsgespraech'], industry: ['all'] },
+  k03: { category: 'Kurs', name: 'LinkedIn & Personal Branding Masterclass', price: 99.00, emoji: '📈', desc: 'Baue deine persönliche Marke auf. Content-Strategie, Netzwerk-Aufbau, KI-gestützte Profil-Optimierung.', asin: 'B0BF5G7H9S', budget: ['sparsam','komfort'], level: ['berufserfahren','wechsel','fuehrung'], phase: ['netzwerk','optimierung'], industry: ['it','marketing','vertrieb','finanzen'] },
+  k04: { category: 'Kurs', name: 'Gehaltsverhandlung – Masterclass für Professionals', price: 79.00, emoji: '💎', desc: 'Lerne die besten Verhandlungstechniken mit KI-Rollenspielen. Inkl. aktueller Gehaltsdaten 2026.', asin: 'B0B5G8HLX9', budget: ['sparsam','komfort'], level: ['berufserfahren','fuehrung','wechsel'], phase: ['gehalt'], industry: ['it','finanzen','vertrieb'] },
+
+  // === BUSINESS-KARTEN / PRINT ===
+  c01: { category: 'Business-Karten', name: 'Visitenkarten Premium (Set 200 Stück)', price: 29.99, emoji: '💳', desc: 'Hochwertige Business-Karten, matt laminiert, 350g Papier. Inkl. KI-Design-Vorlage für maximalen Eindruck.', asin: 'B09B4F5G7R', budget: ['sparsam','komfort'], level: ['berufserfahren','fuehrung','wechsel'], phase: ['netzwerk','optimierung'], industry: ['finanzen','vertrieb','marketing','it'] },
+  c02: { category: 'Business-Karten', name: 'Digitale NFC-Visitenkarte – HiHello Pro', price: 34.99, emoji: '📱', desc: 'KI-gestützte digitale Business-Karte mit NFC-Chip. Einfach ans Smartphone halten – Kontakt gespeichert.', asin: 'B0CJRG2L9V', budget: ['sparsam','komfort','premium'], level: ['fuehrung','berufserfahren','wechsel'], phase: ['netzwerk'], industry: ['it','marketing','finanzen','vertrieb'] },
+  c03: { category: 'Business-Karten', name: 'Moo Premium Business Cards (x100)', price: 44.99, emoji: '💳', desc: 'Design-Visitenkarten mit abgerundeten Ecken, 400g QR-Code. Hinterlässt einen bleibenden Eindruck.', asin: 'B07G1YXPJ9', budget: ['komfort','premium'], level: ['fuehrung','berufserfahren'], phase: ['netzwerk'], industry: ['finanzen','marketing','vertrieb'] },
+
+  // === ZUBEHÖR ===
+  z01: { category: 'Zubehör', name: 'Smartphone-Stativ mit Bluetooth-Fernauslöser', price: 19.99, emoji: '📱', desc: 'Für selbstgemachte Bewerbungsfotos und Video-Aufnahmen. Unverzichtbar für professionelles Bewerbungsfoto.', asin: 'B08R67PGHQ', budget: ['minimal','sparsam'], level: ['student','wiedereinstieg','wechsel'], phase: ['erstbewerbung','optimierung'], industry: ['all'] },
+  z02: { category: 'Zubehör', name: 'USB-Hub 7-in-1 mit 4K-HDMI', price: 34.99, emoji: '🔌', desc: 'HDMI 4K@60Hz, USB-A 3.0, SD-Kartenleser. Für sauberes Kabelmanagement am Bewerbungs-Arbeitsplatz.', asin: 'B0CJRG2L9W', budget: ['sparsam','komfort'], level: ['student','berufserfahren','fuehrung'], phase: ['vorstellungsgespraech'], industry: ['it','marketing'] },
+  z03: { category: 'Zubehör', name: 'Laptop-Ständer Aluminium (höhenverstellbar)', price: 39.99, emoji: '💻', desc: 'Ergonomischer Laptop-Ständer für die perfekte Kameraperspektive bei Video-Interviews.', asin: 'B0B5G8HLX6', budget: ['sparsam','komfort'], level: ['student','berufserfahren','fuehrung'], phase: ['vorstellungsgespraech'], industry: ['it','marketing','finanzen','bildung','vertrieb'] }
+};
+
+function selectOption(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const qIdx = parseInt(el.closest('.question-card').dataset.q);
+  answers[qIdx] = el.dataset.value;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  const active = document.querySelector('.question-card.active');
+  const qIdx = parseInt(active.dataset.q);
+  if (answers[qIdx] === null) return;
+  if (qIdx === 4) { showResult(); return; }
+  active.classList.remove('active');
+  const next = document.querySelector(`[data-q="${qIdx+1}"]`);
+  next.classList.add('active');
+  updateProgress(qIdx+1);
+  updateStepCounter(qIdx+2);
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = qIdx === 3 ? '🎯 Ergebnis anzeigen' : 'Weiter →';
+}
+
+function prevQuestion() {
+  const active = document.querySelector('.question-card.active');
+  const qIdx = parseInt(active.dataset.q);
+  if (qIdx === 0) return;
+  active.classList.remove('active');
+  const prev = document.querySelector(`[data-q="${qIdx-1}"]`);
+  prev.classList.add('active');
+  updateProgress(qIdx-1);
+  updateStepCounter(qIdx);
+  document.getElementById('nextBtn').disabled = false;
+  document.getElementById('nextBtn').textContent = 'Weiter →';
+}
+
+function updateProgress(step) {
+  document.getElementById('progressFill').style.width = (step/5*100)+'%';
+}
+
+function updateStepCounter(step) {
+  document.getElementById('stepCounter').textContent = 'Frage ' + Math.min(step,5) + ' von 5';
+}
+
+function filterProducts(answers) {
+  const level = answers[0];
+  const phase = answers[1];
+  const budget = answers[2];
+  const industry = answers[3];
+  const tech = answers[4];
+
+  let matches = [];
+
+  Object.keys(products).forEach(key => {
+    const p = products[key];
+    let score = 0;
+
+    // Budget match (highest weight)
+    if (p.budget.includes(budget)) score += 3;
+    // Level match
+    if (p.level.includes(level)) score += 2;
+    // Phase match
+    if (p.phase.includes(phase)) score += 2;
+    // Industry match
+    if (p.industry.includes(industry)) score += 2;
+    else if (p.industry.includes('all')) score += 1;
+    // Tech affinity: prefer higher-tech products for tech-affine users
+    if (tech === 'profi' || tech === 'fortgeschritten') {
+      if (p.category === 'Software' || p.category === 'Kurs' || p.name.includes('AI') || p.name.includes('KI')) score += 1;
+    }
+
+    if (score > 0) {
+      matches.push({ ...p, key, score });
+    }
+  });
+
+  // Sort by score descending, then by price ascending for same score
+  matches.sort((a, b) => {
+    if (b.score !== a.score) return b.score - a.score;
+    return a.price - b.price;
+  });
+
+  // Budget ranking for price sort within same score
+  const budgetOrder = ['minimal','sparsam','komfort','premium','luxus'];
+  const budgetIdx = budgetOrder.indexOf(budget);
+
+  // Return top max 8, preferring higher score products
+  return matches.slice(0, 8);
+}
+
+function showResult() {
+  document.getElementById('questions').style.display = 'none';
+  document.querySelector('.nav-buttons').style.display = 'none';
+  document.getElementById('stepCounter').style.display = 'none';
+  document.getElementById('progressFill').style.width = '100%';
+
+  const level = answers[0], phase = answers[1], budget = answers[2], industry = answers[3], tech = answers[4];
+
+  // Fill summary
+  const levelLabels = {
+    student: 'Student / Einsteiger',
+    berufserfahren: 'Berufserfahren',
+    fuehrung: 'Führungskraft',
+    wechsel: 'Branchenwechsel',
+    wiedereinstieg: 'Wiedereinstieg'
+  };
+  document.getElementById('rLevel').textContent = levelLabels[level] || level;
+
+  const phaseLabels = {
+    erstbewerbung: 'Erstbewerbung',
+    optimierung: 'Optimierung',
+    vorstellungsgespraech: 'Vorstellungsgespräch',
+    gehalt: 'Gehaltsverhandlung',
+    netzwerk: 'Netzwerk-Aufbau'
+  };
+  document.getElementById('rPhase').textContent = phaseLabels[phase] || phase;
+
+  const budLabels = {
+    minimal: '0-30€',
+    sparsam: '30-100€',
+    komfort: '100-250€',
+    premium: '250-500€',
+    luxus: '500€+'
+  };
+  document.getElementById('rBudget').textContent = budLabels[budget] || budget;
+
+  const industryLabels = {
+    it: 'IT / Tech',
+    marketing: 'Marketing / Media',
+    finanzen: 'Finanzen / Consulting',
+    gesundheit: 'Gesundheit / Pharma',
+    handwerk: 'Handwerk / Produktion',
+    bildung: 'Bildung / Forschung',
+    vertrieb: 'Vertrieb / Sales'
+  };
+  document.getElementById('rIndustry').textContent = industryLabels[industry] || industry;
+
+  const techLabels = {
+    anfaenger: 'Anfänger',
+    gelegentlich: 'Gelegentlich',
+    fortgeschritten: 'Fortgeschritten',
+    profi: 'Profi'
+  };
+  document.getElementById('rTech').textContent = techLabels[tech] || tech;
+
+  // Profile Title & Emoji
+  const profileMap = {
+    'student_erstbewerbung_minimal_it_anfaenger': { title: 'Der IT-Einsteiger', emoji: '💻', desc: 'Starte deine IT-Karriere mit einem soliden Basis-Setup. Fokus auf klare Bewerbungsunterlagen & erste Kontakte.' },
+    'student_erstbewerbung_sparsam_marketing_gelegentlich': { title: 'Der Kreativ-Start', emoji: '🎨', desc: 'Dein Einstieg ins Marketing mit smarten Tools für Portfolio & Bewerbung.' },
+    'berufserfahren_optimierung_komfort_it_fortgeschritten': { title: 'Der IT-Profi', emoji: '⚡', desc: 'Optimierter Bewerbungsprozess mit professioneller Technik. Du weißt, worauf es ankommt.' },
+    'fuehrung_vorstellungsgespraech_premium_finanzen_profi': { title: 'Die Führungskraft', emoji: '👔', desc: 'Professionelles Auftreten auf höchstem Niveau. Dein Equipment unterstreicht deine Kompetenz.' },
+    'wechsel_erstbewerbung_komfort_marketing_gelegentlich': { title: 'Der Branchenwechsler', emoji: '🔄', desc: 'Neue Branche, neues Glück. Mit den richtigen Tools und Strategien gelingt der Wechsel.' },
+    'wiedereinstieg_optimierung_sparsam_bildung_anfaenger': { title: 'Der Wiedereinsteiger', emoji: '🌱', desc: 'Sanfter Wiedereinstieg mit durchdachten Werkzeugen. Deine Erfahrung zählt.' },
+    'student_vorstellungsgespraech_sparsam_vertrieb_gelegentlich': { title: 'Der Vertriebstalent', emoji: '📞', desc: 'Überzeuge im Vorstellungsgespräch mit professionellem Auftreten und den richtigen Argumenten.' },
+    'berufserfahren_gehalt_komfort_finanzen_fortgeschritten': { title: 'Der Gehaltsverhandler', emoji: '💰', desc: 'Strategisch vorbereitet in die Gehaltsverhandlung. Mit Daten, Taktik und Selbstbewusstsein.' },
+    'fuehrung_netzwerk_premium_it_profi': { title: 'Der Networker', emoji: '🤝', desc: 'Dein Netzwerk ist dein Kapital. Mit professionellem Branding und den richtigen Kontakten.' },
+    'berufserfahren_optimierung_minimal_gesundheit_anfaenger': { title: 'Der Gesundheits-Starter', emoji: '🏥', desc: 'Fokussierte Bewerbung im Gesundheitswesen. Klassisch, professionell, klar.' },
+    'wechsel_netzwerk_komfort_vertrieb_fortgeschritten': { title: 'Der Sales-Wechsler', emoji: '📈', desc: 'Neue Branche, bewährte Vertriebskompetenz. Mit KI-Unterstützung zum Traumjob.' },
+    'student_erstbewerbung_minimal_handwerk_anfaenger': { title: 'Der Handwerks-Einsteiger', emoji: '🔧', desc: 'Praktisch, ehrlich, direkt. Deine Bewerbung zeigt, was du kannst.' }
+  };
+
+  const profileKey = [level, phase, budget, industry, tech].join('_');
+  const profile = profileMap[profileKey] || {
+    title: 'Dein Bewerbungsprofil',
+    emoji: '🎯',
+    desc: 'Basierend auf deinen Antworten haben wir die perfekten Produkte für deine erfolgreiche Bewerbung zusammengestellt.'
+  };
+
+  document.getElementById('resultEmoji').textContent = profile.emoji;
+  document.getElementById('resultTitle').textContent = profile.title;
+  document.getElementById('resultDesc').textContent = profile.desc;
+
+  // Products
+  const matches = filterProducts(answers);
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  
+  if (matches.length === 0) {
+    grid.innerHTML = '<div style="background:#1A1A1A;border:1px solid #2A2A2A;border-radius:14px;padding:24px;text-align:center;color:#888"><p>Keine passenden Produkte gefunden. Bitte versuche andere Antworten.</p></div>';
+  } else {
+    matches.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      const badges = `<span class="badge">${p.category}</span>`;
+      card.innerHTML = `<div class="p-header"><span class="p-icon">${p.emoji}</span><span class="p-title">${p.name}</span><span class="p-price">€${p.price.toFixed(2).replace('.',',')}</span></div>${badges}<div class="p-desc">${p.desc}</div><a class="p-link" href="https://www.amazon.de/dp/${p.asin}?tag=ikune21-21" target="_blank" rel="nofollow">→ Bei Amazon ansehen*</a>`;
+      grid.appendChild(card);
+    });
+  }
+
+  // Total cost
+  const total = matches.reduce((s, p) => s + p.price, 0);
+  document.getElementById('totalCost').textContent = total.toFixed(2).replace('.', ',') + ' €';
+
+  // Action plan based on phase
+  const plans = {
+    erstbewerbung: [
+      'Tag 1: Erstelle deinen Lebenslauf mit einem KI-Bewerbungs-Tool',
+      'Tag 2: Schreibe dein Anschreiben – passend zur Stelle & personalisiert',
+      'Tag 3: Lass deine Unterlagen von einem Freund / Coach prüfen',
+      'Tag 4: Bereite dich auf das Vorstellungsgespräch vor (Technik-Check)',
+      'Tag 5: Bewirb dich bei deinen Wunsch-Unternehmen'
+    ],
+    optimierung: [
+      'Tag 1: Analysiere deine bestehenden Bewerbungsunterlagen kritisch',
+      'Tag 2: Optimiere Lebenslauf mit KI-gestützten Schlüsselwörtern',
+      'Tag 3: Überarbeite Anschreiben – präziser & zielgerichteter',
+      'Tag 4: Aktualisiere LinkedIn/Xing-Profil & Portfolio',
+      'Tag 5: Bewirb dich mit den optimierten Unterlagen'
+    ],
+    vorstellungsgespraech: [
+      'Tag 1: Richte dein technisches Setup ein (Webcam, Mikrofon, Licht)',
+      'Tag 2: Übe typische Fragen mit KI-Simulator oder Spiegel',
+      'Tag 3: Führe ein Probe-Videointerview mit einem Freund durch',
+      'Tag 4: Recherchiere Unternehmen & bereite eigene Fragen vor',
+      'Tag 5: Dein Vorstellungsgespräch – du bist bereit!'
+    ],
+    gehalt: [
+      'Tag 1: Recherchiere Gehaltsdaten für deine Position & Branche',
+      'Tag 2: Entwickle deine Verhandlungsstrategie (Ziel + Minimum + Argumente)',
+      'Tag 3: Übe die Verhandlung mit KI-Rollenspiel',
+      'Tag 4: Bereite dich auf Gegenargumente vor',
+      'Tag 5: Gehe selbstbewusst in die Verhandlung'
+    ],
+    netzwerk: [
+      'Tag 1: Optimiere dein LinkedIn-Profil mit KI-Keywords & Headline',
+      'Tag 2: Erstelle ersten Content-Beitrag (Erfahrung, Insight, Meinung)',
+      'Tag 3: Baue gezielt Kontakte auf (50+ relevante Verbindungen)',
+      'Tag 4: Buche digitale Business-Karten & richte NFC ein',
+      'Tag 5: Starte Gespräche mit Recruitern & Branchenexperten'
+    ]
+  };
+  const planSteps = plans[phase] || plans.erstbewerbung;
+  const planOl = document.getElementById('actionPlan');
+  planOl.innerHTML = '';
+  planSteps.forEach((s) => {
+    const li = document.createElement('li');
+    const colonIdx = s.indexOf(':');
+    if (colonIdx > -1) {
+      li.innerHTML = `<strong>${s.substring(0, colonIdx)}:</strong>${s.substring(colonIdx + 1)}`;
+    } else {
+      li.textContent = s;
+    }
+    planOl.appendChild(li);
+  });
+
+  document.getElementById('resultCard').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  answers = [null,null,null,null,null];
+  document.getElementById('questions').style.display = 'block';
+  document.querySelector('.nav-buttons').style.display = 'flex';
+  document.getElementById('stepCounter').style.display = 'block';
+  document.getElementById('resultCard').classList.remove('active');
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  document.querySelector('[data-q="0"]').classList.add('active');
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  updateProgress(0);
+  updateStepCounter(1);
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = 'Weiter →';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
