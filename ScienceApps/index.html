@@ -1,227 +1,79 @@
 <!DOCTYPE html>
 <html lang="de">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science Apps – Kostenlose Tools, Spiele & mehr</title>
+<title>Science Apps – 16 kostenlose Apps, Games & Tools</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a192f;color:#ccd6f6;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:24px}
-.container{max-width:1100px;margin:0 auto}
-h1{font-size:clamp(24px,5vw,42px);margin-bottom:4px;background:linear-gradient(135deg,#64ffda,#42a5f5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
-.sub{color:#8892b0;text-align:center;margin-bottom:28px;max-width:600px;margin-left:auto;margin-right:auto;font-size:14px}
+.container{max-width:960px;margin:0 auto}
+h1{font-size:clamp(24px,5vw,42px);margin-bottom:8px;background:linear-gradient(135deg,#64ffda,#42a5f5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.sub{color:#8892b0;text-align:center;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.card{background:#112240;border:1px solid #233554;border-radius:12px;padding:22px 18px;text-align:center;transition:all .3s;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center}
+.card{background:#112240;border:1px solid #233554;border-radius:12px;padding:24px;text-align:center;transition:all .3s;text-decoration:none;color:inherit}
 .card:hover{border-color:#64ffda;transform:translateY(-4px);box-shadow:0 8px 30px rgba(100,255,218,.1)}
 .card .emoji{font-size:40px;margin-bottom:8px}
 .card h2{color:#64ffda;font-size:16px;margin-bottom:4px}
-.card p{color:#8892b0;font-size:12px;margin-bottom:0;line-height:1.4}
-.card .status{display:inline-block;background:rgba(100,255,218,.1);color:#64ffda;border:1px solid #64ffda;border-radius:20px;padding:2px 10px;font-size:10px;margin-top:8px}
-.card .status-new{background:rgba(255,217,61,.1);color:#ffd93d;border-color:#ffd93d}
-.stats{display:flex;justify-content:center;gap:32px;margin:24px 0;flex-wrap:wrap}
+.card p{color:#8892b0;font-size:12px;margin-bottom:0}
+.status{display:inline-block;background:rgba(100,255,218,.1);color:#64ffda;border:1px solid #64ffda;border-radius:20px;padding:2px 10px;font-size:10px;margin-top:8px}
+.stats{display:flex;justify-content:center;gap:32px;margin:32px 0;flex-wrap:wrap}
 .stat{text-align:center}
-.stat-num{font-size:26px;font-weight:700;color:#64ffda}
-.stat-label{color:#495670;font-size:11px}
-.section-title{font-size:18px;color:#42a5f5;margin:28px 0 14px;padding-bottom:6px;border-bottom:1px solid #233554;text-align:left}
-
-.newsletter{background:linear-gradient(135deg,#0d2137,#112240);border:1px solid #233554;border-radius:14px;padding:28px;margin:28px 0;text-align:center}
-.newsletter h3{color:#64ffda;font-size:18px;margin-bottom:8px}
-.newsletter p{color:#8892b0;font-size:13px;margin-bottom:16px}
-.newsletter-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto}
-.newsletter-form input{flex:1;min-width:200px;background:#0a192f;border:1px solid #233554;border-radius:8px;padding:10px 16px;color:#ccd6f6;font-size:14px;outline:none;transition:border-color .3s}
-.newsletter-form input:focus{border-color:#64ffda}
-.newsletter-form button{background:linear-gradient(135deg,#64ffda,#42a5f5);color:#0a192f;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s}
-.newsletter-form button:hover{transform:scale(1.03);box-shadow:0 4px 16px rgba(100,255,218,.3)}
-.newsletter-msg{color:#64ffda;font-size:13px;margin-top:10px;min-height:20px}
-
-.visitor-badge{display:inline-flex;align-items:center;gap:6px;background:#112240;border:1px solid #233554;border-radius:20px;padding:4px 14px;font-size:11px;color:#8892b0;margin:0 auto 10px;justify-content:center}
-.visitor-badge .num{color:#64ffda;font-weight:700}
-
-footer{margin-top:40px;color:#495670;font-size:11px;text-align:center;line-height:1.8}
+.stat-num{font-size:28px;font-weight:700;color:#64ffda}
+.stat-label{color:#495670;font-size:12px}
+footer{margin-top:40px;color:#495670;font-size:11px;text-align:center}
 footer a{color:#64ffda;text-decoration:none}
-@media(max-width:500px){.cards{grid-template-columns:1fr 1fr}.card{padding:16px 12px}.card .emoji{font-size:30px}.card h2{font-size:14px}.card p{font-size:11px}}
+.donate{text-align:center;margin:30px 0;padding:20px;background:linear-gradient(135deg,rgba(100,255,218,.05),rgba(66,165,245,.05));border:1px solid rgba(100,255,218,.2);border-radius:12px}
+.donate p{color:#8892b0;font-size:13px;margin-bottom:10px}
+.donate .btn{display:inline-block;background:linear-gradient(135deg,#64ffda,#42a5f5);color:#0a192f;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px;transition:transform .2s}
+.donate .btn:hover{transform:scale(1.05)}
+.category{margin:24px 0 12px;color:#64ffda;font-size:18px;font-weight:700;text-align:center;border-bottom:1px solid #233554;padding-bottom:8px}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>🔬 Science Apps & Tools</h1>
-<p class="sub">Kostenlose Browser-Apps, Spiele & Tools • Finanziert durch Affiliate-Links • Store-ID: ikune21-21</p>
-
-<div class="visitor-badge" id="visitorBadge">👁️ Besucher: <span class="num" id="visitorCount">0</span></div>
+<h1>🔬 Science Apps</h1>
+<p class="sub">16 kostenlose Browser-Apps & Spiele • Finanziert durch Amazon Affiliate<br>Autor: Licht und Schatten • Store-ID: ikune21-21</p>
 
 <div class="stats">
-<div class="stat"><div class="stat-num">19</div><div class="stat-label">Apps</div></div>
+<div class="stat"><div class="stat-num">16</div><div class="stat-label">Apps & Games</div></div>
+<div class="stat"><div class="stat-num">50+</div><div class="stat-label">Tools & Level</div></div>
 <div class="stat"><div class="stat-num">0€</div><div class="stat-label">Kosten</div></div>
-<div class="stat"><div class="stat-num">PWA</div><div class="stat-label">Offline</div></div>
 </div>
 
-<div class="section-title">🆕 Neu! Spieleportal & Geld verdienen</div>
+<div class="category">🧪 Wissenschaft</div>
 <div class="cards">
-<a class="card" href="../games/">
-<div class="emoji">🎮</div>
-<h2>Spieleportal</h2>
-<p>Alle Spiele auf einen Blick – inkl. Gaming-Hardware Empfehlungen (Affiliate)</p>
-<div class="status status-new">🆕 NEU</div>
-</a>
-<a class="card" href="../money/">
-<div class="emoji">💰</div>
-<h2>Geld verdienen</h2>
-<p>Verdiene Geld mit KI-Prompt-Paketen & Affiliate-Marketing – Strategien & Tools</p>
-<div class="status status-new">🆕 NEU</div>
-</a>
+<a class="card" href="/biolab/"><div class="emoji">🧬</div><h2>BioLab</h2><p>Molare Masse, Verdünnungen, pH-Puffer, DNA-Codon, Mikroskop-Berater</p><div class="status">✅ LIVE</div></a>
+<a class="card" href="/chembase/"><div class="emoji">⚗️</div><h2>ChemBase</h2><p>Molare Masse, Stöchiometrie, pH-Rechner, Periodensystem (H–Kr)</p><div class="status">✅ LIVE</div></a>
+<a class="card" href="/physdata/"><div class="emoji">⚡</div><h2>PhysData</h2><p>SI-Präfixe, Kinematik, Ohm'sches Gesetz, Elektrische Leistung</p><div class="status">✅ LIVE</div></a>
+<a class="card" href="/medcalc/"><div class="emoji">🏥</div><h2>MedCalc</h2><p>BMI, Kalorien, Medikamentendosis, Blutdruck-Klassifikation</p><div class="status">✅ LIVE</div></a>
 </div>
 
-<div class="section-title">🔬 Wissenschaft & Rechner</div>
+<div class="category">🎮 Games</div>
 <div class="cards">
-<a class="card" href="./biolab/">
-<div class="emoji">🧬</div>
-<h2>BioLab</h2>
-<p>Molare Masse, Verdünnungen, pH-Puffer, DNA-Codon, Mikroskop-Berater</p>
-<div class="status">✅ LIVE</div>
-</a>
-<a class="card" href="./chembase/">
-<div class="emoji">⚗️</div>
-<h2>ChemBase</h2>
-<p>Molare Masse, Stöchiometrie, pH-Rechner, Periodensystem (H–Kr)</p>
-<div class="status">✅ LIVE</div>
-</a>
-<a class="card" href="./physdata/">
-<div class="emoji">⚡</div>
-<h2>PhysData</h2>
-<p>SI-Präfixe, Kinematik, Ohm'sches Gesetz, Elektrische Leistung</p>
-<div class="status">✅ LIVE</div>
-</a>
-<a class="card" href="./medcalc/">
-<div class="emoji">🏥</div>
-<h2>MedCalc</h2>
-<p>BMI, Kalorien-Grundumsatz, Medikamentendosis, Blutdruck</p>
-<div class="status">✅ LIVE</div>
-</a>
+<a class="card" href="/weaponevo/"><div class="emoji">⚔️</div><h2>Weapon Evolution</h2><p>Idle Clicker: 12 Waffen upgraden, Prestige – von Stein zu Quanten-Power!</p><div class="status">🎮 GAME</div></a>
+<a class="card" href="/galaxyminer/"><div class="emoji">🚀</div><h2>Galaxy Miner</h2><p>Idle Clicker: Erze abbauen, Schiffe upgraden, Planeten entdecken!</p><div class="status">🎮 GAME</div></a>
+<a class="card" href="/sudoku/"><div class="emoji">🔢</div><h2>Sudoku</h2><p>Klassisches Sudoku mit 3 Schwierigkeitsgraden und Timer</p><div class="status">🎮 NEU!</div></a>
+<a class="card" href="/wordsearch/"><div class="emoji">🔤</div><h2>WordSearch</h2><p>Wortgitter-Rätsel auf Deutsch – finde alle versteckten Wörter!</p><div class="status">🎮 NEU!</div></a>
+<a class="card" href="/crossword/"><div class="emoji">🧩</div><h2>Kreuzworträtsel</h2><p>3 deutsche Rätsel: Kunst, Geschichte, Biologie – PWA</p><div class="status">🧩 NEU!</div></a>
 </div>
 
-<div class="section-title">🎮 Spiele & Rätsel</div>
+<div class="category">📝 Tools & Content</div>
 <div class="cards">
-<a class="card" href="../memory/">
-<div class="emoji">🃏</div>
-<h2>Memory</h2>
-<p>Kartenspiel – Finde alle Paare mit KI-Themen Icons. 3 Schwierigkeitsstufen</p>
-<div class="status status-new">🆕 NEU</div>
-</a>
-<a class="card" href="../tictactoe/">
-<div class="emoji">❌</div>
-<h2>TicTacToe</h2>
-<p>Gegen unschlagbare KI (Minimax). 3×3 & 4×4 Modi, 3 Schwierigkeitsstufen</p>
-<div class="status status-new">🆕 NEU</div>
-</a>
-<a class="card" href="../sudoku/">
-<div class="emoji">🧩</div>
-<h2>Sudoku</h2>
-<p>4 Schwierigkeitsstufen, Notizen, Hinweise, Timer – klassisches Sudoku als PWA</p>
-<div class="status">🎮 GAME</div>
-</a>
-<a class="card" href="../crossword/">
-<div class="emoji">🧩</div>
-<h2>Kreuzworträtsel</h2>
-<p>3 Rätsel: KI-Welt, Technik, Allgemeinwissen – Deutsches PWA</p>
-<div class="status">🧩 PUZZLE</div>
-</a>
-<a class="card" href="../wordsearch/">
-<div class="emoji">🔍</div>
-<h2>Wortsuche</h2>
-<p>Wortsuchrätsel mit deutschen Wörtern, 3 Stufen, Wisch-Steuerung</p>
-<div class="status">🔍 FIND</div>
-</a>
-<a class="card" href="../weaponevo/">
-<div class="emoji">⚔️</div>
-<h2>Weapon Evolution</h2>
-<p>Idle Clicker: 12 Waffen, Upgrades, Prestige – Stein bis Quanten-Power</p>
-<div class="status">🎮 GAME</div>
-</a>
+<a class="card" href="/galaxyblog/"><div class="emoji">📰</div><h2>GalaxyBlog</h2><p>5 KI-Artikel mit Affiliate-Links: ChatGPT, DeepSeek, Bildgeneratoren & mehr</p><div class="status">📰 BLOG</div></a>
+<a class="card" href="/resume/"><div class="emoji">📄</div><h2>Resume Builder</h2><p>Lebenslauf-Baukasten – professionelle Vorlagen, PDF-Export</p><div class="status">🛠️ NEU!</div></a>
+<a class="card" href="/prompts1/"><div class="emoji">🤖</div><h2>Prompt Pack #1</h2><p>50+ KI-Prompts für Content Creation & Marketing</p><div class="status">📦 NEU!</div></a>
+<a class="card" href="/prompts2/"><div class="emoji">💻</div><h2>Prompt Pack #2</h2><p>50+ KI-Prompts für Programmierung & Technik</p><div class="status">📦 NEU!</div></a>
+<a class="card" href="/prompts3/"><div class="emoji">💼</div><h2>Prompt Pack #3</h2><p>50+ KI-Prompts für Business & Strategie</p><div class="status">📦 NEU!</div></a>
 </div>
 
-<div class="section-title">💼 Produktivität & Karriere</div>
-<div class="cards">
-<a class="card" href="./resumebuilder/">
-<div class="emoji">📄</div>
-<h2>Lebenslauf-Baukasten</h2>
-<p>Formular ausfüllen, CV-Vorschau, als PDF drucken – deutscher Lebenslauf</p>
-<div class="status">📄 TOOL</div>
-</a>
-</div>
-
-<div class="section-title">🤖 KI-Prompt-Pakete (5€)</div>
-<div class="cards">
-<a class="card" href="./promptpack1/">
-<div class="emoji">✍️</div>
-<h2>Textprompts</h2>
-<p>50+ Prompts für Content, Blogging & Copywriting – inkl. Cheat-Sheet</p>
-<div class="status">🛒 5€</div>
-</a>
-<a class="card" href="./promptpack2/">
-<div class="emoji">💻</div>
-<h2>Coding-Prompts</h2>
-<p>40+ Developer-Prompts: Code, Debugging, Architektur, DevOps</p>
-<div class="status">🛒 5€</div>
-</a>
-<a class="card" href="./promptpack3/">
-<div class="emoji">📊</div>
-<h2>Business-Prompts</h2>
-<p>45+ Prompts für Strategie, Marktanalyse & Vertrieb</p>
-<div class="status">🛒 5€</div>
-</a>
-</div>
-
-<div class="newsletter">
-<h3>📬 Newsletter – Neuigkeiten & Tipps</h3>
-<p>Erhalte Updates zu neuen Apps, Spielen und KI-Tipps. Kein Spam, jederzeit kündbar.</p>
-<div class="newsletter-form">
-<input type="email" id="newsletterEmail" placeholder="Deine E-Mail-Adresse" required>
-<button onclick="subscribeNewsletter()">🔔 Abonnieren</button>
-</div>
-<div class="newsletter-msg" id="newsletterMsg"></div>
+<div class="donate">
+<p>📚 Alle Apps sind völlig kostenlos • Finanziert durch Affiliate-Links & Spenden</p>
+<a class="btn" href="https://ko-fi.com/lichtundschatten" target="_blank" rel="noopener">☕ Unterstütze mich auf Ko-fi</a>
 </div>
 
 <footer>
-<p>Werbung & Affiliate-Links finanzieren diese Seite • Amazon-Partner ikune21-21 • Alle Apps sind kostenlos • Prompt Packs 5€ via Ko-fi</p>
-<p style="margin-top:4px">Erstellt von <strong>Licht und Schatten</strong> 🌘 • Autor aller Inhalte und Code</p>
-<p style="margin-top:4px"><a href="../impressum/">Impressum</a> • <a href="../datenschutz/">Datenschutz</a> • <a href="../games/">Spieleportal</a> • <a href="../money/">Geld verdienen</a></p>
+<p>Werbung & Affiliate-Links finanzieren diese Seite • Amazon-Partner ikune21-21</p>
+<p style="margin-top:4px">Nächste Apps: BioInfo, EcoStat, GeoData (in Planung) • Autor: Licht und Schatten</p>
 </footer>
 </div>
-
-<script>
-// Visitor counter (localStorage-based, per device)
-(function(){
-  let count=parseInt(localStorage.getItem('ls_visitor_count')||'0')+1;
-  localStorage.setItem('ls_visitor_count',count);
-  document.getElementById('visitorCount').textContent=count;
-  
-  // Also track total unique visits
-  let totalVisits=parseInt(localStorage.getItem('ls_total_visits')||'0')+1;
-  localStorage.setItem('ls_total_visits',totalVisits);
-})();
-
-function subscribeNewsletter(){
-  let email=document.getElementById('newsletterEmail').value.trim();
-  let msg=document.getElementById('newsletterMsg');
-  if(!email||!email.includes('@')||!email.includes('.')){
-    msg.style.color='#ff6b6b';
-    msg.textContent='❌ Bitte gib eine gültige E-Mail-Adresse ein.';
-    return;
-  }
-  // Store in localStorage (for now - later connect to a service)
-  let subs=JSON.parse(localStorage.getItem('ls_newsletter_subs')||'[]');
-  if(subs.includes(email)){
-    msg.style.color='#ffd93d';
-    msg.textContent='📧 Diese E-Mail ist bereits angemeldet.';
-    return;
-  }
-  subs.push(email);
-  localStorage.setItem('ls_newsletter_subs',JSON.stringify(subs));
-  msg.style.color='#64ffda';
-  msg.textContent='✅ Danke! Du bist angemeldet. Wir benachrichtigen dich bei neuen Apps.';
-  document.getElementById('newsletterEmail').value='';
-  
-  // Optional: open mailto for manual confirmation
-  // window.location.href='mailto:affirmation.positiv@icloud.com?subject=Newsletter%20Anmeldung&body='+encodeURIComponent(email);
-}
-</script>
 </body>
 </html>
