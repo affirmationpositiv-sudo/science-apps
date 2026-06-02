@@ -1,5 +1,18 @@
 # Loop Log – Science Apps Deployment
 
+## R2.49 – 02.06.2026 (Cron) – Deploy Blog #64 + #65 + Tool #17, Synced Desktop→Live | Autor: Licht und Schatten
+**Aktion:** Frühere in Desktop/gh-pages erstellte Inhalte (Blog #64, #65, Tool #17, LeadGen +3, Tamagotchi) via Patch auf origin/main deployed. GitHub Push erfolgreich.
+**Dateien deployed:**
+- `blog/ki-tools-vergleich-2026.html` (NEU – Blog #64, 22KB, 35+ Amazon-Links)
+- `blog/ki-kueche-ernaehrung-2026.html` (NEU – Blog #65, 34KB, 40+ Amazon-Links)
+- `tools/kueche-bedarf.html` (NEU – Tool #17, 18KB, interaktiver Küchen-Rechner)
+- `leadgen/index.html` (+3 Amazon-Produkte: Jabra Headset, Elgato Light, Akquise-Buch)
+- `tamagotchi/index.html` (wiederhergestellt)
+- `admin.html` / `blog/index.html` / `sitemap.xml` (Stats aktualisiert)
+**Affiliate-Tag:** ikune21-21
+**Loop-Log:** auf Live aktualisiert
+**Status:** ✅ Deployed & Live (Git Push erfolgreich)
+
 ## R2.41 – 02.06.2026 – Blog #65 (KI-Küche & Ernährung 2026) + Tool #17 + LeadGen +3 Produkte
 **Aktion:** Blog #65 "KI-Küche & Ernährung 2026" + interaktiver KI-Küchen-Bedarfsrechner (Tool #17) + LeadGen +3 Amazon-Affiliate-Produkte (Jabra Headset, Elgato Light, Akquise-Buch) + Sitemap 183→185 + Admin-Stats aktualisiert
 **Dateien geändert:**
