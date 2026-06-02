@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#12122a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="200" fill="rgba(245,158,11,0.03)"/>
+  <circle cx="1820" cy="980" r="300" fill="rgba(99,102,241,0.03)"/>
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1920" height="4" fill="url(#gold)"/>
+  <!-- Progress bar -->
+  <rect x="100" y="40" width="1720" height="3" rx="1.5" fill="#1a1a3e"/>
+  <rect x="100" y="40" width="286" height="3" rx="1.5" fill="#f59e0b"/>
+  <!-- Slide number -->
+  <text x="100" y="120" font-family="system-ui, sans-serif" font-size="18" fill="#6366f1" font-weight="600">1/6</text>
+  <!-- Main text -->
+  <text x="160" y="120" font-family="system-ui, sans-serif" font-size="18" fill="#8892b0">Der neue Weg, der Sucht durch Wachstum ersetzt</text>
+  <!-- Title -->
+  <text x="100" y="380" font-family="system-ui, sans-serif" font-size="64" fill="#ffffff" font-weight="700" filter="url(#glow)">Bist du bereit für eine Veränderung?</text>
+  <!-- Subtitle -->
+  <text x="100" y="470" font-family="system-ui, sans-serif" font-size="28" fill="#ccd6f6" opacity="0.9">
+    <tspan x="100" dy="0">Der neue Weg, der Sucht durch Wachstum ersetzt</tspan>
+    
+  </text>
+  <!-- Decorative gold line -->
+  <rect x="100" y="520" width="80" height="3" rx="1.5" fill="#f59e0b"/>
+  <!-- Bottom branding -->
+  <text x="960" y="1030" font-family="system-ui, sans-serif" font-size="16" fill="#6366f1" text-anchor="middle" font-weight="600">RENAISSANCE</text>
+  <text x="960" y="1055" font-family="system-ui, sans-serif" font-size="12" fill="#8892b0" text-anchor="middle">IKUNE KI-Coaching</text>
+</svg>

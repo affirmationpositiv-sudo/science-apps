@@ -1,0 +1,13 @@
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_01.png'
+duration 17.54
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_02.png'
+duration 17.54
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_03.png'
+duration 17.54
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_04.png'
+duration 17.54
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_05.png'
+duration 17.54
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_06.png'
+duration 17.54
+file '/Users/f.cinar/projects/science-apps/renaissance/videos/slides_01_renaissance_intro/slide_06.png'

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renaissance – Video 1: Was ist Renaissance?</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow:hidden;height:100vh;display:flex;flex-direction:column}
+.slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:80px 120px;opacity:0;transition:opacity 1.2s ease;background:linear-gradient(135deg,#0a0a1a,#12122a)}
+.slide.active{opacity:1}
+.slide-num{position:absolute;top:40px;left:60px;color:#6366f1;font-size:16px;font-weight:600}
+.slide-label{position:absolute;top:40px;left:120px;color:#8892b0;font-size:16px}
+.progress{position:absolute;top:30px;left:60px;right:60px;height:3px;background:#1a1a3e;border-radius:2px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#d97706);border-radius:2px;transition:width 0.5s}
+.badge{position:absolute;top:80px;left:60px;background:rgba(99,102,241,0.2);color:#6366f1;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:600;border:1px solid rgba(99,102,241,0.3)}
+.main-text{font-size:clamp(32px,5vw,64px);font-weight:700;color:#fff;text-align:center;max-width:900px;line-height:1.2;margin-bottom:24px}
+.main-text .highlight{background:linear-gradient(135deg,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub-text{font-size:clamp(18px,2vw,28px);color:#ccd6f6;text-align:center;max-width:800px;line-height:1.5;opacity:0.9}
+.gold-line{width:80px;height:3px;background:linear-gradient(90deg,#f59e0b,#d97706);border-radius:2px;margin:32px auto}
+.footer{position:absolute;bottom:40px;left:0;width:100%;text-align:center}
+.footer-text{color:#6366f1;font-size:14px;font-weight:600;letter-spacing:3px}
+.footer-sub{color:#8892b0;font-size:11px;margin-top:4px}
+.controls{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:100}
+.controls button{padding:6px 16px;border-radius:6px;border:1px solid rgba(255,255,255,0.2);background:rgba(10,10,26,0.8);color:#fff;cursor:pointer;font-size:12px;backdrop-filter:blur(10px)}
+.controls button:hover{background:rgba(245,158,11,0.2);border-color:#f59e0b}
+@media(max-width:768px){.slide{padding:60px 30px}.main-text{font-size:26px}.sub-text{font-size:16px}.controls{bottom:40px}}
+</style>
+</head>
+<body>
+
+<div id="container">
+  <div class="slide active" data-index="0">
+    <div class="progress"><div class="progress-fill" id="prog0" style="width:0%"></div></div>
+    <div class="slide-num">1/6</div>
+    <div class="slide-label">Was ist Renaissance?</div>
+    <div class="badge">✨ Der neue Weg</div>
+    <div class="main-text">Bist du bereit für eine <span class="highlight">echte Veränderung</span>?</div>
+    <div class="gold-line"></div>
+    <div class="sub-text">Die meisten Ansätze scheitern, weil sie von außen kommen.<br>Renaissance ist anders. Von innen.</div>
+    <div class="footer"><div class="footer-text">RENAISSANCE</div><div class="footer-sub">IKUNE KI-Coaching</div></div>
+  </div>
+  <div class="slide" data-index="1">
+    <div class="progress"><div class="progress-fill" id="prog1" style="width:0%"></div></div>
+    <div class="slide-num">2/6</div>
+    <div class="slide-label">Was ist Renaissance?</div>
+    <div class="badge">⚠️ Das Problem</div>
+    <div class="main-text">Bloß nicht <span class="highlight">blocken</span>. Wachsen.</div>
+    <div class="gold-line"></div>
+    <div class="sub-text">Blocker-Apps umgehst du. Scham macht es schlimmer.<br>Reine Enthaltsamkeit ohne Wachstum ist eine Zeitbombe.</div>
+    <div class="footer"><div class="footer-text">RENAISSANCE</div><div class="footer-sub">IKUNE KI-Coaching</div></div>
+  </div>
+  <div class="slide" data-index="2">
+    <div class="progress"><div class="progress-fill" id="prog2" style="width:0%"></div></div>
+    <div class="slide-num">3/6</div>
+    <div class="slide-label">Was ist Renaissance?</div>
+    <div class="badge">💡 Die Lösung</div>
+    <div class="main-text">Werde zu jemandem, für den <span class="highlight">kein Thema mehr</span></div>
+    <div class="gold-line"></div>
+    <div class="sub-text">Ersetze die Leere nicht mit Verboten, sondern mit echtem Wachstum.<br>Mit Skills, die dich stärker machen.</div>
+    <div class="footer"><div class="footer-text">RENAISSANCE</div><div class="footer-sub">IKUNE KI-Coaching</div></div>
+  </div>
+  <div class="slide" data-index="3">
+    <div class="progress"><div class="progress-fill" id="prog3" style="width:0%"></div></div>
+    <div class="slide-num">4/6</div>
+    <div class="slide-label">Was ist Renaissance?</div>
+    <div class="badge">🤖 Dein KI-Coach</div>
+    <div class="main-text"><span class="highlight">24/7</span> für dich da</div>
+    <div class="gold-line"></div>
+    <div class="sub-text">Kennt deine Fortschritte. Gibt dir den richtigen Push.<br>Niemals verurteilend. Immer für dich.</div>
+    <div class="footer"><div class="footer-text">RENAISSANCE</div><div class="footer-sub">IKUNE KI-Coaching</div></div>
+  </div>
+  <div class="slide" data-index="4">
+    <div class="progress"><div class="progress-fill" id="prog4" style="width:0%"></div></div>
+    <div class="slide-num">5/6</div>
+    <div class="slide-label">Was ist Renaissance?</div>
+    <div class="badge">📚 12 Wochen Programm</div>
+    <div class="main-text"><span class="highlight">Woche für Woche</span> wachsen</div>
+    <div class="gold-line"></div>
+    <div class="sub-text">Jede Woche ein neues Modul. Skills, die du wirklich lernen kannst.<br>Eine Community, die dich trägt.</div>
+    <div class="footer"><div class="footer-text">RENAISSANCE</div><div class="footer-sub">IKUNE KI-Coaching</div></div>
+  </div>
+  <div class="slide" data-index="5">
+    <div class="progress"><div class="progress-fill" id="prog5" style="width:0%"></div></div>
+    <div class="slide-num">6/6</div>
+    <div class="slide-label">Was ist Renaissance?</div>
+    <div class="badge">🎯 Jetzt starten</div>
+    <div class="main-text">Fang <span class="highlight">heute</span> an</div>
+    <div class="gold-line"></div>
+    <div class="sub-text">Buche dein kostenloses Erstgespräch. 30 Minuten.<br>Kein Druck. Nur ein ehrliches Gespräch.</div>
+    <div class="footer"><div class="footer-text">RENAISSANCE</div><div class="footer-sub">IKUNE KI-Coaching</div></div>
+  </div>
+</div>
+
+<audio id="audio" preload="auto">
+  <source src="01_renaissance_intro.mp3" type="audio/mpeg">
+</audio>
+
+<div class="controls">
+  <button onclick="togglePlay()">▶/⏸</button>
+  <button onclick="restart()">↺</button>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const audio = document.getElementById('audio');
+const totalSlides = slides.length;
+let current = 0;
+let slideTimes = [0, 17.5, 35, 52.5, 70, 87.5];
+
+function showSlide(index) {
+  slides.forEach((s, i) => s.classList.toggle('active', i === index));
+  current = index;
+}
+
+function togglePlay() {
+  if (audio.paused) { audio.play(); } else { audio.pause(); }
+}
+
+function restart() {
+  audio.currentTime = 0;
+  showSlide(0);
+  audio.play();
+}
+
+audio.addEventListener('timeupdate', () => {
+  const t = audio.currentTime;
+  for (let i = slideTimes.length - 1; i >= 0; i--) {
+    if (t >= slideTimes[i]) {
+      if (current !== i) showSlide(i);
+      break;
+    }
+  }
+  // Update progress bars
+  const total = audio.duration || 105;
+  slides.forEach((s, i) => {
+    const bar = document.getElementById('prog' + i);
+    if (bar) {
+      const slideStart = slideTimes[i];
+      const slideEnd = slideTimes[i + 1] || total;
+      const slideDur = slideEnd - slideStart;
+      const slideElapsed = Math.max(0, Math.min(slideDur, t - slideStart));
+      bar.style.width = (slideElapsed / slideDur * 100) + '%';
+    }
+  });
+});
+
+audio.addEventListener('ended', () => showSlide(totalSlides - 1));
+</script>
+</body>
+</html>

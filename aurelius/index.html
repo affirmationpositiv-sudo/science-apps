@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURELIUS – Possession is Permanent</title>
+    <meta name="description" content="AURELIUS. Deutsche Luxus-Manufaktur. Ready-to-Wear, Accessoires und Limited Editions. Nicht für jeden. Nicht für die Meisten.">
+    <meta property="og:title" content="AURELIUS – Possession is Permanent">
+    <meta property="og:description" content="Luxus, der nach Macht schmeckt. Seit Anbeginn der Zeit.">
+    <meta property="og:image" content="https://affirmationpositiv-sudo.github.io/science-apps/aurelius/og.jpg">
+    <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/aurelius/">
+    <meta name="theme-color" content="#0a0a0a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ───────── RESET ───────── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; background: #0a0a0a; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #d4d4d4;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ───────── TYPOGRAPHY ───────── */
+        .serif { font-family: 'Playfair Display', serif; }
+        .serif-light { font-family: 'Cormorant Garamond', serif; }
+        .gold { color: #d4af37; }
+        .white { color: #f5f0e8; }
+
+        /* ───────── NAVBAR ───────── */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+            transition: background 0.4s;
+        }
+        .navbar.scrolled { background: rgba(10,10,10,0.98); }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #f5f0e8;
+            text-decoration: none;
+            font-weight: 400;
+        }
+        .nav-logo span { color: #d4af37; }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+        .nav-links a:hover { color: #d4af37; }
+        .nav-inquire {
+            padding: 10px 28px;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            background: transparent;
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+        }
+        .nav-inquire:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+
+        /* ───────── HERO ───────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            position: relative;
+            background: radial-gradient(ellipse at 50% 30%, rgba(212,175,55,0.04) 0%, transparent 70%),
+                        radial-gradient(ellipse at 80% 80%, rgba(45,10,30,0.15) 0%, transparent 50%);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .hero-sub {
+            font-size: 12px;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #d4af37;
+            margin-bottom: 24px;
+            font-weight: 300;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 700;
+            color: #f5f0e8;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        .hero-title em {
+            font-style: italic;
+            font-weight: 400;
+            display: block;
+            font-size: clamp(24px, 4vw, 56px);
+            color: #d4af37;
+        }
+        .hero-desc {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+        .hero-line {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, #d4af37, transparent);
+            margin-top: 48px;
+        }
+
+        /* ───────── SECTION ───────── */
+        section {
+            padding: 120px 48px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .section-tag {
+            font-size: 11px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: #d4af37;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-size: clamp(32px, 5vw, 64px);
+            font-weight: 600;
+            margin-bottom: 48px;
+        }
+
+        /* ───────── COLLECTION GRID ───────── */
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+        .product-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.5s;
+            cursor: pointer;
+            position: relative;
+        }
+        .product-card:hover {
+            border-color: rgba(212,175,55,0.3);
+            transform: translateY(-4px);
+        }
+        .product-card:hover .product-img {
+            transform: scale(1.03);
+        }
+        .product-img-wrap {
+            height: 380px;
+            overflow: hidden;
+            position: relative;
+            background: #111;
+        }
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s;
+        }
+        .product-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #d4af37;
+            color: #0a0a0a;
+            font-size: 10px;
+            letter-spacing: 2px;
+            padding: 6px 14px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .product-info {
+            padding: 24px;
+        }
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #f5f0e8;
+            margin-bottom: 6px;
+        }
+        .product-desc {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .product-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: #d4af37;
+        }
+        .product-more {
+            font-size: 11px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .product-more:hover { color: #d4af37; }
+
+        /* ───────── PHILOSOPHY ───────── */
+        .philosophy {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .philosophy-text {
+            font-size: 15px;
+            line-height: 2;
+            color: #999;
+        }
+        .philosophy-text p + p { margin-top: 20px; }
+        .philosophy-text .quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-style: italic;
+            color: #d4af37;
+            line-height: 1.5;
+            padding: 24px 0;
+            border-top: 1px solid rgba(212,175,55,0.15);
+            border-bottom: 1px solid rgba(212,175,55,0.15);
+            margin-top: 24px;
+        }
+        .philosophy-img {
+            width: 100%;
+            height: 600px;
+            background: linear-gradient(135deg, #1a1a1a, #2d0a1e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: rgba(212,175,55,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .philosophy-img::after {
+            content: '';
+            position: absolute;
+            inset: 16px;
+            border: 1px solid rgba(212,175,55,0.08);
+        }
+
+        /* ───────── PRICE LIST ───────── */
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .price-table tr {
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .price-table td {
+            padding: 20px 8px;
+            font-size: 14px;
+            color: #999;
+        }
+        .price-table td:first-child {
+            font-family: 'Playfair Display', serif;
+            color: #f5f0e8;
+            font-size: 16px;
+        }
+        .price-table td:last-child {
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+            color: #d4af37;
+            font-size: 20px;
+            white-space: nowrap;
+        }
+        .price-table .limited td:first-child::after {
+            content: ' ✦';
+            color: #d4af37;
+            font-size: 12px;
+        }
+
+        /* ───────── INQUIRE ───────── */
+        .inquire-section {
+            background: linear-gradient(180deg, transparent, rgba(212,175,55,0.03));
+            text-align: center;
+            padding: 120px 48px;
+        }
+        .inquire-section h2 {
+            font-size: clamp(28px, 4vw, 48px);
+            margin-bottom: 16px;
+        }
+        .inquire-section p {
+            color: #888;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .inquire-btn {
+            display: inline-block;
+            padding: 18px 48px;
+            background: #d4af37;
+            color: #0a0a0a;
+            border: none;
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s;
+        }
+        .inquire-btn:hover {
+            background: #f5f0e8;
+            transform: translateY(-2px);
+        }
+
+        /* ───────── FOOTER ───────── */
+        footer {
+            padding: 48px 48px 24px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        footer .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            letter-spacing: 8px;
+            color: #555;
+            margin-bottom: 24px;
+        }
+        footer .links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        footer .links a {
+            color: #555;
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        footer .links a:hover { color: #d4af37; }
+        footer .copyright {
+            font-size: 11px;
+            color: #333;
+        }
+
+        /* ───────── MODAL ───────── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(20px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #0a0a0a;
+            border: 1px solid rgba(212,175,55,0.15);
+            padding: 48px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: none;
+            border: none;
+            color: #555;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .modal h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .modal p {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        .modal-form input,
+        .modal-form textarea,
+        .modal-form select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f5f0e8;
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-family: 'Inter', sans-serif;
+        }
+        .modal-form input:focus,
+        .modal-form textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        .modal-form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        .modal-form select option { background: #1a1a1a; }
+        .modal-form button {
+            width: 100%;
+            padding: 16px;
+            background: #d4af37;
+            border: none;
+            color: #0a0a0a;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .modal-form button:hover { background: #f5f0e8; }
+
+        /* ───────── RESPONSIVE ───────── */
+        @media (max-width: 900px) {
+            section { padding: 80px 24px; }
+            .navbar { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .philosophy { grid-template-columns: 1fr; gap: 40px; }
+            .philosophy-img { height: 300px; }
+        }
+        @media (max-width: 600px) {
+            .collection-grid { grid-template-columns: 1fr; }
+            .product-img-wrap { height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════ NAVBAR ═══════ -->
+<nav class="navbar" id="navbar">
+    <a href="#" class="nav-logo">Aurelius<span>.</span></a>
+    <div class="nav-links">
+        <a href="#collections">Collections</a>
+        <a href="#philosophy">Philosophy</a>
+        <a href="#prices">Prices</a>
+        <a href="#inquire">Inquire</a>
+    </div>
+    <a href="#" class="nav-inquire" onclick="openModal(); return false;">Inquire</a>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+    <div class="hero-sub">Deutsche Manufaktur</div>
+    <h1 class="hero-title">
+        Aurelius
+        <em>Possession is Permanent</em>
+    </h1>
+    <p class="hero-desc">Ready-to-Wear · Accessoires · Limited Editions</p>
+    <div class="hero-line"></div>
+</section>
+
+<!-- ═══════ COLLECTIONS ═══════ -->
+<section id="collections">
+    <div class="section-tag">✦ Collection I</div>
+    <h2 class="section-title serif">The Inception</h2>
+
+    <div class="collection-grid">
+        <div class="product-card">
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a1a1a 30%, #2d0a1e 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.2); font-size:60px;">👑</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Imperator“ T-Shirt</h3>
+                <p class="product-desc">Sea Island Cotton, goldene Naht, handgefertigt in Deutschland</p>
+                <div class="product-meta">
+                    <span class="product-price">€1.800</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #0d0d0d 30%, #1a0a0a 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.2); font-size:60px;">🧥</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Nox“ Wollmantel</h3>
+                <p class="product-desc">Lammwolle, Goldfaden-Details, innen Seide gefüttert</p>
+                <div class="product-meta">
+                    <span class="product-price">€12.000</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a1a1a 30%, #0a1a0a 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.2); font-size:60px;">💎</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Signum“ Gold-Kette</h3>
+                <p class="product-desc">18K vergoldet, eingravierte Seriennummer, nummeriert</p>
+                <div class="product-meta">
+                    <span class="product-price">€8.500</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #0d0d0d 30%, #1a1a2d 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.2); font-size:60px;">🔥</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Aeternum“ Hoodie</h3>
+                <p class="product-desc">Kaschmir-Wolle-Mix, innen Seide, Gold-Applikationen</p>
+                <div class="product-meta">
+                    <span class="product-price">€4.500</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ LIMITED EDITION ═══════ -->
+<section id="limited" style="padding-top:0;">
+    <div class="section-tag">✦ Limited Edition</div>
+    <h2 class="section-title serif">The Few</h2>
+
+    <div class="collection-grid">
+        <div class="product-card" style="border-color: rgba(212,175,55,0.15);">
+            <div class="product-badge">10/10</div>
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #2d0a1e 0%, #0a0a0a 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.15); font-size:80px;">✦</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Aureus“ Gold-Jacke</h3>
+                <p class="product-desc">Von Hand gewebte Goldfäden in schwarze Lammwolle. 10 Exemplare weltweit.</p>
+                <div class="product-meta">
+                    <span class="product-price">€49.000</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card" style="border-color: rgba(212,175,55,0.15);">
+            <div class="product-badge">5/5</div>
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #1a0a0a 0%, #0a0a0a 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.15); font-size:80px;">👑</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Corona“ Krone</h3>
+                <p class="product-desc">Vergoldetes Kunstobjekt. Für den, der sich selbst krönt. 5 Stück.</p>
+                <div class="product-meta">
+                    <span class="product-price">€99.000</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card" style="border-color: rgba(212,175,55,0.15);">
+            <div class="product-badge">15/15</div>
+            <div class="product-img-wrap">
+                <div class="product-img" style="background: linear-gradient(135deg, #0a0a1a 0%, #0a0a0a 100%); display:flex; align-items:center; justify-content:center; color:rgba(212,175,55,0.15); font-size:80px;">⚜️</div>
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">„Sol Invictus“ Anzug</h3>
+                <p class="product-desc">Maßgeschneidert. Italienische Wolle. 15 Besitzer. 1 Schnitt. Ewig.</p>
+                <div class="product-meta">
+                    <span class="product-price">€35.000</span>
+                    <a href="#" class="product-more" onclick="openModal(); return false;">Inquire →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ PHILOSOPHY ═══════ -->
+<section id="philosophy">
+    <div class="philosophy">
+        <div class="philosophy-text">
+            <div class="section-tag">Manifest</div>
+            <h2 class="section-title serif" style="margin-bottom:32px;">Was du besitzt, besitzt dich.</h2>
+            <p>
+                In einer Welt der Wegwerfmode und Massenproduktion erinnert Aurelius an eine Wahrheit,
+                die die Menschen vergessen haben: <strong>Qualität ist keine Frage des Geldes. Sie ist eine Frage des Charakters.</strong>
+            </p>
+            <p>
+                Jedes Aurelius-Stück wird in limitierter Auflage gefertigt. Nicht weil wir nicht mehr produzieren können.
+                Sondern weil wir nicht mehr produzieren wollen. Exklusivität ist kein Marketing-Trick.
+                Exklusivität ist eine Verpflichtung gegenüber dem Besitzer.
+            </p>
+            <div class="quote">
+                „Ein Aurelius-Stück zu tragen bedeutet, eine Verantwortung zu übernehmen.
+                Die Verantwortung, sich selbst nicht zu verraten.“
+            </div>
+        </div>
+        <div class="philosophy-img">
+            AURELIUS
+        </div>
+    </div>
+</section>
+
+<!-- ═══════ PRICE LIST ═══════ -->
+<section id="prices">
+    <div class="section-tag">Preise</div>
+    <h2 class="section-title serif">Die Investition</h2>
+    <table class="price-table">
+        <tr><td>„Imperator“ T-Shirt</td><td>€1.800</td></tr>
+        <tr><td>„Aeternum“ Hoodie</td><td>€4.500</td></tr>
+        <tr><td>„Senatus“ Oxford-Hemd</td><td>€3.200</td></tr>
+        <tr><td>„Nox“ Wollmantel</td><td>€12.000</td></tr>
+        <tr><td>„Caelum“ Lederjacke</td><td>€18.000</td></tr>
+        <tr class="limited"><td>„Signum“ Gold-Kette</td><td>€8.500</td></tr>
+        <tr><td>„Sigillum“ Signetring</td><td>€4.200</td></tr>
+        <tr><td>„Tabula“ Geldbörse</td><td>€2.800</td></tr>
+        <tr><td>„Custos“ Handyhülle</td><td>€1.500</td></tr>
+        <tr><td>„Velum“ Seidenschal</td><td>€3.800</td></tr>
+        <tr class="limited"><td>„Aureus“ Gold-Jacke ✦ Limit 10</td><td>€49.000</td></tr>
+        <tr class="limited"><td>„Praetor“ Leder-Trenchcoat ✦ Limit 25</td><td>€28.000</td></tr>
+        <tr class="limited"><td>„Corona“ Krone ✦ Limit 5</td><td>€99.000</td></tr>
+        <tr class="limited"><td>„Sol Invictus“ Anzug ✦ Limit 15</td><td>€35.000</td></tr>
+        <tr class="limited"><td>„Basis“ Fundament-Skulptur ✦ Einzelstück</td><td>€250.000</td></tr>
+        <tr class="limited"><td>„Immortal“ Private Collection ✦ Auf Anfrage</td><td>ab €1.000.000</td></tr>
+    </table>
+</section>
+
+<!-- ═══════ INQUIRE ═══════ -->
+<section class="inquire-section" id="inquire">
+    <div class="section-tag">Kontakt</div>
+    <h2 class="serif">Besitz beginnt mit einer Frage.</h2>
+    <p>Jedes Aurelius-Stück wird individuell für dich reserviert. Kein Warenkorb. Kein Checkout. Nur ein Gespräch.</p>
+    <a href="#" class="inquire-btn" onclick="openModal(); return false;">✦ Anfrage stellen</a>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+    <div class="logo">AURELIUS</div>
+    <div class="links">
+        <a href="#">Collections</a>
+        <a href="#">Philosophy</a>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">Kontakt</a>
+    </div>
+    <div class="copyright">© AURELIUS – Possession is Permanent</div>
+</footer>
+
+<!-- ═══════ MODAL ═══════ -->
+<div class="modal-overlay" id="inquireModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <h2 class="serif">Anfrage stellen</h2>
+        <p>Wir melden uns innerhalb von 24 Stunden mit einem persönlichen Angebot.</p>
+        <form class="modal-form" id="inquireForm">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="E-Mail" required>
+            <select required>
+                <option value="">Produkt wählen</option>
+                <option>„Imperator“ T-Shirt – €1.800</option>
+                <option>„Aeternum“ Hoodie – €4.500</option>
+                <option>„Nox“ Wollmantel – €12.000</option>
+                <option>„Signum“ Gold-Kette – €8.500</option>
+                <option>„Aureus“ Gold-Jacke – €49.000</option>
+                <option>„Corona“ Krone – €99.000</option>
+                <option>„Immortal“ Private Collection – ab €1.000.000</option>
+                <option>Anderes Produkt</option>
+            </select>
+            <textarea placeholder="Deine Nachricht (optional)"></textarea>
+            <button type="submit">Anfrage senden</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Navbar scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
+    });
+
+    // Modal
+    function openModal() { document.getElementById('inquireModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { document.getElementById('inquireModal').classList.remove('active'); document.body.style.overflow = ''; }
+    document.getElementById('inquireModal').addEventListener('click', e => { if(e.target === e.currentTarget) closeModal(); });
+
+    // Escape schließt Modal
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
