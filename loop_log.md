@@ -8,6 +8,20 @@
 - `blog/index.html` (Stats 66→67, neue Karte #67, Hero-Meta aktualisiert)
 - `admin.html` (Blog-Stats: 62→67, Sitemap: 160→161)
 - `sitemap.xml` (+1 URL: Blog #67, 160→161)
+
+## R2.51 – 02.06.2026 (Cron 22:30) – Blog #68 (KI-Vertrieb & Sales 2026) + 2 Affiliate-Artikel | Autor: Licht und Schatten
+**Aktion:** Blog #68 "KI-Vertrieb & Sales 2026" erstellt + 2 Affiliate-Artikel (AiBiz + WealthLab) deployed. Alle 3 neuen URLs in Sitemap + Admin-Dashboard.
+**Neue Dateien:**
+- `blog/ki-vertrieb-sales-2026.html` (NEU – Blog #68, 21KB, 7 KI-Sales-Tools, 15+ Amazon-Links)
+- `affiliate/aibiz/ratgeber/ki-tools-business-2026.html` (NEU – 10 KI-Tools für Business 2026)
+- `affiliate/wealthlab/ratgeber/geld-verdienen-mit-ki-2026.html` (NEU – 15 Wege Geld verdienen mit KI)
+**Geänderte Dateien:**
+- `blog/index.html` (Stats 67→68, neue Karte #68, Hero-Meta aktualisiert)
+- `affiliate/aibiz/index.html` (+1 Artikel in Ratgeber-Liste)
+- `affiliate/wealthlab/index.html` (+1 Artikel in Ratgeber-Liste)
+- `admin.html` (Blog: 67→68, Affiliate: 50→52, Sitemap: 161→164, Seiten: 173→174)
+- `sitemap.xml` (+3 URLs: Blog #68, AiBiz KI-Tools, WealthLab Geld verdienen, 161→164)
+**Status:** ✅ Deployed (R2.51)
 - `loop_log.md` (aktueller Eintrag)
 **Status:** ✅ Deployed (SSH-Key funktioniert wieder!)
 
