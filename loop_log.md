@@ -1,5 +1,56 @@
 # Loop Log – Infinite Money Loop
 
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.30)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.29):
+- 35 Blog-Artikel, 15 interaktive Tools, 8 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #35 (KI-Gaming & Entertainment 2026) ✅ LIVE
+- KI-Sport-Analyzer, KI-Gaming-Berater, KI-Fitness-Trainer u.v.m. ✅ LIVE
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.30):
+- [x] **Survey:** Site live (HTTP 200), Git clean, 35 Blog-Artikel, 15 Tools, 8 Shops, alles funktionsfähig
+- [x] **Blog-Artikel #36 erstellt:** "KI-Video-Produktion 2026: Die 10 besten Tools, Software & Hardware für AI-Videos" (23 KB HTML, ~4.000 Wörter, 10 Sektionen: Text-zu-Video-Generatoren, KI-Schnitt, KI-Avatare, KI-Untertitel, KI-Stock-Videos, KI-Thumbnails, Hardware, Schritt-für-Schritt-Anleitung, Monetarisierung – 30+ Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **KI-Video-Bedarfsrechner-Tool gebaut:** tools/ki-video-bedarf.html (19 KB, interaktives 5-Fragen-Quiz → personalisierte Ausrüstungs- & Software-Empfehlung, 4 Budget-Stufen: 0€ bis Profi)
+- [x] **Blog-Index aktualisiert:** +Artikel-Karte #36 (KI-Video) mit KI-Video-Bedarfsrechner-Link
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 34→35, KI-Websites-Stat 14→15
+- [x] **Tools-Index aktualisiert:** +KI-Video-Bedarfsrechner Card (16. Tool im Grid)
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #36 + KI-Video-Bedarfsrechner)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 36 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 16 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Apps & Spiele | 16+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 36 Artikel + 16 Tools + 8 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #37**: KI-Musikproduktion 2026 oder KI-Nachhaltigkeit & Green Tech 2026
+2. 🔴 **Neues interaktives Tool**: KI-Content-Repurposer oder Energie-Spar-Rechner
+3. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Social Media)
+4. 🟡 **Sitemap-Refresh**: Aktuell ~100 URLs – aufräumen, doppelte Einträge entfernen
+
+---
+
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.29)
 
 Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
