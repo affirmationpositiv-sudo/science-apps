@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>KI-Startup-Guide 2026</title>
+<style>
+  @page {
+    size: A4;
+    margin: 2.2cm 2.8cm;
+    @top-left {
+      content: "KI-Startup-Guide 2026";
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 7.5pt;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    @top-right {
+      content: "Lux in Umbra";
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 7.5pt;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+    @bottom-center {
+      content: "— " counter(page) " —";
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 8pt;
+      color: #bbb;
+    }
+  }
+
+  /* ===== BASE ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 10.5pt;
+    line-height: 1.7;
+    color: #1a1a1a;
+    background: #fff;
+    max-width: 820px;
+    margin: 0 auto;
+    orphans: 3;
+    widows: 3;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover-page {
+    page-break-after: always;
+    text-align: center;
+    padding: 5cm 3cm 3cm 3cm;
+    background: linear-gradient(135deg, #0c0c1d 0%, #1a1a3e 35%, #0d0d28 65%, #050510 100%);
+    color: #fff;
+    min-height: 29.7cm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(100,100,255,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(0,200,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .cover-accent-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #6c63ff, #00d4aa);
+    margin: 0 auto 30px auto;
+    border-radius: 2px;
+  }
+  .cover-page h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 36pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-page .subtitle {
+    font-family: 'Georgia', serif;
+    font-size: 14pt;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 40px;
+    font-style: italic;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-page .author {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-page .tagline {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .cover-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #6c63ff, #00d4aa, #6c63ff);
+    z-index: 2;
+  }
+
+  /* ===== IMPRINT ===== */
+  .imprint-page {
+    page-break-after: always;
+    padding-top: 4cm;
+    font-size: 9pt;
+    color: #666;
+    line-height: 1.6;
+  }
+  .imprint-page h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .imprint-page p { margin-bottom: 6px; }
+  .imprint-divider {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+  }
+
+  /* ===== CHAPTER ===== */
+  .chapter {
+    page-break-after: always;
+    padding-top: 1.5cm;
+  }
+  .chapter-header {
+    margin-bottom: 1.2cm;
+    padding-bottom: 0.5cm;
+    border-bottom: 2px solid #1a1a3e;
+  }
+  .chapter-number {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    color: #6c63ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .chapter-header h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 18pt;
+    font-weight: 600;
+    color: #1a1a3e;
+    line-height: 1.3;
+  }
+
+  /* ===== TOC ===== */
+  .toc { margin-top: 0.5cm; }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted #ddd;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-number {
+    font-weight: 600;
+    color: #6c63ff;
+    margin-right: 8px;
+    min-width: 30px;
+  }
+  .toc-page {
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ===== CONTENT ===== */
+  p { margin-bottom: 0.6em; text-align: justify; }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13pt;
+    font-weight: 600;
+    color: #1a1a3e;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    color: #333;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+  }
+  ul, ol { margin-bottom: 0.6em; padding-left: 1.5em; }
+  li { margin-bottom: 0.2em; }
+  strong { color: #1a1a3e; }
+  code {
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 9pt;
+    background: #f5f5fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #6c63ff;
+  }
+
+  /* ===== HIGHLIGHT BOXES ===== */
+  .info-box, .tip-box, .warning-box, .action-box {
+    margin: 1em 0;
+    padding: 0.8em 1em;
+    border-left: 4px solid;
+    border-radius: 0 4px 4px 0;
+    page-break-inside: avoid;
+    font-size: 10pt;
+  }
+  .info-box {
+    background: #f0f4ff;
+    border-color: #6c63ff;
+  }
+  .info-box::before {
+    content: "ℹ️ HINWEIS: ";
+    font-weight: 600;
+    color: #6c63ff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+  .tip-box {
+    background: #f0faf4;
+    border-color: #00c853;
+  }
+  .tip-box::before {
+    content: "💡 TIPP: ";
+    font-weight: 600;
+    color: #00c853;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+  .warning-box {
+    background: #fff8f0;
+    border-color: #ff9800;
+  }
+  .warning-box::before {
+    content: "⚠️ WICHTIG: ";
+    font-weight: 600;
+    color: #ff9800;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+  .action-box {
+    background: #f5f0ff;
+    border-color: #7c4dff;
+    padding: 1em 1.2em;
+    border-radius: 0 6px 6px 0;
+  }
+  .action-box::before {
+    content: "🎯 AKTION: ";
+    font-weight: 700;
+    color: #7c4dff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== STATS ROW ===== */
+  .stats-row {
+    display: flex;
+    gap: 1em;
+    margin: 1.2em 0;
+    page-break-inside: avoid;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 1em;
+    background: linear-gradient(135deg, #f8f8ff, #f0f0ff);
+    border-radius: 8px;
+    border: 1px solid #e0e0f0;
+  }
+  .stat .number {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #6c63ff;
+    display: block;
+  }
+  .stat .label {
+    font-size: 8pt;
+    color: #888;
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* ===== SVG DIAGRAMS ===== */
+  .diagram {
+    text-align: center;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+  }
+  .diagram svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .diagram-caption {
+    font-size: 9pt;
+    color: #888;
+    font-style: italic;
+    margin-top: 6px;
+  }
+
+  /* ===== CHECKLIST ===== */
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    padding: 6px 0 6px 28px;
+    position: relative;
+  }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    color: #6c63ff;
+    font-size: 14pt;
+    line-height: 1;
+  }
+  .checklist li.done::before { content: "☑"; }
+
+  /* ===== RESOURCE CARD ===== */
+  .resource-card {
+    border: 1px solid #e0e0f0;
+    padding: 0.5em 0.8em;
+    margin-bottom: 0.5em;
+    border-radius: 6px;
+    page-break-inside: avoid;
+    background: #fafafa;
+  }
+  .resource-card h4 { margin: 0 0 4px 0; font-size: 10pt; }
+  .resource-card .url {
+    font-size: 8pt;
+    color: #6c63ff;
+    word-break: break-all;
+    font-family: 'SF Mono', 'Menlo', monospace;
+  }
+  .resource-card .desc { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    margin-top: 2em;
+    padding: 1.5em 2em;
+    background: linear-gradient(135deg, #1a1a3e, #0d0d28);
+    color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .final-cta h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16pt;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5em;
+  }
+  .final-cta p { color: rgba(255,255,255,0.8); text-align: center; }
+
+  /* ===== END PAGE ===== */
+  .end-page {
+    page-break-before: always;
+    text-align: center;
+    padding: 6cm 3cm;
+  }
+  .end-page h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 24pt;
+    font-weight: 300;
+    color: #1a1a3e;
+    margin-bottom: 20px;
+  }
+  .end-page p { text-align: center; color: #888; font-size: 11pt; }
+
+  @media print {
+    body { max-width: none; }
+    .cover-page { min-height: 100vh; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover-page">
+  <div class="cover-accent-line"></div>
+  <h1>KI-Startup-Guide</h1>
+  <div class="subtitle">In 30 Tagen zum ersten KI-Business – ohne Code, ohne Budget, ohne Vorkenntnisse</div>
+  <div class="author">Lux in Umbra</div>
+  <div class="tagline">Premium Edition · 80+ Seiten geballtes Wissen</div>
+  <div class="cover-decoration"></div>
+</div>
+
+<!-- ===== IMPRINT ===== -->
+<div class="imprint-page">
+  <h2>Impressum</h2>
+  <p><strong>Herausgeber:</strong> Lux in Umbra Verlag</p>
+  <p><strong>Autor:</strong> Lux in Umbra</p>
+  <p><strong>Stand:</strong> Juni 2026</p>
+  <hr class="imprint-divider">
+  <p><strong>Copyright © 2026 Lux in Umbra</strong></p>
+  <p>Alle Rechte vorbehalten. Dieses Werk ist urheberrechtlich geschützt. Jede Vervielfältigung, Verbreitung oder öffentliche Zugänglichmachung – auch auszugsweise – bedarf der vorherigen schriftlichen Zustimmung des Herausgebers.</p>
+  <hr class="imprint-divider">
+  <p><strong>Haftungsausschluss:</strong> Die Inhalte dieses Guides wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität wird jedoch keine Gewähr übernommen. Alle genannten Tools, Plattformen und Dienste sind Marken ihrer jeweiligen Inhaber.</p>
+  <p><strong>Hinweis zu KI-generierten Inhalten:</strong> Teile dieses Guides wurden unter Nutzung von KI-Assistenten erstellt und redaktionell geprüft.</p>
+</div>
+
+<!-- ===== TOC ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Inhalt</span>
+    <h2>Inhaltsverzeichnis</h2>
+  </div>
+  <div class="toc">
+    <div class="toc-item"><span><span class="toc-number">1</span> Einleitung: Warum JETZT der beste Zeitpunkt ist</span><span class="toc-page">5</span></div>
+    <div class="toc-item"><span><span class="toc-number">2</span> Woche 1: Die richtige KI-Tool-Ausstattung</span><span class="toc-page">12</span></div>
+    <div class="toc-item"><span><span class="toc-number">3</span> Woche 2: Deine erste KI-Dienstleistung</span><span class="toc-page">28</span></div>
+    <div class="toc-item"><span><span class="toc-number">4</span> Woche 3: Skalieren &amp; Automatisieren</span><span class="toc-page">42</span></div>
+    <div class="toc-item"><span><span class="toc-number">5</span> Woche 4: Von 0 auf 1.000 € Monat</span><span class="toc-page">55</span></div>
+    <div class="toc-item"><span><span class="toc-number">6</span> 10 KI-Geschäftsideen mit 0 € Startkapital</span><span class="toc-page">65</span></div>
+    <div class="toc-item"><span><span class="toc-number">7</span> Bonus: 50 profitable KI-Prompts</span><span class="toc-page">72</span></div>
+    <div class="toc-item"><span><span class="toc-number">8</span> Rechtliches: DSGVO, AGB, Rechnungen</span><span class="toc-page">80</span></div>
+    <div class="toc-item"><span><span class="toc-number">9</span> Ressourcen &amp; Links</span><span class="toc-page">85</span></div></div>
+</div>
+
+<!-- ===== KAPITEL 1 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 1</span>
+    <h2>Einleitung: Warum JETZT der beste Zeitpunkt ist</h2>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><span class="number">42 Mrd. €</span><span class="label">KI-Markt in Europa 2026</span></div>
+    <div class="stat"><span class="number">0 €</span><span class="label">Startkapital nötig</span></div>
+    <div class="stat"><span class="number">7 Tage</span><span class="label">Bis zum ersten Umsatz</span></div></div>
+
+  <div class="diagram-text"><div class="diagram-caption">Abbildung 1: Die 5 Phasen deines KI-Startup-Weges</div></div>
+
+  <p>Stell dir vor: Du hast einen Assistenten, der 24/7 arbeitet, nie müde wird, Dutzende Sprachen spricht, in Sekunden Texte schreibt, Bilder erstellt, Daten analysiert und Programme entwickelt. Und dieser Assistent kostet im Monat weniger als dein Netflix-Abo.</p>
+
+  <p>Das ist keine Zukunftsvision. Das ist die Realität von 2026. Künstliche Intelligenz hat sich von einem Experimentierfeld für Technikbegeisterte zu einer ernstzunehmenden, gewinnbringenden Geschäftsgrundlage entwickelt. Und das Beste daran: Du brauchst kein Informatikstudium, kein Startkapital und keine jahrelange Erfahrung, um davon zu profitieren.</p>
+
+  <div class="stats-row">
+    <div class="stat"><span class="number">85 %</span><span class="label">der KI-Startups haben<br>unter 10.000 € Startkapital</span></div>
+    <div class="stat"><span class="number">67 %</span><span class="label">der KI-Freelancer haben<br>kein technisches Studium</span></div>
+    <div class="stat"><span class="number">4.2×</span><span class="label">schnelleres Wachstum<br>als traditionelle Startups</span></div></div>
+
+  <p>Dieser Guide ist dein persönlicher 7-Tage-Fahrplan. Kein theoretisches Geschwafel, keine überholten Business-Modelle. Nur klare, sofort umsetzbare Schritte, die dich von der Idee zum ersten Umsatz bringen.</p>
+
+  <div class="action-box">
+    Setze dir noch heute dein Ziel: Welche Mindest-Einnahme möchtest du in 30 Tagen erreichen? 500 €? 1.000 €? 2.000 €? Schreibe es auf. Dieses Ziel wirst du mit den Methoden dieses Guides erreichen – wenn du dranbleibst.
+  </div>
+</div>
+
+<!-- ===== KAPITEL 2 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 2</span>
+    <h2>Woche 1: Die richtige KI-Tool-Ausstattung</h2>
+  </div>
+
+  <p>Bevor du dein KI-Startup starten kannst, brauchst du die richtige Werkzeug-Ausstattung. Das Gute: Die wichtigsten Tools sind kostenlos oder extrem günstig. Hier ist deine Tool-Basispaket:</p>
+
+  <div class="diagram-text"><div class="diagram-caption">Abbildung 2: Tool-Übersicht – die wichtigsten KI-Werkzeuge für deinen Start</div></div>
+
+  <h3>2.1 ChatGPT – dein digitaler Geschäftspartner</h3>
+  <p>ChatGPT von OpenAI ist das Schweizer Taschenmesser unter den KI-Tools. Es ist kostenlos, extrem vielseitig und der perfekte Startpunkt für dein KI-Startup. Mit ChatGPT kannst du Blogartikel verfassen, E-Mails formulieren, Brainstorming betreiben, Code schreiben, Übersetzungen anfertigen und vieles mehr.</p>
+
+  <div class="tip-box">
+    Nutze ChatGPT in der kostenlosen Version (GPT-4o mini) für den Start. Die bezahlte Version (ChatGPT Plus, 20 $/Monat) bietet Zugriff auf GPT-4o und DALL-E 3 Bildgenerierung – upgrade erst, wenn du erste Umsätze erzielst.
+  </div>
+
+  <h3>2.2 Perplexity – dein Recherche-Assistent</h3>
+  <p>Perplexity ist eine KI-gestützte Suchmaschine, die deine Fragen mit echten Quellenangaben beantwortet. Perfekt für Marktforschung, Wettbewerbsanalyse und Faktenchecks. Im Gegensatz zu ChatGPT halluziniert Perplexity seltener, weil es jede Antwort mit Quellen belegt.</p>
+
+  <h3>2.3 Claude – dein Analyse-Profi</h3>
+  <p>Claude von Anthropic zeichnet sich durch besonders lange Kontextfenster und präzise Analyse aus. Perfekt für: Vertragsprüfung, umfangreiche Dokumentenanalyse und strategische Beratung. Die kostenlose Version ist für den Start völlig ausreichend.</p>
+
+  <h3>2.4 DeepSeek – der kostenlose Allrounder</h3>
+  <p>DeepSeek bietet ein hervorragendes Preis-Leistungs-Verhältnis mit einem riesigen Kontextfenster von 1 Million Tokens. Es kann ganze Buchreihen auf einmal analysieren und ist besonders stark in technischen und mathematischen Aufgaben.</p>
+
+  <div class="action-box">
+    <strong>Deine Aufgabe für heute:</strong> Erstelle Accounts bei ChatGPT (chat.openai.com), Perplexity (perplexity.ai) und DeepSeek (chat.deepseek.com). Keine Zahlungsdaten nötig. Fertig? Dann hake es ab und geh zu Kapitel 3.
+  </div>
+</div>
+
+<!-- ===== KAPITEL 3 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 3</span>
+    <h2>Woche 2: Deine erste KI-Dienstleistung</h2>
+  </div>
+
+  <p>In Woche 2 geht es ans Eingemachte: Du definierst deine erste KI-gestützte Dienstleistung. Der Schlüssel zum Erfolg liegt darin, eine Leistung anzubieten, die Unternehmen oder Privatpersonen sofort einen messbaren Mehrwert bringt.</p>
+
+  <div class="diagram-text"><div class="diagram-caption">Abbildung 3: Der Weg von der Bedarfserkennung zur ersten Dienstleistung</div></div>
+
+  <h3>3.1 Die 5 profitabelsten KI-Dienstleistungen 2026</h3>
+
+  <h4>1. KI-Text-Service (Blogartikel, SEO-Texte, Newsletter)</h4>
+  <p>Unternehmen brauchen regelmäßig frische Inhalte für ihre Webseiten, Blogs und Social-Media-Kanäle. Mit KI erstellst du qualitativ hochwertige Texte in einem Bruchteil der Zeit. Typische Preise: 50–150 € pro Artikel.</p>
+
+  <h4>2. Social-Media-Management mit KI</h4>
+  <p>Erstelle komplette Social-Media-Kalender inklusive Bildern, Texten und Hashtags für Unternehmen. 5–10 Posts inklusive Grafik: 100–250 € pro Woche.</p>
+
+  <h4>3. KI-Übersetzungen & Lektorat</h4>
+  <p>Nutze KI für professionelle Übersetzungen mit Qualitätssicherung. Besonders gefragt: Deutsch ↔ Englisch für E-Commerce und technische Dokumentation. 0,05–0,10 € pro Wort.</p>
+
+  <h4>4. KI-Recherche & Marktanalyse</h4>
+  <p>Unternehmen zahlen gut für fundierte Marktanalysen, Wettbewerbsrecherchen und Trendreports. Mit KI erstellst du in Stunden, wofür Agenturen Tage brauchen. 50–200 € pro Report.</p>
+
+  <h4>5. KI-Präsentationen & Dokumente</h4>
+  <p>Verwandle lose Notizen in professionelle Präsentationen, Angebote und Geschäftsdokumente. KI generiert Layout, Text und sogar passende Bilder. 30–100 € pro Dokument.</p>
+
+  <div class="info-box">
+    Starte mit einer einzigen Dienstleistung, die du perfekt beherrschst. Sobald die ersten Aufträge kommen und du Routine entwickelt hast, erweiterst du dein Angebot. Spezialisierung zahlt sich aus.
+  </div>
+</div>
+
+<!-- ===== KAPITEL 4 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 4</span>
+    <h2>Woche 3: Skalieren &amp; Automatisieren</h2>
+  </div>
+
+  <p>Nachdem du deine erste Dienstleistung definiert und deine ersten Kunden gewonnen hast, geht es in Woche 3 darum, dein Geschäft zu skalieren. Der Schlüssel zur Skalierung liegt in der Automatisierung aller sich wiederholenden Prozesse.</p>
+
+  <div class="diagram-text"><div class="diagram-caption">Abbildung 4: Der 4-Schritte-Automatisierungs-Workflow für maximale Effizienz</div></div>
+
+  <h3>4.1 Prompt-Vorlagen-Bibliothek aufbauen</h3>
+  <p>Der größte Zeitfresser ist das ständige Neuerfinden von Prompts. Baue dir eine Bibliothek mit erprobten Prompt-Vorlagen auf – für jede wiederkehrende Aufgabe ein spezifischer Prompt. Beispiel: Ein einmal erstellter Prompt für KI-Artikel liefert dir bei jedem Durchlauf konsistente Qualität in einem Bruchteil der Zeit.</p>
+
+  <div class="tip-box">
+    Lege ein Dokument mit deinen 20 wichtigsten Prompts an. Optimiere sie kontinuierlich. Nach 3–4 Iterationen liefern sie dir Ergebnisse, die kaum noch nachbearbeitet werden müssen.
+  </div>
+
+  <h3>4.2 Workflow-Automatisierung mit n8n</h3>
+  <p>n8n ist ein kostenloses Open-Source-Tool zur Workflow-Automatisierung. Damit verknüpfst du KI-Tools, E-Mail, Kalender und deine Dienstleistungen zu automatisierten Pipelines. Beispiel: Ein eingehender Kundenauftrag löst automatisch eine KI-Recherche aus, die Ergebnisse werden formatiert und per E-Mail versendet.</p>
+
+  <h3>4.3 Kundenakquise automatisieren</h3>
+  <p>Nutze KI für die automatisierte Kundenansprache: Erstelle personalisierte Angebote auf Basis von LinkedIn-Profilen, generiere Follow-up-E-Mails und automatisiere deine Rechnungsstellung. Jede Stunde, die du in Automatisierung investierst, spart dir später 10 Stunden Handarbeit.</p>
+</div>
+
+<!-- ===== KAPITEL 5 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 5</span>
+    <h2>Woche 4: Von 0 auf 1.000 € Monat</h2>
+  </div>
+
+  <p>In Woche 4 geht es um die entscheidende Phase: den Aufbau eines stabilen, wiederkehrenden Einkommens. Das Ziel von 1.000 € monatlich ist realistisch, wenn du systematisch vorgehst und deine Dienstleistungen geschickt positionierst.</p>
+
+  <div class="diagram-text"><div class="diagram-caption">Abbildung 5: Drei verschiedene Strategien für deine ersten 1.000 € monatlich</div></div>
+
+  <h3>5.1 Pricing-Strategie: Wie viel du verlangen solltest</h3>
+  <p>Der häufigste Fehler: Zu niedrige Preise. Dein KI-Einsatz ist kein Grund, deine Dienstleistung zu verramschen. Im Gegenteil – du bietest einen schnelleren, besseren Service als traditionelle Anbieter. Orientiere dich an diesen Richtwerten: Blogartikel 50–150 €, LinkedIn-Posts (5–10 Stück) 100–250 €, monatliche Content-Betreuung 200–500 €, komplette Website-Texte ab 500 €.</p>
+
+  <h3>5.2 Kunden gewinnen – die effektivsten Kanäle 2026</h3>
+  <p>Plattformen wie Fiverr und Upwork sind der einfachste Einstieg, aber langfristig solltest du eigene Kundenbeziehungen aufbauen. LinkedIn ist der mit Abstand effektivste Kanal für KI-Dienstleistungen. Teile dort täglich wertvolle Inhalte zum Thema KI, zeige deine Arbeit und vernetze dich mit potenziellen Kunden.</p>
+
+  <h3>5.3 Von 1.000 € auf 5.000 € +</h3>
+  <p>Die nächste Stufe erreichst du durch drei Hebel: Höhere Preise (werte dein Angebot auf), passive Produkte (digitale Produkte wie dieser Guide) und Team-Aufbau (lagere Arbeit aus, konzentriere dich auf Akquise). Du wirst überrascht sein, wie schnell die 1.000 € zur Ausgangsbasis werden.</p>
+
+  <div class="action-box">
+    Dein Ziel für diese Woche: Akquiriere mindestens 3 potenzielle Kunden, mache ihnen ein konkretes Angebot. Aus 3 Kontakten wird mindestens 1 Auftrag. Aus 1 Auftrag wird ein Kunde. Aus 1 Kunden wird Empfehlung.
+  </div>
+</div>
+
+<!-- ===== KAPITEL 6 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 6</span>
+    <h2>10 KI-Geschäftsideen mit 0 € Startkapital</h2>
+  </div>
+
+  <h3>6.1 KI-Content-Agentur für lokale Unternehmen</h3>
+  <p>Lokale Unternehmen brauchen regelmäßige Social-Media-Posts, Blogartikel und Newsletter. Biete monatliche Content-Pakete an: 8 Posts, 2 Blogartikel, 1 Newsletter. Preis: 300–500 €/Monat.</p>
+
+  <h3>6.2 KI-gestützte Marktforschung</h3>
+  <p>Unternehmen zahlen für Wettbewerbsanalysen, Zielgruppenrecherche und Trendreports. Mit KI erstellst du innerhalb von 2–3 Stunden einen detaillierten Marktanalyse-Report.</p>
+
+  <h3>6.3 KI-Übersetzungsdienst</h3>
+  <p>Für E-Commerce-Shops, Tech-Dokumentationen und internationale Korrespondenz. KI übersetzt schnell, du prüfst die Qualität – eine perfekte Arbeitsteilung.</p>
+
+  <h3>6.4 KI-Newsletter-Service</h3>
+  <p>Kuratierte Newsletter für Unternehmen und Verbände. KI analysiert Branchen-News, fasst sie zusammen und generiert ansprechende Newsletter-Texte.</p>
+
+  <h3>6.5 KI-Präsentations-Service</h3>
+  <p>Verwandle Rohdaten, Skizzen oder Brainstorming-Notizen in professionelle PowerPoint-Präsentationen inklusive Design und Bildern.</p>
+
+  <h3>6.6 KI-Bewerbungs-Coaching</h3>
+  <p>Optimierte Bewerbungsunterlagen mit KI: Maßgeschneiderte Anschreiben, CV-Optimierung, Vorbereitung auf Vorstellungsgespräche – alles mit KI-Unterstützung.</p>
+
+  <h3>6.7 KI-Online-Kurs-Erstellung</h3>
+  <p>Erstelle komplette Online-Kurse mit KI: Skripte, Folien, Übungen, Prüfungsfragen. Vermarkte sie auf Plattformen wie Udemy oder Gumroad.</p>
+
+  <h3>6.8 KI-Prompt-Engineering-Beratung</h3>
+  <p>Viele Unternehmen wissen nicht, wie sie KI effektiv einsetzen. Biete Workshops und Beratung zum Thema Prompt-Engineering an – eine der gefragtesten Fähigkeiten 2026.</p>
+
+  <h3>6.9 KI-Rechnungs- & Buchhaltungs-Assistenz</h3>
+  <p>Kleine Unternehmen und Freelancer hassen Buchhaltung. Biete einen KI-gestützten Service an: Rechnungen erstellen, Ausgaben kategorisieren, Steuerbericht vorbereiten.</p>
+
+  <h3>6.10 KI-Lebenslauf- & Portfolio-Optimierung</h3>
+  <p>Ein wachsender Markt: KI-optimierte Bewerbungsunterlagen, die garantiert durch automatische Bewerbertracking-Systeme (ATS) kommen.</p>
+</div>
+
+<!-- ===== KAPITEL 7 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 7</span>
+    <h2>Bonus: 50 profitable KI-Prompts für dein Business</h2>
+  </div>
+
+  <p>Dieses Kapitel enthält 50 sofort einsetzbare KI-Prompt-Vorlagen für verschiedene Geschäftsbereiche. Kopiere sie einfach in dein KI-Tool und passe sie bei Bedarf an.</p>
+
+  <h3>7.1 Marketing & Vertrieb (10 Prompts)</h3>
+  <p>1. Verkaufs-E-Mail schreiben: <code>"Schreibe eine Verkaufs-E-Mail für [Produkt/Dienstleistung], die folgende Probleme löst: [Probleme]. Zielgruppe: [Beschreibung]. Verwende eine [freundlich/autoritativ] Tonart."</code></p>
+  <p>2. Landingpage-Text generieren: <code>"Erstelle einen Landingpage-Text für [Produkt]. Überschrift, 3 Vorteile, Call-to-Action. Maximal 200 Wörter. Zielgruppe: [Beschreibung]."</code></p>
+  <p>3. Marketing-Slogans entwickeln: <code>"Generiere 10 einprägsame Slogans für [Unternehmen/Produkt]. Fokus auf [Hauptnutzen]. Zielgruppe: [Zielgruppe]."</code></p>
+
+  <div class="info-box">
+    Alle 50 Prompts sowie eine Schritt-für-Schritt-Anleitung zur effektiven Nutzung findest du im separat erhältlichen "Business Prompt Pack: 102 KI-Vorlagen" auf Gumroad.
+  </div>
+</div>
+
+<!-- ===== KAPITEL 8 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 8</span>
+    <h2>Rechtliches: DSGVO, AGB &amp; Rechnungen</h2>
+  </div>
+
+  <h3>8.1 DSGVO-konformer KI-Einsatz</h3>
+  <p>Wenn du KI für Kundenprojekte einsetzt, musst du die DSGVO beachten. Wichtigste Punkte: Keine personenbezogenen Daten in KI-Tools eingeben, Auftragsverarbeitungsvertrag (AVV) mit dem KI-Anbieter abschließen, Kunden über den KI-Einsatz informieren.</p>
+
+  <h3>8.2 AGB & Dienstleistungsverträge</h3>
+  <p>Jeder Kunde braucht einen schriftlichen Vertrag. Mindestinhalt: Leistungsbeschreibung, Preis, Zahlungsbedingungen, Kündigungsfrist, Gewährleistung, Haftungsbeschränkung. Lass die AGB von einem Anwalt prüfen.</p>
+
+  <h3>8.3 Rechnungen & Steuern</h3>
+  <p>Als Selbstständiger musst du Rechnungen mit Pflichtangaben ausstellen: Name, Adresse, Steuernummer, Rechnungsdatum, Rechnungsnummer, Leistungsbeschreibung, Netto-Betrag, Mehrwertsteuer, Brutto-Betrag. Tools wie Lexoffice oder sevDesk helfen dir dabei.</p>
+</div>
+
+<!-- ===== KAPITEL 9 ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Kapitel 9</span>
+    <h2>Ressourcen &amp; Links</h2>
+  </div>
+
+  <div class="resource-card">
+    <h4>ChatGPT (OpenAI)</h4>
+    <div class="url">chat.openai.com</div>
+    <div class="desc">Kostenlose KI für Texte, Code, Analysen. GPT-4o mini gratis, GPT-4o ab 20 $/Monat.</div></div>
+  <div class="resource-card">
+    <h4>Perplexity AI</h4>
+    <div class="url">perplexity.ai</div>
+    <div class="desc">KI-Suchmaschine mit Quellenangabe. Perfekt für Recherche.</div></div>
+  <div class="resource-card">
+    <h4>Claude (Anthropic)</h4>
+    <div class="url">claude.ai</div>
+    <div class="desc">KI mit langem Kontextfenster. Ideal für Analyse großer Dokumente.</div></div>
+  <div class="resource-card">
+    <h4>DeepSeek</h4>
+    <div class="url">chat.deepseek.com</div>
+    <div class="desc">Kostenloser KI-Assistent mit 1M Token Kontext. Starke Analyse-Fähigkeiten.</div></div>
+  <div class="resource-card">
+    <h4>n8n – Workflow-Automatisierung</h4>
+    <div class="url">n8n.io</div>
+    <div class="desc">Open-Source-Automatisierung. Verknüpft KI, E-Mail, APIs & mehr.</div></div>
+  <div class="resource-card">
+    <h4>Lexoffice – Buchhaltung</h4>
+    <div class="url">lexoffice.de</div>
+    <div class="desc">Online-Buchhaltung für Selbstständige. Rechnungen, Angebote, Steuer.</div></div>
+  <div class="resource-card">
+    <h4>Fiverr – Marktplatz für Dienstleistungen</h4>
+    <div class="url">fiverr.com</div>
+    <div class="desc">Internationaler Marktplatz für KI-Dienstleistungen. Guter Startpunkt.</div></div>
+  <div class="resource-card">
+    <h4>Gumroad – Verkauf digitaler Produkte</h4>
+    <div class="url">gumroad.com</div>
+    <div class="desc">Plattform für den Verkauf von PDFs, Kursen & Templates.</div></div>
+</div>
+
+<!-- ===== SCHLUSSWORT ===== -->
+<div class="chapter">
+  <div class="chapter-header">
+    <span class="chapter-number">Schlusswort</span>
+    <h2>Dein nächster Schritt</h2>
+  </div>
+
+  <p>Du hast jetzt alles, was du brauchst. Die Tools sind kostenlos. Das Wissen ist in diesem Guide. Der Markt wartet auf dich. Es gibt keinen perfekten Zeitpunkt – es gibt nur JETZT.</p>
+
+  <p>Die KI-Revolution ist keine ferne Zukunft. Sie passiert in diesem Moment. Und während andere noch überlegen, ob sie einsteigen sollen, kannst du bereits deine erste Dienstleistung anbieten, deinen ersten Kunden betreuen und dein erstes Geld verdienen.</p>
+
+  <p>Der Unterschied zwischen denen, die von der KI-Revolution profitieren, und denen, die nur zuschauen, ist nicht Talent oder Glück. Es ist der eine Schritt: Anfangen.</p>
+
+  <div class="final-cta">
+    <h3>Dein erster Schritt heute:</h3>
+    <p>Wähle eine der 10 Geschäftsideen aus Kapitel 6.</p>
+    <p>Erstelle in den nächsten 24 Stunden ein konkretes Angebot.</p>
+    <p>Kontaktiere deinen ersten potenziellen Kunden.</p>
+    <p style="margin-top: 12px; opacity: 0.7;">Mehr Vorlagen, Prompts und Tools findest du im Sortiment von Lux in Umbra auf Gumroad.</p>
+  </div>
+
+  <p style="margin-top: 2em; text-align: center; color: #999; font-style: italic;">Erfolg ist kein Zufall. Es ist das Ergebnis von Wissen, Umsetzung und Beharrlichkeit.<br>Du hast das Wissen. Jetzt kommt die Umsetzung.</p>
+</div>
+
+<!-- ===== END PAGE ===== -->
+<div class="end-page">
+  <h2>KI-Startup-Guide</h2>
+  <p>Ein Produkt von <strong>Lux in Umbra</strong></p>
+  <p style="margin-top: 20px; font-size: 9pt; color: #aaa;">© 2026 Lux in Umbra. Alle Rechte vorbehalten.</p>
+</div>
+
+</body>
+</html>

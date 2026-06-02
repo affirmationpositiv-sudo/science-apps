@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licht & Schatten Persönlichkeits-Analyse 2026 – Kostenloser KI-Report</title>
+<meta name="description" content="Kostenlose KI-gestützte Persönlichkeits-Analyse: Erhalte deinen persönlichen Licht-und-Schatten-Report mit Empfehlungen für Bücher, Kurse & Tools. Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Persönlichkeitsanalyse, Schattenarbeit, Licht und Schatten, Persönlichkeitstest, Selbstreflexion, Persönlichkeitsentwicklung, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-size: 2.4em; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; text-align: center; }
+.subtitle { text-align: center; color: #6B7280; margin-bottom: 10px; }
+.progress { background: #1A1A1A; border-radius: 20px; height: 12px; margin: 20px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #8B5CF6, #FFD700); border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+.progress-text { text-align: center; color: #6B7280; font-size: 0.85em; margin-bottom: 24px; }
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+h2 { font-size: 1.4em; font-weight: 700; color: #fff; margin-bottom: 20px; text-align: center; }
+.options { display: grid; gap: 10px; }
+.option { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+.option:hover { border-color: #8B5CF6; background: #242424; }
+.option.selected { border-color: #8B5CF6; background: #1a0a2e; box-shadow: 0 0 15px rgba(139,92,246,.2); }
+.option input { display: none; }
+.option .icon { font-size: 24px; }
+.option .label { flex: 1; }
+.option .label strong { display: block; color: #fff; font-size: 1em; }
+.option .label span { color: #888; font-size: 0.85em; }
+.btn-row { text-align: center; margin-top: 24px; }
+.btn { display: inline-block; background: linear-gradient(135deg, #8B5CF6, #FFD700); color: #000; font-weight: 700; padding: 12px 32px; border-radius: 30px; font-size: 1.1em; border: none; cursor: pointer; transition: all 0.3s; }
+.btn:hover { transform: scale(1.05); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Result */
+.result { display: none; }
+.result.active { display: block; }
+.report-section { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+.report-section h3 { color: #FFD700; font-size: 1.2em; margin-bottom: 12px; }
+.report-section p { color: #D1D5DB; margin-bottom: 10px; line-height: 1.7; }
+.report-section .highlight { color: #A78BFA; font-weight: 600; }
+.report-section .amz-link { display: inline-block; background: #232f3e; color: #FFD700; padding: 4px 12px; border-radius: 20px; font-size: 0.8em; font-weight: 600; text-decoration: none; margin: 2px; }
+.report-section .amz-link:hover { background: #37475A; }
+.prod-card { background: #1a0a2e; border: 1px solid #8B5CF6; border-radius: 12px; padding: 16px; margin: 8px 0; }
+.prod-card h4 { color: #fff; font-size: 1em; margin-bottom: 4px; }
+.prod-card .price { color: #FFD700; font-size: 0.9em; font-weight: 600; }
+.prod-card p { font-size: 0.85em; color: #888; margin: 4px 0 10px; }
+.prod-card .buy { display: inline-block; background: #8B5CF6; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.8em; font-weight: 600; text-decoration: none; }
+.prod-card .buy:hover { background: #7C3AED; }
+.summary-box { background: linear-gradient(135deg, #1a0a2e, #0A0A0A); border: 1px solid #8B5CF6; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; }
+.summary-box h3 { color: #fff; font-size: 1.3em; margin-bottom: 8px; }
+.summary-box .big { font-size: 2.5em; font-weight: 800; color: #FFD700; }
+.reset-btn { display: inline-block; background: #2A2A2A; color: #fff; padding: 10px 24px; border-radius: 30px; text-decoration: none; margin-top: 16px; font-weight: 600; transition: all 0.3s; }
+.reset-btn:hover { background: #8B5CF6; }
+.tip { background: #141414; border-left: 3px solid #FFD700; border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 0.9em; }
+.tip strong { color: #FFD700; }
+.badge-analysis { display: inline-block; background: #8B5CF6; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 0.75em; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+footer { text-align: center; padding: 30px; color: #555; font-size: 0.8em; }
+@media (max-width: 600px) { h1 { font-size: 1.6em; } .container { padding: 24px 16px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🌓 Licht & Schatten Persönlichkeits-Analyse</h1>
+<p class="subtitle">Beantworte 5 Fragen – erhalte deinen persönlichen KI-Report mit Buchempfehlungen</p>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<p class="progress-text" id="progressText">Schritt 1 von 5</p>
+
+<div id="quiz">
+
+<!-- Q1 -->
+<div class="quiz-step active" data-step="1">
+  <h2>🌅 Was beschreibt deine aktuelle Lebensphase am besten?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q1" value="aufbruch"><span class="icon">🌅</span><span class="label"><strong>Neuanfang & Aufbruch</strong><span>Ich stehe am Beginn einer neuen Lebensphase</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="stabilitat"><span class="icon">🏔️</span><span class="label"><strong>Stabilität & Wachstum</strong><span>Ich bin angekommen und möchte mich weiterentwickeln</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="krise"><span class="icon">🌑</span><span class="label"><strong>Krise & Herausforderung</strong><span>Ich durchlebe eine schwierige Phase</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="reflexion"><span class="icon">🔮</span><span class="label"><strong>Reflexion & Sinnsuche</strong><span>Ich hinterfrage mein Leben und suche nach tieferem Sinn</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="nextStep(1)">Weiter →</button></div>
+</div>
+
+<!-- Q2 -->
+<div class="quiz-step" data-step="2">
+  <h2>⚡ Welche Eigenschaft möchtest du in dir stärken?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q2" value="mut"><span class="icon">🔥</span><span class="label"><strong>Mut & Entschlossenheit</strong><span>Mehr Risikobereitschaft und Selbstvertrauen</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="ruhe"><span class="icon">🌊</span><span class="label"><strong>Ruhe & Gelassenheit</strong><span>Weniger Stress, mehr innere Frieden</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="klarheit"><span class="icon">💡</span><span class="label"><strong>Klarheit & Fokus</strong><span>Konzentration auf das Wesentliche</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="verbindung"><span class="icon">🤝</span><span class="label"><strong>Verbindung & Empathie</strong><span>Tiefere Beziehungen zu anderen aufbauen</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(2)">← Zurück</button><button class="btn" onclick="nextStep(2)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Q3 -->
+<div class="quiz-step" data-step="3">
+  <h2>🌙 Welcher Schattenaspekt fordert dich aktuell heraus?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q3" value="perfektionismus"><span class="icon">🎯</span><span class="label"><strong>Perfektionismus & Kontrolle</strong><span>Alles muss perfekt sein – ich lasse schwer los</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="selbstzweifel"><span class="icon">💭</span><span class="label"><strong>Selbstzweifel & Hochstapler-Syndrom</strong><span>Ich hinterfrage ständig meine Fähigkeiten</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="prokrastination"><span class="icon">⏰</span><span class="label"><strong>Prokrastination & Antriebslosigkeit</strong><span>Ich schiebe wichtige Dinge immer wieder auf</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="konflikt"><span class="icon">⚔️</span><span class="label"><strong>Konfliktscheue & People Pleasing</strong><span>Ich sage schwer "Nein" und vermeide Konflikte</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(3)">← Zurück</button><button class="btn" onclick="nextStep(3)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Q4 -->
+<div class="quiz-step" data-step="4">
+  <h2>📚 Welches Medium spricht dich am meisten an?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q4" value="bucher"><span class="icon">📖</span><span class="label"><strong>Bücher & Ratgeber</strong><span>Ich lese gerne und lerne aus Fachbüchern</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="kurse"><span class="icon">🎓</span><span class="label"><strong>Online-Kurse & Workshops</strong><span>Ich lerne interaktiv mit Videos und Übungen</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="podcasts"><span class="icon">🎙️</span><span class="label"><strong>Podcasts & Audio</strong><span>Ich höre gerne zu und lerne nebenbei</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="apps"><span class="icon">📱</span><span class="label"><strong>Apps & Digitale Tools</strong><span>Ich nutze lieber interaktive Anwendungen</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(4)">← Zurück</button><button class="btn" onclick="nextStep(4)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Q5 -->
+<div class="quiz-step" data-step="5">
+  <h2>🌟 Was ist dein Hauptziel für die nächsten 6 Monate?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q5" value="beruflich"><span class="icon">💼</span><span class="label"><strong>Berufliche Veränderung</strong><span>Karriere, Business, Selbstständigkeit voranbringen</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="personlich"><span class="icon">🧠</span><span class="label"><strong>Persönliches Wachstum</strong><span>An mir arbeiten, alte Muster durchbrechen</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="beziehung"><span class="icon">❤️</span><span class="label"><strong>Beziehungen & Familie</strong><span>Meine Beziehungen verbessern oder finden</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="gesundheit"><span class="icon">💪</span><span class="label"><strong>Gesundheit & Wohlbefinden</strong><span>Fitness, Ernährung, mentale Gesundheit optimieren</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(5)">← Zurück</button><button class="btn" onclick="generateReport()" style="margin-left:10px;">✅ Report erstellen</button></div>
+</div>
+</div>
+
+<!-- Result -->
+<div class="result" id="result">
+  <div class="summary-box">
+    <h3>🌓 Dein persönlicher Licht & Schatten Report</h3>
+    <p id="summaryName"></p>
+  </div>
+  <div id="reportContent"></div>
+  <div style="text-align:center; margin-top:20px;">
+    <a href="#" onclick="resetQuiz()" class="reset-btn">🔄 Neu analysieren</a>
+  </div>
+</div>
+
+<footer>
+  <p>🔗 Amazon-Partnerlinks (tag=ikune21-21) • <a href="../datenschutz/" style="color:#555;">Datenschutz</a></p>
+</footer>
+</div>
+
+<script>
+let answers = {};
+
+const reports = {
+  // Lebensphase: aufbruch
+  aufbruch_mut: {
+    title: "☀️ Der Pionier",
+    shadow: "Dein Schatten ist die Ungeduld. Du willst alles sofort – aber wahre Größe braucht Zeit.",
+    licht: "Deine Stärke ist dein Unternehmergeist. Du siehst Chancen, wo andere Hindernisse sehen.",
+    books: [
+      {name: "Die 7 Wege zur Effektivität – Stephen R. Covey", price: "ca. 14€", link: "https://www.amazon.de/s?k=die+7+wege+zur+effektivit%C3%A4t+covey&tag=ikune21-21"},
+      {name: "Der Weg des Künstlers – Julia Cameron", price: "ca. 16€", link: "https://www.amazon.de/s?k=der+weg+des+k%C3%BCnstlers+julia+cameron&tag=ikune21-21"}
+    ]
+  },
+  aufbruch_ruhe: {
+    title: "🌿 Der stille Neuanfänger",
+    shadow: "Dein Schatten ist die Angst vor dem Scheitern. Du startest leise, weil du dich noch nicht bereit fühlst.",
+    licht: "Deine Stärke ist deine Achtsamkeit. Du gehst bewusste Schritte und wählst weise.",
+    books: [
+      {name: "Das Kind in dir muss Heimat finden – Stefanie Stahl", price: "ca. 13€", link: "https://www.amazon.de/s?k=das+kind+in+dir+muss+heimat+finden+stefanie+stahl&tag=ikune21-21"},
+      {name: "Jetzt! Die Kraft der Gegenwart – Eckhart Tolle", price: "ca. 12€", link: "https://www.amazon.de/s?k=jetzt+die+kraft+der+gegenwart+eckhart+tolle&tag=ikune21-21"}
+    ]
+  },
+  aufbruch_klarheit: {
+    title: "🔦 Der Suchende",
+    shadow: "Du suchst nach dem perfekten Plan und übersiehst dabei die kleinen Zeichen des Lebens.",
+    licht: "Deine analytische Gabe ist außergewöhnlich. Du kannst komplexe Situationen durchschauen.",
+    books: [
+      {name: "Thinking, Fast and Slow – Daniel Kahneman", price: "ca. 15€", link: "https://www.amazon.de/s?k=thinking+fast+and+slow+daniel+kahneman&tag=ikune21-21"},
+      {name: "Atomic Habits – James Clear", price: "ca. 12€", link: "https://www.amazon.de/s?k=atomic+habits+james+clear&tag=ikune21-21"}
+    ]
+  },
+  aufbruch_verbindung: {
+    title: "🌟 Der Netzwerker",
+    shadow: "Du suchst Bestätigung von außen und vergisst, dass die wichtigste Verbindung die zu dir selbst ist.",
+    licht: "Deine Empathie ist deine Superkraft. Du bringst Menschen zusammen und schaffst Gemeinschaft.",
+    books: [
+      {name: "Die Kunst, gelassen zu sein – Rolf Dobelli", price: "ca. 12€", link: "https://www.amazon.de/s?k=die+kunst+gelassen+zu+sein+dobelli&tag=ikune21-21"},
+      {name: "Wie man Freunde gewinnt – Dale Carnegie", price: "ca. 10€", link: "https://www.amazon.de/s?k=wie+man+freunde+gewinnt+dale+carnegie&tag=ikune21-21"}
+    ]
+  },
+  // Stabilität
+  stabilitat_mut: {
+    title: "🔥 Der erwachende Krieger",
+    shadow: "Du bist so bequem geworden, dass du das Kämpfen verlernt hast. Routine erstickt dein Feuer.",
+    licht: "Du hast eine solide Basis geschaffen. Jetzt ist die Zeit, darauf aufzubauen und zu expandieren.",
+    books: [
+      {name: "Die 1%-Methode – James Clear", price: "ca. 13€", link: "https://www.amazon.de/s?k=die+1+prozent+metode+james+clear&tag=ikune21-21"},
+      {name: "Man's Search for Meaning – Viktor Frankl", price: "ca. 11€", link: "https://www.amazon.de/s?k=man%27s+search+for+meaning+viktor+frankl&tag=ikune21-21"}
+    ]
+  },
+  stabilitat_ruhe: {
+    title: "🏔️ Der weise Beobachter",
+    shadow: "Du ziehst dich zu sehr zurück. Stille ist gut, aber Isolation nicht.",
+    licht: "Deine Gelassenheit ist ansteckend. Du bist ein Fels in der Brandung für andere.",
+    books: [
+      {name: "Siddhartha – Hermann Hesse", price: "ca. 9€", link: "https://www.amazon.de/s?k=siddhartha+hermann+hesse&tag=ikune21-21"},
+      {name: "Der Alchimist – Paulo Coelho", price: "ca. 10€", link: "https://www.amazon.de/s?k=der+alchimist+paulo+coelho&tag=ikune21-21"}
+    ]
+  },
+  stabilitat_klarheit: {
+    title: "🧭 Der Navigator",
+    shadow: "Du analysierst zu viel und handelst zu wenig. Perfektionismus lähmt dich.",
+    licht: "Deine Fähigkeit, Muster zu erkennen und Strategien zu entwickeln, ist einzigartig.",
+    books: [
+      {name: "The 4-Hour Work Week – Tim Ferriss", price: "ca. 14€", link: "https://www.amazon.de/s?k=the+4+hour+work+week+tim+ferriss&tag=ikune21-21"},
+      {name: "Principals – Ray Dalio", price: "ca. 18€", link: "https://www.amazon.de/s?k=principals+ray+dalio&tag=ikune21-21"}
+    ]
+  },
+  stabilitat_verbindung: {
+    title: "🌳 Der verbindende Baum",
+    shadow: "Du kümmerst dich um alle außer dir selbst. Deine eigenen Bedürfnisse kommen zu kurz.",
+    licht: "Deine Beziehungen sind dein größtes Kapital. Du schaffst tiefe, bedeutungsvolle Verbindungen.",
+    books: [
+      {name: "Die 5 Sprachen der Liebe – Gary Chapman", price: "ca. 10€", link: "https://www.amazon.de/s?k=die+5+sprachen+der+liebe+gary+chapman&tag=ikune21-21"},
+      {name: "Verletzlichkeit macht stark – Brené Brown", price: "ca. 14€", link: "https://www.amazon.de/s?k=verletzlichkeit+macht+stark+brene+brown&tag=ikune21-21"}
+    ]
+  },
+  // Krise
+  krise_mut: {
+    title: "🌪️ Der Phönix",
+    shadow: "Deine Wut auf die Situation blockiert dich. Du kämpfst gegen die Realität an.",
+    licht: "Du hast eine enorme innere Stärke. Krisen sind deine größten Lehrer.",
+    books: [
+      {name: "Wenn das Leben schwierig wird – Viktor Frankl", price: "ca. 12€", link: "https://www.amazon.de/s?k=wenn+das+leben+schwierig+wird+viktor+frankl&tag=ikune21-21"},
+      {name: "Option B – Sheryl Sandberg", price: "ca. 14€", link: "https://www.amazon.de/s?k=option+b+sheryl+sandberg&tag=ikune21-21"}
+    ]
+  },
+  krise_ruhe: {
+    title: "🌙 Der tiefe See",
+    shadow: "Du unterdrückst deine Gefühle und tust so, als ob nichts wäre.",
+    licht: "Deine Fähigkeit, auch in Stürmen ruhig zu bleiben, ist bewundernswert.",
+    books: [
+      {name: "Das Kind in dir muss Heimat finden – Stefanie Stahl", price: "ca. 13€", link: "https://www.amazon.de/s?k=das+kind+in+dir+muss+heimat+finden+stefanie+stahl&tag=ikune21-21"},
+      {name: "Selbstmitgefühl – Kristin Neff", price: "ca. 15€", link: "https://www.amazon.de/s?k=selbstmitgefühl+kristin+neff&tag=ikune21-21"}
+    ]
+  },
+  krise_klarheit: {
+    title: "🔎 Der Wahrheitssucher",
+    shadow: "Du suchst nach einem Schuldigen, anstatt nach Lösungen. Kontrollverlust macht dir Angst.",
+    licht: "In der Krise zeigst du deine wahre Größe: analytisch, beharrlich, lösungsorientiert.",
+    books: [
+      {name: "Die Kunst des klaren Denkens – Rolf Dobelli", price: "ca. 12€", link: "https://www.amazon.de/s?k=die+kunst+des+klaren+denkens+dobelli&tag=ikune21-21"},
+      {name: "Aufstehen oder liegenbleiben – Alexandra Reinwarth", price: "ca. 11€", link: "https://www.amazon.de/s?k=aufstehen+oder+liegenbleiben+alexandra+reinwarth&tag=ikune21-21"}
+    ]
+  },
+  krise_verbindung: {
+    title: "🌈 Der verletzte Heiler",
+    shadow: "Du ziehst dich zurück, genau dann, wenn du Unterstützung am meisten brauchst.",
+    licht: "Deine Verletzlichkeit ist keine Schwäche. Sie ist der Schlüssel zu authentischen Verbindungen.",
+    books: [
+      {name: "Verletzlichkeit macht stark – Brené Brown", price: "ca. 14€", link: "https://www.amazon.de/s?k=verletzlichkeit+macht+stark+brene+brown&tag=ikune21-21"},
+      {name: "Die 7 Wege zur Effektivität – Stephen R. Covey", price: "ca. 14€", link: "https://www.amazon.de/s?k=die+7+wege+zur+effektivit%C3%A4t+covey&tag=ikune21-21"}
+    ]
+  },
+  // Reflexion
+  reflexion_mut: {
+    title: "🦋 Der metamorphosierende Schmetterling",
+    shadow: "Du denkst zu viel und handelst zu wenig. Die Suche nach dem Sinn wird zur Ausrede.",
+    licht: "Deine Tiefe und dein Bewusstsein sind außergewöhnlich. Du siehst, was andere übersehen.",
+    books: [
+      {name: "Der Alchimist – Paulo Coelho", price: "ca. 10€", link: "https://www.amazon.de/s?k=der+alchimist+paulo+coelho&tag=ikune21-21"},
+      {name: "Siddhartha – Hermann Hesse", price: "ca. 9€", link: "https://www.amazon.de/s?k=siddhartha+hermann+hesse&tag=ikune21-21"}
+    ]
+  },
+  reflexion_ruhe: {
+    title: "🧘 Der innere Pilger",
+    shadow: "Du suchst nach spirituellen Erfahrungen, um deiner Alltagsrealität zu entkommen.",
+    licht: "Deine spirituelle Neugier ist ein Geschenk. Du bist offen für die tiefen Fragen des Lebens.",
+    books: [
+      {name: "Jetzt! Die Kraft der Gegenwart – Eckhart Tolle", price: "ca. 12€", link: "https://www.amazon.de/s?k=jetzt+die+kraft+der+gegenwart+eckhart+tolle&tag=ikune21-21"},
+      {name: "Das tibetanische Buch vom Leben und Sterben", price: "ca. 14€", link: "https://www.amazon.de/s?k=das+tibetanische+buch+vom+leben+und+sterben&tag=ikune21-21"}
+    ]
+  },
+  reflexion_klarheit: {
+    title: "💎 Der philosophische Diamant",
+    shadow: "Du verlierst dich in abstrakten Konzepten. Deine Erkenntnisse bleiben oft ohne Umsetzung.",
+    licht: "Dein logisch-philosophischer Geist ist selten. Du bringst Ordnung ins Chaos der Gedanken.",
+    books: [
+      {name: "Man's Search for Meaning – Viktor Frankl", price: "ca. 11€", link: "https://www.amazon.de/s?k=man%27s+search+for+meaning+viktor+frankl&tag=ikune21-21"},
+      {name: "Thinking, Fast and Slow – Daniel Kahneman", price: "ca. 15€", link: "https://www.amazon.de/s?k=thinking+fast+and+slow+daniel+kahneman&tag=ikune21-21"}
+    ]
+  },
+  reflexion_verbindung: {
+    title: "🔗 Der Seelenverbinder",
+    shadow: "Du idealisierst andere und wirst dann enttäuscht. Menschen können deinen Erwartungen nicht gerecht werden.",
+    licht: "Deine tiefe Sehnsucht nach Verbindung ist nicht naiv – sie ist der Weg zur wahren Menschlichkeit.",
+    books: [
+      {name: "Die 5 Sprachen der Liebe – Gary Chapman", price: "ca. 10€", link: "https://www.amazon.de/s?k=die+5+sprachen+der+liebe+gary+chapman&tag=ikune21-21"},
+      {name: "Wenn das Leben schwierig wird – Viktor Frankl", price: "ca. 12€", link: "https://www.amazon.de/s?k=wenn+das+leben+schwierig+wird+viktor+frankl&tag=ikune21-21"}
+    ]
+  }
+};
+
+// Fallback if specific combo not found
+const fallbackReports = [
+  {title: "🌓 Der Suchende", shadow: "Dein Schatten ist der innere Kritiker, der dir sagt, dass du nicht genug bist. Er ist nicht dein Feind – er ist dein verirrter Beschützer.", licht: "Deine Reise der Selbstentdeckung ist wertvoll. Jede Frage, die du stellst, bringt dich deiner Wahrheit näher.", books: [
+    {name: "Das Kind in dir muss Heimat finden – Stefanie Stahl", price: "ca. 13€", link: "https://www.amazon.de/s?k=das+kind+in+dir+muss+heimat+finden+stefanie+stahl&tag=ikune21-21"},
+    {name: "Jetzt! Die Kraft der Gegenwart – Eckhart Tolle", price: "ca. 12€", link: "https://www.amazon.de/s?k=jetzt+die+kraft+der+gegenwart+eckhart+tolle&tag=ikune21-21"}
+  ]},
+  {title: "🌊 Der Träumer", shadow: "Du hast Angst vor deiner eigenen Größe. Du sabotierst dich selbst, kurz bevor du durchbrichst.", licht: "Deine Kreativität und Vorstellungskraft sind grenzenlos. Du kannst Welten erschaffen.", books: [
+    {name: "Der Weg des Künstlers – Julia Cameron", price: "ca. 16€", link: "https://www.amazon.de/s?k=der+weg+des+k%C3%BCnstlers+julia+cameron&tag=ikune21-21"},
+    {name: "Atomic Habits – James Clear", price: "ca. 12€", link: "https://www.amazon.de/s?k=atomic+habits+james+clear&tag=ikune21-21"}
+  ]}
+];
+
+function initQuiz() {
+  document.querySelectorAll('.option input').forEach(input => {
+    input.addEventListener('change', function() {
+      this.closest('.option').parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      this.closest('.option').classList.add('selected');
+    });
+  });
+}
+
+function nextStep(n) {
+  let selected = document.querySelector('.quiz-step[data-step="'+n+'"] input:checked');
+  if (!selected) { alert('Bitte wähle eine Option aus.'); return; }
+  answers['q'+n] = selected.value;
+  document.querySelector('.quiz-step[data-step="'+n+'"]').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="'+(n+1)+'"]').classList.add('active');
+  updateProgress(n+1);
+}
+
+function prevStep(n) {
+  document.querySelector('.quiz-step[data-step="'+n+'"]').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="'+(n-1)+'"]').classList.add('active');
+  updateProgress(n-1);
+}
+
+function updateProgress(step) {
+  let pct = ((step-1) / 5) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'Schritt ' + step + ' von 5';
+}
+
+function generateReport() {
+  let q5 = document.querySelector('.quiz-step[data-step="5"] input:checked');
+  if (!q5) { alert('Bitte wähle eine Option aus.'); return; }
+  answers.q5 = q5.value;
+
+  let key = answers.q1 + '_' + answers.q2;
+  let report = reports[key] || fallbackReports[Math.floor(Math.random() * fallbackReports.length)];
+
+  let container = document.getElementById('reportContent');
+  container.innerHTML = '';
+
+  // Profile section
+  let profileDiv = document.createElement('div');
+  profileDiv.className = 'report-section';
+  profileDiv.innerHTML = `<span class="badge-analysis">Dein Profil</span>
+    <h3>${report.title}</h3>
+    <p>Deine aktuelle Lebensphase: <span class="highlight">${getLabel('q1', answers.q1)}</span></p>
+    <p>Deine Entwicklungswunsch: <span class="highlight">${getLabel('q2', answers.q2)}</span></p>
+    <p>Deine Herausforderung: <span class="highlight">${getLabel('q3', answers.q3)}</span></p>
+    <p>Dein Hauptziel: <span class="highlight">${getLabel('q5', answers.q5)}</span></p>`;
+  container.appendChild(profileDiv);
+
+  // Licht section
+  let lichtDiv = document.createElement('div');
+  lichtDiv.className = 'report-section';
+  lichtDiv.innerHTML = `<h3>☀️ Dein Licht</h3><p>${report.licht}</p>`;
+  container.appendChild(lichtDiv);
+
+  // Schatten section
+  let shadowDiv = document.createElement('div');
+  shadowDiv.className = 'report-section';
+  shadowDiv.innerHTML = `<h3>🌑 Dein Schatten</h3><p>${report.shadow}</p>
+    <div class="tip"><strong>💡 Schattenarbeit-Tipp:</strong> Dein Schatten ist nicht dein Feind. Er ist der Teil von dir, der gesehen und verstanden werden will. Indem du ihn ans Licht bringst, verwandelst du deine größte Schwäche in deine größte Stärke.</div>`;
+  container.appendChild(shadowDiv);
+
+  // Recommended reading
+  let booksDiv = document.createElement('div');
+  booksDiv.className = 'report-section';
+  let booksHtml = `<h3>📚 Empfohlene Bücher für deine Reise</h3>
+    <p>Diese Bücher wurden speziell für dein Persönlichkeitsprofil ausgewählt:</p>`;
+  report.books.forEach(b => {
+    booksHtml += `<div class="prod-card">
+      <h4>${b.name}</h4>
+      <span class="price">${b.price}</span>
+      <a href="${b.link}" target="_blank" rel="noopener" class="buy">💰 Bei Amazon ansehen</a>
+    </div>`;
+  });
+  booksHtml += `<p style="margin-top:12px;font-size:0.85em;color:#888;">📢 Amazon-Partnerlinks (tag=ikune21-21) – für dich entstehen keine Mehrkosten.</p>`;
+  booksDiv.innerHTML = booksHtml;
+  container.appendChild(booksDiv);
+
+  // Action plan
+  let actionDiv = document.createElement('div');
+  actionDiv.className = 'report-section';
+  let zielAction = answers.q5 === 'beruflich' ? 'Starte ein neues Projekt oder bewirb dich auf eine neue Stelle.' :
+    answers.q5 === 'gesundheit' ? 'Beginne mit einem 10-minütigen täglichen Gesundheits-Ritual.' :
+    answers.q5 === 'beziehung' ? 'Nimm dir diese Woche bewusst Zeit für einen wichtigen Menschen.' :
+    'Setze dir ein konkretes Lernziel für die nächsten 30 Tage.';
+  actionDiv.innerHTML = `<h3>🎯 Dein 7-Tage-Aktionsplan</h3>
+    <p><strong>Tag 1-2:</strong> Reflektiere: Was hat dich zu diesen Antworten geführt? Schreibe 3 Erkenntnisse auf.</p>
+    <p><strong>Tag 3-4:</strong> ${zielAction}</p>
+    <p><strong>Tag 5-6:</strong> Lese eines der empfohlenen Bücher oder höre das Hörbuch auf dem Weg zur Arbeit.</p>
+    <p><strong>Tag 7:</strong> Wiederhole die Analyse in 7 Tagen und vergleiche deine Ergebnisse.</p>`;
+  container.appendChild(actionDiv);
+
+  // Extra Amazon link section
+  let amazonDiv = document.createElement('div');
+  amazonDiv.className = 'report-section';
+  amazonDiv.innerHTML = `<h3>🛒 Weiterführende Produkte</h3>
+    <p>Diese Produkte unterstützen dich auf deinem Weg:</p>
+    <p>
+      <a href="https://www.amazon.de/s?k=pers%C3%B6nlichkeitsentwicklung+b%C3%BCcher+2026&tag=ikune21-21" target="_blank" rel="noopener" class="amz-link">📚 Persönlichkeitsentwicklung</a>
+      <a href="https://www.amazon.de/s?k=achtsamkeit+meditation+buch&tag=ikune21-21" target="_blank" rel="noopener" class="amz-link">🧘 Achtsamkeit & Meditation</a>
+      <a href="https://www.amazon.de/s?k=journaling+tagebuch+selbstreflexion&tag=ikune21-21" target="_blank" rel="noopener" class="amz-link">📓 Journaling & Tagebücher</a>
+      <a href="https://www.amazon.de/s?k=positive+psychologie+buch&tag=ikune21-21" target="_blank" rel="noopener" class="amz-link">😊 Positive Psychologie</a>
+      <a href="https://www.amazon.de/s?k=noise+cancelling+kopfh%C3%B6rer+konzentration&tag=ikune21-21" target="_blank" rel="noopener" class="amz-link">🎧 Noise-Cancelling-Kopfhörer</a>
+      <a href="https://www.amazon.de/s?k=kindle+paperwhite+2026&tag=ikune21-21" target="_blank" rel="noopener" class="amz-link">📖 Kindle Paperwhite</a>
+    </p>`;
+  container.appendChild(amazonDiv);
+
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').classList.add('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '✅ Report erstellt!';
+  document.getElementById('summaryName').innerHTML = 'Basierend auf deinen Antworten haben wir dein persönliches Profil erstellt. <strong>${report.title}</strong> · <span class="big">7</span> Empfehlungen mit <strong>Amazon-Links (tag=ikune21-21)</strong>';
+
+  // Scroll to top of result
+  document.getElementById('result').scrollIntoView({behavior: 'smooth'});
+}
+
+function getLabel(q, val) {
+  const labels = {
+    q1: {aufbruch: 'Neuanfang & Aufbruch', stabilitat: 'Stabilität & Wachstum', krise: 'Krise & Herausforderung', reflexion: 'Reflexion & Sinnsuche'},
+    q2: {mut: 'Mut & Entschlossenheit', ruhe: 'Ruhe & Gelassenheit', klarheit: 'Klarheit & Fokus', verbindung: 'Verbindung & Empathie'},
+    q3: {perfektionismus: 'Perfektionismus & Kontrolle', selbstzweifel: 'Selbstzweifel', prokrastination: 'Prokrastination', konflikt: 'Konfliktscheue'},
+    q5: {beruflich: 'Berufliche Veränderung', personlich: 'Persönliches Wachstum', beziehung: 'Beziehungen & Familie', gesundheit: 'Gesundheit & Wohlbefinden'}
+  };
+  return (labels[q] && labels[q][val]) || val;
+}
+
+function resetQuiz() {
+  answers = {};
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.option input').forEach(i => i.checked = false);
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.quiz-step[data-step="1"]').classList.add('active');
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('quiz').style.display = 'block';
+  updateProgress(1);
+}
+
+initQuiz();
+</script>
+</body>
+</html>
