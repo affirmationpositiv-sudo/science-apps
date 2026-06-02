@@ -1,0 +1,27 @@
+{
+  "name": "Wortsuche",
+  "short_name": "Wortsuche",
+  "description": "Wortsuchrätsel mit deutschen Wörtern – 3 Schwierigkeitsstufen, PWA",
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a1a",
+  "theme_color": "#0a0a1a",
+  "scope": ".",
+  "lang": "de",
+  "categories": ["games", "puzzles", "education"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230a0a1a' rx='32'/%3E%3Ctext x='96' y='145' font-size='140' text-anchor='middle' fill='%23ffd54f'%3E%E2%9C%93%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230a0a1a' rx='64'/%3E%3Ctext x='256' y='390' font-size='380' text-anchor='middle' fill='%23ffd54f'%3E%E2%9C%93%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

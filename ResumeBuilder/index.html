@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lebenslauf-Baukasten</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1117">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --primary: #22c55e;
+  --accent: #58a6ff;
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --border: #30363d;
+  --input-bg: #0d1117;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 16px;
+}
+.container { max-width: 1000px; margin: 0 auto; }
+h1 { font-size: 1.5rem; color: var(--primary); text-align: center; margin-bottom: 20px; }
+h1 span { font-size: 1.8rem; }
+.layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 768px) { .layout { grid-template-columns: 1fr; } }
+/* Form */
+.form-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.form-panel h2 { font-size: 1.1rem; color: var(--accent); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.82rem; color: var(--text-dim); margin-bottom: 4px; font-weight: 600; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 8px 10px; background: var(--input-bg); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text); font-size: 0.9rem; font-family: inherit; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); outline: none; }
+.form-group textarea { min-height: 60px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.entry-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 10px; }
+.entry-card .form-group { margin-bottom: 6px; }
+.entry-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.entry-header h3 { font-size: 0.85rem; color: var(--primary); }
+.btn-remove { background: none; border: 1px solid #e53935; color: #e53935; border-radius: 4px; padding: 2px 8px; font-size: 0.75rem; cursor: pointer; }
+.btn-add { background: var(--surface2); border: 1px dashed var(--border); color: var(--accent); border-radius: 8px; padding: 8px; width: 100%; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; margin-top: 4px; }
+.btn-add:hover { border-color: var(--accent); background: transparent; }
+.btn-primary { background: var(--primary); color: #0d1117; border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.95rem; font-weight: 700; cursor: pointer; width: 100%; margin-top: 16px; }
+.btn-primary:hover { filter: brightness(1.1); }
+/* Preview */
+.preview-panel { background: white; border-radius: 12px; color: #1a1a2e; padding: 0; overflow: hidden; position: sticky; top: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+#preview { padding: 30px; font-size: 11pt; line-height: 1.4; min-height: 700px; }
+#preview h1 { font-size: 22pt; color: #1a56db; text-align: left; margin-bottom: 4px; }
+#preview .contact-line { font-size: 9pt; color: #666; margin-bottom: 14px; }
+#preview h2 { font-size: 12pt; color: #1a56db; border-bottom: 2px solid #1a56db; padding-bottom: 2px; margin: 14px 0 8px; }
+#preview .section { margin-bottom: 4px; }
+#preview .entry-title { font-weight: 700; font-size: 10.5pt; }
+#preview .entry-sub { font-size: 9.5pt; color: #444; margin-bottom: 2px; }
+#preview .entry-desc { font-size: 9.5pt; color: #333; margin-left: 0; margin-bottom: 6px; white-space: pre-line; }
+#preview .skill-tag { display: inline-block; background: #e8f0fe; color: #1a56db; padding: 1px 8px; border-radius: 10px; font-size: 8.5pt; margin: 1px 3px 1px 0; }
+#preview .lang-item { font-size: 9.5pt; margin-bottom: 2px; }
+#preview .summary { font-size: 9.5pt; color: #333; white-space: pre-line; margin-bottom: 8px; }
+#preview .header-area { display: flex; align-items: flex-start; gap: 16px; }
+#preview .header-text { flex: 1; }
+#preview .photo-preview { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #e0e0e0; }
+@media print {
+  body { background: white; padding: 0; }
+  .form-panel, .btn-primary, .btn-add, .btn-remove, h1, .no-print { display: none !important; }
+  .layout { grid-template-columns: 1fr; }
+  .preview-panel { position: static; box-shadow: none; border-radius: 0; }
+  #preview { padding: 0; min-height: auto; }
+  .preview-panel { border: none; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1><span>📄</span> Lebenslauf-Baukasten</h1>
+
+  <div class="layout">
+    <!-- Form Panel -->
+    <div class="form-panel">
+      <h2>👤 Persönliche Daten</h2>
+      <div class="form-group">
+        <label>Vorname</label>
+        <input type="text" id="fname" placeholder="Max" oninput="updatePreview()">
+      </div>
+      <div class="form-group">
+        <label>Nachname</label>
+        <input type="text" id="lname" placeholder="Mustermann" oninput="updatePreview()">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Straße & Hausnr.</label>
+          <input type="text" id="street" placeholder="Musterstr. 1" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label>PLZ / Ort</label>
+          <input type="text" id="city" placeholder="12345 Berlin" oninput="updatePreview()">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" id="phone" placeholder="+49 123 456789" oninput="updatePreview()">
+        </div>
+        <div class="form-group">
+          <label>E-Mail</label>
+          <input type="email" id="email" placeholder="max@beispiel.de" oninput="updatePreview()">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Foto-URL (optional)</label>
+        <input type="url" id="photo" placeholder="https://example.com/photo.jpg" oninput="updatePreview()">
+      </div>
+      <div class="form-group">
+        <label>Berufliche Zusammenfassung</label>
+        <textarea id="summary" placeholder="Kurze Zusammenfassung Ihrer beruflichen Laufbahn und Ziele..." oninput="updatePreview()"></textarea>
+      </div>
+
+      <h2 style="margin-top:20px;">💼 Berufserfahrung</h2>
+      <div id="work-entries"></div>
+      <button class="btn-add" onclick="addWorkEntry()">+ Berufserfahrung hinzufügen</button>
+
+      <h2 style="margin-top:20px;">🎓 Ausbildung</h2>
+      <div id="edu-entries"></div>
+      <button class="btn-add" onclick="addEduEntry()">+ Ausbildung hinzufügen</button>
+
+      <h2 style="margin-top:20px;">🛠️ Fähigkeiten</h2>
+      <div class="form-group">
+        <label>Fähigkeiten (kommagetrennt)</label>
+        <input type="text" id="skills" placeholder="Python, Projektmanagement, SQL, ..." oninput="updatePreview()">
+      </div>
+
+      <h2 style="margin-top:20px;">🌐 Sprachen</h2>
+      <div id="lang-entries"></div>
+      <button class="btn-add" onclick="addLangEntry()">+ Sprache hinzufügen</button>
+
+      <button class="btn-primary" onclick="window.print()">🖨️ PDF erstellen (Drucken)</button>
+      <p style="font-size:0.7rem;color:var(--text-dim);text-align:center;margin-top:8px;">Wählen Sie im Druckdialog „Als PDF speichern"</p>
+    </div>
+
+    <!-- Preview Panel -->
+    <div class="preview-panel">
+      <div id="preview"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+let workEntries = [];
+let eduEntries = [];
+let langEntries = [];
+
+// ============================================================
+// ADD ENTRIES
+// ============================================================
+function addWorkEntry(data) {
+  const id = Date.now() + Math.random();
+  workEntries.push({ id, title: data?.title || '', company: data?.company || '', from: data?.from || '', to: data?.to || '', desc: data?.desc || '' });
+  renderWorkEntries();
+  updatePreview();
+}
+
+function addEduEntry(data) {
+  const id = Date.now() + Math.random();
+  eduEntries.push({ id, degree: data?.degree || '', school: data?.school || '', from: data?.from || '', to: data?.to || '' });
+  renderEduEntries();
+  updatePreview();
+}
+
+function addLangEntry(data) {
+  const id = Date.now() + Math.random();
+  langEntries.push({ id, language: data?.language || '', level: data?.level || '' });
+  renderLangEntries();
+  updatePreview();
+}
+
+function removeWorkEntry(id) {
+  workEntries = workEntries.filter(e => e.id !== id);
+  renderWorkEntries();
+  updatePreview();
+}
+
+function removeEduEntry(id) {
+  eduEntries = eduEntries.filter(e => e.id !== id);
+  renderEduEntries();
+  updatePreview();
+}
+
+function removeLangEntry(id) {
+  langEntries = langEntries.filter(e => e.id !== id);
+  renderLangEntries();
+  updatePreview();
+}
+
+// ============================================================
+// RENDER FORM ENTRIES
+// ============================================================
+function renderWorkEntries() {
+  const container = document.getElementById('work-entries');
+  container.innerHTML = workEntries.map(e => `
+    <div class="entry-card">
+      <div class="entry-header">
+        <h3>${e.title || 'Neue Position'}</h3>
+        <button class="btn-remove" onclick="removeWorkEntry(${e.id})">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Position / Titel</label>
+        <input type="text" value="${esc(e.title)}" oninput="updateWorkField(${e.id},'title',this.value)" placeholder="Softwareentwickler">
+      </div>
+      <div class="form-group">
+        <label>Unternehmen</label>
+        <input type="text" value="${esc(e.company)}" oninput="updateWorkField(${e.id},'company',this.value)" placeholder="Tech GmbH">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Von</label>
+          <input type="text" value="${esc(e.from)}" oninput="updateWorkField(${e.id},'from',this.value)" placeholder="01/2020">
+        </div>
+        <div class="form-group">
+          <label>Bis</label>
+          <input type="text" value="${esc(e.to)}" oninput="updateWorkField(${e.id},'to',this.value)" placeholder="Heute">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Beschreibung</label>
+        <textarea oninput="updateWorkField(${e.id},'desc',this.value)" placeholder="Aufgaben und Erfolge...">${esc(e.desc)}</textarea>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderEduEntries() {
+  const container = document.getElementById('edu-entries');
+  container.innerHTML = eduEntries.map(e => `
+    <div class="entry-card">
+      <div class="entry-header">
+        <h3>${e.degree || 'Neue Ausbildung'}</h3>
+        <button class="btn-remove" onclick="removeEduEntry(${e.id})">✕</button>
+      </div>
+      <div class="form-group">
+        <label>Abschluss / Studiengang</label>
+        <input type="text" value="${esc(e.degree)}" oninput="updateEduField(${e.id},'degree',this.value)" placeholder="B.Sc. Informatik">
+      </div>
+      <div class="form-group">
+        <label>Institution</label>
+        <input type="text" value="${esc(e.school)}" oninput="updateEduField(${e.id},'school',this.value)" placeholder="TU Berlin">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Von</label>
+          <input type="text" value="${esc(e.from)}" oninput="updateEduField(${e.id},'from',this.value)" placeholder="10/2016">
+        </div>
+        <div class="form-group">
+          <label>Bis</label>
+          <input type="text" value="${esc(e.to)}" oninput="updateEduField(${e.id},'to',this.value)" placeholder="09/2020">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderLangEntries() {
+  const container = document.getElementById('lang-entries');
+  container.innerHTML = langEntries.map(e => `
+    <div class="entry-card">
+      <div class="entry-header">
+        <h3>${e.language || 'Neue Sprache'}</h3>
+        <button class="btn-remove" onclick="removeLangEntry(${e.id})">✕</button>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Sprache</label>
+          <input type="text" value="${esc(e.language)}" oninput="updateLangField(${e.id},'language',this.value)" placeholder="Englisch">
+        </div>
+        <div class="form-group">
+          <label>Niveau</label>
+          <input type="text" value="${esc(e.level)}" oninput="updateLangField(${e.id},'level',this.value)" placeholder="Fließend (C1)">
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function esc(s) { return (s || '').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+function updateWorkField(id, field, val) {
+  const entry = workEntries.find(e => e.id === id);
+  if (entry) { entry[field] = val; updatePreview(); }
+}
+
+function updateEduField(id, field, val) {
+  const entry = eduEntries.find(e => e.id === id);
+  if (entry) { entry[field] = val; updatePreview(); }
+}
+
+function updateLangField(id, field, val) {
+  const entry = langEntries.find(e => e.id === id);
+  if (entry) { entry[field] = val; updatePreview(); }
+}
+
+// ============================================================
+// PREVIEW
+// ============================================================
+function updatePreview() {
+  const fname = document.getElementById('fname').value || 'Max';
+  const lname = document.getElementById('lname').value || 'Mustermann';
+  const street = document.getElementById('street').value;
+  const city = document.getElementById('city').value;
+  const phone = document.getElementById('phone').value;
+  const email = document.getElementById('email').value;
+  const photo = document.getElementById('photo').value;
+  const summary = document.getElementById('summary').value;
+  const skills = document.getElementById('skills').value;
+
+  const preview = document.getElementById('preview');
+  
+  let html = '<div class="header-area">';
+  if (photo) {
+    html += `<img class="photo-preview" src="${esc(photo)}" alt="Foto" onerror="this.style.display='none'">`;
+  }
+  html += '<div class="header-text">';
+  html += `<h1>${esc(fname)} ${esc(lname)}</h1>`;
+  html += '<div class="contact-line">';
+  const parts = [];
+  if (street) parts.push(esc(street));
+  if (city) parts.push(esc(city));
+  if (phone) parts.push(esc(phone));
+  if (email) parts.push(esc(email));
+  html += parts.join(' &nbsp;|&nbsp; ');
+  html += '</div></div></div>';
+  
+  if (summary) {
+    html += '<div class="section"><h2>Profil</h2>';
+    html += `<div class="summary">${esc(summary)}</div></div>`;
+  }
+  
+  // Work experience
+  if (workEntries.length > 0) {
+    html += '<h2>Berufserfahrung</h2>';
+    for (const e of workEntries) {
+      html += '<div class="section">';
+      html += `<div class="entry-title">${esc(e.title)}</div>`;
+      if (e.company) {
+        html += `<div class="entry-sub">${esc(e.company)}`;
+        if (e.from || e.to) {
+          html += ` &nbsp;|&nbsp; ${esc(e.from)} – ${esc(e.to)}`;
+        }
+        html += '</div>';
+      }
+      if (e.desc) html += `<div class="entry-desc">${esc(e.desc)}</div>`;
+      html += '</div>';
+    }
+  }
+  
+  // Education
+  if (eduEntries.length > 0) {
+    html += '<h2>Ausbildung</h2>';
+    for (const e of eduEntries) {
+      html += '<div class="section">';
+      html += `<div class="entry-title">${esc(e.degree)}</div>`;
+      if (e.school) {
+        html += `<div class="entry-sub">${esc(e.school)}`;
+        if (e.from || e.to) {
+          html += ` &nbsp;|&nbsp; ${esc(e.from)} – ${esc(e.to)}`;
+        }
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+  }
+  
+  // Skills
+  if (skills) {
+    html += '<h2>Fähigkeiten</h2>';
+    html += '<div class="section">';
+    const skillItems = skills.split(',').map(s => s.trim()).filter(s => s);
+    for (const s of skillItems) {
+      html += `<span class="skill-tag">${esc(s)}</span>`;
+    }
+    html += '</div>';
+  }
+  
+  // Languages
+  if (langEntries.length > 0) {
+    html += '<h2>Sprachen</h2>';
+    for (const e of langEntries) {
+      if (e.language) {
+        html += `<div class="lang-item">${esc(e.language)}`;
+        if (e.level) html += ` – ${esc(e.level)}`;
+        html += '</div>';
+      }
+    }
+  }
+  
+  preview.innerHTML = html;
+}
+
+// ============================================================
+// INIT
+// ============================================================
+// Add one empty entry for each category
+addWorkEntry({ title: 'Softwareentwickler', company: 'Tech GmbH', from: '01/2020', to: 'Heute', desc: 'Entwicklung moderner Webanwendungen mit React und Node.js\nAgiles Team (Scrum) – verantwortlich für 3 Microservices' });
+addEduEntry({ degree: 'B.Sc. Informatik', school: 'TU Berlin', from: '10/2016', to: '09/2020' });
+addLangEntry({ language: 'Deutsch', level: 'Muttersprache' });
+addLangEntry({ language: 'Englisch', level: 'Fließend (C1)' });
+document.getElementById('fname').value = 'Max';
+document.getElementById('lname').value = 'Mustermann';
+document.getElementById('street').value = 'Musterstr. 1';
+document.getElementById('city').value = '12345 Berlin';
+document.getElementById('phone').value = '+49 123 456789';
+document.getElementById('email').value = 'max@beispiel.de';
+document.getElementById('summary').value = 'Erfahrener Softwareentwickler mit 5+ Jahren Erfahrung in der Webentwicklung. Spezialisiert auf moderne JavaScript-Frameworks und Cloud-Infrastruktur.';
+document.getElementById('skills').value = 'Python, JavaScript, React, Node.js, SQL, Docker, Git, Scrum';
+updatePreview();
+</script>
+</body>
+</html>
