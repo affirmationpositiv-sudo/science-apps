@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dropshipping Profit-Rechner 2026 | Kostenlos + Interaktiv | Licht und Schatten</title>
+<meta name="description" content="Kostenloser interaktiver Dropshipping Profit-Rechner. Berechne sofort deine Marge, Gewinn und ROI für dein E-Commerce-Produkt inkl. aller Kosten.">
+<meta name="keywords" content="Dropshipping Rechner, Profit Rechner, Marge berechnen, E-Commerce Kalkulation, Dropshipping 2026, Licht und Schatten, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Dropshipping Profit-Rechner 2026">
+<meta property="og:description" content="Kostenloser interaktiver Dropshipping Profit-Rechner inkl. Affiliate-Links.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Licht und Schatten Tools">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+a{color:#A78BFA;text-decoration:none;transition:color .3s}
+a:hover{color:#FFD700}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(139,92,246,0.1)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.nav-logo{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:#9CA3AF;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#FFD700}
+.nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer}
+.container{max-width:900px;margin:0 auto;padding:100px 24px 40px}
+h1{font-size:2.2em;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{color:#9CA3AF;margin-bottom:32px}
+.calc-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:768px){.calc-grid{grid-template-columns:1fr}}
+.calc-form{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:28px}
+.calc-form h2{font-size:1.2em;color:#FFD700;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid #2A2A2A}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.85em;color:#9CA3AF;margin-bottom:4px;font-weight:500}
+.field input{width:100%;padding:12px 16px;background:#0A0A0A;border:1px solid #2A2A2A;border-radius:8px;color:#fff;font-size:1em;transition:border-color .3s}
+.field input:focus{outline:none;border-color:#8B5CF6;box-shadow:0 0 0 3px rgba(139,92,246,0.1)}
+.field input::placeholder{color:#4B5563}
+.field .hint{font-size:.75em;color:#4B5563;margin-top:2px}
+.calc-result{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:28px;display:flex;flex-direction:column}
+.calc-result h2{font-size:1.2em;color:#FFD700;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid #2A2A2A}
+.result-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #141414}
+.result-item:last-child{border-bottom:none}
+.result-item .label{color:#9CA3AF;font-size:.9em}
+.result-item .value{font-weight:600;color:#fff}
+.result-item.highlight .value{color:#6EE7B7;font-size:1.2em}
+.result-item.negative .value{color:#EF4444}
+.result-item.warning .value{color:#FBBF24}
+.progress-bar{background:#141414;border-radius:8px;height:12px;margin:16px 0;overflow:hidden}
+.progress-fill{height:100%;border-radius:8px;transition:width .5s ease,background .5s ease}
+.good{background:linear-gradient(90deg,#6EE7B7,#10B981)}
+.ok{background:linear-gradient(90deg,#FBBF24,#F59E0B)}
+.bad{background:linear-gradient(90deg,#EF4444,#DC2626)}
+.rating{text-align:center;margin-top:auto;padding-top:16px}
+.rating .stars{font-size:1.8em;margin-bottom:4px}
+.rating .label{color:#6B7280;font-size:.85em}
+.rating .verdict{color:#FFD700;font-weight:600;font-size:.9em}
+.presets{margin-bottom:20px;display:flex;gap:8px;flex-wrap:wrap}
+.preset-btn{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:8px 16px;color:#9CA3AF;font-size:.8em;cursor:pointer;transition:all .3s}
+.preset-btn:hover{background:#2A2A2A;border-color:#8B5CF6;color:#fff}
+.preset-btn.active{background:rgba(139,92,246,0.15);border-color:#8B5CF6;color:#A78BFA}
+.affiliate-links{margin-top:24px;background:#141414;border:1px solid #2A2A2A;border-radius:12px;padding:20px}
+.affiliate-links h3{color:#A78BFA;font-size:.95em;margin-bottom:12px}
+.affiliate-links a{display:inline-block;margin:4px 8px 4px 0;background:#0A0A0A;border:1px solid #2A2A2A;border-radius:6px;padding:6px 12px;font-size:.8em;color:#9CA3AF;transition:all .3s}
+.affiliate-links a:hover{color:#FFD700;border-color:#8B5CF6}
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:16px;margin:30px 0;font-size:.82em;color:#6B7280;line-height:1.5}
+footer{background:#0A0A0A;border-top:1px solid rgba(139,92,246,0.1);padding:40px 24px 32px;text-align:center}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-brand{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+.footer-links a{color:#6B7280;font-size:.85rem}
+.footer-links a:hover{color:#A78BFA}
+.footer-disclaimer{font-size:.78rem;color:#4B5563;max-width:700px;margin:0 auto;line-height:1.6}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(12px);flex-direction:column;padding:1rem;border-bottom:1px solid rgba(139,92,246,0.2)}
+.nav-links.active{display:flex}
+.nav-toggle{display:block}
+.container{padding:80px 16px 40px}
+h1{font-size:1.6em}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+<div class="nav-logo">✦ Licht & Schatten</div>
+<button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
+<ul class="nav-links">
+<li><a href="../index.html">🏪 Start</a></li>
+<li><a href="../store.html">🛒 Shop</a></li>
+<li><a href="../blog/">📝 Blog</a></li>
+<li><a href="index.html" style="color:#FFD700;">🔧 Tools</a></li>
+</ul>
+</div>
+</nav>
+
+<div class="container">
+<h1>📦 Dropshipping Profit-Rechner</h1>
+<p class="sub">Berechne sofort deine Marge, Gewinn und ROI für dein E-Commerce-Produkt. Inkl. aller versteckten Kosten.</p>
+
+<div class="presets">
+<button class="preset-btn" data-preset="smart-home">🏠 Smart Home Gadget</button>
+<button class="preset-btn" data-preset="fitness">💪 Fitness-Zubehör</button>
+<button class="preset-btn" data-preset="fashion">👕 Fashion / Accessoires</button>
+<button class="preset-btn" data-preset="tech">📱 Tech / Handy-Zubehör</button>
+<button class="preset-btn" data-preset="pet">🐱 Haustier Premium</button>
+</div>
+
+<div class="calc-grid">
+<div class="calc-form">
+<h2>💰 Kosten eingeben</h2>
+<div class="field">
+<label>Verkaufspreis (€)</label>
+<input type="number" id="sellingPrice" value="49.99" step="0.01" min="0" placeholder="z.B. 49.99">
+</div>
+<div class="field">
+<label>Produktkosten (€)</label>
+<input type="number" id="productCost" value="12.00" step="0.01" min="0" placeholder="z.B. 12.00">
+<div class="hint">Einkaufspreis beim Lieferanten</div>
+</div>
+<div class="field">
+<label>Versandkosten (€)</label>
+<input type="number" id="shippingCost" value="4.50" step="0.01" min="0" placeholder="z.B. 4.50">
+<div class="hint">Pro Bestellung inkl. Verpackung</div>
+</div>
+<div class="field">
+<label>Plattformgebühren (%)</label>
+<input type="number" id="platformFee" value="2" step="0.1" min="0" max="30" placeholder="z.B. 2 (Shopify)">
+<div class="hint">Shopify ~2%, Amazon ~15%, eBay ~10%</div>
+</div>
+<div class="field">
+<label>Marketingkosten pro Verkauf (€)</label>
+<input type="number" id="marketingCost" value="5.00" step="0.01" min="0" placeholder="z.B. 5.00">
+<div class="hint">Durchschnittliche Werbekosten pro Verkauf (CAC)</div>
+</div>
+<div class="field">
+<label>Retouren-Quote (%)</label>
+<input type="number" id="returnRate" value="8" step="0.1" min="0" max="100" placeholder="z.B. 8">
+<div class="hint">Branchendurchschnitt: 5–15%</div>
+</div>
+<div class="field">
+<label>Sonstige Kosten (€)</label>
+<input type="number" id="otherCost" value="0" step="0.01" min="0" placeholder="z.B. 0">
+<div class="hint">Zoll, Steuerberater, Software-Abos</div>
+</div>
+</div>
+
+<div class="calc-result">
+<h2>📊 Ergebnis</h2>
+<div class="result-item">
+<span class="label">💰 Umsatz (pro Verkauf)</span>
+<span class="value" id="displayRevenue">€49,99</span>
+</div>
+<div class="result-item">
+<span class="label">💸 Gesamtkosten</span>
+<span class="value" id="displayCosts">€0,00</span>
+</div>
+<div class="result-item highlight">
+<span class="label">✅ Reingewinn</span>
+<span class="value" id="displayProfit">€0,00</span>
+</div>
+<div class="result-item">
+<span class="label">📈 Gewinnmarge</span>
+<span class="value" id="displayMargin">0%</span>
+</div>
+<div class="result-item">
+<span class="label">📊 ROI</span>
+<span class="value" id="displayROI">0%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-fill ok" id="progressBar" style="width:0%"></div>
+</div>
+<div class="rating">
+<div class="stars" id="starsDisplay">⭐⭐⭐</div>
+<div class="label" id="verdictLabel">Daten eingeben, um Bewertung zu sehen</div>
+<div class="verdict" id="verdictText"></div>
+</div>
+
+<div class="affiliate-links">
+<h3>🔗 Passende Produkte für deinen Shop (Amazon)</h3>
+<a href="https://www.amazon.de/s?k=fotobox+produktfotografie+lichtkasten&tag=ikune21-21" target="_blank">📷 Fotobox</a>
+<a href="https://www.amazon.de/s?k=verpackungsmaterial+versandtaschen&tag=ikune21-21" target="_blank">📦 Versandmaterial</a>
+<a href="https://www.amazon.de/s?k=e-commerce+buch+2026&tag=ikune21-21" target="_blank">📚 E-Commerce Bücher</a>
+<a href="https://www.amazon.de/s?k=waage+digital+versand&tag=ikune21-21" target="_blank">⚖️ Versandwaage</a>
+<a href="https://www.amazon.de/s?k=etikettendrucker+versand&tag=ikune21-21" target="_blank">🏷️ Etikettendrucker</a>
+</div>
+</div>
+</div>
+
+<div class="disclaimer">
+<strong>📢 Affiliate-Hinweis:</strong> Dieses Tool enthält Affiliate-Links (Amazon-Partnerprogramm, Tag: <strong>ikune21-21</strong>). Alle Angaben ohne Gewähr. Die Berechnung dient als Richtwert und ersetzt keine professionelle betriebswirtschaftliche Beratung.
+</div>
+
+<p style="text-align:center;margin-top:24px;">➜ <a href="../blog/ki-ecommerce-dropshipping-2026.html">Lies auch den Artikel: KI E-Commerce 2026 – Online-Shop mit KI aufbauen</a></p>
+</div>
+
+<footer>
+<div class="footer-inner">
+<div class="footer-brand">✦ Licht & Schatten</div>
+<div class="footer-links">
+<a href="../index.html">🏪 Startseite</a>
+<a href="../store.html">🛒 Shop</a>
+<a href="../blog/">📝 Blog</a>
+<a href="index.html">🔧 Tools</a>
+<a href="../impressum/">📜 Impressum</a>
+<a href="../datenschutz/">🔒 Datenschutz</a>
+</div>
+<div class="footer-disclaimer">
+Amazon-Partnerwerbung. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.
+© 2026 Licht und Schatten
+</div>
+</div>
+</footer>
+
+<script>
+function calculate() {
+const price = parseFloat(document.getElementById('sellingPrice').value) || 0;
+const product = parseFloat(document.getElementById('productCost').value) || 0;
+const shipping = parseFloat(document.getElementById('shippingCost').value) || 0;
+const platformPct = parseFloat(document.getElementById('platformFee').value) || 0;
+const marketing = parseFloat(document.getElementById('marketingCost').value) || 0;
+const returnPct = parseFloat(document.getElementById('returnRate').value) || 0;
+const other = parseFloat(document.getElementById('otherCost').value) || 0;
+
+const platformFee = price * (platformPct / 100);
+const returnCost = price * (returnPct / 100);
+const totalCosts = product + shipping + platformFee + marketing + returnCost + other;
+const profit = price - totalCosts;
+const margin = price > 0 ? (profit / price) * 100 : 0;
+const roi = totalCosts > 0 ? (profit / totalCosts) * 100 : 0;
+
+document.getElementById('displayRevenue').textContent = '€' + price.toFixed(2).replace('.',',');
+document.getElementById('displayCosts').textContent = '€' + totalCosts.toFixed(2).replace('.',',');
+document.getElementById('displayProfit').textContent = (profit >= 0 ? '€' : '-€') + Math.abs(profit).toFixed(2).replace('.',',');
+document.getElementById('displayMargin').textContent = margin.toFixed(1) + '%';
+document.getElementById('displayROI').textContent = roi.toFixed(1) + '%';
+
+const profitEl = document.getElementById('displayProfit');
+if (profit >= 0) {
+profitEl.parentElement.className = 'result-item highlight';
+} else {
+profitEl.parentElement.className = 'result-item negative';
+}
+
+let barPct = Math.min(Math.max(margin, 0), 80);
+document.getElementById('progressBar').style.width = barPct + '%';
+if (margin >= 30) {
+document.getElementById('progressBar').className = 'progress-fill good';
+} else if (margin >= 15) {
+document.getElementById('progressBar').className = 'progress-fill ok';
+} else {
+document.getElementById('progressBar').className = 'progress-fill bad';
+}
+
+let stars, verdict, label;
+if (margin >= 40) { stars = '⭐⭐⭐⭐⭐'; verdict = 'Exzellent – Skalieren!'; label = 'Hervorragende Marge. Dieses Produkt ist ein Gewinner.'; }
+else if (margin >= 30) { stars = '⭐⭐⭐⭐'; verdict = 'Sehr gut – Loslegen!'; label = 'Solide Marge. Mit gutem Marketing profitabel.'; }
+else if (margin >= 20) { stars = '⭐⭐⭐'; verdict = 'Gut – Optimieren!'; label = 'Akzeptabel. Versuche Kosten zu senken oder Preis zu erhöhen.'; }
+else if (margin >= 10) { stars = '⭐⭐'; verdict = 'Knapp – Vorsichtig!'; label = 'Niedrige Marge. Ein Kostenanstieg macht dich schnell defizitär.'; }
+else if (margin > 0) { stars = '⭐'; verdict = 'Schlecht – Überdenken!'; label = 'Kaum Gewinn. Dieses Produkt lohnt sich nicht.'; }
+else { stars = '❌'; verdict = 'Verlust – Nicht starten!'; label = 'Du verlierst Geld pro Verkauf. Ändere Preis oder Produkt.'; }
+
+document.getElementById('starsDisplay').textContent = stars;
+document.getElementById('verdictText').textContent = verdict;
+document.getElementById('verdictLabel').textContent = label;
+}
+
+const inputs = document.querySelectorAll('input[type="number"]');
+inputs.forEach(inp => inp.addEventListener('input', calculate));
+
+const presets = {
+'smart-home': { price: 49.99, product: 12.00, shipping: 4.50, platform: 2, marketing: 5.00, returns: 8, other: 0 },
+'fitness': { price: 34.99, product: 8.50, shipping: 3.50, platform: 2, marketing: 4.00, returns: 6, other: 0 },
+'fashion': { price: 29.99, product: 6.00, shipping: 3.00, platform: 2, marketing: 6.00, returns: 12, other: 0 },
+'tech': { price: 19.99, product: 3.50, shipping: 2.00, platform: 2, marketing: 3.00, returns: 5, other: 0 },
+'pet': { price: 44.99, product: 14.00, shipping: 4.00, platform: 2, marketing: 5.00, returns: 4, other: 1.50 },
+};
+
+document.querySelectorAll('.preset-btn').forEach(btn => {
+btn.addEventListener('click', function() {
+const p = presets[this.dataset.preset];
+if (!p) return;
+document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+this.classList.add('active');
+document.getElementById('sellingPrice').value = p.price;
+document.getElementById('productCost').value = p.product;
+document.getElementById('shippingCost').value = p.shipping;
+document.getElementById('platformFee').value = p.platform;
+document.getElementById('marketingCost').value = p.marketing;
+document.getElementById('returnRate').value = p.returns;
+document.getElementById('otherCost').value = p.other;
+calculate();
+});
+});
+
+calculate();
+</script>
+</body>
+</html>

@@ -415,4 +415,20 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- KI E-Commerce Artikel #21 -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-ecommerce-dropshipping-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Dropshipping Profit-Rechner -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/dropshipping-rechner.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
