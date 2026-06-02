@@ -382,4 +382,21 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Blog Artikel #18: KI-Produktivität 2026 -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-produktivitaet-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Artikel #19: Online-Business ohne Startkapital 2026 -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/online-business-ohne-startkapital-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
