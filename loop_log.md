@@ -565,7 +565,53 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 | Blog-Artikel | 23 | ✅ LIVE |
 | Interaktive Tools | 9 | ✅ LIVE |
 
-### Next Tick Priorities:
-1. 🔴 Blog-Artikel #25: KI-Bildbearbeitung 2026
-2. 🔴 KI-Entscheidungsfinder oder Steuerrechner
 3. 🟡 KDP Account erstellen (User-Aktion nötig)
+
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.21)
+
+### Previous State (R2.20):
+- 23 Blog-Artikel live, 9 interaktive Tools, 8 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #24 (KI-Startups & Gründung) + Startup-Ideen-Generator live
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.21):
+- [x] **Survey:** Komplette Bestandsaufnahme aller Projekte, Repos und Assets
+- [x] **Blog-Artikel #25 erstellt:** KI-Bildbearbeitung 2026 – 10 Tools, Techniken & Tipps (20 KB HTML, ~3.500 Wörter, 10 Tool-Vorstellungen mit Preisen, 3 Praxis-Workflows, Vergleichstabelle, 4 Monetarisierungs-Strategien, 7-Tage-Lernplan, 20+ Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **Blog-Index aktualisiert:** Stats 23→24 Artikel, +Artikel-Karte #25
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 23→24
+- [x] **Sitemap.xml aktualisiert:** +Blog-Artikel #25 URL
+- [x] **Git commit + push ✅** (5 Dateien geändert/neu)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 24 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 9 | ✅ LIVE |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| Gesamt (Sitemap) | 82+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 24 Artikel + 9 Tools + 8 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #26**: KI-Entscheidungsfinder oder KI-Bildbearbeitungs-Finder
+2. 🔴 **Neues interaktives Tool**: KI-Steuerrechner
+3. 🟡 **KDP Account erstellen** (User-Aktion nötig)
+4. 🟡 **Google Search Console einrichten**
