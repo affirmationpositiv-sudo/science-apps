@@ -266,6 +266,12 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-content-creation-2026.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Learning Tracker -->
   <url>
     <loc>https://affirmationpositiv-sudo.github.io/science-apps/learning-tracker/</loc>
