@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto-Zubehör-Konfigurator 2026 ✦ Finde dein perfektes Zubehör</title>
+  <meta name="description" content="Beantworte 5 Fragen und erhalte eine personalisierte Einkaufsliste mit Auto- & Motorrad-Zubehör in deinem Budget. Kostenlos & interaktiv.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Auto-Zubehör-Konfigurator – Personalisierte Produktempfehlungen">
+  <meta property="og:description" content="Finde das perfekte Zubehör für dein Auto oder Motorrad. Beantworte 5 Fragen und erhalte eine maßgeschneiderte Liste.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/auto-zubehoer-konfigurator.html">
+  <link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/auto-zubehoer-konfigurator.html">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Auto-Zubehör-Konfigurator","description":"Finde personalisierte Auto- & Motorrad-Zubehör-Empfehlungen per Fragebogen.","url":"https://affirmationpositiv-sudo.github.io/science-apps/tools/auto-zubehoer-konfigurator.html","applicationCategory":"ShoppingApplication","operatingSystem":"All"}
+  </script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0A0A0F;color:#E5E5E5;line-height:1.6;min-height:100vh}
+    .container{max-width:900px;margin:0 auto;padding:20px}
+    h1{text-align:center;font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:30px 0 8px}
+    .subtitle{text-align:center;color:#888;font-size:1.05rem;margin-bottom:30px}
+    .back-link{display:block;text-align:center;margin-bottom:20px;color:#8B5CF6;text-decoration:none;font-weight:500}
+    .back-link:hover{color:#FFD700}
+    
+    /* Wizard */
+    .wizard{background:#14141F;border:1px solid rgba(139,92,246,.15);border-radius:16px;padding:30px;position:relative;overflow:hidden}
+    .step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+    .dot{width:10px;height:10px;border-radius:50%;background:#2A2A3A;transition:all .3s}
+    .dot.active{background:#8B5CF6;box-shadow:0 0 10px rgba(139,92,246,.4);width:32px;border-radius:5px}
+    .dot.done{background:#FFD700}
+
+    .step{display:none}
+    .step.active{display:block;animation:fadeIn .35s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    
+    .step h2{font-size:1.4rem;font-weight:700;color:#FFD700;margin-bottom:6px}
+    .step p{color:#999;margin-bottom:24px;font-size:.95rem}
+    
+    .options{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .option{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;cursor:pointer;transition:all .25s;text-align:center}
+    .option:hover{border-color:#8B5CF6;background:rgba(139,92,246,.06)}
+    .option.selected{border-color:#FFD700;background:rgba(255,215,0,.08);box-shadow:0 0 15px rgba(255,215,0,.1)}
+    .option .icon{font-size:2rem;margin-bottom:8px}
+    .option .label{font-weight:600;font-size:.95rem;color:#FFF}
+    .option .desc{color:#888;font-size:.8rem;margin-top:4px}
+
+    .btn-row{display:flex;justify-content:space-between;margin-top:30px;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 28px;border:none;border-radius:8px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .25s}
+    .btn-next{background:#8B5CF6;color:#fff}
+    .btn-next:hover{background:#7C3AED;transform:scale(1.02)}
+    .btn-prev{background:rgba(255,255,255,.08);color:#ccc}
+    .btn-prev:hover{background:rgba(255,255,255,.12)}
+    .btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important}
+
+    .result-section{display:none;background:#14141F;border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:30px;margin-top:24px}
+    .result-section.visible{display:block;animation:fadeIn .4s ease}
+
+    .result-header{text-align:center;margin-bottom:24px}
+    .result-header .emoji{font-size:3rem;margin-bottom:8px}
+    .result-header h3{font-size:1.5rem;color:#FFD700;font-weight:700}
+    .result-header p{color:#999;font-size:.95rem}
+
+    .result-category{margin-bottom:20px}
+    .result-category h4{color:#8B5CF6;font-size:1.1rem;border-bottom:1px solid rgba(139,92,246,.15);padding-bottom:8px;margin-bottom:12px}
+    .result-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+    .result-item .name{font-weight:600;color:#FFF;font-size:.92rem}
+    .result-item .price{color:#8B5CF6;font-size:.85rem}
+    .result-item .link{display:inline-block;background:#FF9900;color:#000!important;font-weight:600;font-size:.8rem;padding:6px 14px;border-radius:5px;text-decoration:none}
+    .result-item .link:hover{background:#E88E00;transform:scale(1.02)}
+
+    .budget-pie{margin:20px 0;text-align:center}
+    .budget-pie canvas{max-width:300px;margin:0 auto;border-radius:50%}
+
+    .reset-btn{display:block;margin:20px auto 0;background:rgba(255,255,255,.06);color:#ccc;border:1px solid rgba(255,255,255,.1);padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:500;transition:all .25s}
+    .reset-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+
+    .budget-slider-wrap{margin:20px 0;text-align:center}
+    .budget-slider-wrap label{color:#999;font-size:.9rem;display:block;margin-bottom:8px}
+    .budget-slider-wrap input[type=range]{width:80%;max-width:400px;height:6px;-webkit-appearance:none;background:linear-gradient(90deg,#8B5CF6,#FFD700);border-radius:3px;outline:none}
+    .budget-slider-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#FFD700;cursor:pointer;box-shadow:0 0 8px rgba(255,215,0,.3)}
+    .budget-display{font-size:1.6rem;font-weight:800;color:#FFD700;margin:8px 0}
+
+    .spartipps{margin:20px 0;padding:16px;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.12);border-radius:10px}
+    .spartipps h4{color:#FFD700;margin-bottom:10px;font-size:1rem}
+    .spartipps li{color:#B0B0B0;font-size:.89rem;margin-bottom:6px;list-style:none;padding-left:20px;position:relative}
+    .spartipps li::before{content:'💡';position:absolute;left:0}
+
+    .footer{text-align:center;padding:30px 20px;color:#666;font-size:.8rem}
+    .footer a{color:#888}
+    @media(max-width:600px){h1{font-size:1.6rem}.options{grid-template-columns:1fr 1fr}.step h2{font-size:1.15rem}.btn-row{flex-direction:column}.btn{width:100%}}
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../blog/auto-motorrad-zubehoer-2026.html" class="back-link">← Zurück zum Blog-Artikel</a>
+  <h1>🚗 Auto-Zubehör-Konfigurator</h1>
+  <p class="subtitle">5 Fragen – deine personalisierte Einkaufsliste in Sekunden</p>
+
+  <div class="wizard" id="wizard">
+    <div class="step-indicator" id="stepDots"></div>
+
+    <!-- Schritt 1: Fahrzeugtyp -->
+    <div class="step active" id="step1">
+      <h2>Welches Fahrzeug hast du?</h2>
+      <p>Wähle deinen Fahrzeugtyp – die Empfehlungen werden darauf abgestimmt.</p>
+      <div class="options" data-step="1" data-key="vehicle">
+        <div class="option" data-value="limo"><div class="icon">🚗</div><div class="label">Limousine / Kombi</div><div class="desc">Alltag & Pendeln</div></div>
+        <div class="option" data-value="suv"><div class="icon">🚙</div><div class="label">SUV / Geländewagen</div><div class="desc">Familie & Abenteuer</div></div>
+        <div class="option" data-value="sport"><div class="icon">🏎️</div><div class="label">Sportwagen / Coupé</div><div class="desc">Fahrspaß & Style</div></div>
+        <div class="option" data-value="motorrad"><div class="icon">🏍️</div><div class="label">Motorrad</div><div class="desc">Biker & Touren</div></div>
+        <div class="option" data-value="van"><div class="icon">🚐</div><div class="label">Van / Transporter</div><div class="desc">Reisen & Transport</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 2: Budget -->
+    <div class="step" id="step2">
+      <h2>Wie viel möchtest du ausgeben?</h2>
+      <p>Wähle dein Gesamtbudget für Auto-Zubehör.</p>
+      <div class="options" data-step="2" data-key="budget">
+        <div class="option" data-value="small"><div class="icon">💰</div><div class="label">Sparsam</div><div class="desc">bis 50 €</div></div>
+        <div class="option" data-value="medium"><div class="icon">💵</div><div class="label">Mittelklasse</div><div class="desc">50–200 €</div></div>
+        <div class="option" data-value="large"><div class="icon">💎</div><div class="label">Premium</div><div class="desc">200–500 €</div></div>
+        <div class="option" data-value="xl"><div class="icon">👑</div><div class="label">Luxus</div><div class="desc">500+ €</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 3: Einsatzbereich -->
+    <div class="step" id="step3">
+      <h2>Wofür nutzt du dein Fahrzeug hauptsächlich?</h2>
+      <p>Dein Haupteinsatzbereich bestimmt die Prioritäten.</p>
+      <div class="options" data-step="3" data-key="use">
+        <div class="option" data-value="commute"><div class="icon">🏢</div><div class="label">Pendeln / Alltag</div><div class="desc">Täglicher Weg zur Arbeit</div></div>
+        <div class="option" data-value="travel"><div class="icon">🛣️</div><div class="label">Reisen / Urlaub</div><div class="desc">Lange Strecken, Camping</div></div>
+        <div class="option" data-value="hobby"><div class="icon">🏁</div><div class="label">Hobby / Sport</div><div class="desc">Ausfahrten, Rennstrecke</div></div>
+        <div class="option" data-value="family"><div class="icon">👨‍👩‍👧‍👧</div><div class="label">Familie / Allround</div><div class="desc">Kinder, Alltag, Einkäufe</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 4: Wichtigster Bereich -->
+    <div class="step" id="step4">
+      <h2>Welcher Bereich ist dir am wichtigsten?</h2>
+      <p>Wähle den Bereich, der dir aktuell am meisten am Herzen liegt.</p>
+      <div class="options" data-step="4" data-key="priority">
+        <div class="option" data-value="sicherheit"><div class="icon">🛡️</div><div class="label">Sicherheit</div><div class="desc">Unfallschutz, Notfall</div></div>
+        <div class="option" data-value="komfort"><div class="icon">✨</div><div class="label">Komfort</div><div class="desc">Bequemlichkeit, Innenraum</div></div>
+        <div class="option" data-value="elektronik"><div class="icon">📱</div><div class="label">Elektronik</div><div class="desc">Dashcam, Navi, Diagnose</div></div>
+        <div class="option" data-value="pflege"><div class="icon">🧼</div><div class="label">Pflege & Optik</div><div class="desc">Lack, Reinigung, Felgen</div></div>
+        <div class="option" data-value="transport"><div class="icon">📦</div><div class="label">Transport</div><div class="desc">Dachbox, Träger, Stauraum</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 5: Erfahrungsstufe -->
+    <div class="step" id="step5">
+      <h2>Wie erfahren bist du mit Auto-Zubehör?</h2>
+      <p>Damit wir dir die passenden Produkte auf deinem Niveau empfehlen.</p>
+      <div class="options" data-step="5" data-key="experience">
+        <div class="option" data-value="beginner"><div class="icon">🌱</div><div class="label">Einsteiger</div><div class="desc">Einfach & schnell montierbar</div></div>
+        <div class="option" data-value="intermediate"><div class="icon">🔧</div><div class="label">Fortgeschritten</div><div class="desc">Selbst Hand anlegen</div></div>
+        <div class="option" data-value="pro"><div class="icon">⚙️</div><div class="label">Profi / Tuner</div><div class="desc">Professionelle Ausstattung</div></div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="btn-row">
+      <button class="btn btn-prev" id="btnPrev" onclick="prevStep()">← Zurück</button>
+      <button class="btn btn-next" id="btnNext" onclick="nextStep()">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Ergebnisse -->
+  <div class="result-section" id="resultSection">
+    <div class="result-header">
+      <div class="emoji">🎯</div>
+      <h3>Deine personalisierte Einkaufsliste</h3>
+      <p id="resultSummary"></p>
+    </div>
+    <div id="resultContent"></div>
+
+    <div class="budget-pie">
+      <canvas id="budgetChart" width="300" height="300"></canvas>
+    </div>
+
+    <div class="spartipps" id="spartippsContainer"></div>
+
+    <button class="reset-btn" onclick="resetConfig()">🔄 Neu starten</button>
+  </div>
+
+</div>
+<div class="footer">
+  <p>© 2026 Licht & Schatten Verlag | <a href="../index.html">Startseite</a> | <a href="../blog/auto-motorrad-zubehoer-2026.html">Zum Blog-Artikel</a></p>
+  <p style="margin-top:4px">*Affiliate-Links: Wir erhalten eine Provision bei Kauf – für dich keine Mehrkosten.</p>
+</div>
+
+<script>
+// ---- Product Database ----
+const PRODUCTS = {
+  sicherheit: [
+    {name: 'Notfallset (42-teilig)', price: 'ca. 30–55 €', value: 45, link: 'https://www.amazon.de/dp/B11JKL/?tag=ikune21-21', tags: ['sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['commute','family','hobby','travel']},
+    {name: 'Gurtmesser & Fensterhammer 2in1', price: 'ca. 10–18 €', value: 14, link: 'https://www.amazon.de/dp/B11MNO/?tag=ikune21-21', tags: ['sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','travel','hobby']},
+    {name: 'Verbandskasten DIN 13164', price: 'ca. 7–12 €', value: 10, link: 'https://www.amazon.de/dp/B11PQR/?tag=ikune21-21', tags: ['sicherheit'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['commute','travel']},
+    {name: 'Feuerlöscher 1 kg Fahrzeug', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B11STU/?tag=ikune21-21', tags: ['sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium','large'], use: ['commute','travel','family']},
+    {name: 'GPS-Tracker Echtzeit-Ortung', price: 'ca. 30–60 €', value: 45, link: 'https://www.amazon.de/dp/B13PQR/?tag=ikune21-21', tags: ['sicherheit','elektronik'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['medium','large'], use: ['commute','travel']},
+    {name: 'Lenkradschloss (pink)', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B13STU/?tag=ikune21-21', tags: ['sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','hobby']},
+    {name: 'Warndreieck + Warnweste (Set)', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B11GHI/?tag=ikune21-21', tags: ['sicherheit'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['commute','travel','hobby']}
+  ],
+  komfort: [
+    {name: 'Memory-Foam Sitzkissen', price: 'ca. 35–55 €', value: 45, link: 'https://www.amazon.de/dp/B08XYZ/?tag=ikune21-21', tags: ['komfort'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large','xl'], use: ['commute','travel','family']},
+    {name: 'Organizer Mittelkonsole', price: 'ca. 12–20 €', value: 16, link: 'https://www.amazon.de/dp/B08ABC/?tag=ikune21-21', tags: ['komfort'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','family']},
+    {name: 'Universal Sitzbezüge (4er-Set)', price: 'ca. 25–45 €', value: 35, link: 'https://www.amazon.de/dp/B08DEF/?tag=ikune21-21', tags: ['komfort','pflege'], vehicle: ['limo','suv','van','sport'], budget: ['medium'], use: ['family','commute']},
+    {name: 'Lenkradbezug Echtleder', price: 'ca. 20–35 €', value: 28, link: 'https://www.amazon.de/dp/B08GHI/?tag=ikune21-21', tags: ['komfort'], vehicle: ['limo','suv','sport'], budget: ['medium','large'], use: ['commute','hobby']},
+    {name: 'Nackenstütze Memory Foam (2er)', price: 'ca. 25–40 €', value: 32, link: 'https://www.amazon.de/dp/B08JKL/?tag=ikune21-21', tags: ['komfort'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['commute','travel']},
+    {name: 'Mülleimer fürs Auto (Mini)', price: 'ca. 8–15 €', value: 12, link: 'https://www.amazon.de/dp/B08MNO/?tag=ikune21-21', tags: ['komfort'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','travel','family']},
+    {name: 'Solar-Lüfter fürs Auto', price: 'ca. 15–30 €', value: 22, link: 'https://www.amazon.de/dp/B14ABC/?tag=ikune21-21', tags: ['komfort'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','travel']}
+  ],
+  elektronik: [
+    {name: 'Dashcam 4K mit Nachtsicht', price: 'ca. 100–180 €', value: 140, link: 'https://www.amazon.de/dp/B09GHI/?tag=ikune21-21', tags: ['elektronik','sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['large','xl'], use: ['commute','travel','hobby']},
+    {name: 'OBD2 Bluetooth Diagnose', price: 'ca. 15–30 €', value: 22, link: 'https://www.amazon.de/dp/B09JKL/?tag=ikune21-21', tags: ['elektronik','werkzeug'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','hobby','travel']},
+    {name: 'Bluetooth Freisprecheinrichtung', price: 'ca. 25–45 €', value: 35, link: 'https://www.amazon.de/dp/B09MNO/?tag=ikune21-21', tags: ['elektronik'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['medium','large'], use: ['commute','travel']},
+    {name: 'USB-C Schnellladeadapter (2x)', price: 'ca. 12–20 €', value: 16, link: 'https://www.amazon.de/dp/B09PQR/?tag=ikune21-21', tags: ['elektronik'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','travel','family']},
+    {name: 'Apple CarPlay / Android Auto Display', price: 'ca. 80–150 €', value: 115, link: 'https://www.amazon.de/dp/B09STU/?tag=ikune21-21', tags: ['elektronik'], vehicle: ['limo','suv','van','sport'], budget: ['large','xl'], use: ['commute','travel']},
+    {name: 'Reifendruck-Kontrollsystem TPMS', price: 'ca. 30–55 €', value: 42, link: 'https://www.amazon.de/dp/B09VWX/?tag=ikune21-21', tags: ['elektronik','sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['commute','travel','family']}
+  ],
+  pflege: [
+    {name: 'Hochdruckreiniger (180 bar)', price: 'ca. 80–130 €', value: 105, link: 'https://www.amazon.de/dp/B08PQR/?tag=ikune21-21', tags: ['pflege'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['large','xl'], use: ['hobby','family']},
+    {name: 'Waschbürste mit weichen Borsten', price: 'ca. 20–35 €', value: 28, link: 'https://www.amazon.de/dp/B08STU/?tag=ikune21-21', tags: ['pflege'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['medium','large'], use: ['hobby','family']},
+    {name: 'Nano-Lackversiegelung Keramik', price: 'ca. 40–70 €', value: 55, link: 'https://www.amazon.de/dp/B08VWX/?tag=ikune21-21', tags: ['pflege'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['hobby']},
+    {name: 'Mikrofasertücher (12er-Set)', price: 'ca. 10–18 €', value: 14, link: 'https://www.amazon.de/dp/B08YZA/?tag=ikune21-21', tags: ['pflege'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['commute','hobby','travel']},
+    {name: 'Felgenbürsten-Set (3-tlg)', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B09ABC/?tag=ikune21-21', tags: ['pflege'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['hobby']},
+    {name: 'Innenraum-Reinigungsset', price: 'ca. 20–30 €', value: 25, link: 'https://www.amazon.de/dp/B09DEF/?tag=ikune21-21', tags: ['pflege','komfort'], vehicle: ['limo','suv','van','sport'], budget: ['medium'], use: ['family','commute']}
+  ],
+  transport: [
+    {name: 'Dachbox 420 L', price: 'ca. 250–450 €', value: 350, link: 'https://www.amazon.de/dp/B11VWX/?tag=ikune21-21', tags: ['transport'], vehicle: ['limo','suv','van'], budget: ['xl'], use: ['travel','family']},
+    {name: 'Fahrradträger AHK', price: 'ca. 200–400 €', value: 300, link: 'https://www.amazon.de/dp/B11YZA/?tag=ikune21-21', tags: ['transport'], vehicle: ['limo','suv','van'], budget: ['xl'], use: ['travel','family']},
+    {name: 'Dachgepäckträger Basic (2er)', price: 'ca. 50–90 €', value: 70, link: 'https://www.amazon.de/dp/B12ABC/?tag=ikune21-21', tags: ['transport'], vehicle: ['limo','suv','van'], budget: ['large','xl'], use: ['travel']},
+    {name: 'Spanngurte-Set (4 Stück, 5 m)', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B12DEF/?tag=ikune21-21', tags: ['transport'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['travel','family']},
+    {name: 'Kofferraum-Schutzmatte', price: 'ca. 20–35 €', value: 28, link: 'https://www.amazon.de/dp/B12GHI/?tag=ikune21-21', tags: ['transport','pflege'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['family','travel','commute']}
+  ],
+  motorrad: [
+    {name: 'Integralhelm Panorama-Visier', price: 'ca. 200–400 €', value: 300, link: 'https://www.amazon.de/dp/B12YZA/?tag=ikune21-21', tags: ['motorrad','sicherheit'], vehicle: ['motorrad'], budget: ['large','xl'], use: ['commute','hobby','travel']},
+    {name: 'Motorrad Handyhalterung', price: 'ca. 20–40 €', value: 30, link: 'https://www.amazon.de/dp/B13ABC/?tag=ikune21-21', tags: ['motorrad','elektronik'], vehicle: ['motorrad'], budget: ['medium','large'], use: ['commute','hobby','travel']},
+    {name: 'Motorradhandschuhe Leder', price: 'ca. 40–80 €', value: 60, link: 'https://www.amazon.de/dp/B13DEF/?tag=ikune21-21', tags: ['motorrad','sicherheit'], vehicle: ['motorrad'], budget: ['medium','large'], use: ['commute','hobby']},
+    {name: 'Regenkombi 2-teilig', price: 'ca. 25–45 €', value: 35, link: 'https://www.amazon.de/dp/B13GHI/?tag=ikune21-21', tags: ['motorrad'], vehicle: ['motorrad'], budget: ['medium','large'], use: ['commute','travel']},
+    {name: 'Tankrucksack 15 L', price: 'ca. 40–70 €', value: 55, link: 'https://www.amazon.de/dp/B13JKL/?tag=ikune21-21', tags: ['motorrad','transport'], vehicle: ['motorrad'], budget: ['medium','large'], use: ['travel','commute']},
+    {name: 'Bluetooth-Kommunikationssystem', price: 'ca. 150–300 €', value: 225, link: 'https://www.amazon.de/dp/B13MNO/?tag=ikune21-21', tags: ['motorrad','elektronik'], vehicle: ['motorrad'], budget: ['large','xl'], use: ['hobby','travel','commute']}
+  ],
+  werkzeug: [
+    {name: '150-teiliges Werkzeugset', price: 'ca. 60–100 €', value: 80, link: 'https://www.amazon.de/dp/B10MNO/?tag=ikune21-21', tags: ['werkzeug'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['large','xl'], use: ['hobby','family','commute']},
+    {name: 'Wagenheber 2 t', price: 'ca. 30–50 €', value: 40, link: 'https://www.amazon.de/dp/B10PQR/?tag=ikune21-21', tags: ['werkzeug'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['hobby','commute']},
+    {name: 'Überbrückungskabel 25 mm²', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B10STU/?tag=ikune21-21', tags: ['werkzeug','sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['commute','travel']},
+    {name: 'Starthilfe Powerbank 2000 A', price: 'ca. 50–90 €', value: 70, link: 'https://www.amazon.de/dp/B10VWX/?tag=ikune21-21', tags: ['werkzeug','sicherheit'], vehicle: ['limo','suv','van','sport'], budget: ['medium','large'], use: ['commute','travel']},
+    {name: 'Ölauffangwanne 10 l', price: 'ca. 12–20 €', value: 16, link: 'https://www.amazon.de/dp/B10YZA/?tag=ikune21-21', tags: ['werkzeug'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['hobby']},
+    {name: 'Trichter-Set (3-tlg)', price: 'ca. 5–10 €', value: 8, link: 'https://www.amazon.de/dp/B11ABC/?tag=ikune21-21', tags: ['werkzeug'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['hobby','commute']}
+  ],
+  reifen: [
+    {name: 'Reifenfüller mit Manometer', price: 'ca. 15–25 €', value: 20, link: 'https://www.amazon.de/dp/B09YZA/?tag=ikune21-21', tags: ['reifen'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['commute','travel']},
+    {name: 'Digitaler Reifendruckprüfer', price: 'ca. 20–35 €', value: 28, link: 'https://www.amazon.de/dp/B10ABC/?tag=ikune21-21', tags: ['reifen'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['medium','large'], use: ['commute','travel']},
+    {name: 'Reifenprofiltiefenmesser digital', price: 'ca. 8–15 €', value: 12, link: 'https://www.amazon.de/dp/B10DEF/?tag=ikune21-21', tags: ['reifen'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['small','medium'], use: ['commute']},
+    {name: 'Reifenmontierpaste & -hebel Set', price: 'ca. 18–30 €', value: 24, link: 'https://www.amazon.de/dp/B10GHI/?tag=ikune21-21', tags: ['reifen','werkzeug'], vehicle: ['motorrad','sport'], budget: ['medium','large'], use: ['hobby']},
+    {name: 'Reifenkoffer für 4 Reifen', price: 'ca. 30–50 €', value: 40, link: 'https://www.amazon.de/dp/B10JKL/?tag=ikune21-21', tags: ['reifen','transport'], vehicle: ['limo','suv','van'], budget: ['medium','large'], use: ['hobby','family']}
+  ],
+  camping: [
+    {name: 'Auto-Zelt (Dachzelt)', price: 'ca. 600–1.200 €', value: 800, link: 'https://www.amazon.de/dp/B12JKL/?tag=ikune21-21', tags: ['camping'], vehicle: ['suv','van'], budget: ['xl'], use: ['travel']},
+    {name: 'Kompressor-Kühlbox 40 L', price: 'ca. 250–450 €', value: 350, link: 'https://www.amazon.de/dp/B12MNO/?tag=ikune21-21', tags: ['camping'], vehicle: ['limo','suv','van'], budget: ['xl'], use: ['travel','family']},
+    {name: 'Camping-Dusche tragbar 20 L', price: 'ca. 30–55 €', value: 42, link: 'https://www.amazon.de/dp/B12PQR/?tag=ikune21-21', tags: ['camping'], vehicle: ['suv','van'], budget: ['medium','large'], use: ['travel']},
+    {name: 'Isolier-Getränkeflasche 1 L', price: 'ca. 20–35 €', value: 28, link: 'https://www.amazon.de/dp/B12STU/?tag=ikune21-21', tags: ['camping','komfort'], vehicle: ['limo','suv','van','sport','motorrad'], budget: ['medium','large'], use: ['travel','commute']},
+    {name: 'Sonnenschutz Windschutzscheibe', price: 'ca. 8–15 €', value: 12, link: 'https://www.amazon.de/dp/B12VWX/?tag=ikune21-21', tags: ['camping','komfort'], vehicle: ['limo','suv','van','sport'], budget: ['small','medium'], use: ['travel','commute']}
+  ]
+};
+
+const allProducts = Object.values(PRODUCTS).flat();
+
+// ---- App State ----
+let state = {vehicle:'', budget:'', use:'', priority:'', experience:''};
+let currentStep = 1;
+const totalSteps = 5;
+
+function init() {
+  renderDots();
+  updateButtons();
+}
+
+function renderDots() {
+  const dots = document.getElementById('stepDots');
+  dots.innerHTML = '';
+  for(let i=1; i<=totalSteps; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot'+(i===currentStep?' active':'')+(state[['','vehicle','budget','use','priority','experience'][i]]?' done':'');
+    dots.appendChild(dot);
+  }
+}
+
+function updateButtons() {
+  document.getElementById('btnPrev').style.display = currentStep>1?'inline-block':'none';
+  document.getElementById('btnNext').textContent = currentStep<totalSteps?'Weiter →':'🎯 Empfehlungen anzeigen';
+  renderDots();
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  currentStep = n;
+  updateButtons();
+}
+
+function nextStep() {
+  const keys = ['','vehicle','budget','use','priority','experience'];
+  const key = keys[currentStep];
+  if(!state[key]) { alert('Bitte wähle eine Option aus.'); return; }
+  if(currentStep < totalSteps) { showStep(currentStep+1); }
+  else { showResults(); }
+}
+
+function prevStep() {
+  if(currentStep>1) showStep(currentStep-1);
+}
+
+function selectOption(el, key) {
+  const container = el.closest('.options');
+  container.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  state[container.dataset.key] = el.dataset.value;
+}
+
+function getBudgetRange(budget) {
+  return {small:50, medium:200, large:500, xl:1200}[budget]||200;
+}
+
+function showResults() {
+  document.getElementById('wizard').style.display = 'none';
+  document.getElementById('resultSection').classList.add('visible');
+
+  const budgetMax = getBudgetRange(state.budget);
+  const vehicle = state.vehicle;
+  const use = state.use;
+  const priority = state.priority;
+  const exp = state.experience;
+  const experienceBonus = {beginner:0.8, intermediate:1.0, pro:1.3}[exp]||1.0;
+
+  // Filter products
+  let candidates = allProducts.filter(p => {
+    const vehicleMatch = p.vehicle.includes(vehicle);
+    const useMatch = p.use.includes(use);
+    const tagsMatch = p.tags.includes(priority);
+    return vehicleMatch && useMatch;
+  });
+
+  // Sort: priority products first, then by value/price
+  const scored = candidates.map(p => {
+    let score = 0;
+    if(p.tags.includes(priority)) score += 100;
+    if(p.budget.includes(state.budget)) score += 50;
+    if(p.vehicle.includes(vehicle)) score += 20;
+    if(p.use.includes(use)) score += 20;
+    if(exp==='beginner' && p.value<60) score += 10;
+    if(exp==='pro' && p.value>60) score += 10;
+    score += Math.min(p.value / budgetMax * 30, 30);
+    return {...p, score};
+  });
+  scored.sort((a,b)=>b.score-a.score);
+
+  // Pick best within budget
+  let budgetRemaining = budgetMax * experienceBonus;
+  const selected = [];
+  for(const p of scored) {
+    if(budgetRemaining <= 0) break;
+    const avgPrice = typeof p.value === 'number' ? p.value : 50;
+    if(avgPrice <= budgetRemaining || selected.length < 2) {
+      if(p.budget.includes(state.budget) || selected.length < 3) {
+        selected.push(p);
+        budgetRemaining -= avgPrice;
+        if(selected.length >= 8) break;
+      }
+    }
+  }
+
+  // Group by category
+  const cats = {};
+  for(const p of selected) {
+    const cat = p.tags[0];
+    if(!cats[cat]) cats[cat] = [];
+    cats[cat].push(p);
+  }
+
+  const catNames = {sicherheit:'🛡️ Sicherheit & Notfall', komfort:'✨ Innenraum & Komfort', elektronik:'📱 Elektronik & Gadgets', pflege:'🧼 Pflege & Reinigung', transport:'📦 Transport', motorrad:'🏍️ Motorrad Zubehör', werkzeug:'🔧 Werkzeug & Wartung', reifen:'⚙️ Reifen & Räder', camping:'🏕️ Camping & Reise'};
+
+  let html = '';
+  for(const [cat, items] of Object.entries(cats)) {
+    html += `<div class="result-category"><h4>${catNames[cat]||cat}</h4>`;
+    for(const p of items) {
+      html += `<div class="result-item"><span class="name">${p.name}</span><span class="price">${p.price}</span><a class="link" href="${p.link}" target="_blank" rel="nofollow">🔗 Preis prüfen</a></div>`;
+    }
+    html += '</div>';
+  }
+
+  if(selected.length===0) {
+    html = '<p style="text-align:center;color:#888;padding:30px">Keine passenden Produkte gefunden. Versuche andere Einstellungen.</p>';
+  }
+
+  document.getElementById('resultContent').innerHTML = html;
+  document.getElementById('resultSummary').textContent = `${selected.length} Produkte gefunden für dein ${vehicle==='motorrad'?'Motorrad':(vehicle==='suv'?'SUV/Geländewagen':(vehicle==='sport'?'Sportwagen':(vehicle==='van'?'Van/Transporter':'Auto')))} – Budget: bis ${budgetMax} € | Priorität: ${priority}`;
+
+  // Spar-Tipps
+  const tips = [
+    'Kaufe Verbandskasten, Warndreieck und Warnweste als Set – sparst bis zu 30% gegenüber Einzelkauf.',
+    'Mikrofasertücher in 12er-Sets sind günstiger als einzeln – und du hast immer frische dabei.',
+    'Dashcams mit Parkmodus sparen im Schadensfall tausende Euro – die Investition lohnt sich immer.',
+    'Nano-Lackversiegelung ersetzt 10x Wachsen pro Jahr – Kostenersparnis: ca. 80 € pro Jahr.',
+    'OBD2-Diagnosegerät erkennt teure Motorschäden frühzeitig und spart Werkstattkosten.',
+    'Starthilfe-Powerbank ist günstiger als ein Pannendienst-Einsatz (ca. 150 € Ersparnis pro Einsatz).'
+  ];
+  document.getElementById('spartippsContainer').innerHTML = `<h4>💡 Spar-Tipps für deine Auswahl</h4><ul>${tips.map(t=>'<li>'+t+'</li>').join('')}</ul>`;
+
+  // Simple budget chart
+  drawChart(selected, budgetMax * experienceBonus);
+}
+
+function drawChart(items, totalBudget) {
+  const canvas = document.getElementById('budgetChart');
+  const ctx = canvas.getContext('2d');
+  const cx = 150, cy = 150, r = 120;
+
+  ctx.clearRect(0,0,300,300);
+  
+  const total = items.reduce((s,p)=>s+p.value,0);
+  const colors = ['#8B5CF6','#FFD700','#FF6B6B','#48C774','#3498DB','#E67E22','#1ABC9C','#9B59B6'];
+  
+  if(total===0) {
+    ctx.beginPath();
+    ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fillStyle = '#2A2A3A';
+    ctx.fill();
+    return;
+  }
+
+  let startAngle = -Math.PI/2;
+  items.forEach((p,i) => {
+    const slice = (p.value/total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,startAngle, startAngle+slice);
+    ctx.closePath();
+    ctx.fillStyle = colors[i%colors.length];
+    ctx.fill();
+    startAngle += slice;
+  });
+
+  // Center hole
+  ctx.beginPath();
+  ctx.arc(cx,cy,55,0,Math.PI*2);
+  ctx.fillStyle = '#14141F';
+  ctx.fill();
+
+  // Text
+  ctx.fillStyle = '#FFD700';
+  ctx.font = 'bold 18px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(Math.round(total/totalBudget*100)+'%', cx, cy-8);
+  ctx.fillStyle = '#888';
+  ctx.font = '12px sans-serif';
+  ctx.fillText('genutzt', cx, cy+14);
+}
+
+function resetConfig() {
+  state = {vehicle:'', budget:'', use:'', priority:'', experience:''};
+  currentStep = 1;
+  document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('wizard').style.display = 'block';
+  document.getElementById('resultSection').classList.remove('visible');
+  showStep(1);
+}
+
+// ---- Event Listeners ----
+document.querySelectorAll('.option').forEach(el => {
+  el.addEventListener('click', function() {
+    const key = this.closest('.options').dataset.key;
+    selectOption(this, key);
+  });
+});
+
+// ---- Init ----
+init();
+
+</script>
+</body>
+</html>
