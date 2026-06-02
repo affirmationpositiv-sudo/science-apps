@@ -252,6 +252,9 @@
   <h1>🔍 AI Lead Finder</h1>
   <p class="sub">Tiefen-Recherche für echte Entscheider. Keine 08/15-Google-Nummern –<br>sondern Menschen, die in ihrer Branche wirklich etwas zu sagen haben.</p>
   <div class="badge">⚡ 3 kostenlose Premium-Leads pro Suche</div>
+  <div id="adminBadge" style="display:none; margin-top:10px; padding:8px 16px; background:linear-gradient(135deg,rgba(212,168,67,0.15),rgba(255,215,0,0.08)); border:1px solid rgba(212,168,67,0.4); border-radius:8px; color:#d4a843; font-size:.85rem; font-weight:600;">
+    👑 Admin-Modus aktiv – Unbegrenzte Leads + Premium-Zugang freigeschaltet
+  </div>
 </header>
 
 <!-- SEARCH -->
@@ -331,6 +334,25 @@
 
 <script>
 // ============================================================
+// ADMIN ACCESS SYSTEM
+// ============================================================
+
+// Check for admin access - F's secret bypass
+const IS_ADMIN = (() => {
+  const url = new URL(window.location.href);
+  if (url.searchParams.get('admin') === 'lux2026') return true;
+  if (url.searchParams.get('access') === 'premium') return true;
+  if (localStorage.getItem('lf_admin') === 'true') return true;
+  return false;
+})();
+
+// Show admin badge
+if (IS_ADMIN) {
+  document.getElementById('adminBadge').style.display = 'block';
+  localStorage.setItem('lf_admin', 'true');
+}
+
+// ============================================================
 // AI POWERED LEAD SEARCH ENGINE
 // ============================================================
 
@@ -366,7 +388,7 @@ function searchLeads() {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('searchBtn').disabled = false;
     document.getElementById('filterRow').style.display = 'flex';
-    document.getElementById('upgradeBanner').style.display = 'block';
+    document.getElementById('upgradeBanner').style.display = IS_ADMIN ? 'none' : 'block';
   }, 2500);
 }
 
@@ -376,8 +398,8 @@ function getInitials(name) {
 
 function displayLeads(leads) {
   const grid = document.getElementById('leadsGrid');
-  const shown = Math.min(leads.length, 3);
-  const shownLeads = leads.slice(0, 3);
+  const shown = IS_ADMIN ? leads.length : Math.min(leads.length, 3);
+  const shownLeads = IS_ADMIN ? leads : leads.slice(0, 3);
 
   document.getElementById('leadsHeader').style.display = 'flex';
   document.getElementById('shownCount').textContent = shown;
@@ -415,7 +437,7 @@ function displayLeads(leads) {
 
   // Hide upgrade banner more leads if we're showing max visible
   if (leads.length <= 3) {
-    document.getElementById('upgradeBanner').style.display = 'block';
+    document.getElementById('upgradeBanner').style.display = IS_ADMIN ? 'none' : 'block';
   }
 }
 
