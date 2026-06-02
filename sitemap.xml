@@ -166,4 +166,26 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
+  <!-- Neue Seiten -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/branchen-ki/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/leadgen/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/money/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
