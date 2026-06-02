@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎵 Musikproduktions-Bedarfsrechner 2026 – Dein perfektes Studio-Setup finden</title>
+<meta name="description" content="Interaktiver Musikproduktions-Bedarfsrechner: 5 Fragen zu Ziel, Budget, Erfahrung, KI & Raum – erhalte personalisierte Studio-Empfehlungen mit Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Musikproduktion Bedarfsrechner, Studio Setup, Audio Interface, Mikrofon, DAW, Kopfhörer, Musik Equipment, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-size: 2.4em; font-weight: 800; background: linear-gradient(135deg, #FF6B35, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; text-align: center; }
+.subtitle { text-align: center; color: #6B7280; margin-bottom: 10px; }
+.progress { background: #1A1A1A; border-radius: 20px; height: 12px; margin: 20px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #FF6B35, #FFD700); border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+.progress-text { text-align: center; color: #6B7280; font-size: 0.85em; margin-bottom: 24px; }
+
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+
+h2 { font-size: 1.4em; font-weight: 700; color: #fff; margin-bottom: 20px; text-align: center; }
+
+.options { display: grid; gap: 10px; }
+.option { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+.option:hover { border-color: #FF6B35; background: #242424; }
+.option.selected { border-color: #FF6B35; background: #1a0f0a; box-shadow: 0 0 15px rgba(255,107,53,.2); }
+.option input { display: none; }
+.option .icon { font-size: 24px; }
+.option .label { flex: 1; }
+.option .label strong { display: block; color: #fff; font-size: 1em; }
+.option .label span { color: #888; font-size: 0.85em; }
+
+.btn-row { text-align: center; margin-top: 24px; }
+.btn { display: inline-block; background: linear-gradient(135deg, #FF6B35, #FFD700); color: #000; font-weight: 700; padding: 12px 32px; border-radius: 30px; font-size: 1.1em; border: none; cursor: pointer; transition: all 0.3s; }
+.btn:hover { transform: scale(1.05); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Result */
+.result { display: none; }
+.result.active { display: block; }
+.result-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 24px; margin-bottom: 16px; transition: all 0.3s; }
+.result-card:hover { border-color: #FF6B35; }
+.result-card h3 { color: #FFD700; font-size: 1.2em; margin-bottom: 8px; }
+.result-card .price { color: #FF6B35; font-size: 0.9em; font-weight: 600; }
+.result-card p { color: #9CA3AF; font-size: 0.9em; margin: 6px 0 10px; }
+.result-card .buy { display: inline-block; background: #FF6B35; color: #fff; padding: 5px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; text-decoration: none; transition: background 0.3s; }
+.result-card .buy:hover { background: #E55A2B; }
+
+.summary-box { background: linear-gradient(135deg, #1a0f0a, #0A0A0A); border: 1px solid #FF6B35; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; }
+.summary-box h3 { color: #fff; font-size: 1.3em; margin-bottom: 8px; }
+.summary-box .big { font-size: 2.5em; font-weight: 800; color: #FFD700; }
+.summary-box p { color: #9CA3AF; }
+.reset-btn { display: inline-block; background: #2A2A2A; color: #fff; padding: 10px 24px; border-radius: 30px; text-decoration: none; margin-top: 16px; font-weight: 600; transition: all 0.3s; }
+.reset-btn:hover { background: #FF6B35; }
+
+.tip { background: #141414; border-left: 3px solid #FF6B35; border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 0.9em; }
+.tip strong { color: #FF6B35; }
+
+.category-badge { display: inline-block; background: rgba(255,107,53,0.15); color: #FF6B35; padding: 3px 12px; border-radius: 12px; font-size: 0.75em; font-weight: 600; margin-bottom: 6px; }
+
+footer { text-align: center; padding: 30px; color: #555; font-size: 0.8em; }
+footer a { color: #FF6B35; text-decoration: none; }
+
+@media (max-width: 600px) { h1 { font-size: 1.6em; } .container { padding: 24px 16px; } .result-card { padding: 18px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🎵 Musikproduktions-Bedarfsrechner</h1>
+<p class="subtitle">Beantworte 5 Fragen – erhalte personalisierte Studio- & Musikproduktions-Empfehlungen</p>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<p class="progress-text" id="progressText">Schritt 1 von 5</p>
+
+<div id="quiz">
+
+<!-- Question 1: Hauptziel -->
+<div class="quiz-step active" data-step="1">
+  <h2>🎯 Was ist dein Hauptziel?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q1" value="musikproduktion"><span class="icon">🎵</span><span class="label"><strong>Musikproduktion</strong><span>Beats, Instrumente, Mixing & Mastering</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="podcasting"><span class="icon">🎙️</span><span class="label"><strong>Podcasting</strong><span>Podcast-Aufnahmen, Interviews, Hörspiele</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="voiceover"><span class="icon">🎤</span><span class="label"><strong>Voice-Over</strong><span>Hörbücher, Synchronisation, Erzählstimmen</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="livestreaming"><span class="icon">📡</span><span class="label"><strong>Livestreaming</strong><span>Live-Musik, Twitch, YouTube-Streams mit Audio-Fokus</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="songwriting"><span class="icon">✍️</span><span class="label"><strong>Songwriting</strong><span>Song-Ideen entwickeln, Demo-Aufnahmen, Akustik-Sessions</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="nextStep(1)">Weiter →</button></div>
+</div>
+
+<!-- Question 2: Budget -->
+<div class="quiz-step" data-step="2">
+  <h2>💰 Welches Budget hast du für dein Setup?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q2" value="mini"><span class="icon">💶</span><span class="label"><strong>Mini: 0–100€</strong><span>Nur das Nötigste – Smartphone & günstiges Zubehör</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="einsteiger"><span class="icon">💶💶</span><span class="label"><strong>Einsteiger: 100–500€</strong><span>USB-Mikrofon, Einsteiger-Interface, gute Kopfhörer</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="mittel"><span class="icon">💶💶💶</span><span class="label"><strong>Fortgeschritten: 500–2.000€</strong><span>XLR-Setup, Studio-Monitore, Akustik-Behandlung</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="high"><span class="icon">💶💶💶💶</span><span class="label"><strong>Semi-Profi: 2.000–5.000€</strong><span>Premium-Mikrofone, High-End-Interface, mehrere Monitore</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="pro"><span class="icon">💶💶💶💶💶</span><span class="label"><strong>Profi: 5.000€+</strong><span>Neumann, API, analoge Outboard-Geräte, Vollausstattung</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(2)">← Zurück</button><button class="btn" onclick="nextStep(2)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Question 3: Erfahrungsstufe -->
+<div class="quiz-step" data-step="3">
+  <h2>🧠 Wie erfahren bist du?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q3" value="anfaenger"><span class="icon">🌱</span><span class="label"><strong>Anfänger</strong><span>Erste Schritte – noch nie mit DAW oder Interface gearbeitet</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="fortgeschritten"><span class="icon">📈</span><span class="label"><strong>Fortgeschritten</strong><span>Schon eigene Aufnahmen gemacht, kenne Grundlagen von Mixing</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="profi"><span class="icon">🔥</span><span class="label"><strong>Profi</strong><span>Langjährige Erfahrung, kenne Signalfluss, Kompression, EQ im Schlaf</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(3)">← Zurück</button><button class="btn" onclick="nextStep(3)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Question 4: KI-Unterstützung -->
+<div class="quiz-step" data-step="4">
+  <h2>🤖 Brauchst du KI-Unterstützung?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q4" value="vollautomatisch"><span class="icon">🤖</span><span class="label"><strong>Ja, vollautomatisch</strong><span>KI-Songwriting, AI-Mastering, automatische Mixing-Tools</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="teilweise"><span class="icon">⚡</span><span class="label"><strong>Nur für bestimmte Tasks</strong><span>KI für Mastering, Sample-Generierung oder Vocal-Tuning (wie Melodyne)</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="klassisch"><span class="icon">🎚️</span><span class="label"><strong>Nein, klassisch</strong><span>Traditioneller Workflow – Handarbeit von Aufnahme bis Mastering</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(4)">← Zurück</button><button class="btn" onclick="nextStep(4)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Question 5: Ort -->
+<div class="quiz-step" data-step="5">
+  <h2>🏠 Wo produzierst du?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q5" value="zuhause"><span class="icon">🏠</span><span class="label"><strong>Zuhause</strong><span>Hobby-Raum, Wohnzimmer oder Schlafzimmer – nicht akustisch behandelt</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="mobil"><span class="icon">🎒</span><span class="label"><strong>Mobiles Setup</strong><span>Unterwegs aufnehmen – Laptop + kompaktes Equipment</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="studio"><span class="icon">🏢</span><span class="label"><strong>Professionelles Studio</strong><span>Behandelter Raum, feste Verkabelung, Monitor-Positionierung</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(5)">← Zurück</button><button class="btn" onclick="calculateResult()" style="margin-left:10px;">✅ Ergebnis anzeigen</button></div>
+</div>
+
+</div>
+
+<!-- Result -->
+<div class="result" id="result">
+  <div class="summary-box" id="summaryBox">
+    <h3>🎵 Dein persönliches Musikproduktions-Setup</h3>
+    <p id="summaryText"></p>
+  </div>
+  <div id="resultGrid"></div>
+  <div class="tip" id="resultTip">
+    <strong>💡 Tipp:</strong> <span id="tipText">Investiere zuerst in ein gutes Mikrofon und Audio-Interface – das macht den größten Klangunterschied.</span>
+  </div>
+  <div style="text-align:center; margin-top:20px;">
+    <a href="../blog/ki-musikproduktion-2026.html" class="btn" style="display:inline-block; text-decoration:none;">📖 Zum KI-Musikproduktion-Guide</a>
+    <a href="#" onclick="resetQuiz()" class="reset-btn" style="display:inline-block; margin-left:10px;">🔄 Neu starten</a>
+  </div>
+</div>
+
+<footer>
+  <p>🔗 Amazon-Partnerlinks (tag=ikune21-21) • <a href="mailto:kontakt@lichtundschatten.eu">Kontakt</a></p>
+  <p style="margin-top:4px;">© 2026 Licht und Schatten · Alle Preise ca.-Angaben, Stand 2026</p>
+</footer>
+
+</div>
+
+<script>
+let answers = {};
+
+const products = {
+  // BUDGET: Mini (0–100€)
+  mini: {
+    musikproduktion: [
+      { name: "Focusrite Scarlett Solo (3. Gen)", desc: "Günstigstes Einsteiger-Audio-Interface mit 1 XLR-Eingang. Ideal für erste Aufnahmen.", price: "ca. 79€", link: "https://www.amazon.de/s?k=Focusrite+Scarlett+Solo+3+Gen&tag=ikune21-21" },
+      { name: "Behringer U-Phoria UMC22", desc: "Günstiges Interface mit MIDAS-Vorverstärker. Bessere Klangqualität als der Preis vermuten lässt.", price: "ca. 49€", link: "https://www.amazon.de/s?k=Behringer+U-Phoria+UMC22&tag=ikune21-21" },
+      { name: "Samson Go Mic", desc: "Tragbares USB-Kondensatormikrofon für unterwegs. Perfekt für erste Song-Ideen.", price: "ca. 49€", link: "https://www.amazon.de/s?k=Samson+Go+Mic&tag=ikune21-21" },
+      { name: "Superlux HD681 Kopfhörer", desc: "Günstige aber gute Semi-Offene Studiokopfhörer. Für erste Mixing-Versuche.", price: "ca. 25€", link: "https://www.amazon.de/s?k=Superlux+HD681&tag=ikune21-21" },
+      { name: "Audacity (Kostenlos)", desc: "Freie DAW-Software für Aufnahme & einfaches Editing. Keine Investition nötig.", price: "0€", link: "https://www.amazon.de/s?k=Audacity+DAW&tag=ikune21-21" }
+    ],
+    podcasting: [
+      { name: "FIFINE K670 USB-Mikrofon", desc: "Günstiges USB-Mikrofon mit gutem Klang für erste Podcasts.", price: "ca. 39€", link: "https://www.amazon.de/s?k=FIFINE+K670+USB+Mikrofon&tag=ikune21-21" },
+      { name: "InnoGear Mikrofonarm", desc: "Stabiler Schwenkarm aus Metall. Flexibel positionierbar.", price: "ca. 25€", link: "https://www.amazon.de/s?k=InnoGear+Mikrofonarm&tag=ikune21-21" },
+      { name: "Pop-Filter Doppellagig", desc: "Reduziert Plosivlaute – ein Muss für klare Podcast-Stimmen.", price: "ca. 12€", link: "https://www.amazon.de/s?k=Pop+Filter+Doppellagig&tag=ikune21-21" },
+      { name: "Bietrun USB-Lavaliermikrofon", desc: "Ansteckmikrofon für Podcasts unterwegs. Kompakt & günstig.", price: "ca. 19€", link: "https://www.amazon.de/s?k=Bietrun+Lavaliermikrofon&tag=ikune21-21" }
+    ],
+    voiceover: [
+      { name: "FIFINE K669B USB-Mikrofon", desc: "Günstiges Kondensatormikrofon für Voice-Over & Sprachaufnahmen.", price: "ca. 33€", link: "https://www.amazon.de/s?k=FIFINE+K669B&tag=ikune21-21" },
+      { name: "Auphonix Pop-Filter Set", desc: "Windschutz + Pop-Filter in einem. Saubere Sprachaufnahmen.", price: "ca. 15€", link: "https://www.amazon.de/s?k=Pop+Filter+Windschutz+Set&tag=ikune21-21" },
+      { name: "Tischstativ für Mikrofon", desc: "Stabiles Mikrofonstativ für den Schreibtisch. Platzsparend.", price: "ca. 18€", link: "https://www.amazon.de/s?k=Mikrofon+Tischstativ&tag=ikune21-21" }
+    ],
+    livestreaming: [
+      { name: "FIFINE A6T USB-Mikrofon", desc: "USB-Mikrofon mit RGB-Beleuchtung. Perfekt für Streamer.", price: "ca. 55€", link: "https://www.amazon.de/s?k=FIFINE+A6T+USB+Mikrofon+RGB&tag=ikune21-21" },
+      { name: "InnoGear Mikrofonarm", desc: "Schwenkarm für saubere Mikrofon-Position im Stream.", price: "ca. 25€", link: "https://www.amazon.de/s?k=InnoGear+Mikrofonarm&tag=ikune21-21" },
+      { name: "OBS Studio", desc: "Kostenlose Streaming-Software. Branchenstandard für Livestreams.", price: "0€", link: "https://www.amazon.de/s?k=OBS+Studio+Streaming&tag=ikune21-21" }
+    ],
+    songwriting: [
+      { name: "Samson Go Mic", desc: "Tragbares USB-Mikrofon für Demos & Song-Ideen. Passt in jede Tasche.", price: "ca. 49€", link: "https://www.amazon.de/s?k=Samson+Go+Mic&tag=ikune21-21" },
+      { name: "Stimmgerät Korg CA-2", desc: "Chromatisches Stimmgerät für Gitarre & Gesang. Zuverlässig & günstig.", price: "ca. 19€", link: "https://www.amazon.de/s?k=Korg+CA-2+Stimmger%C3%A4t&tag=ikune21-21" },
+      { name: "Notenheft A4 + Bleistift Set", desc: "Analoges Songwriting – der Klassiker. 5 Notenhefte + Bleistifte.", price: "ca. 12€", link: "https://www.amazon.de/s?k=Notenheft+A4+Bleistift+Set&tag=ikune21-21" }
+    ]
+  },
+
+  // BUDGET: Einsteiger (100–500€)
+  einsteiger: {
+    musikproduktion: [
+      { name: "Focusrite Scarlett 2i2 (4. Gen)", desc: "Bestseller-Audio-Interface mit 2 XLR-Eingängen und Air-Mode für klareren Klang.", price: "ca. 189€", link: "https://www.amazon.de/s?k=Focusrite+Scarlett+2i2+4+Gen&tag=ikune21-21" },
+      { name: "Audio-Technica ATH-M50x", desc: "Legendäre Studio-Kopfhörer mit ausgewogenem Klang für Mixing.", price: "ca. 149€", link: "https://www.amazon.de/s?k=Audio+Technica+ATH-M50x&tag=ikune21-21" },
+      { name: "Rode NT-USB+", desc: "Hochwertiges USB-Mikrofon mit integriertem DSP. Perfekt für erste Aufnahmen.", price: "ca. 179€", link: "https://www.amazon.de/s?k=Rode+NT-USB+Plus&tag=ikune21-21" },
+      { name: "Ableton Live Lite", desc: "Einsteiger-DAW inkl. vieler Bundle-Angebote. Ideal für Musikproduktion.", price: "ca. 79€", link: "https://www.amazon.de/s?k=Ableton+Live+Lite&tag=ikune21-21" },
+      { name: "Shure SM57", desc: "Legendäres Instrumentenmikrofon. Aufnahmestandard für Gitarren-Verstärker.", price: "ca. 99€", link: "https://www.amazon.de/s?k=Shure+SM57&tag=ikune21-21" }
+    ],
+    podcasting: [
+      { name: "Rode NT-USB+", desc: "USB-Mikrofon mit hervorragender Klangqualität für professionelle Podcasts.", price: "ca. 179€", link: "https://www.amazon.de/s?k=Rode+NT-USB+Plus&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 770 Pro (80Ω)", desc: "Geschlossene Studio-Kopfhörer. Perfekt für Podcast-Überwachung.", price: "ca. 159€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag=ikune21-21" },
+      { name: "Rode PSA1 Mikrofonarm", desc: "Hochwertiger Schwenkarm mit Kabelführung. Stabilität fürs Mikrofon.", price: "ca. 89€", link: "https://www.amazon.de/s?k=Rode+PSA1&tag=ikune21-21" },
+      { name: "Cordial XLR-Kabel 5m", desc: "Entstörtes XLR-Kabel für saubere Signalübertragung.", price: "ca. 24€", link: "https://www.amazon.de/s?k=Cordial+XLR+Kabel+5m&tag=ikune21-21" },
+      { name: "Zoom H1n Handy-Rekorder", desc: "Tragbarer Podcast-Rekorder für Aufnahmen unterwegs.", price: "ca. 119€", link: "https://www.amazon.de/s?k=Zoom+H1n+Handy-Rekorder&tag=ikune21-21" }
+    ],
+    voiceover: [
+      { name: "Rode NT-USB+", desc: "USB-Kondensatormikrofon mit klarem, detailreichem Klang für Voice-Over.", price: "ca. 179€", link: "https://www.amazon.de/s?k=Rode+NT-USB+Plus&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 770 Pro", desc: "Geschlossene Kopfhörer für präzise Sprachaufnahme-Kontrolle.", price: "ca. 159€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag=ikune21-21" },
+      { name: "Elgato Pop Filter", desc: "Doppellagiger Edelstahl-Popfilter. Hochwertig & langlebig.", price: "ca. 19€", link: "https://www.amazon.de/s?k=Elgato+Pop+Filter&tag=ikune21-21" },
+      { name: "Auphonix Reflexionsfilter", desc: "Tragbarer Studio-Portable-Raumtrenner. Reduziert Raumhall.", price: "ca. 49€", link: "https://www.amazon.de/s?k=Reflexionsfilter+Auphonix&tag=ikune21-21" }
+    ],
+    livestreaming: [
+      { name: "Elgato Wave:3", desc: "USB-Mikrofon mit integriertem Mixer. Beliebt bei Streamern.", price: "ca. 149€", link: "https://www.amazon.de/s?k=Elgato+Wave+3&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 770 Pro", desc: "Geschlossene Kopfhörer für latenzfreies Monitoring beim Streamen.", price: "ca. 159€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag=ikune21-21" },
+      { name: "Elgato Wave Mic Arm", desc: "Mikrofonarm speziell für Streamer. Integriertes Kabelmanagement.", price: "ca. 89€", link: "https://www.amazon.de/s?k=Elgato+Wave+Mic+Arm&tag=ikune21-21" },
+      { name: "GoXLR Mini", desc: "Kompakter Streaming-Mixer mit Mute-Button & Soundboard-Funktion.", price: "ca. 249€", link: "https://www.amazon.de/s?k=GoXLR+Mini&tag=ikune21-21" }
+    ],
+    songwriting: [
+      { name: "Focusrite Scarlett Solo (4. Gen)", desc: "Kompaktes Interface für Songwriter. Nehmen Gitarre + Gesang gleichzeitig auf.", price: "ca. 139€", link: "https://www.amazon.de/s?k=Focusrite+Scarlett+Solo+4+Gen&tag=ikune21-21" },
+      { name: "Audio-Technica ATH-M20x", desc: "Günstige aber solide Monitor-Kopfhörer für Demos & Songskizzen.", price: "ca. 49€", link: "https://www.amazon.de/s?k=Audio+Technica+ATH-M20x&tag=ikune21-21" },
+      { name: "Shure SM58", desc: "Das Allround-Mikrofon für Gesang & Instrumente. Unverwüstlich.", price: "ca. 99€", link: "https://www.amazon.de/s?k=Shure+SM58&tag=ikune21-21" },
+      { name: "Tascam DP-008EX", desc: "Tragbarer 8-Spur-Rekorder. Songwriting ohne Computer.", price: "ca. 199€", link: "https://www.amazon.de/s?k=Tascam+DP-008EX+Portastudio&tag=ikune21-21" },
+      { name: "Mackie CR3-X Monitorboxen", desc: "Kompress-Aktivmonitore für erste Abmischungen am Schreibtisch.", price: "ca. 99€", link: "https://www.amazon.de/s?k=Mackie+CR3-X+Monitore&tag=ikune21-21" }
+    ]
+  },
+
+  // BUDGET: Mittel (500–2.000€)
+  mittel: {
+    musikproduktion: [
+      { name: "Universal Audio Apollo Solo", desc: "Profi-Interface mit UAD-DSP. Legendäre Echtzeit-Effekte ohne Latenz.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+Solo&tag=ikune21-21" },
+      { name: "Shure SM7B", desc: "Das Profi-Standard-Mikrofon für Gesang & Sprache. Branchenreferenz.", price: "ca. 399€", link: "https://www.amazon.de/s?k=Shure+SM7B&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 900 Pro X", desc: "Offene High-End-Kopfhörer für kritisches Mixing & Mastering.", price: "ca. 249€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+900+Pro+X&tag=ikune21-21" },
+      { name: "Yamaha HS7 Studio-Monitore (Paar)", desc: "Bekannte Nahfeldmonitore mit weißem Konus. Neutrale Abhörreferenz.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Yamaha+HS7+Paar&tag=ikune21-21" },
+      { name: "Ableton Live 11 Standard", desc: "Professionelle DAW für elektronische & hybride Musikproduktion.", price: "ca. 349€", link: "https://www.amazon.de/s?k=Ableton+Live+11+Standard&tag=ikune21-21" },
+      { name: "AKG C214", desc: "Hochwertiges Großmembran-Kondensatormikrofon für Gesang & Akustikinstrumente.", price: "ca. 349€", link: "https://www.amazon.de/s?k=AKG+C214&tag=ikune21-21" }
+    ],
+    podcasting: [
+      { name: "Rode PodMic", desc: "Speziell für Podcasts entwickeltes dynamisches XLR-Mikrofon.", price: "ca. 99€", link: "https://www.amazon.de/s?k=Rode+PodMic&tag=ikune21-21" },
+      { name: "Rode Rodecaster Pro II", desc: "All-in-One Podcast-Produktionsstudio. 4 Mikrofon-Eingänge, Soundpad, Recording.", price: "ca. 799€", link: "https://www.amazon.de/s?k=Rode+Rodecaster+Pro+II&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 770 Pro", desc: "Geschlossene Profi-Kopfhörer für präzise Podcast-Überwachung.", price: "ca. 159€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag=ikune21-21" },
+      { name: "AKG P220", desc: "Großmembran-Kondensatormikrofon für warme, detailreiche Podcast-Stimmen.", price: "ca. 119€", link: "https://www.amazon.de/s?k=AKG+P220&tag=ikune21-21" },
+      { name: "Auphonix Reflexionsfilter Pro", desc: "Hochwertiger Portale-Booth mit 3 Schichten. Reduziert Raumhall massiv.", price: "ca. 99€", link: "https://www.amazon.de/s?k=Reflexionsfilter+Pro+Auphonix&tag=ikune21-21" }
+    ],
+    voiceover: [
+      { name: "Rode NT1-A", desc: "Extra-rauscharmes Großmembranmikrofon. Benchmark für Voice-Over.", price: "ca. 179€", link: "https://www.amazon.de/s?k=Rode+NT1-A&tag=ikune21-21" },
+      { name: "Focusrite Clarett+ 2Pre", desc: "Profi-Interface mit exzellenten Preamps & Jitter-Jitter-Reduktion.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Focusrite+Clarett+2Pre&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 900 Pro X", desc: "Offene Kopfhörer für natürliche Stimmwiedergabe bei Voice-Over.", price: "ca. 249€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+900+Pro+X&tag=ikune21-21" },
+      { name: "Vicoustic Flexi Screen Lite", desc: "Professioneller Trennschirm für Voice-Over-Aufnahmen. Faltbar.", price: "ca. 159€", link: "https://www.amazon.de/s?k=Vicoustic+Flexi+Screen+Lite&tag=ikune21-21" },
+      { name: "Adobe Audition (Abo)", desc: "Industry-Standard-Software für Sprachaufnahmen & Post-Production.", price: "ca. 24€/Monat", link: "https://www.amazon.de/s?k=Adobe+Audition&tag=ikune21-21" }
+    ],
+    livestreaming: [
+      { name: "Shure SM7B", desc: "Das ultimative Streaming-Mikrofon. Warm, detailreich, hintergrundgeräuscharm.", price: "ca. 399€", link: "https://www.amazon.de/s?k=Shure+SM7B&tag=ikune21-21" },
+      { name: "GoXLR Full-Size", desc: "Professioneller Streaming-Mixer mit 4 Kanälen, Effekten & Sampler.", price: "ca. 449€", link: "https://www.amazon.de/s?k=GoXLR+Full&tag=ikune21-21" },
+      { name: "Elgato Wave XLR", desc: "XLR-Interface mit integriertem Vorbverstärker. Plug & Play für Streamer.", price: "ca. 169€", link: "https://www.amazon.de/s?k=Elgato+Wave+XLR&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 770 Pro", desc: "Geschlossene Kopfhörer für latenzfreies Monitoring beim Streamen.", price: "ca. 159€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag=ikune21-21" }
+    ],
+    songwriting: [
+      { name: "Rode NT1-A", desc: "Leises Rauschen, warme Klangsignatur. Perfekt für Songwriter-Demos.", price: "ca. 179€", link: "https://www.amazon.de/s?k=Rode+NT1-A&tag=ikune21-21" },
+      { name: "Focusrite Scarlett 2i2 (4. Gen)", desc: "2 Eingänge für Gitarre + Gesang gleichzeitig. Songwriter-Standard.", price: "ca. 189€", link: "https://www.amazon.de/s?k=Focusrite+Scarlett+2i2+4+Gen&tag=ikune21-21" },
+      { name: "Yamaha HS5 Monitor (Paar)", desc: "Kompakte Nahfeldmonitore für erste ernsthafte Abmischungen.", price: "ca. 359€", link: "https://www.amazon.de/s?k=Yamaha+HS5+Paar&tag=ikune21-21" },
+      { name: "Native Instruments Komplete 14 Select", desc: "Virtuelle Instrumente, Synths & Effekte. Inspiration pur.", price: "ca. 199€", link: "https://www.amazon.de/s?k=Native+Instruments+Komplete+14+Select&tag=ikune21-21" },
+      { name: "Steinberg UR22C", desc: "Robustes Interface mit USB-C. Ideal für mobile Songwriter.", price: "ca. 179€", link: "https://www.amazon.de/s?k=Steinberg+UR22C&tag=ikune21-21" }
+    ]
+  },
+
+  // BUDGET: High (2.000–5.000€)
+  high: {
+    musikproduktion: [
+      { name: "Neumann TLM 103", desc: "Legendäres Großmembranmikrofon. Unglaublich detailliert & transparent.", price: "ca. 1.199€", link: "https://www.amazon.de/s?k=Neumann+TLM+103&tag=ikune21-21" },
+      { name: "Universal Audio Apollo Twin X", desc: "Thunderbolt-Interface mit UAD-DSP. Echtzeit-UAD-Plugins ohne Latenz.", price: "ca. 899€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+Twin+X&tag=ikune21-21" },
+      { name: "Focal Alpha 80 Evo (Paar)", desc: "Französische High-End-Monitore. Extrem präzise Abbildung.", price: "ca. 899€", link: "https://www.amazon.de/s?k=Focal+Alpha+80+Evo+Paar&tag=ikune21-21" },
+      { name: "Sennheiser HD 650", desc: "Offene High-End-Kopfhörer. Referenz für kritisches Mixing.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+650&tag=ikune21-21" },
+      { name: "Avid Pro Tools Studio (Jahresabo)", desc: "Industry-Standard DAW. Für professionelle Studios unverzichtbar.", price: "ca. 399€/Jahr", link: "https://www.amazon.de/s?k=Pro+Tools+Studio+Abo&tag=ikune21-21" },
+      { name: "AKG C414 XLII", desc: "Vielseitiges Studio-Mikrofon mit 9 Richtcharakteristiken. Alleskönner.", price: "ca. 999€", link: "https://www.amazon.de/s?k=AKG+C414+XLII&tag=ikune21-21" },
+      { name: "dbx 266XS Kompressor", desc: "Analoger Stereo-Kompressor für warmes, analoges Signal-Feeling.", price: "ca. 199€", link: "https://www.amazon.de/s?k=dbx+266XS+Kompressor&tag=ikune21-21" }
+    ],
+    podcasting: [
+      { name: "Shure SM7B + TritonAudio FetHead", desc: "SM7B mit FetHead-Vorverstärker. Maximale Klangqualität für Podcasts.", price: "ca. 468€", link: "https://www.amazon.de/s?k=Shure+SM7B+FetHead+Set&tag=ikune21-21" },
+      { name: "Rode Rodecaster Pro II", desc: "All-in-One-Podcast-Studio mit 4 Mikrofon-Eingängen & Multi-Track.", price: "ca. 799€", link: "https://www.amazon.de/s?k=Rode+Rodecaster+Pro+II&tag=ikune21-21" },
+      { name: "Sennheiser HD 660 S", desc: "Offene High-End-Kopfhörer für präzise Audiobeurteilung.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+660+S&tag=ikune21-21" },
+      { name: "Electro-Voice RE20", desc: "Legendäres Rundfunkmikrofon. Referenz für professionelle Podcasts.", price: "ca. 449€", link: "https://www.amazon.de/s?k=Electro-Voice+RE20&tag=ikune21-21" },
+      { name: "Akustikschaumstoff 50er Set", desc: "Komplette Raumbehandlung. 50 Platten 30x30cm für verbesserte Akustik.", price: "ca. 59€", link: "https://www.amazon.de/s?k=Akustikschaumstoff+50er+Set&tag=ikune21-21" }
+    ],
+    voiceover: [
+      { name: "Neumann TLM 103", desc: "Benchmark-Voice-Over-Mikrofon. Unglaubliche Detailtreue bei Sprache.", price: "ca. 1.199€", link: "https://www.amazon.de/s?k=Neumann+TLM+103&tag=ikune21-21" },
+      { name: "Universal Audio Apollo Twin X", desc: "Profi-Interface mit Realtime-UAD-Effekten für Sprach-Production.", price: "ca. 899€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+Twin+X&tag=ikune21-21" },
+      { name: "Beyerdynamic DT 1990 Pro", desc: "High-End-Kopfhörer für kritisches Voice-Over-Editing.", price: "ca. 549€", link: "https://www.amazon.de/s?k=Beyerdynamic+DT+1990+Pro&tag=ikune21-21" },
+      { name: "Vicoustic Super Bass Extreme", desc: "Professionelle Bassfallen. Für saubere Tiefen im Voice-Over-Raum.", price: "ca. 199€", link: "https://www.amazon.de/s?k=Vicoustic+Super+Bass+Extreme&tag=ikune21-21" },
+      { name: "Izotope RX 10 Standard", desc: "KI-gestützte Audioreparatur. Entfernt Rauschen, Klicks & Zischlaute.", price: "ca. 399€", link: "https://www.amazon.de/s?k=Izotope+RX+10+Standard&tag=ikune21-21" }
+    ],
+    livestreaming: [
+      { name: "Shure SM7B + Cloudlifter", desc: "SM7B mit Cloudlifter-Vorverstärker. Der Goldstandard für Streamer.", price: "ca. 498€", link: "https://www.amazon.de/s?k=Shure+SM7B+Cloudlifter&tag=ikune21-21" },
+      { name: "Rode Rodecaster Duo", desc: "Kompakter Allrounder für Streaming. 2 Mic-Eingänge, Bluetooth & mehr.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Rode+Rodecaster+Duo&tag=ikune21-21" },
+      { name: "Sennheiser HD 660 S", desc: "Offene High-End-Kopfhörer für Mix- & Stream-Monitoring.", price: "ca. 499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+660+S&tag=ikune21-21" },
+      { name: "Elgato Stream Deck XL", desc: "32 programmierbare Tasten. Steuere OBS, GoXLR & mehr.", price: "ca. 199€", link: "https://www.amazon.de/s?k=Elgato+Stream+Deck+XL&tag=ikune21-21" },
+      { name: "Akustikschaumstoff 50er Set", desc: "Verbessere die Raumakustik für sauberen Stream-Sound.", price: "ca. 59€", link: "https://www.amazon.de/s?k=Akustikschaumstoff+50er+Set&tag=ikune21-21" }
+    ],
+    songwriting: [
+      { name: "Neumann TLM 102", desc: "Kompaktes Neumann-Mikrofon für Gesang. Legendäre Qualität zum erschwinglichen Preis.", price: "ca. 699€", link: "https://www.amazon.de/s?k=Neumann+TLM+102&tag=ikune21-21" },
+      { name: "Universal Audio Apollo Twin X", desc: "Interface mit UAD-DSP. Unverzichtbar für Songwriter mit hohen Ansprüchen.", price: "ca. 899€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+Twin+X&tag=ikune21-21" },
+      { name: "Focal CMS 40 (Paar)", desc: "Kompakte High-End-Monitore für präzises Songwriting & Mixing.", price: "ca. 699€", link: "https://www.amazon.de/s?k=Focal+CMS+40+Paar&tag=ikune21-21" },
+      { name: "Native Instruments Komplete 14 Ultimate", desc: "Ultimative Soundbibliothek. Über 100 Instrumente & Effekte.", price: "ca. 599€", link: "https://www.amazon.de/s?k=Native+Instruments+Komplete+14+Ultimate&tag=ikune21-21" },
+      { name: "Nord Stage 4 Compact (oder ähnlich)", desc: "Professionelles Stage-Piano. Für Songwriter mit hohen Ansprüchen.", price: "ca. 3.499€", link: "https://www.amazon.de/s?k=Nord+Stage+4+Compact&tag=ikune21-21" }
+    ]
+  },
+
+  // BUDGET: Pro (5.000€+)
+  pro: {
+    musikproduktion: [
+      { name: "Neumann U 87 Ai", desc: "Das legendäre Studio-Mikrofon. Referenz für Gesang in Profi-Studios weltweit.", price: "ca. 3.299€", link: "https://www.amazon.de/s?k=Neumann+U87+Ai&tag=ikune21-21" },
+      { name: "Universal Audio Apollo x6", desc: "Thunderbolt-3-Interface mit 6-fach DSP. Herzstück jedes Profi-Studios.", price: "ca. 1.899€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+x6&tag=ikune21-21" },
+      { name: "ATC SCM25A Pro (Paar)", desc: "High-End-Studiomonitore. Unglaubliche Präzision für Mastering-Qualität.", price: "ca. 5.999€", link: "https://www.amazon.de/s?k=ATC+SCM25A+Pro&tag=ikune21-21" },
+      { name: "Sennheiser HD 800 S", desc: "Referenz-Kopfhörer für kritisches Mixing & Mastering. Extrem detailliert.", price: "ca. 1.499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+800+S&tag=ikune21-21" },
+      { name: "Avid Pro Tools Ultimate (Jahresabo)", desc: "Profi-DAW für Recording, Mixing & Post-Production.", price: "ca. 999€/Jahr", link: "https://www.amazon.de/s?k=Pro+Tools+Ultimate+Abo&tag=ikune21-21" },
+      { name: "API 3124V Vorverstärker", desc: "Legendärer 4-Kanal-Vorverstärker. Analoger Sound vom Feinsten.", price: "ca. 3.999€", link: "https://www.amazon.de/s?k=API+3124V&tag=ikune21-21" },
+      { name: "Manley Variable Mu Kompressor", desc: "Legendärer Röhren-Kompressor. Warm, musikalisch, unverzichtbar.", price: "ca. 3.499€", link: "https://www.amazon.de/s?k=Manley+Variable+Mu&tag=ikune21-21" }
+    ],
+    podcasting: [
+      { name: "Neumann BCM 104", desc: "Rundfunkmikrofon von Neumann. Referenzklasse für professionelle Podcasts.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=Neumann+BCM+104&tag=ikune21-21" },
+      { name: "Rode Rodecaster Pro II + Rode NTH-100", desc: "Komplett-Set: Rodecaster + Profi-Kopfhörer. Podcast-Studio in einer Box.", price: "ca. 898€", link: "https://www.amazon.de/s?k=Rode+Rodecaster+Pro+II+Set&tag=ikune21-21" },
+      { name: "Sennheiser HD 800 S", desc: "Referenz-Kopfhörer für höchste Ansprüche an Audiokontrolle.", price: "ca. 1.499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+800+S&tag=ikune21-21" },
+      { name: "Vicoustic Wavewood Essentials", desc: "Professionelles Raumakustik-Kit. Diffusoren & Absorber für perfekten Raum.", price: "ca. 699€", link: "https://www.amazon.de/s?k=Vicoustic+Wavewood+Essentials&tag=ikune21-21" },
+      { name: "Electro-Voice RE20 + Rodecaster Bundle", desc: "Podcast-Traumkombination. RE20 + Rodecaster Pro II im Set.", price: "ca. 1.248€", link: "https://www.amazon.de/s?k=Electro-Voice+RE20+Rodecaster&tag=ikune21-21" }
+    ],
+    voiceover: [
+      { name: "Neumann U 87 Ai", desc: "Die Referenz für professionelle Voice-Over & Synchronisation weltweit.", price: "ca. 3.299€", link: "https://www.amazon.de/s?k=Neumann+U87+Ai&tag=ikune21-21" },
+      { name: "Universal Audio Apollo x6", desc: "Profi-Interface für Voice-Over mit Realtime-UAD-Sprach-Plugins.", price: "ca. 1.899€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+x6&tag=ikune21-21" },
+      { name: "Avid Pro Tools Ultimate", desc: "Industry-Standard für Voice-Over-Editing & Post-Production.", price: "ca. 999€/Jahr", link: "https://www.amazon.de/s?k=Pro+Tools+Ultimate&tag=ikune21-21" },
+      { name: "Sennheiser HD 800 S", desc: "Höchste Detailtreue für kritisches Voice-Over-Editing.", price: "ca. 1.499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+800+S&tag=ikune21-21" },
+      { name: "Izotope RX 10 Advanced", desc: "KI-Audioreparatur auf Profi-Niveau. Entfernt jedes Störgeräusch.", price: "ca. 1.199€", link: "https://www.amazon.de/s?k=Izotope+RX+10+Advanced&tag=ikune21-21" }
+    ],
+    livestreaming: [
+      { name: "Neumann BCM 104", desc: "Rundfunkmikrofon. Absoluter Premium-Sound für High-End-Streaming.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=Neumann+BCM+104&tag=ikune21-21" },
+      { name: "Rode Rodecaster Pro II", desc: "Professionelles Streaming-Interface mit 4 Kanälen & Soundboard.", price: "ca. 799€", link: "https://www.amazon.de/s?k=Rode+Rodecaster+Pro+II&tag=ikune21-21" },
+      { name: "Sennheiser HD 800 S", desc: "Referenz-Kopfhörer für die perfekte Stream-Audio-Kontrolle.", price: "ca. 1.499€", link: "https://www.amazon.de/s?k=Sennheiser+HD+800+S&tag=ikune21-21" },
+      { name: "Elgato Stream Deck +", desc: "Stream Deck mit Drehreglern für Audio- & Lichtsteuerung.", price: "ca. 199€", link: "https://www.amazon.de/s?k=Elgato+Stream+Deck+Plus&tag=ikune21-21" },
+      { name: "Vicoustic Wavewood Essentials", desc: "Akustik-Kit für den Streaming-Raum. Sauberer Sound ohne Halleffekte.", price: "ca. 699€", link: "https://www.amazon.de/s?k=Vicoustic+Wavewood+Essentials&tag=ikune21-21" }
+    ],
+    songwriting: [
+      { name: "Neumann U 87 Ai", desc: "Legendärer Sound für Songwriter-Demos in Studioqualität.", price: "ca. 3.299€", link: "https://www.amazon.de/s?k=Neumann+U87+Ai&tag=ikune21-21" },
+      { name: "Universal Audio Apollo x6", desc: "Profi-Interface mit DSP. Für anspruchsvolle Songwriter-Produktionen.", price: "ca. 1.899€", link: "https://www.amazon.de/s?k=Universal+Audio+Apollo+x6&tag=ikune21-21" },
+      { name: "ATC SCM25A Pro Monitore", desc: "Beste Monitore für Songwriter, die keine Kompromisse machen.", price: "ca. 5.999€", link: "https://www.amazon.de/s?k=ATC+SCM25A+Pro&tag=ikune21-21" },
+      { name: "Native Instruments Komplete 14 Collector's", desc: "Komplett-Sound-Library. Alles, was ein Songwriter braucht.", price: "ca. 1.599€", link: "https://www.amazon.de/s?k=Native+Instruments+Komplete+14+Collectors&tag=ikune21-21" },
+      { name: "Steinway Spirio | R (nicht bei Amazon)", desc: "High-End-Player-Piano für Songwriter. Referenz für Klavierkomposition.", price: "auf Anfrage", link: "https://www.amazon.de/s?k=Stage+Piano+88+Tasten+Profi&tag=ikune21-21" }
+    ]
+  }
+};
+
+const tips = {
+  anfaenger: "Als Anfänger: Starte mit einem USB-Mikrofon oder einem günstigen Audio-Interface + SM58. Lerne zuerst die Grundlagen von Gain-Staging und Raumakustik, bevor du teures Equipment kaufst. Kostenlose DAWs wie Audacity oder Cakewalk sind perfekt für den Start.",
+  fortgeschritten: "Du hast schon Erfahrung? Investiere in ein besseres Mikrofon (Shure SM7B oder Rode NT1-A) und ein gutes Audio-Interface. Ein Paar Yamaha HS5/HS7 Monitore bringen deine Mixes auf das nächste Level. Denk auch an einfache Raumakustik-Maßnahmen.",
+  profi: "Als Profi solltest du in High-End-Komponenten investieren: Neumann-Mikrofone, Universal-Audio-Interface, Focal- oder ATC-Monitore. Analoges Outboard-Equipment (Kompression, EQ) gibt deinem Sound den letzten Schliff. Eine professionelle Raumakustik-Kalibrierung ist jetzt Pflicht."
+};
+
+function initQuiz() {
+  document.querySelectorAll('.option input').forEach(input => {
+    input.addEventListener('change', function() {
+      this.closest('.option').parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      this.closest('.option').classList.add('selected');
+    });
+  });
+}
+
+function nextStep(n) {
+  let selected = document.querySelector('.quiz-step[data-step="'+n+'"] input:checked');
+  if (!selected) { alert('Bitte wähle eine Option aus.'); return; }
+  answers['q'+n] = selected.value;
+  document.querySelector('.quiz-step[data-step="'+n+'"]').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="'+(n+1)+'"]').classList.add('active');
+  updateProgress(n+1);
+}
+
+function prevStep(n) {
+  document.querySelector('.quiz-step[data-step="'+n+'"]').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="'+(n-1)+'"]').classList.add('active');
+  updateProgress(n-1);
+}
+
+function updateProgress(step) {
+  let pct = ((step-1) / 5) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'Schritt ' + step + ' von 5';
+}
+
+function calculateResult() {
+  let q5 = document.querySelector('.quiz-step[data-step="5"] input:checked');
+  if (!q5) { alert('Bitte wähle eine Option aus.'); return; }
+  answers.q5 = q5.value;
+
+  let budget = answers.q2;
+  let hauptziel = answers.q1;
+  let erfahrung = answers.q3;
+  let ki = answers.q4;
+  let ort = answers.q5;
+
+  // Build result
+  let grid = document.getElementById('resultGrid');
+  grid.innerHTML = '';
+
+  let items = products[budget] && products[budget][hauptziel] ? products[budget][hauptziel] : products.einsteiger.musikproduktion;
+
+  // Add category header
+  let catHeader = document.createElement('div');
+  catHeader.className = 'result-card';
+  let catLabel = {
+    mini: 'Mini (0–100€)',
+    einsteiger: 'Einsteiger (100–500€)',
+    mittel: 'Fortgeschritten (500–2.000€)',
+    high: 'Semi-Profi (2.000–5.000€)',
+    pro: 'Profi (5.000€+)'
+  };
+  let zielLabel = {
+    musikproduktion: '🎵 Musikproduktion',
+    podcasting: '🎙️ Podcasting',
+    voiceover: '🎤 Voice-Over',
+    livestreaming: '📡 Livestreaming',
+    songwriting: '✍️ Songwriting'
+  };
+  catHeader.innerHTML = '<span class="category-badge">Budget: ' + (catLabel[budget] || budget) + '</span><h2 style="font-size:1.3em;margin-bottom:4px;">' + (zielLabel[hauptziel] || hauptziel) + ' – Empfehlungen</h2><p class="price">' + items.length + ' Produkte gefunden</p>';
+  grid.appendChild(catHeader);
+
+  items.forEach(item => {
+    let card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = '<h3>' + item.name + '</h3><p>' + item.desc + '</p><span class="price">' + item.price + '</span> <a href="' + item.link + '" target="_blank" rel="noopener" class="buy">💰 Bei Amazon ansehen</a>';
+    grid.appendChild(card);
+  });
+
+  // Add KI extras based on answer
+  if (ki === 'vollautomatisch' || ki === 'teilweise') {
+    let extra = document.createElement('div');
+    extra.className = 'result-card';
+    let kiItems = ki === 'vollautomatisch'
+      ? [
+          {n:"LANDR AI Mastering", d:"Automatisches KI-Mastering. Lade deinen Song hoch, erhalte einen fertigen Master.", p:"ab 9,99€/Monat", l:"https://www.amazon.de/s?k=LANDR+AI+Mastering&tag=ikune21-21"},
+          {n:"Izotope Ozone 11 Advanced", d:"KI-Assistent für Mixing & Mastering. Sagt dir, was dein Mix braucht.", p:"ca. 499€", l:"https://www.amazon.de/s?k=Izotope+Ozone+11+Advanced&tag=ikune21-21"},
+          {n:"AIVA KI-Kompositionstool", d:"KI-gestütztes Songwriting. Lass KI Melodien & Harmonien generieren.", p:"ab 11€/Monat", l:"https://www.amazon.de/s?k=AIVA+AI+Music+Composition&tag=ikune21-21"},
+          {n:"Adobe Podcast Enhance", d:"Kostenloses KI-Tool: Entfernt Raumhall & verbessert Sprachqualität automatisch.", p:"kostenlos", l:"https://www.amazon.de/s?k=Adobe+Podcast+Enhance&tag=ikune21-21"}
+        ]
+      : [
+          {n:"Melodyne 5 Essential", d:"KI-gestütztes Vocal-Tuning. Korrigiert Tonhöhen natürlich & transparent.", p:"ca. 99€", l:"https://www.amazon.de/s?k=Melodyne+5+Essential&tag=ikune21-21"},
+          {n:"Izotope RX 10 Elements", d:"KI-Audioreparatur: Entfernt Rauschen, Klicks & Knackser.", p:"ca. 99€", l:"https://www.amazon.de/s?k=Izotope+RX+10+Elements&tag=ikune21-21"},
+          {n:"LANDR AI Mastering (Pay-per-Track)", d:"Einzeltrack-Mastering per KI. Ideal für Zwischendurch.", p:"ca. 3,99€/Track", l:"https://www.amazon.de/s?k=LANDR+AI+Mastering&tag=ikune21-21"}
+        ];
+    let html = '<h3>🤖 KI-Tools (empfohlen für dich)</h3>';
+    kiItems.forEach(a => {
+      html += '<div style="padding:8px 0;border-bottom:1px solid #2A2A2A;"><strong>' + a.n + '</strong> – ' + a.d + ' <span class="price">' + a.p + '</span> <a href="' + a.l + '" target="_blank" rel="noopener" class="buy" style="margin-top:4px;display:inline-block;">🔗 Details</a></div>';
+    });
+    extra.innerHTML = html;
+    grid.appendChild(extra);
+  }
+
+  // Add mobile/studio extras
+  if (ort === 'mobil') {
+    let extra = document.createElement('div');
+    extra.className = 'result-card';
+    extra.innerHTML = '<h3>🎒 Mobiles Setup – Unverzichtbares Zubehör</h3><div style="padding:8px 0;"><strong>Laptop-Ständer + Powerbank</strong> – Für unterwegs immer einsatzbereit</div><div style="padding:8px 0;"><strong>Zoom H1n oder Tascam DR-05X</strong> – Mobiler Field-Recorder für Aufnahmen abseits des Studios</div><div style="padding:8px 0;"><strong>Polster-Kopfhörer-Koffer</strong> – Schützt deine Kopfhörer auf Reisen</div>';
+    grid.appendChild(extra);
+  }
+
+  if (ort === 'zuhause' && budget !== 'pro' && budget !== 'high') {
+    let extra = document.createElement('div');
+    extra.className = 'result-card';
+    extra.innerHTML = '<h3>🏠 Zuhause aufnehmen – Raumakustik-Tipps</h3><div style="padding:8px 0;"><strong>🧱 Akustikschaumstoff Basisset (12er)</strong> – Erste Maßnahme gegen Hall. <a href="https://www.amazon.de/s?k=Akustikschaumstoff+12er+Set&tag=ikune21-21" target="_blank" rel="noopener" class="buy">ca. 25€</a></div><div style="padding:8px 0;"><strong>📦 Teppich + schwere Vorhänge</strong> – Reduzieren Hall enorm, ohne viel Geld auszugeben</div><div style="padding:8px 0;"><strong>🎯 Positionierung: Mit dem Rücken zur Fensterfront</strong> – Weniger Reflexionen, bessere Aufnahmen</div>';
+    grid.appendChild(extra);
+  }
+
+  // Summary
+  let labels = {mini: 'Mini (0–100€)', einsteiger: 'Einsteiger (100–500€)', mittel: 'Fortgeschritten (500–2.000€)', high: 'Semi-Profi (2.000–5.000€)', pro: 'Profi (5.000€+)'};
+  let projLabels = {musikproduktion: 'Musikproduktion', podcasting: 'Podcasting', voiceover: 'Voice-Over', livestreaming: 'Livestreaming', songwriting: 'Songwriting'};
+  let erfLabels = {anfaenger: 'Anfänger', fortgeschritten: 'Fortgeschritten', profi: 'Profi'};
+  let kiLabels = {vollautomatisch: '🤖 Vollautomatisch', teilweise: '⚡ Nur bestimmte Tasks', klassisch: '🎚️ Klassisch'};
+  let ortLabels = {zuhause: 'Zuhause', mobil: 'Mobil', studio: 'Professionelles Studio'};
+
+  document.getElementById('summaryText').innerHTML = 'Dein Setup: <strong>' + projLabels[hauptziel] + '</strong> · Budget: <strong>' + labels[budget] + '</strong> · Erfahrung: <strong>' + erfLabels[erfahrung] + '</strong><br>KI: <strong>' + kiLabels[ki] + '</strong> · Ort: <strong>' + ortLabels[ort] + '</strong><br><span class="big">' + items.length + '</span> Produkt-Empfehlungen <span style="font-size:0.7em;color:#888;">mit Amazon-Links (tag=ikune21-21)</span>';
+
+  // Tip
+  document.getElementById('tipText').textContent = tips[erfahrung] || tips.anfaenger;
+
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').classList.add('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '✅ Ergebnis bereit!';
+
+  // Scroll to top of result
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  answers = {};
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.option input').forEach(i => i.checked = false);
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.quiz-step[data-step="1"]').classList.add('active');
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('quiz').style.display = 'block';
+  updateProgress(1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+initQuiz();
+</script>
+</body>
+</html>
