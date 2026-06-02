@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Home Sicherheits-Checker 2026</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden}
+  ::-webkit-scrollbar{width:8px}
+  ::-webkit-scrollbar-track{background:#0A0A0A}
+  ::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+  ::-webkit-scrollbar-thumb:hover{background:#555}
+
+  .container{width:100%;max-width:800px;padding:20px;margin:0 auto}
+
+  /* HEADER */
+  .header{text-align:center;padding:40px 20px 20px;animation:fadeDown 0.6s ease}
+  .header .logo{font-size:14px;color:#8B5CF6;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-weight:600}
+  .header h1{font-size:32px;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+  .header p{color:#A0A0A0;font-size:16px;line-height:1.6}
+
+  /* PROGRESS BAR */
+  .progress-wrap{background:#1A1A1A;border-radius:10px;height:8px;margin:30px 20px 10px;overflow:hidden;position:relative}
+  .progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#8B5CF6,#FFD700);border-radius:10px;transition:width 0.5s cubic-bezier(0.4,0,0.2,1);position:relative}
+  .progress-bar::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:shimmer 2s infinite}
+  .progress-label{text-align:center;font-size:13px;color:#666;margin-bottom:20px;letter-spacing:1px}
+
+  @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+  /* QUIZ CARD */
+  .quiz-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:40px;margin:0 20px;opacity:0;transform:translateY(20px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+  .quiz-card.active{opacity:1;transform:translateY(0)}
+  .quiz-card .q-number{font-size:12px;color:#8B5CF6;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+  .quiz-card .q-title{font-size:22px;font-weight:700;margin-bottom:24px;line-height:1.4}
+  .quiz-card .q-options{display:flex;flex-direction:column;gap:12px}
+  .quiz-card .q-option{background:#222;border:2px solid #2A2A2A;border-radius:12px;padding:16px 20px;cursor:pointer;transition:all 0.25s ease;font-size:16px;color:#CCC;display:flex;align-items:center;gap:12px}
+  .quiz-card .q-option:hover{background:#2A2A2A;border-color:#8B5CF6;color:#fff;transform:translateX(4px)}
+  .quiz-card .q-option.selected{background:rgba(139,92,246,0.15);border-color:#8B5CF6;color:#fff;box-shadow:0 0 20px rgba(139,92,246,0.1)}
+  .quiz-card .q-option .radio{width:20px;height:20px;border-radius:50%;border:2px solid #444;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s ease}
+  .quiz-card .q-option.selected .radio{border-color:#8B5CF6}
+  .quiz-card .q-option.selected .radio::after{content:'';width:10px;height:10px;border-radius:50%;background:#8B5CF6;animation:popIn 0.25s ease}
+  @keyframes popIn{0%{transform:scale(0)}50%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+  .quiz-card .q-option .icon-opt{font-size:20px}
+
+  /* NAV BUTTONS */
+  .nav-buttons{display:flex;gap:12px;margin-top:30px;justify-content:space-between}
+  .btn{background:#222;border:1px solid #333;color:#CCC;padding:12px 28px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;gap:8px}
+  .btn:hover:not(:disabled){background:#2A2A2A;border-color:#8B5CF6;color:#fff;transform:translateY(-1px)}
+  .btn:disabled{opacity:0.3;cursor:not-allowed;transform:none}
+  .btn-primary{background:#8B5CF6;border-color:#8B5CF6;color:#fff}
+  .btn-primary:hover:not(:disabled){background:#7C3AED;border-color:#7C3AED;box-shadow:0 4px 20px rgba(139,92,246,0.3)}
+  .btn-gold{background:linear-gradient(135deg,#8B5CF6,#FFD700);border:none;color:#0A0A0A;font-weight:700}
+  .btn-gold:hover{box-shadow:0 4px 25px rgba(255,215,0,0.3);transform:translateY(-2px)}
+
+  /* RESULTS */
+  .results{display:none;animation:fadeUp 0.6s ease}
+  .results.show{display:block}
+  @keyframes fadeUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+  @keyframes fadeDown{0%{opacity:0;transform:translateY(-20px)}100%{opacity:1;transform:translateY(0)}}
+
+  .result-header{text-align:center;padding:30px 20px}
+  .result-header .badge{display:inline-block;padding:6px 20px;border-radius:20px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+  .badge-niedrig{background:rgba(34,197,94,0.15);color:#22C55E;border:1px solid rgba(34,197,94,0.3)}
+  .badge-mittel{background:rgba(234,179,8,0.15);color:#EAB308;border:1px solid rgba(234,179,8,0.3)}
+  .badge-hoch{background:rgba(249,115,22,0.15);color:#F97316;border:1px solid rgba(249,115,22,0.3)}
+  .badge-sehr-hoch{background:rgba(239,68,68,0.15);color:#EF4444;border:1px solid rgba(239,68,68,0.3)}
+  .result-header h2{font-size:28px;font-weight:800;color:#fff;margin-bottom:8px}
+  .result-header .cost-box{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;padding:16px 32px;display:inline-block;margin:10px 0}
+  .cost-box .amount{font-size:36px;font-weight:800;color:#FFD700}
+  .cost-box .label{font-size:13px;color:#666;margin-top:2px}
+
+  /* CATEGORY SECTION */
+  .cat-section{margin:0 20px 20px}
+  .cat-title{font-size:18px;font-weight:700;color:#8B5CF6;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .cat-title .count{font-size:12px;color:#666;font-weight:400}
+  .product-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  .product-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;padding:16px 20px;transition:all 0.25s ease;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .product-card:hover{background:#222;border-color:#8B5CF6;transform:translateY(-2px);box-shadow:0 4px 20px rgba(139,92,246,0.08)}
+  .product-card .info{flex:1}
+  .product-card .name{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+  .product-card .desc{font-size:13px;color:#888;line-height:1.4}
+  .product-card .price{font-size:15px;font-weight:700;color:#FFD700;white-space:nowrap}
+  .product-card .btn-link{background:#8B5CF6;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:all 0.25s ease;white-space:nowrap;flex-shrink:0}
+  .product-card .btn-link:hover{background:#7C3AED;box-shadow:0 2px 12px rgba(139,92,246,0.3)}
+
+  /* COMPARISON TABLE */
+  .comp-section{margin:20px 20px 30px}
+  .comp-section h3{font-size:18px;font-weight:700;color:#FFD700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+  .comp-wrap{overflow-x:auto;border-radius:12px;border:1px solid #2A2A2A}
+  table.comp-table{width:100%;border-collapse:collapse;font-size:13px;min-width:600px}
+  table.comp-table th{background:#1A1A1A;color:#8B5CF6;padding:14px 16px;text-align:left;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;border-bottom:2px solid #2A2A2A}
+  table.comp-table td{padding:12px 16px;border-bottom:1px solid #222;color:#AAA}
+  table.comp-table tr:hover td{background:#1f1f1f}
+  table.comp-table td:first-child{font-weight:600;color:#fff}
+  table.comp-table .rating{color:#FFD700;letter-spacing:2px}
+
+  /* BLOG LINK */
+  .blog-link{text-align:center;margin:30px 20px 40px;padding:24px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px}
+  .blog-link p{color:#888;margin-bottom:12px;font-size:14px}
+  .blog-link a{color:#8B5CF6;text-decoration:none;font-weight:600;font-size:16px;transition:all 0.25s ease}
+  .blog-link a:hover{color:#A78BFA;text-decoration:underline}
+
+  /* SCORE ANIMATION */
+  .score-ring{width:100px;height:100px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;position:relative}
+  .score-ring svg{position:absolute;transform:rotate(-90deg)}
+  .score-ring .score-num{font-size:28px;font-weight:800;position:relative;z-index:1}
+
+  /* RESTART */
+  .restart-wrap{text-align:center;margin:10px 0 40px}
+  .restart-wrap .btn{display:inline-flex}
+
+  /* RESPONSIVE */
+  @media(max-width:600px){
+    .container{padding:12px}
+    .header h1{font-size:26px}
+    .quiz-card{padding:24px 20px;margin:0 10px}
+    .quiz-card .q-title{font-size:18px}
+    .quiz-card .q-option{padding:14px 16px;font-size:14px}
+    .nav-buttons{flex-direction:row;gap:8px}
+    .btn{padding:10px 18px;font-size:13px}
+    .product-card{flex-wrap:wrap}
+    .product-card .btn-link{width:100%;text-align:center}
+    .result-header h2{font-size:22px}
+    .cost-box .amount{font-size:28px}
+  }
+  @media(max-width:400px){
+    .quiz-card .q-option{padding:12px 14px;font-size:13px}
+    .btn{padding:8px 14px;font-size:12px}
+  }
+
+  .hidden{display:none!important}
+  .mt-20{margin-top:20px}
+  .text-center{text-align:center}
+  .gap-8{gap:8px}
+
+  /* CONFETTI for fun */
+  .confetti-piece{position:fixed;width:10px;height:10px;z-index:9999;pointer-events:none;animation:confettiFall linear forwards}
+  @keyframes confettiFall{0%{opacity:1;transform:translateY(-10vh) rotate(0deg) scale(1)}100%{opacity:0;transform:translateY(110vh) rotate(720deg) scale(0.3)}}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="logo">🔒 Smart Home Security</div>
+    <h1>🏠 Sicherheits-Checker 2026</h1>
+    <p>Finde die perfekte Smart-Home-Sicherheitslösung für dein Zuhause – in nur 5 Schritten.</p>
+  </div>
+
+  <div id="progress-wrap" class="progress-wrap" style="display:none">
+    <div id="progress-bar" class="progress-bar"></div>
+  </div>
+  <div id="progress-label" class="progress-label" style="display:none">Frage 1 von 5</div>
+
+  <!-- QUIZ AREA -->
+  <div id="quiz-area"></div>
+
+  <!-- RESULTS AREA -->
+  <div id="results" class="results"></div>
+</div>
+
+<script>
+(function(){
+  const QUESTIONS = [
+    {
+      id:'wohnung',
+      title:'In welcher Wohnsituation lebst du?',
+      options:[
+        {value:'haus',label:'🏡 Einfamilienhaus'},
+        {value:'miete',label:'🏢 Wohnung zur Miete'},
+        {value:'eigentum',label:'🏠 Eigentumswohnung'},
+        {value:'reihen',label:'🏘️ Reihenhaus'}
+      ]
+    },
+    {
+      id:'budget',
+      title:'Was ist dein Budget?',
+      options:[
+        {value:'0-100',label:'💰 0–100 €'},
+        {value:'100-300',label:'💰💰 100–300 €'},
+        {value:'300-600',label:'💰💰💰 300–600 €'},
+        {value:'600-1000',label:'💰💰💰💰 600–1.000 €'},
+        {value:'1000+',label:'💎 1.000 €+'}
+      ]
+    },
+    {
+      id:'sorgen',
+      title:'Was sind deine Hauptsorgen?',
+      options:[
+        {value:'einbruch',label:'🔐 Einbruchschutz'},
+        {value:'wildtiere',label:'🦊 Wildtiere im Garten'},
+        {value:'paket',label:'📦 Paketdiebstahl'},
+        {value:'komfort',label:'🤖 Smart-Home-Komfort'},
+        {value:'rundum',label:'🛡️ Rundum-Schutz'}
+      ]
+    },
+    {
+      id:'tueren',
+      title:'Wieviele Außentüren hast du?',
+      options:[
+        {value:'1',label:'🚪 1'},
+        {value:'2',label:'🚪🚪 2'},
+        {value:'3',label:'🚪🚪🚪 3'},
+        {value:'4plus',label:'🚪🚪🚪🚪 4+'}
+      ]
+    },
+    {
+      id:'smarthome',
+      title:'Hast du bereits Smart-Home-Geräte?',
+      options:[
+        {value:'alexa',label:'🎤 Ja (Alexa/Google)'},
+        {value:'homekit',label:'🍏 Ja (Apple HomeKit)'},
+        {value:'sonstiges',label:'🔧 Ja (Sonstiges)'},
+        {value:'nein',label:'❌ Nein'}
+      ]
+    }
+  ];
+
+  const AFF_TAG = 'ikune21-21';
+  const BLOG_URL = '../blog/ki-heim-sicherheit-ueberwachung-2026.html';
+
+  // Product database with 25+ Amazon affiliate links
+  const PRODUCTS = {
+    kameras: [
+      {name:'Ring Spotlight Cam Pro',desc:'Kabellose Außenkamera mit 1080p, Nachtsicht & 2-Wege-Audio',price:'199.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=ring+spotlight+cam+pro`},
+      {name:'TP-Link Tapo C320WS',desc:'Außenkamera 3MP, wetterfest, Nachtsicht bis 30m',price:'49.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=tp+link+tapo+c320ws`},
+      {name:'Arlo Essential 2K',desc:'Kabellose Außenkamera 2K HDR, Akku, Sirene',price:'139.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=arlo+essential+2k+kamera`},
+      {name:'EufyCam 2C Pro',desc:'Kabellos, 2K Auflösung, 180 Tage Akku, kein Abo',price:'199.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=eufycam+2c+pro`},
+      {name:'Blink Mini',desc:'Kompakte Innenkamera, 1080p, Bewegungserkennung',price:'34.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=blink+mini+kamera`},
+      {name:'Reolink Argus 3 Pro',desc:'Kabellose 2K Außenkamera mit Akku & Solar',price:'109.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=reolink+argus+3+pro`}
+    ],
+    turklingeln: [
+      {name:'Ring Video Doorbell 4',desc:'1080p HD, erweiterte Bewegungserkennung, WLAN',price:'179.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=ring+video+doorbell+4`},
+      {name:'Eufy Video Doorbell 2K',desc:'2K Auflösung, kein Abo, lokaler Speicher',price:'149.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=eufy+video+doorbell+2k`},
+      {name:'Aqara G4 Video Türklingel',desc:'Apple HomeKit, 1080p, KI-Gesichtserkennung',price:'199.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=aqara+g4+t%C3%BCrklingel`},
+      {name:'Google Nest Doorbell',desc:'Kabellos oder kabelgebunden, 24/7 Livestream',price:'189.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=google+nest+doorbell+battery`}
+    ],
+    schlosser: [
+      {name:'Nuki Smart Lock 3.0 Pro',desc:'Intelligentes Türschloss, WLAN, Auto-Unlock, Kompatibel mit Alexa',price:'279.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=nuki+smart+lock+3+pro`},
+      {name:'August Wi-Fi Smart Lock',desc:'Smart Lock mit WLAN, Auto-Unlock & Fernzugriff',price:'229.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=august+smart+lock+pro`},
+      {name:'Yale Linus Smart Lock',desc:'Intelligentes Türschloss mit Zylinder, Matter-kompatibel',price:'249.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=yale+linus+smart+lock`},
+      {name:'Bosch Smart Home Türschlossantrieb',desc:'Nachrüstbarer Türschlossantrieb, App-Steuerung',price:'199.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=bosch+smart+home+t%C3%BCrschlossantrieb`}
+    ],
+    alarmanlagen: [
+      {name:'Ring Alarm Sicherheitssystem (5-teilig)',desc:'Komplettes Alarmsystem mit Basisstation, Tastatur, Sensoren',price:'249.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=ring+alarm+sicherheitssystem+5`},
+      {name:'Abus Smartvest Funk-Alarmanlage',desc:'Professionelle Alarmanlage, App-Steuerung, erweiterbar',price:'299.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=abus+smartvest+alarmanlage`},
+      {name:'Bosch Smart Home Alarmanlage Starter-Set',desc:'Intelligentes Alarmsystem mit Tür-/Fensterkontakten',price:'349.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=bosch+smart+home+alarmanlage+starter`},
+      {name:'Hornbach Smarthome Alarm-Set',desc:'Bewegungsmelder, Türkontakte, Sirene – Komplettset',price:'199.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=hornbach+smarthome+alarm+set`}
+    ],
+    sensoren: [
+      {name:'Philips Hue Bewegungssensor',desc:'Kabelloser Sensor für Hue-Lampen und Automationen',price:'44.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=philips+hue+bewegungssensor`},
+      {name:'Aqara Tür-/Fenstersensor',desc:'Apple HomeKit, Zigbee, klein & zuverlässig',price:'24.99',rating:'★★★★★',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=aqara+t%C3%BCr+fenster+sensor`},
+      {name:'Shelly Door/Window 2',desc:'WLAN-Tür-/Fenstersensor, kompakt, sehr günstig',price:'19.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=shelly+door+window+2`},
+      {name:'Netatmo Wetterstation & Außensensor',desc:'Innen-/Außensensor für Temperatur, Luftfeuchte & Lärm',price:'149.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=netatmo+wetterstation+au%C3%9Fensensor`},
+      {name:'Eve Motion Bewegungsmelder',desc:'Thread/Matter, Apple HomeKit, kabellos',price:'54.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=eve+motion+bewegungsmelder+thread`},
+      {name:'Fibaro Rauchmelder',desc:'Z-Wave Rauch- & Hitzemelder, Smart-Home-Integration',price:'69.99',rating:'★★★★☆',url:`https://amzn.to/${AFF_TAG}?tag=${AFF_TAG}&keywords=fibaro+rauchmelder+smart`}
+    ]
+  };
+
+  // Recommendation engine
+  function getRecommendations(answers){
+    const recs = {kameras:[],turklingeln:[],schlosser:[],alarmanlagen:[],sensoren:[]};
+    const keys = Object.keys(PRODUCTS);
+
+    const wohnung = answers.wohnung || 'haus';
+    const budget = answers.budget || '300-600';
+    const sorgen = answers.sorgen || 'rundum';
+    const tueren = parseInt(answers.tueren) || 1;
+    const smarthome = answers.smarthome || 'nein';
+
+    const budgetRanges = {'0-100':[0,100],'100-300':[100,300],'300-600':[300,600],'600-1000':[600,1000],'1000+':[1000,9999]};
+    const [bMin,bMax] = budgetRanges[budget];
+
+    // Helper to pick products within budget
+    const inBudget = (priceStr) => { const p = parseFloat(priceStr); return p >= bMin/3 && p <= bMax*1.5; };
+
+    // Determine primary concern categories
+    const needsCamera = sorgen==='einbruch' || sorgen==='rundum' || sorgen==='paket' || sorgen==='wildtiere';
+    const needsDoorbell = sorgen==='paket' || sorgen==='rundum' || sorgen==='einbruch';
+    const needsLock = sorgen==='einbruch' || sorgen==='rundum';
+    const needsAlarm = sorgen==='einbruch' || sorgen==='rundum' || (sorgen==='wildtiere' && wohnung!=='miete');
+    const needsSensors = sorgen==='rundum' || sorgen==='komfort' || sorgen==='wildtiere';
+
+    // Smart home compatibility
+    const homeKit = smarthome==='homekit';
+    const alexa = smarthome==='alexa' || smarthome==='sonstiges';
+
+    // Filter products
+    if(needsCamera){
+      let cams = [...PRODUCTS.kameras];
+      // Prefer higher-end for einbruch/rundum
+      if(sorgen==='einbruch' || sorgen==='rundum'){
+        cams.sort((a,b)=>parseFloat(b.price)-parseFloat(a.price));
+      }
+      cams = cams.filter(p=>inBudget(p.price));
+      if(cams.length===0) cams = PRODUCTS.kameras.slice(0,2);
+      recs.kameras = cams.slice(0,2);
+    } else if(sorgen==='komfort'){
+      recs.kameras = [PRODUCTS.kameras[4]]; // Blink Mini
+    }
+
+    if(needsDoorbell){
+      let bells = [...PRODUCTS.turklingeln];
+      if(homeKit) bells.sort((a,b)=>a.name.includes('Aqara')?-1:1);
+      if(alexa) bells.sort((a,b)=>a.name.includes('Ring')?-1:1);
+      bells = bells.filter(p=>inBudget(p.price));
+      if(bells.length===0) bells = PRODUCTS.turklingeln.slice(0,1);
+      recs.turklingeln = bells.slice(0,1);
+    }
+
+    if(needsLock){
+      let nrLocks = Math.min(tueren,2);
+      let locks = [...PRODUCTS.schlosser];
+      if(homeKit) locks.sort((a,b)=>a.name.includes('Yale')?-1:1);
+      if(alexa) locks.sort((a,b)=>a.name.includes('Nuki')?-1:1);
+      locks = locks.filter(p=>inBudget(p.price));
+      if(locks.length===0) locks = PRODUCTS.schlosser.slice(0,1);
+      recs.schlosser = locks.slice(0,nrLocks);
+    }
+
+    if(needsAlarm){
+      let alarms = [...PRODUCTS.alarmanlagen];
+      alarms = alarms.filter(p=>inBudget(p.price));
+      if(alarms.length===0) alarms = PRODUCTS.alarmanlagen.slice(0,1);
+      recs.alarmanlagen = alarms.slice(0,1);
+    }
+
+    if(needsSensors){
+      let sensors = [...PRODUCTS.sensoren];
+      if(homeKit) sensors.sort((a,b)=>a.name.includes('Eve')||a.name.includes('Aqara')?-1:1);
+      sensors = sensors.filter(p=>inBudget(p.price));
+      if(sensors.length===0) sensors = PRODUCTS.sensoren.slice(0,2);
+      recs.sensoren = sensors.slice(0,2);
+    }
+
+    // Always add at least one thing if nothing matched
+    if(Object.values(recs).every(a=>a.length===0)){
+      recs.kameras = [PRODUCTS.kameras[4]];
+    }
+
+    return recs;
+  }
+
+  function calcTotal(recs){
+    let total=0;
+    Object.values(recs).forEach(cat=>cat.forEach(p=>{total+=parseFloat(p.price||0)}));
+    return Math.round(total*100)/100;
+  }
+
+  function calcPriority(answers, total){
+    let score=0;
+    const sorgen=answers.sorgen||'rundum';
+    const budget=answers.budget||'300-600';
+
+    if(sorgen==='einbruch') score+=35;
+    else if(sorgen==='rundum') score+=30;
+    else if(sorgen==='paket') score+=20;
+    else if(sorgen==='wildtiere') score+=15;
+    else score+=10;
+
+    if(budget==='1000+') score+=10;
+    else if(budget==='600-1000') score+=5;
+
+    if(answers.wohnung==='haus'||answers.wohnung==='reihen') score+=10;
+
+    if(total>500) score+=5;
+    if(total>1000) score+=10;
+
+    if(answers.smarthome==='nein') score+=5;
+
+    if(score>=60) return {label:'Sehr Hoch',cls:'sehr-hoch',min:60};
+    if(score>=40) return {label:'Hoch',cls:'hoch',min:40};
+    if(score>=20) return {label:'Mittel',cls:'mittel',min:20};
+    return {label:'Niedrig',cls:'niedrig',min:0};
+  }
+
+  // Render functions
+  let currentQ = 0;
+  let answers = {};
+
+  const quizArea = document.getElementById('quiz-area');
+  const resultsDiv = document.getElementById('results');
+  const progressBar = document.getElementById('progress-bar');
+  const progressLabel = document.getElementById('progress-label');
+  const progressWrap = document.getElementById('progress-wrap');
+
+  function renderQuestion(idx){
+    const q = QUESTIONS[idx];
+    const total = QUESTIONS.length;
+    const pct = ((idx+1)/total)*100;
+    progressBar.style.width = pct+'%';
+    progressLabel.textContent = 'Frage '+(idx+1)+' von '+total;
+    progressWrap.style.display='block';
+    progressLabel.style.display='block';
+
+    let optsHTML = q.options.map((o,i)=>{
+      const sel = answers[q.id]===o.value ? 'selected' : '';
+      return `<div class="q-option ${sel}" data-idx="${i}" onclick="selectOption(${idx},${i})">
+        <div class="radio"></div>
+        <span>${o.label}</span>
+      </div>`;
+    }).join('');
+
+    const hasPrev = idx>0;
+    const hasNext = idx<total-1;
+    const hasAnswer = !!answers[q.id];
+
+    quizArea.innerHTML = `
+      <div class="quiz-card active">
+        <div class="q-number">Schritt ${idx+1} / ${total}</div>
+        <div class="q-title">${q.title}</div>
+        <div class="q-options">${optsHTML}</div>
+        <div class="nav-buttons">
+          <button class="btn" id="btn-back" ${!hasPrev?'disabled':''} onclick="goBack()">
+            ← Zurück
+          </button>
+          <button class="btn btn-primary" id="btn-next" ${!hasAnswer?'disabled':''} onclick="goNext()">
+            ${hasNext?'Weiter →':'Ergebnisse anzeigen →'}
+          </button>
+        </div>
+      </div>`;
+  }
+
+  window.selectOption = function(qIdx, optIdx){
+    const q = QUESTIONS[qIdx];
+    const val = q.options[optIdx].value;
+    answers[q.id] = val;
+    renderQuestion(qIdx);
+    // Auto-advance after a short delay for convenience
+    if(qIdx < QUESTIONS.length-1){
+      setTimeout(()=>{ document.getElementById('btn-next')?.click(); },400);
+    } else {
+      setTimeout(()=>{ document.getElementById('btn-next')?.click(); },600);
+    }
+  };
+
+  window.goNext = function(){
+    if(currentQ < QUESTIONS.length-1){
+      currentQ++;
+      renderQuestion(currentQ);
+    } else {
+      showResults();
+    }
+  };
+
+  window.goBack = function(){
+    if(currentQ > 0){
+      currentQ--;
+      renderQuestion(currentQ);
+    }
+  };
+
+  function showResults(){
+    quizArea.style.display='none';
+    progressWrap.style.display='none';
+    progressLabel.style.display='none';
+
+    const recs = getRecommendations(answers);
+    const total = calcTotal(recs);
+    const priority = calcPriority(answers,total);
+
+    // Build category HTML
+    let catsHTML = '';
+    const catNames = {kameras:'📷 Kameras',turklingeln:'🔔 Türklingeln',schlosser:'🔑 Schlösser',alarmanlagen:'🚨 Alarmanlagen',sensoren:'📡 Sensoren'};
+    let allProds = [];
+    Object.keys(recs).forEach(cat=>{
+      if(recs[cat].length===0) return;
+      let itemsHTML = recs[cat].map(p=>{
+        allProds.push(p);
+        return `<div class="product-card">
+          <div class="info">
+            <div class="name">${p.name}</div>
+            <div class="desc">${p.desc} ${p.rating}</div>
+          </div>
+          <div class="price">${p.price} €</div>
+          <a class="btn-link" href="${p.url}" target="_blank" rel="noopener">Bei Amazon</a>
+        </div>`;
+      }).join('');
+      catsHTML += `<div class="cat-section">
+        <div class="cat-title">${catNames[cat]} <span class="count">(${recs[cat].length} Produkte)</span></div>
+        <div class="product-grid">${itemsHTML}</div>
+      </div>`;
+    });
+
+    // Comparison table
+    let tableRows = allProds.map(p=>{
+      let cat='';
+      for(const [k,v] of Object.entries(recs)){
+        if(v.includes(p)){ cat=catNames[k]; break; }
+      }
+      return `<tr><td>${p.name}</td><td>${cat}</td><td>${p.rating}</td><td>${p.price} €</td><td><a href="${p.url}" target="_blank" rel="noopener" style="color:#8B5CF6;text-decoration:none;font-weight:600">Ansehen</a></td></tr>`;
+    }).join('');
+
+    const compHTML = tableRows ? `<div class="comp-section">
+      <h3>📊 Produktvergleich</h3>
+      <div class="comp-wrap">
+        <table class="comp-table">
+          <thead><tr><th>Produkt</th><th>Kategorie</th><th>Bewertung</th><th>Preis</th><th>Link</th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </div>` : '';
+
+    // Score ring
+    const scorePct = priority.min+20; // visual indicator
+    const circumference = 2*Math.PI*40;
+    const offset = circumference - (Math.min(scorePct,100)/100)*circumference;
+
+    resultsDiv.innerHTML = `
+      <div class="result-header">
+        <div class="score-ring">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#222" stroke-width="8"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#8B5CF6" stroke-width="8" stroke-dasharray="${circumference}" stroke-dashoffset="${offset}" stroke-linecap="round" style="transition:stroke-dashoffset 1s ease"/>
+          </svg>
+          <div class="score-num">${total.toFixed(0)}€</div>
+        </div>
+        <div class="badge badge-${priority.cls}">${priority.label} Priorität</div>
+        <h2>Dein personalisiertes Sicherheitspaket</h2>
+        <div class="cost-box">
+          <div class="amount">${total.toFixed(2)} €</div>
+          <div class="label">Geschätzte Gesamtkosten</div>
+        </div>
+      </div>
+      ${catsHTML}
+      ${compHTML}
+      <div class="blog-link">
+        <p>📖 Mehr erfahren in unserem ausführlichen Ratgeber</p>
+        <a href="${BLOG_URL}" target="_blank">KI-Heim-Sicherheit & Überwachung 2026 →</a>
+      </div>
+      <div class="restart-wrap">
+        <button class="btn btn-gold" onclick="restartQuiz()">🔄 Quiz neu starten</button>
+      </div>`;
+
+    resultsDiv.classList.add('show');
+    // Fire confetti for fun
+    fireConfetti();
+  }
+
+  function fireConfetti(){
+    const colors = ['#8B5CF6','#FFD700','#7C3AED','#22C55E','#F97316','#EF4444'];
+    for(let i=0;i<40;i++){
+      setTimeout(()=>{
+        const piece = document.createElement('div');
+        piece.className='confetti-piece';
+        piece.style.left=Math.random()*100+'vw';
+        piece.style.background=colors[Math.floor(Math.random()*colors.length)];
+        piece.style.width=(Math.random()*8+4)+'px';
+        piece.style.height=(Math.random()*8+4)+'px';
+        piece.style.borderRadius=Math.random()>0.5?'50%':'2px';
+        piece.style.animationDuration=(Math.random()*2+2)+'s';
+        piece.style.animationDelay='0s';
+        document.body.appendChild(piece);
+        setTimeout(()=>piece.remove(),3000);
+      },i*50);
+    }
+  }
+
+  window.restartQuiz = function(){
+    answers = {};
+    currentQ = 0;
+    resultsDiv.classList.remove('show');
+    resultsDiv.innerHTML='';
+    resultsDiv.style.display='none';
+    quizArea.style.display='block';
+    progressWrap.style.display='none';
+    progressLabel.style.display='none';
+    renderQuestion(0);
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+
+  // Init
+  renderQuestion(0);
+})();
+</script>
+</body>
+</html>
