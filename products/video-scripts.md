@@ -6,6 +6,33 @@
 
 ---
 
+## 🚀 CLICKBAIT-TITEL (YouTube / TikTok / Shorts / Thumbnails)
+
+```
+ 1. "90% der KI-Tipps sind Müll – ich beweise es"
+ 2. "Der perfekte Prompt in 3 Sätzen – niemand zeigt ihn dir"
+ 3. "Warum dein Kollege dich mit KI ersetzt – und du schläfst"
+ 4. "5 KI-Tools, die mein Leben mehr verändert haben als 10 Jahre Schule"
+ 5. "1 Stunde Arbeit vs. 1 Woche – ich zeig dir den Betrug"
+ 6. "Die dunkle Seite der KI – was dir keiner sagt (und warum)"
+ 7. "KI in 10 Minuten verstehen – ohne Fachchinesisch"
+ 8. "Dein persönlicher Assistent: 24/7, kein Gehalt, unter 20€/Monat"
+ 9. "5 KI-Fehler, die 90% machen – du auch"
+10. "In 7 Tagen von 0 auf 1.000€ mit KI – der Plan"
+11. "Dein zweites Gehirn: Wie du NIE WIEDER etwas vergisst"
+12. "ChatGPT vs. Claude vs. Grok – ein Jahr Test, ein Gewinner"
+13. "3 Wege, mit KI Geld zu verdienen – ohne Startkapital"
+14. "Diese Jobs sterben 2027 – bist du dabei?"
+15. "KI-Bilder wie ein Profi – ohne Talent, ohne Geld"
+16. "10x schneller lernen mit KI – die Methode, die Schulen dir verschweigen"
+17. "DSGVO-Albtraum: Wie dich ein einziger KI-Prompt 100.000€ kosten kann"
+18. "KI tötet Kreativität? Falsch. Ich beweise dir das Gegenteil"
+19. "3 KI-Tricks, die Unternehmern 20 Stunden pro Woche sparen"
+20. "7 Tage vom Anfänger zum KI-Profi – der härteste Plan, der funktioniert"
+```
+
+---
+
 ## Video 1: Die 3 größten Lügen über KI
 
 **Hook (0:00-0:15):**
