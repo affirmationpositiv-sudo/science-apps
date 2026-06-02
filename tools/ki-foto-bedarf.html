@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Foto-Bedarfsrechner 2026 – Finde deine perfekte Kamera & Foto-Ausrüstung | Licht und Schatten</title>
+<meta name="description" content="Finde mit 5 Fragen deine perfekte KI-Foto-Ausrüstung 2026. Personalisierte Empfehlungen für Kameras, Objektive, KI-Bearbeitung & Zubehör – mit Amazon-Affiliate-Links.">
+<meta name="keywords" content="Kamera Beratung, Foto Bedarfsrechner, KI Kamera Finder, Sony Alpha Empfehlung, Canon EOS Beratung, Smartphone Fotografie Test, DJI Drohne Finder, ikune21-21">
+<meta name="author" content="Licht und Schatten Verlag">
+<meta name="robots" content="index, follow">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+a{color:#A78BFA;text-decoration:none}
+a:hover{color:#FFD700}
+.container{max-width:800px;margin:0 auto;padding:30px 20px}
+h1{font-size:2.2em;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:6px}
+.subtitle{text-align:center;color:#888;margin-bottom:30px;font-size:1.05em}
+
+/* Progress Bar */
+.progress{background:#1A1A1A;border-radius:10px;height:8px;margin-bottom:30px;overflow:hidden}
+.progress-bar{height:100%;background:linear-gradient(90deg,#8B5CF6,#FFD700);border-radius:10px;transition:width 0.5s ease;width:0%}
+.progress-text{text-align:center;color:#888;font-size:0.85rem;margin-bottom:6px}
+
+/* Steps */
+.step{display:none;animation:fadeIn 0.4s ease}
+.step.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Question Card */
+.question-card{background:#141414;border:1px solid #2A2A2A;border-radius:16px;padding:32px;margin-bottom:20px}
+.question-card h2{font-size:1.4em;font-weight:700;color:#fff;margin-bottom:20px}
+.question-card h2 .num{color:#8B5CF6;margin-right:8px}
+.options{display:grid;gap:12px}
+.option{background:#1A1A1A;border:2px solid #2A2A2A;border-radius:12px;padding:16px 20px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:14px}
+.option:hover{border-color:#8B5CF6;background:#202020;transform:translateX(4px)}
+.option.selected{border-color:#8B5CF6;background:rgba(139,92,246,0.12);box-shadow:0 0 20px rgba(139,92,246,0.1)}
+.option .icon{font-size:1.8em;min-width:40px;text-align:center}
+.option .label{font-weight:600;color:#fff;font-size:1em}
+.option .desc{color:#888;font-size:0.85rem;margin-top:2px}
+
+/* Navigation Buttons */
+.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;gap:12px}
+.btn{background:#2A2A2A;border:none;color:#fff;padding:12px 28px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s}
+.btn:hover{background:#3A3A3A;transform:translateY(-2px)}
+.btn-primary{background:#8B5CF6}
+.btn-primary:hover{background:#6D3FD6}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+
+/* Result Card */
+.result-card{background:#141414;border:1px solid #8B5CF6;border-radius:16px;padding:32px;margin-bottom:20px}
+.result-card h2{font-size:1.6em;color:#FFD700;margin-bottom:12px;text-align:center}
+.result-card .profile{text-align:center;font-size:3em;margin-bottom:8px}
+.result-card .summary{color:#9CA3AF;text-align:center;margin-bottom:24px;font-size:1.05em}
+.product-section{margin:24px 0}
+.product-section h3{color:#A78BFA;font-size:1.15em;margin-bottom:12px;border-bottom:1px solid #2A2A2A;padding-bottom:8px}
+.product-grid{display:grid;gap:12px}
+.product-item{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;transition:all 0.3s}
+.product-item:hover{border-color:#8B5CF6}
+.product-item .info{flex:1}
+.product-item .name{color:#fff;font-weight:600;font-size:0.95em}
+.product-item .price{color:#FFD700;font-size:0.85rem}
+.product-item .link{background:#8B5CF6;color:#fff;padding:6px 14px;border-radius:8px;font-size:0.8rem;font-weight:600;transition:background 0.3s;white-space:nowrap;margin-left:10px}
+.product-item .link:hover{background:#6D3FD6}
+.budget-section{background:#0A0A0A;border:1px solid #FFD700;border-radius:12px;padding:20px;margin:20px 0}
+.budget-section h3{color:#FFD700;font-size:1.1em;margin-bottom:10px}
+.budget-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1A1A1A;color:#9CA3AF;font-size:0.9rem}
+.budget-item:last-child{border-bottom:none}
+.budget-item .total{color:#FFD700;font-weight:700}
+.plan-box{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;padding:16px;margin:8px 0}
+.plan-box h4{color:#FFD700;font-size:0.95em;margin-bottom:4px}
+.plan-box p{color:#9CA3AF;font-size:0.85rem;margin:0}
+.action-cta{display:block;background:linear-gradient(135deg,#8B5CF6,#6D3FD6);color:#fff;text-align:center;padding:16px 24px;border-radius:12px;font-weight:700;font-size:1.1rem;margin:24px 0;transition:all 0.3s}
+.action-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(139,92,246,0.3);color:#fff}
+.reset-btn{display:block;background:#2A2A2A;border:none;color:#fff;padding:12px 24px;border-radius:10px;font-size:0.95rem;font-weight:600;cursor:pointer;margin:16px auto 0;transition:all 0.3s}
+.reset-btn:hover{background:#3A3A3A}
+.error{text-align:center;color:#f87171;padding:20px}
+.note{font-size:0.8rem;color:#6B7280;text-align:center;margin-top:20px}
+.tag{display:inline-block;background:rgba(139,92,246,0.12);color:#A78BFA;padding:2px 8px;border-radius:6px;font-size:0.7rem;text-transform:uppercase;margin:2px}
+@media(max-width:600px){h1{font-size:1.6em}.question-card{padding:20px}.product-item{flex-direction:column;align-items:flex-start;gap:8px}.product-item .link{align-self:stretch;text-align:center}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>📸 KI-Foto-Bedarfsrechner</h1>
+<p class="subtitle">Beantworte 5 Fragen – erhalte personalisierte Produktempfehlungen für Kameras, Objektive, KI-Bearbeitung & Zubehör</p>
+
+<div class="progress-text"><span id="stepLabel">Frage 1 von 5</span></div>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- Step container -->
+<div id="quizContainer"></div>
+
+<!-- Result container -->
+<div id="resultContainer" style="display:none;"></div>
+
+</div>
+
+<script>
+// ===== DATA =====
+const products = {
+  kameras: {
+    einsteiger: [
+      {name:"Canon EOS R50 + Kit-Objektiv",price:"ca. 750 €",rating:"4.4/5",url:"https://www.amazon.de/s?k=Canon+EOS+R50&tag=ikune21-21"},
+      {name:"Sony ZV-E10 II + Kit",price:"ca. 900 €",rating:"4.3/5",url:"https://www.amazon.de/s?k=Sony+ZV-E10+II&tag=ikune21-21"}
+    ],
+    fortgeschritten: [
+      {name:"Fujifilm X-T6",price:"ca. 1.800 €",rating:"4.6/5",url:"https://www.amazon.de/s?k=Fujifilm+X-T6&tag=ikune21-21"},
+      {name:"Sony Alpha 7 V",price:"ca. 3.500 €",rating:"4.8/5",url:"https://www.amazon.de/s?k=Sony+Alpha+7+V&tag=ikune21-21"}
+    ],
+    profi: [
+      {name:"Sony Alpha 1 II",price:"ca. 6.800 €",rating:"4.9/5",url:"https://www.amazon.de/s?k=Sony+Alpha+1+II&tag=ikune21-21"},
+      {name:"Canon EOS R5 Mark II",price:"ca. 4.800 €",rating:"4.8/5",url:"https://www.amazon.de/s?k=Canon+EOS+R5+Mark+II&tag=ikune21-21"}
+    ]
+  },
+  smartphone: {
+    beste: [
+      {name:"iPhone 17 Pro Max",price:"ca. 1.450 €",rating:"4.9/5",url:"https://www.amazon.de/s?k=iPhone+17+Pro+Max&tag=ikune21-21"},
+      {name:"Samsung Galaxy S26 Ultra",price:"ca. 1.350 €",rating:"4.8/5",url:"https://www.amazon.de/s?k=Samsung+Galaxy+S26+Ultra&tag=ikune21-21"},
+      {name:"Google Pixel 11 Pro",price:"ca. 1.100 €",rating:"4.7/5",url:"https://www.amazon.de/s?k=Google+Pixel+11+Pro&tag=ikune21-21"}
+    ],
+    mittel: [
+      {name:"Xiaomi 16 Pro",price:"ca. 850 €",rating:"4.5/5",url:"https://www.amazon.de/s?k=Xiaomi+16+Pro&tag=ikune21-21"},
+      {name:"Google Pixel 11 Pro",price:"ca. 1.100 €",rating:"4.7/5",url:"https://www.amazon.de/s?k=Google+Pixel+11+Pro&tag=ikune21-21"}
+    ]
+  },
+  objektive: {
+    einsteiger: [
+      {name:"Sony FE 50mm f/1.8",price:"ca. 250 €",rating:"4.3/5",url:"https://www.amazon.de/s?k=Sony+50mm+f1.8+FE&tag=ikune21-21"}
+    ],
+    premium: [
+      {name:"Sony FE 24-70mm f/2.8 GM II",price:"ca. 2.200 €",rating:"4.9/5",url:"https://www.amazon.de/s?k=Sony+24-70+GM+II&tag=ikune21-21"},
+      {name:"Sigma 24-70mm f/2.8 DG DN Art II",price:"ca. 1.200 €",rating:"4.6/5",url:"https://www.amazon.de/s?k=Sigma+24-70+Art+II&tag=ikune21-21"}
+    ],
+    tele: [
+      {name:"Canon RF 70-200mm f/2.8L IS USM Z",price:"ca. 2.800 €",rating:"4.8/5",url:"https://www.amazon.de/s?k=Canon+RF+70-200+f2.8&tag=ikune21-21"}
+    ]
+  },
+  bearbeitung: {
+    kostenlos: [
+      {name:"GIMP + KI-Plugins (kostenlos)",price:"Kostenlos",rating:"4.0/5",url:"https://www.amazon.de/s?k=GIMP+Fotobearbeitung+Buch&tag=ikune21-21"},
+      {name:"Lightroom Mobile (kostenlos)",price:"Kostenlos",rating:"4.3/5",url:"https://www.amazon.de/s?k=Adobe+Lightroom+Abonnement&tag=ikune21-21"}
+    ],
+    premium: [
+      {name:"Topaz Photo AI 3.0",price:"199 € einmalig",rating:"4.7/5",url:"https://www.amazon.de/s?k=Topaz+Photo+AI&tag=ikune21-21"},
+      {name:"Skylum Luminar Neo 2026",price:"99 € einmalig",rating:"4.5/5",url:"https://www.amazon.de/s?k=Luminar+Neo+KI&tag=ikune21-21"}
+    ],
+    abo: [
+      {name:"Adobe Lightroom + Firefly",price:"12 €/Monat",rating:"4.8/5",url:"https://www.amazon.de/s?k=Adobe+Lightroom+Abonnement&tag=ikune21-21"},
+      {name:"ON1 Photo RAW 2026",price:"80 € einmalig",rating:"4.4/5",url:"https://www.amazon.de/s?k=ON1+Photo+RAW+2026&tag=ikune21-21"}
+    ]
+  },
+  drohnen: {
+    einsteiger: [
+      {name:"DJI Neo",price:"ca. 200 €",rating:"4.3/5",url:"https://www.amazon.de/s?k=DJI+Neo&tag=ikune21-21"}
+    ],
+    mittel: [
+      {name:"DJI Mini 5 Pro",price:"ca. 800 €",rating:"4.7/5",url:"https://www.amazon.de/s?k=DJI+Mini+5+Pro&tag=ikune21-21"}
+    ],
+    profi: [
+      {name:"DJI Mavic 4 Pro",price:"ca. 2.200 €",rating:"4.9/5",url:"https://www.amazon.de/s?k=DJI+Mavic+4+Pro&tag=ikune21-21"}
+    ]
+  },
+  zubehoer: {
+    premium: [
+      {name:"Peak Design Travel Tripod Carbon",price:"ca. 400 €",rating:"4.8/5",url:"https://www.amazon.de/s?k=Peak+Design+Travel+Tripod&tag=ikune21-21"},
+      {name:"Godox AD200 Pro II Blitz",price:"ca. 350 €",rating:"4.6/5",url:"https://www.amazon.de/s?k=Godox+AD200+Pro+II&tag=ikune21-21"}
+    ],
+    mittel: [
+      {name:"Sony CFexpress Type A TOUGH 160GB",price:"ca. 200 €",rating:"4.7/5",url:"https://www.amazon.de/s?k=Sony+CFexpress+Type+A+TOUGH&tag=ikune21-21"},
+      {name:"K&F Concept Filter Set",price:"ca. 60 €",rating:"4.3/5",url:"https://www.amazon.de/s?k=K%26F+Concept+Nano+X+Filter&tag=ikune21-21"}
+    ],
+    einsteiger: [
+      {name:"NIID Radiant Sling Kameratasche",price:"ca. 80 €",rating:"4.4/5",url:"https://www.amazon.de/s?k=NIID+Radiant+Kameratasche&tag=ikune21-21"},
+      {name:"K&F Concept Filter Set",price:"ca. 60 €",rating:"4.3/5",url:"https://www.amazon.de/s?k=K%26F+Concept+Nano+X+Filter&tag=ikune21-21"}
+    ]
+  },
+  kiGeneratoren: [
+    {name:"Midjourney V7",price:"10-60 €/Monat",rating:"4.9/5",url:"https://www.amazon.de/s?k=Midjourney+KI+Guide+Buch&tag=ikune21-21"},
+    {name:"Adobe Firefly 3.0",price:"22 €/Monat",rating:"4.7/5",url:"https://www.amazon.de/s?k=Adobe+Firefly+KI&tag=ikune21-21"},
+    {name:"Canva Magic Media",price:"11 €/Monat",rating:"4.3/5",url:"https://www.amazon.de/s?k=Canva+Pro+KI+Design&tag=ikune21-21"}
+  ]
+};
+
+// ===== QUESTIONS =====
+const questions = [
+  {
+    id:"q1",
+    question:"Was ist dein Fotografie-Niveau?",
+    icon:"🎯",
+    options:[
+      {value:"anfaenger",icon:"🌱",label:"Absolute*r Anfänger*in",desc:"Erste Schritte, noch keine eigene Kamera"},
+      {value:"fortgeschritten",icon:"📷",label:"Fortgeschritten",desc:"Grundkenntnisse vorhanden, möchte aufrüsten"},
+      {value:"profi",icon:"🏆",label:"Profi / Semi-Profi",desc:"Professionelle Ansprüche, hochwertiges Equipment nötig"}
+    ]
+  },
+  {
+    id:"q2",
+    question:"Was möchtest du hauptsächlich fotografieren?",
+    icon:"🎨",
+    options:[
+      {value:"portrait",icon:"👤",label:"Porträts & Menschen",desc:"Familie, Freunde, Events, Hochzeiten"},
+      {value:"landschaft",icon:"🏔️",label:"Landschaft & Reisen",desc:"Natur, Städte, Urlaubsfotos"},
+      {value:"sport",icon:"⚽",label:"Sport & Tiere",desc:"Schnelle Motive, Wildlife, Action"},
+      {value:"produkt",icon:"📦",label:"Produkte & Content",desc:"Social Media, Amazon, Online-Shop"},
+      {value":"alltag",icon:"📱",label:"Alltag & Smartphone",desc:"Dokumentation, Familie, tägliche Momente"}
+    ]
+  },
+  {
+    id:"q3",
+    question:"Wie hoch ist dein Budget für Kamera + 1 Objektiv?",
+    icon:"💰",
+    options:[
+      {value:"0-500",icon:"🪙",label:"0–500 €",desc:"Smartphone-only oder absolute Einsteiger-Kamera"},
+      {value:"500-1500",icon:"💰",label:"500–1.500 €",desc:"Gute Einsteiger-Systemkamera + Objektiv"},
+      {value:"1500-4000",icon:"💎",label:"1.500–4.000 €",desc:"Semiprofi-Setup mit hochwertigen Komponenten"},
+      {value:"4000+",icon:"👑",label:"4.000 €+",desc:"Profi-Vollausstattung, keine Kompromisse"}
+    ]
+  },
+  {
+    id:"q4",
+    question:"Welche KI-Features interessieren dich am meisten?",
+    icon:"🤖",
+    options:[
+      {value:"bearbeitung",icon:"🎨",label:"KI-Fotobearbeitung",desc:"Bilder optimieren, Rauschen entfernen, Himmel tauschen"},
+      {value:"generierung",icon:"✨",label:"KI-Bildgenerierung",desc:"Aus Text Bilder erstellen (Midjourney, Firefly)"},
+      {value:"aufnahme",icon:"📸",label:"KI-Kamera-Features",desc:"Autofokus, Motiverkennung, Szenenoptimierung"},
+      {value:"alles",icon:"🚀",label:"Alles davon!",desc:"Ich will die volle KI-Power"}
+    ]
+  },
+  {
+    id:"q5",
+    question:"Planst du auch Drohnen-Aufnahmen oder Videografie?",
+    icon:"🛸",
+    options:[
+      {value:"drohne",icon:"🚁",label:"Ja, Drohne für Luftaufnahmen",desc:"Landschaften, Immobilien, Events von oben"},
+      {value:"video",icon:"🎬",label:"Ja, Video + Gimbal",desc:"Vlogs, Reisevideos, Kinofilme"},
+      {value:"beides",icon:"🎥",label:"Drohne + Video",desc:"Komplettes Luft- & Video-Setup"},
+      {value:"nein",icon:"📷",label:"Nur Fotos",desc:"Konzentration auf Standfotografie"}
+    ]
+  }
+];
+
+// ===== PROFILES =====
+function generateProfile(answers) {
+  const level = answers.q1 || "anfaenger";
+  const subject = answers.q2 || "alltag";
+  const budget = answers.q3 || "0-500";
+  const ai = answers.q4 || "bearbeitung";
+  const drone = answers.q5 || "nein";
+
+  let profileEmoji, profileTitle, profileDesc;
+  let cam, phone, lens, edit, droneGear, accs, kiGen = [];
+  let budgetTotal = 0;
+  let plan = [];
+
+  if (level === "anfaenger" && budget === "0-500") {
+    profileEmoji = "📱";
+    profileTitle = "Smartphone-Fotograf*in";
+    profileDesc = "Perfekter Start ohne Extra-Investition! Dein Smartphone + kostenlose KI-Apps reichen für tolle Ergebnisse.";
+    phone = products.smartphone.beste.slice(0,1);
+    if (phone[0]) phone[0].price = "Bereits vorhanden ✓";
+    edit = ai === "generierung" ? products.kiGeneratoren.slice(2,3) : products.bearbeitung.kostenlos;
+    accs = products.zubehoer.einsteiger.slice(0,1);
+    if (ai === "generierung") kiGen = products.kiGeneratoren.slice(0,2);
+    budgetTotal = 0;
+    plan = [
+      {day:1,title:"Foto-Smartphone kennenlernen",desc:"Probiere alle KI-Kameramodi deines Handys aus"},
+      {day:2,title:"Lightroom Mobile",desc:"Lade die kostenlose App und teste KI-Automatik"},
+      {day:3,title:"50 Fotos Challenge",desc:"Fotografiere 50 Bilder mit verschiedenen Motiven"},
+      {day:4,title:"KI-Bearbeitung lernen",desc:"Verbessere deine 10 besten Fotos mit KI-Tools"},
+      {day:5,title:"Komposition üben",desc:"Lerne Drittel-Regel, Linien & Licht"},
+      {day:6,title:"Social-Media-Posting",desc:"Teile deine 3 besten Fotos auf Instagram"},
+      {day:7,"title":"Nächste Schritte planen",desc:"Überlege, ob eine Kamera wirklich nötig ist"}
+    ];
+  } else if (level === "anfaenger" || budget === "500-1500") {
+    profileEmoji = "📸";
+    profileTitle = "Einsteiger-Fotograf*in";
+    profileDesc = "Perfektes Einstiegs-Setup mit moderner KI-Technik. Kamera + Objektiv + Bearbeitung für unter 1.500 €.";
+    cam = products.kameras.einsteiger;
+    lens = products.objektive.einsteiger;
+    edit = ai === "generierung" ? products.kiGeneratoren.concat(products.bearbeitung.kostenlos).slice(0,2) : products.bearbeitung.kostenlos;
+    accs = products.zubehoer.einsteiger;
+    budgetTotal = subject === "sport" ? 1500 : 1000;
+    plan = [
+      {day:1,title:"Kamera auspacken & einrichten",desc:"Akku laden, Speicherkarte einsetzen, Grundlagen lernen"},
+      {day:2,title:"KI-Modi testen",desc:"Probiere KI-Autofokus, Szenenerkennung & Kreativfilter"},
+      {day:3,title:"Lightroom KI-Bearbeitung",desc:"Importiere Fotos und teste KI-Automatik-Voreinstellungen"},
+      {day:4,title:"Objektiv-Wechsel lernen",desc:"Übe das Wechseln der Optik und verschiedene Brennweiten"},
+      {day:5,title:"Fotospaziergang",desc:"100 Fotos mit verschiedenen Einstellungen machen"},
+      {day:6,title:"KI-Bearbeitung vertiefen",desc:"Lerne Maskierung, Himmel-Austausch & KI-Entrauschen"},
+      {day:7,title:"Portfolio aufbauen",desc:"Wähle deine 10 besten Fotos aus und präsentiere sie"}
+    ];
+  } else if (level === "fortgeschritten" && budget === "1500-4000") {
+    profileEmoji = "🏔️";
+    profileTitle = "Fortgeschrittene*r Fotograf*in";
+    profileDesc = "Hochwertiges Setup für ambitionierte Fotografie mit professionellen KI-Features. Perfekt für deine nächste Stufe.";
+    cam = products.kameras.fortgeschritten;
+    if (subject === "sport" || subject === "portrait") lens = products.objektive.premium.concat(products.objektive.tele);
+    else lens = products.objektive.premium;
+    edit = products.bearbeitung.abo.concat(products.bearbeitung.premium);
+    accs = products.zubehoer.mittel.concat(products.zubehoer.premium);
+    if (drone === "drohne" || drone === "beides") droneGear = products.drohnen.mittel;
+    if (ai === "generierung" || ai === "alles") kiGen = products.kiGeneratoren.slice(0,2);
+    budgetTotal = 3500;
+    plan = [
+      {day:1,title:"Profi-Setup konfigurieren",desc:"Nutze den Foto-Bedarfsrechner für die finale Kaufentscheidung"},
+      {day:2,title:"Kamera-Feathers entdecken",desc:"KI-Augen-AF, Echtzeit-Tracking & Individualprofile einrichten"},
+      {day:3,title:"Lightroom Workflow",desc:"Presets erstellen, KI-Stapelverarbeitung & Farblookups"},
+      {day:4,title:"Zubehör-Tag",desc:"Stativ-Techniken, Filter-Einsatz & Gimbal-Bedienung üben"},
+      {day:5,title:"Profi-Shooting",desc:"Ganzes Shooting mit Model oder Location planen + durchführen"},
+      {day:6,title:"Post-Processing",desc:"Topaz Photo AI für Rauschreduzierung + Hochskalierung"},
+      {day:7,title:"Portfolio-Relaunch",desc:"Neue Fotos auswählen, bearbeiten & online stellen"}
+    ];
+  } else {
+    profileEmoji = "👑";
+    profileTitle = "Profi-Fotograf*in";
+    profileDesc = "Kompromissloses Profi-Setup mit absolutem High-End-Equipment. Nichts als das Beste für deine professionelle Arbeit.";
+    cam = products.kameras.profi;
+    lens = subject === "sport" ? products.objektive.tele.concat(products.objektive.premium) : products.objektive.premium.concat(products.objektive.tele);
+    edit = products.bearbeitung.abo.concat(products.bearbeitung.premium);
+    accs = products.zubehoer.premium;
+    if (drone === "drohne" || drone === "beides") droneGear = products.drohnen.profi;
+    else droneGear = products.drohnen.mittel;
+    if (ai === "generierung" || ai === "alles") kiGen = products.kiGeneratoren;
+    if (drone === "video" || drone === "beides") accs = accs.concat([{name:"DJI RS 4 Pro Gimbal",price:"ca. 900 €",rating:"4.8/5",url:"https://www.amazon.de/s?k=DJI+RS+4+Pro&tag=ikune21-21"}]);
+    budgetTotal = 8000;
+    plan = [
+      {day:1,title:"Profi-Planung",desc:"Shooting-Konzept + benötigtes Equipment listen"},
+      {day:2,title:"Equipment-Check",desc:"Alle Komponenten testen: Kameras, Objektive, Lichter"},
+      {day:3,title:"KI-Workflow optimieren",desc":"Lightroom-Presets, Topaz-Stapelverarbeitung, Backup-Routine"},
+      {day:4,title:"Drohnen-Training",desc:"Luftaufnahmen planen und Flugrouten üben"},
+      {day:5,title:"Großes Shooting",desc":"Kund*innen-Shooting mit gesamtem Equipment"},
+      {day:6,title:"Post-Production",desc":"Bilder sortieren, KI-Bearbeitung, Kunden-Edit"},
+      {day:7,title:"Abrechnung & Portfolio",desc":"Ergebnisse präsentieren, Portfolio aktualisieren, nächste Projekte planen"}
+    ];
+  }
+
+  return {profileEmoji,profileTitle,profileDesc,cam,phone,lens,edit,droneGear,accs,kiGen,budgetTotal,plan};
+}
+
+// ===== RENDER =====
+let currentStep = 0;
+const answers = {};
+
+function renderStep(step) {
+  const q = questions[step];
+  if (!q) { showResult(); return; }
+
+  const container = document.getElementById("quizContainer");
+  document.getElementById("resultContainer").style.display = "none";
+
+  let html = `<div class="step active"><div class="question-card"><h2><span class="num">${q.icon}</span> ${q.question}</h2><div class="options">`;
+  q.options.forEach(o => {
+    const selected = answers[q.id] === o.value ? "selected" : "";
+    html += `<div class="option ${selected}" onclick="selectOption('${q.id}','${o.value}')"><div class="icon">${o.icon}</div><div><div class="label">${o.label}</div><div class="desc">${o.desc}</div></div></div>`;
+  });
+  html += `</div></div><div class="nav-buttons">`;
+  if (step > 0) html += `<button class="btn" onclick="goToStep(${step-1})">← Zurück</button>`;
+  else html += `<button class="btn" disabled>← Zurück</button>`;
+  const hasAnswer = !!answers[q.id];
+  const nextLabel = step < questions.length-1 ? "Weiter →" : "🔍 Auswertung starten";
+  html += `<button class="btn btn-primary" onclick="nextStep()" ${hasAnswer?"":"disabled"}>${nextLabel}</button>`;
+  html += `</div></div>`;
+
+  container.innerHTML = html;
+  container.style.display = "block";
+  document.getElementById("progressBar").style.width = ((step+1)/questions.length*100)+"%";
+  document.getElementById("stepLabel").textContent = `Frage ${step+1} von ${questions.length}`;
+}
+
+function selectOption(qId, value) {
+  answers[qId] = value;
+  const options = document.querySelectorAll(".option");
+  options.forEach(o => o.classList.remove("selected"));
+  event.currentTarget.classList.add("selected");
+  document.querySelector(".btn-primary").disabled = false;
+}
+
+function nextStep() {
+  const q = questions[currentStep];
+  if (!answers[q.id]) return;
+  currentStep++;
+  if (currentStep >= questions.length) showResult();
+  else renderStep(currentStep);
+}
+
+function goToStep(step) {
+  currentStep = step;
+  renderStep(step);
+}
+
+function showResult() {
+  document.getElementById("quizContainer").style.display = "none";
+  document.getElementById("resultContainer").style.display = "block";
+  document.getElementById("progressBar").style.width = "100%";
+  document.getElementById("stepLabel").textContent = "✅ Auswertung abgeschlossen";
+
+  const profile = generateProfile(answers);
+  let html = `<div class="result-card"><div class="profile">${profile.profileEmoji}</div><h2>${profile.profileTitle}</h2><p class="summary">${profile.profileDesc}</p>`;
+
+  // Kameras
+  if (profile.cam && profile.cam.length) {
+    html += `<div class="product-section"><h3>📷 Empfohlene Kameras</h3><div class="product-grid">`;
+    profile.cam.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Smartphone
+  if (profile.phone && profile.phone.length) {
+    html += `<div class="product-section"><h3>📱 Empfohlene Smartphones</h3><div class="product-grid">`;
+    profile.phone.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Objektive
+  if (profile.lens && profile.lens.length) {
+    html += `<div class="product-section"><h3>🔭 Empfohlene Objektive</h3><div class="product-grid">`;
+    profile.lens.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // KI-Bearbeitung
+  if (profile.edit && profile.edit.length) {
+    html += `<div class="product-section"><h3>🎨 KI-Fotobearbeitung</h3><div class="product-grid">`;
+    profile.edit.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // KI-Generatoren
+  if (profile.kiGen && profile.kiGen.length) {
+    html += `<div class="product-section"><h3>✨ KI-Bildgeneratoren (Text zu Bild)</h3><div class="product-grid">`;
+    profile.kiGen.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Drohnen
+  if (profile.droneGear && profile.droneGear.length) {
+    html += `<div class="product-section"><h3>🚁 KI-Drohnen</h3><div class="product-grid">`;
+    profile.droneGear.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Zubehör
+  if (profile.accs && profile.accs.length) {
+    html += `<div class="product-section"><h3>🔧 Empfohlenes Zubehör</h3><div class="product-grid">`;
+    profile.accs.forEach(p => {
+      html += `<div class="product-item"><div class="info"><div class="name">${p.name}</div><div class="price">${p.price} · ${p.rating}</div></div><a href="${p.url}" target="_blank" class="link">🔗 Preise</a></div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  // Budget-Bereich
+  if (profile.budgetTotal) {
+    html += `<div class="budget-section"><h3>💰 Geschätzte Gesamtinvestition</h3>`;
+    html += `<p style="color:#9CA3AF;font-size:0.9rem;margin-bottom:10px;">Richtwert für Kamera + 1 Objektiv + Basis-Zubehör + Software:</p>`;
+    html += `<div class="budget-item"><span>Start-Investment</span><span class="total">ca. ${profile.budgetTotal.toLocaleString('de-DE')} €</span></div>`;
+    html += `<div class="budget-item"><span>Erweiterung (Drohne, zusätzliche Objektive)</span><span class="total">+500–3.000 €</span></div>`;
+    html += `<div class="budget-item" style="border-bottom:2px solid #FFD700"><span>Potenzielle Gesamtkosten</span><span class="total">${(profile.budgetTotal+2500).toLocaleString('de-DE')} €</span></div>`;
+    html += `<p style="color:#6B7280;font-size:0.8rem;margin-top:10px;">Tipp: Starte mit Kamera + Objektiv und erweitere nach und nach.</p></div>`;
+  }
+
+  // 7-Day Plan
+  if (profile.plan && profile.plan.length) {
+    html += `<div class="budget-section" style="border-color:#8B5CF6;"><h3>📅 7-Tage-Aktionsplan</h3>`;
+    profile.plan.forEach(p => {
+      html += `<div class="plan-box"><h4>Tag ${p.day}: ${p.title}</h4><p>${p.desc}</p></div>`;
+    });
+    html += `</div>`;
+  }
+
+  // CTA
+  html += `<a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" class="action-cta">🛒 Alle Produkte bei Amazon entdecken (tag=ikune21-21)</a>`;
+  html += `<a href="../blog/ki-fotografie-kamera-zubehoer-2026.html" style="display:block;text-align:center;color:#A78BFA;margin:12px 0;">📖 Zum ausführlichen Ratgeber-Artikel</a>`;
+  html += `<button class="reset-btn" onclick="resetQuiz()">🔄 Neustarten</button>`;
+
+  document.getElementById("resultContainer").innerHTML = html;
+  // Scroll to top
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function resetQuiz() {
+  currentStep = 0;
+  for (let key in answers) delete answers[key];
+  document.getElementById("resultContainer").style.display = "none";
+  document.getElementById("quizContainer").style.display = "block";
+  renderStep(0);
+}
+
+// ===== START =====
+renderStep(0);
+</script>
+<footer style="text-align:center;padding:40px 0;color:#555;font-size:.8rem;border-top:1px solid #1A1A1A;">
+  <a href="../index.html" style="color:#8B5CF6;">← Zurück zum Portal</a> · 
+  <a href="../blog/ki-fotografie-kamera-zubehoer-2026.html" style="color:#8B5CF6;">📖 Ratgeber lesen</a> · 
+  <a href="../blog/" style="color:#8B5CF6;">📝 Blog</a><br>
+  © 2026 Licht und Schatten Verlag · Amazon-Partner (tag=ikune21-21)
+</footer>
+</div>
+</body>
+</html>
