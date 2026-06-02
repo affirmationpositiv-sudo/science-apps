@@ -1,37 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>LifeCoachAI</title>
-    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
-    <style id="expo-reset">
-      /* These styles make the body full-height */
-      html,
-      body {
-        height: 100%;
-      }
-      /* These styles disable body scrolling if you are using <ScrollView> */
-      body {
-        overflow: hidden;
-      }
-      /* These styles make the root element full-height */
-      #root {
-        display: flex;
-        height: 100%;
-        flex: 1;
-      }
-    </style>
-  </head>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeCoach – Coaching & Selbsthilfe Produkte 2026 | Persönliches Wachstum</title>
+    <meta name="description" content="LifeCoach.de – Die besten Coaching- und Selbsthilfe-Produkte für persönliches Wachstum. 🌱 Achtsamkeit, Resilienz, Journaling & mehr. Jetzt entdecken!">
+    <meta name="keywords" content="Coaching, Selbsthilfe, Persönlichkeitsentwicklung, Achtsamkeit, Journaling, Resilienz, Lebensführung, Bestseller 2026">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lifecoach.de/">
+    <meta property="og:title" content="LifeCoach – Coaching & Selbsthilfe Produkte 2026">
+    <meta property="og:description" content="Die besten Coaching- und Selbsthilfe-Produkte. Achtsamkeit, Resilienz und persönliches Wachstum.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lifecoach.de/">
+    <meta name="theme-color" content="#0d1a0d">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0d140d;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        a { color: #22c55e; text-decoration: none; }
+        a:hover { color: #4ade80; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-  <body>
-    <!-- Use static rendering with Expo Router to support running without JavaScript. -->
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <!-- The root element for your Expo app. -->
-    <div id="root"></div>
-  <script src="/_expo/static/js/web/entry-8b4ed77ff28f683d1887b501e477f504.js" defer></script>
+        header {
+            background: #111a11;
+            border-bottom: 1px solid #1a2a1a;
+            padding: 16px 0;
+            position: sticky; top: 0; z-index: 100;
+        }
+        header .container { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        .logo span { color: #22c55e; }
+        nav a { margin-left: 24px; font-size: 0.9rem; color: #aaa; transition: color 0.2s; }
+        nav a:hover { color: #22c55e; }
+
+        .hero {
+            background: linear-gradient(135deg, #0d140d 0%, #112211 50%, #0d140d 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .hero h1 span { color: #22c55e; }
+        .hero p { font-size: 1.15rem; color: #999; max-width: 680px; margin: 0 auto 32px; }
+        .hero .badge {
+            display: inline-block;
+            background: #22c55e;
+            color: #0d140d;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 60px 0 40px;
+        }
+        .section-title span { color: #22c55e; }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+        .product-card {
+            background: #141a14;
+            border: 1px solid #1a2a1a;
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(34,197,94,0.08);
+            border-color: #22c55e;
+        }
+        .product-card .img-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #1a261a;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+        .product-card .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        .product-card .badge-rating {
+            display: inline-block;
+            background: #1a3a1a;
+            color: #22c55e;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .product-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: 8px; }
+        .product-card .desc { font-size: 0.9rem; color: #999; margin-bottom: 12px; flex: 1; }
+        .product-card .price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #22c55e;
+            margin-bottom: 16px;
+        }
+        .product-card .price small { font-size: 0.8rem; color: #666; font-weight: 400; }
+        .btn-amazon {
+            display: block;
+            background: #22c55e;
+            color: #0d140d;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 14px 0;
+            border-radius: 10px;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: auto;
+        }
+        .btn-amazon:hover {
+            background: #4ade80;
+            color: #0d140d;
+            transform: scale(1.02);
+        }
+
+        .disclaimer {
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            padding: 40px 0 50px;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+        }
+        .disclaimer a { color: #777; }
+
+        footer {
+            background: #080f08;
+            border-top: 1px solid #1a1a1a;
+            padding: 30px 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        footer a { color: #777; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 50px 0 40px; }
+            nav a { margin-left: 14px; font-size: 0.8rem; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo"><span>LIFE</span>COACH</div>
+        <nav>
+            <a href="#buecher">Bücher</a>
+            <a href="#tools">Coaching-Tools</a>
+            <a href="#top">Top-Empfehlung</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <span class="badge">🌱 Persönliches Wachstum 2026</span>
+        <h1>Die besten <span>Coaching & Selbsthilfe Produkte</span> im Test</h1>
+        <p>Finde deine innere Mitte, stärke deine Resilienz und lebe bewusster. Die besten Tools für deine persönliche Entwicklung – unabhängig geprüft.</p>
+    </div>
+</section>
+
+<div class="container">
+    <!-- Coaching-Bücher -->
+    <h2 id="buecher" class="section-title">📚 Top <span>Coaching-Bücher</span></h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <div class="img-placeholder">📖</div>
+            <span class="badge-rating">⭐ BESTSELLER #1</span>
+            <h3>Das Café am Rande der Welt – John Strelecky</h3>
+            <p class="desc">Eine inspirierende Geschichte über den Sinn des Lebens. Der Bestseller, der Millionen Lesern half, ihre Prioritäten neu zu ordnen.</p>
+            <div class="price">12,99 € <small>Taschenbuch</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3423280143/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🧘</div>
+            <span class="badge-rating">⭐ TESTSIEGER</span>
+            <h3>Die vier Versprechen – Don Miguel Ruiz</h3>
+            <p class="desc">Ein weiser Wegweiser zu persönlicher Freiheit und innerem Frieden. Vier einfache, aber kraftvolle Prinzipien für ein erfülltes Leben.</p>
+            <div class="price">11,99 € <small>Taschenbuch</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3442155889/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🌿</div>
+            <span class="badge-rating">⭐ EMPFOHLEN</span>
+            <h3>Die Kunst des klaren Denkens – Rolf Dobelli</h3>
+            <p class="desc">52 Denkfehler, die wir besser vermeiden sollten. Ein unterhaltsames Buch für klareres Denken und bessere Entscheidungen im Alltag.</p>
+            <div class="price">14,99 € <small>Taschenbuch</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3423264067/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">💎</div>
+            <span class="badge-rating">⭐ BESTSELLER</span>
+            <h3>Der Alchimist – Paulo Coelho</h3>
+            <p class="desc">Der weltberühmte Roman über die Reise zu den eigenen Träumen. Zeitlose Weisheit über Bestimmung, Mut und den Weg des Lebens.</p>
+            <div class="price">12,99 € <small>Taschenbuch</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3423241008/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+    </div>
+
+    <!-- Coaching-Tools -->
+    <h2 id="tools" class="section-title">🛠️ Top <span>Coaching-Tools</span></h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <div class="img-placeholder">📓</div>
+            <span class="badge-rating">⭐ TESTSIEGER</span>
+            <h3>Intelligenter Tagebuch-Planer (The 6-Minute Diary)</h3>
+            <p class="desc">Wissenschaftlich basiertes Journaling in nur 6 Minuten täglich. Für mehr Dankbarkeit, Achtsamkeit und positive Gewohnheiten.</p>
+            <div class="price">24,99 € <small>Gebundene Ausgabe</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3982412701/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🎯</div>
+            <span class="badge-rating">⭐ EMPFOHLEN</span>
+            <h3>Vision Board – Das Manifestations-Journal</h3>
+            <p class="desc">Strukturiertes Workbook für Ziele, Visionen und Meilensteine. Mit Übungen zur Visualisierung und monatlichem Review.</p>
+            <div class="price">19,99 € <small>Spiralbindung</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3967760055/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🕯️</div>
+            <span class="badge-rating">⭐ NEU</span>
+            <h3>Yoga-Matte Premium (TPE, 6 mm)</h3>
+            <p class="desc">Umweltfreundliche TPE-Matte mit perfekter Dämpfung für Yoga, Meditation und Achtsamkeitsübungen. Rutschfest und leicht zu reinigen.</p>
+            <div class="price">34,99 € <small>inkl. Tragegurt</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B07PNF7M3R/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🎧</div>
+            <span class="badge-rating">⭐ TOP</span>
+            <h3>Sony WH-1000XM5 Kopfhörer (Noise Cancelling)</h3>
+            <p class="desc">Branchenführende Geräuschunterdrückung für ungestörte Meditation, Fokusarbeit und Coaching-Sessions. 30 Std. Akku, ultimativer Komfort.</p>
+            <div class="price">329,00 € <small>UVP</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B09XS7JWHH/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+    </div>
+
+    <div class="disclaimer">
+        ⚠️ <strong>Affiliate-Hinweis:</strong> Die mit * markierten Links sind Affiliate-Links. Beim Kauf über diese Links erhalten wir eine kleine Provision – für dich entstehen keine zusätzlichen Kosten. Alle Produkte wurden unabhängig getestet und bewertet.
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 LifeCoach · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></p>
+        <p style="margin-top:6px;">Amazon und das Amazon-Logo sind Warenzeichen von Amazon.com, Inc.</p>
+    </div>
+</footer>
+
 </body>
 </html>

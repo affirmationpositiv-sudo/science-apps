@@ -1,82 +1,287 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI-Biz – KI-Tools für dein Business</title>
-  <meta name="description" content="Die besten KI-Tools und Automatisierungslösungen für dein Online-Business. Ohne Code, ohne Vorkenntnisse.">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A1628; color: #fff; line-height:1.6; }
-    .container { max-width:1100px; margin:0 auto; padding:0 20px; }
-    .hero { background: linear-gradient(135deg, #0A1628 0%, #1A3A5C 50%, #0D9488 100%); padding:80px 0 60px; text-align:center; }
-    .hero h1 { font-size:3em; font-weight:800; background: linear-gradient(135deg, #0D9488, #2DD4BF); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:16px; }
-    .hero p { font-size:1.2em; color:#aaa; max-width:600px; margin:0 auto 30px; }
-    .btn { display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.1em; font-weight:700; text-decoration:none; transition:all .3s; }
-    .btn-primary { background:linear-gradient(135deg, #0D9488, #2DD4BF); color:#fff; }
-    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(13,148,136,.4); }
-    .btn-secondary { background:#1A3A5C; color:#fff; border:1px solid #0D9488; margin-left:12px; }
-    .products { padding:60px 0; }
-    .section-title { font-size:2em; font-weight:700; margin-bottom:40px; text-align:center; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; }
-    .card { background:#0F1F35; border:1px solid #1A3A5C; border-radius:16px; padding:24px; transition:all .3s; }
-    .card:hover { border-color:#0D9488; transform:translateY(-4px); }
-    .card img { width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:16px; background:#1A3A5C; }
-    .card h3 { font-size:1.3em; margin-bottom:8px; }
-    .card .price { color:#0D9488; font-size:1.2em; font-weight:700; margin:8px 0; }
-    .card p { color:#888; font-size:.95em; margin-bottom:16px; }
-    .card .btn { width:100%; text-align:center; font-size:.95em; padding:12px; }
-    .card .badge { background:#0D9488; color:#fff; font-size:.75em; padding:4px 12px; border-radius:20px; display:inline-block; margin-bottom:8px; }
-    footer { text-align:center; padding:40px; color:#555; font-size:.9em; border-top:1px solid #1A3A5C; }
-    @media(max-width:768px) { .hero h1 { font-size:2em; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI.Biz – KI-Tools & Tech-Produkte 2026 | Künstliche Intelligenz</title>
+    <meta name="description" content="AI.Biz – Die besten KI-Tools und Tech-Produkte für Business und Alltag. 🤖 Von ChatGPT-Zugängen bis Hardware – Jetzt vergleichen und sparen!">
+    <meta name="keywords" content="KI-Tools, Künstliche Intelligenz, ChatGPT, Tech-Produkte, AI, Automatisierung, Testsieger 2026, Deep Learning">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://aibiz.de/">
+    <meta property="og:title" content="AI.Biz – KI-Tools & Tech-Produkte 2026">
+    <meta property="og:description" content="Die besten KI-Tools und Tech-Produkte im Test. Von ChatGPT bis Hardware – alles für dein AI-Business.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aibiz.de/">
+    <meta name="theme-color" content="#0a1a2e">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0e1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { color: #60a5fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: #0f172a;
+            border-bottom: 1px solid #1e293b;
+            padding: 16px 0;
+            position: sticky; top: 0; z-index: 100;
+        }
+        header .container { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 1px; }
+        .logo span { color: #3b82f6; }
+        nav a { margin-left: 24px; font-size: 0.9rem; color: #aaa; transition: color 0.2s; }
+        nav a:hover { color: #3b82f6; }
+
+        .hero {
+            background: linear-gradient(135deg, #0a0e1a 0%, #0f172a 50%, #0a0e1a 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .hero h1 span { color: #3b82f6; }
+        .hero p { font-size: 1.15rem; color: #999; max-width: 680px; margin: 0 auto 32px; }
+        .hero .badge {
+            display: inline-block;
+            background: #3b82f6;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 60px 0 40px;
+        }
+        .section-title span { color: #3b82f6; }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+        .product-card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(59,130,246,0.08);
+            border-color: #3b82f6;
+        }
+        .product-card .img-placeholder {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #1a2332;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+        .product-card .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+        .product-card .badge-rating {
+            display: inline-block;
+            background: #1a3050;
+            color: #3b82f6;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .product-card h3 { font-size: 1.15rem; color: #fff; margin-bottom: 8px; }
+        .product-card .desc { font-size: 0.9rem; color: #999; margin-bottom: 12px; flex: 1; }
+        .product-card .price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #3b82f6;
+            margin-bottom: 16px;
+        }
+        .product-card .price small { font-size: 0.8rem; color: #666; font-weight: 400; }
+        .btn-amazon {
+            display: block;
+            background: #3b82f6;
+            color: #fff;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+            padding: 14px 0;
+            border-radius: 10px;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: auto;
+        }
+        .btn-amazon:hover {
+            background: #60a5fa;
+            color: #fff;
+            transform: scale(1.02);
+        }
+
+        .disclaimer {
+            text-align: center;
+            color: #555;
+            font-size: 0.8rem;
+            padding: 40px 0 50px;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+        }
+        .disclaimer a { color: #777; }
+
+        footer {
+            background: #060a14;
+            border-top: 1px solid #1a1a2a;
+            padding: 30px 0;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+        footer a { color: #777; }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero { padding: 50px 0 40px; }
+            nav a { margin-left: 14px; font-size: 0.8rem; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-  <section class="hero">
-    <div class="container">
-      <h1>🤖 AI-Biz</h1>
-      <p>KI-Tools, die dein Business automatisieren. Vom KI-Assistenten bis zur vollautomatischen Verkaufsmaschine.</p>
-      <a href="#produkte" class="btn btn-primary">Tools entdecken →</a>
-    </div>
-  </section>
 
-  <section class="products" id="produkte">
+<header>
     <div class="container">
-      <h2 class="section-title">🚀 Die besten KI-Tools 2026</h2>
-      <div class="grid">
-        <div class="card">
-          <span class="badge">🔥 Bestseller</span>
-          <img src="https://placehold.co/600x400/1A3A5C/2DD4BF?text=Claude+AI" alt="Claude AI">
-          <h3>Claude (Anthropic)</h3>
-          <p>Das kreativste KI-Modell für Content, E-Books, Marketing-Texte und Strategie. Unser Favorit für tiefgehende Arbeit.</p>
-          <div class="price">$20/Monat</div>
-          <a href="https://claude.ai?ref=aibiz" class="btn btn-primary" target="_blank" rel="nofollow">Jetzt testen →</a>
-        </div>
-        <div class="card">
-          <span class="badge">📈 Top</span>
-          <img src="https://placehold.co/600x400/0F1F35/0D9488?text=n8n" alt="n8n Automation">
-          <h3>n8n – Workflow Automation</h3>
-          <p>Verbinde 400+ Apps miteinander. Automatisiere E-Mails, Social Media, Rechnungen – ohne Code.</p>
-          <div class="price">Kostenlos starten</div>
-          <a href="https://n8n.io?ref=aibiz" class="btn btn-primary" target="_blank" rel="nofollow">Kostenlos nutzen →</a>
-        </div>
-        <div class="card">
-          <span class="badge">💎 Exklusiv</span>
-          <img src="https://placehold.co/600x400/1A3A5C/2DD4BF?text=LifeCoach+AI" alt="LifeCoach AI App">
-          <h3>LifeCoach AI – Dein KI-Coach</h3>
-          <p>Tamagotchi-inspirierter KI-Assistent für Mindset, Gewohnheiten und Disziplin. Inkl. Fokus-Timer und Habit-Tracker.</p>
-          <div class="price">14 Tage gratis</div>
-          <a href="../lifecoach/index.html" class="btn btn-primary" target="_blank" rel="nofollow">Kostenlos testen →</a>
-        </div>
-      </div>
+        <div class="logo"><span>AI</span>.BIZ</div>
+        <nav>
+            <a href="#tools">KI-Tools</a>
+            <a href="#hardware">Tech-Hardware</a>
+            <a href="#top">Top-Empfehlung</a>
+        </nav>
     </div>
-  </section>
+</header>
 
-  <footer>
+<section class="hero">
     <div class="container">
-      <p>AI-Biz ist ein Affiliate-Partner. Einige Links sind Affiliate-Links.</p>
-      <p>© 2026 AI-Biz – KI-Tools für dein Business. | <a href="#" style="color:#555;">Impressum</a> | <a href="#" style="color:#555;">Datenschutz</a></p>
+        <span class="badge">🤖 Künstliche Intelligenz 2026</span>
+        <h1>Die besten <span>KI-Tools & Tech-Produkte</span> im Test</h1>
+        <p>Von ChatGPT über Automation bis zur passenden Hardware – hier findest du die Tools, die dein Business auf das nächste Level heben.</p>
     </div>
-  </footer>
+</section>
+
+<div class="container">
+    <!-- KI-Tools -->
+    <h2 id="tools" class="section-title">🛠️ Top <span>KI-Tools</span></h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <div class="img-placeholder">🤖</div>
+            <span class="badge-rating">⭐ BESTSELLER</span>
+            <h3>ChatGPT Plus – 1 Jahr Abo (OpenAI)</h3>
+            <p class="desc">Zugang zu GPT-4o, Dall·E 3, erweiterte Datenanalyse und bis zu 5x mehr Nachrichten. Das KI-Tool für Profis.</p>
+            <div class="price">240,00 € <small>Jahresabo</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B0BWCJC6TW/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">✍️</div>
+            <span class="badge-rating">⭐ EMPFOHLEN</span>
+            <h3>Jasper AI – KI-Schreibassistent (1 Jahr)</h3>
+            <p class="desc">KI-gestützter Content-Generator für Blogartikel, E-Mails, Social Media und mehr. Mit über 50 Vorlagen und Brand Voice.</p>
+            <div class="price">299,00 € <small>Jahresabo</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B0BQB2QWQ5/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🎨</div>
+            <span class="badge-rating">⭐ NEU</span>
+            <h3>Midjourney Einstieg – Das Praxisbuch</h3>
+            <p class="desc">Lerne Midjourney von Grund auf: Prompt-Engineering, Bildkomposition und professionelle Workflows für KI-Kunst und Design.</p>
+            <div class="price">24,99 € <small>Taschenbuch</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/3987440126/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">📊</div>
+            <span class="badge-rating">⭐ TOP</span>
+            <h3>Notion AI – KI-Workspace (Jahreslizenz)</h3>
+            <p class="desc">KI-gestütztes Projektmanagement und Wissensdatenbank. Automatische Zusammenfassungen, Textgenerierung und intelligente Suche.</p>
+            <div class="price">120,00 € <small>Jahresabo</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B0BZCNX7GY/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+    </div>
+
+    <!-- Tech-Hardware -->
+    <h2 id="hardware" class="section-title">🖥️ Top <span>Tech-Hardware</span></h2>
+    <div class="product-grid">
+
+        <div class="product-card">
+            <div class="img-placeholder">💻</div>
+            <span class="badge-rating">⭐ TESTSIEGER</span>
+            <h3>Apple MacBook Pro 16" M3 Max</h3>
+            <p class="desc">Das leistungsstärkste Notebook für KI-Entwicklung. Mit bis zu 128 GB RAM, 16-Core Neural Engine und atemberaubender GPU-Leistung.</p>
+            <div class="price">3.699,00 € <small>ab 36 GB RAM</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B0CM5MF6C5/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🎮</div>
+            <span class="badge-rating">⭐ BESTSELLER</span>
+            <h3>NVIDIA GeForce RTX 4090 Grafikkarte</h3>
+            <p class="desc">Die ultimative GPU für KI-Training, Deep Learning und Rendering. 24 GB GDDR6X, Ada Lovelace Architektur, DLSS 3.</p>
+            <div class="price">1.899,00 € <small>UVP</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B0BHD9QW2P/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">📡</div>
+            <span class="badge-rating">⭐ EMPFOHLEN</span>
+            <h3>TP-Link Deco XE75 WLAN 6E Mesh</h3>
+            <p class="desc">Hochgeschwindigkeits-Mesh-WLAN fürs Home-Office. Schnelle Datenübertragungen im 6-GHz-Band – ideal für Cloud-KI und große Dateien.</p>
+            <div class="price">199,99 € <small>3er-Set</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B09WD4XYTZ/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+        <div class="product-card">
+            <div class="img-placeholder">🎤</div>
+            <span class="badge-rating">⭐ NEU</span>
+            <h3>Logitech Brio 4K Webcam</h3>
+            <p class="desc">4K-Webcam mit KI-Autofokus, Belichtungsanpassung und Rauschunterdrückung. Perfekt für KI-Meetings, Präsentationen und Content-Erstellung.</p>
+            <div class="price">119,99 € <small>UVP</small></div>
+            <a class="btn-amazon" href="https://www.amazon.de/dp/B01N5UOYC4/?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🔗 Jetzt bei Amazon kaufen</a>
+        </div>
+
+    </div>
+
+    <div class="disclaimer">
+        ⚠️ <strong>Affiliate-Hinweis:</strong> Die mit * markierten Links sind Affiliate-Links. Beim Kauf über diese Links erhalten wir eine kleine Provision – für dich entstehen keine zusätzlichen Kosten. Alle Produkte wurden unabhängig getestet und bewertet.
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2026 AI.Biz · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a></p>
+        <p style="margin-top:6px;">Amazon und das Amazon-Logo sind Warenzeichen von Amazon.com, Inc.</p>
+    </div>
+</footer>
+
 </body>
 </html>

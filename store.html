@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licht und Schatten Shop – Bücher, T-Shirts, Prompts & Spiele</title>
+    <meta name="description" content="Entdecke alle Produkte von Licht und Schatten: 15 KDP-Bücher zu KI, Fitness, Psychologie & Philosophie, 8 einzigartige T-Shirt-Designs, 3 Premium-Prompt-Packs für KI-Kunst und über 10 Spiele. Jetzt bei Amazon kaufen!">
+    <meta name="keywords" content="Licht und Schatten, KDP Bücher, KI Bücher, T-Shirt Designs, Prompt Engineering, Spiele, Amazon Affiliate, ikune21-21">
+    <meta name="author" content="Licht und Schatten">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="de">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Licht und Schatten Shop – Bücher, T-Shirts, Prompts & Spiele">
+    <meta property="og:description" content="Entdecke alle Produkte von Licht und Schatten. KDP-Bücher, T-Shirts, Prompt-Packs und Spiele – alles bei Amazon.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lichtundschatten.github.io/store">
+    <meta property="og:site_name" content="Licht und Schatten Shop">
+    <meta property="og:locale" content="de_DE">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Licht und Schatten Shop">
+    <meta name="twitter:description" content="Bücher, T-Shirts, Prompt-Packs & Spiele – jetzt bei Amazon entdecken.">
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "Licht und Schatten Shop",
+        "author": {
+            "@type": "Person",
+            "name": "Licht und Schatten"
+        },
+        "description": "Online-Shop mit KDP-Büchern, T-Shirt-Designs, Prompt-Packs und Spielen.",
+        "url": "https://lichtundschatten.github.io/store",
+        "sameAs": [
+            "https://www.amazon.de/s?tag=ikune21-21"
+        ]
+    }
+    </script>
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0A0A0A;
+            color: #E5E5E5;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a {
+            color: #A78BFA;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #FFD700;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #8B5CF6, #FFD700);
+            border-radius: 4px;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #A0A0A0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            background: rgba(139, 92, 246, 0.15);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 2rem 80px;
+            text-align: center;
+            background: linear-gradient(180deg, #0A0A0A 0%, #1A0A2E 50%, #0A0A0A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(255, 215, 0, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #C4B5FD, #8B5CF6, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #9CA3AF;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .hero-badge.gold {
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.08);
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #C4B5FD, #8B5CF6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header h2 .highlight {
+            background: linear-gradient(135deg, #8B5CF6, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: #9CA3AF;
+            font-size: 1.05rem;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #8B5CF6, #FFD700);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* ===== PRODUCT GRID ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-grid.wide {
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        }
+
+        /* ===== PRODUCT CARD ===== */
+        .product-card {
+            background: linear-gradient(145deg, #141414, #1A1A1A);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8B5CF6, #FFD700, transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(139, 92, 246, 0.35);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15), 0 0 30px rgba(255, 215, 0, 0.05);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .badge-new { background: rgba(139, 92, 246, 0.85); color: #fff; }
+        .badge-bestseller { background: rgba(255, 215, 0, 0.85); color: #0A0A0A; }
+        .badge-free { background: rgba(34, 197, 94, 0.85); color: #fff; }
+        .badge-popular { background: rgba(239, 68, 68, 0.85); color: #fff; }
+
+        .product-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .product-icon.amber { background: rgba(255, 215, 0, 0.1); }
+        .product-icon.green { background: rgba(34, 197, 94, 0.1); }
+        .product-icon.blue { background: rgba(59, 130, 246, 0.1); }
+        .product-icon.rose { background: rgba(239, 68, 68, 0.1); }
+        .product-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        .product-icon.teal { background: rgba(20, 184, 166, 0.1); }
+        .product-icon.orange { background: rgba(249, 115, 22, 0.1); }
+
+        .product-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #F0F0F0;
+            margin-bottom: 0.4rem;
+            line-height: 1.3;
+        }
+
+        .product-card .product-sub {
+            font-size: 0.78rem;
+            color: #8B5CF6;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-card .product-desc {
+            font-size: 0.88rem;
+            color: #9CA3AF;
+            margin-bottom: 1rem;
+            flex: 1;
+            line-height: 1.5;
+        }
+
+        .product-card .product-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .product-card .price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #FFD700;
+        }
+
+        .product-card .price.free {
+            color: #22C55E;
+        }
+
+        .product-card .price-info {
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+
+        .btn-amazon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #FF9900, #FFB84D);
+            color: #0A0A0A;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-amazon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.35);
+            color: #0A0A0A;
+        }
+
+        .btn-amazon:active {
+            transform: translateY(0);
+        }
+
+        .btn-amazon svg {
+            flex-shrink: 0;
+        }
+
+        /* ===== GAME CARD SPECIAL ===== */
+        .game-card .product-meta {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .game-card .price {
+            font-size: 1.1rem;
+        }
+
+        .btn-affiliate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.65rem 1rem;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            background: rgba(255, 153, 0, 0.15);
+            color: #FFB84D;
+            border: 1px solid rgba(255, 153, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: 0.3rem;
+        }
+
+        .btn-affiliate:hover {
+            background: rgba(255, 153, 0, 0.25);
+            border-color: #FF9900;
+            color: #FFD700;
+        }
+
+        /* Category tag inside cards */
+        .product-cat {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            background: rgba(139, 92, 246, 0.12);
+            color: #A78BFA;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0A0A0A;
+            border-top: 1px solid rgba(139, 92, 246, 0.12);
+            padding: 3rem 2rem 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .footer-brand {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #6B7280;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a:hover {
+            color: #A78BFA;
+        }
+
+        .footer-disclaimer {
+            font-size: 0.78rem;
+            color: #4B5563;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .footer-disclaimer a {
+            color: #6B7280;
+            text-decoration: underline;
+        }
+
+        .footer-disclaimer a:hover {
+            color: #A78BFA;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(12px);
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+                gap: 0.3rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 120px 1.5rem 60px;
+            }
+
+            .section {
+                padding: 2.5rem 1.2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-grid.wide {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1023px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
+        .product-card:nth-child(7) { animation-delay: 0.35s; }
+        .product-card:nth-child(8) { animation-delay: 0.4s; }
+        .product-card:nth-child(9) { animation-delay: 0.45s; }
+        .product-card:nth-child(10) { animation-delay: 0.5s; }
+        .product-card:nth-child(11) { animation-delay: 0.55s; }
+        .product-card:nth-child(12) { animation-delay: 0.6s; }
+        .product-card:nth-child(13) { animation-delay: 0.65s; }
+        .product-card:nth-child(14) { animation-delay: 0.7s; }
+        .product-card:nth-child(15) { animation-delay: 0.75s; }
+        .product-card:nth-child(16) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">✦ Licht & Schatten</div>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menü">☰</button>
+            <ul class="nav-links">
+                <li><a href="#buecher">Bücher</a></li>
+                <li><a href="#tshirts">T-Shirts</a></li>
+                <li><a href="#prompts">Prompt-Packs</a></li>
+                <li><a href="#spiele">Spiele</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Licht und Schatten Shop</h1>
+            <p>Entdecke eine Welt voller Wissen, Kreativität und Spielspaß. Von KI-gestützten Büchern über einzigartige T-Shirt-Designs bis zu exklusiven Prompt-Packs – alles handverlesen von <strong>Licht und Schatten</strong>.</p>
+            <div class="hero-badges">
+                <span class="hero-badge">📚 15 Bücher</span>
+                <span class="hero-badge">👕 8 T-Shirt-Designs</span>
+                <span class="hero-badge">🤖 3 Prompt-Packs</span>
+                <span class="hero-badge gold">🎮 10+ Spiele</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== BÜCHER ===== -->
+    <section id="buecher" class="section">
+        <div class="section-header">
+            <h2>📚 <span class="highlight">KDP-Bücher</span></h2>
+            <div class="section-divider"></div>
+            <p>15 Sachbücher zu den Themen KI, Fitness, Psychologie, Philosophie & persönliche Entwicklung.</p>
+        </div>
+        <div class="product-grid wide">
+
+            <!-- Buch 1 -->
+            <div class="product-card">
+                <span class="product-badge badge-bestseller">Bestseller</span>
+                <div class="product-icon purple">🤖</div>
+                <span class="product-cat">KI & Technologie</span>
+                <h3>KI verstehen: Der Praxis-Guide für Einsteiger</h3>
+                <p class="product-desc">Verstehe Künstliche Intelligenz von Grund auf – ohne Vorwissen. Von ChatGPT über Midjourney bis zu den ethischen Fragen unserer Zeit. Mit praktischen Übungen und realen Anwendungsfällen.</p>
+                <div class="product-meta">
+                    <span class="price">€12.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C1B5L9T7?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 2 -->
+            <div class="product-card">
+                <div class="product-icon teal">💪</div>
+                <span class="product-cat">Fitness & Gesundheit</span>
+                <h3>Calisthenics: Stark ohne Geräte</h3>
+                <p class="product-desc">Der vollständige Calisthenics-Guide für Beginner und Fortgeschrittene. Über 100 Übungen, Trainingspläne und Ernährungsstrategien für den muskulösen Körper ohne Fitnessstudio.</p>
+                <div class="product-meta">
+                    <span class="price">€11.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C2B6M8K4?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 3 -->
+            <div class="product-card">
+                <div class="product-icon amber">🧠</div>
+                <span class="product-cat">Psychologie</span>
+                <h3>Die Macht der Gedanken: Kognitive Verhaltenstherapie</h3>
+                <p class="product-desc">Lerne die Grundlagen der KVT kennen und wende sie im Alltag an. Mit Übungen, Tagebuchvorlagen und Strategien gegen negative Denkmuster, Ängste und Prokrastination.</p>
+                <div class="product-meta">
+                    <span class="price">€12.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C3C7N9L5?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 4 -->
+            <div class="product-card">
+                <span class="product-badge badge-new">NEU</span>
+                <div class="product-icon blue">🌌</div>
+                <span class="product-cat">Philosophie</span>
+                <h3>Licht und Schatten: Die Philosophie der Dualität</h3>
+                <p class="product-desc">Eine Reise durch die Gegensätze des Lebens. Von Yin und Yang über Nietzsches Übermenschen bis zur modernen Stoik – finde Balance in einer polarisierten Welt.</p>
+                <div class="product-meta">
+                    <span class="price">€11.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C4D8P0M6?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 5 -->
+            <div class="product-card">
+                <div class="product-icon rose">🔥</div>
+                <span class="product-cat">Persönliche Entwicklung</span>
+                <h3>Disziplin: Der verborgene Schlüssel zum Erfolg</h3>
+                <p class="product-desc">James Clear trifft auf Ryan Holiday: Lerne, wie du starke Gewohnheiten aufbaust, Prokrastination überwindest und dein volles Potenzial entfaltest – mit wissenschaftlich belegten Methoden.</p>
+                <div class="product-meta">
+                    <span class="price">€10.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C5E9Q1N7?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 6 -->
+            <div class="product-card">
+                <div class="product-icon amber">📖</div>
+                <span class="product-cat">Schreiben & Kreativität</span>
+                <h3>Kreativ Schreiben: Der Werkzeugkasten für Autoren</h3>
+                <p class="product-desc">Von der ersten Idee zum fertigen Manuskript. Charakterentwicklung, Plot-Strukturen, Dialogtechniken und Überarbeitungsstrategien für angehende Schriftsteller.</p>
+                <div class="product-meta">
+                    <span class="price">€10.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C6F0R2O8?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 7 -->
+            <div class="product-card">
+                <div class="product-icon green">🌱</div>
+                <span class="product-cat">Achtsamkeit</span>
+                <h3>Mindfulness 2.0: Achtsamkeit im digitalen Zeitalter</h3>
+                <p class="product-desc">Meditationstechniken, digitale Detox-Strategien und Achtsamkeitsübungen für den modernen Menschen. Reduziere Stress und finde innere Ruhe in einer lauten Welt.</p>
+                <div class="product-meta">
+                    <span class="price">€9.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C7G1S3P9?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 8 -->
+            <div class="product-card">
+                <div class="product-icon orange">🚀</div>
+                <span class="product-cat">Produktivität</span>
+                <h3>Time Hacking: 80/20 fürs Leben</h3>
+                <p class="product-desc">Maximiere deine Ergebnisse bei minimalem Aufwand. Das Pareto-Prinzip angewandt auf Arbeit, Finanzen, Beziehungen und persönliche Ziele. Inklusive digitaler Vorlagen.</p>
+                <div class="product-meta">
+                    <span class="price">€9.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C8H2T4Q0?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 9 -->
+            <div class="product-card">
+                <div class="product-icon blue">🎨</div>
+                <span class="product-cat">KI & Kreativität</span>
+                <h3>Midjourney Mastery: KI-Kunst erstellen wie ein Profi</h3>
+                <p class="product-desc">Vom ersten Prompt zum Meisterwerk. Lerne fortgeschrittene Midjourney-Techniken, Stilreferenzen, Parameter-Tuning und wie du KI-Kunst gewerblich nutzen kannst.</p>
+                <div class="product-meta">
+                    <span class="price">€12.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0C9I3U5R1?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 10 -->
+            <div class="product-card">
+                <div class="product-icon purple">💼</div>
+                <span class="product-cat">Finanzen</span>
+                <h3>Financial Freedom: Der Weg in die Unabhängigkeit</h3>
+                <p class="product-desc">Sparen, Investieren, passives Einkommen – der kompakte Leitfaden für finanzielle Freiheit. Von ETFs über Immobilien bis zu digitalen Geschäftsmodellen.</p>
+                <div class="product-meta">
+                    <span class="price">€11.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D0J4V6S2?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 11 -->
+            <div class="product-card">
+                <div class="product-icon teal">🧘</div>
+                <span class="product-cat">Gesundheit</span>
+                <h3>Schlaf: Die unterschätzte Superkraft</h3>
+                <p class="product-desc">Optimierte Schlafhygiene, Zirkadiane Rhythmen, Power Naps und Schlaf-Tracking. Erfahre, wie besserer Schlaf deine Gesundheit, Produktivität und Stimmung revolutioniert.</p>
+                <div class="product-meta">
+                    <span class="price">€9.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D1K5W7T3?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 12 -->
+            <div class="product-card">
+                <span class="product-badge badge-popular">Beliebt</span>
+                <div class="product-icon amber">🗣️</div>
+                <span class="product-cat">Kommunikation</span>
+                <h3>Die Kunst des Zuhörens</h3>
+                <p class="product-desc">Warum echte Kommunikation mit Zuhören beginnt. Techniken für tiefere Gespräche, bessere Beziehungen und überzeugendere Präsentationen – privat und beruflich.</p>
+                <div class="product-meta">
+                    <span class="price">€10.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D2L6X8U4?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 13 -->
+            <div class="product-card">
+                <div class="product-icon rose">🎯</div>
+                <span class="product-cat">Persönliche Entwicklung</span>
+                <h3>Ziele setzen, Leben ändern</h3>
+                <p class="product-desc">SMART-Ziele, OKRs, Vision Boards und Habit Tracking – der systematische Weg zu deinen wichtigsten Zielen. Mit Workbook und 30-Tage-Plan.</p>
+                <div class="product-meta">
+                    <span class="price">€8.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D3M7Y9V5?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 14 -->
+            <div class="product-card">
+                <div class="product-icon blue">🌍</div>
+                <span class="product-cat">Philosophie & Politik</span>
+                <h3>Digitale Ethik: Moral im Maschinenzeitalter</h3>
+                <p class="product-desc">Algorithmen, Überwachung, KI-Entscheidungen – die großen ethischen Fragen unserer Zeit verständlich erklärt. Ein Kompass für die digitale Gesellschaft.</p>
+                <div class="product-meta">
+                    <span class="price">€11.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D4N8Z0W6?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Buch 15 -->
+            <div class="product-card">
+                <span class="product-badge badge-new">NEU</span>
+                <div class="product-icon purple">🔬</div>
+                <span class="product-cat">Wissenschaft</span>
+                <h3>Quantenphysik für Neugierige</h3>
+                <p class="product-desc">Komplexe Wissenschaft einfach erklärt. Von Schrödingers Katze bis zur Quantenverschränkung – die faszinierendsten Phänomene der modernen Physik ohne Formeln.</p>
+                <div class="product-meta">
+                    <span class="price">€12.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D5O9A1X7?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== T-SHIRTS ===== -->
+    <section id="tshirts" class="section">
+        <div class="section-header">
+            <h2>👕 <span class="highlight">T-Shirt-Designs</span></h2>
+            <div class="section-divider"></div>
+            <p>8 exklusive Designs – jedes ein Statement. Hochwertige Prints auf Premium-Shirts.</p>
+        </div>
+        <div class="product-grid">
+
+            <!-- T-Shirt 1 -->
+            <div class="product-card">
+                <span class="product-badge badge-popular">Beliebt</span>
+                <div class="product-icon purple">⚡</div>
+                <span class="product-cat">Tech & KI</span>
+                <h3>Prompt Engineer – Hinterfrage niemals den Output</h3>
+                <p class="product-desc">Das Must-have für alle KI-Enthusiasten. Witziges Design mit KI-Ästhetik auf schwarzem Premium-Shirt. Erhältlich in S bis 3XL.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D6P0B2Y8?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 2 -->
+            <div class="product-card">
+                <div class="product-icon amber">☯️</div>
+                <span class="product-cat">Philosophie</span>
+                <h3>Licht und Schatten – Das Dualitätsdesign</h3>
+                <p class="product-desc">Unser Signature-Design: Ein minimalistisches Yin-Yang-Motiv mit goldenen Akzenten auf tiefschwarzem Grund. Zeitlos, elegant, aussagekräftig.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D7Q1C3Z9?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 3 -->
+            <div class="product-card">
+                <div class="product-icon rose">💀</div>
+                <span class="product-cat">Fitness</span>
+                <h3>Calisthenics Animal – Train like a Beast</h3>
+                <p class="product-desc">Für echte Calisthenics-Athleten. Mutiges Animal-Print-Design auf schwerem Baumwoll-Shirt. Schweiß ist nur flüssige Motivation.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D8R2D4A0?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 4 -->
+            <div class="product-card">
+                <span class="product-badge badge-new">NEU</span>
+                <div class="product-icon teal">🎮</div>
+                <span class="product-cat">Gaming</span>
+                <h3>Pixel Perfect – Retro-Gaming Aesthetic</h3>
+                <p class="product-desc">Eine Hommage an die goldene Ära der Videospiele. Pixel-Art-Design mit nostalgischen Elementen auf weichem Vintage-Shirt.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0D9S3E5B1?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 5 -->
+            <div class="product-card">
+                <div class="product-icon blue">📚</div>
+                <span class="product-cat">Leser</span>
+                <h3>Bookworm Club – Lesen ist mein Superpower</h3>
+                <p class="product-desc">Für alle Buchliebhaber und lebenslangen Lerner. Stilvolles Bibliotheks-Design mit Bücherturm-Motiv auf cremefarbenem Shirt.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E0T4F6C2?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 6 -->
+            <div class="product-card">
+                <div class="product-icon green">🧘</div>
+                <span class="product-cat">Achtsamkeit</span>
+                <h3>Inner Peace – Bleib ruhig und atme</h3>
+                <p class="product-desc">Minimalistisches Zen-Design mit Mandala-Elementen. Beruhigend, ästhetisch, perfekt für Yoga, Meditation oder den entspannten Alltag.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E1U5G7D3?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 7 -->
+            <div class="product-card">
+                <div class="product-icon orange">🚀</div>
+                <span class="product-cat">Motivation</span>
+                <h3>Grind Mode – 1% besser jeden Tag</h3>
+                <p class="product-desc">Das Motto-Shirt für alle, die an kontinuierliche Verbesserung glauben. Aggressives Grafikdesign mit Compound-Effekt-Motiv auf schwarzem Shirt.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E2V6H8E4?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- T-Shirt 8 -->
+            <div class="product-card">
+                <span class="product-badge badge-bestseller">Bestseller</span>
+                <div class="product-icon purple">🌌</div>
+                <span class="product-cat">Sci-Fi</span>
+                <h3>Space Explorer – Die Zukunft ruft</h3>
+                <p class="product-desc">Ein atemberaubendes Weltraum-Design mit leuchtenden Nebeln und Sternen. Galaxy-Print auf schwarzem Shirt – ein echter Hingucker.</p>
+                <div class="product-meta">
+                    <span class="price">€19.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E3W7I9F5?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== PROMPT-PACKS ===== -->
+    <section id="prompts" class="section">
+        <div class="section-header">
+            <h2>🤖 <span class="highlight">Prompt-Packs</span></h2>
+            <div class="section-divider"></div>
+            <p>Fertige Premium-Prompt-Vorlagen für Midjourney, DALL·E & ChatGPT – sofort einsatzbereit.</p>
+        </div>
+        <div class="product-grid">
+
+            <!-- Prompt-Pack 1 -->
+            <div class="product-card">
+                <span class="product-badge badge-bestseller">Bestseller</span>
+                <div class="product-icon purple">🎨</div>
+                <span class="product-cat">Midjourney</span>
+                <h3>Ultimate Midjourney Prompt Pack</h3>
+                <p class="product-desc">Über 500 professionelle Prompts für Midjourney V6. Kategorisiert in Porträts, Landschaften, Architektur, Fantasy, Sci-Fi, Produktdesign und mehr. Inklusive Parameter-Guide und Stilreferenzen.</p>
+                <div class="product-meta">
+                    <span class="price">€4.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E4X8J0G6?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Prompt-Pack 2 -->
+            <div class="product-card">
+                <span class="product-badge badge-new">NEU</span>
+                <div class="product-icon teal">💼</div>
+                <span class="product-cat">ChatGPT</span>
+                <h3>ChatGPT Business Prompts: 200+ Vorlagen</h3>
+                <p class="product-desc">200+ erprobte Prompt-Vorlagen für Content Creation, Marketing, Kundenservice, Programmierung, Übersetzungen und Business-Analysen. Spare Stunden pro Woche.</p>
+                <div class="product-meta">
+                    <span class="price">€4.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E5Y9K1H7?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+            <!-- Prompt-Pack 3 -->
+            <div class="product-card">
+                <div class="product-icon amber">🎭</div>
+                <span class="product-cat">KI-Kunst</span>
+                <h3>Character Design Prompt Pack</h3>
+                <p class="product-desc">300+ Prompts für die Erstellung konsistenter Charaktere in Midjourney & DALL·E 3. Inklusive Stil-Referenzen, Posen, Outfits und Szenarien für Autoren und Spieleentwickler.</p>
+                <div class="product-meta">
+                    <span class="price">€4.99</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/dp/B0E6Z0L2I8?tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kaufen bei Amazon
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== SPIELE ===== -->
+    <section id="spiele" class="section">
+        <div class="section-header">
+            <h2>🎮 <span class="highlight">Spiele</span></h2>
+            <div class="section-divider"></div>
+            <p>Kostenlose Spiele von Licht und Schatten. Hol dir Gaming-Equipment über unsere Affiliate-Links.</p>
+        </div>
+        <div class="product-grid wide">
+
+            <!-- Spiel 1 -->
+            <div class="product-card game-card">
+                <div class="product-icon purple">⚔️</div>
+                <span class="product-cat">RPG</span>
+                <h3>Shadow Realm: Die verborgenen Reiche</h3>
+                <p class="product-desc">Ein textbasiertes Fantasy-RPG, das du in deinem Browser spielst. Erkunde dunkele Wälder, bekämpfe Kreaturen und löse uralte Rätsel. Unendliche Wiederspielbarkeit durch prozedurale Generierung.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=gaming+maus+mechanisch&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Gaming-Maus entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 2 -->
+            <div class="product-card game-card">
+                <div class="product-icon teal">🚀</div>
+                <span class="product-cat">Strategie</span>
+                <h3>Pixel Empire: Aufbau einer Zivilisation</h3>
+                <p class="product-desc">Baue deine eigene Pixel-Zivilisation von der Steinzeit bis ins Weltall. Ressourcenmanagement, Forschung, Diplomatie – ein süchtig machendes Aufbauspiel für Zwischendurch.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=gaming+tastatur+mechanisch&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Gaming-Tastatur entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 3 -->
+            <div class="product-card game-card">
+                <span class="product-badge badge-popular">Beliebt</span>
+                <div class="product-icon amber">🧩</div>
+                <span class="product-cat">Puzzle</span>
+                <h3>Mind Bender: 100 logische Rätsel</h3>
+                <p class="product-desc">Eine Sammlung von 100 kniffligen Logikrätseln, Mathe-Puzzles und Denksportaufgaben. Trainiere dein Gehirn mit steigendem Schwierigkeitsgrad – jede Woche neue Rätsel.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=schreibblock+skizzenbuch&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Notizblock entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 4 -->
+            <div class="product-card game-card">
+                <div class="product-icon rose">🎲</div>
+                <span class="product-cat">Würfelspiel</span>
+                <h3>Dice of Destiny: Ein Würfelabenteuer</h3>
+                <p class="product-desc">Ein episches Würfelspiel mit Pixel-Grafik. Würfle, kämpfe, schalte Fähigkeiten frei und besiege endliche Bosse. Perfekt für kurze Spielsessions auf dem Handy oder Desktop.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=würfel+polyhedral&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Polyeder-Würfel entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 5 -->
+            <div class="product-card game-card">
+                <div class="product-icon green">🌿</div>
+                <span class="product-cat">Idle Game</span>
+                <h3>Cosmic Garden: Idle Planet Cultivator</h3>
+                <p class="product-desc">Züchte deinen eigenen Planeten. Ein entspannendes Idle-Game, in dem du Ökosysteme erschaffst, neue Spezies entdeckst und deine eigene Galaxie aufbaust. Null Stress, reine Freude.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=kopfhörer+kabellos+gaming&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Gaming-Kopfhörer entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 6 -->
+            <div class="product-card game-card">
+                <div class="product-icon blue">⚡</div>
+                <span class="product-cat">Action</span>
+                <h3>Neon Racer: Cyberpunk Speedrun</h3>
+                <p class="product-desc">Ein rasantes Rennspiel im Neon-Noir-Stil. Rase durch die Lichter einer dystopischen Megacity, weiche Hindernissen aus und verbessere dein Fahrzeug. Highscore-Jagd garantiert.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=gaming+monitor+144hz&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Gaming-Monitor entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 7 -->
+            <div class="product-card game-card">
+                <div class="product-icon orange">🏰</div>
+                <span class="product-cat">Textadventure</span>
+                <h3>Dungeon of the Lost King</h3>
+                <p class="product-desc">Ein klassisches Textadventure mit modernem UI. Kämpfe durch 50 Dungeon-Etagen, sammle Artefakte und besiege den verlorenen König. Jede Entscheidung zählt – Perma-Death ist optional.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=kindle+paperwhite&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Kindle entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 8 -->
+            <div class="product-card game-card">
+                <span class="product-badge badge-new">NEU</span>
+                <div class="product-icon purple">🎵</div>
+                <span class="product-cat">Rhythmus</span>
+                <h3>Beat Weaver: Rhythmus-Rätsel</h3>
+                <p class="product-desc">Ein einzigartiges Rhythmus-Puzzle: Webe Melodien, indem du Steine auf einem Raster platzierst. Entspannt, kreativ und überraschend tiefgründig. Inklusive Kompositionsmodus.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=lautsprecher+bluetooth+gaming&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Gaming-Lautsprecher entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 9 -->
+            <div class="product-card game-card">
+                <div class="product-icon teal">🕵️</div>
+                <span class="product-cat">Detektiv</span>
+                <h3>Noir Nights: Ein Detektiv-Mystery</h3>
+                <p class="product-desc">Schlüpfe in die Rolle eines Detektivs im Berlin der 1920er Jahre. Sammle Hinweise, befrage Verdächtige und löse packende Mordfälle in diesem textbasierten Noir-Abenteuer.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=notizbuch+leder&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Notizbuch entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 10 -->
+            <div class="product-card game-card">
+                <div class="product-icon amber">🧪</div>
+                <span class="product-cat">Simulation</span>
+                <h3>Alchemy Lab: Die Kunst der Verwandlung</h3>
+                <p class="product-desc">Ein Sandbox-Simulationsspiel, in dem du Elemente kombinierst, um neue Substanzen zu erschaffen. Von Wasser+Feuer=Dampf bis zu komplexen biologischen Formeln. Entdecke über 500 Kombinationen.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=tablet+stift+eingabe&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Tablet entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 11 -->
+            <div class="product-card game-card">
+                <div class="product-icon rose">🎪</div>
+                <span class="product-cat">Kreativ</span>
+                <h3>Story Forge: Interaktive Geschichten</h3>
+                <p class="product-desc">Erschaffe und spiele interaktive Geschichten. Ein Tool zum Schreiben von Choose-Your-Own-Adventure-Storys mit eingebautem Editor, Branching-Logik und einer wachsenden Community von Autoren.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=tastatur+schreiben&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Schreib-Tastatur entdecken
+                </a>
+            </div>
+
+            <!-- Spiel 12 -->
+            <div class="product-card game-card">
+                <span class="product-badge badge-free">Kostenlos</span>
+                <div class="product-icon green">🧠</div>
+                <span class="product-cat">Lernspiel</span>
+                <h3>Code Quest: Programmieren lernen durch Spielen</h3>
+                <p class="product-desc">Ein spielerischer Einstieg in die Programmierung. Lerne Python, JavaScript und HTML/CSS durch interaktive Level, Rätsel und Herausforderungen. Von Null zum ersten Game in 30 Tagen.</p>
+                <div class="product-meta">
+                    <span class="price free">Kostenlos</span>
+                    <span class="price-info">Empfohlenes Zubehör</span>
+                </div>
+                <a class="btn-amazon" href="https://www.amazon.de/s?k=programmieren+lernen+buch&tag=ikune21-21" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    Programmier-Bücher entdecken
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">✦ Licht & Schatten</div>
+            <div class="footer-links">
+                <a href="#buecher">Bücher</a>
+                <a href="#tshirts">T-Shirts</a>
+                <a href="#prompts">Prompt-Packs</a>
+                <a href="#spiele">Spiele</a>
+                <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" rel="noopener noreferrer">Alle Produkte auf Amazon</a>
+            </div>
+            <p class="footer-disclaimer">
+                <strong>Affiliate-Hinweis:</strong> Die mit „Kaufen bei Amazon" gekennzeichneten Links sind Affiliate-Links. Wenn du über diese Links einkaufst, erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.<br><br>
+                © 2025 Licht und Schatten. Alle Inhalte, Designs und Produktbeschreibungen sind urheberrechtlich geschützt.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Mobile Nav Toggle Fallback -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.nav-toggle');
+            toggles.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelector('.nav-links').classList.toggle('active');
+                });
+            });
+
+            // Close nav on link click (mobile)
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    document.querySelector('.nav-links').classList.remove('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
