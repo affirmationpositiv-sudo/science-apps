@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Galaxy Miner</title>
+<link rel="manifest" href="manifest.json">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a1a;
+  --panel:#12122a;
+  --panel-border:#2a2a5a;
+  --accent:#4a6cf7;
+  --accent-glow:#4a6cf740;
+  --gold:#ffd700;
+  --gold-dim:#b8960f;
+  --green:#4ade80;
+  --red:#ef4444;
+  --text:#e0e0f0;
+  --text-dim:#8080a0;
+  --card:#1a1a3e;
+  --card-hover:#222252;
+  --radius:12px;
+  --font:'Segoe UI',system-ui,-apple-system,sans-serif
+}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  display:flex;flex-direction:column;
+  user-select:none;-webkit-user-select:none;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  overflow:hidden
+}
+#app{
+  display:flex;flex-direction:column;
+  height:100dvh;max-width:480px;margin:0 auto;
+  width:100%;padding:0;
+  position:relative;overflow:hidden
+}
+/* Stars background */
+#stars{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0
+}
+/* Header */
+header{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 16px;z-index:10;
+  background:linear-gradient(180deg,#0d0d25 0%,transparent 100%);
+  min-height:52px
+}
+header h1{
+  font-size:18px;font-weight:700;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text
+}
+.prestige-btn{
+  background:linear-gradient(135deg,#6b21a8,#4a6cf7);
+  border:none;color:#fff;font-size:12px;font-weight:700;
+  padding:6px 14px;border-radius:20px;cursor:pointer;
+  box-shadow:0 0 12px #4a6cf740;transition:transform .15s
+}
+.prestige-btn:active{transform:scale(.92)}
+
+/* Main content area */
+main{
+  flex:1;display:flex;flex-direction:column;
+  overflow:auto;z-index:10;padding:0 16px 8px;
+  -webkit-overflow-scrolling:touch
+}
+main::-webkit-scrollbar{width:3px}
+main::-webkit-scrollbar-track{background:transparent}
+main::-webkit-scrollbar-thumb{background:var(--panel-border);border-radius:3px}
+
+/* Credits display */
+.credit-display{
+  text-align:center;padding:12px 0 6px;
+  position:relative
+}
+.credits{
+  font-size:32px;font-weight:800;color:var(--gold);
+  text-shadow:0 0 20px #ffd70020;
+  transition:transform .1s
+}
+.credits.pulse{animation:creditPulse .3s ease-out}
+@keyframes creditPulse{0%{transform:scale(1.15)}100%{transform:scale(1)}}
+.credit-rate{
+  font-size:13px;color:var(--text-dim);margin-top:2px
+}
+.credit-rate span{color:var(--green)}
+
+/* Level / XP bar */
+.level-bar-wrap{
+  margin:4px 0 8px;padding:6px 10px;
+  background:var(--panel);border-radius:8px;
+  border:1px solid var(--panel-border)
+}
+.level-info{
+  display:flex;justify-content:space-between;
+  font-size:11px;color:var(--text-dim);margin-bottom:3px
+}
+.level-info span{font-weight:700;color:var(--accent)}
+.xp-bar-track{
+  height:6px;background:#1a1a3e;border-radius:3px;overflow:hidden
+}
+.xp-bar-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  transition:width .3s ease;width:0%
+}
+
+/* Asteroid click area */
+.asteroid-area{
+  display:flex;justify-content:center;align-items:center;
+  padding:6px 0;min-height:160px;
+  position:relative;overflow:visible
+}
+.asteroid-btn{
+  width:140px;height:140px;border-radius:50%;
+  background:radial-gradient(ellipse at 35% 35%,#6b6b8b,#2a2a4a 60%,#1a1a3a);
+  border:2px solid #4a4a6a;
+  box-shadow:0 0 30px #4a6cf720,inset 0 -8px 20px rgba(0,0,0,.5);
+  cursor:pointer;position:relative;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .08s ease;
+  touch-action:none
+}
+.asteroid-btn:active{transform:scale(.88)}
+.asteroid-craters{
+  position:absolute;width:100%;height:100%;
+  border-radius:50%;overflow:hidden
+}
+.asteroid-craters::before,.asteroid-craters::after{
+  content:'';position:absolute;border-radius:50%;
+  background:rgba(0,0,0,.3)
+}
+.asteroid-craters::before{width:24px;height:20px;top:28px;left:30px}
+.asteroid-craters::after{width:16px;height:14px;bottom:35px;right:32px}
+.asteroid-glow{
+  position:absolute;width:150%;height:150%;
+  border-radius:50%;
+  background:radial-gradient(circle,transparent 40%,var(--accent-glow));
+  opacity:0;transition:opacity .15s;
+  pointer-events:none
+}
+.asteroid-btn.mining .asteroid-glow{opacity:1}
+.asteroid-inner{
+  width:70px;height:70px;border-radius:50%;
+  background:radial-gradient(circle at 40% 40%,#8a8aaa 0%,#3a3a5a 60%,#1a1a3a);
+  border:1px solid #5a5a7a;
+  display:flex;align-items:center;justify-content:center;
+  z-index:2
+}
+.asteroid-inner svg{width:36px;height:36px;fill:var(--gold);opacity:.7}
+.mining-text{
+  position:absolute;bottom:-22px;
+  font-size:12px;color:var(--text-dim)
+}
+.mining-text span{color:var(--gold);font-weight:700}
+
+/* Particles container */
+#particles{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;z-index:20}
+
+/* Floating numbers */
+.floating-num{
+  position:absolute;font-size:20px;font-weight:800;
+  color:var(--gold);pointer-events:none;
+  animation:floatUp .9s ease-out forwards;
+  text-shadow:0 0 10px #ffd70080,0 0 20px #ffd70040;
+  z-index:30
+}
+@keyframes floatUp{
+  0%{opacity:1;transform:translateY(0) scale(1)}
+  60%{opacity:.9}
+  100%{opacity:0;transform:translateY(-80px) scale(1.2)}
+}
+
+/* Sections */
+.section-label{
+  font-size:12px;font-weight:700;text-transform:uppercase;
+  color:var(--text-dim);letter-spacing:1px;
+  margin:8px 0 4px;display:flex;align-items:center;gap:8px
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--panel-border)}
+
+/* Upgrades grid */
+.upgrade-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8px;margin-bottom:8px
+}
+.upgrade-card{
+  background:var(--card);border:1px solid var(--panel-border);
+  border-radius:var(--radius);padding:10px;
+  cursor:pointer;transition:all .2s;
+  display:flex;flex-direction:column;gap:3px;
+  position:relative;overflow:hidden
+}
+.upgrade-card:active{transform:scale(.96)}
+.upgrade-card.owned{border-color:var(--accent);background:linear-gradient(135deg,var(--card),#1a1a4e)}
+.upgrade-card.locked{opacity:.5;cursor:not-allowed}
+.upgrade-card.locked:active{transform:none}
+.upgrade-card.maxis{opacity:.6;border-color:var(--gold-dim)}
+.upgrade-name{
+  font-size:13px;font-weight:700
+}
+.upgrade-desc{
+  font-size:10px;color:var(--text-dim);
+  line-height:1.3
+}
+.upgrade-cost{
+  font-size:12px;font-weight:700;color:var(--gold)
+}
+.upgrade-level{
+  font-size:10px;color:var(--accent);
+  position:absolute;top:6px;right:8px
+}
+.upgrade-effect{
+  font-size:10px;color:var(--green)
+}
+.flash-overlay{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:var(--accent);opacity:0;pointer-events:none;
+  z-index:100;transition:none;
+  animation:flash .35s ease-out
+}
+@keyframes flash{
+  0%{opacity:.15}
+  100%{opacity:0}
+}
+.prestige-flash{
+  background:linear-gradient(135deg,#6b21a8,#4a6cf7);
+  animation:prestigeFlash .6s ease-out
+}
+@keyframes prestigeFlash{
+  0%{opacity:.25}
+  100%{opacity:0}
+}
+
+/* Prestige panel */
+.prestige-panel{
+  background:var(--card);
+  border:1px solid #4a2a7a;
+  border-radius:var(--radius);padding:12px;
+  margin-bottom:8px;
+  background:linear-gradient(135deg,#1a0a2e,var(--card))
+}
+.prestige-title{
+  font-size:14px;font-weight:700;color:#a78bfa;
+  margin-bottom:4px
+}
+.prestige-desc{font-size:11px;color:var(--text-dim);margin-bottom:8px}
+.prestige-stat{
+  font-size:13px;color:var(--gold);font-weight:700;
+  margin-bottom:8px
+}
+.prestige-btn-act{
+  width:100%;padding:10px;
+  background:linear-gradient(135deg,#6b21a8,#4a6cf7);
+  border:none;border-radius:8px;color:#fff;
+  font-size:14px;font-weight:700;cursor:pointer;
+  box-shadow:0 0 20px #4a6cf740;
+  transition:transform .15s
+}
+.prestige-btn-act:active{transform:scale(.95)}
+
+/* Stats row */
+.stats-row{
+  display:flex;gap:8px;margin-bottom:6px
+}
+.stat-item{
+  flex:1;background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:8px;padding:6px 8px;text-align:center
+}
+.stat-label{font-size:9px;color:var(--text-dim);text-transform:uppercase}
+.stat-value{font-size:15px;font-weight:700;color:var(--text)}
+
+/* Responsive tweaks */
+@media(min-width:480px){
+  #app{padding:0 8px}
+  .asteroid-btn{width:160px;height:160px}
+  .asteroid-inner{width:80px;height:80px}
+  .upgrade-grid{grid-template-columns:1fr 1fr}
+  .credits{font-size:36px}
+}
+@media(max-height:700px){
+  .asteroid-area{min-height:130px}
+  .asteroid-btn{width:120px;height:120px}
+  .asteroid-inner{width:60px;height:60px}
+  .asteroid-inner svg{width:28px;height:28px}
+  .credit-display{padding:8px 0 4px}
+  .credits{font-size:26px}
+}
+
+/* Toast notifications */
+.toast{
+  position:fixed;top:60px;left:50%;transform:translateX(-50%);
+  background:var(--card);border:1px solid var(--accent);
+  border-radius:8px;padding:10px 20px;
+  font-size:13px;font-weight:600;color:var(--text);
+  z-index:200;pointer-events:none;
+  animation:toastAnim 2s ease forwards;
+  box-shadow:0 4px 20px rgba(0,0,0,.5)
+}
+@keyframes toastAnim{
+  0%{opacity:0;transform:translateX(-50%) translateY(20px)}
+  15%{opacity:1;transform:translateX(-50%) translateY(0)}
+  75%{opacity:1}
+  100%{opacity:0;transform:translateX(-50%) translateY(-10px)}
+}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div id="app">
+  <header>
+    <h1>✦ Galaxy Miner</h1>
+    <button class="prestige-btn" id="prestigeBtn" onclick="togglePrestige()">⟲ Prestige</button>
+  </header>
+  <main id="main">
+    <!-- Credits -->
+    <div class="credit-display">
+      <div class="credits" id="credits">0</div>
+      <div class="credit-rate">⚡ <span id="creditRate">0</span> /s</div>
+    </div>
+
+    <!-- Level bar -->
+    <div class="level-bar-wrap">
+      <div class="level-info">
+        <span>Level <b id="levelDisplay">1</b></span>
+        <span id="xpDisplay">0 / 100 XP</span>
+      </div>
+      <div class="xp-bar-track">
+        <div class="xp-bar-fill" id="xpBarFill"></div>
+      </div>
+    </div>
+
+    <!-- Asteroid -->
+    <div class="asteroid-area" id="asteroidArea">
+      <div class="asteroid-btn" id="asteroidBtn">
+        <div class="asteroid-craters"></div>
+        <div class="asteroid-glow" id="asteroidGlow"></div>
+        <div class="asteroid-inner">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        </div>
+      </div>
+      <div class="mining-text">⛏️ <span id="clickValue">1</span> / click</div>
+      <div id="particles"></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-label">Clicks</div><div class="stat-value" id="statClicks">0</div></div>
+      <div class="stat-item"><div class="stat-label">Earned</div><div class="stat-value" id="statEarned">0</div></div>
+      <div class="stat-item"><div class="stat-label">Multi</div><div class="stat-value" id="statMulti">1.00×</div></div>
+    </div>
+
+    <!-- Prestige panel (hidden) -->
+    <div class="prestige-panel" id="prestigePanel" style="display:none">
+      <div class="prestige-title">✦ Prestige</div>
+      <div class="prestige-desc">Reset your progress for a permanent multiplier bonus.</div>
+      <div class="prestige-stat" id="prestigeStat">You'll gain <b>0</b> Prestige Shards</div>
+      <div class="prestige-desc" style="font-size:10px">Each shard = <b>+10%</b> permanent earnings multiplier</div>
+      <button class="prestige-btn-act" onclick="doPrestige()">⟲ Prestige Now</button>
+    </div>
+
+    <!-- Upgrades -->
+    <div class="section-label">Ship Upgrades</div>
+    <div class="upgrade-grid" id="upgradeGrid"></div>
+  </main>
+</div>
+<div id="flash"></div>
+<script>
+// ============================================================
+// GALAXY MINER - Full Game
+// ============================================================
+
+// ----- Audio Engine (Web Audio API) -----
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function ensureAudio() {
+  if (!audioCtx) audioCtx = new AudioCtx();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function playBeep(freq, duration, type, vol) {
+  try {
+    ensureAudio();
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = type || 'sine';
+    o.frequency.value = freq;
+    g.gain.setValueAtTime((vol||0.1), audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (duration||0.1));
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(); o.stop(audioCtx.currentTime + (duration||0.1));
+  } catch(e) {/* silent */}
+}
+
+function playMineSound() {
+  playBeep(800, 0.08, 'square', 0.06);
+  setTimeout(() => playBeep(1200, 0.06, 'sine', 0.04), 40);
+}
+
+function playUpgradeSound() {
+  playBeep(600, 0.1, 'triangle', 0.08);
+  setTimeout(() => playBeep(900, 0.1, 'triangle', 0.07), 80);
+  setTimeout(() => playBeep(1200, 0.15, 'sine', 0.06), 160);
+}
+
+function playPrestigeSound() {
+  playBeep(400, 0.2, 'sine', 0.1);
+  setTimeout(() => playBeep(600, 0.2, 'sine', 0.08), 200);
+  setTimeout(() => playBeep(800, 0.2, 'sine', 0.07), 400);
+  setTimeout(() => playBeep(1200, 0.4, 'sine', 0.06), 600);
+}
+
+function playLevelUpSound() {
+  playBeep(500, 0.1, 'triangle', 0.07);
+  setTimeout(() => playBeep(700, 0.1, 'triangle', 0.06), 100);
+  setTimeout(() => playBeep(1000, 0.1, 'triangle', 0.06), 200);
+  setTimeout(() => playBeep(1400, 0.2, 'sine', 0.05), 300);
+}
+
+// ----- Starfield Background -----
+(function initStars() {
+  const c = document.getElementById('stars');
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    stars = Array.from({length:120}, () => ({
+      x:Math.random()*c.width, y:Math.random()*c.height,
+      r:Math.random()*1.5+0.3, s:Math.random()*0.3+0.05,
+      o:Math.random()*0.7+0.3
+    }));
+  }
+  resize();
+  function draw() {
+    ctx.clearRect(0,0,c.width,c.height);
+    for (const s of stars) {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(200,200,255,${s.o})`;
+      ctx.fill();
+      s.y -= s.s;
+      if (s.y < -5) { s.y = c.height + 5; s.x = Math.random()*c.width; }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize', resize);
+})();
+
+// ----- Game State -----
+const UPGRADES = [
+  {id:'laser', name:'Mining Laser II', desc:'+1 credit per click', baseCost:50, costScale:1.4, effect:['click',1], maxLvl:50},
+  {id:'cargo', name:'Cargo Hold', desc:'+2 credits per second', baseCost:100, costScale:1.35, effect:['auto',2], maxLvl:50},
+  {id:'thruster', name:'Ion Thruster', desc:'+5 credits per second', baseCost:500, costScale:1.4, effect:['auto',5], maxLvl:40},
+  {id:'drill', name:'Auto-Drill Array', desc:'+20 credits per second', baseCost:2000, costScale:1.45, effect:['auto',20], maxLvl:30},
+  {id:'quantum', name:'Quantum Processor', desc:'+100 credits per second', baseCost:10000, costScale:1.5, effect:['auto',100], maxLvl:25},
+  {id:'core', name:'Dimensional Core', desc:'+500 credits per second', baseCost:50000, costScale:1.55, effect:['auto',500], maxLvl:20}
+];
+
+const XP_BASE = 100;
+const XP_GROWTH = 1.15;
+
+const SAVE_KEY = 'galaxyminer_save';
+
+function defaultState() {
+  return {
+    credits: 0,
+    level: 1,
+    xp: 0,
+    totalClicks: 0,
+    totalEarned: 0,
+    prestigeShards: 0,
+    upgrades: UPGRADES.map(u => ({id:u.id, lvl:0})),
+    lastSave: Date.now()
+  };
+}
+
+let state = defaultState();
+let miningActive = false;
+
+// ----- DOM refs -----
+const $ = id => document.getElementById(id);
+const creditsEl = $('credits');
+const creditRateEl = $('creditRate');
+const clickValueEl = $('clickValue');
+const levelDisplay = $('levelDisplay');
+const xpDisplay = $('xpDisplay');
+const xpBarFill = $('xpBarFill');
+const statClicks = $('statClicks');
+const statEarned = $('statEarned');
+const statMulti = $('statMulti');
+const asteroidBtn = $('asteroidBtn');
+const asteroidGlow = $('asteroidGlow');
+const upgradeGrid = $('upgradeGrid');
+const flashEl = $('flash');
+const prestigePanel = $('prestigePanel');
+const prestigeStat = $('prestigeStat');
+const mainEl = $('main');
+
+// ----- Computed values -----
+function getUpgradeLevel(id) {
+  const u = state.upgrades.find(x => x.id === id);
+  return u ? u.lvl : 0;
+}
+
+function getUpgradeCost(u) {
+  const lvl = getUpgradeLevel(u.id);
+  return Math.floor(u.baseCost * Math.pow(u.costScale, lvl));
+}
+
+function getClickBonus() {
+  const laserLvl = getUpgradeLevel('laser');
+  return 1 + laserLvl;
+}
+
+function getAutoRate() {
+  let rate = 0;
+  for (const u of UPGRADES) {
+    if (u.id === 'laser') continue;
+    rate += getUpgradeLevel(u.id) * u.effect[1];
+  }
+  return rate;
+}
+
+function getMultiplier() {
+  return 1 + state.prestigeShards * 0.1;
+}
+
+function getXpForLevel(lvl) {
+  return Math.floor(XP_BASE * Math.pow(XP_GROWTH, lvl - 1));
+}
+
+function getPrestigeGain() {
+  const total = state.totalEarned;
+  if (total < 10000) return 0;
+  return Math.max(1, Math.floor(Math.pow(total / 10000, 0.5)));
+}
+
+// ----- Update UI -----
+function formatNum(n) {
+  if (n >= 1e12) return (n/1e12).toFixed(1)+'T';
+  if (n >= 1e9) return (n/1e9).toFixed(1)+'B';
+  if (n >= 1e6) return (n/1e6).toFixed(1)+'M';
+  if (n >= 1e3) return (n/1e3).toFixed(1)+'K';
+  return Math.floor(n).toLocaleString();
+}
+
+function formatFull(n) {
+  if (n >= 1e12) return n.toExponential(2);
+  return Math.floor(n).toLocaleString();
+}
+
+function updateUI() {
+  const multi = getMultiplier();
+
+  creditsEl.textContent = formatNum(state.credits);
+  creditRateEl.textContent = formatNum(getAutoRate() * multi);
+
+  const clickVal = getClickBonus() * multi;
+  clickValueEl.textContent = formatNum(clickVal);
+
+  levelDisplay.textContent = state.level;
+  const xpNeeded = getXpForLevel(state.level);
+  xpDisplay.textContent = `${Math.floor(state.xp)} / ${xpNeeded} XP`;
+  xpBarFill.style.width = `${Math.min(100,(state.xp/xpNeeded)*100)}%`;
+
+  statClicks.textContent = formatNum(state.totalClicks);
+  statEarned.textContent = formatNum(state.totalEarned);
+  statMulti.textContent = multi.toFixed(2)+'×';
+
+  // Prestige
+  const pg = getPrestigeGain();
+  if (pg > 0) {
+    prestigePanel.style.display = 'block';
+    prestigeStat.innerHTML = `You'll gain <b>${pg}</b> Prestige Shard${pg!==1?'s':''}`;
+  } else {
+    prestigePanel.style.display = state.prestigeShards > 0 ? 'block' : 'none';
+    if (state.prestigeShards > 0) {
+      prestigeStat.innerHTML = `Current: <b>${state.prestigeShards}</b> shards (${multi.toFixed(1)}×)`;
+    }
+  }
+
+  // Upgrades
+  renderUpgrades();
+}
+
+function renderUpgrades() {
+  upgradeGrid.innerHTML = '';
+  for (const u of UPGRADES) {
+    const lvl = getUpgradeLevel(u.id);
+    const cost = getUpgradeCost(u);
+    const isMaxed = lvl >= u.maxLvl;
+    const canAfford = state.credits >= cost;
+    const card = document.createElement('div');
+    card.className = 'upgrade-card';
+    if (lvl > 0) card.classList.add('owned');
+    if (isMaxed) card.classList.add('maxis');
+    if (!canAfford && !isMaxed) card.classList.add('locked');
+
+    card.innerHTML = `
+      <span class="upgrade-level">${isMaxed ? 'MAX' : 'Lv.'+lvl}</span>
+      <span class="upgrade-name">${u.name}</span>
+      <span class="upgrade-desc">${u.desc}</span>
+      <span class="upgrade-effect">${u.effect[0]==='click'?'🖱️':'⚡'} +${formatNum(u.effect[1] * (isMaxed ? 1 : 1))}${u.effect[0]==='click'?'/click':'/s'}</span>
+      <span class="upgrade-cost">${isMaxed ? '✦ MAXED' : '💎 '+formatNum(cost)}</span>
+    `;
+
+    if (!isMaxed) {
+      card.addEventListener('click', () => buyUpgrade(u.id));
+    }
+    upgradeGrid.appendChild(card);
+  }
+}
+
+// ----- Core game logic -----
+function earnCredits(amount) {
+  const multi = getMultiplier();
+  const actual = amount * multi;
+  state.credits += actual;
+  state.totalEarned += actual;
+
+  // XP: base 1 per credit earned, capped
+  const xpGain = Math.max(1, Math.min(actual, 50));
+  addXP(xpGain);
+
+  autoSave();
+  updateUI();
+}
+
+function addXP(amount) {
+  state.xp += amount;
+  const needed = getXpForLevel(state.level);
+  if (state.xp >= needed) {
+    state.xp -= needed;
+    state.level++;
+    playLevelUpSound();
+    toast(`⬆ Level ${state.level}!`);
+    // Flash on level up
+    flashScreen(false);
+  }
+  updateUI();
+}
+
+function mine() {
+  ensureAudio();
+  playMineSound();
+  state.totalClicks++;
+  const amount = getClickBonus();
+  earnCredits(amount);
+
+  // Asteroid animation
+  asteroidBtn.classList.add('mining');
+  setTimeout(() => asteroidBtn.classList.remove('mining'), 120);
+
+  // Particles
+  spawnParticles();
+
+  // Floating number
+  spawnFloatingNum(amount);
+
+  // Pulse credits
+  creditsEl.classList.remove('pulse');
+  void creditsEl.offsetWidth;
+  creditsEl.classList.add('pulse');
+
+  updateUI();
+}
+
+function buyUpgrade(id) {
+  ensureAudio();
+  const u = UPGRADES.find(x => x.id === id);
+  if (!u) return;
+  const lvl = getUpgradeLevel(id);
+  if (lvl >= u.maxLvl) return;
+  const cost = getUpgradeCost(u);
+  if (state.credits < cost) return;
+
+  state.credits -= cost;
+  const upgrade = state.upgrades.find(x => x.id === id);
+  upgrade.lvl++;
+
+  playUpgradeSound();
+  flashScreen(false);
+  toast(`${u.name} → Lv.${upgrade.lvl}!`);
+
+  autoSave();
+  updateUI();
+}
+
+function flashScreen(prestige) {
+  const div = document.createElement('div');
+  div.className = 'flash-overlay' + (prestige ? ' prestige-flash' : '');
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 400);
+}
+
+// ----- Particles -----
+function spawnParticles() {
+  const area = $('asteroidArea');
+  const rect = area.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+
+  for (let i = 0; i < 8; i++) {
+    const p = document.createElement('div');
+    const size = 3 + Math.random() * 5;
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 40 + Math.random() * 80;
+    const colors = ['#ffd700','#ff6b6b','#4a6cf7','#ffa500','#fff'];
+    const color = colors[Math.floor(Math.random()*colors.length)];
+
+    p.style.cssText = `
+      position:fixed;width:${size}px;height:${size}px;
+      background:${color};border-radius:50%;
+      left:${cx}px;top:${cy}px;pointer-events:none;
+      box-shadow:0 0 ${size+2}px ${color};
+      z-index:30
+    `;
+    document.body.appendChild(p);
+
+    const dx = Math.cos(angle) * speed;
+    const dy = Math.sin(angle) * speed - 30;
+
+    p.animate([
+      {transform:'translate(0,0) scale(1)', opacity:1},
+      {transform:`translate(${dx}px,${dy}px) scale(0)`, opacity:0}
+    ], {duration:400+Math.random()*200, easing:'ease-out'}).onfinish = () => p.remove();
+  }
+}
+
+function spawnFloatingNum(amount) {
+  const area = $('asteroidArea');
+  const rect = area.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+
+  const el = document.createElement('div');
+  el.className = 'floating-num';
+  el.textContent = `+${formatNum(amount)}💎`;
+  el.style.left = (cx - 30 + Math.random()*60) + 'px';
+  el.style.top = (cy - 20 + Math.random()*40) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1000);
+}
+
+// ----- Prestige -----
+function togglePrestige() {
+  const panel = prestigePanel;
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+    updateUI();
+    mainEl.scrollTop = 0;
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+function doPrestige() {
+  const gain = getPrestigeGain();
+  if (gain < 1 && state.prestigeShards < 1) {
+    toast('Need to earn 10K credits total first!');
+    return;
+  }
+
+  if (gain < 1 && state.prestigeShards > 0) {
+    toast('Earn more for more shards!');
+    return;
+  }
+
+  ensureAudio();
+  playPrestigeSound();
+  flashScreen(true);
+
+  state.prestigeShards += gain;
+  state.credits = 0;
+  state.level = 1;
+  state.xp = 0;
+  state.totalClicks = 0;
+  state.totalEarned = 0;
+  state.upgrades = UPGRADES.map(u => ({id:u.id, lvl:0}));
+
+  toast(`✦ Prestige! +${gain} shard${gain!==1?'s':''} (${getMultiplier().toFixed(1)}×)`);
+  prestigePanel.style.display = 'none';
+  autoSave();
+  updateUI();
+}
+
+// ----- Toast -----
+function toast(msg) {
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2200);
+}
+
+// ----- Auto-miner loop -----
+let lastAutoTick = 0;
+function autoMine(timestamp) {
+  if (!lastAutoTick) lastAutoTick = timestamp;
+  const dt = (timestamp - lastAutoTick) / 1000;
+  lastAutoTick = timestamp;
+
+  const rate = getAutoRate();
+  if (rate > 0 && dt > 0) {
+    const earnings = rate * dt;
+    earnCredits(earnings);
+  }
+
+  requestAnimationFrame(autoMine);
+}
+
+// ----- Save / Load -----
+function autoSave() {
+  state.lastSave = Date.now();
+  try {
+    localStorage.setItem(SAVE_KEY, JSON.stringify(state));
+  } catch(e) {/* storage full */}
+}
+
+function loadGame() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (raw) {
+      const saved = JSON.parse(raw);
+      // Merge safely
+      state.credits = saved.credits || 0;
+      state.level = saved.level || 1;
+      state.xp = saved.xp || 0;
+      state.totalClicks = saved.totalClicks || 0;
+      state.totalEarned = saved.totalEarned || 0;
+      state.prestigeShards = saved.prestigeShards || 0;
+      if (saved.upgrades) {
+        for (const su of saved.upgrades) {
+          const mu = state.upgrades.find(x => x.id === su.id);
+          if (mu) mu.lvl = su.lvl || 0;
+        }
+      }
+    }
+  } catch(e) {}
+  updateUI();
+}
+
+// ----- Register service worker -----
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+
+// ----- Event listeners -----
+asteroidBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  mine();
+});
+
+asteroidBtn.addEventListener('touchstart', (e) => {
+  // Prevent context menu
+  e.preventDefault();
+  mine();
+}, {passive:false});
+
+// Auto-save every 15s
+setInterval(autoSave, 15000);
+
+// Also save on visibility change
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) autoSave();
+});
+
+// ----- Init -----
+loadGame();
+requestAnimationFrame(autoMine);
+updateUI();
+
+console.log('🚀 Galaxy Miner loaded!');
+console.log(`💎 Credits: ${formatNum(state.credits)}`);
+console.log(`⚡ Auto-rate: ${formatNum(getAutoRate() * getMultiplier())}/s`);
+console.log(`📈 Multiplier: ${getMultiplier().toFixed(2)}×`);
+</script>
+</body>
+</html>
