@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📊 Lernfortschritt-Tracker 2026 – Dein persönlicher Lernbegleiter | Licht und Schatten</title>
+<meta name="description" content="Kostenloser interaktiver Lernfortschritt-Tracker: Verfolge deine Online-Kurse, setze Lernziele, tracke tägliche Lernzeit. Inkl. Statistiken & Motivations-Tools.">
+<meta name="keywords" content="Lernfortschritt Tracker, Online-Lernen, Lernziele, Lernplan, Lern-Tracker, Produktivität, E-Learning, Zeitmanagement, Licht und Schatten, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<meta name="language" content="de">
+<meta property="og:title" content="Lernfortschritt-Tracker 2026">
+<meta property="og:description" content="Verfolge deine Lernziele, Kurse und tägliche Lernzeit mit diesem interaktiven Tool.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/learning-tracker/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size:16px; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0A0A0A; color: #E5E5E5; line-height: 1.6; min-height: 100vh;
+}
+a { color: #A78BFA; text-decoration: none; }
+a:hover { color: #FFD700; }
+
+/* Nav */
+.nav {
+    background: rgba(10,10,10,.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(139,92,246,.1); padding:0 24px;
+}
+.nav-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:60px; }
+.nav-logo { font-weight:800; background:linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-size:1.1rem; }
+.nav-links { display:flex; gap:20px; list-style:none; }
+.nav-links a { color:#9CA3AF; font-size:.88rem; }
+.nav-links a:hover { color:#FFD700; }
+
+.container { max-width:1100px; margin:0 auto; padding:40px 20px; }
+
+/* Header */
+.hero { text-align:center; padding:60px 20px 20px; }
+.hero h1 { font-size:2.8em; font-weight:800; background:linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:10px; }
+.hero p { color:#9CA3AF; max-width:600px; margin:0 auto; font-size:1.1em; }
+
+/* Stats Overview */
+.stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:30px 0; }
+.stat-card { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:12px; padding:20px; text-align:center; }
+.stat-card .num { font-size:2.2em; font-weight:800; color:#8B5CF6; }
+.stat-card .label { color:#888; font-size:.85em; margin-top:4px; }
+
+/* Grid: Kurse + Neuer Kurs */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:30px 0; }
+
+/* Panel */
+.panel { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:16px; padding:24px; }
+.panel h2 { font-size:1.3em; font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+
+/* Form */
+.form-group { margin-bottom:14px; }
+.form-group label { display:block; color:#9CA3AF; font-size:.88rem; margin-bottom:4px; }
+.form-group input, .form-group select { width:100%; padding:10px 14px; background:#0A0A0A; border:1px solid #2A2A2A; border-radius:8px; color:#fff; font-size:.95rem; }
+.form-group input:focus, .form-group select:focus { outline:none; border-color:#8B5CF6; }
+.btn {
+    padding:10px 24px; border:none; border-radius:8px; cursor:pointer;
+    font-weight:600; font-size:.95rem; transition:all .3s;
+}
+.btn-primary { background:#8B5CF6; color:#fff; }
+.btn-primary:hover { background:#7C3AED; transform:translateY(-1px); }
+.btn-sm { padding:6px 14px; font-size:.82rem; }
+.btn-danger { background:#EF4444; color:#fff; }
+.btn-danger:hover { background:#DC2626; }
+.btn-success { background:#10B981; color:#fff; }
+.btn-success:hover { background:#059669; }
+
+/* Course List */
+.course-list { display:flex; flex-direction:column; gap:12px; max-height:400px; overflow-y:auto; }
+.course-item { background:#141414; border:1px solid #2A2A2A; border-radius:10px; padding:16px; }
+.course-item .top { display:flex; justify-content:space-between; align-items:start; margin-bottom:8px; }
+.course-item .name { font-weight:700; color:#fff; }
+.course-item .platform { color:#6B7280; font-size:.82rem; }
+.course-item .progress-text { color:#A78BFA; font-weight:600; font-size:.9rem; }
+.progress-bar { height:6px; background:#2A2A2A; border-radius:3px; overflow:hidden; margin-top:8px; }
+.progress-fill { height:100%; background:linear-gradient(90deg,#8B5CF6,#FFD700); border-radius:3px; transition:width .5s ease; }
+.course-item .actions { display:flex; gap:6px; margin-top:10px; justify-content:flex-end; }
+
+/* Daily Log */
+.log-section { margin-top:30px; }
+.log-entry { background:#141414; border:1px solid #2A2A2A; border-radius:10px; padding:14px 16px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+.log-entry .log-date { color:#8B5CF6; font-weight:600; min-width:120px; }
+.log-entry .log-hours { color:#FFD700; font-weight:700; }
+.log-entry .log-note { color:#9CA3AF; flex:1; margin:0 16px; font-size:.9rem; }
+.log-entry .log-del { cursor:pointer; color:#6B7280; font-size:1.2rem; }
+.log-entry .log-del:hover { color:#EF4444; }
+
+/* Progress Chart (simple bar) */
+.chart-container { margin:30px 0; }
+
+/* Affiliate / Disclaimer */
+.affiliate-box {
+    background:linear-gradient(135deg,#1a0a2e,#0a1a2e); border:1px solid #8B5CF6;
+    border-radius:12px; padding:16px 20px; margin:24px 0;
+    text-align:center;
+}
+.affiliate-box p { color:#C4B5FD; font-size:.9rem; }
+.affiliate-box a { color:#FFD700; font-weight:600; }
+
+footer { text-align:center; padding:40px 20px; color:#555; font-size:.82rem; border-top:1px solid #1A1A1A; }
+footer a { color:#8B5CF6; }
+
+@media (max-width:700px) {
+    .grid-2 { grid-template-columns:1fr; }
+    .stats-row { grid-template-columns:repeat(2,1fr); }
+    .hero h1 { font-size:2em; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-inner">
+    <a href="../index.html" class="nav-logo">✦ Licht & Schatten</a>
+    <ul class="nav-links">
+        <li><a href="../index.html">🏪 Start</a></li>
+        <li><a href="../blog/">📝 Blog</a></li>
+        <li><a href="../tools/">🧰 Tools</a></li>
+    </ul>
+</div>
+</nav>
+
+<div class="container">
+
+<div class="hero">
+    <h1>📊 Lernfortschritt-Tracker</h1>
+    <p>Verfolge deine Online-Kurse, setze Lernziele und motiviere dich täglich. <strong>100% browserbasiert</strong> – deine Daten bleiben lokal auf deinem Gerät.</p>
+</div>
+
+<!-- Stats -->
+<div class="stats-row" id="statsRow">
+    <div class="stat-card"><div class="num" id="statCourses">0</div><div class="label">📚 Kurse</div></div>
+    <div class="stat-card"><div class="num" id="statHours">0</div><div class="label">⏱ Gelernte Stunden</div></div>
+    <div class="stat-card"><div class="num" id="statDays">0</div><div class="label">📅 Lerntage</div></div>
+    <div class="stat-card"><div class="num" id="statStreak">0</div><div class="label">🔥 Tägliche Serie</div></div>
+</div>
+
+<!-- Main Grid -->
+<div class="grid-2">
+    <!-- Add Course -->
+    <div class="panel">
+        <h2>➕ Neuen Kurs hinzufügen</h2>
+        <div class="form-group">
+            <label>Kursname</label>
+            <input type="text" id="courseName" placeholder="z.B. Python für Anfänger">
+        </div>
+        <div class="form-group">
+            <label>Plattform</label>
+            <select id="coursePlatform">
+                <option value="Udemy">Udemy</option>
+                <option value="Coursera">Coursera</option>
+                <option value="edX">edX</option>
+                <option value="LinkedIn Learning">LinkedIn Learning</option>
+                <option value="Skillshare">Skillshare</option>
+                <option value="YouTube">YouTube</option>
+                <option value="KI-Tutor">KI-Tutor (ChatGPT/Claude)</option>
+                <option value="Fernuni">Fernuniversität</option>
+                <option value="Sonstige">Sonstige</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Gesamtstunden (geschätzt)</label>
+            <input type="number" id="courseHours" placeholder="z.B. 40" min="1" max="1000">
+        </div>
+        <button class="btn btn-primary" onclick="addCourse()">➕ Kurs starten</button>
+    </div>
+
+    <!-- Active Courses -->
+    <div class="panel">
+        <h2>📋 Aktive Kurse</h2>
+        <div id="courseList" class="course-list">
+            <p style="color:#6B7280; text-align:center; padding:20px;">Noch keine Kurse. Starte deinen ersten Kurs!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Log Learning -->
+<div class="panel log-section">
+    <h2>📝 Lernzeit eintragen</h2>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:end;">
+        <div class="form-group" style="flex:1; min-width:150px;">
+            <label>Kurs</label>
+            <select id="logCourse"></select>
+        </div>
+        <div class="form-group" style="flex:0 0 100px;">
+            <label>Stunden</label>
+            <input type="number" id="logHours" placeholder="1" min="0.25" max="24" step="0.25">
+        </div>
+        <div class="form-group" style="flex:2; min-width:200px;">
+            <label>Notiz (optional)</label>
+            <input type="text" id="logNote" placeholder="Was hast du gelernt?">
+        </div>
+        <button class="btn btn-primary" onclick="logLearning()" style="margin-bottom:14px;">✅ Eintragen</button>
+    </div>
+</div>
+
+<!-- Learning Log -->
+<div class="panel log-section" style="margin-top:20px;">
+    <h2>📖 Lerntagebuch</h2>
+    <div id="logList">
+        <p style="color:#6B7280; text-align:center; padding:20px;">Noch keine Einträge. Starte heute mit dem Lernen!</p>
+    </div>
+    <button class="btn btn-danger btn-sm" onclick="clearAll()" style="margin-top:12px;">🗑️ Alle Daten löschen</button>
+</div>
+
+<!-- Affiliate -->
+<div class="affiliate-box">
+    <p>📚 <strong>Lern-Ausrüstung empfohlen:</strong> Tablet mit Stift · E-Reader · Noise-Cancelling-Kopfhörer</p>
+    <p>⭐ <a href="https://www.amazon.de/s?k=online+lernen+ausr%C3%BCstung&tag=ikune21-21" target="_blank" rel="noopener">→ Lern-Hardware bei Amazon entdecken (tag: ikune21-21)</a></p>
+</div>
+
+</div>
+
+<footer>
+    <p>© 2026 <a href="../index.html">Licht und Schatten</a> Verlag. Daten bleiben lokal im Browser.</p>
+    <p><a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></p>
+</footer>
+
+<script>
+// ===== STATE =====
+let state = { courses: [], log: [] };
+
+// ===== LOCAL STORAGE =====
+function saveState() {
+    localStorage.setItem('learningTracker', JSON.stringify(state));
+}
+function loadState() {
+    const raw = localStorage.getItem('learningTracker');
+    if (raw) { state = JSON.parse(raw); }
+}
+
+// ===== ADD COURSE =====
+function addCourse() {
+    const name = document.getElementById('courseName').value.trim();
+    const platform = document.getElementById('coursePlatform').value;
+    const hours = parseFloat(document.getElementById('courseHours').value) || 20;
+    if (!name) { alert('Bitte Kursnamen eingeben!'); return; }
+
+    state.courses.push({
+        id: Date.now(),
+        name: name,
+        platform: platform,
+        totalHours: hours,
+        completedHours: 0,
+        createdAt: new Date().toISOString()
+    });
+
+    document.getElementById('courseName').value = '';
+    document.getElementById('courseHours').value = '';
+    saveState();
+    renderAll();
+}
+
+// ===== DELETE COURSE =====
+function deleteCourse(id) {
+    if (!confirm('Kurs wirklich löschen?')) return;
+    state.courses = state.courses.filter(c => c.id !== id);
+    saveState();
+    renderAll();
+}
+
+// ===== COMPLETE COURSE =====
+function toggleComplete(id) {
+    const course = state.courses.find(c => c.id === id);
+    if (course) {
+        course.completedHours = course.totalHours;
+        saveState();
+        renderAll();
+    }
+}
+
+// ===== LOG LEARNING =====
+function logLearning() {
+    const courseId = parseInt(document.getElementById('logCourse').value);
+    const hours = parseFloat(document.getElementById('logHours').value);
+    const note = document.getElementById('logNote').value.trim();
+    if (!hours || hours <= 0) { alert('Bitte Stunden eintragen!'); return; }
+    if (!courseId) { alert('Bitte Kurs auswählen!'); return; }
+
+    const course = state.courses.find(c => c.id === courseId);
+    if (!course) { alert('Kurs nicht gefunden!'); return; }
+
+    state.log.push({
+        date: new Date().toISOString().split('T')[0],
+        hours: hours,
+        courseId: courseId,
+        courseName: course.name,
+        note: note || '',
+        timestamp: Date.now()
+    });
+
+    course.completedHours = Math.min(course.completedHours + hours, course.totalHours);
+
+    document.getElementById('logHours').value = '';
+    document.getElementById('logNote').value = '';
+    saveState();
+    renderAll();
+}
+
+// ===== DELETE LOG ENTRY =====
+function deleteLog(ts) {
+    const entry = state.log.find(l => l.timestamp === ts);
+    if (entry) {
+        const course = state.courses.find(c => c.id === entry.courseId);
+        if (course) {
+            course.completedHours = Math.max(0, course.completedHours - entry.hours);
+        }
+    }
+    state.log = state.log.filter(l => l.timestamp !== ts);
+    saveState();
+    renderAll();
+}
+
+// ===== CLEAR ALL =====
+function clearAll() {
+    if (!confirm('⚠️ Wirklich ALLE Lern-Daten löschen?')) return;
+    state = { courses: [], log: [] };
+    localStorage.removeItem('learningTracker');
+    renderAll();
+}
+
+// ===== RENDER =====
+function renderAll() {
+    renderStats();
+    renderCourses();
+    renderLog();
+    populateLogCourseSelect();
+}
+
+function renderStats() {
+    const totalCourses = state.courses.length;
+    const totalHours = state.log.reduce((sum, e) => sum + e.hours, 0);
+    const uniqueDays = [...new Set(state.log.map(e => e.date))].length;
+
+    // Streak: consecutive days back from today
+    const days = [...new Set(state.log.map(e => e.date))].sort().reverse();
+    let streak = 0;
+    const today = new Date().toISOString().split('T')[0];
+    for (let i = 0; i < days.length; i++) {
+        const expected = new Date();
+        expected.setDate(expected.getDate() - i);
+        const expectedStr = expected.toISOString().split('T')[0];
+        if (days[i] === expectedStr) { streak++; }
+        else break;
+    }
+
+    document.getElementById('statCourses').textContent = totalCourses;
+    document.getElementById('statHours').textContent = Math.round(totalHours * 10) / 10;
+    document.getElementById('statDays').textContent = uniqueDays;
+    document.getElementById('statStreak').textContent = streak;
+}
+
+function renderCourses() {
+    const container = document.getElementById('courseList');
+    if (state.courses.length === 0) {
+        container.innerHTML = '<p style="color:#6B7280; text-align:center; padding:20px;">Noch keine Kurse. Starte deinen ersten Kurs!</p>';
+        return;
+    }
+    container.innerHTML = state.courses.map(c => {
+        const pct = Math.min(100, Math.round((c.completedHours / c.totalHours) * 100));
+        const completed = pct >= 100;
+        return `<div class="course-item">
+            <div class="top">
+                <div>
+                    <div class="name">${completed ? '✅ ' : ''}${c.name}</div>
+                    <div class="platform">${c.platform} · ${c.totalHours}h gesamt</div>
+                </div>
+                <div class="progress-text">${c.completedHours.toFixed(1)} / ${c.totalHours}h (${pct}%)</div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+            <div class="actions">
+                ${!completed ? `<button class="btn btn-success btn-sm" onclick="toggleComplete(${c.id})">✅ Fertig</button>` : ''}
+                <button class="btn btn-danger btn-sm" onclick="deleteCourse(${c.id})">🗑️</button>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function renderLog() {
+    const container = document.getElementById('logList');
+    if (state.log.length === 0) {
+        container.innerHTML = '<p style="color:#6B7280; text-align:center; padding:20px;">Noch keine Einträge. Starte heute mit dem Lernen!</p>';
+        return;
+    }
+    const sorted = [...state.log].sort((a,b) => b.timestamp - a.timestamp);
+    container.innerHTML = sorted.map(e => `
+        <div class="log-entry">
+            <span class="log-date">📅 ${e.date}</span>
+            <span class="log-hours">⏱ ${e.hours}h</span>
+            <span class="log-note">${e.courseName}${e.note ? ': ' + e.note : ''}</span>
+            <span class="log-del" onclick="deleteLog(${e.timestamp})">✕</span>
+        </div>
+    `).join('');
+}
+
+function populateLogCourseSelect() {
+    const sel = document.getElementById('logCourse');
+    sel.innerHTML = '<option value="">– Kurs wählen –</option>' +
+        state.courses.map(c => `<option value="${c.id}">${c.name} (${c.platform})</option>`).join('');
+}
+
+// ===== INIT =====
+loadState();
+renderAll();
+</script>
+</body>
+</html>
