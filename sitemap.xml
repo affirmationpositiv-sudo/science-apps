@@ -367,6 +367,14 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Blog Artikel #17: KI-Jobs & Karriere 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-jobs-karriere-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Interactive Tools -->
   <url>
     <loc>https://affirmationpositiv-sudo.github.io/science-apps/quiz/</loc>
