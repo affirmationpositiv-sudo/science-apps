@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitnessPro – Deine Transformation beginnt hier</title>
+  <meta name="description" content="Professionelle Fitness-Produkte, Trainingspläne und Supplements für deine beste Version.">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #fff; line-height:1.6; }
+    .container { max-width:1100px; margin:0 auto; padding:0 20px; }
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); padding:80px 0 60px; text-align:center; }
+    .hero h1 { font-size:3em; font-weight:800; background: linear-gradient(135deg, #e94560, #f5a623); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:16px; }
+    .hero p { font-size:1.2em; color:#aaa; max-width:600px; margin:0 auto 30px; }
+    .btn { display:inline-block; padding:16px 40px; border-radius:50px; font-size:1.1em; font-weight:700; text-decoration:none; transition:all .3s; }
+    .btn-primary { background:linear-gradient(135deg, #e94560, #f5a623); color:#fff; }
+    .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(233,69,96,.4); }
+    /* Products */
+    .products { padding:60px 0; }
+    .section-title { font-size:2em; font-weight:700; margin-bottom:40px; text-align:center; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px; }
+    .card { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:16px; padding:24px; transition:all .3s; }
+    .card:hover { border-color:#e94560; transform:translateY(-4px); }
+    .card img { width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:16px; background:#2a2a2a; }
+    .card h3 { font-size:1.3em; margin-bottom:8px; }
+    .card .price { color:#e94560; font-size:1.2em; font-weight:700; margin:8px 0; }
+    .card p { color:#888; font-size:.95em; margin-bottom:16px; }
+    .card .btn { width:100%; text-align:center; font-size:.95em; padding:12px; }
+    /* Testimonials */
+    .testimonials { background:#111; padding:60px 0; }
+    .testimonial { background:#1a1a1a; border-radius:12px; padding:24px; margin-bottom:16px; }
+    .testimonial p { font-style:italic; color:#ccc; }
+    .testimonial .author { color:#e94560; margin-top:12px; font-weight:600; }
+    /* Footer */
+    footer { text-align:center; padding:40px; color:#555; font-size:.9em; border-top:1px solid #1a1a1a; }
+    @media(max-width:768px) { .hero h1 { font-size:2em; } }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <h1>💪 FitnessPro</h1>
+      <p>Premium Fitness-Produkte, die deine Transformation auf das nächste Level bringen. Von Calisthenics bis Heavy Lifting.</p>
+      <a href="#produkte" class="btn btn-primary">Jetzt shoppen →</a>
+    </div>
+  </section>
+
+  <section class="products" id="produkte">
+    <div class="container">
+      <h2 class="section-title">🏆 Unsere Top-Empfehlungen</h2>
+      <div class="grid">
+        <div class="card">
+          <img src="https://placehold.co/600x400/1a1a2e/e94560?text=Calisthenics+Set" alt="Calisthenics Set">
+          <h3>Calisthenics Starter Set</h3>
+          <p>Parallettes, Widerstandsbänder und Klimmzugstange – alles was du für Bodyweight-Training brauchst.</p>
+          <div class="price">€79,99</div>
+          <a href="https://www.amazon.de/dp/EXAMPLE1?tag=fitnesspro-21" class="btn btn-primary" target="_blank" rel="nofollow">Bei Amazon kaufen →</a>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/600x400/16213e/f5a623?text=Proteine" alt="Whey Protein">
+          <h3>Premium Whey Protein</h3>
+          <p>24g Protein pro Portion, keine künstlichen Zusätze. Perfekt für Muskelaufbau und Regeneration.</p>
+          <div class="price">€34,99</div>
+          <a href="https://www.amazon.de/dp/EXAMPLE2?tag=fitnesspro-21" class="btn btn-primary" target="_blank" rel="nofollow">Bei Amazon kaufen →</a>
+        </div>
+        <div class="card">
+          <img src="https://placehold.co/600x400/0f3460/e94560?text=Trainingsplan" alt="Trainingsplan">
+          <h3>90-Tage Transformationsplan</h3>
+          <p>Wissenschaftlich fundierter Trainingsplan für Anfänger und Fortgeschrittene. Inkl. Ernährungsguide.</p>
+          <div class="price">€47,00</div>
+          <a href="https://www.digistore24.com/product/EXAMPLE3?aid=fitnesspro" class="btn btn-primary" target="_blank" rel="nofollow">Jetzt kaufen →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">💬 Was Kunden sagen</h2>
+      <div class="testimonial">
+        <p>"Mit FitnessPro habe ich in 90 Tagen 12kg Fett verloren und meine erste Klimmzug geschafft!"</p>
+        <div class="author">– Markus K., München</div>
+      </div>
+      <div class="testimonial">
+        <p>"Die Qualität der Produkte ist unglaublich. Besonders das Whey Protein schmeckt besser als alles andere."</p>
+        <div class="author">– Sarah L., Berlin</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>FitnessPro ist ein Affiliate-Partner von Amazon und Digistore24.</p>
+      <p>© 2026 FitnessPro – Deine Transformation beginnt hier. | <a href="#" style="color:#555;">Impressum</a> | <a href="#" style="color:#555;">Datenschutz</a></p>
+    </div>
+  </footer>
+</body>
+</html>
