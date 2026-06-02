@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKUNE Prompt Pack: KI-Bilder & Design PRO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        ::selection { background: #f59e0b; color: #0a0a1a; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        .nav-bar { padding: 20px 0; border-bottom: 1px solid rgba(245,158,11,0.1); display: flex; align-items: center; justify-content: space-between; }
+        .nav-bar .logo-small { font-weight: 900; font-size: 1.3rem; letter-spacing: 4px; color: #f59e0b; text-decoration: none; text-transform: uppercase; }
+        .nav-bar a { color: #888; text-decoration: none; font-size: 0.85rem; }
+        .nav-bar a:hover { color: #f59e0b; }
+
+        .product-hero { padding: 60px 0 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .product-hero .preview-box { background: linear-gradient(135deg, #1a280a, #2a4a1a); border: 1px solid rgba(245,158,11,0.2); border-radius: 16px; padding: 40px 30px; min-height: 350px; display: flex; align-items: center; justify-content: center; font-size: 6rem; position: relative; overflow: hidden; }
+        .product-hero .preview-box::after { content: '200 Prompts'; position: absolute; bottom: 20px; right: 20px; background: rgba(245,158,11,0.15); color: #f59e0b; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; }
+        .product-hero .info h1 { font-size: 2rem; color: #fff; margin-bottom: 10px; }
+        .product-hero .info .subtitle { color: #f59e0b; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
+        .product-hero .info .desc { color: #aaa; font-size: 1rem; margin-bottom: 20px; }
+        .product-hero .info .price-block { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+        .product-hero .info .price-block .price { font-size: 2.5rem; font-weight: 800; color: #f59e0b; }
+        .product-hero .info .price-block .savings { background: rgba(245,158,11,0.1); color: #f59e0b; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+
+        .btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #0a0a1a; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; padding: 14px 36px; border-radius: 8px; text-decoration: none; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3); }
+        .btn-large { padding: 16px 48px; font-size: 1rem; }
+
+        .features-section { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .features-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 35px; }
+        .features-section h2 span { color: #f59e0b; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .feature-item { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.1); border-radius: 10px; padding: 20px; }
+        .feature-item .icon { font-size: 1.8rem; margin-bottom: 8px; }
+        .feature-item h4 { color: #fff; margin-bottom: 6px; }
+        .feature-item p { color: #999; font-size: 0.85rem; }
+
+        .categories-section { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .categories-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 30px; }
+        .categories-section h2 span { color: #f59e0b; }
+        .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+        .cat-item { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.1); border-radius: 10px; padding: 18px; text-align: center; }
+        .cat-item h4 { color: #f59e0b; font-size: 0.95rem; margin-bottom: 4px; }
+        .cat-item p { color: #777; font-size: 0.8rem; }
+
+        .preview-section { padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .preview-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 15px; }
+        .preview-section h2 span { color: #f59e0b; }
+        .preview-section > .container > p { text-align: center; color: #888; margin-bottom: 30px; }
+        .prompt-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .prompt-item { background: rgba(245,158,11,0.03); border-left: 3px solid #f59e0b; padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 0.85rem; color: #ccc; font-family: 'Courier New', monospace; line-height: 1.5; }
+        .prompt-item .prompt-num { color: #f59e0b; font-weight: 700; display: block; margin-bottom: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .cta-section { padding: 60px 0; text-align: center; border-top: 1px solid rgba(245,158,11,0.1); border-bottom: 1px solid rgba(245,158,11,0.1); }
+        .cta-section h2 { font-size: 2rem; color: #fff; margin-bottom: 10px; }
+        .cta-section h2 span { color: #f59e0b; }
+        .cta-section p { color: #aaa; margin-bottom: 25px; font-size: 1rem; }
+        .cta-section .paypal-note { color: #666; font-size: 0.8rem; margin-top: 10px; }
+
+        .faq-section { padding: 40px 0; }
+        .faq-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 30px; }
+        .faq-section h2 span { color: #f59e0b; }
+        .faq-grid { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+        .faq-item { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.1); border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 16px 20px; color: #fff; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; }
+        .faq-question:hover { background: rgba(245,158,11,0.05); }
+        .faq-question .icon { color: #f59e0b; transition: transform 0.3s; }
+        .faq-item.active .faq-question .icon { transform: rotate(45deg); }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #999; font-size: 0.85rem; line-height: 1.7; }
+        .faq-item.active .faq-answer { padding: 0 20px 16px; max-height: 300px; }
+
+        footer { background: linear-gradient(135deg, #0a0a1a, #050510); border-top: 1px solid rgba(245,158,11,0.1); padding: 40px 0; text-align: center; }
+        footer .footer-logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 4px; color: #f59e0b; margin-bottom: 10px; }
+        footer p { color: #666; font-size: 0.85rem; }
+        footer a { color: #f59e0b; text-decoration: none; }
+
+        @media (max-width: 700px) { .product-hero { grid-template-columns: 1fr; gap: 30px; } .product-hero .preview-box { min-height: 200px; font-size: 4rem; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav-bar">
+        <a href="index.html" class="logo-small">IKUNE</a>
+        <a href="index.html">← Zurück zum Shop</a>
+    </div>
+</div>
+
+<section class="container">
+    <div class="product-hero">
+        <div class="preview-box">🎨</div>
+        <div class="info">
+            <div class="subtitle">Prompt Pack · PDF + .txt</div>
+            <h1>KI-Bilder &amp; Design PRO</h1>
+            <p class="desc">200 Premium-Prompts für Midjourney, DALL-E 3 &amp; Stable Diffusion. Von fotorealistischen Produktaufnahmen bis zu Fantasy-Kunst – mit Stilangaben und Techniken.</p>
+            <div class="price-block">
+                <div class="price">€12,99</div>
+                <div class="savings">Sofort-Download</div>
+            </div>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="affirmation.positiv@gmail.com">
+                <input type="hidden" name="item_name" value="IKUNE Prompt Pack Bilder PRO">
+                <input type="hidden" name="amount" value="12.99">
+                <input type="hidden" name="currency_code" value="EUR">
+                <input type="hidden" name="return" value="https://affirmationpositiv-sudo.github.io/science-apps/shop/thanks.html">
+                <button type="submit" class="btn btn-large">Jetzt kaufen – €12,99</button>
+            </form>
+            <p style="color:#666; font-size:0.8rem; margin-top:10px;">✓ Sichere Zahlung via PayPal · 14 Tage Geld-zurück-Garantie</p>
+        </div>
+    </div>
+</section>
+
+<section class="features-section">
+    <div class="container">
+        <h2>Was du <span>bekommst</span></h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="icon">🎨</div>
+                <h4>200 Premium-Prompts</h4>
+                <p>Für Midjourney, DALL-E 3 und Stable Diffusion – mit Stilangaben für jedes KI-Tool.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">📂</div>
+                <h4>9 spezialisierte Kategorien</h4>
+                <p>Von Midjourney Styles über Character Design bis zu UI/UX Mockups.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🎭</div>
+                <h4>Diverse Kunststile</h4>
+                <p>Von Renaissance-Ölgemälde über Cyberpunk bis Studio Ghibli – über 40 Stilrichtungen.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">📸</div>
+                <h4>Product Photography</h4>
+                <p>Spezielle Prompts für professionelle Produktfotografie mit Lichtsetzung und Komposition.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🏷️</div>
+                <h4>Logo &amp; Branding</h4>
+                <p>Komplette Branding-Prompts inkl. Farbpaletten, Icons und Visitenkarten-Designs.</p>
+            </div>
+            <div class="feature-item">
+                <div class="icon">🎮</div>
+                <h4>Fantasy &amp; Sci-Fi</h4>
+                <p>Epische Welten, Kreaturen und Charaktere – bereit für Spiele oder Illustrationen.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="categories-section">
+    <div class="container">
+        <h2>Alle <span>Kategorien</span></h2>
+        <div class="cat-grid">
+            <div class="cat-item"><h4>Midjourney Styles</h4><p>40 Prompts</p></div>
+            <div class="cat-item"><h4>DALL-E Prompts</h4><p>30 Prompts</p></div>
+            <div class="cat-item"><h4>Stable Diffusion</h4><p>30 Prompts</p></div>
+            <div class="cat-item"><h4>Character Design</h4><p>20 Prompts</p></div>
+            <div class="cat-item"><h4>Product Photography</h4><p>20 Prompts</p></div>
+            <div class="cat-item"><h4>Logo &amp; Branding</h4><p>20 Prompts</p></div>
+            <div class="cat-item"><h4>Fantasy &amp; Sci-Fi</h4><p>20 Prompts</p></div>
+            <div class="cat-item"><h4>UI/UX Mockups</h4><p>10 Prompts</p></div>
+            <div class="cat-item"><h4>Social Media Graphics</h4><p>10 Prompts</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="preview-section">
+    <div class="container">
+        <h2>Prompt-<span>Vorschau</span></h2>
+        <p>Einblick in 10 der 200 Premium-Prompts aus dem Pack</p>
+        <div class="prompt-list">
+            <div class="prompt-item"><span class="prompt-num">#1 – Midjourney Surreal</span>Ein [PRODUKT] in einer surrealistischen Traumlandschaft, pastellfarben, weiche Übergänge, ätherisch – Midjourney V6 Stil: surreal, pastell, cineastisch, 8k.</div>
+            <div class="prompt-item"><span class="prompt-num">#5 – Viktorianisch</span>Ein Porträt eines [CHARAKTER] im Stil der viktorianischen Porträtmalerei, altmodisch, Öl auf Leinwand.</div>
+            <div class="prompt-item"><span class="prompt-num">#15 – Luxus Werbung</span>Ein [PRODUKT] im Glamour-Stil einer Luxus-Werbung, goldenes Licht, elegante Komposition.</div>
+            <div class="prompt-item"><span class="prompt-num">#41 – DALL-E Realistisch</span>Erstelle ein fotorealistisches Bild von [PRODUKT] in einer Alltagssituation mit natürlichem Licht.</div>
+            <div class="prompt-item"><span class="prompt-num">#71 – Stable Diffusion</span>Generiere ein hochdetailliertes Fantasy-Bild von [THEMA] mit Stable Diffusion, negative prompts: Text, Wasserzeichen.</div>
+            <div class="prompt-item"><span class="prompt-num">#101 – Fantasy-RPG Held</span>Entwerfe einen Heldencharakter für ein Fantasy-RPG: [NAME], [KLASSE], [HINTERGRUND], inkl. Rüstung.</div>
+            <div class="prompt-item"><span class="prompt-num">#121 – Marmorsockel</span>Fotografiere [PRODUKT] auf einem Marmorsockel mit sanftem Seitenlicht und Schatten.</div>
+            <div class="prompt-item"><span class="prompt-num">#141 – Minimalistisches Logo</span>Entwerfe ein minimalistisches Logo für [MARKE] mit einem [SYMBOL] assoziiert.</div>
+            <div class="prompt-item"><span class="prompt-num">#161 – Schwebende Insel</span>Erstelle eine Fantasy-Stadt auf einer schwebenden Insel mit Wasserfällen, die ins Leere fallen.</div>
+            <div class="prompt-item"><span class="prompt-num">#181 – Mobile App Mockup</span>Erstelle ein Mobile-App-Mockup für eine [APP-TYP]-App mit modernem UI-Design.</div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Bereit für <span>bessere KI-Bilder</span>?</h2>
+        <p>200 Prompts. 9 Kategorien. Ein Klick.</p>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+            <input type="hidden" name="cmd" value="_xclick">
+            <input type="hidden" name="business" value="affirmation.positiv@gmail.com">
+            <input type="hidden" name="item_name" value="IKUNE Prompt Pack Bilder PRO">
+            <input type="hidden" name="amount" value="12.99">
+            <input type="hidden" name="currency_code" value="EUR">
+            <input type="hidden" name="return" value="https://affirmationpositiv-sudo.github.io/science-apps/shop/thanks.html">
+            <button type="submit" class="btn btn-large">Jetzt kaufen – €12,99</button>
+        </form>
+        <p class="paypal-note">✓ PayPal-Zahlung · 14 Tage Geld-zurück-Garantie · Sofort-Download</p>
+    </div>
+</section>
+
+<section class="faq-section">
+    <div class="container">
+        <h2>Häufige <span>Fragen</span></h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Sind die Prompts für Midjourney optimiert?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Ja, die erste Kategorie mit 40 Prompts ist speziell für Midjourney V6 mit detaillierten Stilangaben formuliert. Dazu kommen 30 DALL-E und 30 Stable Diffusion Prompts.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Sind Anwendungsbeispiele enthalten?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Ja, jeder Prompt enthält Platzhalter wie [PRODUKT] oder [THEMA], die du durch deine eigenen Begriffe ersetzt. So passt du die Prompts flexibel an.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Kann ich die Bilder kommerziell nutzen?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Ja, die generierten Bilder dürfen kommerziell genutzt werden. Die Prompts selbst dürfen nicht weiterverkauft werden.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Brauche ich ein Midjourney-Abo?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Für die Midjourney-Prompts ja. Die DALL-E-Prompts funktionieren mit ChatGPT Plus, die Stable-Diffusion-Prompts mit kostenlosen Tools wie Automatic1111 oder ComfyUI.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-logo">IKUNE</div>
+        <p>© 2025 IKUNE Coach. Alle Rechte vorbehalten.</p>
+        <p style="margin-top:6px; font-size:0.8rem;">Dein Code. Dein Erfolg.</p>
+        <p style="margin-top:4px;"><a href="index.html">← Zurück zum Shop</a></p>
+    </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

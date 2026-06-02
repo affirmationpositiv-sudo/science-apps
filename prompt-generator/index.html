@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKUNE Prompt Generator — Premium Prompt Erstellung</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a1a;--bg2:#0f0f25;--card:#12122a;--card2:#181840;--gold:#f59e0b;--gold2:#d97706;--indigo:#6366f1;--indigo2:#4f46e5;--text:#e8e8f0;--text2:#9898b8;--border:#1e1e40;--border2:#2a2a55;--danger:#ef4444;--success:#22c55e;--radius:12px;--radius2:8px;--shadow:0 8px 32px rgba(0,0,0,0.4);--font:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6;overflow-x:hidden}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold2)}
+.container{max-width:1200px;margin:0 auto;padding:16px 20px}
+@media(min-width:768px){.container{padding:24px 32px}}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;padding:12px 0}
+header .container{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700}
+.logo svg{flex-shrink:0}
+.logo span{background:linear-gradient(135deg,var(--gold),var(--indigo));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.prompt-counter{background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius2);padding:6px 14px;font-size:13px;color:var(--text2);white-space:nowrap;display:flex;align-items:center;gap:6px}
+.prompt-counter .count{color:var(--gold);font-weight:700}
+.prompt-counter .count.used{color:var(--danger)}
+.license-badge{background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:var(--radius2);padding:4px 12px;font-size:12px;font-weight:600;color:#000;display:none}
+
+/* TABS */
+.tab-bar{display:flex;gap:4px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:4px;margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap}
+.tab-btn{flex:1;min-width:0;padding:10px 12px;border:none;background:transparent;color:var(--text2);font-size:13px;font-weight:600;border-radius:var(--radius2);cursor:pointer;transition:all 0.25s ease;white-space:nowrap;display:flex;align-items:center;justify-content:center;gap:6px}
+.tab-btn:hover{color:var(--text);background:rgba(255,255,255,0.04)}
+.tab-btn.active{background:linear-gradient(135deg,rgba(245,158,11,0.15),rgba(99,102,241,0.15));color:var(--gold);box-shadow:0 0 20px rgba(245,158,11,0.08)}
+@media(max-width:500px){.tab-btn{font-size:12px;padding:8px 8px;min-width:auto}.tab-btn span{display:none}}
+
+/* PANELS */
+.panel{display:none;animation:fadeSlide 0.35s ease}
+.panel.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;transition:border-color 0.3s}
+.card:hover{border-color:var(--border2)}
+.card-title{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+.card-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:600px){.card-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.card-grid.grid-3{grid-template-columns:1fr 1fr 1fr}}
+
+/* FORM ELEMENTS */
+label{display:block;font-size:13px;font-weight:500;color:var(--text2);margin-bottom:4px}
+textarea,.input-field,select{width:100%;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);color:var(--text);font-size:14px;font-family:var(--font);transition:all 0.25s;outline:none}
+textarea:focus,.input-field:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,158,11,0.1)}
+textarea{resize:vertical;min-height:70px}
+select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%239898b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;cursor:pointer}
+select option{background:var(--card);color:var(--text)}
+input[type="range"]{-webkit-appearance:none;appearance:none;width:100%;height:4px;background:var(--border2);border-radius:2px;outline:none;margin:8px 0}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--indigo));cursor:pointer;border:2px solid var(--card);box-shadow:0 0 10px rgba(245,158,11,0.3)}
+input[type="range"]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--indigo));cursor:pointer;border:2px solid var(--card)}
+.range-value{font-size:14px;font-weight:600;color:var(--gold);text-align:right}
+.checkbox-grid{display:flex;flex-wrap:wrap;gap:8px}
+.checkbox-item{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all 0.2s;font-size:13px;color:var(--text2);user-select:none}
+.checkbox-item:hover{border-color:var(--gold);color:var(--text)}
+.checkbox-item.selected{background:rgba(245,158,11,0.1);border-color:var(--gold);color:var(--gold)}
+.checkbox-item input{display:none}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed var(--border2);border-radius:var(--radius);padding:24px;text-align:center;cursor:pointer;transition:all 0.3s;position:relative}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--gold);background:rgba(245,158,11,0.04)}
+.upload-zone.has-files{border-color:var(--indigo);border-style:solid}
+.upload-zone input{display:none}
+.upload-zone .icon{font-size:32px;margin-bottom:8px}
+.upload-zone .text{font-size:13px;color:var(--text2)}
+.upload-zone .subtext{font-size:11px;color:var(--text2);opacity:0.6;margin-top:4px}
+.upload-thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.upload-thumb{position:relative;width:60px;height:60px;border-radius:8px;overflow:hidden;border:1px solid var(--border2)}
+.upload-thumb img{width:100%;height:100%;object-fit:cover}
+.upload-thumb .remove{position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;background:var(--danger);color:#fff;border:none;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;line-height:1;padding:0}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;border:none;border-radius:var(--radius2);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.25s;white-space:nowrap;font-family:var(--font)}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:var(--card2);color:var(--text);border:1px solid var(--border2)}
+.btn-secondary:hover{background:var(--border2);border-color:var(--text2)}
+.btn-indigo{background:linear-gradient(135deg,var(--indigo),var(--indigo2));color:#fff}
+.btn-indigo:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(99,102,241,0.3)}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.btn-block{width:100%}
+
+/* OUTPUT */
+.output-card{background:linear-gradient(135deg,var(--card),rgba(99,102,241,0.06));border:1px solid rgba(99,102,241,0.2);border-radius:var(--radius);padding:20px;margin-top:16px;display:none;animation:fadeSlide 0.35s ease}
+.output-card.visible{display:block}
+.output-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.output-header h3{font-size:16px;font-weight:600;color:var(--gold)}
+.output-content{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:16px;font-family:'SF Mono','Fira Code','JetBrains Mono',monospace;font-size:13px;line-height:1.7;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:400px;overflow-y:auto}
+.output-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:10000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{pointer-events:auto;padding:12px 20px;border-radius:var(--radius2);font-size:13px;font-weight:500;color:#fff;animation:toastIn 0.3s ease;max-width:320px;box-shadow:var(--shadow)}
+.toast.success{background:#065f46;border:1px solid var(--success)}
+.toast.error{background:#7f1d1d;border:1px solid var(--danger)}
+.toast.info{background:var(--card2);border:1px solid var(--indigo)}
+@keyframes toastIn{from{opacity:0;transform:translateY(20px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* MODAL */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:5000;display:none;align-items:center;justify-content:center;padding:20px;animation:fadeSlide 0.3s ease}
+.modal-overlay.visible{display:flex}
+.modal{background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);max-width:560px;width:100%;padding:32px;box-shadow:var(--shadow);max-height:90vh;overflow-y:auto;animation:modalIn 0.3s ease}
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal h2{font-size:22px;font-weight:700;margin-bottom:8px;text-align:center}
+.modal p{color:var(--text2);text-align:center;font-size:14px;margin-bottom:24px}
+.modal-close{float:right;background:none;border:none;color:var(--text2);font-size:24px;cursor:pointer;padding:0;line-height:1}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px}
+@media(min-width:500px){.pricing-grid{grid-template-columns:1fr 1fr}}
+.pricing-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all 0.3s}
+.pricing-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.pricing-card.featured{border-color:var(--gold);background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(99,102,241,0.08));position:relative}
+.pricing-card.featured::before{content:'BESTSELLER';position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;font-size:10px;font-weight:700;padding:3px 12px;border-radius:999px;letter-spacing:0.5px}
+.pricing-card h3{font-size:16px;font-weight:600;margin-bottom:4px}
+.pricing-card .price{font-size:32px;font-weight:800;color:var(--gold);margin:8px 0}
+.pricing-card .price small{font-size:14px;font-weight:400;color:var(--text2)}
+.pricing-card ul{list-style:none;padding:0;margin:12px 0 16px;text-align:left}
+.pricing-card ul li{padding:4px 0;font-size:13px;color:var(--text2);display:flex;align-items:center;gap:6px}
+.pricing-card ul li::before{content:'✓';color:var(--success);font-weight:700}
+
+/* HISTORY */
+.history-item{padding:12px 16px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);margin-bottom:8px;cursor:pointer;transition:all 0.2s}
+.history-item:hover{border-color:var(--gold);background:rgba(245,158,11,0.04)}
+.history-item .hi-type{font-size:11px;font-weight:600;text-transform:uppercase;color:var(--indigo);letter-spacing:0.5px}
+.history-item .hi-concept{font-size:13px;color:var(--text);margin:2px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.history-item .hi-date{font-size:11px;color:var(--text2)}
+
+/* TEMPLATES */
+.template-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:600px){.template-grid{grid-template-columns:1fr 1fr 1fr}}
+.template-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius2);padding:14px;cursor:pointer;transition:all 0.25s;text-align:center}
+.template-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 4px 16px rgba(245,158,11,0.1)}
+.template-card .t-icon{font-size:24px;margin-bottom:4px}
+.template-card .t-name{font-size:13px;font-weight:500;color:var(--text)}
+.template-card .t-desc{font-size:11px;color:var(--text2);margin-top:2px}
+
+/* SHARE MODAL */
+.share-grid{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.share-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 24px;border-radius:var(--radius2);border:none;cursor:pointer;font-size:13px;font-weight:500;transition:all 0.2s;min-width:100px;color:#fff}
+.share-btn .s-icon{font-size:28px}
+.share-btn.whatsapp{background:#25D366}.share-btn.whatsapp:hover{background:#1da851}
+.share-btn.telegram{background:#0088cc}.share-btn.telegram:hover{background:#0077b5}
+.share-btn.copy{background:var(--card2);border:1px solid var(--border2);color:var(--text)}.share-btn.copy:hover{background:var(--border2)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text2)}
+
+/* SUB TABS */
+.sub-tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--bg2);border-radius:var(--radius2);padding:3px;overflow-x:auto}
+.sub-tab{flex:1;min-width:0;padding:8px 12px;border:none;background:transparent;color:var(--text2);font-size:12px;font-weight:500;border-radius:6px;cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.sub-tab:hover{color:var(--text)}
+.sub-tab.active{background:var(--card);color:var(--gold);box-shadow:0 2px 8px rgba(0,0,0,0.2)}
+
+/* SECTION TOGGLE */
+.section-toggle{display:none}
+@media(max-width:599px){.section-toggle{display:block;margin-bottom:12px}}
+.section-toggle summary{cursor:pointer;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius2);font-size:13px;font-weight:600;color:var(--text2);transition:all 0.2s}
+.section-toggle summary:hover{border-color:var(--gold);color:var(--gold)}
+.section-toggle[open] summary{border-color:var(--gold);color:var(--gold);border-radius:var(--radius2) var(--radius2) 0 0}
+.section-toggle .section-body{padding:16px;background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius2) var(--radius2)}
+
+/* RESPONSIVE FIXES */
+@media(max-width:400px){.card{padding:14px}.modal{padding:20px}.pricing-card{padding:14px}}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:40px 20px;color:var(--text2)}
+.empty-state .icon{font-size:48px;margin-bottom:12px}
+.empty-state h3{font-size:16px;color:var(--text);margin-bottom:4px}
+.empty-state p{font-size:13px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<a href="#" class="logo" onclick="event.preventDefault();switchTab('video')">
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="url(#lg)"/><path d="M8 10l8 4-8 4V10z" fill="#0a0a1a"/><defs><linearGradient id="lg" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#f59e0b"/><stop offset="1" stop-color="#6366f1"/></linearGradient></defs></svg>
+<span>IKUNE Prompt Generator</span>
+</a>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+<div class="license-badge" id="licenseBadge"></div>
+<div class="prompt-counter" id="promptCounter">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+Frei: <span class="count" id="promptCountDisplay">3</span>/3
+</div>
+</div>
+</div>
+</header>
+
+<div class="container">
+
+<!-- TAB BAR -->
+<div class="tab-bar" role="tablist">
+<button class="tab-btn active" data-tab="video" role="tab" onclick="switchTab('video')">🎬 <span>Video</span></button>
+<button class="tab-btn" data-tab="image" role="tab" onclick="switchTab('image')">🖼️ <span>Bild</span></button>
+<button class="tab-btn" data-tab="website" role="tab" onclick="switchTab('website')">🌐 <span>Website</span></button>
+<button class="tab-btn" data-tab="general" role="tab" onclick="switchTab('general')">📝 <span>Allzweck</span></button>
+</div>
+
+<!-- SUB TABS -->
+<div class="sub-tabs" id="subTabs">
+<button class="sub-tab active" data-sub="generator" onclick="switchSubTab('generator')">⚡ Generator</button>
+<button class="sub-tab" data-sub="templates" onclick="switchSubTab('templates')">📁 Vorlagen</button>
+<button class="sub-tab" data-sub="history" onclick="switchSubTab('history')">📜 Verlauf</button>
+</div>
+
+<!-- ========== VIDEO PANEL ========== -->
+<div class="panel active" id="panel-video" data-panel>
+
+<div class="sub-panel" data-subpanel="generator">
+<div class="card">
+<div class="card-title">Konzept</div>
+<textarea id="vConcept" placeholder="z.B. Eine futuristische Stadt in der Dämmerung, mit fliegenden Autos und Neonlichtern..."></textarea>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">CFG Scale</div>
+<input type="range" id="vCfg" min="0.1" max="1.0" step="0.05" value="0.7">
+<div class="range-value" id="vCfgVal">0.70</div>
+</div>
+<div class="card">
+<div class="card-title">Modell</div>
+<select id="vModel">
+<option>Gemini 2.5 Flash</option>
+<option>Gemini 2.0 Pro</option>
+<option>Claude 3.5 Sonnet</option>
+<option>GPT-4o</option>
+<option>DeepSeek-V3</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Referenzbilder (optional)</div>
+<div class="upload-zone" id="vUpload" onclick="document.getElementById('vFileInput').click()">
+<div class="icon">📤</div>
+<div class="text">Bilder hier ablegen oder klicken zum Hochladen</div>
+<div class="subtext">Max. 10 Bilder (JPG, PNG, WebP)</div>
+<input type="file" id="vFileInput" accept="image/*" multiple onchange="handleUpload(event,'v')">
+<div class="upload-thumbs" id="vThumbs"></div>
+</div>
+</div>
+
+<div class="card-grid grid-3">
+<div class="card">
+<div class="card-title">Stil</div>
+<select id="vStyle">
+<option>Einfach</option><option>Kinematografisch</option><option>Animiert</option>
+<option>Dokumentation</option><option>Musikvideo</option><option>Horror</option>
+<option>Sci-Fi</option><option>Fantasy</option><option>Romantisch</option><option>Thriller</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Kamera-Stil</div>
+<select id="vCamStyle">
+<option>Keiner</option><option>Steadicam</option><option>Handheld</option><option>Drohne</option>
+<option>Stativ</option><option>POV</option><option>Tracking</option><option>Dolly</option><option>Kran</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Kamera-Richtung</div>
+<select id="vCamDir">
+<option>Keine</option><option>Frontal</option><option>Seitenprofil</option><option>Über-die-Schulter</option>
+<option>Vogelperspektive</option><option>Froschperspektive</option><option>Holländischer Winkel</option><option>Augenhöhe</option>
+</select>
+</div>
+</div>
+
+<div class="card-grid grid-3">
+<div class="card">
+<div class="card-title">Tempo</div>
+<select id="vPacing">
+<option>Keine</option><option>Langsam & Atmosphärisch</option><option>Mittel</option>
+<option>Schnell</option><option>Montage</option><option>Zeitraffer</option><option>Zeitlupe</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Spezialeffekte</div>
+<select id="vFX">
+<option>Keine</option><option>VFX-lastig</option><option>Praktische Effekte</option>
+<option>Minimal</option><option>Glitch</option><option>VHS</option><option>Filmkörnung</option>
+<option>Lens Flare</option><option>Bokeh</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Prompt-Länge</div>
+<select id="vLength">
+<option>Kurz</option><option>Mittel</option><option>Lang</option><option>Extrem detailliert</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Benutzerdefinierte Elemente (optional)</div>
+<textarea id="vCustom" placeholder="Füge spezifische Elemente, Charaktere oder Anforderungen hinzu..."></textarea>
+</div>
+
+<button class="btn btn-primary btn-block" onclick="generatePrompt('video')">🚀 Prompt Generieren</button>
+</div>
+
+<div class="sub-panel" data-subpanel="templates" style="display:none">
+<div class="card">
+<div class="card-title">📁 Video-Vorlagen</div>
+<div class="template-grid" id="vTemplates"></div>
+</div>
+</div>
+
+<div class="sub-panel" data-subpanel="history" style="display:none">
+<div class="card">
+<div class="card-title">📜 Verlauf</div>
+<div id="historyList"></div>
+</div>
+</div>
+</div>
+
+<!-- ========== IMAGE PANEL ========== -->
+<div class="panel" id="panel-image" data-panel>
+
+<div class="sub-panel" data-subpanel="generator">
+<div class="card">
+<div class="card-title">Konzept</div>
+<textarea id="iConcept" placeholder="z.B. Eine einsame Kiefer auf einer nebligen Bergspitze bei Sonnenaufgang..."></textarea>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">CFG Scale</div>
+<input type="range" id="iCfg" min="0.1" max="1.0" step="0.05" value="0.7">
+<div class="range-value" id="iCfgVal">0.70</div>
+</div>
+<div class="card">
+<div class="card-title">Modell</div>
+<select id="iModel">
+<option>Midjourney v6</option><option>DALL-E 3</option><option>Stable Diffusion XL</option>
+<option>Flux Pro</option><option>Ideogram</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Referenzbilder (optional)</div>
+<div class="upload-zone" id="iUpload" onclick="document.getElementById('iFileInput').click()">
+<div class="icon">📤</div>
+<div class="text">Bilder hier ablegen oder klicken zum Hochladen</div>
+<div class="subtext">Max. 10 Bilder (JPG, PNG, WebP)</div>
+<input type="file" id="iFileInput" accept="image/*" multiple onchange="handleUpload(event,'i')">
+<div class="upload-thumbs" id="iThumbs"></div>
+</div>
+</div>
+
+<div class="card-grid grid-3">
+<div class="card">
+<div class="card-title">Stil</div>
+<select id="iStyle">
+<option>Fotorealistisch</option><option>Ölgemälde</option><option>Aquarell</option><option>Anime</option>
+<option>Pixel Art</option><option>3D Render</option><option>Skizze</option><option>Minimalistisch</option>
+<option>Surreal</option><option>Cyberpunk</option><option>Fantasy</option><option>Steampunk</option>
+<option>Vintage</option><option>Modern</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Beleuchtung</div>
+<select id="iLighting">
+<option>Keine</option><option>Goldene Stunde</option><option>Blaue Stunde</option><option>Studio</option>
+<option>Natürlich</option><option>Dramatisch</option><option>Randlicht</option><option>Gegenlicht</option>
+<option>Weich</option><option>Hart</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Komposition</div>
+<select id="iComp">
+<option>Keine</option><option>Drittel-Regel</option><option>Zentriert</option><option>Symmetrisch</option>
+<option>Führende Linien</option><option>Rahmung</option><option>Diagonalen</option><option>Negativer Raum</option>
+</select>
+</div>
+</div>
+
+<div class="card-grid grid-3">
+<div class="card">
+<div class="card-title">Farbpalette</div>
+<select id="iColor">
+<option>Keine</option><option>Monochromatisch</option><option>Komplementär</option><option>Analog</option>
+<option>Pastell</option><option>Neon</option><option>Erdtöne</option><option>Schwarz-Weiß</option>
+<option>Warm</option><option>Kalt</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Seitenverhältnis</div>
+<select id="iAspect">
+<option>16:9</option><option>4:3</option><option>1:1</option><option>9:16</option><option>3:2</option><option>2:3</option><option>21:9</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Stimmung</div>
+<select id="iMood">
+<option>Keine</option><option>Friedlich</option><option>Dramatisch</option><option>Geheimnisvoll</option>
+<option>Fröhlich</option><option>Melancholisch</option><option>Episch</option><option>Intim</option>
+<option>Chaotisch</option><option>Verträumt</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Benutzerdefinierte Elemente (optional)</div>
+<textarea id="iCustom" placeholder="Spezifische Details, Charaktere, Objekte oder Anforderungen..."></textarea>
+</div>
+
+<button class="btn btn-primary btn-block" onclick="generatePrompt('image')">🚀 Prompt Generieren</button>
+</div>
+
+<div class="sub-panel" data-subpanel="templates" style="display:none">
+<div class="card">
+<div class="card-title">📁 Bild-Vorlagen</div>
+<div class="template-grid" id="iTemplates"></div>
+</div>
+</div>
+
+<div class="sub-panel" data-subpanel="history" style="display:none">
+<div class="card">
+<div class="card-title">📜 Verlauf</div>
+<div id="historyList2"></div>
+</div>
+</div>
+</div>
+
+<!-- ========== WEBSITE PANEL ========== -->
+<div class="panel" id="panel-website" data-panel>
+
+<div class="sub-panel" data-subpanel="generator">
+<div class="card">
+<div class="card-title">Konzept</div>
+<textarea id="wConcept" placeholder="Beschreibe deine Website-Idee... z.B. Eine moderne SaaS-Landingpage für KI-gestützte Projektmanagement-Tools"></textarea>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">Website-Typ</div>
+<select id="wType">
+<option>Landing Page</option><option>E-Commerce</option><option>Blog</option><option>Portfolio</option>
+<option>SaaS Dashboard</option><option>Business-Website</option><option>Bildung</option>
+<option>Community</option><option>Web-App</option><option>Mobile-First</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Design-Stil</div>
+<select id="wDesign">
+<option>Minimal</option><option>Modern</option><option>Corporate</option><option>Kreativ</option>
+<option>Luxus</option><option>Verspielt</option><option>Technisch</option><option>Redaktionell</option>
+<option>Dark Mode</option><option>Glasmorphismus</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Farbschema</div>
+<select id="wColor">
+<option>Keine</option><option>Professionelles Blau</option><option>Warme Erdtöne</option><option>Tech Grün</option>
+<option>Luxuriöses Gold</option><option>Kreatives Lila</option><option>Gesundheits-Mint</option>
+<option>Energetisches Orange</option><option>Kühles Grau</option>
+</select>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">Seiten</div>
+<div class="checkbox-grid" id="wPagesGrid">
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Home">🏠 Home</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Über uns">👥 Über uns</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Preise">💲 Preise</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Features">⭐ Features</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Kontakt">📞 Kontakt</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Blog">📝 Blog</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="FAQ">❓ FAQ</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Galerie">🖼️ Galerie</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Testimonials">💬 Testimonials</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Dashboard">📊 Dashboard</label>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Features</div>
+<div class="checkbox-grid" id="wFeaturesGrid">
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Hero Section">🎯 Hero</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Navigation">🧭 Navigation</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Formulare">📋 Formulare</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Animationen">✨ Animationen</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Suche">🔍 Suche</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Filter">🔎 Filter</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Chat">💬 Chat</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Karten">🗺️ Karten</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Social Links">🔗 Social</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Newsletter">📧 Newsletter</label>
+<label class="checkbox-item" onclick="toggleCheckbox(this)"><input type="checkbox" value="Footer">🦶 Footer</label>
+</div>
+</div>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">Zielgruppe</div>
+<select id="wAudience">
+<option>B2B</option><option>B2C</option><option>Unternehmen</option><option>Startups</option>
+<option>Kreative</option><option>Entwickler</option><option>Verbraucher</option><option>Nischen/Hobby</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Conversion-Ziel</div>
+<select id="wGoal">
+<option>Lead-Generierung</option><option>Direktverkauf</option><option>Markenbekanntheit</option>
+<option>Anmeldungen</option><option>Information</option><option>Downloads</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Referenzen (optional)</div>
+<textarea id="wRefs" placeholder="Spezifische Websites, die dir gefallen? Beschreibe, was dir daran gefällt..."></textarea>
+</div>
+
+<button class="btn btn-primary btn-block" onclick="generatePrompt('website')">🚀 Prompt Generieren</button>
+</div>
+
+<div class="sub-panel" data-subpanel="templates" style="display:none">
+<div class="card">
+<div class="card-title">📁 Website-Vorlagen</div>
+<div class="template-grid" id="wTemplates"></div>
+</div>
+</div>
+
+<div class="sub-panel" data-subpanel="history" style="display:none">
+<div class="card">
+<div class="card-title">📜 Verlauf</div>
+<div id="historyList3"></div>
+</div>
+</div>
+</div>
+
+<!-- ========== GENERAL PANEL ========== -->
+<div class="panel" id="panel-general" data-panel>
+
+<div class="sub-panel" data-subpanel="generator">
+<div class="card">
+<div class="card-title">Aufgabe</div>
+<textarea id="gConcept" placeholder="Beschreibe, was du benötigst... z.B. Erstelle eine umfassende Social-Media-Strategie für ein neues KI-Startup"></textarea>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">Prompt-Typ</div>
+<select id="gType">
+<option>Brainstorming</option><option>Content Writing</option><option>Code-Generierung</option>
+<option>Analyse</option><option>Recherche</option><option>Kreatives Schreiben</option>
+<option>Business-Strategie</option><option>Marketing-Text</option><option>Problemlösung</option>
+<option>Lernen/Tutorial</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Ausgabeformat</div>
+<select id="gFormat">
+<option>Klartext</option><option>Bullet Points</option><option>Tabelle</option><option>Gliederung</option>
+<option>Schritt-für-Schritt</option><option>JSON</option><option>Code-Block</option><option>Markdown</option>
+<option>Bericht</option><option>E-Mail</option>
+</select>
+</div>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">Ton</div>
+<select id="gTone">
+<option>Professionell</option><option>Lässig</option><option>Akademisch</option><option>Überzeugend</option>
+<option>Technisch</option><option>Einfühlsam</option><option>Humorvoll</option><option>Inspirierend</option>
+<option>Autoritär</option><option>Neutral</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Expertise-Level</div>
+<select id="gExpert">
+<option>Anfänger</option><option>Fortgeschritten</option><option>Experte</option><option>Profi</option><option>Kindgerecht</option>
+</select>
+</div>
+</div>
+
+<div class="card-grid">
+<div class="card">
+<div class="card-title">Länge</div>
+<select id="gLength">
+<option>Knapp</option><option>Kurz</option><option>Mittel</option><option>Lang</option><option>Umfassend</option>
+</select>
+</div>
+<div class="card">
+<div class="card-title">Sprache</div>
+<select id="gLang">
+<option>Deutsch</option><option>Englisch</option><option>Türkisch</option><option>Französisch</option>
+<option>Spanisch</option><option>Italienisch</option><option>Japanisch</option><option>Chinesisch</option>
+<option>Arabisch</option><option>Russisch</option>
+</select>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">Einschränkungen (optional)</div>
+<textarea id="gConstraints" placeholder="Irgendwelche Einschränkungen, Do's/Don'ts, spezifische Anforderungen..."></textarea>
+</div>
+
+<button class="btn btn-primary btn-block" onclick="generatePrompt('general')">🚀 Prompt Generieren</button>
+</div>
+
+<div class="sub-panel" data-subpanel="templates" style="display:none">
+<div class="card">
+<div class="card-title">📁 Allzweck-Vorlagen</div>
+<div class="template-grid" id="gTemplates"></div>
+</div>
+</div>
+
+<div class="sub-panel" data-subpanel="history" style="display:none">
+<div class="card">
+<div class="card-title">📜 Verlauf</div>
+<div id="historyList4"></div>
+</div>
+</div>
+</div>
+
+<!-- OUTPUT -->
+<div class="output-card" id="outputCard">
+<div class="output-header">
+<h3>✅ Generierter Prompt</h3>
+<span style="font-size:12px;color:var(--text2)" id="outputType"></span>
+</div>
+<div class="output-content" id="outputContent"></div>
+<div class="output-actions">
+<button class="btn btn-secondary btn-sm" onclick="copyPrompt()">📋 Kopieren</button>
+<button class="btn btn-secondary btn-sm" onclick="downloadPrompt()">💾 Download</button>
+<button class="btn btn-secondary btn-sm" onclick="regeneratePrompt()">🔄 Neu generieren</button>
+<button class="btn btn-secondary btn-sm" onclick="showShareModal()">📤 Teilen</button>
+</div>
+</div>
+
+</div>
+
+<!-- PAYWALL MODAL -->
+<div class="modal-overlay" id="paywallModal">
+<div class="modal">
+<button class="modal-close" onclick="closeModal('paywallModal')">&times;</button>
+<h2>⚡ Du hast deine 3 kostenlosen Prompts aufgebraucht</h2>
+<p>Wähle ein Premium-Paket, um unbegrenzt hochwertige Prompts zu generieren.</p>
+<div class="pricing-grid">
+<div class="pricing-card">
+<h3>Starter</h3>
+<div class="price">€24.99 <small>einmalig</small></div>
+<ul>
+<li>100 Prompts pro Monat</li><li>Alle 4 Modi</li><li>Download-Funktion</li>
+</ul>
+<button class="btn btn-primary btn-block" onclick="purchase('starter')">💳 Jetzt kaufen</button>
+</div>
+<div class="pricing-card featured">
+<h3>Premium</h3>
+<div class="price">€99.99 <small>einmalig</small></div>
+<ul>
+<li>Unbegrenzte Prompts</li><li>Alle 4 Modi</li><li>Download-Funktion</li>
+<li>Höchste Qualität</li><li>Prioritäts-Support</li>
+</ul>
+<button class="btn btn-indigo btn-block" onclick="purchase('premium')">💳 Jetzt kaufen</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SHARE MODAL -->
+<div class="modal-overlay" id="shareModal">
+<div class="modal">
+<button class="modal-close" onclick="closeModal('shareModal')">&times;</button>
+<h2>📤 Prompt teilen</h2>
+<p style="margin-bottom:16px">Teile deinen generierten Prompt mit anderen</p>
+<div class="share-grid" id="shareLinks"></div>
+</div>
+</div>
+
+<footer style="text-align:center;padding:40px 0 24px;border-top:1px solid var(--border);margin-top:40px;color:var(--text2);font-size:12px">
+<p>© 2026 IKUNE Prompt Generator — Alle Rechte vorbehalten</p>
+</footer>
+
+<script>
+// ============ STATE ============
+const STATE = {
+  currentTab: 'video',
+  currentSub: 'generator',
+  images: { v: [], i: [] },
+  lastGenerated: null,
+  lastMode: null,
+  lastFormData: null
+};
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', () => {
+  checkLicense();
+  updateCounter();
+  loadHistory();
+  initTemplates();
+  initDragDrop();
+  setupCfgSliders();
+  checkUrlParams();
+});
+
+// ============ TABS ============
+function switchTab(tab) {
+  STATE.currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('[data-panel]').forEach(p => p.classList.toggle('active', p.id === 'panel-'+tab));
+  switchSubTab(STATE.currentSub);
+}
+
+function switchSubTab(sub) {
+  STATE.currentSub = sub;
+  document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.sub === sub));
+  const panel = document.getElementById('panel-'+STATE.currentTab);
+  panel.querySelectorAll('[data-subpanel]').forEach(p => p.style.display = p.dataset.subpanel === sub ? 'block' : 'none');
+  if (sub === 'history') renderHistory();
+  if (sub === 'templates') {}
+}
+
+// ============ CFG SLIDERS ============
+function setupCfgSliders() {
+  ['v','i'].forEach(p => {
+    const sl = document.getElementById(p+'Cfg');
+    const val = document.getElementById(p+'CfgVal');
+    if (sl && val) {
+      sl.addEventListener('input', () => { val.textContent = parseFloat(sl.value).toFixed(2); });
+    }
+  });
+}
+
+// ============ IMAGE UPLOAD ============
+const uploads = { v: [], i: [] };
+
+function handleUpload(e, prefix) {
+  const files = Array.from(e.target.files);
+  addFiles(files, prefix);
+  e.target.value = '';
+}
+
+function addFiles(files, prefix) {
+  const maxFiles = 10;
+  const current = uploads[prefix] || [];
+  const remaining = maxFiles - current.length;
+  const toAdd = files.slice(0, remaining);
+  toAdd.forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      current.push({ file, dataUrl: ev.target.result });
+      renderThumbs(prefix);
+    };
+    reader.readAsDataURL(file);
+  });
+  uploads[prefix] = current;
+  if (toAdd.length < files.length) {
+    showToast('Maximal ' + maxFiles + ' Bilder erlaubt', 'error');
+  }
+}
+
+function removeThumb(idx, prefix) {
+  uploads[prefix].splice(idx, 1);
+  renderThumbs(prefix);
+}
+
+function renderThumbs(prefix) {
+  const container = document.getElementById(prefix+'Thumbs');
+  const zone = document.getElementById(prefix+'Upload');
+  const items = uploads[prefix] || [];
+  zone.classList.toggle('has-files', items.length > 0);
+  container.innerHTML = items.map((img, i) =>
+    '<div class="upload-thumb"><img src="'+img.dataUrl+'" alt="Thumb"><button class="remove" onclick="removeThumb('+i+',\''+prefix+'\')">&times;</button></div>'
+  ).join('');
+}
+
+// ============ DRAG & DROP ============
+function initDragDrop() {
+  ['v','i'].forEach(prefix => {
+    const zone = document.getElementById(prefix+'Upload');
+    if (!zone) return;
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+    zone.addEventListener('dragleave', () => { zone.classList.remove('dragover'); });
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('dragover');
+      const files = Array.from(e.dataTransfer.files);
+      addFiles(files, prefix);
+    });
+  });
+}
+
+// ============ CHECKBOXES ============
+function toggleCheckbox(el) {
+  el.classList.toggle('selected');
+  const cb = el.querySelector('input');
+  if (cb) cb.checked = !cb.checked;
+}
+
+function getCheckedValues(containerId) {
+  const items = document.querySelectorAll('#' + containerId + ' .checkbox-item.selected');
+  return Array.from(items).map(el => el.querySelector('input').value);
+}
+
+// ============ PROMPT GENERATION ============
+const LENGTH_MAP = {
+  'Kurz': 'Erstelle einen kurzen, prägnanten Prompt: ',
+  'Mittel': 'Erstelle einen detaillierten Prompt: ',
+  'Lang': 'Erstelle einen ausführlichen, detailreichen Prompt: ',
+  'Extrem detailliert': 'Erstelle einen extrem detaillierten, hochspezifischen Prompt mit maximalen Details: '
+};
+
+function generatePrompt(mode) {
+  if (!checkFreeUsage()) return;
+
+  let prompt = '';
+  const formData = { mode };
+
+  if (mode === 'video') {
+    const concept = document.getElementById('vConcept').value.trim();
+    if (!concept) { showToast('Bitte gib ein Konzept ein', 'error'); return; }
+    const cfg = document.getElementById('vCfg').value;
+    const model = document.getElementById('vModel').value;
+    const style = document.getElementById('vStyle').value;
+    const camStyle = document.getElementById('vCamStyle').value;
+    const camDir = document.getElementById('vCamDir').value;
+    const pacing = document.getElementById('vPacing').value;
+    const fx = document.getElementById('vFX').value;
+    const length = document.getElementById('vLength').value;
+    const custom = document.getElementById('vCustom').value.trim();
+    const images = uploads.v || [];
+
+    const lenPrefix = LENGTH_MAP[length] || '';
+    prompt = lenPrefix + 'Erstelle einen Video-Prompt für ' + model + '.\n\n';
+    prompt += 'KONZEPT: ' + concept + '\n';
+    prompt += 'CFG SCALE: ' + cfg + '\n';
+    if (style && style !== 'Einfach') prompt += 'STIL: ' + style + '\n';
+    if (camStyle && camStyle !== 'Keiner') prompt += 'KAMERA-STIL: ' + camStyle + '\n';
+    if (camDir && camDir !== 'Keine') prompt += 'KAMERA-RICHTUNG: ' + camDir + '\n';
+    if (pacing && pacing !== 'Keine') prompt += 'TEMPO: ' + pacing + '\n';
+    if (fx && fx !== 'Keine') prompt += 'EFFEKTE: ' + fx + '\n';
+    if (images.length > 0) prompt += 'REFERENZBILDER: ' + images.length + ' Bild(er) hochgeladen\n';
+    if (custom) prompt += 'BENUTZERDEFINIERT: ' + custom + '\n';
+    prompt += '\n---\nGeneriere einen vollständigen, optimierten ' + length.toLowerCase() + ' Prompt basierend auf diesen Parametern.';
+
+    formData.concept = concept; formData.cfg = cfg; formData.model = model; formData.style = style;
+    formData.camStyle = camStyle; formData.camDir = camDir; formData.pacing = pacing;
+    formData.fx = fx; formData.length = length; formData.custom = custom; formData.images = images.length;
+
+  } else if (mode === 'image') {
+    const concept = document.getElementById('iConcept').value.trim();
+    if (!concept) { showToast('Bitte gib ein Konzept ein', 'error'); return; }
+    const cfg = document.getElementById('iCfg').value;
+    const model = document.getElementById('iModel').value;
+    const style = document.getElementById('iStyle').value;
+    const lighting = document.getElementById('iLighting').value;
+    const comp = document.getElementById('iComp').value;
+    const color = document.getElementById('iColor').value;
+    const aspect = document.getElementById('iAspect').value;
+    const mood = document.getElementById('iMood').value;
+    const custom = document.getElementById('iCustom').value.trim();
+    const images = uploads.i || [];
+
+    prompt = 'Erstelle einen optimierten Bild-Prompt für ' + model + '.\n\n';
+    prompt += 'KONZEPT: ' + concept + '\n';
+    prompt += 'CFG SCALE: ' + cfg + '\n';
+    prompt += 'SEITENVERHÄLTNIS: ' + aspect + '\n';
+    if (style && style !== 'Fotorealistisch') prompt += 'STIL: ' + style + '\n';
+    if (lighting && lighting !== 'Keine') prompt += 'BELEUCHTUNG: ' + lighting + '\n';
+    if (comp && comp !== 'Keine') prompt += 'KOMPOSITION: ' + comp + '\n';
+    if (color && color !== 'Keine') prompt += 'FARBPALETTE: ' + color + '\n';
+    if (mood && mood !== 'Keine') prompt += 'STIMMUNG: ' + mood + '\n';
+    if (images.length > 0) prompt += 'REFERENZBILDER: ' + images.length + ' Bild(er) hochgeladen\n';
+    if (custom) prompt += 'BENUTZERDEFINIERT: ' + custom + '\n';
+    prompt += '\n---\nGeneriere einen vollständigen, detailreichen Prompt für die Bildgenerierung mit ' + model + '.';
+
+    formData.concept = concept; formData.cfg = cfg; formData.model = model; formData.style = style;
+    formData.lighting = lighting; formData.comp = comp; formData.color = color;
+    formData.aspect = aspect; formData.mood = mood; formData.custom = custom; formData.images = images.length;
+
+  } else if (mode === 'website') {
+    const concept = document.getElementById('wConcept').value.trim();
+    if (!concept) { showToast('Bitte beschreibe deine Website-Idee', 'error'); return; }
+    const type = document.getElementById('wType').value;
+    const design = document.getElementById('wDesign').value;
+    const color = document.getElementById('wColor').value;
+    const audience = document.getElementById('wAudience').value;
+    const goal = document.getElementById('wGoal').value;
+    const refs = document.getElementById('wRefs').value.trim();
+    const pages = getCheckedValues('wPagesGrid');
+    const features = getCheckedValues('wFeaturesGrid');
+
+    prompt = 'Erstelle einen umfassenden Website-Prompt für eine ' + type + '.\n\n';
+    prompt += 'KONZEPT: ' + concept + '\n';
+    prompt += 'WEBSITE-TYP: ' + type + '\n';
+    prompt += 'DESIGN-STIL: ' + design + '\n';
+    if (color && color !== 'Keine') prompt += 'FARBSCHEMA: ' + color + '\n';
+    if (pages.length > 0) prompt += 'SEITEN: ' + pages.join(', ') + '\n';
+    if (features.length > 0) prompt += 'FEATURES: ' + features.join(', ') + '\n';
+    prompt += 'ZIELGRUPPE: ' + audience + '\n';
+    prompt += 'CONVERSION-ZIEL: ' + goal + '\n';
+    if (refs) prompt += 'REFERENZEN: ' + refs + '\n';
+    prompt += '\n---\nGeneriere einen vollständigen, detaillierten Prompt für die Erstellung einer ' + type + '-Website im ' + design + '-Stil.';
+
+    formData.concept = concept; formData.type = type; formData.design = design; formData.color = color;
+    formData.pages = pages; formData.features = features; formData.audience = audience;
+    formData.goal = goal; formData.refs = refs;
+
+  } else if (mode === 'general') {
+    const concept = document.getElementById('gConcept').value.trim();
+    if (!concept) { showToast('Bitte beschreibe deine Aufgabe', 'error'); return; }
+    const type = document.getElementById('gType').value;
+    const format = document.getElementById('gFormat').value;
+    const tone = document.getElementById('gTone').value;
+    const expert = document.getElementById('gExpert').value;
+    const length = document.getElementById('gLength').value;
+    const lang = document.getElementById('gLang').value;
+    const constraints = document.getElementById('gConstraints').value.trim();
+
+    prompt = 'Erstelle einen optimierten Prompt für: ' + concept + '\n\n';
+    prompt += 'PROMPT-TYP: ' + type + '\n';
+    prompt += 'AUSGABEFORMAT: ' + format + '\n';
+    prompt += 'TON: ' + tone + '\n';
+    prompt += 'EXPERTISE: ' + expert + '\n';
+    prompt += 'LÄNGE: ' + length + '\n';
+    prompt += 'SPRACHE: ' + lang + '\n';
+    if (constraints) prompt += 'EINSCHRÄNKUNGEN: ' + constraints + '\n';
+    prompt += '\n---\nGeneriere einen vollständigen, detaillierten Prompt in ' + lang + ' auf ' + expert + '-Niveau im ' + tone + '-Ton.';
+
+    formData.concept = concept; formData.type = type; formData.format = format;
+    formData.tone = tone; formData.expert = expert; formData.length = length;
+    formData.lang = lang; formData.constraints = constraints;
+  }
+
+  STATE.lastGenerated = prompt;
+  STATE.lastMode = mode;
+  STATE.lastFormData = formData;
+
+  showOutput(prompt, mode);
+  addToHistory(prompt, mode, formData);
+  decrementCounter();
+  showToast('✅ Prompt erfolgreich generiert!', 'success');
+}
+
+// ============ OUTPUT ============
+function showOutput(prompt, mode) {
+  const card = document.getElementById('outputCard');
+  const content = document.getElementById('outputContent');
+  const type = document.getElementById('outputType');
+
+  const modeNames = { video: '🎬 Video Prompt', image: '🖼️ Bild Prompt', website: '🌐 Website Prompt', general: '📝 Allzweck Prompt' };
+  type.textContent = modeNames[mode] || 'Prompt';
+  content.textContent = prompt;
+  card.classList.add('visible');
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyPrompt() {
+  if (!STATE.lastGenerated) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(STATE.lastGenerated).then(() => {
+      showToast('📋 In die Zwischenablage kopiert!', 'success');
+    }).catch(() => fallbackCopy());
+  } else {
+    fallbackCopy();
+  }
+}
+
+function fallbackCopy() {
+  const ta = document.createElement('textarea');
+  ta.value = STATE.lastGenerated;
+  ta.style.position = 'fixed'; ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.select();
+  document.execCommand('copy');
+  document.body.removeChild(ta);
+  showToast('📋 In die Zwischenablage kopiert!', 'success');
+}
+
+function downloadPrompt() {
+  if (!STATE.lastGenerated) return;
+  const blob = new Blob([STATE.lastGenerated], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const modeNames = { video: 'video', image: 'bild', website: 'website', general: 'allzweck' };
+  a.download = 'ikune-prompt-' + (modeNames[STATE.lastMode] || 'prompt') + '-' + Date.now() + '.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('💾 Prompt heruntergeladen!', 'success');
+}
+
+function regeneratePrompt() {
+  if (STATE.lastMode) generatePrompt(STATE.lastMode);
+}
+
+function showShareModal() {
+  if (!STATE.lastGenerated) { showToast('Generiere zuerst einen Prompt', 'error'); return; }
+  const container = document.getElementById('shareLinks');
+  const encoded = encodeURIComponent(STATE.lastGenerated);
+  const url = encodeURIComponent(window.location.href);
+  container.innerHTML =
+    '<button class="share-btn whatsapp" onclick="window.open(\'https://wa.me/?text=' + encoded + '\',\'_blank\')"><span class="s-icon">💬</span> WhatsApp</button>' +
+    '<button class="share-btn telegram" onclick="window.open(\'https://t.me/share/url?url=' + url + '&text=' + encoded + '\',\'_blank\')"><span class="s-icon">✈️</span> Telegram</button>' +
+    '<button class="share-btn copy" onclick="copyPrompt();closeModal(\'shareModal\')"><span class="s-icon">📋</span> Kopieren</button>';
+  document.getElementById('shareModal').classList.add('visible');
+}
+
+// ============ PAYWALL ============
+function checkFreeUsage() {
+  const license = localStorage.getItem('ikune_license');
+  if (license === 'starter' || license === 'premium') return true;
+
+  const count = parseInt(localStorage.getItem('ikune_prompt_count') || '0');
+  if (count >= 3) {
+    document.getElementById('paywallModal').classList.add('visible');
+    return false;
+  }
+  return true;
+}
+
+function decrementCounter() {
+  const license = localStorage.getItem('ikune_license');
+  if (license === 'starter' || license === 'premium') return;
+
+  const count = parseInt(localStorage.getItem('ikune_prompt_count') || '0');
+  localStorage.setItem('ikune_prompt_count', (count + 1).toString());
+  updateCounter();
+}
+
+function updateCounter() {
+  const license = localStorage.getItem('ikune_license');
+  const count = parseInt(localStorage.getItem('ikune_prompt_count') || '0');
+  const display = document.getElementById('promptCountDisplay');
+  const badge = document.getElementById('licenseBadge');
+
+  if (license === 'premium') {
+    display.textContent = '∞';
+    display.parentElement.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg> Unbegrenzt';
+    document.querySelector('.prompt-counter .count').className = 'count';
+    badge.textContent = '⭐ PREMIUM';
+    badge.style.display = 'inline-block';
+  } else if (license === 'starter') {
+    display.textContent = (100 - count);
+    document.querySelector('.prompt-counter .count').className = 'count';
+    badge.textContent = '💫 STARTER';
+    badge.style.display = 'inline-block';
+  } else {
+    const remaining = Math.max(0, 3 - count);
+    display.textContent = remaining;
+    const el = document.querySelector('.prompt-counter .count');
+    el.className = 'count' + (remaining <= 0 ? ' used' : '');
+    badge.style.display = 'none';
+  }
+}
+
+function checkLicense() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const paid = urlParams.get('paid');
+  if (paid === 'starter' || paid === 'premium') {
+    localStorage.setItem('ikune_license', paid);
+    localStorage.setItem('ikune_prompt_count', '0');
+    updateCounter();
+    showToast('🎉 Vielen Dank für deinen Kauf! Du hast jetzt ' + (paid === 'premium' ? 'PREMIUM' : 'STARTER') + ' Zugang!', 'success');
+    // Clean URL
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }
+}
+
+function purchase(tier) {
+  const prices = { starter: '24.99', premium: '99.99' };
+  const names = { starter: 'IKUNE+Prompt+Generator+Starter', premium: 'IKUNE+Prompt+Generator+Premium' };
+  const price = prices[tier];
+  const name = names[tier];
+  const paypalUrl = 'https://www.paypal.com/cgi-bin/webscr?' +
+    'cmd=_xclick' +
+    '&business=affirmation.positiv@gmail.com' +
+    '&item_name=' + name +
+    '&amount=' + price +
+    '&currency_code=EUR' +
+    '&return=' + encodeURIComponent(window.location.origin + '/prompt-generator/?paid=' + tier) +
+    '&cancel_return=' + encodeURIComponent(window.location.href);
+  window.open(paypalUrl, '_blank');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('visible');
+}
+
+// Close modals on overlay click
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('modal-overlay')) {
+    e.target.classList.remove('visible');
+  }
+});
+
+// ESC key to close modals
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.visible').forEach(m => m.classList.remove('visible'));
+  }
+});
+
+// ============ HISTORY ============
+function addToHistory(prompt, mode, formData) {
+  const history = JSON.parse(localStorage.getItem('ikune_history') || '[]');
+  const entry = {
+    id: Date.now(),
+    prompt: prompt.substring(0, 200) + (prompt.length > 200 ? '...' : ''),
+    fullPrompt: prompt,
+    mode: mode,
+    concept: formData.concept || 'Kein Konzept',
+    timestamp: new Date().toISOString(),
+    formData: formData
+  };
+  history.unshift(entry);
+  if (history.length > 10) history.pop();
+  localStorage.setItem('ikune_history', JSON.stringify(history));
+}
+
+function loadHistory() {
+  // Nothing to pre-render; renderHistory() handles display
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem('ikune_history') || '[]');
+  const modeNames = { video: '🎬 Video', image: '🖼️ Bild', website: '🌐 Website', general: '📝 Allzweck' };
+  const containers = ['historyList', 'historyList2', 'historyList3', 'historyList4'];
+
+  containers.forEach(containerId => {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    if (history.length === 0) {
+      container.innerHTML = '<div class="empty-state"><div class="icon">📜</div><h3>Noch kein Verlauf</h3><p>Generierte Prompts erscheinen hier</p></div>';
+      return;
+    }
+    container.innerHTML = history.map(item => {
+      const date = new Date(item.timestamp);
+      const dateStr = date.toLocaleDateString('de-DE') + ' ' + date.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+      return '<div class="history-item" onclick="restorePrompt(' + item.id + ')">' +
+        '<div class="hi-type">' + (modeNames[item.mode] || '📝 Prompt') + '</div>' +
+        '<div class="hi-concept">' + escapeHtml(item.concept) + '</div>' +
+        '<div class="hi-date">' + dateStr + '</div>' +
+        '</div>';
+    }).join('');
+  });
+}
+
+function restorePrompt(id) {
+  const history = JSON.parse(localStorage.getItem('ikune_history') || '[]');
+  const item = history.find(h => h.id === id);
+  if (!item) return;
+  STATE.lastGenerated = item.fullPrompt;
+  STATE.lastMode = item.mode;
+  STATE.lastFormData = item.formData;
+  showOutput(item.fullPrompt, item.mode);
+  switchSubTab('generator');
+  showToast('✅ Prompt wiederhergestellt', 'success');
+}
+
+// ============ TEMPLATES ============
+const TEMPLATES = {
+  video: [
+    { icon: '🚀', name: 'Sci-Fi Trailer', desc: 'Epischer Sci-Fi Filmtrailer', fields: { concept: 'Ein epischer Sci-Fi Trailer für einen Film über die erste Kolonie auf dem Mars. Riesige Kuppelstädte, rote Staubstürme, ein einsamer Astronaut entdeckt uralte Ruinen unter der Oberfläche.', style: 'Sci-Fi', camStyle: 'Drohne', camDir: 'Vogelperspektive', pacing: 'Schnell', fx: 'VFX-lastig', length: 'Lang' } },
+    { icon: '🌿', name: 'Naturdoku', desc: 'Dokumentation Tierwelt', fields: { concept: 'Eine Naturdokumentation über die letzten unberührten Regenwälder des Amazonas. Makroaufnahmen von exotischen Insekten, Zeitraffer von blühenden Orchideen, majestätische Jaguare im Dämmerlicht.', style: 'Dokumentation', camStyle: 'Steadicam', camDir: 'Augenhöhe', pacing: 'Langsam & Atmosphärisch', fx: 'Filmkörnung', length: 'Mittel' } },
+    { icon: '💔', name: 'Romantik Szene', desc: 'Emotionale Liebesszene', fields: { concept: 'Ein romantisches Wiedersehen am Pariser Bahnhof Gare du Nord. Zwei Menschen rennen aufeinander zu, Zeitlupe, Regentropfen auf dem Glasdach, warmes goldenes Licht der Abendsonne.', style: 'Romantisch', camStyle: 'Handheld', camDir: 'Frontal', pacing: 'Zeitlupe', fx: 'Bokeh', length: 'Mittel' } },
+    { icon: '🎵', name: 'Musikvideo', desc: 'Stylisches Musikvideo', fields: { concept: 'Ein stylisches Musikvideo für einen Synthwave-Song. Neonlichter einer futuristischen Stadt, tanzende Silhouetten, schnelle Schnitte, Retro-Ästhetik der 80er Jahre.', style: 'Musikvideo', camStyle: 'POV', camDir: 'Holländischer Winkel', pacing: 'Montage', fx: 'Glitch', length: 'Kurz' } },
+    { icon: '👻', name: 'Horror Kurzfilm', desc: 'Gruselige Horrorszene', fields: { concept: 'Eine gruselige Horrorszene in einem verlassenen viktorianischen Haus. Eine flackernde Kerze wirft unheimliche Schatten an die Wand, ein knarrender Schrank öffnet sich langsam, kalter Atem im Nacken.', style: 'Horror', camStyle: 'Handheld', camDir: 'Über-die-Schulter', pacing: 'Langsam & Atmosphärisch', fx: 'Filmkörnung', length: 'Mittel' } }
+  ],
+  image: [
+    { icon: '🏔️', name: 'Bergpanorama', desc: 'Epische Berglandschaft', fields: { concept: 'Eine einsame Kiefer auf einem felsigen Berggipfel, Nebelschwaden ziehen durch das Tal, die ersten Sonnenstrahlen färben die schneebedeckten Gipfel golden, imposante Wolkenformationen.', style: 'Fotorealistisch', lighting: 'Goldene Stunde', comp: 'Drittel-Regel', color: 'Warm', aspect: '16:9', mood: 'Episch' } },
+    { icon: '🤖', name: 'Cyberpunk Porträt', desc: 'Futuristisches Charakterporträt', fields: { concept: 'Ein weibliches Cyberpunk-Charakterporträt mit leuchtenden Neon-Implantaten, Regen läuft über ihr Gesicht, holografische Displays reflektieren in ihren Augen, dunkle Gasse mit Neonlichtern.', style: 'Cyberpunk', lighting: 'Dramatisch', comp: 'Zentriert', color: 'Neon', aspect: '3:2', mood: 'Geheimnisvoll' } },
+    { icon: '🍎', name: 'Product Shot', desc: 'Professionelles Produktfoto', fields: { concept: 'Ein luxuriöses Parfümflakon auf einem marmornen Sockel, umgeben von exotischen Blütenblättern, weiches Studio-Licht erzeugt elegante Reflexionen auf dem Glas, dezenter Hintergrund.', style: 'Fotorealistisch', lighting: 'Studio', comp: 'Symmetrisch', color: 'Monochromatisch', aspect: '4:3', mood: 'Friedlich' } },
+    { icon: '🌌', name: 'Fantasy Welt', desc: 'Magische Fantasielandschaft', fields: { concept: 'Eine magische Fantasielandschaft mit schwebenden Inseln, leuchtenden Kristallen, Wasserfällen die ins Leere stürzen, zwei Monde am violetten Himmel, uralte Steintempel.', style: 'Fantasy', lighting: 'Natürlich', comp: 'Führende Linien', color: 'Komplementär', aspect: '16:9', mood: 'Verträumt' } },
+    { icon: '🎨', name: 'Aquarell Porträt', desc: 'Malerisches Aquarell-Porträt', fields: { concept: 'Ein Aquarell-Porträt einer jungen Frau mit Blumen im Haar, sanfte Farbverläufe, zarte Pinselstriche, impressionistischer Stil, warme Pastelltöne, verschwommener Hintergrund.', style: 'Aquarell', lighting: 'Weich', comp: 'Negativer Raum', color: 'Pastell', aspect: '3:4', mood: 'Intim' } }
+  ],
+  website: [
+    { icon: '📱', name: 'SaaS Landing Page', desc: 'Moderne SaaS-Startseite', fields: { concept: 'Eine moderne, hochkonvertierende Landing Page für ein KI-gestütztes Projektmanagement-Tool. Zeige Dashboard-Vorschauen, Kundenlogos, Testimonials und eine klare CTA.', type: 'Landing Page', design: 'Modern', color: 'Professionelles Blau', audience: 'B2B', goal: 'Anmeldungen', pages: ['Home','Features','Preise','FAQ'], features: ['Hero Section','Navigation','Formulare','Animationen','Testimonials','Newsletter'] } },
+    { icon: '🛍️', name: 'E-Commerce Shop', desc: 'Vollständiger Online-Shop', fields: { concept: 'Ein eleganter E-Commerce-Shop für handgefertigten Schmuck und Accessoires. Hochwertige Produktbilder, sanfte Übergänge, einfache Navigation und schneller Checkout.', type: 'E-Commerce', design: 'Luxus', color: 'Luxuriöses Gold', audience: 'B2C', goal: 'Direktverkauf', pages: ['Home','Kontakt','Blog','FAQ'], features: ['Hero Section','Navigation','Formulare','Suche','Filter','Newsletter','Footer'] } },
+    { icon: '💼', name: 'Portfolio Seite', desc: 'Kreatives Design-Portfolio', fields: { concept: 'Ein atemberaubendes Online-Portfolio für einen UI/UX Designer. Große Projekt-Vorschaubilder, elegante Animationen beim Scrollen, klare Typografie, minimalistisches Layout.', type: 'Portfolio', design: 'Minimal', color: 'Kühles Grau', audience: 'Kreative', goal: 'Lead-Generierung', pages: ['Home','Über uns','Kontakt'], features: ['Hero Section','Navigation','Animationen','Social Links','Footer'] } },
+    { icon: '📊', name: 'SaaS Dashboard', desc: 'Funktionales Dashboard', fields: { concept: 'Ein datenreiches Dashboard für ein Analytics-SaaS. Übersichtliche KPI-Karten, interaktive Diagramme, Dark Mode, anpassbare Widgets, Echtzeit-Datenvisualisierung.', type: 'SaaS Dashboard', design: 'Dark Mode', color: 'Tech Grün', audience: 'Unternehmen', goal: 'Markenbekanntheit', pages: ['Dashboard'], features: ['Navigation','Suche','Filter','Footer'] } },
+    { icon: '📝', name: 'Blog/Redaktionell', desc: 'Content-fokussierter Blog', fields: { concept: 'Ein eleganter Tech-Blog mit Fokus auf Lesbarkeit und Content. Große Header-Bilder, klare Typografie, Kategoriesystem, verwandte Artikel und Newsletter-Anmeldung.', type: 'Blog', design: 'Redaktionell', color: 'Warme Erdtöne', audience: 'Verbraucher', goal: 'Markenbekanntheit', pages: ['Home','Blog','FAQ','Kontakt'], features: ['Hero Section','Navigation','Suche','Social Links','Newsletter','Footer'] } }
+  ],
+  general: [
+    { icon: '📈', name: 'Business Plan', desc: 'Umfassender Geschäftsplan', fields: { concept: 'Erstelle einen detaillierten Business Plan für ein KI-gestütztes Personal-Training Startup inklusive Marktanalyse, Geschäftsmodell, Finanzprognosen und Meilensteinen.', type: 'Business-Strategie', format: 'Gliederung', tone: 'Professionell', expert: 'Experte', length: 'Umfassend', lang: 'Deutsch' } },
+    { icon: '✍️', name: 'Content Strategie', desc: 'Social-Media Strategie', fields: { concept: 'Entwickle eine umfassende Social-Media-Content-Strategie für ein nachhaltiges Mode-Label inklusive Content-Kalender, Plattform-spezifische Formate und Engagement-Taktiken.', type: 'Marketing-Text', format: 'Bullet Points', tone: 'Inspirierend', expert: 'Fortgeschritten', length: 'Lang', lang: 'Deutsch' } },
+    { icon: '🐍', name: 'Code Generator', desc: 'Python Skript erstellen', fields: { concept: 'Erstelle ein Python-Skript, das automatisch PDF-Rechnungen aus JSON-Daten generiert, inklusive Fehlerbehandlung, Logging und CLI-Argument-Parsing.', type: 'Code-Generierung', format: 'Code-Block', tone: 'Technisch', expert: 'Experte', length: 'Mittel', lang: 'Englisch' } },
+    { icon: '📚', name: 'Lern-Tutorial', desc: 'Anfänger-Tutorial', fields: { concept: 'Erstelle ein Anfänger-Tutorial für React Hooks (useState, useEffect, useContext) mit praktischen Beispielen, die zeigen, wie man einen einfachen Todo-Task-Manager baut.', type: 'Lernen/Tutorial', format: 'Schritt-für-Schritt', tone: 'Freundlich', expert: 'Anfänger', length: 'Lang', lang: 'Deutsch' } },
+    { icon: '💡', name: 'Brainstorming', desc: 'Kreative Ideensammlung', fields: { concept: 'Führe ein Brainstorming für innovative Features einer mentalen Gesundheits-App durch, die KI-gestützte Stimmungserkennung und personalisierte Achtsamkeitsübungen bietet.', type: 'Brainstorming', format: 'Bullet Points', tone: 'Kreativ', expert: 'Fortgeschritten', length: 'Mittel', lang: 'Deutsch' } }
+  ]
+};
+
+function initTemplates() {
+  ['video','image','website','general'].forEach(mode => {
+    const container = document.getElementById(mode[0]+'Templates');
+    if (!container) return;
+    container.innerHTML = TEMPLATES[mode].map((t, i) =>
+      '<div class="template-card" onclick="applyTemplate(\''+mode+'\','+i+')">' +
+      '<div class="t-icon">'+t.icon+'</div>' +
+      '<div class="t-name">'+t.name+'</div>' +
+      '<div class="t-desc">'+t.desc+'</div>' +
+      '</div>'
+    ).join('');
+  });
+}
+
+function applyTemplate(mode, idx) {
+  const tpl = TEMPLATES[mode][idx];
+  if (!tpl) return;
+
+  // Switch to generator
+  switchSubTab('generator');
+
+  if (mode === 'video') {
+    setVal('vConcept', tpl.fields.concept);
+    setVal('vStyle', tpl.fields.style);
+    setVal('vCamStyle', tpl.fields.camStyle);
+    setVal('vCamDir', tpl.fields.camDir);
+    setVal('vPacing', tpl.fields.pacing);
+    setVal('vFX', tpl.fields.fx);
+    setVal('vLength', tpl.fields.length);
+  } else if (mode === 'image') {
+    setVal('iConcept', tpl.fields.concept);
+    setVal('iStyle', tpl.fields.style);
+    setVal('iLighting', tpl.fields.lighting);
+    setVal('iComp', tpl.fields.comp);
+    setVal('iColor', tpl.fields.color);
+    setVal('iAspect', tpl.fields.aspect);
+    setVal('iMood', tpl.fields.mood);
+  } else if (mode === 'website') {
+    setVal('wConcept', tpl.fields.concept);
+    setVal('wType', tpl.fields.type);
+    setVal('wDesign', tpl.fields.design);
+    setVal('wColor', tpl.fields.color);
+    setVal('wAudience', tpl.fields.audience);
+    setVal('wGoal', tpl.fields.goal);
+    // Clear all checkboxes first
+    document.querySelectorAll('#wPagesGrid .checkbox-item, #wFeaturesGrid .checkbox-item').forEach(el => {
+      el.classList.remove('selected');
+      el.querySelector('input').checked = false;
+    });
+    if (tpl.fields.pages) tpl.fields.pages.forEach(p => {
+      document.querySelectorAll('#wPagesGrid .checkbox-item').forEach(el => {
+        if (el.querySelector('input').value === p) { el.classList.add('selected'); el.querySelector('input').checked = true; }
+      });
+    });
+    if (tpl.fields.features) tpl.fields.features.forEach(f => {
+      document.querySelectorAll('#wFeaturesGrid .checkbox-item').forEach(el => {
+        if (el.querySelector('input').value === f) { el.classList.add('selected'); el.querySelector('input').checked = true; }
+      });
+    });
+  } else if (mode === 'general') {
+    setVal('gConcept', tpl.fields.concept);
+    setVal('gType', tpl.fields.type);
+    setVal('gFormat', tpl.fields.format);
+    setVal('gTone', tpl.fields.tone);
+    setVal('gExpert', tpl.fields.expert);
+    setVal('gLength', tpl.fields.length);
+    setVal('gLang', tpl.fields.lang);
+  }
+
+  // Scroll to top of form
+  document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+  showToast('📁 Vorlage "' + tpl.name + '" geladen!', 'success');
+}
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.value = val;
+}
+
+// ============ HELPERS ============
+function checkUrlParams() {
+  checkLicense();
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ============ TOAST ============
+function showToast(msg, type) {
+  type = type || 'info';
+  const container = document.querySelector('.toast-container');
+  if (!container) {
+    const c = document.createElement('div');
+    c.className = 'toast-container';
+    document.body.appendChild(c);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'toast ' + type;
+  toast.textContent = msg;
+  document.querySelector('.toast-container').appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    toast.style.transition = 'all 0.3s ease';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+</script>
+
+</body>
+</html>

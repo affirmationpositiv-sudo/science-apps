@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKUNE Einkommensrechner – Was kannst du mit KI verdienen?</title>
+<meta name="description" content="Berechne dein KI-Einkommenspotenzial in 30 Sekunden. Realistische Multiplikatoren basierend auf Zeit, Erfahrung, Produktart und Marketing.">
+<meta name="author" content="IKUNE">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;padding:20px}
+.container{max-width:700px;margin:0 auto;background:#111118;border-radius:16px;padding:40px;border:1px solid #1a1a2e}
+h1{font-size:1.8em;color:#fff;margin-bottom:8px;text-align:center}
+h2{font-size:1.2em;color:#a78bfa;margin-bottom:12px;margin-top:8px}
+.sub{color:#6b7280;text-align:center;margin-bottom:30px;font-size:.9em}
+.source{background:#0d0d14;border:1px solid #1a1a2e;border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.source label{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;color:#a78bfa;font-weight:600;font-size:.95em}
+.source input[type="range"]{width:100%;margin:8px 0;-webkit-appearance:none;appearance:none;height:6px;background:#2a2a3e;border-radius:3px;outline:none}
+.source input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:2px solid #a78bfa}
+.source input[type="range"]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#8b5cf6;cursor:pointer;border:2px solid #a78bfa}
+.source .range-val{color:#ffd700;font-weight:700;font-size:1.1em;text-align:right;display:block}
+.source select{width:100%;padding:10px 14px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:6px;color:#fff;font-size:1em;cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%238b5cf6'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:20px}
+.source select:focus{outline:2px solid #8b5cf6;border-color:#8b5cf6}
+.source .hint{font-size:.75em;color:#6b7280;margin-top:4px}
+.result-box{background:linear-gradient(135deg,#1a1a2e,#111118);border:2px solid #8b5cf6;border-radius:12px;padding:24px;text-align:center;margin:24px 0}
+.result-box .total{font-size:2.8em;font-weight:800;color:#ffd700}
+.result-box .label{color:#9ca3af;margin-top:4px;font-size:.9em}
+.result-box .subtotal{color:#6b7280;font-size:.85em;margin-top:6px}
+.breakdown{margin:20px 0}
+.breakdown-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.9em}
+.breakdown-item .val{color:#ffd700;font-weight:600}
+.bar-chart{margin:20px 0}
+.bar-item{margin-bottom:10px}
+.bar-label{display:flex;justify-content:space-between;font-size:.85em;color:#9ca3af;margin-bottom:3px}
+.bar-track{height:10px;background:#1a1a2e;border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;transition:width .6s ease;width:0}
+.bar-fill.zeit{background:#8b5cf6}
+.bar-fill.erfahrung{background:#059669}
+.bar-fill.produkt{background:#f59e0b}
+.bar-fill.marketing{background:#ef4444}
+.compared{display:flex;gap:16px;margin:20px 0}
+.compared-box{flex:1;background:#0d0d14;border:1px solid #2a2a3e;border-radius:10px;padding:18px;text-align:center}
+.compared-box.mit{border-color:#8b5cf6;background:linear-gradient(135deg,#1a1a2e,#111118)}
+.compared-box .cmp-label{font-size:.8em;color:#6b7280;margin-bottom:4px}
+.compared-box .cmp-val{font-size:1.8em;font-weight:800;color:#fff}
+.compared-box.mit .cmp-val{color:#ffd700}
+.compared-box.ohne .cmp-val{color:#6b7280}
+.share-btns{display:flex;gap:10px;margin:16px 0}
+.share-btns a{flex:1;padding:10px;border-radius:8px;text-align:center;text-decoration:none;font-size:.9em;font-weight:600;color:#fff;transition:opacity .3s}
+.share-btns a:hover{opacity:.85}
+.share-wa{background:#25D366}
+.share-tg{background:#0088cc}
+.btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,#8b5cf6,#059669);border:none;border-radius:8px;color:#fff;font-size:1.1em;font-weight:700;cursor:pointer;transition:opacity .3s;margin-bottom:16px;text-decoration:none;text-align:center}
+.btn:hover{opacity:.9}
+.btn-sec{background:linear-gradient(135deg,#2a2a3e,#1a1a2e)}
+.affiliate-box{background:linear-gradient(135deg,#1a1a2e,#111118);border:1px solid #2a1a4e;border-radius:10px;padding:14px 18px;margin:16px 0;font-size:.85em}
+.affiliate-box a{color:#fbbf24;text-decoration:none}
+.affiliate-box a:hover{text-decoration:underline}
+.back-link{display:block;text-align:center;margin-top:20px;color:#6b7280;font-size:.85em;text-decoration:none}
+.back-link:hover{color:#a78bfa}
+.tag{display:inline-block;background:#1a1a2e;color:#8b5cf6;padding:2px 10px;border-radius:12px;font-size:.7em;margin-top:4px}
+@media(max-width:600px){.container{padding:20px}h1{font-size:1.4em}.result-box .total{font-size:2em}.compared{flex-direction:column}.share-btns{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>🤖 IKUNE Einkommensrechner</h1>
+<p class="sub">Berechne dein KI-Einkommenspotenzial in 30 Sekunden</p>
+
+<div class="source">
+<label>⏱ Stunden pro Woche <span class="range-val" id="stundenVal">20</span></label>
+<input type="range" id="stunden" min="5" max="60" value="20" step="5" oninput="updateCalc()">
+<p class="hint">Wie viel Zeit kannst du wöchentlich investieren?</p>
+</div>
+
+<div class="source">
+<label>🎯 KI-Erfahrung</label>
+<select id="erfahrung" onchange="updateCalc()">
+<option value="0.5">Anfänger – Ich starte gerade</option>
+<option value="1.0" selected>Fortgeschritten – Erste Erfolge</option>
+<option value="2.0">Profi – Ich lebe davon</option>
+</select>
+<p class="hint">Dein aktuelles Erfahrungsniveau mit KI-Tools</p>
+</div>
+
+<div class="source">
+<label>📦 Produktart</label>
+<select id="produkt" onchange="updateCalc()">
+<option value="1.0">Digital – E-Books, Vorlagen, Prompts</option>
+<option value="2.0">Kurs – Videokurse, Workshops</option>
+<option value="3.0">Coaching – 1:1 Beratung</option>
+<option value="5.0" selected>Kombi – Alles zusammen</option>
+</select>
+<p class="hint">Welche Produktart möchtest du anbieten?</p>
+</div>
+
+<div class="source">
+<label>📢 Marketing-Intensität</label>
+<select id="marketing" onchange="updateCalc()">
+<option value="0.3">Keins – Nur organisch, kein Aufwand</option>
+<option value="1.0" selected>Etwas – Social Media gelegentlich</option>
+<option value="2.0">Viel – Tägliches Marketing</option>
+<option value="4.0">Profi – Bezahlte Anzeigen + Funnel</option>
+</select>
+<p class="hint">Wie stark investierst du in Marketing?</p>
+</div>
+
+<button class="btn" onclick="updateCalc()">🧮 Jetzt berechnen</button>
+
+<div id="result" class="result-box" style="display:none">
+<div class="label">Dein KI-Einkommenspotenzial</div>
+<div class="total" id="total">€0</div>
+<div class="subtotal" id="subtotal">/ Monat</div>
+<div class="tag">🔮 Basierend auf realistischen Multiplikatoren</div>
+</div>
+
+<div id="comparison" class="compared" style="display:none">
+<div class="compared-box ohne">
+<div class="cmp-label">❌ Ohne KI (traditionell)</div>
+<div class="cmp-val" id="ohneKI">€0</div>
+<div class="cmp-label">pro Monat</div>
+</div>
+<div class="compared-box mit">
+<div class="cmp-label">✅ Mit KI-Strategie</div>
+<div class="cmp-val" id="mitKI">€0</div>
+<div class="cmp-label">pro Monat</div>
+</div>
+</div>
+
+<div id="breakdown" style="display:none">
+<h2>📊 Aufschlüsselung</h2>
+<div class="breakdown">
+<div class="breakdown-item"><span>⏱ Zeit (Stunden/Woche)</span><span class="val" id="bZeit">0x</span></div>
+<div class="breakdown-item"><span>🎯 Erfahrung</span><span class="val" id="bErfahrung">0x</span></div>
+<div class="breakdown-item"><span>📦 Produktart</span><span class="val" id="bProdukt">0x</span></div>
+<div class="breakdown-item"><span>📢 Marketing</span><span class="val" id="bMarketing">0x</span></div>
+<div class="breakdown-item" style="border-bottom:none;font-weight:700"><span>📊 Gesamt-Multiplikator</span><span class="val" id="bMulti">0x</span></div>
+</div>
+
+<h2>📈 Balkendiagramm</h2>
+<div class="bar-chart">
+<div class="bar-item">
+<div class="bar-label"><span>⏱ Zeit</span><span id="barZeitPct">0%</span></div>
+<div class="bar-track"><div class="bar-fill zeit" id="barZeit"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>🎯 Erfahrung</span><span id="barErfahrungPct">0%</span></div>
+<div class="bar-track"><div class="bar-fill erfahrung" id="barErfahrung"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>📦 Produktart</span><span id="barProduktPct">0%</span></div>
+<div class="bar-track"><div class="bar-fill produkt" id="barProdukt"></div></div>
+</div>
+<div class="bar-item">
+<div class="bar-label"><span>📢 Marketing</span><span id="barMarketingPct">0%</span></div>
+<div class="bar-track"><div class="bar-fill marketing" id="barMarketing"></div></div>
+</div>
+</div>
+</div>
+
+<div class="share-btns" id="shareBtns" style="display:none">
+<a href="#" class="share-wa" id="shareWA" target="_blank" rel="noopener">💬 WhatsApp</a>
+<a href="#" class="share-tg" id="shareTG" target="_blank" rel="noopener">✈️ Telegram</a>
+</div>
+
+<a href="/coaching/" class="btn">🚀 Hol dir deine persönliche KI-Strategie</a>
+
+<div class="affiliate-box">
+<strong>📌 Empfohlene Tools für deinen KI-Start:</strong><br>
+→ <a href="https://amzn.to/4hL8X3G?tag=ikune21-21" target="_blank" rel="noopener">📖 Bestseller: KI-Tools & Strategien auf Amazon</a><br>
+→ <a href="/blog/artikel-42-ki-einkommensrechner.html">📝 Wie viel kannst du mit KI verdienen? (Blog)</a><br>
+→ <a href="/launch/">🚀 Launch-Plan: Von 0 zu deinem ersten €</a>
+</div>
+
+<a href="index.html" class="back-link">← Zurück zu den Tools</a>
+</div>
+
+<script>
+function getStundenMulti(h) {
+if (h <= 5) return 0.3;
+if (h <= 10) return 0.6;
+if (h <= 20) return 1.0;
+if (h <= 40) return 1.8;
+return 2.5;
+}
+
+function updateCalc() {
+const h = parseInt(document.getElementById('stunden').value);
+const erf = parseFloat(document.getElementById('erfahrung').value);
+const prod = parseFloat(document.getElementById('produkt').value);
+const mkt = parseFloat(document.getElementById('marketing').value);
+
+const baseline = 500;
+const stundenM = getStundenMulti(h);
+const multi = stundenM * erf * prod * mkt;
+const estimated = Math.round(baseline * multi);
+
+// Ohne KI: nur 0,3x vom Basiswert
+const ohne = Math.round(baseline * 0.3);
+
+// Display
+document.getElementById('stundenVal').textContent = h;
+document.getElementById('total').textContent = '€' + estimated.toLocaleString('de-DE');
+document.getElementById('mitKI').textContent = '€' + estimated.toLocaleString('de-DE');
+document.getElementById('ohneKI').textContent = '€' + ohne.toLocaleString('de-DE');
+
+// Breakdown multipliers
+document.getElementById('bZeit').textContent = stundenM + 'x';
+document.getElementById('bErfahrung').textContent = erf + 'x';
+document.getElementById('bProdukt').textContent = prod + 'x';
+document.getElementById('bMarketing').textContent = mkt + 'x';
+document.getElementById('bMulti').textContent = multi.toFixed(2) + 'x';
+
+// Bar chart (normalized to max possible multiplier: 2.5*2*5*4 = 100)
+const maxMulti = 100;
+document.getElementById('barZeit').style.width = (stundenM / 2.5 * 100) + '%';
+document.getElementById('barZeitPct').textContent = Math.round(stundenM / 2.5 * 100) + '%';
+document.getElementById('barErfahrung').style.width = (erf / 2.0 * 100) + '%';
+document.getElementById('barErfahrungPct').textContent = Math.round(erf / 2.0 * 100) + '%';
+document.getElementById('barProdukt').style.width = (prod / 5.0 * 100) + '%';
+document.getElementById('barProduktPct').textContent = Math.round(prod / 5.0 * 100) + '%';
+document.getElementById('barMarketing').style.width = (mkt / 4.0 * 100) + '%';
+document.getElementById('barMarketingPct').textContent = Math.round(mkt / 4.0 * 100) + '%';
+
+// Show sections
+document.getElementById('result').style.display = 'block';
+document.getElementById('comparison').style.display = 'flex';
+document.getElementById('breakdown').style.display = 'block';
+document.getElementById('shareBtns').style.display = 'flex';
+
+// Share links
+const shareText = encodeURIComponent('Mein KI-Einkommenspotenzial: €' + estimated.toLocaleString('de-DE') + '/Monat 🚀 Berechne auch deins: https://ikune.de/tools/einkommensrechner.html');
+document.getElementById('shareWA').href = 'https://wa.me/?text=' + shareText;
+document.getElementById('shareTG').href = 'https://t.me/share/url?url=https://ikune.de/tools/einkommensrechner.html&text=' + shareText;
+}
+
+// Initial calculation
+updateCalc();
+</script>
+</body>
+</html>

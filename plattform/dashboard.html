@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IKUNE Creator Dashboard – Mitglieder, Umsatz, Kurse, KI-Agenten auf einen Blick.">
+<title>Dashboard – IKUNE Plattform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+a{color:#f59e0b;text-decoration:none}
+.container{max-width:1400px;margin:0 auto;padding:0 20px}
+h1,h2,h3{color:#fff}
+.gold{color:#f59e0b}
+.btn{display:inline-block;padding:12px 24px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0a0a1a}
+.btn-primary:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px)}
+.btn-secondary{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.4)}
+.btn-secondary:hover{background:rgba(245,158,11,.25)}
+.btn-sm{padding:8px 16px;font-size:.8rem}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,26,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(245,158,11,.1)}
+nav .container{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:1.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.5px}
+.logo span{color:#fff}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:#ccc;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#f59e0b}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none}
+.hamburger span{width:28px;height:3px;background:#f59e0b;border-radius:2px;transition:.3s}
+.page{padding-top:80px;display:flex;min-height:100vh}
+.sidebar{width:240px;background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.06);padding:24px 16px;flex-shrink:0;position:fixed;top:60px;bottom:0;overflow-y:auto}
+.sidebar .user{display:flex;align-items:center;gap:12px;padding:16px 12px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:16px}
+.sidebar .avatar{width:40px;height:40px;border-radius:50%;background:f59e0b;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:#f59e0b;color:#0a0a1a;font-weight:700}
+.sidebar .uname{font-weight:600;font-size:.9rem}
+.sidebar .uplan{color:#f59e0b;font-size:.75rem}
+.sidebar-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:8px;color:#999;font-size:.9rem;cursor:pointer;transition:all .2s;margin-bottom:2px}
+.sidebar-item:hover,.sidebar-item.active{background:rgba(245,158,11,.1);color:#f59e0b}
+.main{flex:1;margin-left:240px;padding:30px}
+.main-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;flex-wrap:wrap;gap:16px}
+.main-header h1{font-size:1.5rem}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:30px}
+.stat-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px}
+.stat-card .sicon{font-size:1.5rem;margin-bottom:8px}
+.stat-card .svalue{font-size:1.6rem;font-weight:800;color:#fff}
+.stat-card .slabel{color:#888;font-size:.85rem;margin-top:4px}
+.stat-card .strend{font-size:.8rem;margin-top:4px;color:#4ade80}
+.dash-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:30px}
+.activity-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:24px}
+.activity-card h3{font-size:1rem;margin-bottom:16px;color:#f59e0b}
+.activity-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.activity-item:last-child{border:none}
+.activity-item .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.activity-item .dot.green{background:#4ade80}
+.activity-item .dot.gold{background:#f59e0b}
+.activity-item .dot.blue{background:#60a5fa}
+.activity-item .text{flex:1;font-size:.88rem;color:#ccc}
+.activity-item .time{color:#666;font-size:.78rem}
+.quick-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.quick-actions .btn{flex:1;min-width:140px}
+.agent-mini{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.15);border-radius:12px;padding:20px;margin-bottom:16px}
+.agent-mini h4{color:#f59e0b;font-size:.95rem;margin-bottom:8px}
+.agent-mini p{color:#aaa;font-size:.85rem}
+.agent-mini .status{color:#4ade80;font-size:.8rem;margin-top:8px}
+.course-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.course-card .cinfo{flex:1}
+.course-card .cname{font-weight:600;color:#fff;font-size:.9rem}
+.course-card .cmeta{color:#888;font-size:.8rem;margin-top:2px}
+.course-card .cmembers{color:#f59e0b;font-weight:600}
+footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);padding:30px 0 20px;text-align:center;margin-left:240px}
+footer p{color:#666;font-size:.8rem}
+/* Responsive */
+@media(max-width:900px){
+.sidebar{display:none}
+.main{margin-left:0}
+footer{margin-left:0}
+.dash-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+.nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:#0a0a1a;flex-direction:column;padding:20px;gap:16px}
+.nav-links.show{display:flex}.hamburger{display:flex}
+.hamburger.active span:nth-child(1){transform:rotate(45deg)translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg)translate(7px,-6px)}
+.stats-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+.stats-grid{grid-template-columns:1fr}
+.main{padding:20px}
+.main-header h1{font-size:1.2rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="index.html" class="logo">IKUNE<span>.app</span></a>
+<button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show');this.classList.toggle('active')">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+<a href="index.html">Start</a>
+<a href="preise.html">Preise</a>
+<a href="creator.html">Creator</a>
+<a href="ki-agenten.html">KI-Agenten</a>
+<a href="dashboard.html" class="btn btn-primary" style="padding:8px 20px;font-size:.85rem">Dashboard</a>
+</div>
+</div>
+</nav>
+
+<div class="page">
+<div class="sidebar">
+<div class="user">
+<div class="avatar">M</div>
+<div><div class="uname">Max Mustermann</div><div class="uplan">🔥 Creator Plan</div></div>
+</div>
+<div class="sidebar-item active">📊 Übersicht</div>
+<div class="sidebar-item">📚 Kurse</div>
+<div class="sidebar-item">💬 Community</div>
+<div class="sidebar-item">📈 Analyse</div>
+<div class="sidebar-item">🤖 KI-Assistent</div>
+<div class="sidebar-item">👥 Mitglieder</div>
+<div class="sidebar-item">💰 Umsatz</div>
+<div class="sidebar-item">🔗 Affiliate</div>
+<div class="sidebar-item">⚙️ Einstellungen</div>
+</div>
+
+<div class="main">
+<div class="main-header">
+<div>
+<h1>Willkommen zurück, <span class="gold">Max</span> 👋</h1>
+<p style="color:#888;font-size:.9rem">Hier ist deine Übersicht für heute.</p>
+</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<a href="creator.html" class="btn btn-primary btn-sm">+ Neuer Kurs</a>
+<a href="ki-agenten.html" class="btn btn-secondary btn-sm">KI konfigurieren</a>
+</div>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card">
+<div class="sicon">👥</div>
+<div class="svalue">47</div>
+<div class="slabel">Mitglieder</div>
+<div class="strend">↑ 12% diese Woche</div>
+</div>
+<div class="stat-card">
+<div class="sicon">💰</div>
+<div class="svalue">€320</div>
+<div class="slabel">Umsatz (dieser Monat)</div>
+<div class="strend">↑ 8% zum Vormonat</div>
+</div>
+<div class="stat-card">
+<div class="sicon">📚</div>
+<div class="svalue">4</div>
+<div class="slabel">Aktive Kurse</div>
+<div class="strend" style="color:#aaa">2 in Planung</div>
+</div>
+<div class="stat-card">
+<div class="sicon">🏆</div>
+<div class="svalue">2.340</div>
+<div class="slabel">Community XP</div>
+<div class="strend">Level: Gold 🥇</div>
+</div>
+</div>
+
+<div class="dash-grid">
+<div class="activity-card">
+<h3>📋 Letzte Aktivitäten</h3>
+<div class="activity-item"><div class="dot green"></div><div class="text">Neues Mitglied: Sarah M. ist beigetreten</div><div class="time">5 Min.</div></div>
+<div class="activity-item"><div class="dot gold"></div><div class="text">KI-Agent Hermes hat einen neuen Kursplan erstellt</div><div class="time">23 Min.</div></div>
+<div class="activity-item"><div class="dot blue"></div><div class="text">Kurs "KI für Einsteiger" – 3 neue Lektionen freigeschaltet</div><div class="time">1 Std.</div></div>
+<div class="activity-item"><div class="dot green"></div><div class="text">Thomas W. hat den Affiliate-Link geklickt</div><div class="time">2 Std.</div></div>
+<div class="activity-item"><div class="dot gold"></div><div class="text">Yesar (KI) hat 12 Fragen in der Community beantwortet</div><div class="time">3 Std.</div></div>
+<div class="activity-item"><div class="dot blue"></div><div class="text">Neue Quiz-Ergebnisse: Ø 82% richtig</div><div class="time">5 Std.</div></div>
+</div>
+
+<div>
+<div class="agent-mini">
+<h4>🤖 Hermes – Head Leader</h4>
+<p>Strategie & Content-Erstellung. Hat heute einen 6-wöchigen Kursplan erstellt.</p>
+<div class="status">✅ Aktiv – 3 Tasks heute</div>
+</div>
+<div class="agent-mini">
+<h4>💬 Yesar – Community Manager</h4>
+<p>Hat 12 Fragen beantwortet und 45 XP an Mitglieder verteilt.</p>
+<div class="status">✅ Aktiv – Sehr rege</div>
+</div>
+<div class="agent-mini">
+<h4>✅ Jason – Qualitäts-Chef</h4>
+<p>Hat 2 Kurs-Lektionen geprüft und Verbesserungen vorgeschlagen.</p>
+<div class="status">⏳ 2 ausstehende Prüfungen</div>
+</div>
+</div>
+</div>
+
+<div class="activity-card">
+<h3>📚 Deine Kurse</h3>
+<div class="course-card">
+<div class="cinfo"><div class="cname">KI für Einsteiger</div><div class="cmeta">12 Lektionen • 4 Videos • ⭐ 4.8</div></div>
+<div class="cmembers">23 Mitglieder</div>
+</div>
+<div class="course-card">
+<div class="cinfo"><div class="cname">Social Media Marketing</div><div class="cmeta">8 Lektionen • 3 Videos • ⭐ 4.5</div></div>
+<div class="cmembers">15 Mitglieder</div>
+</div>
+<div class="course-card">
+<div class="cinfo"><div class="cname">Produktivität mit KI</div><div class="cmeta">6 Lektionen • 2 Videos • ⭐ Neu</div></div>
+<div class="cmembers">9 Mitglieder</div>
+</div>
+<div class="course-card">
+<div class="cinfo"><div class="cname">Python Grundlagen</div><div class="cmeta">20 Lektionen • 8 Videos • ⭐ 4.9</div></div>
+<div class="cmembers">12 Mitglieder</div>
+</div>
+</div>
+
+<div class="quick-actions" style="margin-top:20px">
+<a href="creator.html" class="btn btn-primary">📚 Neuen Kurs erstellen</a>
+<a href="ki-agenten.html" class="btn btn-secondary">🤖 KI-Bericht anfordern</a>
+<a href="preise.html" class="btn btn-secondary">⬆️ Upgrade auf Unlimited</a>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="container">
+<p>© 2026 IKUNE.app – Dashboard-Vorschau | <a href="https://amzn.to/42vS21j">Amazon Affiliate</a> Tag: ikune21-21</p>
+</div>
+</footer>
+</body>
+</html>

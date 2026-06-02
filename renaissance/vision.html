@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renaissance – Vision & Prototyp</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a1a;
+    color: #e2e8f0;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(245,158,11,.3); color: #fff; }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 40px;
+    background: rgba(10,10,26,.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(245,158,11,.12);
+  }
+  nav .logo { font-size: 1.4rem; font-weight: 700; letter-spacing: 2px; }
+  nav .logo span { color: #f59e0b; }
+  nav a { color: #94a3b8; text-decoration: none; font-size: .9rem; margin-left: 28px; transition: color .2s; }
+  nav a:hover { color: #f59e0b; }
+
+  /* ---- SECTIONS ---- */
+  section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+  .section-title { font-size: 2.8rem; font-weight: 700; text-align: center; margin-bottom: 16px; }
+  .section-title span { color: #f59e0b; }
+  .section-sub { text-align: center; color: #94a3b8; font-size: 1.15rem; max-width: 640px; margin: 0 auto 60px; }
+
+  /* ---- HERO ---- */
+  #hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative; padding-top: 100px;
+  }
+  #hero::before {
+    content: ''; position: absolute; top: -30%; left: -20%; width: 140%; height: 140%;
+    background: radial-gradient(ellipse at 50% 30%, rgba(99,102,241,.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  #hero h1 { font-size: 4rem; font-weight: 800; max-width: 800px; margin-bottom: 20px; position: relative; }
+  #hero h1 span { color: #f59e0b; }
+  #hero p { font-size: 1.25rem; color: #94a3b8; max-width: 600px; margin-bottom: 40px; position: relative; }
+  #hero .cta {
+    display: inline-block; padding: 16px 48px; background: linear-gradient(135deg,#f59e0b,#d97706);
+    color: #0a0a1a; font-weight: 700; font-size: 1.05rem; border-radius: 40px; text-decoration: none;
+    transition: transform .3s, box-shadow .3s; position: relative;
+  }
+  #hero .cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(245,158,11,.35); }
+
+  /* ---- PROBLEM ---- */
+  #problem .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+  .problem-side h3 { font-size: 1.6rem; margin-bottom: 28px; }
+  .problem-side h3 .badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: .8rem; margin-left: 8px; vertical-align: middle; }
+  .badge.old { background: rgba(239,68,68,.2); color: #ef4444; }
+  .badge.new { background: rgba(99,102,241,.25); color: #818cf8; }
+  .problem-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; padding: 20px; border-radius: 16px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05); transition: all .3s; }
+  .problem-item:hover { border-color: rgba(245,158,11,.2); transform: translateX(4px); }
+  .problem-item .icon { font-size: 1.8rem; flex-shrink: 0; width: 48px; text-align: center; }
+  .problem-item h4 { font-size: 1.05rem; margin-bottom: 4px; }
+  .problem-item p { font-size: .9rem; color: #94a3b8; }
+
+  /* ---- SCREENS ---- */
+  #screens .screen-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+  .phone-frame {
+    width: 300px; background: #111; border-radius: 36px; padding: 14px;
+    border: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 24px 80px rgba(0,0,0,.6);
+    transition: transform .3s;
+  }
+  .phone-frame:hover { transform: translateY(-6px); }
+  .phone-frame .phone-inner {
+    background: #16162a; border-radius: 24px; overflow: hidden;
+    font-size: .78rem; line-height: 1.4;
+  }
+  .phone-frame .label {
+    text-align: center; padding: 10px 0 4px; font-weight: 600; font-size: .8rem; color: #f59e0b;
+  }
+
+  /* Mockup shared */
+  .mockup { padding: 14px 16px; }
+  .mockup .status-bar { display: flex; justify-content: space-between; font-size: .68rem; color: #94a3b8; margin-bottom: 10px; }
+  .mockup .logo-bar { text-align: center; font-weight: 700; letter-spacing: 2px; margin-bottom: 16px; }
+  .mockup .logo-bar span { color: #f59e0b; }
+
+  /* Screen 1 – Login */
+  .screen-login { text-align: center; }
+  .screen-login .app-icon { width: 56px; height: 56px; border-radius: 16px; background: linear-gradient(135deg,#f59e0b,#6366f1); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fff; }
+  .screen-login h2 { font-size: 1.1rem; margin-bottom: 4px; }
+  .screen-login .sub { font-size: .75rem; color: #94a3b8; margin-bottom: 20px; }
+  .btn-social { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 11px; border-radius: 12px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); color: #e2e8f0; font-size: .82rem; font-weight: 500; margin-bottom: 10px; cursor: default; transition: background .2s; }
+  .btn-social:hover { background: rgba(255,255,255,.08); }
+  .btn-social .ico { font-size: 1rem; }
+  .screen-login .divider { display: flex; align-items: center; gap: 12px; margin: 16px 0; color: #475569; font-size: .7rem; }
+  .screen-login .divider::before, .screen-login .divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,.08); }
+  .screen-login .bottom-link { font-size: .72rem; color: #64748b; margin-top: 14px; }
+  .screen-login .bottom-link a { color: #818cf8; text-decoration: none; }
+
+  /* Screen 2 – Chat */
+  .screen-chat .chat-msg { margin-bottom: 10px; max-width: 85%; padding: 10px 13px; border-radius: 18px; font-size: .75rem; line-height: 1.5; }
+  .screen-chat .chat-msg.ai { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2); border-bottom-left-radius: 4px; }
+  .screen-chat .chat-msg.user { background: rgba(99,102,241,.12); border: 1px solid rgba(99,102,241,.15); margin-left: auto; border-bottom-right-radius: 4px; }
+  .screen-chat .chat-input { display: flex; gap: 8px; margin-top: 14px; }
+  .screen-chat .chat-input input { flex: 1; padding: 10px 14px; border-radius: 20px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); color: #e2e8f0; font-size: .75rem; outline: none; }
+  .screen-chat .chat-input input::placeholder { color: #475569; }
+  .screen-chat .chat-input button { width: 36px; height: 36px; border-radius: 50%; border: none; background: #f59e0b; color: #0a0a1a; font-size: 1rem; cursor: default; }
+
+  /* Screen 3 – Skill Tree */
+  .screen-skills .level-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: .7rem; color: #94a3b8; }
+  .screen-skills .xp-track { height: 5px; background: rgba(255,255,255,.08); border-radius: 4px; margin-bottom: 16px; overflow: hidden; }
+  .screen-skills .xp-track .fill { height: 100%; width: 67%; background: linear-gradient(90deg,#f59e0b,#d97706); border-radius: 4px; }
+  .skill-card { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 8px; border-radius: 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05); }
+  .skill-card .ico { font-size: 1.2rem; width: 28px; text-align: center; }
+  .skill-card .info { flex: 1; }
+  .skill-card .info .name { font-size: .75rem; font-weight: 600; }
+  .skill-card .info .lvl { font-size: .63rem; color: #64748b; }
+  .skill-card .bar { height: 4px; background: rgba(255,255,255,.06); border-radius: 3px; margin-top: 4px; overflow: hidden; }
+  .skill-card .bar .f { height: 100%; border-radius: 3px; }
+  .skill-card .btn { font-size: .65rem; padding: 4px 10px; border-radius: 8px; border: 1px solid rgba(245,158,11,.3); color: #f59e0b; background: transparent; cursor: default; }
+
+  /* Screen 4 – Quests */
+  .screen-quest .quest { display: flex; gap: 10px; padding: 10px 12px; border-radius: 12px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05); margin-bottom: 8px; }
+  .screen-quest .quest .chk { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(245,158,11,.4); flex-shrink: 0; margin-top: 2px; }
+  .screen-quest .quest .q-info { flex: 1; }
+  .screen-quest .quest .q-info .q-title { font-size: .74rem; }
+  .screen-quest .quest .q-info .q-xp { font-size: .62rem; color: #f59e0b; }
+  .screen-quest .quest.main { border-color: rgba(245,158,11,.25); background: rgba(245,158,11,.06); }
+  .screen-quest .quest.main .chk { border-color: #f59e0b; }
+  .screen-quest .weekly { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.2); font-size: .7rem; color: #818cf8; }
+
+  /* Screen 5 – Coaching */
+  .screen-coach { text-align: center; }
+  .screen-coach .avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg,#f59e0b,#6366f1); margin: 0 auto 8px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: #fff; }
+  .screen-coach h3 { font-size: .9rem; }
+  .screen-coach .tagline { font-size: .7rem; color: #94a3b8; margin-bottom: 12px; }
+  .screen-coach .next-call { padding: 8px 14px; border-radius: 20px; background: rgba(99,102,241,.15); border: 1px solid rgba(99,102,241,.2); font-size: .68rem; color: #818cf8; display: inline-block; margin-bottom: 14px; }
+  .screen-coach .pack { display: flex; justify-content: space-between; padding: 8px 12px; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.05); margin-bottom: 6px; font-size: .68rem; }
+  .screen-coach .pack .price { color: #f59e0b; font-weight: 600; }
+  .screen-coach .pack .save { font-size: .6rem; color: #22c55e; }
+  .screen-coach .clients { font-size: .62rem; color: #64748b; margin-top: 10px; }
+
+  /* ---- PRICING ---- */
+  #pricing .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 24px; }
+  .price-card {
+    padding: 32px 24px; border-radius: 20px; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.06);
+    text-align: center; transition: all .3s; position: relative;
+  }
+  .price-card:hover { border-color: rgba(245,158,11,.25); transform: translateY(-4px); }
+  .price-card.featured { border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.04); }
+  .price-card .badge-feat { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 4px 20px; border-radius: 20px; background: #f59e0b; color: #0a0a1a; font-size: .7rem; font-weight: 600; }
+  .price-card h4 { font-size: 1.1rem; margin-bottom: 4px; }
+  .price-card .price { font-size: 2rem; font-weight: 800; color: #f59e0b; margin-bottom: 4px; }
+  .price-card .price span { font-size: .85rem; color: #94a3b8; font-weight: 400; }
+  .price-card .desc { font-size: .8rem; color: #94a3b8; margin-bottom: 20px; }
+  .price-card ul { list-style: none; text-align: left; margin-bottom: 24px; }
+  .price-card ul li { padding: 6px 0; font-size: .82rem; color: #cbd5e1; }
+  .price-card ul li::before { content: '✓ '; color: #22c55e; font-weight: 700; }
+  .price-card .btn { display: inline-block; padding: 10px 32px; border-radius: 30px; font-weight: 600; font-size: .85rem; text-decoration: none; background: rgba(245,158,11,.12); color: #f59e0b; border: 1px solid rgba(245,158,11,.2); transition: all .3s; }
+  .price-card .btn:hover { background: #f59e0b; color: #0a0a1a; }
+  .price-card.featured .btn { background: #f59e0b; color: #0a0a1a; }
+
+  /* ---- TECH SPECS ---- */
+  #techspec .specs-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; }
+  .spec-item { padding: 24px; border-radius: 16px; background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.05); text-align: center; }
+  .spec-item .sico { font-size: 2rem; margin-bottom: 8px; }
+  .spec-item h4 { font-size: .95rem; margin-bottom: 4px; }
+  .spec-item p { font-size: .78rem; color: #94a3b8; }
+
+  /* ---- FOOTER ---- */
+  footer { text-align: center; padding: 40px 20px; color: #475569; font-size: .8rem; border-top: 1px solid rgba(255,255,255,.04); }
+
+  /* ---- RESPONSIVE ---- */
+  @media(max-width:768px) {
+    section { padding: 60px 20px; }
+    #hero h1 { font-size: 2.2rem; }
+    #problem .grid { grid-template-columns: 1fr; gap: 30px; }
+    .phone-frame { width: 100%; max-width: 320px; }
+    nav { padding: 12px 20px; }
+    nav a { margin-left: 16px; font-size: .8rem; }
+    .section-title { font-size: 2rem; }
+    #screens .screen-grid { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">RENAISSANCE <span>✦</span></div>
+  <div>
+    <a href="#problem">Problem</a>
+    <a href="#screens">App</a>
+    <a href="#pricing">Preise</a>
+    <a href="#techspec">Tech</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <h1>RENAISSANCE – <br>Die App, die dich <span>wachsen</span> lässt</h1>
+  <p>Nicht blocken. Wachsen. Der erste KI-Coach, der dich zur besten Version deiner selbst macht.</p>
+  <a href="#problem" class="cta">Vision entdecken ↓</a>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <h2 class="section-title">Warum <span>Renaissance</span>?</h2>
+  <p class="section-sub">Die alten Methoden sind gescheitert. Wir machen es radikal anders.</p>
+  <div class="grid">
+    <div class="problem-side">
+      <h3>Die alten Methoden funktionieren nicht <span class="badge old">ALT</span></h3>
+      <div class="problem-item">
+        <div class="icon">🚫</div>
+        <div><h4>Blocker-Apps</h4><p>Blocken ist sinnlos – du findest immer einen Weg, sie zu umgehen.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="icon">😞</div>
+        <div><h4>Scham-Ansatz</h4><p>Scham macht alles nur schlimmer und raubt dir die Motivation.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="icon">🧑‍🦯</div>
+        <div><h4>Isolation</h4><p>Alleine schafft man es selten – ohne Begleitung fehlt der Antrieb.</p></div>
+      </div>
+    </div>
+    <div class="problem-side">
+      <h3>Renaissance macht es anders <span class="badge new">NEU</span></h3>
+      <div class="problem-item">
+        <div class="icon">🌱</div>
+        <div><h4>Skill-Aufbau</h4><p>Ersetze Sucht durch Können – baue echte Fähigkeiten auf.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="icon">🤖</div>
+        <div><h4>KI-Coach</h4><p>24/7 Begleitung ohne Urteil – dein persönlicher Mentor.</p></div>
+      </div>
+      <div class="problem-item">
+        <div class="icon">👥</div>
+        <div><h4>Community</h4><p>Gemeinsam wachsen – werde Teil von etwas Größerem.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP SCREENS -->
+<section id="screens">
+  <h2 class="section-title">So sieht die <span>App</span> aus</h2>
+  <p class="section-sub">Fünf Screens, die deine tägliche Renaissance begleiten.</p>
+  <div class="screen-grid">
+
+    <!-- Screen 1: Login -->
+    <div class="phone-frame">
+      <div class="label">① Google Login</div>
+      <div class="phone-inner">
+        <div class="mockup screen-login">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="app-icon">✦</div>
+          <h2>Willkommen bei deiner Renaissance</h2>
+          <p class="sub">Beginne deine Reise zur besten Version deiner selbst.</p>
+          <div class="btn-social"><span class="ico">🔴🟡🟢</span> Weiter mit Google</div>
+          <div class="btn-social"><span class="ico">🍎</span> Weiter mit Apple</div>
+          <div class="divider">oder</div>
+          <div class="btn-social"><span class="ico">✉️</span> Mit E-Mail registrieren</div>
+          <p class="bottom-link">Bereits Mitglied? <a href="#">Anmelden</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 2: Chat -->
+    <div class="phone-frame">
+      <div class="label">② KI-Assistent Chat</div>
+      <div class="phone-inner">
+        <div class="mockup screen-chat">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="logo-bar">RENAISSANCE <span>AI</span></div>
+          <div style="text-align:center;font-size:.65rem;color:#22c55e;margin-bottom:10px;">● Online</div>
+          <div class="chat-msg ai">Hey! Wie war dein Tag? Hast du heute an deinem Skill gearbeitet?</div>
+          <div class="chat-msg user">Ja, hab 20min Gitarre geübt. Meine Finger tun weh 😅</div>
+          <div class="chat-msg ai">Das ist der Weg! 💪 Die ersten Tage sind die härtesten. Kleiner Tipp: Mach morgen 15min, aber konzentrierter. Qualität &gt; Quantität.</div>
+          <div class="chat-input"><input placeholder="Schreib mir..." value=""><button>➤</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 3: Skill Tree -->
+    <div class="phone-frame">
+      <div class="label">③ Skill-Tree</div>
+      <div class="phone-inner">
+        <div class="mockup screen-skills">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="level-bar"><span>Rohdiamant → Anwärter</span><span>Lv. 3</span></div>
+          <div class="xp-track"><div class="fill"></div></div>
+          <div class="skill-card">
+            <span class="ico">🎸</span>
+            <div class="info"><div class="name">Kreativität</div><div class="lvl">Level 3/10</div><div class="bar"><div class="f" style="width:40%;background:#f59e0b"></div></div></div>
+            <span class="btn">Trainieren</span>
+          </div>
+          <div class="skill-card">
+            <span class="ico">💪</span>
+            <div class="info"><div class="name">Körper</div><div class="lvl">Level 5/10</div><div class="bar"><div class="f" style="width:60%;background:#22c55e"></div></div></div>
+            <span class="btn">Trainieren</span>
+          </div>
+          <div class="skill-card">
+            <span class="ico">🧠</span>
+            <div class="info"><div class="name">Geist</div><div class="lvl">Level 2/10</div><div class="bar"><div class="f" style="width:20%;background:#818cf8"></div></div></div>
+            <span class="btn">Trainieren</span>
+          </div>
+          <div class="skill-card">
+            <span class="ico">💰</span>
+            <div class="info"><div class="name">Vermögen</div><div class="lvl">Level 1/10</div><div class="bar"><div class="f" style="width:10%;background:#f59e0b"></div></div></div>
+            <span class="btn">Trainieren</span>
+          </div>
+          <div class="skill-card">
+            <span class="ico">🤝</span>
+            <div class="info"><div class="name">Beziehungen</div><div class="lvl">Level 0/10 – Noch nicht gestartet</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 4: Quests -->
+    <div class="phone-frame">
+      <div class="label">④ Tägliche Quests</div>
+      <div class="phone-inner">
+        <div class="mockup screen-quest">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="logo-bar">HEUTIGE <span>MISSIONEN</span></div>
+          <div class="quest main">
+            <div class="chk"></div>
+            <div class="q-info">
+              <div class="q-title">🔥 30 Minuten Deep Work – Kein Handy, kein Social Media</div>
+              <div class="q-xp">50 XP + Bonus</div>
+            </div>
+          </div>
+          <div class="quest">
+            <div class="chk"></div>
+            <div class="q-info">
+              <div class="q-title">📋 10min Meditation (Headspace-Alternative)</div>
+              <div class="q-xp">15 XP</div>
+            </div>
+          </div>
+          <div class="quest">
+            <div class="chk"></div>
+            <div class="q-info">
+              <div class="q-title">📋 Schreibe 3 Dinge auf, für die du dankbar bist</div>
+              <div class="q-xp">10 XP</div>
+            </div>
+          </div>
+          <div class="quest">
+            <div class="chk"></div>
+            <div class="q-info">
+              <div class="q-title">📋 Mach 20 Liegestütze</div>
+              <div class="q-xp">15 XP</div>
+            </div>
+          </div>
+          <div class="weekly">🏆 Weekly Challenge: 7 Tage am Stück eine neue Gewohnheit halten → 200 XP Bonus</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 5: Coaching -->
+    <div class="phone-frame">
+      <div class="label">⑤ Live-Coaching</div>
+      <div class="phone-inner">
+        <div class="mockup screen-coach">
+          <div class="status-bar"><span>9:41</span><span>📶 🔋</span></div>
+          <div class="avatar">FC</div>
+          <h3>Coaching mit F. Cinar</h3>
+          <div class="tagline">Dein persönlicher Renaissance-Coach</div>
+          <div class="next-call">📅 Nächster Live-Call: Di, 18:00 Uhr → Jetzt buchen</div>
+          <div class="pack">
+            <span>Einzelsession (60min)</span>
+            <span class="price">€197</span>
+          </div>
+          <div class="pack">
+            <span>4er-Pack (4× 60min)</span>
+            <span><span class="price">€597</span> <span class="save">spare €191</span></span>
+          </div>
+          <div class="pack">
+            <span>12-Wochen-Programm (12× 60min)</span>
+            <span><span class="price">€1.997</span> <span class="save">spare €367</span></span>
+          </div>
+          <div class="clients">Bereits 127+ erfolgreiche Clients</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <h2 class="section-title">Transparente <span>Preise</span></h2>
+  <p class="section-sub">Wähle den Plan, der zu deiner Reise passt.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <h4>Free</h4>
+      <div class="price">€0 <span>/ Monat</span></div>
+      <p class="desc">Perfekt für den Start</p>
+      <ul>
+        <li>KI-Chat Basic</li>
+        <li>1 Skill-Baum</li>
+        <li>Community-Zugang</li>
+      </ul>
+      <a href="#" class="btn">Kostenlos starten</a>
+    </div>
+    <div class="price-card featured">
+      <div class="badge-feat">Empfohlen</div>
+      <h4>Renaissance</h4>
+      <div class="price">€19.99 <span>/ Monat</span></div>
+      <p class="desc">Dein täglicher Begleiter</p>
+      <ul>
+        <li>KI-Coach voller Zugriff</li>
+        <li>Alle Skill-Bäume</li>
+        <li>Challenges &amp; Ranking</li>
+        <li>Community + Events</li>
+      </ul>
+      <a href="#" class="btn">Jetzt starten</a>
+    </div>
+    <div class="price-card">
+      <h4>Renaissance Pro</h4>
+      <div class="price">€49.99 <span>/ Monat</span></div>
+      <p class="desc">Für ambitionierte Wachstum</p>
+      <ul>
+        <li>Alles aus Renaissance</li>
+        <li>Prioritäts-Support</li>
+        <li>Erweiterte Analytics</li>
+        <li>Export-Funktionen</li>
+        <li>Beta-Features</li>
+      </ul>
+      <a href="#" class="btn">Pro werden</a>
+    </div>
+    <div class="price-card">
+      <h4>Live-Coaching</h4>
+      <div class="price">€197 <span>– €1.997</span></div>
+      <p class="desc">1:1 mit deinem Coach</p>
+      <ul>
+        <li>Persönliche Sessions</li>
+        <li>Individueller Plan</li>
+        <li>Wöchentliches Review</li>
+        <li>WhatsApp-Support</li>
+      </ul>
+      <a href="#" class="btn">Termin buchen</a>
+    </div>
+  </div>
+</section>
+
+<!-- TECH SPECS -->
+<section id="techspec">
+  <h2 class="section-title">Technische <span>Spezifikationen</span></h2>
+  <p class="section-sub">Modernste Technologie für ein nahtloses Erlebnis.</p>
+  <div class="specs-grid">
+    <div class="spec-item">
+      <div class="sico">🔐</div>
+      <h4>Google OAuth Login</h4>
+      <p>via Firebase Auth oder Supabase – sicher und schnell</p>
+    </div>
+    <div class="spec-item">
+      <div class="sico">🧠</div>
+      <h4>KI-Assistent</h4>
+      <p>via OpenRouter API – smarter, persönlicher Coach</p>
+    </div>
+    <div class="spec-item">
+      <div class="sico">💾</div>
+      <h4>Lokale + Cloud-Daten</h4>
+      <p>localStorage offline + optionale Cloud-Sync</p>
+    </div>
+    <div class="spec-item">
+      <div class="sico">🌓</div>
+      <h4>Dark / Light Mode</h4>
+      <p>Automatisch oder manuell umschaltbar</p>
+    </div>
+    <div class="spec-item">
+      <div class="sico">📲</div>
+      <h4>PWA-ready</h4>
+      <p>Installierbar auf dem Homescreen – wie eine native App</p>
+    </div>
+    <div class="spec-item">
+      <div class="sico">📱</div>
+      <h4>Responsive</h4>
+      <p>Mobile-First Design – perfekt auf jedem Gerät</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  RENAISSANCE ✦ – Die App, die dich wachsen lässt.<br>
+  © 2026 Renaissance App. Alle Rechte vorbehalten.
+</footer>
+
+</body>
+</html>

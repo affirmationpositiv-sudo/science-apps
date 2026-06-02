@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏕️ KI-Camping-Bedarfsrechner 2026 – Finde deine perfekte Outdoor-Ausrüstung</title>
+<meta name="description" content="Interaktiver KI-Camping-Bedarfsrechner: Beantworte 5 Fragen und erhalte personalisierte Produktempfehlungen für Zelte, Powerstations, Schlafsäcke, Kocher & mehr. Mit 5 Budget-Stufen und 7-Tage-Startplan.">
+<meta name="keywords" content="Camping Bedarfsrechner, Camping Ausrüstung Finder, Outdoor Gadgets Quiz, Camping Produktempfehlung, Amazon Affiliate ikune21-21">
+<meta name="language" content="de">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:40px 24px}
+h1{font-size:2.2em;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:8px}
+.subtitle{text-align:center;color:#6B7280;margin-bottom:40px}
+.quiz-box{background:#141414;border:1px solid #2A2A2A;border-radius:16px;padding:32px}
+.question{display:none;animation:fadeIn 0.4s ease}
+.question.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.q-number{color:#6B7280;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.q-text{font-size:1.4em;font-weight:700;margin-bottom:24px;color:#fff}
+.options{display:grid;grid-template-columns:1fr;gap:10px}
+.option{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;padding:16px 20px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:12px}
+.option:hover{border-color:#8B5CF6;background:#222}
+.option.selected{border-color:#FFD700;background:rgba(255,215,0,0.08)}
+.option .radio{width:20px;height:20px;border:2px solid #4B5563;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.option.selected .radio{border-color:#FFD700}
+.option.selected .radio::after{content:'';width:10px;height:10px;background:#FFD700;border-radius:50%}
+.option .opt-text{flex:1;font-size:0.95rem}
+.option .opt-desc{color:#6B7280;font-size:0.8rem;margin-top:2px}
+.nav-btns{display:flex;justify-content:space-between;margin-top:28px;gap:12px}
+.nav-btns button{background:#2A2A2A;border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:0.95rem;transition:background 0.3s}
+.nav-btns button:hover{background:#8B5CF6}
+.nav-btns button:disabled{opacity:0.3;cursor:not-allowed}
+.nav-btns button.next{background:#8B5CF6;font-weight:600}
+.nav-btns button.next:hover{background:#6D3FD6}
+/* Progress */
+.progress{display:flex;gap:8px;margin-bottom:28px;justify-content:center}
+.prog-step{width:40px;height:4px;background:#2A2A2A;border-radius:2px;transition:all 0.4s}
+.prog-step.active{background:#8B5CF6}
+.prog-step.done{background:#FFD700}
+/* Result */
+.result{display:none;animation:fadeIn 0.5s ease}
+.result.active{display:block}
+.result-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:28px;margin:16px 0}
+.result-card h3{color:#FFD700;margin-bottom:8px;font-size:1.2em}
+.result-card p{color:#9CA3AF;font-size:0.9rem;margin-bottom:12px}
+.result-card a{display:inline-block;background:#8B5CF6;color:#fff;padding:8px 20px;border-radius:8px;font-weight:600;font-size:0.85rem;transition:background 0.3s}
+.result-card a:hover{background:#6D3FD6;color:#fff}
+.result-card .prod-list{margin:12px 0}
+.result-card .prod-list li{color:#9CA3AF;margin:6px 0;font-size:0.9rem}
+.result-card .prod-list a{display:inline;background:none;color:#A78BFA;padding:0;font-weight:400;font-size:0.9rem}
+.result-card .prod-list a:hover{color:#FFD700;text-decoration:underline}
+.badge{display:inline-block;background:rgba(139,92,246,0.12);color:#A78BFA;padding:2px 10px;border-radius:12px;font-size:0.75rem;font-weight:600;margin-bottom:8px}
+.plan-box{background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.2);border-radius:12px;padding:24px;margin:20px 0}
+.plan-box h4{color:#FFD700;margin-bottom:8px}
+.plan-box ol{color:#9CA3AF;margin:8px 0 0 20px;font-size:0.9rem}
+.plan-box ol li{margin:4px 0}
+.reset-btn{display:block;margin:24px auto 0;background:#2A2A2A;border:none;color:#fff;padding:10px 28px;border-radius:8px;cursor:pointer;font-size:0.95rem;transition:background 0.3s}
+.reset-btn:hover{background:#8B5CF6}
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:16px;margin:24px 0;font-size:0.8em;color:#6B7280;text-align:center}
+footer{background:#0A0A0A;border-top:1px solid rgba(139,92,246,0.1);padding:32px 24px;text-align:center}
+footer a{color:#6B7280;font-size:0.85rem;margin:0 8px}
+footer a:hover{color:#A78BFA}
+.back-link{display:block;text-align:center;margin:20px 0;color:#A78BFA;font-size:0.9rem}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🏕️ KI-Camping-Bedarfsrechner</h1>
+  <p class="subtitle">Beantworte 5 Fragen und erhalte <strong>personalisierte Produktempfehlungen</strong> + deinen 7-Tage-Startplan</p>
+
+  <div class="quiz-box">
+    <!-- Progress -->
+    <div class="progress" id="progress"></div>
+
+    <!-- Fragen -->
+    <form id="quiz">
+
+      <div class="question active" data-q="1">
+        <div class="q-number">Frage 1 von 5</div>
+        <div class="q-text">Welche Art von Camping planst du?</div>
+        <div class="options">
+          <label class="option" data-value="campingplatz">
+            <span class="radio"></span>
+            <span class="opt-text">🏕️ Campingplatz mit Auto/Zelt<span class="opt-desc">Klassisches Camping mit Komfort (Stromanschluss, Sanitäranlagen)</span></span>
+          </label>
+          <label class="option" data-value="trekking">
+            <span class="radio"></span>
+            <span class="opt-text">🥾 Trekking & Wander-Camping<span class="opt-desc">Mehrtagestouren, Rucksack-Camping, alles muss getragen werden</span></span>
+          </label>
+          <label class="option" data-value="wild">
+            <span class="radio"></span>
+            <span class="opt-text">🌲 Wildcampen / Survival<span class="opt-desc">Abseits der Zivilisation, autark, minimalistisch</span></span>
+          </label>
+          <label class="option" data-value="familie">
+            <span class="radio"></span>
+            <span class="opt-text">👨‍👩‍👧‍👦 Familien-Camping (mit Kindern)<span class="opt-desc">Komfortabel, sicher, Platz für die ganze Familie</span></span>
+          </label>
+          <label class="option" data-value="van">
+            <span class="radio"></span>
+            <span class="opt-text">🚐 Van / Wohnmobil<span class="opt-desc">Fahrzeug-Camping, Stromversorgung & Stellplatz-Suche</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-q="2">
+        <div class="q-number">Frage 2 von 5</div>
+        <div class="q-text">Wie viel Budget hast du für deine Camping-Ausrüstung?</div>
+        <div class="options">
+          <label class="option" data-value="minimal">
+            <span class="radio"></span>
+            <span class="opt-text">💰 0–200 €<span class="opt-desc">Minimal-Ausstattung, gebraucht kaufen, mit vorhandener Ausrüstung starten</span></span>
+          </label>
+          <label class="option" data-value="budget">
+            <span class="radio"></span>
+            <span class="opt-text">💰 200–500 €<span class="opt-desc">Solide Grundausstattung für gelegentliches Campen</span></span>
+          </label>
+          <label class="option" data-value="mittel">
+            <span class="radio"></span>
+            <span class="opt-text">💰 500–1.500 €<span class="opt-desc">Gute Qualität, Powerstation, GPS, hochwertiges Zelt</span></span>
+          </label>
+          <label class="option" data-value="premium">
+            <span class="radio"></span>
+            <span class="opt-text">💰 1.500–3.500 €<span class="opt-desc">Premium-Ausrüstung für ambitionierte Touren</span></span>
+          </label>
+          <label class="option" data-value="profi">
+            <span class="radio"></span>
+            <span class="opt-text">💰 3.500 €+<span class="opt-desc">Professionelle Expedition-Ausrüstung, kein Limit</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-q="3">
+        <div class="q-number">Frage 3 von 5</div>
+        <div class="q-text">Wie oft willst du campen gehen?</div>
+        <div class="options">
+          <label class="option" data-value="selten">
+            <span class="radio"></span>
+            <span class="opt-text">🗓️ 1–2x pro Jahr<span class="opt-desc">Einmal im Sommer ausprobieren, Festival oder Wochenend-Trip</span></span>
+          </label>
+          <label class="option" data-value="hin">
+            <span class="radio"></span>
+            <span class="opt-text">🗓️ 3–6x pro Jahr<span class="opt-desc">An manchen Wochenenden, Urlaub in der Natur</span></span>
+          </label>
+          <label class="option" data-value="oft">
+            <span class="radio"></span>
+            <span class="opt-text">🗓️ 7–15x pro Jahr<span class="opt-desc">Regelmäßig, jedes freie Wochenende</span></span>
+          </label>
+          <label class="option" data-value="dauerhaft">
+            <span class="radio"></span>
+            <span class="opt-text">🗓️ Dauercamper / Auswanderer<span class="opt-desc">Monatelang unterwegs oder ganzjährig im Van</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-q="4">
+        <div class="q-number">Frage 4 von 5</div>
+        <div class="q-text">Welche Tech-Affinität hast du?</div>
+        <div class="options">
+          <label class="option" data-value="lowtech">
+            <span class="radio"></span>
+            <span class="opt-text">🔌 Low-Tech<span class="opt-desc">Nur das Nötigste: Handy-Licht reicht, kein GPS nötig</span></span>
+          </label>
+          <label class="option" data-value="mittel">
+            <span class="radio"></span>
+            <span class="opt-text">📱 Mittel<span class="opt-desc">Smartphone-Navigation, Powerbank, gelegentlich GPS</span></span>
+          </label>
+          <label class="option" data-value="high">
+            <span class="radio"></span>
+            <span class="opt-text">⚡ High-Tech<span class="opt-desc">Powerstation, Solar, Actioncam, GPS-Navi, Laptop-Arbeit unterwegs</span></span>
+          </label>
+          <label class="option" data-value="pro">
+            <span class="radio"></span>
+            <span class="opt-text">🛰️ Pro-Level<span class="opt-desc">Satelliten-Kommunikation (inReach), Wetterstation, Drohne, KI-Tools</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="question" data-q="5">
+        <div class="q-number">Frage 5 von 5</div>
+        <div class="q-text">Dein Haupt-Schwerpunkt beim Camping?</div>
+        <div class="options">
+          <label class="option" data-value="ausruhen">
+            <span class="radio"></span>
+            <span class="opt-text">😌 Ausruhen & Natur genießen<span class="opt-desc">Entspannung, Lesen, gutes Essen, Lagerfeuer</span></span>
+          </label>
+          <label class="option" data-value="wandern">
+            <span class="radio"></span>
+            <span class="opt-text">🥾 Wandern & Aktivurlaub<span class="opt-desc">Tageswanderungen, Klettern, Radtouren</span></span>
+          </label>
+          <label class="option" data-value="fotografie">
+            <span class="radio"></span>
+            <span class="opt-text">📸 Fotografie & Content<span class="opt-desc">Nachtfotografie, Drohnen-Videos, Reise-Vlog</span></span>
+          </label>
+          <label class="option" data-value="familytime">
+            <span class="radio"></span>
+            <span class="opt-text">👨‍👩‍👧‍👦 Familienzeit<span class="opt-desc">Mit Kindern unterwegs, sicher & pädagogisch wertvoll</span></span>
+          </label>
+          <label class="option" data-value="survival">
+            <span class="radio"></span>
+            <span class="opt-text">🔥 Bushcraft & Survival<span class="opt-desc">Feuer machen, essbare Pflanzen, Knoten, shelter bauen</span></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-btns">
+        <button type="button" id="prevBtn" onclick="prevQuestion()" disabled>← Zurück</button>
+        <button type="button" id="nextBtn" class="next" onclick="nextQuestion()">Weiter →</button>
+      </div>
+    </form>
+
+    <!-- Ergebnis -->
+    <div class="result" id="result"></div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>Affiliate-Disclaimer:</strong> Die Produktempfehlungen enthalten Amazon-Affiliate-Links (tag=ikune21-21). Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. Für dich entstehen keine Mehrkosten.
+  </div>
+
+  <a href="../blog/ki-outdoor-camping-2026.html" class="back-link">← Zum Blog-Artikel: KI-Outdoor & Camping 2026</a>
+  <a href="index.html" class="back-link">← Zurück zu allen Tools</a>
+</div>
+
+<footer>
+  <a href="../index.html">🏪 Start</a>
+  <a href="../blog/index.html">📝 Blog</a>
+  <a href="../shop.html">🛒 Shop</a>
+  <span style="color:#4B5563;font-size:0.8rem;">· Amazon Affiliate (tag=ikune21-21)</span>
+</footer>
+
+<script>
+const questions = Array.from(document.querySelectorAll('.question'));
+let current = 0;
+let answers = {};
+const totalQs = 5;
+
+function renderProgress() {
+  const p = document.getElementById('progress');
+  p.innerHTML = '';
+  for(let i=0;i<totalQs;i++){
+    const s=document.createElement('div');
+    s.className='prog-step';
+    if(i===current) s.classList.add('active');
+    else if(i<current) s.classList.add('done');
+    p.appendChild(s);
+  }
+}
+
+function showQuestion(n) {
+  questions.forEach((q,i)=>{
+    q.classList.toggle('active',i===n);
+  });
+  document.getElementById('prevBtn').disabled=n===0;
+  const nextBtn=document.getElementById('nextBtn');
+  if(n===totalQs-1){
+    nextBtn.textContent='🔍 Auswerten';
+  } else {
+    nextBtn.textContent='Weiter →';
+  }
+  renderProgress();
+  // Restore selection
+  const q=questions[n];
+  const val=answers[q.dataset.q];
+  if(val){
+    q.querySelectorAll('.option').forEach(o=>{
+      if(o.dataset.value===val) o.classList.add('selected');
+    });
+  }
+}
+
+function selectOption(el) {
+  const q=el.closest('.question');
+  q.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[q.dataset.q]=el.dataset.value;
+}
+
+// Click on option
+document.querySelectorAll('.option').forEach(o=>{
+  o.addEventListener('click',function(){selectOption(this);});
+});
+
+function nextQuestion() {
+  const q=questions[current];
+  if(!answers[q.dataset.q]){
+    alert('Bitte wähle eine Option aus.');
+    return;
+  }
+  if(current<totalQs-1){
+    current++;
+    showQuestion(current);
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if(current>0){
+    current--;
+    showQuestion(current);
+  }
+}
+
+function showResult() {
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('progress').style.display='none';
+  document.querySelector('.nav-btns').style.display='none';
+  const r=document.getElementById('result');
+  r.classList.add('active');
+
+  const campingType=answers['1']||'campingplatz';
+  const budget=answers['2']||'budget';
+  const freq=answers['3']||'hin';
+  const tech=answers['4']||'mittel';
+  const focus=answers['5']||'ausruhen';
+
+  let profile='';
+  if(campingType==='trekking') profile='🥾 Du planst Trekking- und Wander-Camping. Leichtes Gewicht ist entscheidend!';
+  else if(campingType==='campingplatz') profile='🏕️ Du liebst klassisches Camping auf Plätzen – Komfort und Bequemlichkeit stehen im Fokus.';
+  else if(campingType==='wild') profile='🌲 Wildcampen & Survival – Autarkie und Robustheit sind deine Priorität.';
+  else if(campingType==='familie') profile='👨‍👩‍👧‍👦 Familien-Camping – Sicherheit, Platz und Unterhaltung für Kinder sind wichtig.';
+  else if(campingType==='van') profile='🚐 Van/Wohnmobil – kompakte Lösungen für unterwegs, 12V-Stromversorgung.';
+
+  let budgetLabel='';
+  if(budget==='minimal') budgetLabel='0–200 € (Minimal)';
+  else if(budget==='budget') budgetLabel='200–500 €';
+  else if(budget==='mittel') budgetLabel='500–1.500 €';
+  else if(budget==='premium') budgetLabel='1.500–3.500 €';
+  else if(budget==='profi') budgetLabel='3.500 €+ (Profi)';
+
+  r.innerHTML=`
+    <div style="text-align:center;margin-bottom:28px;">
+      <span class="badge">✅ Analyse abgeschlossen</span>
+      <h2 style="font-size:2em;margin:12px 0;">Dein Camping-Profil</h2>
+      <p style="color:#9CA3AF;">${profile}</p>
+      <p style="color:#6B7280;margin-top:8px;">Budget: ${budgetLabel} · Nutzung: ${freq==='selten'?'1–2x/Jahr':freq==='hin'?'3–6x/Jahr':freq==='oft'?'7–15x/Jahr':'Dauercamper'} · Tech-Level: ${tech==='lowtech'?'Low-Tech':tech==='mittel'?'Mittel':tech==='high'?'High-Tech':'Pro'}</p>
+    </div>
+  `;
+
+  // Recommendations based on answers
+  const recs = getRecommendations(campingType,budget,freq,tech,focus);
+  r.innerHTML+=`<h3 style="margin-top:24px;color:#FFD700;">🎯 Deine Produktempfehlungen</h3>`;
+  recs.forEach(rec=>{
+    r.innerHTML+=`
+      <div class="result-card">
+        <span class="badge">${rec.badge||'🔗 Empfehlung'}</span>
+        <h3>${rec.title}</h3>
+        <p>${rec.desc}</p>
+        <ul class="prod-list">${rec.items.map(i=>`<li>• ${i}</li>`).join('')}</ul>
+        <a href="${rec.link}" target="_blank">🔗 ${rec.btnText||'Bei Amazon ansehen'}</a>
+      </div>
+    `;
+  });
+
+  // 7-Day Plan
+  r.innerHTML+=`
+    <div class="plan-box">
+      <h4>📅 Dein 7-Tage-Startplan</h4>
+      <ol>
+        <li><strong>Tag 1:</strong> Bestandsaufnahme – was hast du schon? (Rucksack, Isomatte, Decke)</li>
+        <li><strong>Tag 2:</strong> Basis-Ausrüstung besorgen (Zelt, Schlafsack, Kocher)</li>
+        <li><strong>Tag 3:</strong> Koch-Equipment + erste Mahlzeit planen</li>
+        <li><strong>Tag 4:</strong> Navigation & Sicherheit (Komoot laden, Erste-Hilfe-Set)</li>
+        <li><strong>Tag 5:</strong> Bekleidung & Sonnenschutz (Merino, Regenjacke)</li>
+        <li><strong>Tag 6:</strong> Probe-Campen im Garten – Zelt aufbauen, Kocher testen</li>
+        <li><strong>Tag 7:</strong> 🥾 Erster Camping-Trip!</li>
+      </ol>
+    </div>
+  `;
+
+  // Restart button
+  r.innerHTML+=`<button class="reset-btn" onclick="resetAll()">🔄 Neu starten</button>`;
+}
+
+function getRecommendations(type,budget,freq,tech,focus){
+  const recommendations=[];
+
+  // Powerstation/Solar
+  if(budget!=='minimal' || tech!=='lowtech'){
+    if(tech==='pro'||budget==='profi'||budget==='premium'){
+      recommendations.push({
+        badge:'🔋 Premium Powerstation',
+        title:'EcoFlow Delta 2 Max + Solar-Panel',
+        desc:'2.048 Wh Powerstation mit KI-Energiemanagement. Perfekt für Van/Wohnmobil oder ambitionierte Camping-Abenteuer. 1.800W Solar-Eingang.',
+        items:['Versorgt Kühlschrank, Laptop, Lampen & Drohnen-Akkus','KI-gesteuerte Ladeoptimierung verlängert Akku-Lebensdauer','Inkl. EcoFlow 220W Solarpanel für autarkes Camping'],
+        link:'https://www.amazon.de/s?k=ecoflow+delta+2+max+powerstation&tag=ikune21-21',
+        btnText:'🔗 EcoFlow Delta 2 Max bei Amazon'
+      });
+    } else if(budget==='mittel'&&tech!=='lowtech'){
+      recommendations.push({
+        badge:'🔋 Mittelklasse',
+        title:'Jackery Explorer 1000 Pro + SolarSaga 100W',
+        desc:'1.002 Wh Powerstation – ideal für Wochenend-Camping. Leicht, leise, zuverlässig.',
+        items:['1.000W Dauerleistung (Smartphone, Kamera, Kühlbox)','2x USB-C + 3x AC-Steckdosen','KI-Ladeoptimierung für Solar-Betrieb'],
+        link:'https://www.amazon.de/s?k=jackery+explorer+1000+pro&tag=ikune21-21',
+        btnText:'🔗 Jackery Explorer 1000 Pro bei Amazon'
+      });
+    } else {
+      recommendations.push({
+        badge:'🔋 Einstieg',
+        title:'Powerbank 20.000 mAh + Mini-Solarpanel',
+        desc:'Perfekt für den Start: günstige Powerbank versorgt Smartphone & Kamera für 3–4 Tage.',
+        items:['Anker PowerCore 20.000 mAh (~25 €)','BigBlue 20W Klapp-Solarpanel (~50 €)','USB-C Mehrfach-Ladekabel'],
+        link:'https://www.amazon.de/s?k=anker+powercore+20000+powerbank&tag=ikune21-21',
+        btnText:'🔗 Powerbank bei Amazon'
+      });
+    }
+  }
+
+  // Campingzelt
+  if(type==='trekking'){
+    if(budget==='mittel'||budget==='premium'){
+      recommendations.push({
+        badge:'⛺ Trekking-Zelt',
+        title:'MSR Hubba Hubba 2026',
+        desc:'Ultraleicht (1,7 kg), 2-Personen, KI-optimierte Belüftung. Der Klassiker für Wander-Camping.',
+        items:['Easton Syclone Stangen – extrem stabil bei geringem Gewicht','Smart-Vent-Belüftungssystem','Doppelwandig, wasserdicht, inkl. Fußabdruck'],
+        link:'https://www.amazon.de/s?k=msr+hubba+hubba+zelt&tag=ikune21-21',
+        btnText:'🔗 MSR Hubba Hubba bei Amazon'
+      });
+    } else {
+      recommendations.push({
+        badge:'⛺ Budget-Trekking-Zelt',
+        title:'Naturehike Cloud-Up 2',
+        desc:'Günstige Alternative (1,9 kg, ~120 €) für Einsteiger. Gute Qualität zum kleinen Preis.',
+        items:['20D Nylon, wasserdicht bis 4.000 mm','Leicht genug für Mehrtagestouren','Doppelwandig mit Apside'],
+        link:'https://www.amazon.de/s?k=naturehike+cloud+up+2+zelt&tag=ikune21-21',
+        btnText:'🔗 Naturehike Cloud-Up bei Amazon'
+      });
+    }
+  } else if(type==='familie'||type==='campingplatz'){
+    recommendations.push({
+      badge:'⛺ Familien-Zelt',
+      title:'Quechua 4 Sekunden Fresh & Black',
+      desc:'Aufbau in Sekunden! 4-Personen-Familienzelt mit Belüftungssystem. Perfekt für Campingplätze.',
+      items:['Fresh-Technologie: hält Innenraum bis 10°C kühler','UV-Schutz 50+','Aufbau in 4 Sekunden – einfach hochwerfen und fixieren'],
+      link:'https://www.amazon.de/s?k=quechua+4+sekunden+fresh+zelt&tag=ikune21-21',
+      btnText:'🔗 Quechua Familien-Zelt bei Amazon'
+    });
+  } else if(type==='wild'){
+    recommendations.push({
+      badge:'⛺ Survival-Zelt',
+      title:'Hilleberg Anjan 2 GT',
+      desc:'Höchste Qualität für Expeditionen. Gelb – die Farbe der Rettung. Robust, wasserdicht, extrem windstabil.',
+      items:['Einwand-Konstruktion für schnellen Aufbau','Kerlon 1200 Außenstoff – reißfest','Große Apside für Gepäck & Kochen bei Regen'],
+      link:'https://www.amazon.de/s?k=hilleberg+anjan+2+gt+zelt&tag=ikune21-21',
+      btnText:'🔗 Hilleberg Anjan bei Amazon'
+    });
+  } else {
+    recommendations.push({
+      badge:'⛺ Van/Vorzeit',
+      title:'Coleman Coastline 3',
+      desc:'Geräumiges 3-Personen-Zelt zum fairen Preis. Gut für Campingplätze und Festivals.',
+      items:['Wassersäule 4.500 mm – zuverlässig wasserdicht','Schnellaufbau mit Farbcodierung','Inkl. Tragetasche, 6,5 kg'],
+      link:'https://www.amazon.de/s?k=coleman+coastline+3+zelt&tag=ikune21-21',
+      btnText:'🔗 Coleman Zelt bei Amazon'
+    });
+  }
+
+  // GPS/Navigation
+  if(tech==='high'||tech==='pro'||type==='trekking'||type==='wild'){
+    if(budget==='premium'||budget==='profi'||tech==='pro'){
+      recommendations.push({
+        badge:'🗺️ Premium GPS',
+        title:'Garmin GPSMAP 67',
+        desc:'Multiband-GPS mit TopoActive-Karten. KI-Routenoptimierung, Wetterradar & 180 Std. Akku.',
+        items:['Satelliten-gestützte Routenplanung + Offline-Karten','Wettervorhersage & SOS-Funktion','Robust, wasserdicht, stoßfest'],
+        link:'https://www.amazon.de/s?k=garmin+gpsmap+67+outdoor+navi&tag=ikune21-21',
+        btnText:'🔗 Garmin GPSMAP 67 bei Amazon'
+      });
+    } else if(budget==='mittel'){
+      recommendations.push({
+        badge:'🗺️ Mittelklasse GPS',
+        title:'Garmin eTrex 32x',
+        desc:'Zuverlässiges Outdoor-GPS mit vorinstallierten Topo-Karten. Günstiger, aber bewährt.',
+        items:['2,2" Farbdisplay, ablesbar in der Sonne','25 Std. Akkulaufzeit mit 2x AA','KI-Wegpunkt-Management & Track-Aufzeichnung'],
+        link:'https://www.amazon.de/s?k=garmin+etrex+32x+outdoor+gps&tag=ikune21-21',
+        btnText:'🔗 Garmin eTrex 32x bei Amazon'
+      });
+    }
+  }
+  if(tech==='mittel'||tech==='lowtech'){
+    recommendations.push({
+      badge:'📱 Smartphone-Navi',
+      title:'Komoot + Outdooractive (kostenlos)',
+      desc:'Die besten Apps für Outdoor-Navigation. Offline-Karten, Tourenplanung & KI-Routenvorschläge.',
+      items:['Komoot: beste Routenplanung (1x Region kaufen)','Outdooractive: viele Touren kostenlos','Smartphone-Halterung + Powerbank als Backup'],
+      link:'https://www.amazon.de/s?k=outdoor+sport+smartphone+halterung&tag=ikune21-21',
+      btnText:'🔗 Smartphone-Zubehör bei Amazon'
+    });
+  }
+
+  // SOS/InReach for wildcamping/trekking
+  if(type==='wild'||type==='trekking'||(type==='van'&&tech==='pro')){
+    recommendations.push({
+      badge:'🆘 SOS-Kommunikation',
+      title:'Garmin inReach Mini 2',
+      desc:'Satelliten-Kommunikator mit SOS-Notruffunktion. Unverzichtbar für abgelegene Gebiete.',
+      items:['Weltweite Satelliten-Abdeckung (Iridium)','KI-optimierte Textkompression für längere Akkulaufzeit','Wettervorhersage auf der Tour'],
+      link:'https://www.amazon.de/s?k=garmin+inreach+mini+2+satellit&tag=ikune21-21',
+      btnText:'🔗 inReach Mini 2 bei Amazon'
+    });
+  }
+
+  // Campingkocher
+  if(focus!=='ausruhen'||freq!=='selten'){
+    if(type==='trekking'||type==='wild'){
+      recommendations.push({
+        badge:'🔥 Trekking-Kocher',
+        title:'MSR PocketRocket Deluxe',
+        desc:'Ultrakompakt (73 g), Wasserkocher in 3,5 Min. 15% sparsamer durch KI-Temperaturregelung.',
+        items:['Passt in jede Tasche','Gut windgeschützt','Inkl. Gaskartusche (100 g)'],
+        link:'https://www.amazon.de/s?k=msr+pocketrocket+deluxe+kocher&tag=ikune21-21',
+        btnText:'🔗 MSR PocketRocket bei Amazon'
+      });
+    } else {
+      recommendations.push({
+        badge:'🔥 Camping-Kocher',
+        title:'Campingaz Camp Bistro 3',
+        desc:'3-flammiger Gaskocher mit 6 kW Leistung. KI-Flammenregulierung für gleichmäßiges Brutzeln.',
+        items:['Ideal für Familien: 3 Töpfe gleichzeitig','Inkl. Windschutz & Piezo-Zündung','Kompatibel mit Campingaz CV 470 Kartusche'],
+        link:'https://www.amazon.de/s?k=campingaz+camp+bistro+3+kocher&tag=ikune21-21',
+        btnText:'🔗 Campingaz Kocher bei Amazon'
+      });
+    }
+  }
+
+  // Schlafsack/Isomatte
+  if(type==='wild'||freq==='dauerhaft'||budget==='premium'||budget==='profi'){
+    recommendations.push({
+      badge:'🛏️ Premium Schlafsystem',
+      title:'Mammut Nordic 2026 + Therm-a-Rest NeoAir XTherm',
+      desc:'Daunenschlafsack (Komfort -10°C) + extrem isolierende Isomatte (R-Wert 6,9). Perfekt für kalte Nächte.',
+      items:['850+ cuin Daune, KI-Temperaturregelung','Isomatte nur 450 g, R-Wert 6,9','Schlafsack komprimiert auf 4L Packvolumen'],
+      link:'https://www.amazon.de/s?k=mammut+nordic+schlafsack&tag=ikune21-21',
+      btnText:'🔗 Schlafsack bei Amazon'
+    });
+  } else {
+    recommendations.push({
+      badge:'🛏️ Einsteiger-Schlafsystem',
+      title:'Carinthia Defence 4 + Isomatte',
+      desc:'Bewährter Militärschlafsack (Komfort -10°C) + selbstaufblasende Isomatte für erholsamen Schlaf.',
+      items:['Carinthia Defence 4: robust, langlebig (~180 €)','Selbstaufblasende Isomatte 5 cm (~35 €)','Inlett für warme Nächte (~20 €)'],
+      link:'https://www.amazon.de/s?k=carinthia+defence+4+schlafsack&tag=ikune21-21',
+      btnText:'🔗 Carinthia Schlafsack bei Amazon'
+    });
+  }
+
+  // Beleuchtung
+  if(tech==='high'||tech==='pro'){
+    recommendations.push({
+      badge:'💡 Premium-Beleuchtung',
+      title:'Ledlenser ML6 Connect + Petzl Swift RL',
+      desc:'KI-gesteuerte Laterne (2.000 Lumen) + reaktive Stirnlampe (1.100 Lumen).',
+      items:['ML6: App-Fernsteuerung, 150 Std. Leuchtdauer','Petzl Swift RL passt Helligkeit automatisch an','Beleuchtung fürs ganze Camp'],
+      link:'https://www.amazon.de/s?k=ledlenser+ml6+connect+laterne&tag=ikune21-21',
+      btnText:'🔗 Camping-Beleuchtung bei Amazon'
+    });
+  } else {
+    recommendations.push({
+      badge:'🔦 Basis-Beleuchtung',
+      title:'MPOWERD Luci Solar Light + Stirnlampe',
+      desc:'Solar-Lampe für 20 € + günstige LED-Stirnlampe für unterwegs.',
+      items:['Luci: aufblasbar, 75 Lumen, 10 g','Stirnlampe: LED 200 Lumen, 3x AAA','Solar-Lampe lädt tagsüber, leuchtet nachts 6 Std.'],
+      link:'https://www.amazon.de/s?k=mpowerd+luci+solar+light&tag=ikune21-21',
+      btnText:'🔗 Luci Solar-Lampe bei Amazon'
+    });
+  }
+
+  // Rucksack
+  if(type==='trekking'||focus==='wandern'){
+    recommendations.push({
+      badge:'🎒 Trekking-Rucksack',
+      title:'Deuter Aircontact Core 65+10',
+      desc:'KI-optimiertes Tragesystem mit variabler Rückenlänge. Perfekt für Mehrtagestouren.',
+      items:['65+10 Liter für 5–7 Tage Ausrüstung','Active-Contact-Gurt perfekt für Lastverteilung','Inkl. Regenhülle & Trinksystem-Vorbereitung'],
+      link:'https://www.amazon.de/s?k=deuter+aircontact+core+65+10+rucksack&tag=ikune21-21',
+      btnText:'🔗 Deuter Rucksack bei Amazon'
+    });
+  } else if(type==='familie'){
+    recommendations.push({
+      badge:'🎒 Familien-Rucksack',
+      title:'Deuter Kid Comfort Pro + Osprey Daylite Plus',
+      desc:'Kindertrage für Wanderungen + Tagesrucksack für Eltern.',
+      items:['Deuter Kid Comfort: für Kinder bis 22 kg (~249 €)','Osprey Daylite Plus: 20L, ~99 €','Sonnenverdeck & Regenschutz inklusive'],
+      link:'https://www.amazon.de/s?k=deuter+kid+comfort+pro+kindertrage&tag=ikune21-21',
+      btnText:'🔗 Deuter Kindertrage bei Amazon'
+    });
+  }
+
+  // Water/Filter for wild camping and trekking
+  if(type==='wild'||type==='trekking'){
+    recommendations.push({
+      badge:'💧 Wasserfilter',
+      title:'Katadyn BeFree 1.0L',
+      desc:'Ultrakompakt (60 g), filtert bis 2L/min. KI-überwachte Durchflussanzeige.',
+      items:['0,1 Mikron Membran – entfernt Bakterien & Protozoen','Flexible Flasche, einfach zusammendrückbar','Ideal für Quellwasser & Bäche unterwegs'],
+      link:'https://www.amazon.de/s?k=katadyn+befree+wasserfilter&tag=ikune21-21',
+      btnText:'🔗 Katadyn BeFree bei Amazon'
+    });
+  }
+
+  // Fotografie/Content
+  if(focus==='fotografie'){
+    recommendations.push({
+      badge:'📸 Actioncam für Content',
+      title:'GoPro Hero 13 Black + DJI Mini 5 Pro',
+      desc:'Perfekt für Outdoor-Content: KI-Automatikmodi + Drohnenaufnahmen.',
+      items:['GoPro: HyperSmooth 6.0, wasserdicht 10m','DJI Mini 5 Pro: 4K, unter 249g, KI-Tracking','Zubehör: Stativ, Powerbank, Speicherkarten'],
+      link:'https://www.amazon.de/s?k=gopro+hero+13+black+action&tag=ikune21-21',
+      btnText:'🔗 Actioncams bei Amazon'
+    });
+  }
+
+  // Survival specific
+  if(focus==='survival'||type==='wild'){
+    recommendations.push({
+      badge:'🪚 Survival-Tools',
+      title:'Victorinox Hunter Pro + Feuerstahl',
+      desc:'Multifunktionswerkzeug mit 12 Funktionen + zuverlässiger Feuerstahl für den Notfall.',
+      items:['Victorinox: Säge, Messer, Zange, Dosenöffner','Feuerstahl: zündet bei Nässe & Wind','Paracord-Armband (5 m) für Extrasituationen'],
+      link:'https://www.amazon.de/s?k=victorinox+hunter+pro+multifunktionswerkzeug&tag=ikune21-21',
+      btnText:'🔗 Survival-Werkzeug bei Amazon'
+    });
+  }
+
+  // Family specific
+  if(type==='familie'||focus==='familytime'){
+    recommendations.push({
+      badge:'👨‍👩‍👧‍👦 Familien-Extras',
+      title:'Spiele, Sonnenschutz & Sicherheit für Kinder',
+      desc:'Damit der Camping-Trip mit Kindern zum Erfolg wird.',
+      items:['Kinder-Sonnenschutz (UV-50 Kleidung, ~25 €)','Erste-Hilfe-Set für Kinder (~15 €)','Camping-Spiele: Schnitzeljagd-Set, Bälle, Kartenspiele'],
+      link:'https://www.amazon.de/s?k=kinder+camping+spielzeug+outdoor&tag=ikune21-21',
+      btnText:'🔗 Kinder-Camping-Zubehör bei Amazon'
+    });
+  }
+
+  return recommendations.slice(0,6);
+}
+
+function resetAll() {
+  current=0;
+  answers={};
+  document.getElementById('quiz').style.display='block';
+  document.getElementById('progress').style.display='flex';
+  document.querySelector('.nav-btns').style.display='flex';
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('result').innerHTML='';
+  document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  showQuestion(0);
+}
+
+showQuestion(0);
+</script>
+
+</body>
+</html>

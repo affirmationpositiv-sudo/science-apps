@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKUNE KI-Coaching – Willkommen an Bord</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        ::selection { background: #f59e0b; color: #0a0a1a; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+        .nav-bar { padding: 20px 0; border-bottom: 1px solid rgba(245,158,11,0.1); display: flex; align-items: center; justify-content: space-between; }
+        .nav-bar .logo-small { font-weight: 900; font-size: 1.3rem; letter-spacing: 4px; color: #f59e0b; text-decoration: none; text-transform: uppercase; }
+        .nav-bar a { color: #888; text-decoration: none; font-size: 0.85rem; }
+        .nav-bar a:hover { color: #f59e0b; }
+
+        .hero { padding: 70px 0 50px; text-align: center; }
+        .hero .badge { display: inline-block; background: rgba(245,158,11,0.1); color: #f59e0b; padding: 6px 20px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; border: 1px solid rgba(245,158,11,0.2); }
+        .hero h1 { font-size: 2.8rem; color: #fff; margin-bottom: 15px; line-height: 1.2; }
+        .hero h1 span { color: #f59e0b; }
+        .hero .subtitle { font-size: 1.1rem; color: #aaa; max-width: 650px; margin: 0 auto 30px; }
+        .hero .hero-cta .btn { margin: 0 8px 12px; }
+
+        .btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #0a0a1a; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; padding: 14px 36px; border-radius: 8px; text-decoration: none; transition: all 0.3s; border: none; cursor: pointer; }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3); }
+        .btn-large { padding: 16px 48px; font-size: 1rem; }
+        .btn-outline { background: transparent; border: 2px solid #f59e0b; color: #f59e0b; }
+        .btn-outline:hover { background: rgba(245,158,11,0.1); }
+        .btn-dark { background: linear-gradient(145deg, #1a1a3a, #0d0d20); border: 1px solid rgba(245,158,11,0.2); color: #f59e0b; }
+        .btn-dark:hover { border-color: #f59e0b; }
+
+        .benefits-section { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .benefits-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 35px; }
+        .benefits-section h2 span { color: #f59e0b; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .benefit-item { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.1); border-radius: 10px; padding: 24px 20px; text-align: center; }
+        .benefit-item .icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .benefit-item h4 { color: #fff; margin-bottom: 6px; font-size: 1rem; }
+        .benefit-item p { color: #999; font-size: 0.85rem; }
+
+        .what-you-get { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        .what-you-get h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 35px; }
+        .what-you-get h2 span { color: #f59e0b; }
+        .wyg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .wyg-item { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.1); border-radius: 10px; padding: 24px 20px; text-align: center; }
+        .wyg-item .icon { font-size: 2rem; margin-bottom: 8px; }
+        .wyg-item h4 { color: #f59e0b; font-size: 0.95rem; margin-bottom: 4px; }
+        .wyg-item p { color: #888; font-size: 0.82rem; }
+
+        .tiers-section { padding: 50px 0; border-top: 1px solid rgba(245,158,11,0.1); }
+        .tiers-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 10px; }
+        .tiers-section h2 span { color: #f59e0b; }
+        .tiers-section > .container > p { text-align: center; color: #888; margin-bottom: 30px; }
+        .tiers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; align-items: start; }
+        .tier-card { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.15); border-radius: 16px; padding: 30px; text-align: center; position: relative; }
+        .tier-card.featured { border-color: #f59e0b; border-width: 2px; transform: scale(1.03); }
+        .tier-card.featured .tier-label { background: #f59e0b; color: #0a0a1a; }
+        .tier-label { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: rgba(245,158,11,0.15); color: #f59e0b; padding: 4px 18px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+        .tier-card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 6px; }
+        .tier-card .tier-price { font-size: 2.2rem; font-weight: 800; color: #f59e0b; margin: 12px 0; }
+        .tier-card .tier-price small { font-size: 1rem; color: #888; font-weight: 400; }
+        .tier-card .tier-desc { color: #aaa; font-size: 0.85rem; margin-bottom: 15px; min-height: 40px; }
+        .tier-card ul { list-style: none; text-align: left; margin-bottom: 20px; }
+        .tier-card ul li { color: #999; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .tier-card ul li::before { content: '✓ '; color: #f59e0b; font-weight: 700; }
+        .tier-card .btn { width: 100%; }
+
+        .countdown-banner { background: linear-gradient(135deg, #1a1a3a, #2a1a0a); border: 1px solid rgba(245,158,11,0.2); border-radius: 12px; padding: 20px 30px; text-align: center; margin-top: 30px; }
+        .countdown-banner p { color: #f59e0b; font-size: 1rem; font-weight: 600; }
+        .countdown-banner p span { color: #fff; background: rgba(245,158,11,0.1); padding: 2px 10px; border-radius: 6px; }
+
+        .join-section { padding: 60px 0; text-align: center; border-top: 1px solid rgba(245,158,11,0.1); border-bottom: 1px solid rgba(245,158,11,0.1); background: linear-gradient(135deg, #0a0a1a, #0d0d2a); }
+        .join-section h2 { font-size: 2rem; color: #fff; margin-bottom: 10px; }
+        .join-section h2 span { color: #f59e0b; }
+        .join-section p { color: #aaa; margin-bottom: 25px; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .join-section .btn { font-size: 1.1rem; padding: 18px 56px; }
+        .join-section .telegram-note { color: #666; font-size: 0.8rem; margin-top: 12px; }
+
+        .faq-section { padding: 50px 0; }
+        .faq-section h2 { text-align: center; font-size: 1.8rem; color: #fff; margin-bottom: 30px; }
+        .faq-section h2 span { color: #f59e0b; }
+        .faq-grid { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+        .faq-item { background: linear-gradient(145deg, #12122a, #0d0d20); border: 1px solid rgba(245,158,11,0.1); border-radius: 8px; overflow: hidden; }
+        .faq-question { padding: 16px 20px; color: #fff; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; }
+        .faq-question:hover { background: rgba(245,158,11,0.05); }
+        .faq-question .icon { color: #f59e0b; transition: transform 0.3s; }
+        .faq-item.active .faq-question .icon { transform: rotate(45deg); }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: all 0.3s; color: #999; font-size: 0.85rem; line-height: 1.7; }
+        .faq-item.active .faq-answer { padding: 0 20px 16px; max-height: 300px; }
+
+        footer { background: linear-gradient(135deg, #0a0a1a, #050510); border-top: 1px solid rgba(245,158,11,0.1); padding: 40px 0; text-align: center; }
+        footer .footer-logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 4px; color: #f59e0b; margin-bottom: 10px; }
+        footer p { color: #666; font-size: 0.85rem; }
+        footer a { color: #f59e0b; text-decoration: none; }
+
+        @media (max-width: 700px) { .hero h1 { font-size: 2rem; } .tiers-grid { grid-template-columns: 1fr; } .tier-card.featured { transform: none; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="nav-bar">
+        <a href="../index.html" class="logo-small">IKUNE</a>
+        <a href="../index.html">← Zurück zur Übersicht</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="container">
+        <div class="badge">🚀 Neu – Ab sofort verfügbar</div>
+        <h1>IKUNE <span>KI-Coaching</span> – Willkommen an Bord</h1>
+        <p class="subtitle">Dein persönlicher KI-Begleiter. Tägliche Impulse, exklusive Prompt-Packs und eine Community von Gleichgesinnten – egal ob Anfänger oder Profi.</p>
+        <div class="hero-cta">
+            <a href="#tiers" class="btn btn-large">Tier entdecken</a>
+            <a href="#join" class="btn btn-large btn-outline">Kostenlos beitreten</a>
+        </div>
+    </div>
+</section>
+
+<section class="benefits-section">
+    <div class="container">
+        <h2>Warum <span>IKUNE Coaching</span>?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="icon">⚡</div>
+                <h4>Lerne schneller mit KI</h4>
+                <p>Praktische Tipps &amp; Workflows, die dich in Minuten weiterbringen – kein technisches Vorwissen nötig.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">📬</div>
+                <h4>Tägliche Impulse</h4>
+                <p>Jeden Tag ein neuer Prompt, eine neue Technik oder ein Power-Tipp direkt auf dein Handy.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">👥</div>
+                <h4>Community von Gleichgesinnten</h4>
+                <p>Tausche dich aus, stelle Fragen und wachse gemeinsam mit anderen KI-Enthusiasten.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon">📦</div>
+                <h4>Exklusive Prompt Packs</h4>
+                <p>Zugriff auf kuratierte Prompt-Sammlungen für Bilder, Texte, Videos, Programmierung und mehr.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="what-you-get">
+    <div class="container">
+        <h2>Was dich <span>erwartet</span></h2>
+        <div class="wyg-grid">
+            <div class="wyg-item">
+                <div class="icon">🤖</div>
+                <h4>Tägliche KI-Tipps</h4>
+                <p>Kurz, prägnant, sofort umsetzbar – für ChatGPT, Midjourney, Copilot &amp; Co.</p>
+            </div>
+            <div class="wyg-item">
+                <div class="icon">📚</div>
+                <h4>Prompt-Library Zugang</h4>
+                <p>Hunderte erprobte Prompts in ständig wachsenden Kategorien.</p>
+            </div>
+            <div class="wyg-item">
+                <div class="icon">💬</div>
+                <h4>Community</h4>
+                <p>Private Gruppe zum Austausch, Networking &amp; gemeinsamen Lernen.</p>
+            </div>
+            <div class="wyg-item">
+                <div class="icon">🔧</div>
+                <h4>Exklusive Tools</h4>
+                <p>Zugang zu IKUNE-Rechnern, Generatoren und Analyzer-Tools.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tiers-section" id="tiers">
+    <div class="container">
+        <h2>Wähle dein <span>Coaching-Tier</span></h2>
+        <p>Vom kostenlosen Einstieg bis zum persönlichen 1:1-Mentoring – für jedes Level das passende Angebot.</p>
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="tier-label">Kostenlos</div>
+                <h3>Telegram Channel</h3>
+                <div class="tier-price">€0 <small>frei</small></div>
+                <p class="tier-desc">Tägliche KI-Impulse direkt auf Telegram</p>
+                <ul>
+                    <li>Tägliche KI-Tipps &amp; Tricks</li>
+                    <li>Wöchentliche Prompt-Drops</li>
+                    <li>Community-Zugang (Read-only)</li>
+                    <li>Exklusive Ankündigungen</li>
+                </ul>
+                <a href="https://t.me/IKUNE_Coaching" class="btn">Kostenlos beitreten</a>
+            </div>
+            <div class="tier-card featured">
+                <div class="tier-label">⭐ Beliebt</div>
+                <h3>Starter – Private Gruppe</h3>
+                <div class="tier-price">€97 <small>/ einmalig</small></div>
+                <p class="tier-desc">Interaktive Community mit Prompt-Library &amp; Tools</p>
+                <ul>
+                    <li>Alles aus dem kostenlosen Kanal</li>
+                    <li>Private Telegram-Gruppe</li>
+                    <li>Vollständige Prompt-Library</li>
+                    <li>Monatliche Live-Q&amp;A-Sessions</li>
+                    <li>Exklusive Tool-Updates</li>
+                </ul>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="affirmation.positiv@gmail.com">
+                    <input type="hidden" name="item_name" value="IKUNE Starter Coaching">
+                    <input type="hidden" name="amount" value="97.00">
+                    <input type="hidden" name="currency_code" value="EUR">
+                    <input type="hidden" name="return" value="https://affirmationpositiv-sudo.github.io/science-apps/coaching/telegram-kanal.html">
+                    <button type="submit" class="btn">Jetzt starten – €97</button>
+                </form>
+            </div>
+            <div class="tier-card">
+                <div class="tier-label">VIP</div>
+                <h3>Elite – 1:1 Coaching</h3>
+                <div class="tier-price">€997 <small>/ einmalig</small></div>
+                <p class="tier-desc">Persönliches Mentoring mit massgeschneidertem KI-Fahrplan</p>
+                <ul>
+                    <li>Alles aus Starter &amp; Kanal</li>
+                    <li>4 persönliche 1:1-Sessions (je 60 Min.)</li>
+                    <li>Massgeschneiderter KI-Fahrplan</li>
+                    <li>Direkt-Chat mit dem Coach</li>
+                    <li>Individuelle Prompt-Entwicklung</li>
+                    <li>Prioritäts-Support</li>
+                </ul>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="affirmation.positiv@gmail.com">
+                    <input type="hidden" name="item_name" value="IKUNE Elite Coaching">
+                    <input type="hidden" name="amount" value="997.00">
+                    <input type="hidden" name="currency_code" value="EUR">
+                    <input type="hidden" name="return" value="https://affirmationpositiv-sudo.github.io/science-apps/coaching/telegram-kanal.html">
+                    <button type="submit" class="btn">Jetzt buchen – €997</button>
+                </form>
+            </div>
+        </div>
+        <div class="countdown-banner">
+            <p>⏳ Nur <span>10 Plätze</span> im €97-Tier diesen Monat verfügbar – sichere dir deinen Zugang!</p>
+        </div>
+    </div>
+</section>
+
+<section class="join-section" id="join">
+    <div class="container">
+        <h2>Dem <span>IKUNE KI-Coaching</span> beitreten</h2>
+        <p>Kostenlos starten, wachsen und mit Gleichgesinnten die KI-Welt erobern. Klicke auf den Button und trete dem Telegram-Kanal bei – keine Anmeldung nötig.</p>
+        <a href="https://t.me/IKUNE_Coaching" class="btn btn-large">📱 Jetzt Kanal beitreten</a>
+        <p class="telegram-note">🔒 Telegram-App erforderlich · Kostenlos · Jederzeit kündbar</p>
+    </div>
+</section>
+
+<section class="faq-section">
+    <div class="container">
+        <h2>Häufige <span>Fragen</span></h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Was ist IKUNE KI-Coaching überhaupt?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">IKUNE KI-Coaching ist dein täglicher Begleiter in die Welt der Künstlichen Intelligenz. Wir liefern dir praxisnahe Tipps, erprobte Prompts und eine unterstützende Community – egal ob du KI im Beruf, für kreative Projekte oder im Alltag nutzen möchtest.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Brauche ich Vorkenntnisse?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Überhaupt nicht. Der Channel richtet sich an Anfänger genauso wie an Fortgeschrittene. Die Tipps sind so aufbereitet, dass du sie sofort umsetzen kannst – oft in weniger als 5 Minuten.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Was kostet der Telegram-Kanal?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Der Telegram-Kanal ist komplett kostenlos. Du erhältst täglich wertvolle KI-Impulse, ohne jemals zu bezahlen. Die kostenpflichtigen Tiers (€97 Private Gruppe, €997 1:1-Coaching) sind optionale Upgrades für tiefere Einblicke und persönliche Betreuung.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Wie unterscheiden sich die Tiers?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Der kostenlose Kanal ist ein reiner Info-Kanal (Read-only). Das Starter-Tier (€97) öffnet dir eine interaktive Privatgruppe mit Prompt-Library, Live-Q&As und Austausch. Das Elite-Tier (€997) bietet zusätzlich 4 persönliche 1:1-Mentoring-Sessions und einen massgeschneiderten KI-Fahrplan für deine individuellen Ziele.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Kann ich später upgraden?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">Ja, jederzeit! Du startest kostenlos im Kanal und kannst dich jederzeit für das Starter- oder Elite-Tier entscheiden. Dein Wissen und deine Fortschritte aus dem Kanal bleiben dir natürlich erhalten.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-logo">IKUNE</div>
+        <p>© 2025 IKUNE Coach. Alle Rechte vorbehalten.</p>
+        <p style="margin-top:6px; font-size:0.8rem;">Dein Code. Dein Erfolg.</p>
+        <p style="margin-top:4px;"><a href="../index.html">← Zurück zur Übersicht</a></p>
+    </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

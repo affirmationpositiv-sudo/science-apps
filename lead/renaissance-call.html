@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kostenloses Erstgespräch – Renaissance Coaching</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f7c948, #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: #9a9a9a;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .hero .highlight {
+            color: #f7c948;
+            font-weight: 600;
+        }
+
+        /* Benefits */
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .benefit-card {
+            background: linear-gradient(145deg, #141420, #1a1a2e);
+            border: 1px solid #2a2a3e;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: #f7c948;
+        }
+        .benefit-card .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        .benefit-card h3 {
+            font-size: 1rem;
+            color: #f7c948;
+            margin-bottom: 8px;
+        }
+        .benefit-card p {
+            font-size: 0.85rem;
+            color: #9a9a9a;
+        }
+
+        /* Booking form */
+        .booking-section {
+            background: linear-gradient(145deg, #141420, #1a1a2e);
+            border: 1px solid #2a2a3e;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        .booking-section h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #f7c948;
+        }
+        .booking-section .subtitle {
+            text-align: center;
+            color: #9a9a9a;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #f7c948;
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .form-group select option {
+            background: #141420;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* Calendar mockup */
+        .calendar-mockup {
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .calendar-mockup .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            color: #f7c948;
+        }
+        .calendar-mockup .cal-header span { font-weight: 600; }
+        .calendar-mockup .cal-header .nav-arrows { color: #555; cursor: default; }
+        .calendar-mockup .cal-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            text-align: center;
+        }
+        .calendar-mockup .cal-days .day-name {
+            font-size: 0.75rem;
+            color: #666;
+            padding: 6px 0;
+        }
+        .calendar-mockup .cal-days .day {
+            padding: 8px 0;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+            cursor: default;
+        }
+        .calendar-mockup .cal-days .day.available {
+            background: rgba(247, 201, 72, 0.15);
+            color: #f7c948;
+            cursor: pointer;
+        }
+        .calendar-mockup .cal-days .day.available:hover {
+            background: rgba(247, 201, 72, 0.3);
+        }
+        .calendar-mockup .cal-days .day.selected {
+            background: #f7c948;
+            color: #0a0a0f;
+            font-weight: 600;
+        }
+        .calendar-mockup .cal-days .day.today {
+            border: 1px solid #f7c948;
+        }
+        .calendar-mockup .cal-days .day.past {
+            color: #333;
+        }
+
+        /* Time slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        .time-slot {
+            padding: 10px;
+            text-align: center;
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .time-slot:hover {
+            border-color: #f7c948;
+            background: rgba(247, 201, 72, 0.1);
+        }
+        .time-slot.selected {
+            border-color: #f7c948;
+            background: rgba(247, 201, 72, 0.2);
+            color: #f7c948;
+        }
+
+        /* Button */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff6b35, #f7c948);
+            border: none;
+            border-radius: 12px;
+            color: #0a0a0f;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(247, 201, 72, 0.3);
+        }
+
+        /* Confirmation page (hidden by default) */
+        .confirmation-page {
+            display: none;
+        }
+        .confirmation-page.active {
+            display: block;
+        }
+        .booking-page.hidden {
+            display: none;
+        }
+
+        /* Confirmation styles */
+        .confirmation-header {
+            text-align: center;
+            padding: 60px 0 30px;
+        }
+        .confirmation-header .checkmark {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+        .confirmation-header h2 {
+            font-size: 2rem;
+            color: #f7c948;
+            margin-bottom: 12px;
+        }
+        .confirmation-card {
+            background: linear-gradient(145deg, #141420, #1a1a2e);
+            border: 1px solid #2a2a3e;
+            border-radius: 20px;
+            padding: 32px;
+            margin: 20px 0;
+        }
+        .confirmation-card h3 {
+            color: #f7c948;
+            margin-bottom: 16px;
+        }
+        .confirmation-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .confirmation-card ul li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: #ccc;
+        }
+        .confirmation-card ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f7c948;
+            font-weight: 600;
+        }
+        .prep-questions {
+            margin-top: 24px;
+        }
+        .prep-questions h4 {
+            color: #f7c948;
+            margin-bottom: 12px;
+        }
+        .prep-questions .question {
+            background: #0a0a0f;
+            border: 1px solid #2a2a3e;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+        .prep-questions .question strong {
+            display: block;
+            color: #e0e0e0;
+            margin-bottom: 4px;
+        }
+        .prep-questions .question span {
+            color: #9a9a9a;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.8rem; }
+            .benefits { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .time-slots { grid-template-columns: repeat(2, 1fr); }
+            .booking-section { padding: 24px 16px; }
+            .calendar-mockup .cal-days .day { font-size: 0.75rem; padding: 6px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Booking Page -->
+        <div id="bookingPage" class="booking-page">
+            <!-- Hero -->
+            <div class="hero">
+                <h1>Kostenloses Erstgespräch</h1>
+                <p>Finde heraus, ob <span class="highlight">Renaissance</span> dir hilft, deine Ziele zu erreichen – unverbindlich, kostenlos, 30 Minuten.</p>
+            </div>
+
+            <!-- Benefits -->
+            <div class="benefits">
+                <div class="benefit-card">
+                    <div class="icon">🎯</div>
+                    <h3>Klarheit gewinnen</h3>
+                    <p>Wo stehst du wirklich? Wir identifizieren deine größten Hebel für Veränderung.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🚀</div>
+                    <h3>Fahrplan erhalten</h3>
+                    <p>Du bekommst einen konkreten 3-Schritte-Plan für dein nächstes Level.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🤝</div>
+                    <h3>Prüfen, ob es passt</h3>
+                    <p>Kein Verkaufsdruck. Nur ein ehrliches Gespräch – passt es, arbeiten wir zusammen.</p>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="booking-section">
+                <h2>Wähle deinen Termin</h2>
+                <p class="subtitle">30-minütiges Kennenlerngespräch – per Video oder Telefon</p>
+
+                <form id="bookingForm" onsubmit="return handleSubmit(event)">
+                    <!-- Calendar Mockup -->
+                    <div class="calendar-mockup">
+                        <div class="cal-header">
+                            <span class="nav-arrows">‹</span>
+                            <span>Juni 2026</span>
+                            <span class="nav-arrows">›</span>
+                        </div>
+                        <div class="cal-days">
+                            <div class="day-name">Mo</div>
+                            <div class="day-name">Di</div>
+                            <div class="day-name">Mi</div>
+                            <div class="day-name">Do</div>
+                            <div class="day-name">Fr</div>
+                            <div class="day-name">Sa</div>
+                            <div class="day-name">So</div>
+                            <!-- Row 1 -->
+                            <div class="day past">26</div>
+                            <div class="day past">27</div>
+                            <div class="day past">28</div>
+                            <div class="day past">29</div>
+                            <div class="day past">30</div>
+                            <div class="day past">31</div>
+                            <div class="day past">1</div>
+                            <!-- Row 2 -->
+                            <div class="day past">2</div>
+                            <div class="day today available" data-date="2026-06-03" onclick="selectDate(this)">3</div>
+                            <div class="day available" data-date="2026-06-04" onclick="selectDate(this)">4</div>
+                            <div class="day available" data-date="2026-06-05" onclick="selectDate(this)">5</div>
+                            <div class="day available" data-date="2026-06-06" onclick="selectDate(this)">6</div>
+                            <div class="day available" data-date="2026-06-07" onclick="selectDate(this)">7</div>
+                            <div class="day available" data-date="2026-06-08" onclick="selectDate(this)">8</div>
+                            <!-- Row 3 -->
+                            <div class="day available" data-date="2026-06-09" onclick="selectDate(this)">9</div>
+                            <div class="day available" data-date="2026-06-10" onclick="selectDate(this)">10</div>
+                            <div class="day available" data-date="2026-06-11" onclick="selectDate(this)">11</div>
+                            <div class="day available" data-date="2026-06-12" onclick="selectDate(this)">12</div>
+                            <div class="day available" data-date="2026-06-13" onclick="selectDate(this)">13</div>
+                            <div class="day available" data-date="2026-06-14" onclick="selectDate(this)">14</div>
+                            <div class="day available" data-date="2026-06-15" onclick="selectDate(this)">15</div>
+                            <!-- Row 4 -->
+                            <div class="day available" data-date="2026-06-16" onclick="selectDate(this)">16</div>
+                            <div class="day available" data-date="2026-06-17" onclick="selectDate(this)">17</div>
+                            <div class="day available" data-date="2026-06-18" onclick="selectDate(this)">18</div>
+                            <div class="day available" data-date="2026-06-19" onclick="selectDate(this)">19</div>
+                            <div class="day available" data-date="2026-06-20" onclick="selectDate(this)">20</div>
+                            <div class="day not-available">21</div>
+                            <div class="day not-available">22</div>
+                        </div>
+                    </div>
+
+                    <!-- Time Slots -->
+                    <p style="color:#9a9a9a; font-size:0.85rem; margin-bottom:10px;">Verfügbare Zeiten:</p>
+                    <div class="time-slots">
+                        <div class="time-slot" onclick="selectTime(this)">09:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">09:30</div>
+                        <div class="time-slot" onclick="selectTime(this)">10:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">10:30</div>
+                        <div class="time-slot" onclick="selectTime(this)">11:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">14:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">14:30</div>
+                        <div class="time-slot" onclick="selectTime(this)">15:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">16:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">16:30</div>
+                        <div class="time-slot" onclick="selectTime(this)">17:00</div>
+                        <div class="time-slot" onclick="selectTime(this)">18:00</div>
+                    </div>
+
+                    <!-- Hidden inputs for date/time -->
+                    <input type="hidden" id="selectedDate" name="date">
+                    <input type="hidden" id="selectedTime" name="time">
+
+                    <!-- Personal Info -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Dein Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Max Mustermann">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Deine E-Mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="max@beispiel.de">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Telefon (optional)</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+49 170 1234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="topic">Was ist dein Thema? *</label>
+                            <select id="topic" name="topic" required>
+                                <option value="">Bitte wählen…</option>
+                                <option value="career">Karriere &amp; Berufung</option>
+                                <option value="business">Business &amp; Gründung</option>
+                                <option value="mindset">Mindset &amp; Blockaden</option>
+                                <option value="relationships">Beziehungen &amp; Kommunikation</option>
+                                <option value="health">Gesundheit &amp; Energie</option>
+                                <option value="finance">Finanzen &amp; Wohlstand</option>
+                                <option value="other">Sonstiges</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Deine Nachricht – Was beschäftigt dich aktuell? (optional)</label>
+                        <textarea id="message" name="message" placeholder="Erzähle kurz, woran du arbeiten möchtest..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary">✓ Kostenloses Gespräch buchen</button>
+                </form>
+                <p style="text-align:center; color:#555; font-size:0.75rem; margin-top:16px;">
+                    Mit dem Absenden stimmst du der Verarbeitung deiner Daten zu.<br>
+                    Deine Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.
+                </p>
+            </div>
+
+            <div class="footer">
+                Renaissance Coaching · Dein Weg zur nächsten Version von dir
+            </div>
+        </div>
+
+        <!-- Confirmation Page -->
+        <div id="confirmationPage" class="confirmation-page">
+            <div class="confirmation-header">
+                <div class="checkmark">✓</div>
+                <h2>Gespräch bestätigt!</h2>
+                <p style="color:#9a9a9a;">Dein kostenloses Erstgespräch ist gebucht. Wir sehen uns bald!</p>
+            </div>
+
+            <div class="confirmation-card">
+                <h3>📅 Deine Buchungsdetails</h3>
+                <ul>
+                    <li><strong>Datum:</strong> <span id="confirmDate">—</span></li>
+                    <li><strong>Uhrzeit:</strong> <span id="confirmTime">—</span></li>
+                    <li><strong>Dauer:</strong> 30 Minuten</li>
+                    <li><strong>Ort:</strong> Video-Call (Link folgt per E-Mail)</li>
+                </ul>
+            </div>
+
+            <div class="confirmation-card">
+                <h3>📝 Bereite dich optimal vor</h3>
+                <p style="color:#9a9a9a; margin-bottom: 16px;">Nimm dir 10 Minuten Zeit, um diese Fragen zu beantworten – das Gespräch wird dadurch doppelt so wertvoll.</p>
+                <div class="prep-questions">
+                    <h4>Fragen zur Vorbereitung:</h4>
+                    <div class="question">
+                        <strong>1. Was ist dein konkretes Ziel für die nächsten 6 Monate?</strong>
+                        <span>Sei so spezifisch wie möglich. "Ich möchte ... erreicht haben"</span>
+                    </div>
+                    <div class="question">
+                        <strong>2. Was hält dich aktuell zurück?</strong>
+                        <span>Welche innere oder äußere Barriere spürst du am stärksten?</span>
+                    </div>
+                    <div class="question">
+                        <strong>3. Was hast du schon versucht?</strong>
+                        <span>Welche Strategien, Bücher, Kurse? Warum hat es nicht geklappt?</span>
+                    </div>
+                    <div class="question">
+                        <strong>4. Wo willst du in 1 Jahr stehen?</strong>
+                        <span>Wenn alles perfekt läuft – wie sieht dein Leben aus?</span>
+                    </div>
+                    <div class="question">
+                        <strong>5. Was ist dir wirklich wichtig?</strong>
+                        <span>Welche Werte treiben dich an? Freiheit, Sicherheit, Wachstum, Verbindung?</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="confirmation-card">
+                <h3>💡 Tipps für dein Gespräch</h3>
+                <ul>
+                    <li>Sei ehrlich – nur so können wir wirklich helfen</li>
+                    <li>Bring deine Notizen mit – die Vorbereitungsfragen helfen</li>
+                    <li>Sorge für eine ruhige Umgebung (20–30 Minuten ungestört)</li>
+                    <li>Hab keine Erwartungen – wir schauen gemeinsam, was passt</li>
+                    <li>Wenn du verhindert bist: Sag bitte 24h vorher Bescheid</li>
+                </ul>
+            </div>
+
+            <div class="footer">
+                Renaissance Coaching · Dein Weg zur nächsten Version von dir
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedDateEl = null;
+        let selectedTimeEl = null;
+
+        function selectDate(el) {
+            if (selectedDateEl) selectedDateEl.classList.remove('selected');
+            el.classList.add('selected');
+            selectedDateEl = el;
+            document.getElementById('selectedDate').value = el.dataset.date;
+        }
+
+        function selectTime(el) {
+            if (selectedTimeEl) selectedTimeEl.classList.remove('selected');
+            el.classList.add('selected');
+            selectedTimeEl = el;
+            document.getElementById('selectedTime').value = el.textContent.trim();
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const date = document.getElementById('selectedDate').value;
+            const time = document.getElementById('selectedTime').value;
+            const topic = document.getElementById('topic').value;
+
+            if (!name || !email || !date || !time || !topic) {
+                alert('Bitte fülle alle Pflichtfelder aus und wähle Datum + Uhrzeit.');
+                return false;
+            }
+
+            // Set confirmation details
+            document.getElementById('confirmDate').textContent = date ? new Date(date).toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '—';
+            document.getElementById('confirmTime').textContent = time || '—';
+
+            // Switch to confirmation page
+            document.getElementById('bookingPage').classList.add('hidden');
+            document.getElementById('confirmationPage').classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            return false;
+        }
+    </script>
+</body>
+</html>

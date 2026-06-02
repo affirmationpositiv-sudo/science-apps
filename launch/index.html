@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKUNE Launch-Plan – Von 0 zu deinem ersten € in 7 Tagen</title>
+<meta name="description" content="Der ultimative Launch-Plan für dein KI-Business. Pre-Launch-Checkliste, Launch-Day-Playbook, Post-Launch-Strategie und Traffic-Quellen.">
+<meta name="author" content="IKUNE">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;padding:20px}
+.container{max-width:780px;margin:0 auto;background:#111118;border-radius:16px;padding:40px;border:1px solid #1a1a2e}
+h1{font-size:2em;color:#fff;margin-bottom:8px;text-align:center}
+h2{font-size:1.4em;color:#a78bfa;margin:30px 0 16px;padding-bottom:8px;border-bottom:1px solid #1a1a2e}
+h3{font-size:1.1em;color:#c4b5fd;margin:16px 0 10px}
+.sub{color:#6b7280;text-align:center;margin-bottom:30px;font-size:.95em}
+.section{background:#0d0d14;border:1px solid #1a1a2e;border-radius:12px;padding:24px;margin-bottom:20px}
+.tagline{text-align:center;font-size:1.1em;color:#fbbf24;font-weight:600;margin:16px 0}
+
+/* Timeline */
+.timeline{position:relative;padding:0;margin:20px 0;list-style:none}
+.timeline::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#8b5cf6,#059669,#f59e0b)}
+.timeline-item{position:relative;padding:0 0 24px 56px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-item .day{position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#059669);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em;z-index:1}
+.timeline-item .card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:10px;padding:16px}
+.timeline-item .card h4{color:#c4b5fd;margin-bottom:6px;font-size:1em}
+.timeline-item .card p{color:#9ca3af;font-size:.85em;margin-bottom:4px}
+.timeline-item .card .action{color:#fbbf24;font-weight:600;font-size:.85em}
+
+/* Checklist */
+.checklist-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #1a1a2e;font-size:.9em}
+.checklist-item:last-child{border-bottom:none}
+.checklist-item .num{background:#8b5cf6;color:#fff;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8em;flex-shrink:0}
+.checklist-item .text{color:#d1d5db}
+.checklist-item .text strong{color:#fbbf24}
+
+/* Playbook */
+.playbook-hour{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #1a1a2e}
+.playbook-hour:last-child{border-bottom:none}
+.playbook-hour .time{min-width:70px;font-weight:700;color:#8b5cf6;font-size:.9em}
+.playbook-hour .desc{color:#d1d5db;font-size:.85em}
+
+/* Post-Launch */
+.week-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.week-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:8px;padding:14px}
+.week-card .week{color:#8b5cf6;font-weight:700;font-size:.85em;margin-bottom:4px}
+.week-card p{color:#9ca3af;font-size:.8em;margin-bottom:4px}
+.week-card .focus{color:#fbbf24;font-weight:600;font-size:.85em}
+
+/* Traffic sources */
+.traffic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.traffic-card{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:8px;padding:14px;text-align:center}
+.traffic-card .icon{font-size:2em;margin-bottom:6px}
+.traffic-card h4{color:#c4b5fd;font-size:.9em;margin-bottom:4px}
+.traffic-card p{color:#6b7280;font-size:.8em}
+
+/* KPI Table (styled as cards since Telegram has no tables) */
+.kpi-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #1a1a2e;font-size:.85em}
+.kpi-item:last-child{border-bottom:none}
+.kpi-item .kpi-name{color:#d1d5db}
+.kpi-item .kpi-val{color:#fbbf24;font-weight:600}
+.kpi-item .kpi-desc{color:#6b7280;font-size:.8em;text-align:right;max-width:180px}
+
+.btn{display:inline-block;padding:14px 28px;background:linear-gradient(135deg,#8b5cf6,#059669);border:none;border-radius:8px;color:#fff;font-size:1.1em;font-weight:700;cursor:pointer;transition:opacity .3s;text-decoration:none;margin-top:16px;text-align:center}
+.btn:hover{opacity:.9}
+.btn-wrap{text-align:center}
+
+.back-link{display:block;text-align:center;margin-top:20px;color:#6b7280;font-size:.85em;text-decoration:none}
+.back-link:hover{color:#a78bfa}
+
+@media(max-width:600px){.container{padding:20px}h1{font-size:1.5em}.week-grid,.traffic-grid{grid-template-columns:1fr}.kpi-item{flex-direction:column;gap:4px}.kpi-item .kpi-desc{text-align:left;max-width:none}}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>🚀 IKUNE Launch-Plan</h1>
+<p class="sub">Von 0 zu deinem ersten € in 7 Tagen – mit KI</p>
+
+<div class="tagline">📅 7 Tage. 1 Mission. Dein KI-Business startet heute.</div>
+
+<!-- Timeline -->
+<h2>📆 Timeline: Tag 1–7</h2>
+<div class="section">
+<ul class="timeline">
+<li class="timeline-item">
+<div class="day">Tag 1</div>
+<div class="card">
+<h4>🎯 Nische & Angebot definieren</h4>
+<p>Wähle eine profitable Nische, in der KI einen echten Mehrwert bietet. Definiere dein erstes Produkt (E-Book, Vorlage, Prompt-Pack).</p>
+<p class="action">✅ To-do: Nische validieren, Produkt skizzieren</p>
+</div>
+</li>
+<li class="timeline-item">
+<div class="day">Tag 2</div>
+<div class="card">
+<h4>🤖 KI-Produkt erstellen</h4>
+<p>Nutze ChatGPT, Claude oder Midjourney, um dein erstes digitales Produkt zu erstellen. Qualität vor Quantität.</p>
+<p class="action">✅ To-do: Produkt mit KI erstellen + finalisieren</p>
+</div>
+</li>
+<li class="timeline-item">
+<div class="day">Tag 3</div>
+<div class="card">
+<h4>🌐 Landing Page aufsetzen</h4>
+<p>Erstelle eine einfache Verkaufsseite mit PayPal/Stripe-Integration. Nutze Gumroad, Sendowl oder eine eigene Seite.</p>
+<p class="action">✅ To-do: Landing Page live + Zahlung einrichten</p>
+</div>
+</li>
+<li class="timeline-item">
+<div class="day">Tag 4</div>
+<div class="card">
+<h4>📝 Content-Marketing starten</h4>
+<p>Schreibe 3 LinkedIn-Posts, 5 Tweets/X-Threads und einen Blog-Artikel zu deinem Thema. KI hilft dir beim Texten.</p>
+<p class="action">✅ To-do: 9+ Content-Stücke veröffentlichen</p>
+</div>
+</li>
+<li class="timeline-item">
+<div class="day">Tag 5</div>
+<div class="card">
+<h4>📢 Launch-Vorbereitung</h4>
+<p>Baue eine E-Mail-Liste auf (Lead Magnet), erstelle Teaser für Telegram/Reddit. Plane deinen Launch-Post.</p>
+<p class="action">✅ To-do: Lead Magnet + E-Mail-Liste + Teaser</p>
+</div>
+</li>
+<li class="timeline-item">
+<div class="day">Tag 6</div>
+<div class="card">
+<h4>🎉 LAUNCH TAG</h4>
+<p>Veröffentliche dein Produkt. Poste auf allen Kanälen. Biete einen Early-Bird-Rabatt. Beantworte Fragen live.</p>
+<p class="action">✅ To-do: Launch durchführen + 1. Verkauf feiern</p>
+</div>
+</li>
+<li class="timeline-item">
+<div class="day">Tag 7</div>
+<div class="card">
+<h4>📊 Analyse & Optimierung</h4>
+<p>Messe deine Ergebnisse (Klicks, Conversions, Umsatz). Optimiere deine Landing Page. Plane Woche 2.</p>
+<p class="action">✅ To-do: Ergebnisse analysieren + nächste Schritte</p>
+</div>
+</li>
+</ul>
+</div>
+
+<!-- Pre-Launch Checklist -->
+<h2>✅ Pre-Launch Checkliste</h2>
+<div class="section">
+<div class="checklist-item">
+<div class="num">1</div>
+<div class="text"><strong>Nische validieren</strong> – Gibt es Nachfrage? Suchvolumen? Zahlungsbereitschaft?</div>
+</div>
+<div class="checklist-item">
+<div class="num">2</div>
+<div class="text"><strong>Produkt-MVP fertig</strong> – Minimum Viable Product: nicht perfekt, aber wertvoll.</div>
+</div>
+<div class="checklist-item">
+<div class="num">3</div>
+<div class="text"><strong>Zahlungssystem eingerichtet</strong> – Stripe, PayPal, Gumroad oder ähnlich.</div>
+</div>
+<div class="checklist-item">
+<div class="num">4</div>
+<div class="text"><strong>Landing Page live</strong> – Verkaufsseite mit klarem CTA und USP.</div>
+</div>
+<div class="checklist-item">
+<div class="num">5</div>
+<div class="text"><strong>Lead Magnet erstellt</strong> – Kostenloser Download gegen E-Mail-Adresse.</div>
+</div>
+<div class="checklist-item">
+<div class="num">6</div>
+<div class="text"><strong>Social-Media-Profile optimiert</strong> – Bio, Link, konsistentes Branding.</div>
+</div>
+<div class="checklist-item">
+<div class="num">7</div>
+<div class="text"><strong>Launch-Content vorbereitet</strong> – 5-10 Posts für Launch-Tag.</div>
+</div>
+<div class="checklist-item">
+<div class="num">8</div>
+<div class="text"><strong>Teaser-Kampagne gefahren</strong> – 3-5 Tage vor Launch Aufmerksamkeit aufbauen.</div>
+</div>
+<div class="checklist-item">
+<div class="num">9</div>
+<div class="text"><strong>Affiliate-Links eingebaut</strong> – Amazon-Partnerlinks für passive Einnahmen.</div>
+</div>
+<div class="checklist-item">
+<div class="num">10</div>
+<div class="text"><strong>Launch-Partner informiert</strong> – Netzwerk, Telegram-Gruppen, Reddit-Communities.</div>
+</div>
+</div>
+
+<!-- Launch-Day Playbook -->
+<h2>📋 Launch-Day Playbook</h2>
+<div class="section">
+<div class="playbook-hour">
+<div class="time">08:00</div>
+<div class="desc"><strong>Letzter Check:</strong> Alle Links funktionieren? Landing Page online? Zahlungssystem aktiv?</div>
+</div>
+<div class="playbook-hour">
+<div class="time">09:00</div>
+<div class="desc"><strong>Launch-Post</strong> auf LinkedIn, X/Twitter, Telegram, Reddit. Emotionaler Storytelling-Ansatz.</div>
+</div>
+<div class="playbook-hour">
+<div class="time">10:00</div>
+<div class="desc"><strong>E-Mail-Liste benachrichtigen:</strong> "Es ist soweit – hier ist mein neuestes Produkt"</div>
+</div>
+<div class="playbook-hour">
+<div class="time">11:00</div>
+<div class="desc"><strong>Early-Bird-Angebot:</strong> 30% Rabatt für die ersten 10 Kunden – Dringlichkeit schaffen.</div>
+</div>
+<div class="playbook-hour">
+<div class="time">12:00</div>
+<div class="desc"><strong>Social Proof sammeln:</strong> Erste Käufer zu Reviews/Testimonials ermutigen.</div>
+</div>
+<div class="playbook-hour">
+<div class="time">14:00</div>
+<div class="desc"><strong>2. Content-Welle:</strong> Behind-the-Scenes-Post, Nutzen-Liste, FAQ.</div>
+</div>
+<div class="playbook-hour">
+<div class="time">16:00</div>
+<div class="desc"><strong>Community-Engagement:</strong> Alle Kommentare und Fragen beantworten. Live Q&A starten.</div>
+</div>
+<div class="playbook-hour">
+<div class="time">18:00</div>
+<div class="desc"><strong>Reminder-Post:</strong> "Nur noch 6 Stunden Early-Bird – sichere dir dein Exemplar"</div>
+</div>
+<div class="playbook-hour">
+<div class="time">20:00</div>
+<div class="desc"><strong>Dankes-Post:</strong> Ersten Erfolg feiern. Social Proof teilen. "Danke an alle X Käufer!"</div>
+</div>
+<div class="playbook-hour">
+<div class="time">22:00</div>
+<div class="desc"><strong>Analyse:</strong> Zahlen checken. Was hat funktioniert? Was nicht? Dokumentieren.</div>
+</div>
+</div>
+
+<!-- Post-Launch -->
+<h2>📈 Post-Launch: Woche 1–4</h2>
+<div class="section">
+<div class="week-grid">
+<div class="week-card">
+<div class="week">Woche 1 – Stabilisieren</div>
+<p>Kunden-Onboarding, erste Optimierungen, Danke-Mails. Sammle Feedback.</p>
+<div class="focus">🔑 Fokus: Kundenzufriedenheit</div>
+</div>
+<div class="week-card">
+<div class="week">Woche 2 – Skalieren</div>
+<p>Content-Strategie ausweiten. LinkedIn/X-Threads automatisieren. Gäste-Posts.</p>
+<div class="focus">🔑 Fokus: Reichweite aufbauen</div>
+</div>
+<div class="week-card">
+<div class="week">Woche 3 – Monetarisieren</div>
+<p>Upsells, Cross-Sells, Bundle-Angebote. Zweites Produkt planen. Affiliate-Programm.</p>
+<div class="focus">🔑 Fokus: Umsatz pro Kunde steigern</div>
+</div>
+<div class="week-card">
+<div class="week">Woche 4 – Automatisieren</div>
+<p>KI-Workflows für Marketing, Vertrieb & Service. Passives Einkommen anstreben.</p>
+<div class="focus">🔑 Fokus: Automatisierung + Systeme</div>
+</div>
+</div>
+</div>
+
+<!-- Traffic-Quellen -->
+<h2>🌍 Traffic-Quellen (organisch)</h2>
+<div class="section">
+<div class="traffic-grid">
+<div class="traffic-card">
+<div class="icon">✈️</div>
+<h4>Telegram</h4>
+<p>Kanäle + Gruppen mit 500+ Mitgliedern in deiner Nische – direkter Draht zu Interessenten</p>
+</div>
+<div class="traffic-card">
+<div class="icon">🤖</div>
+<h4>Reddit</h4>
+<p>Subreddits wie r/KI_Welt, r/sidehustle, r/digital_marketing – hohe Kaufintention</p>
+</div>
+<div class="traffic-card">
+<div class="icon">🔍</div>
+<h4>SEO</h4>
+<p>Blog-Artikel mit Long-Tail-Keywords wie "KI Einkommen aufbauen 2026" – passiver Traffic</p>
+</div>
+<div class="traffic-card">
+<div class="icon">▶️</div>
+<h4>YouTube</h4>
+<p>Tutorials, Case Studies, Produkt-Reviews – baut Vertrauen auf und bringt qualifizierte Leads</p>
+</div>
+</div>
+</div>
+
+<!-- KPI-Tabelle -->
+<h2>📊 KPIs: Was zu messen</h2>
+<div class="section">
+<div class="kpi-item">
+<span class="kpi-name">👀 Unique Visitors</span>
+<span class="kpi-val">>100/Tag</span>
+<span class="kpi-desc">Besucher auf Landing Page</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">📧 E-Mail-Conversion</span>
+<span class="kpi-val">>5%</span>
+<span class="kpi-desc">Lead-Magnet-Anmeldungen</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">💰 Conversion Rate</span>
+<span class="kpi-val">>2%</span>
+<span class="kpi-desc">Verkäufe pro Besucher</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">📦 Durchschnittlicher Warenkorb</span>
+<span class="kpi-val">>€25</span>
+<span class="kpi-desc">Umsatz pro Kauf</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">💵 Monatsumsatz (Woche 4)</span>
+<span class="kpi-val">>€500</span>
+<span class="kpi-desc">Ziel nach 1 Monat</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">📢 Social Shares</span>
+<span class="kpi-val">>50</span>
+<span class="kpi-desc">Pro Launch-Kampagne</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">⭐ Kundenzufriedenheit</span>
+<span class="kpi-val">>4.5/5</span>
+<span class="kpi-desc">Reviews & Feedback</span>
+</div>
+<div class="kpi-item">
+<span class="kpi-name">🔄 Wiederkehrer</span>
+<span class="kpi-val">>20%</span>
+<span class="kpi-desc">Kunden, die wiederkommen</span>
+</div>
+</div>
+
+<div class="btn-wrap">
+<a href="/plattform/" class="btn">🚀 Jetzt starten – IKUNE Plattform</a>
+</div>
+
+<a href="../index.html" class="back-link">← Zurück zur Startseite</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IKUNE KI-Agenten – Lerne Hermes (Strategie), Yesar (Community) und Jason (Qualität) kennen. 24/7 KI-Coaching.">
+<title>KI-Agenten – IKUNE Plattform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+a{color:#f59e0b;text-decoration:none}
+a:hover{color:#fbbf24}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3{color:#fff;line-height:1.2}
+h1{font-size:2.5rem;margin-bottom:1rem;text-align:center}
+h2{font-size:1.8rem;margin-bottom:1.5rem;text-align:center}
+.gold{color:#f59e0b}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0a0a1a}
+.btn-primary:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px)}
+.btn-lg{padding:18px 40px;font-size:1.1rem}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,26,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(245,158,11,.1)}
+nav .container{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:1.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.5px}
+.logo span{color:#fff}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:#ccc;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#f59e0b}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none}
+.hamburger span{width:28px;height:3px;background:#f59e0b;border-radius:2px;transition:.3s}
+.page{padding-top:100px;padding-bottom:60px}
+.hero-section{text-align:center;padding:60px 0;background:radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.08),transparent 60%)}
+.hero-section p{color:#aaa;font-size:1.1rem;max-width:650px;margin:0 auto 30px}
+.agent-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:24px;margin:40px 0}
+.agent-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;transition:all .3s;position:relative;overflow:hidden}
+.agent-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:16px 16px 0 0}
+.agent-card:nth-child(1)::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.agent-card:nth-child(2)::before{background:linear-gradient(90deg,#60a5fa,#3b82f6)}
+.agent-card:nth-child(3)::before{background:linear-gradient(90deg,#4ade80,#22c55e)}
+.agent-card:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.3);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.agent-avatar{font-size:3.5rem;margin-bottom:16px}
+.agent-card h3{font-size:1.5rem;margin-bottom:4px}
+.agent-role{color:#f59e0b;font-weight:600;font-size:.9rem;margin-bottom:16px;display:block}
+.agent-desc{color:#aaa;font-size:.95rem;margin-bottom:16px;line-height:1.7}
+.agent-grid-mini{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.agent-tag{padding:6px 12px;border-radius:6px;font-size:.8rem}
+.agent-tag.can{background:rgba(74,222,128,.1);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
+.agent-tag.cant{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
+.agent-tag.how{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2);grid-column:1/-1;text-align:center}
+.system-desc{background:rgba(245,158,11,.03);border:1px solid rgba(245,158,11,.15);border-radius:12px;padding:32px;margin:40px 0;text-align:center}
+.system-desc h3{color:#f59e0b;margin-bottom:12px}
+.system-desc p{color:#aaa;max-width:700px;margin:0 auto}
+.cta-section{text-align:center;padding:40px 0}
+.cta-section p{color:#aaa;margin-bottom:24px}
+footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);padding:40px 0 20px;margin-top:40px}
+.ft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin-bottom:30px}
+.ft-col h4{color:#fff;margin-bottom:16px}
+.ft-col a{display:block;color:#888;font-size:.9rem;margin-bottom:8px}
+.ft-col a:hover{color:#f59e0b}
+.ft-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);color:#666;font-size:.8rem}
+@media(max-width:768px){
+h1{font-size:1.8rem}.nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:#0a0a1a;flex-direction:column;padding:20px;gap:16px}
+.nav-links.show{display:flex}.hamburger{display:flex}
+.hamburger.active span:nth-child(1){transform:rotate(45deg)translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg)translate(7px,-6px)}
+.agent-grid{grid-template-columns:1fr}
+.agent-grid-mini{grid-template-columns:1fr}
+}
+@media(max-width:480px){.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="index.html" class="logo">IKUNE<span>.app</span></a>
+<button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show');this.classList.toggle('active')">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+<a href="index.html">Start</a>
+<a href="preise.html">Preise</a>
+<a href="creator.html">Creator</a>
+<a href="ki-agenten.html">KI-Agenten</a>
+<a href="vergleich.html">Vergleich</a>
+<a href="beitreten.html" class="btn btn-primary" style="padding:10px 24px;font-size:.9rem">Kostenlos starten</a>
+</div>
+</div>
+</nav>
+
+<div class="page">
+<section class="hero-section">
+<div class="container">
+<div class="badge" style="display:inline-block;padding:8px 20px;border-radius:20px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#f59e0b;font-size:.85rem;font-weight:600;margin-bottom:24px">🤖 Multi-Agent-System</div>
+<h1>Dein persönliches <span class="gold">KI-Team</span></h1>
+<p>3 spezialisierte KI-Agenten arbeiten rund um die Uhr für dich und deine Community. Strategie, Community-Management und Qualitätssicherung – automatisiert.</p>
+<a href="beitreten.html" class="btn btn-primary btn-lg">Aktiviere deine KI-Agenten</a>
+</div>
+</section>
+
+<section class="container agent-grid">
+
+<div class="agent-card">
+<div class="agent-avatar">🧠</div>
+<h3>Hermes</h3>
+<span class="agent-role">⚡ Der Head Leader – Strategie & Content</span>
+<p class="agent-desc">Hermes ist dein strategischer Kopf. Er plant Kurse, erstellt Content-Kalender, schreibt Lektionen und optimiert deine gesamte Plattform. Er denkt in Wochen und Monaten – nicht in Stunden.</p>
+<div class="agent-grid-mini">
+<span class="agent-tag can">✅ Kursstruktur planen</span>
+<span class="agent-tag can">✅ Content-Kalender erstellen</span>
+<span class="agent-tag can">✅ Lektionen & Quizze schreiben</span>
+<span class="agent-tag can">✅ Automatisierungen einrichten</span>
+<span class="agent-tag cant">❌ Community-Fragen beantworten</span>
+<span class="agent-tag cant">❌ Nicht persönlich werden</span>
+<span class="agent-tag how">🔧 Aktivierung: Im Dashboard unter "KI-Assistent" → "Hermes aktivieren"</span>
+</div>
+</div>
+
+<div class="agent-card">
+<div class="agent-avatar">💬</div>
+<h3>Yesar</h3>
+<span class="agent-role">👥 Der Community-Manager</span>
+<p class="agent-desc">Yesar ist das Herz deiner Community. Er begrüßt neue Mitglieder, beantwortet Fragen, verteilt XP, moderiert Diskussionen und sorgt dafür, dass sich alle willkommen fühlen. 24/7, ohne Pause.</p>
+<div class="agent-grid-mini">
+<span class="agent-tag can">✅ Neue Mitglieder begrüßen</span>
+<span class="agent-tag can">✅ Fragen beantworten (aus Kursen)</span>
+<span class="agent-tag can">✅ XP & Badges verteilen</span>
+<span class="agent-tag can">✅ Diskussionen moderieren</span>
+<span class="agent-tag cant">❌ Komplexe Fachfragen außerhalb des Kurses</span>
+<span class="agent-tag cant">❌ Nicht persönlich werden</span>
+<span class="agent-tag how">🔧 Aktivierung: Im Dashboard unter "KI-Assistent" → "Yesar aktivieren"</span>
+</div>
+</div>
+
+<div class="agent-card">
+<div class="agent-avatar">✅</div>
+<h3>Jason</h3>
+<span class="agent-role">🎯 Der Qualitäts-Chef</span>
+<p class="agent-desc">Jason ist dein schärfster Kritiker – und das ist gut so. Er prüft alle Inhalte auf Qualität, gibt detailliertes Feedback, findet Fehler und sorgt dafür, dass deine Kurse erstklassig sind.</p>
+<div class="agent-grid-mini">
+<span class="agent-tag can">✅ Kursinhalte prüfen</span>
+<span class="agent-tag can">✅ Feedback geben</span>
+<span class="agent-tag can">✅ Fehler & Lücken finden</span>
+<span class="agent-tag can">✅ Verbesserungen vorschlagen</span>
+<span class="agent-tag cant">❌ Neue Inhalte erstellen (das macht Hermes)</span>
+<span class="agent-tag cant">❌ Nicht persönlich werden</span>
+<span class="agent-tag how">🔧 Aktivierung: Automatisch aktiv – prüft jeden neuen Kurs</span>
+</div>
+</div>
+
+</section>
+
+<section class="container system-desc">
+<h3>🧠 Wie die Agenten zusammenarbeiten</h3>
+<p><strong>Hermes</strong> erstellt einen Kurs → <strong>Jason</strong> prüft ihn auf Qualität → <strong>Yesar</strong> betreut die Mitglieder und beantwortet Fragen. Alle drei arbeiten parallel und kommunizieren miteinander. Du behältst die Kontrolle – die KI macht die Arbeit.</p>
+</section>
+
+<section class="container cta-section">
+<h2>Bereit für dein <span class="gold">KI-Team?</span></h2>
+<p>Starte kostenlos und aktiviere alle 3 Agenten. Keine Kreditkarte nötig.</p>
+<a href="beitreten.html" class="btn btn-primary btn-lg">Kostenlos starten</a>
+</section>
+</div>
+
+<footer>
+<div class="container">
+<div class="ft-grid">
+<div class="ft-col"><h4>IKUNE</h4><a href="index.html">Start</a><a href="preise.html">Preise</a><a href="beitreten.html">Registrieren</a></div>
+<div class="ft-col"><h4>KI-Agenten</h4><a href="ki-agenten.html">Hermes</a><a href="ki-agenten.html">Yesar</a><a href="ki-agenten.html">Jason</a></div>
+<div class="ft-col"><h4>Ressourcen</h4><a href="vergleich.html">Vergleich</a><a href="videos.html">Video-System</a><a href="dashboard.html">Dashboard</a></div>
+<div class="ft-col"><h4>Rechtliches</h4><a href="#">Datenschutz</a><a href="#">Impressum</a><a href="https://amzn.to/42vS21j">Amazon Affiliate</a></div>
+</div>
+<div class="ft-bottom"><p>© 2026 IKUNE.app | Amazon-Partner: Tag ikune21-21</p></div>
+</div>
+</footer>
+</body>
+</html>

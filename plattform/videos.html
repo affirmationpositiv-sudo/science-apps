@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IKUNE Video-System – Eigenes Hosting, KI-Zusammenfassungen, Kapitel, Transkripte. Kein YouTube nötig.">
+<title>Video-System – IKUNE Plattform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+a{color:#f59e0b;text-decoration:none}
+a:hover{color:#fbbf24}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3{color:#fff;line-height:1.2}
+h1{font-size:2.5rem;margin-bottom:1rem;text-align:center}
+h2{font-size:1.8rem;margin-bottom:1.5rem}
+.gold{color:#f59e0b}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0a0a1a}
+.btn-primary:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px)}
+.btn-lg{padding:18px 40px;font-size:1.1rem}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,26,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(245,158,11,.1)}
+nav .container{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:1.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.5px}
+.logo span{color:#fff}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:#ccc;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#f59e0b}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none}
+.hamburger span{width:28px;height:3px;background:#f59e0b;border-radius:2px;transition:.3s}
+.page{padding-top:100px;padding-bottom:60px}
+.hero-section{text-align:center;padding:40px 0;background:radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.06),transparent 60%)}
+.hero-section p{color:#aaa;font-size:1.1rem;max-width:650px;margin:0 auto 30px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:40px 0}
+.card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:28px;transition:all .3s}
+.card:hover{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);transform:translateY(-2px)}
+.card .icon{font-size:2rem;margin-bottom:12px}
+.card h4{color:#fff;margin-bottom:8px;font-size:1.1rem}
+.card p{color:#999;font-size:.9rem}
+.compare-box{background:rgba(245,158,11,.03);border:1px solid rgba(245,158,11,.15);border-radius:12px;padding:32px;margin:40px 0}
+.compare-box h3{color:#f59e0b;margin-bottom:16px;text-align:center}
+.comp-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:.9rem}
+.comp-table th,.comp-table td{padding:12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+.comp-table th{color:#f59e0b}
+.comp-table .yes{color:#4ade80}
+.comp-table .no{color:#ef4444}
+footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);padding:40px 0 20px;margin-top:40px}
+.ft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin-bottom:30px}
+.ft-col h4{color:#fff;margin-bottom:16px}
+.ft-col a{display:block;color:#888;font-size:.9rem;margin-bottom:8px}
+.ft-col a:hover{color:#f59e0b}
+.ft-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);color:#666;font-size:.8rem}
+@media(max-width:768px){
+h1{font-size:1.8rem}.nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:#0a0a1a;flex-direction:column;padding:20px;gap:16px}
+.nav-links.show{display:flex}.hamburger{display:flex}
+.hamburger.active span:nth-child(1){transform:rotate(45deg)translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg)translate(7px,-6px)}
+}
+@media(max-width:480px){.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="index.html" class="logo">IKUNE<span>.app</span></a>
+<button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show');this.classList.toggle('active')">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+<a href="index.html">Start</a>
+<a href="preise.html">Preise</a>
+<a href="creator.html">Creator</a>
+<a href="ki-agenten.html">KI-Agenten</a>
+<a href="vergleich.html">Vergleich</a>
+<a href="beitreten.html" class="btn btn-primary" style="padding:10px 24px;font-size:.9rem">Kostenlos starten</a>
+</div>
+</div>
+</nav>
+
+<div class="page">
+<section class="hero-section">
+<div class="container">
+<div class="badge" style="display:inline-block;padding:8px 20px;border-radius:20px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#f59e0b;font-size:.85rem;font-weight:600;margin-bottom:24px">🎥 Video-System</div>
+<h1>Eigenes Video-Hosting.<br>Mit <span class="gold">KI-Superkräften.</span></h1>
+<p>Lade deine Videos direkt hoch – kein YouTube, kein Vimeo, keine Limits. Die KI erstellt automatisch Zusammenfassungen, Kapitel und Transkripte.</p>
+<a href="beitreten.html" class="btn btn-primary btn-lg">Kostenlos starten</a>
+</div>
+</section>
+
+<section class="container">
+<h2>So funktioniert unser <span class="gold">Video-System</span></h2>
+<div class="grid-2">
+<div class="card"><div class="icon">☁️</div><h4>Gehostet auf GitHub Pages</h4><p>Deine Videos werden auf GitHub Pages gehostet – kostenlos, unbegrenzt, schnell. Keine versteckten Kosten für Traffic.</p></div>
+<div class="card"><div class="icon">📝</div><h4>KI-Zusammenfassungen</h4><p>Nach dem Upload erstellt die KI automatisch eine Zusammenfassung deines Videos. Perfekt für Kurse und Vorschauen.</p></div>
+<div class="card"><div class="icon">📑</div><h4>Automatische Kapitel</h4><p>Die KI erkennt Themenwechsel und setzt automatisch Kapitelmarken. Deine Lerner springen direkt zur richtigen Stelle.</p></div>
+<div class="card"><div class="icon">📄</div><h4>Transkripte inklusive</h4><p>Jedes Video erhält ein vollständiges, durchsuchbares Transkript. Ideal zum Nachlesen und für Barrierefreiheit.</p></div>
+<div class="card"><div class="icon">🔗</div><h4>YouTube/Vimeo Embed</h4><p>Du kannst auch weiterhin YouTube oder Vimeo einbetten, wenn du möchtest. Beides funktioniert. Flexibel.</p></div>
+<div class="card"><div class="icon">🏷️</div><h4>Thumbnail-Generator</h4><p>Die KI schlägt Thumbnails vor und hilft dir beim Branding deiner Videos. Einheitlich und professionell.</p></div>
+</div>
+</section>
+
+<section class="container compare-box">
+<h3>Video-Hosting: IKUNE vs. Skool</h3>
+<table class="comp-table">
+<thead><tr><th>Feature</th><th>Skool</th><th>IKUNE</th></tr></thead>
+<tbody>
+<tr><td>Eigenes Hosting</td><td class="no">❌ Nur Embed</td><td class="yes">✅ Ja (GitHub Pages)</td></tr>
+<tr><td>KI-Zusammenfassung</td><td class="no">❌</td><td class="yes">✅ Automatisch</td></tr>
+<tr><td>Kapitel-Markierungen</td><td class="no">❌ Manuell</td><td class="yes">✅ Automatisch (KI)</td></tr>
+<tr><td>Transkripte</td><td class="no">❌</td><td class="yes">✅ Automatisch</td></tr>
+<tr><td>Thumbnails</td><td class="no">❌ Manuell</td><td class="yes">✅ KI-generiert</td></tr>
+<tr><td>Bandbreite</td><td class="no">❌ Begrenzt</td><td class="yes">✅ Unbegrenzt</td></tr>
+<tr><td>YouTube-Alternative</td><td class="no">❌ Ja, aber Embed</td><td class="yes">✅ Ja, beides möglich</td></tr>
+<tr><td>Kosten</td><td class="no">❌ $99/Monat</td><td class="yes">✅ €0 (inklusive)</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="container" style="text-align:center;padding:40px 0">
+<h2>Bereit, deine Videos <span class="gold">hochzuladen?</span></h2>
+<p style="color:#aaa;margin:16px auto 24px;max-width:500px">Keine Warteschlangen, keine Limits. Starte kostenlos und lade dein erstes Video hoch.</p>
+<a href="beitreten.html" class="btn btn-primary btn-lg">Kostenlos starten</a>
+</section>
+</div>
+
+<footer>
+<div class="container">
+<div class="ft-grid">
+<div class="ft-col"><h4>IKUNE</h4><a href="index.html">Start</a><a href="preise.html">Preise</a><a href="beitreten.html">Registrieren</a></div>
+<div class="ft-col"><h4>Features</h4><a href="videos.html">Video-System</a><a href="ki-agenten.html">KI-Agenten</a><a href="creator.html">Creator</a></div>
+<div class="ft-col"><h4>Ressourcen</h4><a href="vergleich.html">Vergleich</a><a href="student.html">Für Lerner</a></div>
+<div class="ft-col"><h4>Rechtliches</h4><a href="#">Datenschutz</a><a href="#">Impressum</a><a href="https://amzn.to/42vS21j">Amazon Affiliate</a></div>
+</div>
+<div class="ft-bottom"><p>© 2026 IKUNE.app | Amazon-Partner: Tag ikune21-21</p></div>
+</div>
+</footer>
+</body>
+</html>

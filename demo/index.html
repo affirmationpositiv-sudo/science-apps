@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IKUNE Plattform – So funktioniert's (Demo)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6}
+.hero{background:linear-gradient(135deg,#0a0a1a 0%,#1a0a2e 50%,#0a0a1a 100%);padding:60px 20px 40px;text-align:center}
+.hero h1{font-size:2.5rem;background:linear-gradient(135deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.hero p{color:#999;font-size:1.1rem}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+/* Video Placeholder */
+.video-wrapper{margin:40px auto;max-width:900px;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(139,92,246,.3)}
+.video-placeholder{position:relative;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;border-radius:16px;overflow:hidden}
+.video-placeholder::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+/* Mockup screenshot inside video */
+.mockup-screen{position:relative;z-index:2;width:85%;max-width:700px;background:#0d1117;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.5);border:1px solid #30363d}
+.mockup-header{background:#161b22;padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #30363d}
+.mockup-dots{display:flex;gap:6px}
+.mockup-dot{width:10px;height:10px;border-radius:50%}
+.mockup-dot.r{background:#ff5f57}
+.mockup-dot.y{background:#ffbd2e}
+.mockup-dot.g{background:#28c840}
+.mockup-title{color:#8b949e;font-size:12px;margin-left:12px}
+.mockup-body{padding:20px;display:flex;gap:20px;min-height:180px;align-items:center}
+.mockup-sidebar{width:60px;display:flex;flex-direction:column;gap:8px}
+.mockup-sidebar div{width:40px;height:12px;background:#21262d;border-radius:3px}
+.mockup-content{flex:1}
+.mockup-content h3{color:#c9d1d9;font-size:16px;margin-bottom:10px}
+.mockup-content .line{height:10px;background:#21262d;border-radius:3px;margin-bottom:8px}
+.mockup-content .line.w200{width:200px}
+.mockup-content .line.w150{width:150px}
+.mockup-content .line.w100{width:100px}
+.mockup-content .line.w250{width:250px}
+.mockup-preview{display:flex;gap:10px;margin-top:12px}
+.mockup-preview div{flex:1;height:60px;background:linear-gradient(135deg,#1f2937,#374151);border-radius:6px}
+/* Play button */
+.play-btn{position:absolute;z-index:5;width:80px;height:80px;background:rgba(139,92,246,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.3s;box-shadow:0 0 40px rgba(139,92,246,.4);border:3px solid rgba(255,255,255,.3)}
+.play-btn:hover{transform:scale(1.1);background:rgba(139,92,246,1)}
+.play-btn svg{margin-left:4px;width:32px;height:32px;fill:#fff}
+.video-label{position:absolute;bottom:20px;z-index:3;color:rgba(255,255,255,.6);font-size:14px;background:rgba(0,0,0,.6);padding:6px 16px;border-radius:20px}
+/* Section headings */
+.section-title{font-size:1.8rem;text-align:center;margin:50px 0 10px;color:#fff}
+.section-sub{text-align:center;color:#888;margin-bottom:40px}
+/* Steps cards */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin:30px 0 50px}
+.step-card{background:#111118;border:1px solid #1f1f2e;border-radius:16px;padding:24px;transition:.3s}
+.step-card:hover{border-color:#8b5cf6;transform:translateY(-4px);box-shadow:0 12px 30px rgba(139,92,246,.15)}
+.step-number{display:inline-block;background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;font-weight:700;font-size:14px;padding:4px 12px;border-radius:20px;margin-bottom:12px}
+.step-card h3{color:#fff;font-size:1.3rem;margin-bottom:10px}
+.step-card p{color:#999;font-size:.95rem}
+/* Screenshot mockup inside cards */
+.card-mockup{background:#161b22;border-radius:10px;overflow:hidden;margin-bottom:16px;border:1px solid #30363d}
+.card-mockup .chat-bar{background:#1f2937;padding:10px;display:flex;align-items:center;gap:10px}
+.card-mockup .chat-bar .avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#ec4899);flex-shrink:0}
+.card-mockup .chat-bar .name{color:#c9d1d9;font-size:13px;font-weight:600}
+.card-mockup .chat-bar .time{color:#8b949e;font-size:11px;margin-left:auto}
+.card-mockup .chat-body{padding:12px;min-height:100px}
+.card-mockup .bubble{background:#1f2937;padding:8px 12px;border-radius:12px;margin-bottom:8px;max-width:80%;font-size:13px;color:#c9d1d9}
+.card-mockup .bubble.out{background:#8b5cf6;color:#fff;margin-left:auto}
+.card-mockup .bubble.typing{background:#1f2937;padding:10px 12px;display:flex;gap:4px;align-items:center;max-width:60px}
+.card-mockup .bubble.typing span{width:6px;height:6px;background:#666;border-radius:50%;animation:typingDot 1.4s infinite}
+.card-mockup .bubble.typing span:nth-child(2){animation-delay:.2s}
+.card-mockup .bubble.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingDot{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.card-mockup .course-bar{background:#1f2937;padding:10px;display:flex;align-items:center;gap:10px}
+.card-mockup .course-bar .progress{flex:1;height:6px;background:#30363d;border-radius:3px;overflow:hidden}
+.card-mockup .course-bar .progress-fill{height:100%;width:60%;background:linear-gradient(90deg,#8b5cf6,#ec4899);border-radius:3px}
+.card-mockup .course-body{padding:12px;min-height:100px;display:flex;gap:10px;flex-wrap:wrap}
+.card-mockup .lesson-card{background:#21262d;border-radius:8px;padding:10px;flex:1;min-width:100px;text-align:center}
+.card-mockup .lesson-card .icon{font-size:24px;margin-bottom:4px}
+.card-mockup .lesson-card .label{color:#8b949e;font-size:11px}
+.card-mockup .ai-chat{padding:12px;min-height:100px}
+.card-mockup .ai-msg{background:#1f2937;padding:10px 14px;border-radius:12px;margin-bottom:8px;border-left:3px solid #8b5cf6;font-size:13px;color:#c9d1d9}
+.card-mockup .ai-msg.user{border-left-color:#ec4899;margin-left:auto;max-width:80%}
+.card-mockup .ai-msg .ai-label{color:#8b5cf6;font-weight:600;font-size:11px;display:block;margin-bottom:4px}
+.card-mockup .ai-msg .user-label{color:#ec4899;font-weight:600;font-size:11px;display:block;margin-bottom:4px}
+/* Feature highlights */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin:30px 0 50px}
+.feature{background:#111118;border:1px solid #1f1f2e;border-radius:12px;padding:24px;text-align:center;transition:.3s}
+.feature:hover{border-color:#8b5cf6}
+.feature .icon{font-size:2.5rem;margin-bottom:10px}
+.feature h4{color:#fff;margin-bottom:6px}
+.feature p{color:#888;font-size:.9rem}
+/* CTA */
+.cta-section{text-align:center;padding:60px 20px;background:linear-gradient(135deg,#0a0a1a,#1a0a2e);border-radius:20px;margin:40px 0}
+.cta-section h2{font-size:2rem;color:#fff;margin-bottom:10px}
+.cta-section p{color:#999;margin-bottom:30px}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff;font-size:1.2rem;font-weight:700;padding:16px 40px;border-radius:12px;text-decoration:none;transition:.3s;box-shadow:0 4px 20px rgba(139,92,246,.3)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(139,92,246,.5)}
+/* Testimonials */
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:30px 0 50px}
+.testimonial{background:#111118;border:1px solid #1f1f2e;border-radius:12px;padding:24px}
+.testimonial .stars{color:#f59e0b;margin-bottom:8px}
+.testimonial p{color:#ccc;font-style:italic;font-size:.95rem;margin-bottom:12px}
+.testimonial .author{display:flex;align-items:center;gap:10px}
+.testimonial .author .ava{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:14px}
+.testimonial .author .info .name{color:#fff;font-weight:600;font-size:14px}
+.testimonial .author .info .role{color:#888;font-size:12px}
+footer{text-align:center;padding:30px;color:#555;font-size:14px;border-top:1px solid #1f1f2e;margin-top:40px}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>🚀 IKUNE Plattform – So funktioniert's</h1>
+  <p>Lerne mit KI, werde Teil der Community und starte deine Reise</p>
+</section>
+
+<div class="container">
+
+  <!-- Video Placeholder -->
+  <div class="video-wrapper">
+    <div class="video-placeholder" onclick="this.querySelector('.play-btn').style.display='none';this.querySelector('.video-label').textContent='▶ Demo läuft... (kein echtes Video eingebettet)';">
+      <div class="mockup-screen">
+        <div class="mockup-header">
+          <div class="mockup-dots">
+            <span class="mockup-dot r"></span>
+            <span class="mockup-dot y"></span>
+            <span class="mockup-dot g"></span>
+          </div>
+          <span class="mockup-title">IKUNE Plattform – Dashboard</span>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-sidebar">
+            <div></div><div></div><div></div><div></div><div></div>
+          </div>
+          <div class="mockup-content">
+            <h3>Willkommen zurück, Max! 👋</h3>
+            <div class="line w250"></div>
+            <div class="line w200"></div>
+            <div class="line w150"></div>
+            <div class="mockup-preview">
+              <div></div><div></div><div></div>
+            </div>
+            <div class="line w200" style="margin-top:10px"></div>
+            <div class="line w100"></div>
+          </div>
+        </div>
+      </div>
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="video-label">🎬 Demo ansehen (2:34 Min)</div>
+    </div>
+  </div>
+
+  <p style="text-align:center;color:#888;margin-bottom:30px"><strong>In dieser Demo siehst du:</strong></p>
+
+  <!-- 3 Steps with mockups -->
+  <div class="steps">
+
+    <div class="step-card">
+      <span class="step-number">Schritt 1</span>
+      <div class="card-mockup">
+        <div class="chat-bar">
+          <div class="avatar"></div>
+          <span class="name">IKUNE Community</span>
+          <span class="time">jetzt</span>
+        </div>
+        <div class="chat-body">
+          <div class="bubble">🎉 Willkommen in der IKUNE Community!</div>
+          <div class="bubble">Stelle dich kurz vor 👇</div>
+          <div class="bubble out">Hey! Ich bin Max, freue mich 🚀</div>
+          <div class="bubble typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+      <h3>Community beitreten</h3>
+      <p>Tritt unserer Telegram-Community bei und vernetze dich mit 500+ Lernenden. Tägliche Challenges, Live-Sessions und direkter Austausch.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-number">Schritt 2</span>
+      <div class="card-mockup">
+        <div class="course-bar">
+          <span style="color:#c9d1d9;font-size:13px;font-weight:600">KI Grundlagen Kurs</span>
+          <span style="color:#8b949e;font-size:11px;margin-left:auto">3/5 Lektionen</span>
+        </div>
+        <div class="course-body">
+          <div class="lesson-card">
+            <div class="icon">📖</div>
+            <div class="label">Einführung</div>
+          </div>
+          <div class="lesson-card">
+            <div class="icon">✅</div>
+            <div class="label">Grundlagen</div>
+          </div>
+          <div class="lesson-card">
+            <div class="icon">▶️</div>
+            <div class="label">Prompting</div>
+          </div>
+        </div>
+      </div>
+      <h3>Ersten Kurs starten</h3>
+      <p>Wähle aus interaktiven Kursen zu KI, Coaching, Game Dev und mehr. Lerne mit Videos, Quizzen und praktischen Projekten.</p>
+    </div>
+
+    <div class="step-card">
+      <span class="step-number">Schritt 3</span>
+      <div class="card-mockup">
+        <div class="chat-bar" style="background:linear-gradient(90deg,#1f2937,#1a1a2e)">
+          <span style="font-size:20px">🤖</span>
+          <span class="name">Hermes KI-Coach</span>
+          <span class="time">online</span>
+        </div>
+        <div class="ai-chat">
+          <div class="ai-msg">
+            <span class="ai-label">🤖 Hermes</span>
+            Hi Max! Welches Thema möchtest du heute vertiefen?
+          </div>
+          <div class="ai-msg user">
+            <span class="user-label">👤 Du</span>
+            Erklär mir bitte neuronale Netze einfach!
+          </div>
+          <div class="ai-msg">
+            <span class="ai-label">🤖 Hermes</span>
+            Stell dir vor, neuronale Netze sind wie ...  <span style="color:#8b5cf6">▍</span>
+          </div>
+        </div>
+      </div>
+      <h3>Mit KI-Coach lernen</h3>
+      <p>Dein persönlicher KI-Assistent Hermes hilft dir bei Fragen, erklärt Konzepte und passt sich deinem Lernstil an.</p>
+    </div>
+
+  </div>
+
+  <!-- Feature Highlights -->
+  <h2 class="section-title">✨ Feature-Highlights</h2>
+  <p class="section-sub">Alles, was du für deine Lernreise brauchst</p>
+  <div class="features">
+    <div class="feature">
+      <div class="icon">🎯</div>
+      <h4>Personalisierte Lernpfade</h4>
+      <p>KI-empfohlene Kurse basierend auf deinen Zielen und Vorkenntnissen</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🏆</div>
+      <h4>Gamification</h4>
+      <p>Sammle XP, schalte Achievements frei und erklimme die Leaderboards</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🤖</div>
+      <h4>24/7 KI-Coach</h4>
+      <p>Dein persönlicher Tutor Hermes ist jederzeit für dich da</p>
+    </div>
+    <div class="feature">
+      <div class="icon">💬</div>
+      <h4>Community</h4>
+      <p>Lerne gemeinsam mit Gleichgesinnten in unserer aktiven Telegram-Gruppe</p>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <h2 class="section-title">💬 Was unsere Mitglieder sagen</h2>
+  <p class="section-sub">Über 500 zufriedene Lernende</p>
+  <div class="testimonials">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"Die Kombination aus KI-Coach und Community ist genial. Ich habe in 2 Wochen mehr gelernt als in Monaten alleine."</p>
+      <div class="author">
+        <div class="ava">S</div>
+        <div class="info"><div class="name">Sarah M.</div><div class="role">KI-Einsteigerin</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"Der Hermes KI-Coach erklärt komplexe Konzepte so einfach, dass selbst meine Oma es verstehen würde. Absolut empfehlenswert!"</p>
+      <div class="author">
+        <div class="ava">M</div>
+        <div class="info"><div class="name">Maximilian K.</div><div class="role">Game Dev Student</div></div>
+      </div>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"Endlich eine Plattform, die KI nicht nur erklärt, sondern auch praktisch einsetzt. Die Gamification motiviert mich jeden Tag."</p>
+      <div class="author">
+        <div class="ava">L</div>
+        <div class="info"><div class="name">Laura B.</div><div class="role">Content Creatorin</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Bereit, durchzustarten? 🚀</h2>
+    <p>Werde Teil der IKUNE Community – kostenlos und unverbindlich</p>
+    <a href="/plattform/beitreten.html" class="cta-btn">Jetzt kostenlos starten →</a>
+  </div>
+
+</div>
+
+<footer>© 2026 IKUNE Plattform. Made with ❤️ für die Community.</footer>
+
+</body>
+</html>

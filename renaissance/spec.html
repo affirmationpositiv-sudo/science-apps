@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renaissance – Technische Spezifikation</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+    background: #0a0a1a;
+    color: #e2e8f0;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(245,158,11,.3); color: #fff; }
+
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 40px;
+    background:rgba(10,10,26,.85); backdrop-filter:blur(20px);
+    border-bottom:1px solid rgba(245,158,11,.12);
+  }
+  nav .logo { font-size:1.2rem; font-weight:700; letter-spacing:2px; }
+  nav .logo span { color:#f59e0b; }
+  nav a { color:#94a3b8; text-decoration:none; font-size:.85rem; margin-left:24px; transition:color .2s; }
+  nav a:hover { color:#f59e0b; }
+
+  .container { max-width:1100px; margin:0 auto; padding:100px 40px 60px; }
+
+  h1 { font-size:3rem; font-weight:800; margin-bottom:8px; }
+  h1 span { color:#f59e0b; }
+  h2 { font-size:1.9rem; font-weight:700; margin:60px 0 8px; padding-bottom:8px; border-bottom:2px solid rgba(245,158,11,.15); }
+  h2 span { color:#f59e0b; }
+  h2:first-of-type { margin-top:0; }
+  h3 { font-size:1.2rem; font-weight:600; margin:32px 0 12px; color:#f59e0b; }
+  h4 { font-size:1rem; font-weight:600; margin:20px 0 8px; color:#e2e8f0; }
+  p, li { font-size:.95rem; color:#cbd5e1; margin-bottom:8px; }
+  .subtitle { font-size:1.1rem; color:#94a3b8; margin-bottom:40px; }
+
+  /* ---- cards / boxes ---- */
+  .info-box {
+    background:rgba(99,102,241,.05); border:1px solid rgba(99,102,241,.12);
+    border-radius:16px; padding:20px 24px; margin:20px 0;
+  }
+  .info-box.gold { background:rgba(245,158,11,.04); border-color:rgba(245,158,11,.15); }
+  .info-box h4 { margin-top:0; }
+
+  .tag {
+    display:inline-block; padding:2px 10px; border-radius:12px; font-size:.7rem; font-weight:600;
+  }
+  .tag.gold { background:rgba(245,158,11,.15); color:#f59e0b; }
+  .tag.green { background:rgba(34,197,94,.12); color:#22c55e; }
+  .tag.blue { background:rgba(99,102,241,.15); color:#818cf8; }
+  .tag.red { background:rgba(239,68,68,.12); color:#ef4444; }
+
+  /* ---- ARCHITECTURE DIAGRAM ---- */
+  .arch-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:24px 0;
+  }
+  .arch-layer {
+    padding:16px; border-radius:14px; text-align:center; font-weight:600; font-size:.8rem;
+    border:1px solid rgba(255,255,255,.06);
+  }
+  .arch-layer.l1 { background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.2); }
+  .arch-layer.l2 { background:rgba(99,102,241,.08); border-color:rgba(99,102,241,.2); }
+  .arch-layer.l3 { background:rgba(34,197,94,.06); border-color:rgba(34,197,94,.15); }
+  .arch-layer.l4 { background:rgba(239,68,68,.06); border-color:rgba(239,68,68,.12); }
+  .arch-layer .icon { font-size:1.6rem; margin-bottom:4px; display:block; }
+  .arch-arrow { text-align:center; color:#475569; font-size:.7rem; padding:4px 0; }
+
+  /* ---- DATA MODEL ---- */
+  .data-table { width:100%; border-collapse:separate; border-spacing:0; margin:16px 0 24px; border-radius:12px; overflow:hidden; }
+  .data-table th { background:rgba(245,158,11,.1); color:#f59e0b; font-weight:600; padding:10px 14px; text-align:left; font-size:.8rem; }
+  .data-table td { padding:8px 14px; border-bottom:1px solid rgba(255,255,255,.04); font-size:.8rem; }
+  .data-table tr:last-child td { border-bottom:none; }
+  .data-table tr:hover td { background:rgba(255,255,255,.02); }
+  .data-table .type { font-family:'SF Mono','Fira Code',monospace; font-size:.75rem; color:#818cf8; }
+
+  /* ---- API ENDPOINTS ---- */
+  .endpoint {
+    display:flex; align-items:center; gap:12px;
+    padding:10px 16px; border-radius:10px; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.04);
+    margin-bottom:6px; font-size:.82rem; font-family:'SF Mono','Fira Code',monospace;
+  }
+  .endpoint .method {
+    display:inline-block; padding:2px 8px; border-radius:6px; font-weight:700; font-size:.7rem; min-width:52px; text-align:center;
+  }
+  .method.get { background:rgba(34,197,94,.15); color:#22c55e; }
+  .method.post { background:rgba(245,158,11,.15); color:#f59e0b; }
+  .method.put { background:rgba(99,102,241,.15); color:#818cf8; }
+  .method.del { background:rgba(239,68,68,.15); color:#ef4444; }
+  .endpoint .url { color:#e2e8f0; }
+  .endpoint .desc { color:#94a3b8; font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif; margin-left:auto; font-size:.72rem; }
+
+  /* ---- UI FLOW ---- */
+  .flow { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; margin:24px 0; }
+  .flow-step {
+    padding:12px 20px; border-radius:14px; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06);
+    text-align:center; font-size:.78rem; min-width:100px;
+  }
+  .flow-step .f-icon { font-size:1.4rem; display:block; margin-bottom:4px; }
+  .flow-step .f-label { font-weight:600; }
+  .flow-step .f-desc { font-size:.65rem; color:#94a3b8; }
+  .flow-arrow { font-size:1.2rem; color:#475569; }
+
+  /* ---- DESIGN SYSTEM ---- */
+  .color-swatches { display:flex; gap:16px; flex-wrap:wrap; margin:16px 0; }
+  .swatch { width:100px; padding:12px; border-radius:12px; text-align:center; font-size:.7rem; font-weight:600; }
+  .swatch .hex { font-family:monospace; font-size:.65rem; opacity:.8; margin-top:2px; }
+  .swatch.bg { background:#0a0a1a; border:1px solid rgba(255,255,255,.1); }
+  .swatch.bg2 { background:#16162a; }
+  .swatch.gold { background:#f59e0b; color:#0a0a1a; }
+  .swatch.indigo { background:#6366f1; }
+  .swatch.text { background:#e2e8f0; color:#0a0a1a; }
+  .swatch.muted { background:#94a3b8; color:#0a0a1a; }
+
+  .typo-sample { margin:12px 0; }
+  .typo-sample .size-label { font-size:.7rem; color:#64748b; }
+  .typo-sample .h1-sample { font-size:2.5rem; font-weight:800; }
+  .typo-sample .h2-sample { font-size:1.8rem; font-weight:700; }
+  .typo-sample .h3-sample { font-size:1.2rem; font-weight:600; }
+  .typo-sample .body-sample { font-size:.95rem; }
+
+  /* ---- ROADMAP ---- */
+  .timeline { position:relative; padding-left:32px; margin:24px 0; }
+  .timeline::before { content:''; position:absolute; left:12px; top:0; bottom:0; width:2px; background:rgba(245,158,11,.2); }
+  .tl-item { position:relative; margin-bottom:28px; }
+  .tl-item::before { content:''; position:absolute; left:-26px; top:6px; width:12px; height:12px; border-radius:50%; background:#f59e0b; border:2px solid #0a0a1a; }
+  .tl-item .phase { font-weight:700; color:#f59e0b; font-size:.8rem; }
+  .tl-item h4 { margin:4px 0 4px; }
+  .tl-item p, .tl-item ul { font-size:.82rem; color:#94a3b8; }
+  .tl-item ul { padding-left:16px; }
+  .tl-item ul li { margin-bottom:4px; }
+
+  /* ---- RESPONSIVE ---- */
+  @media(max-width:768px) {
+    .container { padding:80px 20px 40px; }
+    h1 { font-size:2rem; }
+    h2 { font-size:1.5rem; }
+    nav { padding:10px 20px; }
+    nav a { margin-left:12px; font-size:.75rem; }
+    .flow { flex-direction:column; }
+    .flow-arrow { transform:rotate(90deg); }
+    .color-swatches { justify-content:center; }
+    .endpoint { flex-wrap:wrap; }
+    .endpoint .desc { margin-left:0; width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">RENAISSANCE <span>⚙</span></div>
+  <div>
+    <a href="#architektur">Architektur</a>
+    <a href="#datenmodell">Daten</a>
+    <a href="#api">API</a>
+    <a href="#ui-flow">UI-Flow</a>
+    <a href="#design">Design</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1>Renaissance <span>Technische Spezifikation</span></h1>
+<p class="subtitle">Architektur, Datenmodell, API-Endpunkte, UI-Flow, Design-System &amp; Entwicklungs-Roadmap.</p>
+
+<!-- ==================== ARCHITEKTUR ==================== -->
+<h2 id="architektur">🏗️ <span>Architektur</span></h2>
+<p>Die Renaissance App basiert auf einer <strong>Client-zentrierten Architektur</strong> mit optionalem Cloud-Backend. Der Fokus liegt auf Offline-First, datenschonendem Design und nahtloser Integration externer KI-Dienste.</p>
+
+<h3>Layer-Architektur (Übersicht)</h3>
+<div class="arch-grid">
+  <div class="arch-layer l4"><span class="icon">🖥️</span>Presentation Layer<br><small style="color:#94a3b8;font-weight:400;">HTML + CSS + Vanilla JS<br>Responsive, PWA-ready</small></div>
+  <div class="arch-layer l3"><span class="icon">🧩</span>Application Layer<br><small style="color:#94a3b8;font-weight:400;">State Management<br>Routing, Business Logic</small></div>
+  <div class="arch-layer l2"><span class="icon">🔌</span>Integration Layer<br><small style="color:#94a3b8;font-weight:400;">OpenRouter API<br>Firebase/Supabase Auth</small></div>
+  <div class="arch-layer l1"><span class="icon">🗄️</span>Data Layer<br><small style="color:#94a3b8;font-weight:400;">localStorage (offline)<br>Cloud-DB (optional)</small></div>
+</div>
+
+<div class="arch-arrow">⬇ request / ⬆ response</div>
+
+<div class="info-box">
+  <h4>🔑 Schlüsselentscheidungen</h4>
+  <ul>
+    <li><strong>Offline-First:</strong> Alle Kernfunktionen funktionieren ohne Internet. Daten werden lokal gespeichert (IndexedDB / localStorage) und bei Verbindung asynchron mit der Cloud synchronisiert.</li>
+    <li><strong>Kein eigenes Backend nötig:</strong> Authentifizierung via Firebase Auth oder Supabase. KI-Assistent via OpenRouter API (direkt aus dem Frontend mit API-Key).</li>
+    <li><strong>PWA:</strong> Service Worker + Manifest → installierbar auf dem Homescreen, Push-Benachrichtigungen.</li>
+    <li><strong>Ein-Page-Architektur (SPA):</strong> Hash-basiertes Routing, keine Server-Renderings notwendig.</li>
+  </ul>
+</div>
+
+<h3>Kommunikationsfluss</h3>
+<pre style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;font-size:.78rem;color:#94a3b8;overflow-x:auto;font-family:'SF Mono','Fira Code',monospace;line-height:1.8;">
+User ──➤ Presentation (UI) ──➤ Application (Logic) ──➤ Integration (APIs)
+                                          │                        │
+                                          ▼                        ▼
+                                     Data Layer              OpenRouter / Auth
+                                          │
+                                          ▼
+                                    localStorage
+                                     (IndexedDB)
+</pre>
+
+<!-- ==================== DATENMODELL ==================== -->
+<h2 id="datenmodell">📊 <span>Datenmodell</span></h2>
+<p>Alle Datenstrukturen als TypeScript-Typen definiert (zur klaren Spezifikation – wird später nach JS/JSON übertragen).</p>
+
+<h3>👤 User</h3>
+<table class="data-table">
+  <tr><th>Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+  <tr><td>id</td><td class="type">string</td><td>Eindeutige User-ID (UUID)</td></tr>
+  <tr><td>email</td><td class="type">string</td><td>E-Mail-Adresse (nach OAuth/Login)</td></tr>
+  <tr><td>displayName</td><td class="type">string</td><td>Anzeigename</td></tr>
+  <tr><td>avatar</td><td class="type">string | null</td><td>Profilbild-URL</td></tr>
+  <tr><td>level</td><td class="type">number</td><td>Gesamtlevel (1–100)</td></tr>
+  <tr><td>xp</td><td class="type">number</td><td>Aktuelle XP (0–1000 pro Level)</td></tr>
+  <tr><td>plan</td><td class="type">'free' | 'renaissance' | 'pro'</td><td>Abo-Status</td></tr>
+  <tr><td>createdAt</td><td class="type">ISO timestamp</td><td>Registrierungsdatum</td></tr>
+  <tr><td>lastActive</td><td class="type">ISO timestamp</td><td>Letzte Aktivität</td></tr>
+  <tr><td>settings</td><td class="type">Settings</td><td>Dark/Light, Sprache, Benachrichtigungen</td></tr>
+</table>
+
+<h3>🎯 Skill</h3>
+<table class="data-table">
+  <tr><th>Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+  <tr><td>id</td><td class="type">string</td><td>Skill-ID</td></tr>
+  <tr><td>userId</td><td class="type">string</td><td>Referenz auf User</td></tr>
+  <tr><td>name</td><td class="type">string</td><td>Name (z.B. "Kreativität")</td></tr>
+  <tr><td>icon</td><td class="type">string</td><td>Emoji/Icon</td></tr>
+  <tr><td>category</td><td class="type">'kreativität' | 'körper' | 'geist' | 'vermögen' | 'beziehungen'</td><td>Skill-Kategorie</td></tr>
+  <tr><td>level</td><td class="type">number</td><td>Aktuelles Level (0–10)</td></tr>
+  <tr><td>xp</td><td class="type">number</td><td>XP im aktuellen Level</td></tr>
+  <tr><td>xpToNext</td><td class="type">number</td><td>XP benötigt für nächstes Level</td></tr>
+  <tr><td>streak</td><td class="type">number</td><td>Tage in Folge trainiert</td></tr>
+  <tr><td>lastTrained</td><td class="type">ISO timestamp | null</td><td>Letztes Training</td></tr>
+</table>
+
+<h3>📋 Quest</h3>
+<table class="data-table">
+  <tr><th>Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+  <tr><td>id</td><td class="type">string</td><td>Quest-ID</td></tr>
+  <tr><td>userId</td><td class="type">string</td><td>Referenz auf User</td></tr>
+  <tr><td>title</td><td class="type">string</td><td>Titel der Quest</td></tr>
+  <tr><td>description</td><td class="type">string</td><td>Details (optional)</td></tr>
+  <tr><td>xpReward</td><td class="type">number</td><td>XP-Belohnung</td></tr>
+  <tr><td>type</td><td class="type">'daily' | 'main' | 'weekly' | 'challenge'</td><td>Quest-Typ</td></tr>
+  <tr><td>completed</td><td class="type">boolean</td><td>Status</td></tr>
+  <tr><td>dueDate</td><td class="type">ISO date</td><td>Fälligkeitsdatum</td></tr>
+  <tr><td>skillCategory</td><td class="type">string | null</td><td>Verknüpfter Skill</td></tr>
+</table>
+
+<h3>💬 Chat</h3>
+<table class="data-table">
+  <tr><th>Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+  <tr><td>id</td><td class="type">string</td><td>Nachrichten-ID</td></tr>
+  <tr><td>userId</td><td class="type">string</td><td>Referenz auf User</td></tr>
+  <tr><td>role</td><td class="type">'user' | 'assistant'</td><td>Absender</td></tr>
+  <tr><td>content</td><td class="type">string</td><td>Nachrichtentext</td></tr>
+  <tr><td>timestamp</td><td class="type">ISO timestamp</td><td>Zeitpunkt</td></tr>
+  <tr><td>context</td><td class="type">{ skill?: string; quest?: string } | null</td><td>Kontext (optional)</td></tr>
+</table>
+
+<h3>🎓 Coaching</h3>
+<table class="data-table">
+  <tr><th>Feld</th><th>Typ</th><th>Beschreibung</th></tr>
+  <tr><td>id</td><td class="type">string</td><td>Session-ID</td></tr>
+  <tr><td>userId</td><td class="type">string</td><td>Referenz auf User</td></tr>
+  <tr><td>package</td><td class="type">'single' | 'pack4' | 'week12'</td><td>Buchungspaket</td></tr>
+  <tr><td>sessionsRemaining</td><td class="type">number</td><td>Verbleibende Sessions</td></tr>
+  <tr><td>nextSession</td><td class="type">ISO timestamp | null</td><td>Nächster Termin</td></tr>
+  <tr><td>notes</td><td class="type">string[]</td><td>Coaching-Notizen</td></tr>
+  <tr><td>createdAt</td><td class="type">ISO timestamp</td><td>Buchungsdatum</td></tr>
+</table>
+
+<!-- ==================== API ==================== -->
+<h2 id="api">🔌 <span>API-Endpunkte</span></h2>
+<p>Geplante REST-API-Endpunkte (optionales Backend). Aktuell werden alle Daten lokal verwaltet – die API wird in Phase 2 für Cloud-Sync &amp; Multi-Device-Support implementiert.</p>
+
+<h3>Authentifizierung</h3>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/auth/google</span><span class="desc">Google OAuth Login / Registrierung</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/auth/apple</span><span class="desc">Apple OAuth Login / Registrierung</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/auth/email</span><span class="desc">E-Mail-Registrierung / Login</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/auth/refresh</span><span class="desc">Token-Refresh</span></div>
+
+<h3>User &amp; Skills</h3>
+<div class="endpoint"><span class="method get">GET</span><span class="url">/user/me</span><span class="desc">Eigenes Profil abrufen</span></div>
+<div class="endpoint"><span class="method put">PUT</span><span class="url">/user/me</span><span class="desc">Profil aktualisieren</span></div>
+<div class="endpoint"><span class="method get">GET</span><span class="url">/skills</span><span class="desc">Alle Skills des Users abrufen</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/skills/:id/train</span><span class="desc">Trainingseinheit protokollieren (+XP)</span></div>
+
+<h3>Quests</h3>
+<div class="endpoint"><span class="method get">GET</span><span class="url">/quests</span><span class="desc">Heutige/Wöchentliche Quests abrufen</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/quests/:id/complete</span><span class="desc">Quest abschließen + XP gutschreiben</span></div>
+
+<h3>Chat</h3>
+<div class="endpoint"><span class="method get">GET</span><span class="url">/chat/history</span><span class="desc">Chat-Verlauf abrufen (paginiert)</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/chat/message</span><span class="desc">Nachricht senden + KI-Antwort erhalten</span></div>
+
+<h3>Coaching</h3>
+<div class="endpoint"><span class="method get">GET</span><span class="url">/coaching/sessions</span><span class="desc">Gebuchte Sessions abrufen</span></div>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/coaching/book</span><span class="desc">Neue Coaching-Session buchen</span></div>
+<div class="endpoint"><span class="method del">DEL</span><span class="url">/coaching/session/:id</span><span class="desc">Session stornieren</span></div>
+
+<h3>Sync (Cloud) – Phase 2</h3>
+<div class="endpoint"><span class="method post">POST</span><span class="url">/sync/push</span><span class="desc">Lokale Änderungen an Cloud senden</span></div>
+<div class="endpoint"><span class="method get">GET</span><span class="url">/sync/pull</span><span class="desc">Cloud-Änderungen abrufen (Merge-Konflikte)</span></div>
+
+<!-- ==================== UI-FLOW ==================== -->
+<h2 id="ui-flow">🔄 <span>UI-Flow</span></h2>
+<p>Der Benutzer durchläuft die App in einer natürlichen Progression: <strong>Onboarding → Tägliche Routine → Wachstum → Vertiefung</strong>.</p>
+
+<div class="flow">
+  <div class="flow-step"><span class="f-icon">①</span><span class="f-label">Google Login</span><span class="f-desc">Authentifizierung</span></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><span class="f-icon">②</span><span class="f-label">KI-Assistent</span><span class="f-desc">Erstgespräch / Onboarding</span></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><span class="f-icon">③</span><span class="f-label">Skill-Tree</span><span class="f-desc">Dashboard &amp; Auswahl</span></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><span class="f-icon">④</span><span class="f-label">Daily Quests</span><span class="f-desc">Tägliche Aufgaben</span></div>
+  <span class="flow-arrow">→</span>
+  <div class="flow-step"><span class="f-icon">⑤</span><span class="f-label">Live-Coaching</span><span class="f-desc">Premium-Vertiefung</span></div>
+</div>
+
+<div class="info-box gold">
+  <h4>📱 Screen-by-Screen Navigation</h4>
+  <ul>
+    <li><strong>Screen 1 – Login:</strong> Google / Apple / E-Mail. Nach erfolgreichem Login → Weiterleitung zu Screen 2 (Onboarding-Chat) bei erstmaligem Besuch, sonst zu Screen 3 (Dashboard).</li>
+    <li><strong>Screen 2 – KI-Chat:</strong> Erster Chat = Onboarding. Der KI-Assistent lernt den User kennen, fragt nach Zielen und schlägt erste Skills vor. Danach als permanenter Coach verfügbar.</li>
+    <li><strong>Screen 3 – Skill-Tree:</strong> Haupt-Dashboard. Zeigt alle 5 Skill-Bäume mit Fortschritt. Von hier aus Training starten, Details einsehen oder Quests anzeigen.</li>
+    <li><strong>Screen 4 – Daily Quests:</strong> Tägliche Missionen mit XP-Belohnungen. Main Quest, 3 Daily Quests + Weekly Challenge. Abschluss aktualisiert Skill-XP.</li>
+    <li><strong>Screen 5 – Live-Coaching:</strong> Buchungs- und Verwaltungsseite für 1:1-Sessions mit dem persönlichen Coach. Nur sichtbar für User mit Coaching-Paket.</li>
+  </ul>
+</div>
+
+<h3>Routing-Entwurf</h3>
+<pre style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;font-size:.78rem;color:#94a3b8;overflow-x:auto;font-family:'SF Mono','Fira Code',monospace;line-height:1.8;">
+#/login        → Screen 1 (Login)
+#/chat         → Screen 2 (KI-Assistent)
+#/skills       → Screen 3 (Skill-Tree Dashboard)
+#/quests       → Screen 4 (Tägliche Quests)
+#/coaching     → Screen 5 (Live-Coaching)
+#/profile      → User-Profil &amp; Einstellungen
+#/settings     → App-Einstellungen (Dark Mode, Sprache, etc.)
+</pre>
+
+<!-- ==================== DESIGN-SYSTEM ==================== -->
+<h2 id="design">🎨 <span>Design-System</span></h2>
+
+<h3>Farbpalette</h3>
+<div class="color-swatches">
+  <div class="swatch bg"><span class="hex">#0a0a1a</span>Dark BG</div>
+  <div class="swatch bg2"><span class="hex">#16162a</span>Surface</div>
+  <div class="swatch gold"><span class="hex">#f59e0b</span>Gold Accent</div>
+  <div class="swatch indigo"><span class="hex">#6366f1</span>Indigo Accent</div>
+  <div class="swatch text"><span class="hex">#e2e8f0</span>Text Primary</div>
+  <div class="swatch muted"><span class="hex">#94a3b8</span>Text Muted</div>
+</div>
+
+<div class="info-box" style="margin-top:8px;">
+  <table class="data-table" style="margin:0;">
+    <tr><th>Token</th><th>Farbe</th><th>Verwendung</th></tr>
+    <tr><td class="type">--bg-primary</td><td>#0a0a1a</td><td>Haupt-Hintergrund</td></tr>
+    <tr><td class="type">--bg-surface</td><td>#16162a</td><td>Karten, Modal, Phone-Mockups</td></tr>
+    <tr><td class="type">--bg-elevated</td><td>rgba(255,255,255,.02–.06)</td><td>Cards, Hover-States</td></tr>
+    <tr><td class="type">--accent-gold</td><td>#f59e0b</td><td>Primäre Akzente, Buttons, XP</td></tr>
+    <tr><td class="type">--accent-indigo</td><td>#6366f1</td><td>Sekundäre Akzente, User-Chat, Coaching</td></tr>
+    <tr><td class="type">--accent-green</td><td>#22c55e</td><td>Erfolge, Completed, Online-Status</td></tr>
+    <tr><td class="type">--text-primary</td><td>#e2e8f0</td><td>Fließtext</td></tr>
+    <tr><td class="type">--text-muted</td><td>#94a3b8</td><td>Subtile Texte, Beschreibungen</td></tr>
+    <tr><td class="type">--border</td><td>rgba(255,255,255,.04–.12)</td><td>Rahmen, Trennlinien</td></tr>
+  </table>
+</div>
+
+<h3>Typografie</h3>
+<div class="typo-sample">
+  <div class="size-label">h1 – 2.5rem / 800 weight</div>
+  <div class="h1-sample">Renaissance – Die App, die dich wachsen lässt</div>
+</div>
+<div class="typo-sample">
+  <div class="size-label">h2 – 1.8rem / 700 weight</div>
+  <div class="h2-sample">So sieht die App aus</div>
+</div>
+<div class="typo-sample">
+  <div class="size-label">h3 – 1.2rem / 600 weight</div>
+  <div class="h3-sample">Skill-Aufbau ersetzt Sucht durch Können</div>
+</div>
+<div class="typo-sample">
+  <div class="size-label">body – .95rem / 400 weight</div>
+  <div class="body-sample">Nicht blocken. Wachsen. Der erste KI-Coach, der dich zur besten Version deiner selbst macht.</div>
+</div>
+
+<h3>Komponenten-Standards</h3>
+<table class="data-table">
+  <tr><th>Komponente</th><th>Stil</th><th>Radius</th></tr>
+  <tr><td>Buttons (Primary)</td><td>Gold-Gradient, fett</td><td>40px / 30px</td></tr>
+  <tr><td>Cards / Karten</td><td>Leicht transparent, border</td><td>16px</td></tr>
+  <tr><td>Inputs</td><td>Dark, subtiler border</td><td>20px</td></tr>
+  <tr><td>Phone Frames</td><td>#111 bg, shadow</td><td>36px</td></tr>
+  <tr><td>Chat Blasen</td><td>Gold/Indigo getönt</td><td>18px</td></tr>
+  <tr><td>XP-Bars</td><td>Gold-Gradient fill</td><td>4px</td></tr>
+  <tr><td>Divider</td><td>rgba(255,255,255,.08)</td><td>1px</td></tr>
+</table>
+
+<h3>Light Mode (geplant)</h3>
+<div class="info-box">
+  <p>Ein vollständiger Light Mode wird später implementiert. Die Tokens bleiben gleich, nur die Werte ändern sich:</p>
+  <ul>
+    <li><code class="type">--bg-primary</code> → #f8fafc (helles Weiß)</li>
+    <li><code class="type">--text-primary</code> → #0f172a</li>
+    <li><code class="type">--text-muted</code> → #64748b</li>
+    <li><code class="type">--accent-gold</code> bleibt #f59e0b</li>
+  </ul>
+</div>
+
+<!-- ==================== ROADMAP ==================== -->
+<h2 id="roadmap">🗺️ <span>Entwicklungs-Roadmap</span></h2>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="phase">Phase 1 – Foundation (Woche 1)</div>
+    <h4>🎯 Ziel: Funktionsfähige Web-App</h4>
+    <ul>
+      <li><strong>Tag 1:</strong> Projekt-Setup, HTML-Struktur, CSS-Design-System, PWA-Manifest + Service Worker</li>
+      <li><strong>Tag 2:</strong> Login-Screen (Google OAuth via Firebase/Supabase), Routing (#/login)</li>
+      <li><strong>Tag 3:</strong> KI-Assistent Chat – OpenRouter API-Integration, Nachrichten-Historie (localStorage)</li>
+      <li><strong>Tag 4:</strong> Skill-Tree Dashboard – Datenmodell, 5 Skill-Karten, XP-System, Level-Up-Logik</li>
+      <li><strong>Tag 5:</strong> Daily Quests – Main Quest + 3 Dailies + Weekly Challenge, Quest-Logik + XP-Vergabe</li>
+      <li><strong>Tag 6:</strong> Live-Coaching Screen – Buchung, Pakete, Kalender-Integration (simuliert)</li>
+      <li><strong>Tag 7:</strong> Testing, Bugfixes, Deployment (Netlify / Vercel), Dokumentation</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="phase">Phase 2 – Mobile &amp; Backend (Woche 2–3)</div>
+    <h4>🎯 Ziel: Native-App-Feeling + Cloud-Backend</h4>
+    <ul>
+      <li>React Native / Flutter Port (Mobile Apps für iOS &amp; Android)</li>
+      <li>Cloud-Backend mit Supabase (Datenbank + Auth + Realtime)</li>
+      <li>Sync-Engine: Offline → Cloud (Konfliktlösung via Last-Write-Wins)</li>
+      <li>Push-Benachrichtigungen (Erinnerungen, Streak-Alarme)</li>
+      <li>Ranking &amp; Leaderboards (Community-Feature)</li>
+      <li>Zahlungsintegration (Stripe für Abos + Coaching)</li>
+    </ul>
+  </div>
+
+  <div class="tl-item">
+    <div class="phase">Phase 3 – Scale &amp; AI (Woche 4+)</div>
+    <h4>🎯 Ziel: Intelligentes, personalisiertes System</h4>
+    <ul>
+      <li>KI-gestützte Skill-Empfehlungen (basierend auf User-Verhalten)</li>
+      <li>Adaptive Quests (Schwierigkeit passt sich an Fortschritt an)</li>
+      <li>Sprach-Assistent (Speech-to-Text für Coaching-Notes)</li>
+      <li>Dashboard mit erweiterten Analytics (Fortschritt-Charts, Insights)</li>
+      <li>Community-Features: Gruppen-Challenges, Skill-Sharing, Mentoring</li>
+      <li>Internationalisierung (Englisch, Spanisch, Türkisch)</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Tech-Stack (Entscheidungsmatrix)</h3>
+<table class="data-table">
+  <tr><th>Bereich</th><th>Phase 1</th><th>Phase 2</th></tr>
+  <tr><td>Frontend</td><td>Vanilla JS (SPA)</td><td>React Native / Flutter</td></tr>
+  <tr><td>Auth</td><td>Firebase Auth / Supabase</td><td>Supabase Auth</td></tr>
+  <tr><td>KI</td><td>OpenRouter API (direkt)</td><td>OpenRouter + Backend-Proxy</td></tr>
+  <tr><td>Datenbank</td><td>localStorage (JSON)</td><td>Supabase (PostgreSQL)</td></tr>
+  <tr><td>Hosting</td><td>Netlify / Vercel</td><td>Vercel + Supabase</td></tr>
+  <tr><td>Zahlungen</td><td>– (manuell)</td><td>Stripe</td></tr>
+  <tr><td>PWA</td><td>Service Worker + Manifest</td><td>+ Push-Benachrichtigungen</td></tr>
+</table>
+
+<h3>Risiken &amp; Mitigation</h3>
+<div class="info-box gold">
+  <ul>
+    <li><strong>OpenRouter API-Kosten:</strong> Rate-Limiting + Caching häufiger Antworten. Fallback: lokale Simple-Response-Engine bei API-Ausfall.</li>
+    <li><strong>Datenschutz:</strong> Alle sensiblen Daten lokal. Cloud nur mit explizitem User-Consent. DSGVO-konform.</li>
+    <li><strong>Offline vs. Online Sync:</strong> Konflikte bei gleichzeitiger Bearbeitung. Strategie: Last-Write-Wins + Konflikt-Log für Admin-Review.</li>
+    <li><strong>PWA-Einschränkungen:</strong> Kein Zugriff auf native APIs (HealthKit, Sensoren). Phase 2 (native Apps) löst dies.</li>
+  </ul>
+</div>
+
+<footer style="margin-top:60px;padding-top:24px;border-top:1px solid rgba(255,255,255,.04);text-align:center;color:#475569;font-size:.8rem;">
+  RENAISSANCE ⚙ – Technische Spezifikation v1.0<br>
+  © 2026 Renaissance App. Alle Rechte vorbehalten.
+</footer>
+
+</div><!-- /container -->
+</body>
+</html>

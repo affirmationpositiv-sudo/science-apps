@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKUNE KI-Coaching – 12 Wochen zum KI-Millionär</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a1a; color: #e2e2e2; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .badge { display: inline-block; background: #f59e0b; color: #0a0a1a; padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Hero */
+  .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 60px 20px; background: radial-gradient(ellipse at center, #1a1a3e 0%, #0a0a1a 70%); position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 40%, rgba(245,158,11,0.06) 0%, transparent 50%); pointer-events: none; }
+  .hero-sub { font-size: 14px; color: #f59e0b; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-size: clamp(2.2rem, 6vw, 4.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 20px; background: linear-gradient(135deg, #f59e0b, #ffd700, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero p { font-size: clamp(1rem, 2vw, 1.25rem); color: #aaa; max-width: 700px; margin-bottom: 32px; }
+  .hero .cta-btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #0a0a1a; font-weight: 800; padding: 16px 48px; border-radius: 50px; font-size: 1.1rem; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 4px 25px rgba(245,158,11,0.35); }
+  .hero .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 35px rgba(245,158,11,0.5); }
+  .limited { margin-top: 16px; font-size: 14px; color: #f59e0b; font-weight: 600; }
+
+  /* Sections */
+  section { padding: 80px 0; }
+  .section-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; text-align: center; margin-bottom: 12px; }
+  .section-sub { text-align: center; color: #888; max-width: 600px; margin: 0 auto 48px; }
+  .gold { color: #f59e0b; }
+
+  /* Pain → Solution */
+  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .pain-list { list-style: none; }
+  .pain-list li { padding: 12px 0 12px 32px; position: relative; font-size: 1.05rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .pain-list li::before { content: '✕'; position: absolute; left: 0; color: #ef4444; font-weight: bold; }
+  .solution-list { list-style: none; }
+  .solution-list li { padding: 12px 0 12px 32px; position: relative; font-size: 1.05rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .solution-list li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: bold; font-size: 1.2rem; }
+
+  /* 12 Module */
+  .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+  .module-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(245,158,11,0.1); border-radius: 12px; padding: 20px; transition: border-color 0.3s; }
+  .module-card:hover { border-color: rgba(245,158,11,0.4); }
+  .module-card .num { font-size: 12px; color: #f59e0b; font-weight: 700; margin-bottom: 4px; }
+  .module-card h4 { font-size: 1rem; font-weight: 700; color: #fff; }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: start; }
+  .pricing-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 36px 28px; text-align: center; position: relative; transition: transform 0.3s; }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-card.featured { border-color: #f59e0b; background: rgba(245,158,11,0.06); box-shadow: 0 0 30px rgba(245,158,11,0.1); }
+  .pricing-card.featured .badge-featured { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #f59e0b; color: #0a0a1a; padding: 4px 20px; border-radius: 20px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+  .pricing-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 4px; color: #fff; }
+  .pricing-card .duration { color: #888; font-size: 14px; margin-bottom: 16px; }
+  .pricing-card .price { font-size: 3rem; font-weight: 900; color: #f59e0b; margin-bottom: 4px; }
+  .pricing-card .price-sub { color: #666; font-size: 14px; margin-bottom: 20px; }
+  .pricing-card ul { list-style: none; text-align: left; margin-bottom: 24px; }
+  .pricing-card ul li { padding: 8px 0 8px 28px; position: relative; font-size: 14px; color: #ccc; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .pricing-card ul li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-weight: bold; }
+  .pricing-card ul li.disabled { color: #555; }
+  .pricing-card ul li.disabled::before { content: '—'; color: #555; }
+  .buy-btn { display: inline-block; background: linear-gradient(135deg, #f59e0b, #d97706); color: #0a0a1a; font-weight: 800; padding: 14px 40px; border-radius: 50px; text-decoration: none; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s; }
+  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(245,158,11,0.4); }
+  .buy-btn.outline { background: transparent; border: 2px solid #f59e0b; color: #f59e0b; }
+
+  /* Comparison Table */
+  .comp-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+  .comp-table th, .comp-table td { padding: 14px 16px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .comp-table th { background: rgba(245,158,11,0.1); color: #f59e0b; font-weight: 700; font-size: 14px; }
+  .comp-table td { font-size: 14px; }
+  .comp-table td:first-child { text-align: left; font-weight: 600; color: #ddd; }
+  .comp-table .check { color: #22c55e; font-size: 1.2rem; }
+  .comp-table .cross { color: #ef4444; font-size: 0.9rem; }
+  .comp-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* Testimonials */
+  .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .test-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; }
+  .test-card .stars { color: #f59e0b; margin-bottom: 12px; font-size: 1.1rem; }
+  .test-card blockquote { font-size: 0.95rem; color: #ccc; font-style: italic; margin-bottom: 16px; }
+  .test-card .author { display: flex; align-items: center; gap: 12px; }
+  .test-card .author .avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #d97706); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 16px; color: #0a0a1a; }
+  .test-card .author .info { font-size: 13px; }
+  .test-card .author .name { font-weight: 700; color: #fff; }
+  .test-card .author .detail { color: #888; }
+
+  /* FAQ */
+  .faq-list { max-width: 800px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 20px 0; }
+  .faq-q { font-weight: 700; font-size: 1.05rem; color: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-q::after { content: '+'; font-size: 1.4rem; color: #f59e0b; transition: transform 0.3s; }
+  .faq-item.open .faq-q::after { content: '−'; }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s ease; color: #aaa; font-size: 0.95rem; }
+  .faq-item.open .faq-a { max-height: 300px; padding-top: 12px; }
+
+  /* Guarantee */
+  .guarantee { text-align: center; background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.15); border-radius: 16px; padding: 48px 24px; max-width: 700px; margin: 0 auto; }
+  .guarantee .icon { font-size: 3rem; margin-bottom: 16px; }
+  .guarantee h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; color: #fff; }
+  .guarantee p { color: #aaa; max-width: 500px; margin: 0 auto; }
+
+  /* Countdown */
+  .countdown-wrap { text-align: center; background: rgba(245,158,11,0.04); border: 1px solid rgba(245,158,11,0.1); border-radius: 16px; padding: 40px 24px; max-width: 500px; margin: 0 auto; }
+  .countdown-wrap h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 16px; color: #f59e0b; }
+  .countdown { display: flex; justify-content: center; gap: 20px; }
+  .countdown div { text-align: center; }
+  .countdown .num { font-size: 2.4rem; font-weight: 900; color: #fff; display: block; line-height: 1; }
+  .countdown .label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Bonus Banner */
+  .bonus-banner { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(245,158,11,0.03)); border: 2px solid #f59e0b; border-radius: 16px; padding: 32px 24px; text-align: center; max-width: 600px; margin: 32px auto 0; }
+  .bonus-banner h3 { font-size: 1.3rem; font-weight: 800; color: #f59e0b; margin-bottom: 8px; }
+  .bonus-banner p { color: #ccc; }
+
+  /* Footer */
+  footer { padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: #555; }
+  footer a { color: #f59e0b; text-decoration: none; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .pain-grid { grid-template-columns: 1fr; gap: 20px; }
+    .hero { min-height: auto; padding: 80px 20px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .test-grid { grid-template-columns: 1fr; }
+    .countdown { gap: 12px; }
+    .countdown .num { font-size: 1.8rem; }
+  }
+
+  /* Countdown Timer JS placeholder (runs on load) */
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-sub">◈ Licht und Schatten ◈</div>
+  <h1>IKUNE KI-Coaching<br>12 Wochen zum KI-Millionär</h1>
+  <p>Persönliches 1:1 AI-Coaching für Unternehmer, die ihre Produktivität ×10 steigern und mit KI systematisch skalieren wollen.</p>
+  <a href="#pricing" class="cta-btn">Jetzt Platz sichern →</a>
+  <div class="limited">⚠️ Nur 10 Plätze pro Monat – aktuell <span id="slots-left">7</span> verfügbar</div>
+</section>
+
+<!-- Pain → Solution -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Wo stehst <span class="gold">du</span> gerade?</h2>
+    <p class="section-sub">Die meisten Unternehmer scheitern nicht am Willen – sondern am fehlenden System.</p>
+    <div class="pain-grid">
+      <div>
+        <h3 style="color:#ef4444;margin-bottom:16px">❌ Ohne KI-Coaching</h3>
+        <ul class="pain-list">
+          <li>Stundenlange manuelle Routine-Aufgaben</li>
+          <li>Keine Ahnung, welche KI-Tools wirklich helfen</li>
+          <li>Inhalte-Produktion frisst Tage statt Minuten</li>
+          <li>Automatisierung? Fehlanzeige</li>
+          <li>Konkurrenz überholt dich mit KI-Systemen</li>
+          <li>Umsatz stagniert trotz harter Arbeit</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color:#22c55e;margin-bottom:16px">✅ Mit IKUNE KI-Coaching</h3>
+        <ul class="solution-list">
+          <li>KI übernimmt 80% deiner Routine-Aufgaben</li>
+          <li>Maßgeschneiderte Tool-Strategie für dein Business</li>
+          <li>Content in 10% der Zeit produziert</li>
+          <li>Vollautomatisierte Workflows live am Laufen</li>
+          <li>Du bist der Konkurrenz 12 Wochen voraus</li>
+          <li>Systematische Umsatz-Skalierung mit KI</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 Module -->
+<section style="background:rgba(255,255,255,0.02)">
+  <div class="container">
+    <h2 class="section-title">Dein <span class="gold">12-Wochen</span> Fahrplan</h2>
+    <p class="section-sub">Jede Woche ein neues Modul. Praxisnah, ergebnisorientiert, sofort anwendbar.</p>
+    <div class="modules-grid">
+      <div class="module-card"><div class="num">WOCHE 1</div><h4>KI-Grundlagen</h4></div>
+      <div class="module-card"><div class="num">WOCHE 2</div><h4>Automatisierung</h4></div>
+      <div class="module-card"><div class="num">WOCHE 3</div><h4>Content-Produktion</h4></div>
+      <div class="module-card"><div class="num">WOCHE 4</div><h4>Prompt Engineering</h4></div>
+      <div class="module-card"><div class="num">WOCHE 5</div><h4>Digitale Produkte</h4></div>
+      <div class="module-card"><div class="num">WOCHE 6</div><h4>KI-Assistenten</h4></div>
+      <div class="module-card"><div class="num">WOCHE 7</div><h4>Business-Strategie</h4></div>
+      <div class="module-card"><div class="num">WOCHE 8</div><h4>Sales Funnels</h4></div>
+      <div class="module-card"><div class="num">WOCHE 9</div><h4>Analysen & KPIs</h4></div>
+      <div class="module-card"><div class="num">WOCHE 10</div><h4>Skalierung</h4></div>
+      <div class="module-card"><div class="num">WOCHE 11</div><h4>Community-Building</h4></div>
+      <div class="module-card"><div class="num">WOCHE 12</div><h4>Mastermind & Next Steps</h4></div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title">Wähle dein <span class="gold">Level</span></h2>
+    <p class="section-sub">Investiere in deine KI-Zukunft. Alle Pakete inkl. 14-Tage Geld-zurück-Garantie.</p>
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <h3>IKUNE Starter</h3>
+        <div class="duration">4 Wochen · 2×/Woche Sessions</div>
+        <div class="price">€97</div>
+        <div class="price-sub">einmalig</div>
+        <ul>
+          <li>4 Wochen 1:1 Coaching (2×/Woche à 45 Min)</li>
+          <li>Prompt Library Zugang</li>
+          <li>E-Mail-Support (Mo–Fr, 24h Antwortzeit)</li>
+          <li class="disabled">Asset Library Zugang</li>
+          <li class="disabled">WhatsApp Priority Support</li>
+          <li class="disabled">Bonus-Sessions</li>
+          <li class="disabled">Persönlicher KI-Agent-Setup</li>
+          <li class="disabled">24/7 Priority Support</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/DVH9DA396F7A6" target="_blank" class="buy-btn outline">Buy with PayPal →</a>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="pricing-card featured">
+        <div class="badge-featured">Bestseller</div>
+        <h3>IKUNE Pro</h3>
+        <div class="duration">8 Wochen · 2×/Woche Sessions</div>
+        <div class="price">€297</div>
+        <div class="price-sub">einmalig</div>
+        <ul>
+          <li>8 Wochen 1:1 Coaching (2×/Woche à 45 Min)</li>
+          <li>Prompt Library + Asset Library Zugang</li>
+          <li>WhatsApp Priority Support (Mo–So)</li>
+          <li>2 Bonus-Sessions</li>
+          <li class="disabled">Persönlicher KI-Agent-Setup</li>
+          <li class="disabled">24/7 Priority Support</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/7VEBRWFMXP96U" target="_blank" class="buy-btn">Buy with PayPal →</a>
+      </div>
+
+      <!-- Elite -->
+      <div class="pricing-card">
+        <h3>IKUNE Elite</h3>
+        <div class="duration">12 Wochen · 3×/Woche Sessions</div>
+        <div class="price">€997</div>
+        <div class="price-sub">einmalig</div>
+        <ul>
+          <li>12 Wochen 1:1 Coaching (3×/Woche à 60 Min)</li>
+          <li>Vollzugriff auf Prompt Library + Asset Library</li>
+          <li>24/7 Priority Support (persönlicher Ansprechpartner)</li>
+          <li>Persönlicher KI-Agent-Setup</li>
+          <li>3 gratis Prompt Packs (Wert €147)</li>
+          <li>Exklusiver Mastermind-Zugang</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/TFVHXBN2Y563G" target="_blank" class="buy-btn">Buy with PayPal →</a>
+      </div>
+    </div>
+
+    <!-- Bonus Banner for Elite -->
+    <div class="bonus-banner">
+      <h3>🎁 Elite-Bonus: 3 gratis Prompt Packs</h3>
+      <p>Bei Buchung des IKUNE Elite Pakets erhältst du 3 Premium Prompt Packs (Content, Vertrieb, Automatisierung) im Wert von €147 – kostenlos!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Table -->
+<section style="background:rgba(255,255,255,0.02)">
+  <div class="container">
+    <h2 class="section-title">Paketvergleich <span class="gold">im Detail</span></h2>
+    <p class="section-sub">Sieh auf einen Blick, welches Paket zu dir passt.</p>
+    <div style="overflow-x:auto">
+    <table class="comp-table">
+      <thead>
+        <tr><th>Feature</th><th>Starter</th><th>Pro</th><th>Elite</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Laufzeit</td><td>4 Wochen</td><td>8 Wochen</td><td>12 Wochen</td></tr>
+        <tr><td>Sessions pro Woche</td><td>2× 45 Min</td><td>2× 45 Min</td><td>3× 60 Min</td></tr>
+        <tr><td>Prompt Library</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Asset Library</td><td class="cross">✕</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>E-Mail-Support</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>WhatsApp Support</td><td class="cross">✕</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>24/7 Priority Support</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td>Bonus-Sessions</td><td class="cross">✕</td><td>2</td><td>4</td></tr>
+        <tr><td>KI-Agent-Setup</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td>Prompt Packs</td><td class="cross">✕</td><td class="cross">✕</td><td>3 gratis</td></tr>
+        <tr><td>Mastermind-Zugang</td><td class="cross">✕</td><td class="cross">✕</td><td class="check">✓</td></tr>
+        <tr><td style="font-weight:800;color:#f59e0b">Preis</td><td style="font-weight:800">€97</td><td style="font-weight:800">€297</td><td style="font-weight:800">€997</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section>
+  <div class="container">
+    <h2 class="section-title">Was unsere <span class="gold">Klienten</span> sagen</h2>
+    <p class="section-sub">Echte Ergebnisse von echten Unternehmern, die mit IKUNE den KI-Durchbruch geschafft haben.</p>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Ich habe in 8 Wochen mehr über KI gelernt als in 2 Jahren Selbststudium. Meine Content-Produktion ist von 3 Tagen auf 2 Stunden gesunken. Der ROI war nach dem ersten Monat erreicht."</blockquote>
+        <div class="author">
+          <div class="avatar">MS</div>
+          <div class="info"><span class="name">Markus S.</span> · <span class="detail">45, IT-Unternehmer</span></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Die individuellen Prompts und Workflows, die IKUNE für mich entwickelt hat, sparen mir jeden Tag 3 Stunden. Meine Conversion-Rate hat sich verdoppelt. Absolute Empfehlung!"</blockquote>
+        <div class="author">
+          <div class="avatar">EK</div>
+          <div class="info"><span class="name">Elena K.</span> · <span class="detail">34, Online-Marketing</span></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="stars">★★★★★</div>
+        <blockquote>"Als Immobilienmakler war ich skeptisch, ob KI mir wirklich helfen kann. IKUNE hat mir gezeigt, wie ich KI für Objektbewertungen, Anzeigen und Kundenkommunikation nutze. Meine Abschlussrate +40%."</blockquote>
+        <div class="author">
+          <div class="avatar">TW</div>
+          <div class="info"><span class="name">Thomas W.</span> · <span class="detail">52, Immobilienmakler</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:rgba(255,255,255,0.02)">
+  <div class="container">
+    <h2 class="section-title">Häufig gestellte <span class="gold">Fragen</span></h2>
+    <p class="section-sub">Alles, was du vor deiner Buchung wissen musst.</p>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q">Für wen ist das IKUNE Coaching geeignet?</div>
+        <div class="faq-a">Das Coaching richtet sich an Unternehmer, Selbstständige und Führungskräfte, die KI systematisch in ihrem Business einsetzen wollen. Vorkenntnisse sind nicht nötig – IKUNE begleitet dich von Null auf KI-Profi.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Wie läuft eine Coaching-Session ab?</div>
+        <div class="faq-a">Jede Session findet 1:1 via Video-Call statt. Wir analysieren deine aktuelle Situation, arbeiten an konkreten Workflows und du erhältst sofort umsetzbare Maßnahmen. Zwischen den Sessions hast du Zugang zur Prompt Library und zu deinem persönlichen Support-Kanal.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kann ich jederzeit kündigen?</div>
+        <div class="faq-a">Ja. Du hast 14 Tage Geld-zurück-Garantie ab Buchungsdatum. Solltest du innerhalb dieser Zeit feststellen, dass das Coaching nichts für dich ist, erhältst du dein Geld vollständig zurück – ohne Wenn und Aber.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Was ist der Unterschied zwischen Starter, Pro und Elite?</div>
+        <div class="faq-a">Der Starter ist ideal für Einsteiger (4 Wochen), der Pro für ambitionierte Unternehmer (8 Wochen + WhatsApp-Support + Asset Library). Der Elite ist das Komplettpaket: 12 Wochen, 3 Sessions/Woche, 24/7 Support, persönlicher KI-Agent-Setup und 3 gratis Prompt Packs.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Wie viele Plätze gibt es pro Monat?</div>
+        <div class="faq-a">IKUNE arbeitet mit maximal 10 Klienten pro Monat, um jedem die volle Aufmerksamkeit zu schenken. Sobald die Plätze belegt sind, ist der nächste Monat der frühestmögliche Starttermin.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kann ich das Coaching steuerlich absetzen?</div>
+        <div class="faq-a">Ja, als Unternehmer kannst du die Coaching-Kosten in der Regel als Weiterbildung oder Betriebsausgabe steuerlich geltend machen. Frage deinen Steuerberater für die Details zu deiner Situation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Countdown + Guarantee -->
+<section>
+  <div class="container">
+    <div class="countdown-wrap">
+      <h3>⏳ Nächste Runde startet in</h3>
+      <div class="countdown" id="countdown">
+        <div><span class="num" id="cd-days">14</span><span class="label">Tage</span></div>
+        <div><span class="num" id="cd-hours">12</span><span class="label">Stunden</span></div>
+        <div><span class="num" id="cd-minutes">30</span><span class="label">Minuten</span></div>
+        <div><span class="num" id="cd-seconds">0</span><span class="label">Sekunden</span></div>
+      </div>
+    </div>
+    <div style="height:60px"></div>
+    <div class="guarantee">
+      <div class="icon">🛡️</div>
+      <h3>14-Tage Geld-zurück-Garantie</h3>
+      <p>Starte ohne Risiko. Wenn du nach den ersten 14 Tagen nicht das Gefühl hast, dass IKUNE Coaching dich voranbringt, bekommst du dein Geld vollständig zurück.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>© 2026 <strong>IKUNE</strong> — Licht und Schatten. Alle Rechte vorbehalten.</p>
+    <p style="margin-top:8px">
+      <a href="https://ikune.de/impressum" target="_blank">Impressum</a> · 
+      <a href="https://ikune.de/datenschutz" target="_blank">Datenschutz</a> · 
+      <a href="mailto:affirmation.positiv@gmail.com">Kontakt</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+// FAQ Toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+// Countdown Timer (placeholder: 14 days from now)
+(function() {
+  const target = new Date();
+  target.setDate(target.getDate() + 14);
+  target.setHours(23, 59, 59, 0);
+
+  function update() {
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-minutes').textContent = '0';
+      document.getElementById('cd-seconds').textContent = '0';
+      return;
+    }
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-minutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-seconds').textContent = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+})();
+</script>
+</body>
+</html>

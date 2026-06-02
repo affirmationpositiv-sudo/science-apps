@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Willkommen bei IKUNE – Los geht's in 3 Schritten</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+/* Progress Bar */
+.progress-container{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a0f;padding:20px 20px 10px}
+.progress-bar-bg{width:100%;max-width:600px;margin:0 auto;height:6px;background:#1f1f2e;border-radius:3px;overflow:hidden}
+.progress-bar-fill{height:100%;width:33%;background:linear-gradient(90deg,#8b5cf6,#ec4899);border-radius:3px;transition:width .5s ease}
+.progress-steps{display:flex;justify-content:space-between;max-width:600px;margin:8px auto 0;font-size:12px;color:#666}
+.progress-steps span.active{color:#8b5cf6;font-weight:600}
+/* Onboarding Card */
+.onboarding-card{max-width:520px;width:100%;background:#111118;border:1px solid #1f1f2e;border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;margin-top:80px}
+/* Steps */
+.step{display:none;animation:fadeIn .4s ease}
+.step.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.step h2{font-size:1.6rem;margin-bottom:6px;color:#fff}
+.step .desc{color:#888;margin-bottom:24px;font-size:.95rem}
+/* Form Elements */
+label{display:block;color:#aaa;font-size:.9rem;margin-bottom:6px;font-weight:500}
+input[type="text"],input[type="email"],input[type="password"]{width:100%;padding:12px 16px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:10px;color:#fff;font-size:1rem;outline:none;transition:.3s;margin-bottom:16px}
+input:focus{border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.2)}
+/* Avatar Selector */
+.avatar-grid{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.avatar-opt{width:48px;height:48px;border-radius:50%;background:#1a1a2e;border:2px solid #2a2a3e;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;transition:.2s}
+.avatar-opt:hover{border-color:#8b5cf6;background:#2a1a3e}
+.avatar-opt.selected{border-color:#8b5cf6;background:#2a1a3e;box-shadow:0 0 0 3px rgba(139,92,246,.3)}
+/* Category Grid */
+.category-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.category-card{background:#1a1a2e;border:2px solid #2a2a3e;border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:.2s}
+.category-card:hover{border-color:#8b5cf6;background:#2a1a3e}
+.category-card.selected{border-color:#8b5cf6;background:#2a1a3e;box-shadow:0 0 0 3px rgba(139,92,246,.2)}
+.category-card .emoji{font-size:2rem;margin-bottom:6px}
+.category-card .name{color:#fff;font-weight:600;font-size:.95rem}
+.category-card .count{color:#888;font-size:.8rem;margin-top:4px}
+/* Community step */
+.telegram-link{display:flex;align-items:center;gap:12px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:12px;padding:16px;margin-bottom:16px;cursor:pointer;transition:.2s}
+.telegram-link:hover{border-color:#8b5cf6}
+.telegram-link .tg-icon{font-size:2rem}
+.telegram-link .tg-text{flex:1}
+.telegram-link .tg-text h4{color:#fff;font-size:1rem}
+.telegram-link .tg-text p{color:#888;font-size:.85rem}
+.telegram-link .tg-arrow{color:#8b5cf6;font-size:1.2rem}
+.success-icon{text-align:center;padding:20px 0}
+.success-icon .big{font-size:4rem}
+.success-icon h3{color:#fff;font-size:1.5rem;margin-top:10px}
+.success-icon p{color:#888;margin-top:6px}
+/* Buttons */
+.btn-row{display:flex;gap:12px;margin-top:20px}
+.btn{flex:1;padding:14px;border-radius:12px;border:none;font-size:1rem;font-weight:600;cursor:pointer;transition:.3s;text-decoration:none;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#8b5cf6,#6d28d9);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(139,92,246,.3)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:#1f1f2e;color:#aaa;border:1px solid #2a2a3e}
+.btn-secondary:hover{color:#fff;border-color:#8b5cf6}
+/* Confetti CSS-only */
+.confetti-container{position:fixed;inset:0;pointer-events:none;z-index:1000;overflow:hidden}
+.confetti-piece{position:absolute;top:-10px;width:10px;height:10px;border-radius:2px;animation:confettiFall 3s ease-in forwards}
+.confetti-piece:nth-child(1){left:10%;background:#8b5cf6;animation-delay:0s;width:8px;height:8px}
+.confetti-piece:nth-child(2){left:25%;background:#ec4899;animation-delay:.1s;width:12px;height:6px}
+.confetti-piece:nth-child(3){left:40%;background:#f59e0b;animation-delay:.2s;width:10px;height:10px}
+.confetti-piece:nth-child(4){left:55%;background:#10b981;animation-delay:.3s;width:6px;height:12px}
+.confetti-piece:nth-child(5){left:70%;background:#3b82f6;animation-delay:.15s;width:9px;height:9px}
+.confetti-piece:nth-child(6){left:85%;background:#8b5cf6;animation-delay:.25s;width:11px;height:7px}
+.confetti-piece:nth-child(7){left:15%;background:#ec4899;animation-delay:.35s;width:7px;height:11px}
+.confetti-piece:nth-child(8){left:50%;background:#f59e0b;animation-delay:.05s;width:10px;height:10px}
+.confetti-piece:nth-child(9){left:75%;background:#10b981;animation-delay:.4s;width:13px;height:8px}
+.confetti-piece:nth-child(10){left:90%;background:#3b82f6;animation-delay:.2s;width:8px;height:13px}
+.confetti-piece:nth-child(11){left:33%;background:#8b5cf6;animation-delay:.5s;width:10px;height:6px}
+.confetti-piece:nth-child(12){left:60%;background:#ec4899;animation-delay:.45s;width:6px;height:10px}
+.confetti-piece:nth-child(13){left:5%;background:#f59e0b;animation-delay:.55s;width:12px;height:12px}
+.confetti-piece:nth-child(14){left:80%;background:#10b981;animation-delay:.3s;width:8px;height:8px}
+.confetti-piece:nth-child(15){left:45%;background:#3b82f6;animation-delay:.1s;width:7px;height:7px}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+/* Error */
+.error-msg{color:#ef4444;font-size:.85rem;margin-bottom:10px;display:none}
+</style>
+</head>
+<body>
+
+<div class="progress-container">
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-steps">
+    <span id="ps1" class="active">👤 Profil</span>
+    <span id="ps2">📚 Thema</span>
+    <span id="ps3">🤝 Community</span>
+  </div>
+</div>
+
+<div class="onboarding-card">
+  <!-- Step 1: Profil erstellen -->
+  <div class="step active" id="step1">
+    <h2>👤 Profil erstellen</h2>
+    <p class="desc">Erstelle dein kostenloses IKUNE-Konto</p>
+    <label>Dein Name</label>
+    <input type="text" id="nameInput" placeholder="z.B. Max Mustermann" required>
+    <label>E-Mail-Adresse</label>
+    <input type="email" id="emailInput" placeholder="max@example.com" required>
+    <label>Passwort</label>
+    <input type="password" id="passInput" placeholder="Mindestens 6 Zeichen" minlength="6" required>
+    <label>Wähle deinen Avatar</label>
+    <div class="avatar-grid" id="avatarGrid">
+      <div class="avatar-opt" data-emoji="🧑‍🚀">🧑‍🚀</div>
+      <div class="avatar-opt" data-emoji="👩‍💻">👩‍💻</div>
+      <div class="avatar-opt" data-emoji="🧙‍♂️">🧙‍♂️</div>
+      <div class="avatar-opt" data-emoji="🦊">🦊</div>
+      <div class="avatar-opt" data-emoji="🐱">🐱</div>
+      <div class="avatar-opt selected" data-emoji="🤖">🤖</div>
+      <div class="avatar-opt" data-emoji="👾">👾</div>
+      <div class="avatar-opt" data-emoji="🎮">🎮</div>
+    </div>
+    <div class="error-msg" id="error1">Bitte fülle alle Felder aus.</div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="nextStep(1)">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Thema wählen -->
+  <div class="step" id="step2">
+    <h2>📚 Welches Thema interessiert dich?</h2>
+    <p class="desc">Wähle mindestens ein Thema – du kannst später immer wechseln</p>
+    <div class="category-grid">
+      <div class="category-card" data-category="KI lernen" onclick="toggleCategory(this)">
+        <div class="emoji">🤖</div>
+        <div class="name">KI lernen</div>
+        <div class="count">12 Kurse</div>
+      </div>
+      <div class="category-card" data-category="Geld verdienen" onclick="toggleCategory(this)">
+        <div class="emoji">💰</div>
+        <div class="name">Geld verdienen</div>
+        <div class="count">8 Kurse</div>
+      </div>
+      <div class="category-card" data-category="Game Dev" onclick="toggleCategory(this)">
+        <div class="emoji">🎮</div>
+        <div class="name">Game Dev</div>
+        <div class="count">6 Kurse</div>
+      </div>
+      <div class="category-card" data-category="Coaching" onclick="toggleCategory(this)">
+        <div class="emoji">🧠</div>
+        <div class="name">Coaching</div>
+        <div class="count">5 Kurse</div>
+      </div>
+      <div class="category-card" data-category="Content Creation" onclick="toggleCategory(this)">
+        <div class="emoji">🎬</div>
+        <div class="name">Content Creation</div>
+        <div class="count">9 Kurse</div>
+      </div>
+      <div class="category-card" data-category="Sprachen" onclick="toggleCategory(this)">
+        <div class="emoji">🌍</div>
+        <div class="name">Sprachen</div>
+        <div class="count">4 Kurse</div>
+      </div>
+    </div>
+    <div class="error-msg" id="error2">Bitte wähle mindestens ein Thema.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(2)">← Zurück</button>
+      <button class="btn btn-primary" onclick="nextStep(2)">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Community beitreten -->
+  <div class="step" id="step3">
+    <div class="success-icon">
+      <div class="big">🎉</div>
+      <h3>Du bist bereit!</h3>
+      <p>Dein Konto wurde erfolgreich erstellt.</p>
+    </div>
+    <label style="margin-top:16px">Tritt jetzt der Community bei:</label>
+    <a class="telegram-link" href="https://t.me/ikune_community" target="_blank">
+      <span class="tg-icon">✈️</span>
+      <div class="tg-text">
+        <h4>IKUNE Community auf Telegram</h4>
+        <p>500+ Mitglieder • Tägliche Challenges • Live-Events</p>
+      </div>
+      <span class="tg-arrow">→</span>
+    </a>
+    <p style="color:#888;font-size:.85rem;margin-bottom:16px;text-align:center">
+      💡 Tipp: Klicke auf den Link, um der Gruppe beizutreten.
+    </p>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(3)">← Zurück</button>
+      <button class="btn btn-primary" onclick="completeOnboarding()">Zum Dashboard 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confetti container (hidden by default) -->
+<div class="confetti-container" id="confettiContainer"></div>
+
+<script>
+let currentStep = 1;
+let selectedAvatar = '🤖';
+let selectedCategories = [];
+
+// Load saved state
+document.addEventListener('DOMContentLoaded', function(){
+  const saved = localStorage.getItem('ikune_onboarding');
+  if(saved){
+    const data = JSON.parse(saved);
+    if(data.completed){
+      // If already completed, redirect
+      window.location.href = '/plattform/dashboard.html';
+      return;
+    }
+  }
+  // Load avatar selection
+  document.querySelectorAll('.avatar-opt').forEach(el => {
+    if(el.classList.contains('selected')) selectedAvatar = el.dataset.emoji;
+    el.addEventListener('click', function(){
+      document.querySelectorAll('.avatar-opt').forEach(a => a.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedAvatar = this.dataset.emoji;
+    });
+  });
+});
+
+function toggleCategory(el){
+  el.classList.toggle('selected');
+  const cat = el.dataset.category;
+  if(selectedCategories.includes(cat)){
+    selectedCategories = selectedCategories.filter(c => c !== cat);
+  } else {
+    selectedCategories.push(cat);
+  }
+}
+
+function updateProgress(){
+  const fill = document.getElementById('progressFill');
+  const pct = Math.round((currentStep / 3) * 100);
+  fill.style.width = pct + '%';
+  for(let i=1;i<=3;i++){
+    const el = document.getElementById('ps'+i);
+    el.classList.toggle('active', i <= currentStep);
+  }
+}
+
+function showStep(n){
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  // Scroll to top of card
+  document.querySelector('.onboarding-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function nextStep(n){
+  if(n === 1){
+    const name = document.getElementById('nameInput').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    const pass = document.getElementById('passInput').value;
+    if(!name || !email || pass.length < 6){
+      document.getElementById('error1').style.display='block';
+      return;
+    }
+    document.getElementById('error1').style.display='none';
+    // Save to localStorage
+    localStorage.setItem('ikune_user', JSON.stringify({
+      name, email, avatar: selectedAvatar
+    }));
+  }
+  if(n === 2){
+    if(selectedCategories.length === 0){
+      document.getElementById('error2').style.display='block';
+      return;
+    }
+    document.getElementById('error2').style.display='none';
+    localStorage.setItem('ikune_topics', JSON.stringify(selectedCategories));
+  }
+  showStep(n + 1);
+}
+
+function prevStep(n){
+  showStep(n - 1);
+}
+
+function completeOnboarding(){
+  // Save completed flag
+  const data = {
+    completed: true,
+    completedAt: new Date().toISOString(),
+    userName: JSON.parse(localStorage.getItem('ikune_user') || '{}').name
+  };
+  localStorage.setItem('ikune_onboarding', JSON.stringify(data));
+  // Trigger confetti
+  const container = document.getElementById('confettiContainer');
+  container.innerHTML = '<div class="confetti-piece"></div>'.repeat(15);
+  // Redirect after animation
+  setTimeout(() => {
+    window.location.href = '/plattform/dashboard.html';
+  }, 3000);
+}
+</script>
+
+</body>
+</html>

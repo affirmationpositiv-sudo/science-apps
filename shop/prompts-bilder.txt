@@ -1,0 +1,423 @@
+=== IKUNE Prompt Pack: KI-Bilder & Design ===
+200 Premium Prompts für die Erstellung von KI-Bildern, Designs und Grafiken
+
+=== KATEGORIE 1: MIDJOURNEY STYLES (40 Prompts) ===
+
+1. Ein [PRODUKT] in einem surrealistischen Traumlandschaft-Stil, pastellfarben, weiche Übergänge, ätherisch – Midjourney V6 Stil: surreal, pastellfarben, cineastisch, 8k.
+
+2. Ein [THEMA] im Ölgemälde-Stil der Renaissance, dramatische Beleuchtung, realistische Texturen, goldener Rahmen.
+
+3. Ein [OBJEKT] als 3D-Render im Pixar-Animation-Stil, Hochglanz, weiche Schatten, niedliche Proportionen.
+
+4. Eine [SZENE] im Cyberpunk-Stil, Neonlichter, Regen auf der Straße, dystopische Atmosphäre, hoher Kontrast.
+
+5. Ein Porträt eines [CHARAKTER] im Stil der viktorianischen Porträtmalerei, altmodisch, Öl auf Leinwand.
+
+6. Eine [LANDSCHAFT] im Stil von Studio Ghibli, üppig grün, verspielt, magische Atmosphäre, warme Farben.
+
+7. Ein [PRODUKT] fotografiert im minimalistischen Produktstudio-Stil, weißer Hintergrund, weiches Tageslicht.
+
+8. Eine [SZENE] im Stil von Film Noir, schwarz-weiß, harte Schatten, dramatisch, rauchig.
+
+9. Ein [CHARAKTER] im Stil einer japanischen Holzschnitt-Ukiyo-e-Druckgrafik, traditionell, fließende Linien.
+
+10. Eine [LANDSCHAFT] im Stil von Caspar David Friedrichs Romantik, dramatischer Himmel, einsame Figur.
+
+11. Ein [OBJEKT] fotorealistisch mit Makro-Aufnahme-Stil, extreme Details, Bokeh-Hintergrund.
+
+12. Eine [SZENE] im Stil einer Fantasy-Illustration von Magic: The Gathering, episch, detailliert, magisch.
+
+13. Ein [CHARAKTER] als 3D-Charaktermodell im Stil eines Videospiels, hochauflösend, PBR-Texturen.
+
+14. Eine [LANDSCHAFT] im Stil eines Aquarellgemäldes, fließende Farben, weiche Konturen, künstlerisch.
+
+15. Ein [PRODUKT] im Glamour-Stil einer Luxus-Werbung, goldenes Licht, elegante Komposition.
+
+16. Eine [SZENE] im Stil einer Bleistiftskizze, handgezeichnete Textur, schwarzer Strich, detaillierte Schraffur.
+
+17. Ein [CHARAKTER] im Pop-Art-Stil von Andy Warhol, kräftige Farben, halbton-Punkte, Siebdruck-Look.
+
+18. Eine [LANDSCHAFT] als isometrische Vektor-Illustration, flache Farben, Winkel von oben.
+
+19. Ein [OBJEKT] im Stil einer wissenschaftlichen Illustration, präzise Linien, beschriftet, Lehrbuch-Ästhetik.
+
+20. Eine [SZENE] im Stil des Impressionismus, lockere Pinselstriche, Spiel mit Licht und Farben.
+
+21. Ein [CHARAKTER] im Manga/Anime-Stil, große Augen, dynamische Pose, bunte Haare, Zellschattierung.
+
+22. Eine [LANDSCHAFT] als Vaporwave-Artwork, neonviolett und cyan, Retro-8-Bit-Elemente, nostalgisch.
+
+23. Ein [PRODUKT] fotografiert im Lebensstil-Stil, natürliche Umgebung, authentisch, warme Stimmung.
+
+24. Eine [SZENE] im Stil einer antiken griechischen Vasenmalerei, rot-schwarz, mythologische Motive.
+
+25. Ein [CHARAKTER] als actionfigur-ähnliches 3D-Modell, hochglänzend, in einer Blisterverpackung.
+
+26. Eine [LANDSCHAFT] als Steampunk-Welt, Zahnräder, Bronze, Dampf, viktorianisch-mechanisch.
+
+27. Ein [OBJEKT] im Stil einer technischen Blaupause, blau-weiß, präzise Linien, Maßbeschriftungen.
+
+28. Eine [SZENE] im Stil eines Barockgemäldes, opulent, dramatisch, chiaroscuro, reich verziert.
+
+29. Ein [CHARAKTER] im Stil eines 8-Bit-Videospiel-Porträts, pixelig, Retro, limitierte Farbpalette.
+
+30. Eine [LANDSCHAFT] als Post-Impressionismus im Stil von Van Gogh, dicke Pinselstriche, leuchtend.
+
+31. Ein [PRODUKT] im Stil eines Schwarz-Weiß-Fotogramms, geometrisch, abstrakt, analog.
+
+32. Eine [SZENE] im Stil von Hieronymus Bosch' Fantasiewelten, skurril, detailliert, allegorisch.
+
+33. Ein [CHARAKTER] im Stil einer Art-Déco-Illustration, geometrisch, luxuriös, goldene Akzente.
+
+34. Eine [LANDSCHAFT] als minimalistische Linienkunst, wenige Striche, viel Negativraum, elegant.
+
+35. Ein [OBJEKT] im Stil einer Hochglanz-Magazinanzeige, poliert, gestellt, perfekte Beleuchtung.
+
+36. Eine [SZENE] im Stil von Edward Hoppers Gemälden, einsam, amerikanisch, nostalgisch.
+
+37. Ein [CHARAKTER] im Stil eines Scherenschnitt-Porträts, schwarze Silhouette, feine Details.
+
+38. Eine [LANDSCHAFT] im Stil einer mittelalterlichen Buchmalerei, goldene Blätter, leuchtende Farben.
+
+39. Ein [PRODUKT] im Stil einer chinesischen Tuschmalerei, schwarze Tinte, Bambuspinsel, fließend.
+
+40. Eine [SZENE] als Collage aus verschiedenen Materialien, Papier, Stoff, gemischt, surreal.
+
+=== KATEGORIE 2: DALL-E PROMPTS (30 Prompts) ===
+
+41. Erstelle ein fotorealistisches Bild von [PRODUKT] in einer Alltagssituation mit natürlichem Licht.
+
+42. Generiere eine Illustration von [THEMA] im Cartoon-Stil, bunt, kinderfreundlich, fröhlich.
+
+43. Erstelle ein Bild von [PERSON] in [BERUF/ROLLE], stilvoll, professionell, mit [ATTRIBUT].
+
+44. Generiere eine detaillierte Szene von [ORT] mit vielen interagierenden Elementen.
+
+45. Erstelle ein Bild im Stil eines Kinderbuchs, niedliche Charaktere, warme Pastellfarben.
+
+46. Generiere ein digitales Kunstwerk von [THEMA] im Stil einer Albumcover-Gestaltung.
+
+47. Erstelle eine Textur oder ein Muster basierend auf [THEMA] für einen Stoff oder Tapete.
+
+48. Generiere ein Bild mit transparentem Hintergrund eines [OBJEKT] für Design-Zwecke.
+
+49. Erstelle ein Postkarten-Design für [ORT/THEMA] mit Schriftzug und dekorativen Elementen.
+
+50. Generiere eine Werbeanzeigen-Grafik für [PRODUKT] mit Platz für Text links/rechts.
+
+51. Erstelle ein Social-Media-Post-Bild für [THEMA] im quadratischen Format.
+
+52. Generiere ein Bild von [MAHLZEIT] mit ansprechender Food-Fotografie, appetitlich, stilvoll.
+
+53. Erstelle ein Bild von [ZUKUNFTSSZENARIO] im retro-futuristischen Stil.
+
+54. Generiere eine abstrakte Darstellung von [KONZEPT] als farbenfrohes Kunstwerk.
+
+55. Erstelle ein Bild einer [JAHRESZEIT]-Szene in [ORT] mit stimmungsvoller Atmosphäre.
+
+56. Generiere ein Bild von [ARCHITEKTUR] in einem [STIL] mit beeindruckender Perspektive.
+
+57. Erstelle eine Charakter-Kreation: [CHARAKTER], vollständig beschrieben, inkl. Kleidung und Umgebung.
+
+58. Generiere ein Bild von einem [TIER] in einer unerwarteten [SITUATION/UMGEBUNG].
+
+59. Erstelle ein Bild im Stil eines Storyboard-Frames für [FILMSZENE].
+
+60. Generiere ein digitales Porträt von [PERSON] im Stil eines Gemäldes.
+
+61. Erstelle ein Bild von [PRODUKT] mit Benutzerinteraktion, die den Nutzen zeigt.
+
+62. Generiere ein Bild mit einem Wort oder Schriftzug aus natürlichen Materialien wie Blumen.
+
+63. Erstelle ein Bild im Stil einer Vintage-Werbung aus den [JAHR]ern für [PRODUKT].
+
+64. Generiere ein Bild von [AKTIVITÄT] aus der Vogelperspektive, abstrakt und farbenfroh.
+
+65. Erstelle ein Bild, das [KONZEPT] als metaphorische Szene darstellt.
+
+66. Generiere ein Bild einer [LANDSCHAFT] mit unrealistischen Farben, traumartig, psychodelisch.
+
+67. Erstelle ein Bild von [CHARAKTER] in einer [HISTORISCHEN EPOCHE] mit authentischen Details.
+
+68. Generiere ein Bild eines [MUSTER], das sich nahtlos wiederholt (nahtloses Muster).
+
+69. Erstelle ein Bild im Stil eines Reisetagebuchs mit Skizzen und Notizen zu [THEMA].
+
+70. Generiere ein Bild eines 3D-gerenderten [OBJEKT] in einer Umgebungsbeleuchtung.
+
+=== KATEGORIE 3: STABLE DIFFUSION (30 Prompts) ===
+
+71. Generiere ein hochdetailliertes Fantasy-Bild von [THEMA] mit Stable Diffusion, negative prompts: Text, Wasserzeichen.
+
+72. Erstelle ein Bild von [CHARAKTER] mit spezifischem [HAARFARBE]-Haar, [AUGENFARBE]-Augen, [KLEIDUNG].
+
+73. Generiere ein Bild im Anime-Stil mit hohem Detailgrad für [CHARAKTER] in [SZENE].
+
+74. Erstelle ein Bild von [LANDSCHAFT] mit dynamischer Beleuchtung und volumetrischem Nebel.
+
+75. Generiere ein Porträt von [PERSON] mit Tiefenschärfe und Bokeh-Hintergrund.
+
+76. Erstelle ein Bild von [PRODUKT] mit makroskopischer Detailaufnahme und komplexen Texturen.
+
+77. Generiere ein Bild von [ARCHITEKTUR] mit Gothic-Stil-Elementen und düsterer Atmosphäre.
+
+78. Erstelle ein Bild im Ölgemälde-Stil mit pastosen Pinselstrichen für [THEMA].
+
+79. Generiere ein Bild mit Octane-Render-Stil, hochglänzend, photorealistisch, für [OBJEKT].
+
+80. Erstelle ein Bild von [CHARAKTER] im Steampunk-Stil mit mechanischen Prothesen und Zahnrädern.
+
+81. Generiere ein Bild einer [SZENE] mit dynamischer Action und Bewegungsunschärfe.
+
+82. Erstelle ein Bild im Cinematic-Stil, Seitenverhältnis 16:9, Filmkörnung, für [THEMA].
+
+83. Generiere ein Bild von [ORT] mit Magie-Lichteffekten und schwebenden Partikeln.
+
+84. Erstelle ein Bild von [CHARAKTER] als Linolschnitt-Druckgrafiken, kräftige schwarze Linien.
+
+85. Generiere ein Bild einer [SZENE] mit extremer Tiefe und detailliertem Vorder-/Hintergrund.
+
+86. Erstelle ein Bild von [PRODUKT] im Isometrischen-Design-Stil für Infografiken.
+
+87. Generiere ein Bild von [THEMA] als Farbfeld-Malerei mit abstrakter Komposition.
+
+88. Erstelle ein Bild im Stil von Rangefinder-Fotografie für [PORTRAIT/SZENE].
+
+89. Generiere ein Bild von [CHARAKTER] als ägyptische Gottheit mit Anubis-/Horus-Elementen.
+
+90. Erstelle ein Bild von [LANDSCHAFT] im Polaroid-Foto-Stil mit weißem Rand und Filmtönung.
+
+91. Generiere ein Bild von [PRODUKT] als Explosionszeichnung mit technischen Details.
+
+92. Erstelle ein Bild von [SZENE] mit Regenbogen-Beleuchtung und prismatischen Effekten.
+
+93. Generiere ein Bild im Stil von Astrofotografie: [HIMMELSKÖRPER/LANDSCHAFT].
+
+94. Erstelle ein Bild von [CHARAKTER] im Art-Nouveau-Stil mit floralen Verzierungen.
+
+95. Generiere ein Bild von [SZENE] im Schwarz-Weiß-Stil mit hohem Kontrast und Struktur.
+
+96. Erstelle ein Bild von [THEMA] im Stil einer Wachssiegel-Illustration, mittelalterlich.
+
+97. Generiere ein Bild von [SZENE] als Nahtloses 360-Grad-Panorama.
+
+98. Erstelle ein Bild von [CHARAKTER] mit Glitch-Art-Effekten, digital verfremdet.
+
+99. Generiere ein Bild von [PRODUKT] als Origami-Papierfaltung, kreativ, handwerklich.
+
+100. Erstelle ein Bild von [THEMA] im Stil einer Social-Media-Infografik mit Icons.
+
+=== KATEGORIE 4: CHARACTER DESIGN (20 Prompts) ===
+
+101. Entwerfe einen Heldencharakter für ein Fantasy-RPG: [NAME], [KLASSE], [HINTERGRUND], inkl. Rüstung.
+
+102. Erstelle einen Bösewicht-Charakter: [NAME], motiviert durch [MOTIVATION], mit markanter Narbe.
+
+103. Generiere einen Sidekick-Charakter: klein, wendig, humorvoll, treu zu [PROTAGONIST].
+
+104. Entwickle einen NPC-Händler in einer Fantasy-Welt: exzentrisch, viele Taschen, geheimnisvoll.
+
+105. Erstelle einen Sci-Fi-Charakter: Cyborg mit sichtbaren [TECHNOLOGIE]-Implantaten.
+
+106. Generiere einen Superhelden-Charakter: Kraft [SUPERKRAFT], Kostüm in [FARBEN], Symbol auf Brust.
+
+107. Entwickle einen historischen Charakter aus [EPOCHE] mit authentischer Kleidung und Accessoires.
+
+108. Erstelle einen Tier-Charakter (anthropomorph): [TIERART] mit [BERUF]-Kleidung, sprechende Augen.
+
+109. Generiere einen mysteriösen Magier: langer Umhang, leuchtende Augen, umgeben von [MAGIE-EFFEKT].
+
+110. Entwickle einen modernen Alltagscharakter: [BERUF] in [STADT], mit charakteristischem Accessoire.
+
+111. Erstelle einen Zombie-/Untoten-Charakter mit verfallener Kleidung und [EPOCHE]-Hintergrund.
+
+112. Generiere einen Elfen-Charakter aus einem [WALD]-Reich mit langen Ohren und natürlichen Farben.
+
+113. Entwickle einen Roboter-Charakter: [MODELL], rostig/schlank, mit leuchtenden [FARBE]-Augen.
+
+114. Erstelle einen Piratenkapitän: [NAME], Holzbein/Augenklappe, Papagei auf Schulter.
+
+115. Generiere einen Geist- oder Schatten-Charakter: durchsichtig, schwebend, traurig oder bedrohlich.
+
+116. Entwickle einen Zwergen-Schmied: muskulös, großer Bart, Schmiedehammer, rußverschmiert.
+
+117. Erstelle einen Engel-oder-Dämon-Charakter: Flügel in [FARBE], Heiligenschein/Hörner, fließende Roben.
+
+118. Generiere einen Ninja-oder-Samurai-Charakter: maskiert, Waffe [WAFFE], dynamische Kampfpose.
+
+119. Entwickle einen Feen-Charakter: winzig, durchsichtige Flügel, leuchtet in [FARBE], schelmisch.
+
+120. Erstelle einen Wikinger-Krieger: Helm mit Hörnern, Schild mit [SYMBOL], Fellumhang, Kampfnarbe.
+
+=== KATEGORIE 5: PRODUCT PHOTOGRAPHY (20 Prompts) ===
+
+121. Fotografiere [PRODUKT] auf einem Marmorsockel mit sanftem Seitenlicht und Schatten.
+
+122. Erstelle ein Lifestyle-Foto von [PRODUKT] in einer [RAUM]-Umgebung mit Tageslicht.
+
+123. Generiere ein Makro-Foto von [PRODUKT] mit Tropfen oder Wasserperlen für Textur.
+
+124. Entwickle ein Foto von [PRODUKT] mit Weitwinkel-Perspektive im [STIL]-Ambiente.
+
+125. Erstelle ein flaches Lay-Foto von [PRODUKT] mit [ZUBEHÖR]-Arrangement von oben.
+
+126. Generiere ein Foto von [PRODUKT] vor einem farbigen Hintergrund mit Farbverlaufseffekt.
+
+127. Entwickle ein Foto von [PRODUKT] mit goldenem Stunde-Licht, warm, einladend, natürlich.
+
+128. Erstelle ein Group-Shot-Foto mehrerer [PRODUKT]-Varianten in einer Reihe angeordnet.
+
+129. Generiere ein Foto von [PRODUKT] in Aktion/Verwendung durch eine [PERSON].
+
+130. Entwickle ein High-Key-Foto von [PRODUKT] mit überbelichtetem weißen Hintergrund.
+
+131. Erstelle ein Low-Key-Foto von [PRODUKT] mit dramatischem Spotlicht und tiefen Schatten.
+
+132. Generiere ein Foto von [PRODUKT] als Teil einer Stillleben-Komposition mit [OBJEKTEN].
+
+133. Entwickle ein Glamour-Shot-Foto von [PRODUKT] mit Gold-Reflektoren und Funkeln.
+
+134. Erstelle ein Foto von [PRODUKT] mit negativem Raum für Werbetext-Platzierung.
+
+135. Generiere ein Foto von [PRODUKT] auf Holz-/Stein-/Stofftextur für rustikalen Look.
+
+136. Entwickle ein Foto von [PRODUKT] im Splash-Art-Stil mit bewegten Wassertropfen.
+
+137. Erstelle ein Foto von [PRODUKT] mit eingeschaltetem Display/Licht zur Hervorhebung.
+
+138. Generiere ein Foto von [PRODUKT] mit saisonalen Dekorationen für [FEIERTAG/JAHRESZEIT].
+
+139. Entwickle ein Foto von [PRODUKT] aus der Froschperspektive für eindrucksvolle Wirkung.
+
+140. Erstelle ein Foto von [PRODUKT] in einer [WETTER]-Szene für Stimmungsbild (Regen/Schnee/Sonne).
+
+=== KATEGORIE 6: LOGO & BRANDING (20 Prompts) ===
+
+141. Entwerfe ein minimalistisches Logo für [MARKE] mit einem [SYMBOL] assoziiert.
+
+142. Erstelle ein Wordmark-Logo für [MARKE] mit einer eleganten Serifenschrift.
+
+143. Generiere ein Maskottchen-Logo für [MARKE] im [STIL]-Stil mit [TIER].
+
+144. Entwickle ein abstraktes geometrisches Logo für [MARKE] in [FARBEN].
+
+145. Erstelle ein Monogramm-Logo aus den Initialen [BUCHSTABEN] für [MARKE].
+
+146. Generiere ein Emblem-Logo (kreisförmig) für [MARKE] mit [SYMBOL] und Schriftzug.
+
+147. Entwickle ein Vintage-Logo für [MARKE] im [DEKADE]-Stil mit retro Elementen.
+
+148. Erstelle ein Tech/Startup-Logo für [MARKE] mit futuristischen Linien und [FARBE]-Akzent.
+
+149. Generiere ein Luxus-Logo für [MARKE] mit goldenen Elementen und edler Schrift.
+
+150. Entwickle ein handgezeichnetes Logo für [MARKE] im Skizzen-Stil, persönlich und natürlich.
+
+151. Erstelle ein Logo für eine [BRANCHE]-Firma mit [INDUSTRIE]-Symbol.
+
+152. Generiere ein Farbpaletten-Set für [MARKE] mit 5 Farben und deren HEX-Codes.
+
+153. Entwickle ein Brand-Board für [MARKE] inkl. Logo, Farbpalette, Typografie, Muster.
+
+154. Erstelle ein Icon-Set für [MARKE] mit 5 verschiedenen Icons im Linienstil.
+
+155. Generiere ein Muster/Pattern für die Marke [MARKE] als nahtloses Hintergrunddesign.
+
+156. Entwickle ein Typografie-Konzept für [MARKE] mit 3 Schriftarten (Headline, Body, Akzent).
+
+157. Erstelle ein Social-Media-Profilbild für [MARKE] im [STIL]-Stil.
+
+158. Generiere eine Visitenkarten-Vorderseite für [MARKE] mit Logo und [FARBEN].
+
+159. Entwickle ein Briefpapier-Design für [MARKE] inkl. Briefkopf und Umschlag.
+
+160. Erstelle ein Signatur-Logo für [MARKE] als persönliche Handschrift gestaltet.
+
+=== KATEGORIE 7: FANTASY & SCI-FI (20 Prompts) ===
+
+161. Erstelle eine Fantasy-Stadt auf einer schwebenden Insel mit Wasserfällen, die ins Leere fallen.
+
+162. Generiere eine Sci-Fi-Megastadt mit fliegenden Fahrzeugen zwischen riesigen Türmen.
+
+163. Entwickle eine Kreatur: Mischung aus [TIER A] und [TIER B] mit leuchtenden [KÖRPER]-Teilen.
+
+164. Erstelle einen magischen Wald mit gigantischen leuchtenden Pilzen und schwebenden Lichtern.
+
+165. Generiere ein Raumschiff-Interieur mit Hologrammen und Alien-Technologie.
+
+166. Entwickle eine Unterwasserwelt mit Kristallpalästen und leuchtenden Meerestieren.
+
+167. Erstelle einen Drachen in [UMGEBUNG], detaillierte Schuppen, Feuer im Hintergrund.
+
+168. Generiere eine verlassene Alien-Ruine mit unbekannten Symbolen und geheimnisvollem Licht.
+
+169. Entwickle eine Magie-Schule auf einem Berggipfel, umgeben von schwebenden Inseln.
+
+170. Erstelle einen interdimensionale Portal-Effekt mit wirbelnden Farben und Licht.
+
+171. Generiere eine Steampunk-Maschine aus Zahnrädern, Dampf und Kupferrohren.
+
+172. Entwickle eine Schlacht zwischen [FANTASY-RASSE A] und [FANTASY-RASSE B] auf einer Brücke.
+
+173. Erstelle einen Zaubertrank in einer Phiole mit leuchtender Flüssigkeit und magischen Effekten.
+
+174. Generiere einen außerirdischen Planeten mit zwei Sonnen und seltsamer Vegetation.
+
+175. Entwickle eine verzauberte Rüstung eines gefallenen Ritters in einem dunklen Wald.
+
+176. Erstelle eine Zeitmaschine im Stil von [EPOCHE]/Sci-Fi, mit Zifferblättern und Lichtern.
+
+177. Generiere eine fliegende Insel mit einem Baum des Lebens in der Mitte.
+
+178. Entwickle einen Cyberpunk-Charakter mit Neon-Tattoos und holografischem Display.
+
+179. Erstelle einen magischen Kristall, der in [FARBEN] leuchtet, von Ranken umgeben.
+
+180. Generiere eine Drachenhöhle mit Schätzen, Knochen und glühender Lava.
+
+=== KATEGORIE 8: UI/UX MOCKUPS (10 Prompts) ===
+
+181. Erstelle ein Mobile-App-Mockup für eine [APP-TYP]-App mit modernem UI-Design.
+
+182. Generiere ein Dashboard-Mockup für [SAAS-TOOL] mit Charts, KPI-Karten und Sidebar.
+
+183. Entwickle ein Landing-Page-Mockup für [PRODUKT] mit Hero, Feature-Bereich und Footer.
+
+184. Erstelle ein E-Commerce-Produktseiten-Mockup für [PRODUKT] mit Galerie und Kauf-Button.
+
+185. Generiere ein Tablet-Interface für eine [PRODUKT]-App im Querformat.
+
+186. Entwickle ein Dark-Mode-UI für [APP] mit [FARBE]-Akzenten und modernen Karten.
+
+187. Erstelle ein Checkout-Flow-Mockup mit 3 Schritten für [ONLINE-SHOP].
+
+188. Generiere ein Settings/Profile-Page-Mockup für [APP] mit Toggle-Switchen.
+
+189. Entwickle ein Login-/Signup-Screen-Mockup für [APP] mit Social-Login-Optionen.
+
+190. Erstelle ein Notifications-Center-Mockup für [APP] mit verschiedenen Benachrichtigungstypen.
+
+=== KATEGORIE 9: SOCIAL MEDIA GRAPHICS (10 Prompts) ===
+
+191. Erstelle ein Instagram-Post-Design für [THEMA] im quadratischen Format (1080x1080px).
+
+192. Generiere ein Instagram-Story-Design für [THEMA] im Hochformat (1080x1920px).
+
+193. Entwickle ein LinkedIn-Banner-Design für [UNTERNEHMEN] mit Markenfarben und Logo.
+
+194. Erstelle ein YouTube-Thumbnail für [VIDEO-TITEL] mit rotem Kreis und Pfeil.
+
+195. Generiere ein Facebook-Cover-Photo für [SEITE] mit [THEMA]-Motiv und Schriftzug.
+
+196. Entwickle ein Twitter/X-Banner für [PROFIL] mit minimalistischer Ästhetik.
+
+197. Erstelle eine Pinterest-Pin-Grafik für [THEMA] mit vertikalem Layout und Text-Overlay.
+
+198. Generiere ein TikTok-Video-Cover für [THEMA] mit auffälliger Typografie.
+
+199. Entwickle ein Social-Media-Kit für [MARKE] mit einheitlichen Vorlagen für 4 Plattformen.
+
+200. Erstelle einen Satz von 5 verschiedenen Werbe-Banner-Größen für [PRODUKT].
+
+=== ENDE DES PROMPT-PACKS ===
+www.ikune.de – IKUNE Coach. Dein Code. Dein Erfolg.
