@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#0a0a1a">
+<title>Spieleportal – Kostenlose Browser-Spiele | Licht und Schatten</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:24px}
+.container{max-width:1100px;margin:0 auto}
+h1{font-size:clamp(28px,5vw,44px);margin-bottom:6px;background:linear-gradient(135deg,#ff6b6b,#ffd93d,#6bcb77);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+h1 .icon{display:block;font-size:clamp(40px,8vw,64px);-webkit-text-fill-color:initial;margin-bottom:4px}
+.sub{color:#8892b0;text-align:center;margin-bottom:10px;font-size:14px;max-width:650px;margin-left:auto;margin-right:auto}
+.stats{display:flex;justify-content:center;gap:32px;margin:20px 0;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:26px;font-weight:700;color:#ffd93d}
+.stat-label{color:#495670;font-size:11px}
+.section-title{font-size:20px;color:#ffd93d;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2a2a3a;display:flex;align-items:center;gap:8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.card{background:#12122a;border:1px solid #2a2a3a;border-radius:14px;padding:24px 20px;text-align:center;transition:all .3s;text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center}
+.card:hover{border-color:#ffd93d;transform:translateY(-4px);box-shadow:0 8px 30px rgba(255,217,61,.08)}
+.card .emoji{font-size:48px;margin-bottom:10px}
+.card h2{color:#ffd93d;font-size:17px;margin-bottom:6px}
+.card p{color:#8892b0;font-size:13px;line-height:1.5;margin-bottom:10px}
+.card .tag{display:inline-block;background:rgba(255,217,61,.1);color:#ffd93d;border:1px solid rgba(255,217,61,.3);border-radius:20px;padding:3px 12px;font-size:10px;margin-top:4px}
+.affiliate-box{background:#1a1a2e;border:1px solid #2a2a40;border-radius:12px;padding:24px;margin:28px 0}
+.affiliate-box h3{color:#ff6b6b;font-size:16px;margin-bottom:14px;text-align:center}
+.affiliate-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.affiliate-item{background:#12122a;border:1px solid #2a2a3a;border-radius:10px;padding:16px;text-align:center;transition:all .3s}
+.affiliate-item:hover{border-color:#ff6b6b}
+.affiliate-item .product{font-size:13px;font-weight:600;color:#e0e0e0;margin-bottom:4px}
+.affiliate-item .desc{font-size:11px;color:#667;margin-bottom:8px}
+.affiliate-item a{display:inline-block;background:linear-gradient(135deg,#ff6b6b,#ff8e53);color:#fff;border-radius:8px;padding:6px 18px;font-size:11px;font-weight:600;text-decoration:none;transition:all .3s}
+.affiliate-item a:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(255,107,107,.3)}
+footer{margin-top:40px;color:#495670;font-size:11px;text-align:center;line-height:1.8}
+footer a{color:#ffd93d;text-decoration:none}
+@media(max-width:500px){.cards{grid-template-columns:1fr 1fr}.card{padding:18px 14px}.card .emoji{font-size:36px}.card h2{font-size:14px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1><span class="icon">🎮</span>Spieleportal</h1>
+<p class="sub">Kostenlose Browser-Spiele • Kein Download • Keine Anmeldung • Dark Theme • PWA-ready</p>
+
+<div class="stats">
+<div class="stat"><div class="stat-num">7</div><div class="stat-label">Spiele</div></div>
+<div class="stat"><div class="stat-num">0€</div><div class="stat-label">Kostenlos</div></div>
+<div class="stat"><div class="stat-num">🎯</div><div class="stat-label">Spaß garantiert</div></div>
+</div>
+
+<div class="section-title">⚔️ Action & Idle</div>
+<div class="cards">
+<a class="card" href="../weaponevo/">
+<div class="emoji">⚔️</div>
+<h2>Weapon Evolution</h2>
+<p>Idle Clicker: 12 Waffenstufen vom Stein bis zur Quantenwaffe. Upgrades, Prestige, Auto-Farming!</p>
+<div class="tag">🎮 IDLE</div>
+</a>
+<a class="card" href="../galaxyminer/">
+<div class="emoji">⛏️</div>
+<h2>Galaxy Miner</h2>
+<p>Mine in den Tiefen des Alls. Kaufe Planeten, stelle Automatisierung her, werde zum Milliardär!</p>
+<div class="tag">🚀 MINING</div>
+</a>
+</div>
+
+<div class="section-title">🧩 Rätsel & Denksport</div>
+<div class="cards">
+<a class="card" href="../sudoku/">
+<div class="emoji">🧩</div>
+<h2>Sudoku</h2>
+<p>Klassisches Sudoku mit 4 Schwierigkeitsstufen, Notizen, Hinweisen und Timer.</p>
+<div class="tag">🧮 LOGIK</div>
+</a>
+<a class="card" href="../crossword/">
+<div class="emoji">📝</div>
+<h2>Kreuzworträtsel</h2>
+<p>3 Rätsel zu KI, Technik & Allgemeinwissen – auf Deutsch als PWA.</p>
+<div class="tag">📖 WORTE</div>
+</a>
+<a class="card" href="../wordsearch/">
+<div class="emoji">🔍</div>
+<h2>Wortsuche</h2>
+<p>Finde versteckte Wörter im Raster. 3 Schwierigkeitsstufen, Wisch-Steuerung.</p>
+<div class="tag">🔎 FINDEN</div>
+</a>
+</div>
+
+<div class="section-title">🧠 Neue Spiele</div>
+<div class="cards">
+<a class="card" href="../memory/">
+<div class="emoji">🃏</div>
+<h2>Memory</h2>
+<p>Kartenspiel – Finde alle Paare. KI-Themen Icons in stilvollem Dark Design.</p>
+<div class="tag">🆕 NEU</div>
+</a>
+<a class="card" href="../tictactoe/">
+<div class="emoji">❌</div>
+<h2>TicTacToe</h2>
+<p>Gegen einen unschlagbaren KI-Gegner (Minimax-Algorithmus). 3×3 & 4×4 Modi!</p>
+<div class="tag">🆕 NEU</div>
+</a>
+</div>
+
+<div class="affiliate-box">
+<h3>🔥 Empfohlene Gaming-Hardware</h3>
+<div class="affiliate-items">
+<div class="affiliate-item">
+<div class="product">🖱️ Logitech G Pro X Superlight</div>
+<div class="desc">Professionelle Gaming-Maus, 63g, Hero-Sensor</div>
+<a href="https://www.amazon.de/dp/B07W5JKHZM?tag=ikune21-21" target="_blank" rel="nofollow">Bei Amazon ansehen</a>
+</div>
+<div class="affiliate-item">
+<div class="product">🎧 HyperX Cloud II</div>
+<div class="desc">7.1 Surround-Sound, komfortabel, langlebig</div>
+<a href="https://www.amazon.de/dp/B00SAYCXGC?tag=ikune21-21" target="_blank" rel="nofollow">Bei Amazon ansehen</a>
+</div>
+<div class="affiliate-item">
+<div class="product">⌨️ Razer Huntsman Mini</div>
+<div class="desc">60% mechanische Tastatur, optische Switches</div>
+<a href="https://www.amazon.de/dp/B0862ZWRPP?tag=ikune21-21" target="_blank" rel="nofollow">Bei Amazon ansehen</a>
+</div>
+<div class="affiliate-item">
+<div class="product">🖥️ MSI Optix G2412</div>
+<div class="desc">24" 144Hz IPS Gaming Monitor, 1ms</div>
+<a href="https://www.amazon.de/dp/B09R6GBXTY?tag=ikune21-21" target="_blank" rel="nofollow">Bei Amazon ansehen</a>
+</div>
+</div>
+<p style="color:#667;font-size:10px;text-align:center;margin-top:12px">* Amazon Affiliate-Links (ikune21-21) – Für dich entstehen keine Mehrkosten.</p>
+</div>
+
+<footer>
+<p>Alle Spiele sind kostenlos und laufen direkt im Browser • Erstellt von <strong>Licht und Schatten</strong> 🌘</p>
+<p><a href="../impressum/">Impressum</a> • <a href="../datenschutz/">Datenschutz</a> • <a href="../ScienceApps/">Zurück zur Übersicht</a></p>
+<p style="margin-top:6px">Amazon-Partner (ikune21-21) • Werbung durch Affiliate-Links</p>
+</footer>
+
+</div>
+</body>
+</html>

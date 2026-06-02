@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Memory – KI-Theme Kartenspiel | Licht und Schatten</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;justify-content:center;padding:16px}
+.container{max-width:600px;width:100%;text-align:center}
+h1{font-size:clamp(20px,5vw,32px);margin:16px 0 6px;background:linear-gradient(135deg,#64ffda,#42a5f5);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#667;font-size:12px;margin-bottom:14px}
+.stats{display:flex;justify-content:center;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+.stat{background:#12122a;border:1px solid #2a2a3a;border-radius:10px;padding:8px 16px;min-width:80px}
+.stat-label{color:#667;font-size:10px}
+.stat-value{color:#64ffda;font-size:18px;font-weight:700}
+.controls{display:flex;justify-content:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.controls select{background:#12122a;color:#e0e0e0;border:1px solid #2a2a3a;border-radius:8px;padding:8px 12px;font-size:13px;cursor:pointer}
+.controls button{background:linear-gradient(135deg,#64ffda,#42a5f5);color:#0a0a1a;border:none;border-radius:8px;padding:8px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .3s}
+.controls button:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(100,255,218,.3)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 auto;max-width:480px}
+.card{aspect-ratio:1;background:linear-gradient(145deg,#1a1a3e,#12122a);border:1px solid #2a2a5a;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:clamp(24px,5vw,36px);cursor:pointer;transition:all .4s;user-select:none;-webkit-tap-highlight-color:transparent;transform-style:preserve-3d;perspective:600px}
+.card.flipped{background:linear-gradient(145deg,#1a2a4a,#162040);border-color:#64ffda;transform:rotateY(180deg);box-shadow:0 4px 20px rgba(100,255,218,.15)}
+.card.matched{background:rgba(100,255,218,.1);border-color:#64ffda;cursor:default;opacity:.85;transform:rotateY(180deg) scale(.95);box-shadow:0 0 20px rgba(100,255,218,.2)}
+.card.matched .card-inner{animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.card-inner{transition:all .3s;pointer-events:none}
+.card:not(.flipped):not(.matched):hover{border-color:#42a5f5;transform:translateY(-2px)}
+.win-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,26,.92);z-index:100;flex-direction:column;align-items:center;justify-content:center}
+.win-overlay.show{display:flex}
+.win-overlay h2{font-size:clamp(28px,6vw,42px);background:linear-gradient(135deg,#ffd700,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.win-overlay p{color:#b0bec5;font-size:16px;margin-bottom:8px}
+.win-overlay .stats-line{color:#64ffda;font-size:14px;margin-bottom:20px}
+.win-overlay button{background:linear-gradient(135deg,#64ffda,#42a5f5);color:#0a0a1a;border:none;border-radius:12px;padding:12px 36px;font-size:16px;font-weight:700;cursor:pointer;transition:all .3s}
+.win-overlay button:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(100,255,218,.3)}
+footer{margin-top:24px;color:#495670;font-size:10px;text-align:center}
+footer a{color:#64ffda;text-decoration:none}
+@media(max-width:400px){.grid{gap:6px}.card{border-radius:8px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🃏 Memory</h1>
+<p class="sub">KI-Theme • Finde alle Paare • Dark Edition</p>
+
+<div class="stats">
+<div class="stat"><div class="stat-label">Züge</div><div class="stat-value" id="moves">0</div></div>
+<div class="stat"><div class="stat-label">Paare</div><div class="stat-value" id="pairs">0/8</div></div>
+<div class="stat"><div class="stat-label">Zeit</div><div class="stat-value" id="timer">0s</div></div>
+</div>
+
+<div class="controls">
+<select id="difficulty">
+<option value="easy">Einfach (4×4)</option>
+<option value="medium">Mittel (4×6)</option>
+<option value="hard">Schwer (6×6)</option>
+</select>
+<button onclick="startGame()">🔄 Neues Spiel</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="win-overlay" id="winOverlay">
+<h2>🎉 Gewonnen!</h2>
+<p>Alle Paare gefunden!</p>
+<p class="stats-line" id="winStats">Züge: 0 | Zeit: 0s</p>
+<button onclick="startGame()">🔄 Nochmal spielen</button>
+</div>
+
+<footer>
+<p>Erstellt von <strong>Licht und Schatten</strong> 🌘 • <a href="../games/">Alle Spiele</a></p>
+</footer>
+</div>
+
+<script>
+const ICONS = ['🤖','🧠','💻','🔬','📡','⚡','🌐','🤯','🧬','🛸','📊','🔮','🎯','⚙️','🧪','🔭','💾','🖥️','📱','🧩','🔗','⚛️','🌀','🌟','🚀','🧿','💡','📈','🎛️','🕹️'];
+
+let cards=[], flipped=[], matched=0, moves=0, timer=0, timerInterval=null, isPlaying=false, locked=false;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function startGame(){
+  clearInterval(timerInterval);timerInterval=null;timer=0;moves=0;matched=0;flipped=[];locked=false;isPlaying=false;
+  document.getElementById('moves').textContent='0';
+  document.getElementById('timer').textContent='0s';
+  document.getElementById('winOverlay').classList.remove('show');
+  
+  let diff=document.getElementById('difficulty').value;
+  let cols,rows,total;
+  if(diff==='easy'){cols=4;total=16}
+  else if(diff==='medium'){cols=4;total=24}
+  else{cols=6;total=36}
+  rows=total/cols;
+  
+  let pairs=total/2;
+  let selectedIcons=shuffle([...ICONS]).slice(0,pairs);
+  cards=shuffle([...selectedIcons,...selectedIcons]);
+  
+  let grid=document.getElementById('grid');
+  grid.style.gridTemplateColumns=`repeat(${cols},1fr)`;
+  grid.innerHTML=cards.map((icon,i)=>`<div class="card" data-index="${i}" onclick="flipCard(${i})"><div class="card-inner">${icon}</div></div>`).join('');
+  
+  document.getElementById('pairs').textContent=`0/${pairs}`;
+  isPlaying=true;
+}
+
+function flipCard(idx){
+  if(!isPlaying||locked||flipped.length>=2||flipped.includes(idx)) return;
+  let card=document.querySelector(`.card[data-index="${idx}"]`);
+  if(card.classList.contains('matched')) return;
+  
+  if(!timerInterval){timerInterval=setInterval(()=>{timer++;document.getElementById('timer').textContent=timer+'s'},1000)}
+  
+  card.classList.add('flipped');
+  flipped.push(idx);
+  
+  if(flipped.length===2){
+    moves++;
+    document.getElementById('moves').textContent=moves;
+    locked=true;
+    let [a,b]=flipped;
+    if(cards[a]===cards[b]){
+      document.querySelector(`.card[data-index="${a}"]`).classList.add('matched');
+      document.querySelector(`.card[data-index="${b}"]`).classList.add('matched');
+      matched+=2;
+      let total=cards.length;
+      document.getElementById('pairs').textContent=`${matched/2}/${total/2}`;
+      flipped=[];
+      locked=false;
+      if(matched===total){
+        clearInterval(timerInterval);
+        document.getElementById('winStats').textContent=`Züge: ${moves} | Zeit: ${timer}s`;
+        setTimeout(()=>document.getElementById('winOverlay').classList.add('show'),400);
+      }
+    } else {
+      setTimeout(()=>{
+        document.querySelector(`.card[data-index="${a}"]`).classList.remove('flipped');
+        document.querySelector(`.card[data-index="${b}"]`).classList.remove('flipped');
+        flipped=[];
+        locked=false;
+      },800);
+    }
+  }
+}
+
+startGame();
+</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>TicTacToe – KI-Gegner | Licht und Schatten</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;justify-content:center;padding:16px}
+.container{max-width:500px;width:100%;text-align:center}
+h1{font-size:clamp(24px,5vw,36px);margin:16px 0 4px;background:linear-gradient(135deg,#ff6b6b,#64ffda);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#667;font-size:12px;margin-bottom:12px}
+.status{font-size:18px;margin-bottom:14px;min-height:28px}
+.status.x-turn{color:#ff6b6b}
+.status.o-turn{color:#64ffda}
+.status.win{color:#ffd93d}
+.status.draw{color:#8892b0}
+.controls{margin-bottom:14px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.controls select,.controls button{background:#12122a;color:#e0e0e0;border:1px solid #2a2a3a;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer}
+.controls button{background:linear-gradient(135deg,#64ffda,#42a5f5);color:#0a0a1a;border:none;font-weight:600;transition:all .3s}
+.controls button:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(100,255,218,.3)}
+.grid{display:grid;gap:6px;margin:0 auto;max-width:360px}
+.grid.cell-3{grid-template-columns:repeat(3,1fr)}
+.grid.cell-4{grid-template-columns:repeat(4,1fr)}
+.cell{aspect-ratio:1;background:#12122a;border:1px solid #2a2a3a;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:clamp(32px,8vw,56px);cursor:pointer;transition:all .3s;user-select:none;-webkit-tap-highlight-color:transparent}
+.cell:hover{border-color:#42a5f5}
+.cell.x{color:#ff6b6b;border-color:#ff6b6b;background:rgba(255,107,107,.05);text-shadow:0 0 16px rgba(255,107,107,.3)}
+.cell.o{color:#64ffda;border-color:#64ffda;background:rgba(100,255,218,.05);text-shadow:0 0 16px rgba(100,255,218,.3)}
+.cell.win-cell{border-color:#ffd93d;background:rgba(255,217,61,.08);animation:winPulse 1s ease-in-out infinite}
+@keyframes winPulse{0%,100%{box-shadow:0 0 8px rgba(255,217,61,.2)}50%{box-shadow:0 0 24px rgba(255,217,61,.5)}}
+.cell:not(.x):not(.o):hover{cursor:pointer}
+.stats{display:flex;justify-content:center;gap:24px;margin:16px 0 10px}
+.stat{text-align:center}
+.stat-label{color:#667;font-size:10px}
+.stat-value{color:#64ffda;font-size:20px;font-weight:700}
+.stat-value.red{color:#ff6b6b}
+footer{margin-top:32px;color:#495670;font-size:10px;text-align:center}
+footer a{color:#64ffda;text-decoration:none}
+@media(max-width:400px){.cell{border-radius:8px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>❌ TicTacToe ⭕</h1>
+<p class="sub">Gegen die KI – Unschlagbare Strategie</p>
+
+<div class="stats">
+<div class="stat"><div class="stat-label">Du</div><div class="stat-value red" id="playerScore">0</div></div>
+<div class="stat"><div class="stat-label">KI</div><div class="stat-value" id="aiScore">0</div></div>
+<div class="stat"><div class="stat-label">Unentschieden</div><div class="stat-value" id="drawScore" style="color:#8892b0">0</div></div>
+</div>
+
+<div class="status" id="status">Du bist ❌ – du beginnst</div>
+
+<div class="controls">
+<select id="mode">
+<option value="3">3×3 Classic</option>
+<option value="4">4×4 Extreme</option>
+</select>
+<select id="difficulty">
+<option value="easy">Einfach</option>
+<option value="medium">Mittel</option>
+<option value="hard" selected>Unschlagbar</option>
+</select>
+<button onclick="newGame()">🔄 Neues Spiel</button>
+</div>
+
+<div class="grid cell-3" id="grid"></div>
+
+<footer>
+<p>Erstellt von <strong>Licht und Schatten</strong> 🌘 • Minimax-KI • <a href="../games/">Alle Spiele</a></p>
+</footer>
+</div>
+
+<script>
+let board=[], size=3, turn='X', gameOver=false, difficulty='hard';
+let scores={player:0,ai:0,draw:0};
+
+function newGame(){
+  size=parseInt(document.getElementById('mode').value);
+  difficulty=document.getElementById('difficulty').value;
+  board=Array(size*size).fill(null);
+  turn='X';gameOver=false;
+  let grid=document.getElementById('grid');
+  grid.className='grid cell-'+size;
+  grid.innerHTML=board.map((_,i)=>`<div class="cell" data-i="${i}" onclick="playerMove(${i})"></div>`).join('');
+  document.getElementById('status').textContent='Du bist ❌ – du beginnst';
+  document.getElementById('status').className='status x-turn';
+}
+
+function playerMove(i){
+  if(gameOver||board[i]||turn!=='X') return;
+  makeMove(i,'X');
+  if(!gameOver&&turn==='O'){
+    document.getElementById('status').textContent='🤖 KI denkt…';
+    document.getElementById('status').className='status o-turn';
+    setTimeout(aiMove,300);
+  }
+}
+
+function makeMove(i,player){
+  board[i]=player;
+  let cell=document.querySelector(`.cell[data-i="${i}"]`);
+  cell.textContent=player==='X'?'❌':'⭕';
+  cell.className='cell '+player.toLowerCase();
+  
+  let win=checkWin(player);
+  if(win){
+    highlightWin(win);
+    gameOver=true;
+    if(player==='X'){
+      scores.player++;
+      document.getElementById('playerScore').textContent=scores.player;
+      document.getElementById('status').textContent='🎉 Du hast gewonnen! Unglaublich!';
+    } else {
+      scores.ai++;
+      document.getElementById('aiScore').textContent=scores.ai;
+      document.getElementById('status').textContent='🤖 Die KI gewinnt! Versuch es nochmal!';
+    }
+    document.getElementById('status').className='status win';
+    return;
+  }
+  if(board.every(c=>c)){
+    gameOver=true;
+    scores.draw++;
+    document.getElementById('drawScore').textContent=scores.draw;
+    document.getElementById('status').textContent='🤝 Unentschieden!';
+    document.getElementById('status').className='status draw';
+    return;
+  }
+  turn=player==='X'?'O':'X';
+  if(turn==='X'){
+    document.getElementById('status').textContent='Du bist dran ❌';
+    document.getElementById('status').className='status x-turn';
+  } else {
+    document.getElementById('status').textContent='🤖 KI überlegt…';
+    document.getElementById('status').className='status o-turn';
+  }
+}
+
+function checkWin(player){
+  let lines=getWinLines();
+  for(let line of lines){
+    if(line.every(i=>board[i]===player)) return line;
+  }
+  return null;
+}
+
+function getWinLines(){
+  let lines=[];
+  // rows
+  for(let r=0;r<size;r++){
+    let row=[];
+    for(let c=0;c<size;c++) row.push(r*size+c);
+    lines.push(row);
+  }
+  // cols
+  for(let c=0;c<size;c++){
+    let col=[];
+    for(let r=0;r<size;r++) col.push(r*size+c);
+    lines.push(col);
+  }
+  // diag
+  let d1=[],d2=[];
+  for(let i=0;i<size;i++){
+    d1.push(i*size+i);
+    d2.push(i*size+(size-1-i));
+  }
+  lines.push(d1,d2);
+  return lines;
+}
+
+function highlightWin(line){
+  line.forEach(i=>{
+    let cell=document.querySelector(`.cell[data-i="${i}"]`);
+    if(cell) cell.classList.add('win-cell');
+  });
+}
+
+function aiMove(){
+  if(gameOver) return;
+  let best;
+  if(difficulty==='easy'){
+    let empty=board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
+    best=empty[Math.random()*empty.length|0];
+  } else if(difficulty==='medium'){
+    best=Math.random()<.5?minimax(board,size,'O',-Infinity,Infinity).index:getRandomMove();
+  } else {
+    best=minimax(board,size,'O',-Infinity,Infinity).index;
+  }
+  if(best!==undefined) makeMove(best,'O');
+}
+
+function getRandomMove(){
+  let empty=board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
+  return empty[Math.random()*empty.length|0];
+}
+
+function minimax(board,n,player,alpha,beta){
+  let winX=checkWin('X'),winO=checkWin('O');
+  if(winX) return {score:-10-(n*n-board.filter(c=>c).length)};
+  if(winO) return {score:10+(n*n-board.filter(c=>c).length)};
+  if(board.every(c=>c)) return {score:0};
+  
+  let empty=board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
+  let best={score:player==='O'?-Infinity:Infinity};
+  
+  for(let i of empty){
+    board[i]=player;
+    let result=minimax(board,n,player==='O'?'X':'O',alpha,beta);
+    board[i]=null;
+    result.index=i;
+    
+    if(player==='O'){
+      if(result.score>best.score){best=result}
+      alpha=Math.max(alpha,best.score);
+    } else {
+      if(result.score<best.score){best=result}
+      beta=Math.min(beta,best.score);
+    }
+    if(beta<=alpha) break;
+  }
+  return best;
+}
+
+newGame();
+</script>
+</body>
+</html>

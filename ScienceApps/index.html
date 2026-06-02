@@ -14,13 +14,28 @@ h1{font-size:clamp(24px,5vw,42px);margin-bottom:4px;background:linear-gradient(1
 .card .emoji{font-size:40px;margin-bottom:8px}
 .card h2{color:#64ffda;font-size:16px;margin-bottom:4px}
 .card p{color:#8892b0;font-size:12px;margin-bottom:0;line-height:1.4}
-.status{display:inline-block;background:rgba(100,255,218,.1);color:#64ffda;border:1px solid #64ffda;border-radius:20px;padding:2px 10px;font-size:10px;margin-top:8px}
+.card .status{display:inline-block;background:rgba(100,255,218,.1);color:#64ffda;border:1px solid #64ffda;border-radius:20px;padding:2px 10px;font-size:10px;margin-top:8px}
+.card .status-new{background:rgba(255,217,61,.1);color:#ffd93d;border-color:#ffd93d}
 .stats{display:flex;justify-content:center;gap:32px;margin:24px 0;flex-wrap:wrap}
 .stat{text-align:center}
 .stat-num{font-size:26px;font-weight:700;color:#64ffda}
 .stat-label{color:#495670;font-size:11px}
 .section-title{font-size:18px;color:#42a5f5;margin:28px 0 14px;padding-bottom:6px;border-bottom:1px solid #233554;text-align:left}
-footer{margin-top:40px;color:#495670;font-size:11px;text-align:center}
+
+.newsletter{background:linear-gradient(135deg,#0d2137,#112240);border:1px solid #233554;border-radius:14px;padding:28px;margin:28px 0;text-align:center}
+.newsletter h3{color:#64ffda;font-size:18px;margin-bottom:8px}
+.newsletter p{color:#8892b0;font-size:13px;margin-bottom:16px}
+.newsletter-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto}
+.newsletter-form input{flex:1;min-width:200px;background:#0a192f;border:1px solid #233554;border-radius:8px;padding:10px 16px;color:#ccd6f6;font-size:14px;outline:none;transition:border-color .3s}
+.newsletter-form input:focus{border-color:#64ffda}
+.newsletter-form button{background:linear-gradient(135deg,#64ffda,#42a5f5);color:#0a192f;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;transition:all .3s}
+.newsletter-form button:hover{transform:scale(1.03);box-shadow:0 4px 16px rgba(100,255,218,.3)}
+.newsletter-msg{color:#64ffda;font-size:13px;margin-top:10px;min-height:20px}
+
+.visitor-badge{display:inline-flex;align-items:center;gap:6px;background:#112240;border:1px solid #233554;border-radius:20px;padding:4px 14px;font-size:11px;color:#8892b0;margin:0 auto 10px;justify-content:center}
+.visitor-badge .num{color:#64ffda;font-weight:700}
+
+footer{margin-top:40px;color:#495670;font-size:11px;text-align:center;line-height:1.8}
 footer a{color:#64ffda;text-decoration:none}
 @media(max-width:500px){.cards{grid-template-columns:1fr 1fr}.card{padding:16px 12px}.card .emoji{font-size:30px}.card h2{font-size:14px}.card p{font-size:11px}}
 </style>
@@ -30,10 +45,28 @@ footer a{color:#64ffda;text-decoration:none}
 <h1>🔬 Science Apps & Tools</h1>
 <p class="sub">Kostenlose Browser-Apps, Spiele & Tools • Finanziert durch Affiliate-Links • Store-ID: ikune21-21</p>
 
+<div class="visitor-badge" id="visitorBadge">👁️ Besucher: <span class="num" id="visitorCount">0</span></div>
+
 <div class="stats">
-<div class="stat"><div class="stat-num">14</div><div class="stat-label">Apps</div></div>
+<div class="stat"><div class="stat-num">19</div><div class="stat-label">Apps</div></div>
 <div class="stat"><div class="stat-num">0€</div><div class="stat-label">Kosten</div></div>
 <div class="stat"><div class="stat-num">PWA</div><div class="stat-label">Offline</div></div>
+</div>
+
+<div class="section-title">🆕 Neu! Spieleportal & Geld verdienen</div>
+<div class="cards">
+<a class="card" href="../games/">
+<div class="emoji">🎮</div>
+<h2>Spieleportal</h2>
+<p>Alle Spiele auf einen Blick – inkl. Gaming-Hardware Empfehlungen (Affiliate)</p>
+<div class="status status-new">🆕 NEU</div>
+</a>
+<a class="card" href="../money/">
+<div class="emoji">💰</div>
+<h2>Geld verdienen</h2>
+<p>Verdiene Geld mit KI-Prompt-Paketen & Affiliate-Marketing – Strategien & Tools</p>
+<div class="status status-new">🆕 NEU</div>
+</a>
 </div>
 
 <div class="section-title">🔬 Wissenschaft & Rechner</div>
@@ -66,25 +99,37 @@ footer a{color:#64ffda;text-decoration:none}
 
 <div class="section-title">🎮 Spiele & Rätsel</div>
 <div class="cards">
-<a class="card" href="./sudoku/">
+<a class="card" href="../memory/">
+<div class="emoji">🃏</div>
+<h2>Memory</h2>
+<p>Kartenspiel – Finde alle Paare mit KI-Themen Icons. 3 Schwierigkeitsstufen</p>
+<div class="status status-new">🆕 NEU</div>
+</a>
+<a class="card" href="../tictactoe/">
+<div class="emoji">❌</div>
+<h2>TicTacToe</h2>
+<p>Gegen unschlagbare KI (Minimax). 3×3 & 4×4 Modi, 3 Schwierigkeitsstufen</p>
+<div class="status status-new">🆕 NEU</div>
+</a>
+<a class="card" href="../sudoku/">
 <div class="emoji">🧩</div>
 <h2>Sudoku</h2>
 <p>4 Schwierigkeitsstufen, Notizen, Hinweise, Timer – klassisches Sudoku als PWA</p>
 <div class="status">🎮 GAME</div>
 </a>
-<a class="card" href="./crossword/">
+<a class="card" href="../crossword/">
 <div class="emoji">🧩</div>
 <h2>Kreuzworträtsel</h2>
 <p>3 Rätsel: KI-Welt, Technik, Allgemeinwissen – Deutsches PWA</p>
 <div class="status">🧩 PUZZLE</div>
 </a>
-<a class="card" href="./wordsearch/">
+<a class="card" href="../wordsearch/">
 <div class="emoji">🔍</div>
 <h2>Wortsuche</h2>
 <p>Wortsuchrätsel mit deutschen Wörtern, 3 Stufen, Wisch-Steuerung</p>
 <div class="status">🔍 FIND</div>
 </a>
-<a class="card" href="./weaponevo/">
+<a class="card" href="../weaponevo/">
 <div class="emoji">⚔️</div>
 <h2>Weapon Evolution</h2>
 <p>Idle Clicker: 12 Waffen, Upgrades, Prestige – Stein bis Quanten-Power</p>
@@ -124,10 +169,59 @@ footer a{color:#64ffda;text-decoration:none}
 </a>
 </div>
 
+<div class="newsletter">
+<h3>📬 Newsletter – Neuigkeiten & Tipps</h3>
+<p>Erhalte Updates zu neuen Apps, Spielen und KI-Tipps. Kein Spam, jederzeit kündbar.</p>
+<div class="newsletter-form">
+<input type="email" id="newsletterEmail" placeholder="Deine E-Mail-Adresse" required>
+<button onclick="subscribeNewsletter()">🔔 Abonnieren</button>
+</div>
+<div class="newsletter-msg" id="newsletterMsg"></div>
+</div>
+
 <footer>
 <p>Werbung & Affiliate-Links finanzieren diese Seite • Amazon-Partner ikune21-21 • Alle Apps sind kostenlos • Prompt Packs 5€ via Ko-fi</p>
-<p style="margin-top:4px">Erstellt von <strong>Licht und Schatten</strong> 🌘 • Author aller Inhalte und Code</p>
+<p style="margin-top:4px">Erstellt von <strong>Licht und Schatten</strong> 🌘 • Autor aller Inhalte und Code</p>
+<p style="margin-top:4px"><a href="../impressum/">Impressum</a> • <a href="../datenschutz/">Datenschutz</a> • <a href="../games/">Spieleportal</a> • <a href="../money/">Geld verdienen</a></p>
 </footer>
 </div>
+
+<script>
+// Visitor counter (localStorage-based, per device)
+(function(){
+  let count=parseInt(localStorage.getItem('ls_visitor_count')||'0')+1;
+  localStorage.setItem('ls_visitor_count',count);
+  document.getElementById('visitorCount').textContent=count;
+  
+  // Also track total unique visits
+  let totalVisits=parseInt(localStorage.getItem('ls_total_visits')||'0')+1;
+  localStorage.setItem('ls_total_visits',totalVisits);
+})();
+
+function subscribeNewsletter(){
+  let email=document.getElementById('newsletterEmail').value.trim();
+  let msg=document.getElementById('newsletterMsg');
+  if(!email||!email.includes('@')||!email.includes('.')){
+    msg.style.color='#ff6b6b';
+    msg.textContent='❌ Bitte gib eine gültige E-Mail-Adresse ein.';
+    return;
+  }
+  // Store in localStorage (for now - later connect to a service)
+  let subs=JSON.parse(localStorage.getItem('ls_newsletter_subs')||'[]');
+  if(subs.includes(email)){
+    msg.style.color='#ffd93d';
+    msg.textContent='📧 Diese E-Mail ist bereits angemeldet.';
+    return;
+  }
+  subs.push(email);
+  localStorage.setItem('ls_newsletter_subs',JSON.stringify(subs));
+  msg.style.color='#64ffda';
+  msg.textContent='✅ Danke! Du bist angemeldet. Wir benachrichtigen dich bei neuen Apps.';
+  document.getElementById('newsletterEmail').value='';
+  
+  // Optional: open mailto for manual confirmation
+  // window.location.href='mailto:affirmation.positiv@icloud.com?subject=Newsletter%20Anmeldung&body='+encodeURIComponent(email);
+}
+</script>
 </body>
 </html>
