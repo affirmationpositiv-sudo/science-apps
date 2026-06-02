@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcher KI-Typ bist du? - Finde es in 2 Minuten heraus!</title>
+<meta name="description" content="Beantworte 6 Fragen und entdecke deinen persönlichen KI-Archetypen – inklusive persönlicher Strategie">
+<meta property="og:title" content="Welcher KI-Typ bist du?">
+<meta property="og:description" content="Beantworte 6 Fragen und entdecke deinen persönlichen KI-Archetypen!">
+<meta property="og:image" content="https://affirmationpositiv-sudo.github.io/science-apps/ki-quiz-og.png">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/ki-quiz.html">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: #0a0a1a;
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  .container {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .quiz-header {
+    text-align: center;
+    padding: 40px 20px 30px;
+  }
+  .quiz-header h1 {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: #f59e0b;
+    margin-bottom: 10px;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+  .quiz-header p {
+    color: #94a3b8;
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f59e0b22, #f59e0b11);
+    border: 1px solid #f59e0b44;
+    color: #f59e0b;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .progress-wrap {
+    background: #1e1e3a;
+    border-radius: 12px;
+    height: 8px;
+    margin: 0 0 30px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #f59e0b, #f97316);
+    border-radius: 12px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .progress-label {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.82rem;
+    margin-top: -22px;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+  .card {
+    background: #12122a;
+    border: 1px solid #1e1e3a;
+    border-radius: 20px;
+    padding: 30px 24px;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+  .card.fade-out {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.97);
+  }
+  .card.fade-in {
+    opacity: 0;
+    transform: translateX(20px) scale(0.97);
+  }
+  .card.show {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+  .question-number {
+    color: #f59e0b;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+  }
+  .question-text {
+    font-size: clamp(1.15rem, 3.5vw, 1.35rem);
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.4;
+    color: #f1f5f9;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option-btn {
+    background: #1a1a35;
+    border: 1px solid #2a2a4a;
+    border-radius: 14px;
+    padding: 14px 18px;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: inherit;
+    line-height: 1.4;
+    width: 100%;
+  }
+  .option-btn:hover {
+    background: #22224a;
+    border-color: #f59e0b55;
+    transform: translateX(4px);
+  }
+  .option-btn:active {
+    transform: scale(0.98);
+  }
+  .option-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #2a2a4a;
+    color: #f59e0b;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .option-btn.selected {
+    background: #f59e0b15;
+    border-color: #f59e0b;
+    color: #f59e0b;
+  }
+  .option-btn.selected .option-label {
+    background: #f59e0b;
+    color: #0a0a1a;
+  }
+
+  /* Result card */
+  .result-icon {
+    font-size: 4rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .result-title {
+    font-size: clamp(1.5rem, 4vw, 1.9rem);
+    font-weight: 800;
+    color: #f59e0b;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .result-sub {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+  }
+  .result-body {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    padding: 0 4px;
+  }
+  .result-body strong {
+    color: #f59e0b;
+  }
+  .result-body p {
+    margin-bottom: 12px;
+  }
+  .advice-box {
+    background: #f59e0b08;
+    border-left: 3px solid #f59e0b;
+    padding: 16px 18px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    font-size: 0.92rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+  }
+  .advice-box::before {
+    content: "💡 Mein Rat an dich:";
+    display: block;
+    color: #f59e0b;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .share-section {
+    text-align: center;
+    margin: 24px 0 16px;
+    padding-top: 20px;
+    border-top: 1px solid #1e1e3a;
+  }
+  .share-section p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .share-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 1px solid #2a2a4a;
+    background: #1a1a35;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-weight: 500;
+  }
+  .share-btn:hover {
+    background: #22224a;
+    border-color: #f59e0b55;
+    transform: translateY(-2px);
+  }
+  .share-btn.whatsapp:hover { border-color: #25D366; color: #25D366; }
+  .share-btn.telegram:hover { border-color: #0088cc; color: #0088cc; }
+  .share-btn.copy:hover { border-color: #f59e0b; color: #f59e0b; }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #0a0a1a;
+    font-size: 1.05rem;
+    font-weight: 800;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    margin-bottom: 12px;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px #f59e0b33;
+  }
+  .secondary-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    background: transparent;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid #2a2a4a;
+    border-radius: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+  .secondary-btn:hover {
+    border-color: #f59e0b44;
+    color: #f59e0b;
+    background: #f59e0b08;
+  }
+  .affiliate-link {
+    display: block;
+    text-align: center;
+    margin: 16px 0 6px;
+    color: #64748b;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .affiliate-link:hover {
+    color: #f59e0b;
+  }
+
+  .hidden { display: none !important; }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #1e1e3a;
+    border: 1px solid #f59e0b44;
+    color: #e2e8f0;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: all 0.35s ease;
+    z-index: 999;
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @media (max-width: 500px) {
+    body { padding: 12px; }
+    .card { padding: 20px 16px; }
+    .quiz-header { padding: 24px 12px 20px; }
+    .option-btn { padding: 12px 14px; font-size: 0.9rem; }
+    .share-buttons { flex-direction: column; }
+    .share-btn { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <div class="quiz-header">
+    <div class="badge">🧪 Persönlichkeitstest</div>
+    <h1>Welcher KI-Typ bist du?</h1>
+    <p>Beantworte 6 Fragen und entdecke deinen persönlichen KI-Archetypen – inklusive persönlicher Strategie</p>
+  </div>
+
+  <div id="progressWrapper" class="progress-wrap">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+  <div id="progressLabel" class="progress-label">Frage 1 von 6</div>
+
+  <div id="quizCard" class="card show">
+    <div id="startScreen">
+      <div style="text-align:center;padding:20px 0 10px;">
+        <div style="font-size:5rem;margin-bottom:16px;">🤖</div>
+        <p style="color:#94a3b8;font-size:1rem;margin-bottom:24px;line-height:1.6;">
+          Bist du ein <strong style="color:#f59e0b;">Stratege</strong>, ein <strong style="color:#f59e0b;">Kreativer</strong>, ein <strong style="color:#f59e0b;">Praktiker</strong> oder ein <strong style="color:#f59e0b;">Community-Builder</strong>?<br>
+          Finde es in 2 Minuten heraus.
+        </p>
+        <button onclick="startQuiz()" style="
+          background:linear-gradient(135deg,#f59e0b,#d97706);
+          color:#0a0a1a;
+          border:none;
+          padding:16px 40px;
+          border-radius:14px;
+          font-size:1.1rem;
+          font-weight:800;
+          cursor:pointer;
+          font-family:inherit;
+          transition:all 0.25s;
+        " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px #f59e0b33'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          🚀 Jetzt starten
+        </button>
+      </div>
+    </div>
+
+    <div id="questionScreen" class="hidden">
+      <div class="question-number" id="questionNumber">FRAGE 1</div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+    </div>
+
+    <div id="resultScreen" class="hidden">
+      <div id="resultContent"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "Was ist deine größte Herausforderung?",
+      options: [
+        { label: "A", text: "Zu wenig Zeit für alles", key: "A" },
+        { label: "B", text: "Zu wenig Geld", key: "B" },
+        { label: "C", text: "Ich verstehe Technik nicht", key: "C" },
+        { label: "D", text: "Ich habe zu viele Ideen, aber setze nichts um", key: "D" }
+      ]
+    },
+    {
+      q: "Wie gehst du mit neuen Technologien um?",
+      options: [
+        { label: "A", text: "Ich bin immer First Mover", key: "A" },
+        { label: "B", text: "Ich warte, bis es sich bewährt hat", key: "B" },
+        { label: "C", text: "Ich finde es stressig", key: "C" },
+        { label: "D", text: "Ich lasse es andere machen", key: "D" }
+      ]
+    },
+    {
+      q: "Was würdest du mit einer KI machen, die alles für dich erledigt?",
+      options: [
+        { label: "A", text: "Ein Business aufbauen", key: "A" },
+        { label: "B", text: "Mehr Zeit mit Familie verbringen", key: "B" },
+        { label: "C", text: "Endlich mein Buch schreiben", key: "C" },
+        { label: "D", text: "Reisen und leben", key: "D" }
+      ]
+    },
+    {
+      q: "Deine Beziehung zu Geld?",
+      options: [
+        { label: "A", text: "Geld ist Werkzeug, ich will mehr", key: "A" },
+        { label: "B", text: "Geld ist Sicherheit", key: "B" },
+        { label: "C", text: "Geld ist knapp, ich brauche Hilfe", key: "C" },
+        { label: "D", text: "Geld interessiert mich nicht so", key: "D" }
+      ]
+    },
+    {
+      q: "Was ist deine Superkraft?",
+      options: [
+        { label: "A", text: "Strategisches Denken", key: "A" },
+        { label: "B", text: "Kreativität", key: "B" },
+        { label: "C", text: "Durchhaltevermögen", key: "C" },
+        { label: "D", text: "Menschen verbinden", key: "D" }
+      ]
+    },
+    {
+      q: "Dein Lieblingssatz?",
+      options: [
+        { label: "A", text: "Arbeit smart, nicht hart", key: "A" },
+        { label: "B", text: "Probieren geht über Studieren", key: "B" },
+        { label: "C", text: "Hilfe annehmen ist okay", key: "C" },
+        { label: "D", text: "Gemeinsam sind wir stark", key: "D" }
+      ]
+    }
+  ];
+
+  const results = {
+    A: {
+      icon: "🧠",
+      title: "Der KI-Stratege",
+      tagline: "Du denkst strategisch und siehst das große Ganze.",
+      body: `<p>KI ist für dich ein Werkzeug, um deine Vision zu verwirklichen. Deine Stärke: Du erkennst Muster und Chancen, die andere übersehen. Deine Herausforderung: Du denkst oft zu groß und verlierst dich in der Planung.</p>`,
+      advice: "Starte klein, aber starte heute. Wähle EINEN Bereich (Content, Automatisierung oder Business) und setze KI gezielt ein. In 30 Tagen wirst du nicht mehr ohne wollen."
+    },
+    B: {
+      icon: "🎨",
+      title: "Der KI-Kreative",
+      tagline: "Du bist ein kreativer Kopf mit Visionen.",
+      body: `<p>KI ist deine neue Muse – sie hilft dir, deine Ideen schneller umzusetzen als je zuvor. Deine Stärke: Du denkst in Bildern und Geschichten. Deine Herausforderung: Technik ist nicht dein Ding, aber das musst du auch nicht können.</p>`,
+      advice: "Nutze KI-Tools wie ChatGPT für Texte und Midjourney für Bilder. Dein Talent + KI = unschlagbar."
+    },
+    C: {
+      icon: "⚡",
+      title: "Der KI-Praktiker",
+      tagline: "Du bist pragmatisch und ergebnisorientiert.",
+      body: `<p>KI interessiert dich nur, wenn sie dir konkret hilft – und das tut sie. Deine Stärke: Du setzt Dinge um. Deine Herausforderung: Du unterschätzt oft, wie viel KI schon heute kann.</p>`,
+      advice: "Probiere diese Woche 3 KI-Tools aus: ChatGPT (Texte), Canva AI (Design), und ein KI-Tool deiner Branche. Du wirst überrascht sein."
+    },
+    D: {
+      icon: "🤝",
+      title: "Der KI-Community-Builder",
+      tagline: "Du glaubst an die Kraft der Gemeinschaft.",
+      body: `<p>KI ist für dich ein Werkzeug, um Menschen zusammenzubringen. Deine Stärke: Du baust Beziehungen und Netzwerke auf. Deine Herausforderung: Du nutzt KI noch nicht genug, um deine Community zu skalieren.</p>`,
+      advice: "Starte eine Telegram-Gruppe zu deinem Thema und nutze KI für täglichen Content. In 3 Monaten hast du 500 Mitglieder."
+    }
+  };
+
+  const BASE_URL = "https://affirmationpositiv-sudo.github.io/science-apps/ki-quiz.html";
+
+  let currentQuestion = 0;
+  let answers = [];
+  let isTransitioning = false;
+
+  function startQuiz() {
+    currentQuestion = 0;
+    answers = [];
+    document.getElementById('startScreen').classList.add('hidden');
+    document.getElementById('resultScreen').classList.add('hidden');
+    document.getElementById('questionScreen').classList.remove('hidden');
+    document.getElementById('progressWrapper').style.display = 'block';
+    document.getElementById('progressLabel').style.display = 'block';
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('questionNumber').textContent = 'FRAGE ' + (currentQuestion + 1);
+    document.getElementById('questionText').textContent = q.q;
+    updateProgress();
+
+    const container = document.getElementById('optionsContainer');
+    container.innerHTML = '';
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.innerHTML = `<span class="option-label">${opt.label}</span><span>${opt.text}</span>`;
+      btn.dataset.key = opt.key;
+      btn.addEventListener('click', () => selectAnswer(opt.key));
+      container.appendChild(btn);
+    });
+
+    const card = document.getElementById('quizCard');
+    card.classList.remove('fade-out', 'fade-in');
+    void card.offsetHeight;
+    card.classList.add('show');
+  }
+
+  function selectAnswer(key) {
+    if (isTransitioning) return;
+    answers.push(key);
+
+    const btns = document.querySelectorAll('.option-btn');
+    btns.forEach(b => b.classList.remove('selected'));
+    event.target.closest('.option-btn')?.classList.add('selected');
+
+    const card = document.getElementById('quizCard');
+    card.classList.remove('show');
+    card.classList.add('fade-out');
+
+    isTransitioning = true;
+    setTimeout(() => {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        card.classList.remove('fade-out');
+        card.classList.add('fade-in');
+        showQuestion();
+        setTimeout(() => {
+          card.classList.remove('fade-in');
+          card.classList.add('show');
+          isTransitioning = false;
+        }, 50);
+      } else {
+        showResult();
+        isTransitioning = false;
+      }
+    }, 300);
+  }
+
+  function updateProgress() {
+    const pct = ((currentQuestion) / questions.length) * 100;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = 'Frage ' + (currentQuestion + 1) + ' von ' + questions.length;
+  }
+
+  function getResultKey() {
+    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    answers.forEach(a => { if (counts[a] !== undefined) counts[a]++; });
+    let maxKey = 'A', maxCount = 0;
+    for (const k of ['A','B','C','D']) {
+      if (counts[k] > maxCount) { maxCount = counts[k]; maxKey = k; }
+    }
+    return maxKey;
+  }
+
+  function showResult() {
+    document.getElementById('progressBar').style.width = '100%';
+    document.getElementById('progressLabel').textContent = 'Dein Ergebnis 🎉';
+
+    const key = getResultKey();
+    const r = results[key];
+    const shareText = encodeURIComponent('Ich bin der ' + r.title + ' ' + r.icon + ' - Welcher KI-Typ bist du? Mach den Test:');
+    const shareUrl = encodeURIComponent(BASE_URL);
+    const whatsappUrl = 'https://wa.me/?text=' + shareText + '+https%3A%2F%2Faffirmationpositiv-sudo.github.io%2Fscience-apps%2Fki-quiz.html';
+    const telegramUrl = 'https://t.me/share/url?url=' + shareUrl + '&text=' + encodeURIComponent('Ich bin der ' + r.title + ' ' + r.icon);
+
+    document.getElementById('resultContent').innerHTML = `
+      <div class="result-icon">${r.icon}</div>
+      <div class="result-title">${r.title}</div>
+      <div class="result-sub">${r.tagline}</div>
+      <div class="result-body">${r.body}</div>
+      <div class="advice-box">${r.advice}</div>
+
+      <a href="/coaching/" class="cta-btn" target="_blank">📞 Hol dir deine persönliche KI-Strategie</a>
+      <a href="${whatsappUrl}" target="_blank" class="share-btn whatsapp" style="display:inline-flex;margin:0 auto 6px;">
+        💬 Auf WhatsApp teilen
+      </a>
+      <div style="text-align:center;margin:6px 0;">
+        <a href="${telegramUrl}" target="_blank" class="share-btn telegram" style="display:inline-flex;">✈️ In Telegram teilen</a>
+      </div>
+      <div style="text-align:center;margin:8px 0 14px;">
+        <button onclick="copyLink('${BASE_URL}')" class="share-btn copy" style="display:inline-flex;">🔗 Link kopieren</button>
+      </div>
+
+      <a href="https://amzn.to/4hL8X3G?tag=ikune21-21" target="_blank" rel="nofollow sponsored" class="affiliate-link">
+        📚 Buchempfehlung: Mein KI-Buch auf Amazon ansehen
+      </a>
+
+      <div class="share-section">
+        <p>Teile dein Ergebnis:</p>
+        <div class="share-buttons">
+          <a href="${whatsappUrl}" target="_blank" class="share-btn whatsapp">💬 WhatsApp</a>
+          <a href="${telegramUrl}" target="_blank" class="share-btn telegram">✈️ Telegram</a>
+          <button onclick="copyLink('${BASE_URL}')" class="share-btn copy">🔗 Link</button>
+        </div>
+      </div>
+
+      <button onclick="restartQuiz()" class="secondary-btn" style="margin-top:12px;">🔄 Nochmal spielen</button>
+    `;
+
+    document.getElementById('questionScreen').classList.add('hidden');
+    document.getElementById('resultScreen').classList.remove('hidden');
+
+    const card = document.getElementById('quizCard');
+    card.classList.remove('fade-out', 'fade-in');
+    void card.offsetHeight;
+    card.classList.add('show');
+  }
+
+  function restartQuiz() {
+    document.getElementById('resultScreen').classList.add('hidden');
+    document.getElementById('startScreen').classList.remove('hidden');
+    document.getElementById('progressWrapper').style.display = 'block';
+    document.getElementById('progressBar').style.width = '0%';
+    document.getElementById('progressLabel').textContent = 'Frage 1 von 6';
+    currentQuestion = 0;
+    answers = [];
+    const card = document.getElementById('quizCard');
+    card.classList.remove('fade-out', 'fade-in');
+    void card.offsetHeight;
+    card.classList.add('show');
+  }
+
+  function copyLink(url) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => showToast('✅ Link kopiert!')).catch(() => fallbackCopy(url));
+    } else {
+      fallbackCopy(url);
+    }
+  }
+
+  function fallbackCopy(url) {
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showToast('✅ Link kopiert!'); } catch(e) { showToast('❌ Konnte Link nicht kopieren'); }
+    document.body.removeChild(ta);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._hide);
+    t._hide = setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('progressWrapper').style.display = 'block';
+    document.getElementById('progressLabel').style.display = 'block';
+  });
+</script>
+</body>
+</html>

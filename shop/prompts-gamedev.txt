@@ -1,0 +1,423 @@
+=== IKUNE Prompt Pack: Game Development & 3D ===
+200 Premium Prompts für Spieleentwicklung mit KI-Unterstützung
+Gültig für: ChatGPT, Claude, Copilot, Cursor & weitere Code-KI-Assistenten
+
+=== KATEGORIE 1: UNITY C# SCRIPTING (30 Prompts) ===
+
+1. Schreibe ein C#-Script in Unity für eine [BEWEGUNGSART]-Bewegung eines [CHARAKTER]-Charakters in einem [SPIELTYP]-Spiel. Inkludiere [WEITERE_FUNKTION].
+
+2. Erstelle ein C#-Script für eine Third-Person-Kamera in Unity mit [EMPFINDLICHKEIT]-Mausempfindlichkeit, [DISTANZ]-Kameradistanz und [OBSTAKEL]-Kollisionsvermeidung.
+
+3. Entwickle ein Patrouillen-Verhalten für einen [ENEMY]-Gegner in Unity. Der Gegner soll zwischen [ANZAHL] Wegpunkten patrouillieren und bei Sichtkontakt [REAKTION] ausführen.
+
+4. Erstelle ein Health-System in Unity C# mit [MAX_HP]-maxHP, [RÜSTUNG]-Rüstungswert und visuellem [EFFEKT]-Damage-Feedback.
+
+5. Schreibe ein Object-Pooling-System in Unity für [OBJEKT_TYP] mit [POOL_GRÖSSE]-Startpool und automatischer [WIEDERVERWENDUNG]-Strategie.
+
+6. Implementiere ein Wave-Spawner-System in Unity. Jede Wave hat [ANZAHL] Gegner vom Typ [GEGNER_TYP] mit [ABSTAND]-Spawn-Intervall.
+
+7. Entwickle eine C#-Klasse für ein Dialogsystem in Unity mit [SKIP]-Skip-Funktion, [EFFEKT]-Texteffekt und [ANZAHL]-Entscheidungsmöglichkeiten.
+
+8. Erstelle ein C#-Script für eine Gegner-KI in Unity, die [VERHALTEN]-Verhalten verwendet. Der Gegner soll [ZUSTAND1], [ZUSTAND2] und [ZUSTAND3] als Zustände haben.
+
+9. Schreibe ein Loot-System in Unity mit [SELTENHEIT]-Spawn-Tabelle, [ANZAHL] Gegenstandstypen und visuellem [EFFEKT]-Pickup-Effekt.
+
+10. Implementiere ein Speicher-System in Unity C# mit [METHODE] (JSON/Binary/PlayerPrefs) zum Speichern von [DATEN_SPIELER] und [DATEN_WELT].
+
+11. Erstelle ein C#-Script für prozedurale Level-Generierung in Unity mit [TECHNIK] (Perlin Noise/Zellularautomaten/Raumaufteilung), [GRÖSSE]-Levelgröße und [RÄUME]-Raumanzahl.
+
+12. Entwickle ein Fähigkeiten-System (Skill-Tree) in Unity mit [ANZAHL] Fähigkeiten, [PUNKTE]-Skillpunkt-System und [MAX_STUFE]-Maximalstufe.
+
+13. Schreibe ein UI-Manager-Script in Unity, das [ANZAHL] UI-Panels mit [EFFEKT]-Übergangseffekten und [STEUERUNG]-Tastatursteuerung verwaltet.
+
+14. Erstelle ein C#-Script für ein Crafting-System mit [ANZAHL] Rezepten, [MATERIAL]-Ressourcentypen und [QUALITÄT]-Qualitätsstufen.
+
+15. Entwickle ein Inventar-System in Unity mit [ANZAHL] Slots, Drag-and-Drop und [ZUSATZFUNKTION]. Speichere den Zustand mit [SPEICHERMETHODE].
+
+16. Implementiere ein Minimap-System in Unity mit [GRÖSSE]-Render-Textur, [IKONE]-Spieler-Ikone und [AUFDECKUNG]-Aufdeckungsmechanik.
+
+17. Schreibe ein C#-Script für dynamische Wettereffekte in Unity mit [WETTER]-Typen, [ÜBERGANG]-Übergangszeit und [INTENSITÄT]-Intensitätssteuerung.
+
+18. Erstelle eine Interaktions-Klasse in Unity, die [OBJEKTE] mit [REICHWEITE]-Interaktionsreichweite und [PROMPT]-UI-Prompt verwaltet.
+
+19. Entwickle ein C#-Script für ein Rennen-Zeitsystem (Timer/Stoppuhr) in Unity mit [GENAUIGKEIT]-Zeitgenauigkeit und [BESTZEIT]-Bestzeit-Speicherung.
+
+20. Implementiere eine Waffen-Klasse in Unity mit [TYP]-Waffentyp, [SCHADEN]-Schaden, [MUNITION]-Munitionssystem und [FEUERRATE]-Feuerrate.
+
+21. Schreibe ein NPC-Dialog-Trigger-System in Unity mit [DISTANZ]-Aktivierungsdistanz, [ICON]-Indikator-Icon und [DIALOG]-Dialog-Datenbank.
+
+22. Erstelle ein C#-Script für ein Side-Scrolling-Camera-Follow in Unity mit [OFFSET]-Kamera-Offset, [GLÄTTUNG]-Glättungsfaktor und [GRENZE]-Kameragrenzen.
+
+23. Entwickle ein Achievement-System in Unity mit [ANZAHL] Achievements, [BEDINGUNG]-Freischaltbedingungen und [BENACHRICHTIGUNG]-Benachrichtigungs-Popup.
+
+24. Implementiere ein C#-Script für Split-Screen-Multiplayer mit [ANZAHL] Spielern, [AUFTEILUNG]-Bildschirmaufteilung und [CONTROLLER]-Controller-Zuordnung.
+
+25. Schreibe ein Ragdoll-System in Unity, das bei [AUSLÖSER]-Ereignis aktiviert wird und [KNOCHEN]-Knochen mit [KRAFT]-Impulskraft beeinflusst.
+
+26. Erstelle ein C#-Script für eine Grappling-Hook-Mechanik mit [SEILLÄNGE]-Seillänge, [GESCHWINDIGKEIT]-Zuggeschwindigkeit und [PHYSIK]-Physik-Berechnung.
+
+27. Entwickle ein Tutorial-System in Unity mit [SCHRITTE]-Tutorial-Schritten, [HIGHLIGHT]-UI-Highlight und [ÜBERSPRINGEN]-Sprung-Funktion.
+
+28. Implementiere ein C#-Event-System für lose Kopplung zwischen Unity-Komponenten, mit [EVENTS]-Event-Typen und [LISTENER]-Listener-Verwaltung.
+
+29. Schreibe ein C#-Script für dynamische Schwierigkeitsanpassung in Unity basierend auf [SPIELERSTATS] mit [STUFEN]-Schwierigkeitsstufen.
+
+30. Erstelle ein Multiplayer-Netzwerk-Script in Unity mit [METHODE] (Mirror/Photon/FishNet) für [ANZAHL] Spieler mit [SYNC]-Synchronisationsmethode.
+
+=== KATEGORIE 2: UNREAL ENGINE BLUEPRINTS/C++ (30 Prompts) ===
+
+31. Erstelle ein Unreal Engine Blueprint für ein [WAFFENTYP]-Waffensystem mit [ANZAHL] Feuer-Modi, Munitionssystem und [EFFEKT]-Effekten.
+
+32. Entwickle eine Character-Movement-Komponente in Unreal Engine C++ mit [BEWEGUNG]-Bewegungsart, [GESCHWINDIGKEIT]-MaxSpeed und [SPRUNGKRAFT]-Jump-Z-Force.
+
+33. Schreibe ein C++-Klasse in Unreal Engine 5 für einen [CHARAKTER]-Charakter mit [ANZAHL] Bewegungsfähigkeiten und [MECHANIK]-Mechaniker.
+
+34. Erstelle ein Blueprint für ein Interaktionssystem in Unreal mit [TRACE]-Trace-Länge, [PROMPT]-UI-Prompt und [ANZAHL] Interaktionsoptionen.
+
+35. Implementiere ein Health-Component-System in Unreal Engine C++ mit [MAX_HP]-MaxHealth, [REGENERATION]-Regenerationsrate und [DAMAGE]-Damage-Typen.
+
+36. Entwickle ein AI-Controlled-Pawn-BP in Unreal mit [VERHALTEN]-Behavior-Tree, [SINNES]-Wahrnehmungssystem und [ZUSTAND]-Zustandsmaschine.
+
+37. Schreibe ein C++-Actor-Klasse für ein Inventar-System in Unreal Engine mit [ANZAHL] Slots, [GEWICHT]-Gewichtssystem und [TYP]-Item-Typen.
+
+38. Erstelle ein Blueprint für ein Fahrzeug-Steuerungssystem mit [RAD]-Radanzahl, [GESCHWINDIGKEIT]-Höchstgeschwindigkeit und [HANDLING]-Handling-Parametern.
+
+39. Implementiere ein C++-GameMode-Klasse in Unreal mit [SPIELREGELN]-Spielregeln, [ZIEL]-Sieg-Bedingung und [SPAWN]-Spawn-System.
+
+40. Entwickle ein Blueprint für dynamisches Tag-Nacht-System mit [DAUER]-Zyklus-Dauer, [LICHT]-Sonnenwinkel und [TIMESCALE]-Zeitskala.
+
+41. Schreibe ein C++-AnimInstance-Klasse in Unreal mit [ANZAHL] Blend-Spaces, [STATE]-Animations-Zustände und [IK]-Foot-IK-Integration.
+
+42. Erstelle ein Blueprint für ein Cover-System mit [AKTIVIERUNG]-Aktivierungsmechanik, [CHECK]-Wand-Prüfung und [ÜBERGANG]-Übergangs-Animation.
+
+43. Implementiere ein C++-SaveGame-System in Unreal mit [DATEN]-Spielerdaten, [SLOTS]-Speicherplätze und [KOMPRESSION]-Komprimierungsmethode.
+
+44. Entwickle ein Blueprint für ein Quest-System mit [ANZAHL] Quest-Phasen, [BELOHNUNG]-Belohnungstypen und [LOG]-Quest-Log-UI.
+
+45. Schreibe ein C++-AbilitySystemComponent-Klasse mit [ANZAHL] Fähigkeiten, [COOLDOWN]-Abklingzeiten und [EFFEKT]-Gameplay-Effekten.
+
+46. Erstelle ein Blueprint für ein Crafting-System mit [REZEPTE]-Rezeptanzahl, [KATEGORIE]-Kategorien und [ERGEBNIS]-Ergebnis-Vorschau.
+
+47. Implementiere ein C++-Niagara-Effekt-System für [EFFEKT]-Effekt-Typ mit [PARTIKEL]-Partikelanzahl und [SIMULATION]-Simulationsmodus.
+
+48. Entwickle ein Blueprint für ein Dialog-System mit [CHARAKTERE]-sprechende Charaktere, [ZWEIGE]-Dialog-Zweige und [TON]-Voice-Over-Trigger.
+
+49. Schreibe ein C++-PlayerController-Klasse in Unreal mit [EINGABE]-Input-Mapping, [HUD]-HUD-Klasse und [PAUSE]-Pause-Menü.
+
+50. Erstelle ein Blueprint für ein Minigame-System mit [ANZAHL] Minigames, [ERFOLG]-Erfolgsbedingungen und [PUNKTE]-Punktesystem.
+
+51. Implementiere ein C++-LOD-System für [MESH]-Mesh-Typ mit [STUFEN]-LOD-Stufen, [DISTANZ]-Übergangsdistanzen und [SCREEN]-Screen-Size-Berechnung.
+
+52. Entwickle ein Blueprint für ein Footstep-Sound-System mit [MATERIAL]-Materialerkennung, [LAUTSTÄRKE]-Lautstärke-Variation und [STEP]-Schritt-Intervall.
+
+53. Schreibe ein C++-ActorComponent für ein Stat-System mit [STATS]-Stat-Liste, [MODIFIER]-Modifier-Stacking und [UPDATE]-Update-Event.
+
+54. Erstelle ein Blueprint für ein Respawn-System mit [VERZÖGERUNG]-Respawn-Verzögerung, [POSITION]-Respawn-Punkt-Auswahl und [EFFEKT]-Respawn-Effekt.
+
+55. Implementiere ein C++-Custom-TraceChannel-System für [INTERAKTION]-Interaktions-Tracing mit [VISUALISIERUNG]-Debug-Darstellung.
+
+56. Entwickle ein Blueprint für ein Mini-Quest-System (Radiant Quests) mit [TYPEN]-Quest-Typen, [BELOHNUNG]-Belohnungs-Pool und [WIEDERHOLUNG]-Cooldown.
+
+57. Schreibe eine C++-Klasse für ein Grappling-System mit [SEILLÄNGE]-maximale Seillänge, [PHYSIK]-Physik-Constraint und [AUFZIEHEN]-Aufzieh-Geschwindigkeit.
+
+58. Erstelle ein Blueprint für ein Possess-System (Geist-Besessenheit) mit [ZIEL]-Ziel-Typen, [DAUER]-Besessenheits-Dauer und [EFFEKT]-Besessenheits-Effekt.
+
+59. Implementiere ein C++-Multiplayer-Subsystem in Unreal mit [MAX_SPIELER]-MaxPlayers, [SESSION]-Session-Typ und [MATCH]-Matchmaking-Parametern.
+
+60. Entwickle ein Blueprint für ein Upgrade-System mit [STUFEN]-Upgrade-Stufen, [KOSTEN]-Kosten-Skalierung und [EFFEKT]-Upgrade-Effekten.
+
+=== KATEGORIE 3: BLENDER 3D MODELING (30 Prompts) ===
+
+61. Modelliere in Blender ein [OBJEKT] im Low-Poly-Stil mit maximal [ANZAHL] Polygonen. Verwende [TECHNIK] und füge eine [FARBE]-Farbpalette mit [SHADER]-Shader hinzu.
+
+62. Erstelle ein Hard-Surface-Modell von [OBJEKT] in Blender mit [MODIFIER]-Modifiern und [DETAIL]-Detailgrad. Zielpolygonzahl: [ANZAHL] Polygone.
+
+63. Erstelle ein detailliertes Sculpt eines [CHARAKTER]-Kopfes in Blender mit [STIL]-Stil. Verwende [PINSEL]-Pinsel für realistische [DETAIL]-Details.
+
+64. Entwickle ein Basis-Mesh für einen humanoiden Charakter in Blender mit [GRÖSSE]-Proportionen, [TOPOLOGIE]-Topologie-Struktur und [ANZAHL]-Edge-Loops.
+
+65. Modelliere eine [WUMGEBUNG]-Umgebung in Blender mit [OBJEKTE]-Anzahl Objekte, [STIL]-Stil und [TEXTUR]-Textur-Methode.
+
+66. Erstelle ein UV-Unwrapping für [OBJEKT] in Blender mit [METHODE]-Methode. Optimiere für [TEXTUR_GRÖSSE]-Texturen.
+
+67. Entwickle ein PBR-Textur-Set für [OBJEKT] in Blender mit [MAPS]-Map-Typen (Albedo/Roughness/Normal/Metalness) in [AUFLÖSUNG]-Auflösung.
+
+68. Erstelle ein Rig für einen [CHARAKTER]-Charakter in Blender mit [ANZAHL] Bones, [IK/FK]-IK/FK-Switch und [CONTROLLER]-Controller-Formen.
+
+69. Animiere einen Lauf-Zyklus für [CHARAKTER] in Blender mit [STIL]-Stil, [DAUER]-Frame-Dauer und [KONTRAST]-Bewegungskontrast.
+
+70. Modelliere ein [FAHRZEUG]-Fahrzeug in Blender im [STIL]-Stil mit [ANZAHL] Polygonen und [DETAIL]-Detailgrad.
+
+71. Erstelle eine [WUMME]-Waffe / [GEGENSTAND] in Blender mit [STIL]-Design-Stil, [DETAILS]-Zusatzdetails und [POLYGONE]-Zielpolygonzahl.
+
+72. Entwickle ein Material-Setup in Blender mit [KNOTEN]-Node-Struktur, [EFFEKT]-Shader-Effekt und [BAKE]-Bake-Einstellungen.
+
+73. Erstelle ein Weight-Painting für das Rig von [CHARAKTER] in Blender mit [AUTOMATISCH]-Auto-Weight-Basis und manueller [ANPASSUNG]-Anpassung für [BEREICH].
+
+74. Modelliere ein [GEBÄUDE]-Gebäude in Blender im [STIL]-Architekturstil mit [MODULAR]-modularen Teilen und [DETAIL]-Detailgrad.
+
+75. Erstelle eine Shape-Key-basierte Gesichtsanimation für [CHARAKTER] in Blender mit [ANZAHL] Formen und [STEUERUNG]-Steuerungs-Rig.
+
+76. Entwickle ein Partikel-System in Blender für [EFFEKT]-Effekt mit [ANZAHL] Partikeln, [PHYSIK]-Physik-Typ und [MATERIAL]-Material.
+
+77. Generiere prozedurale [OBERFLÄCHE]-Oberflächen in Blender mit [MODIFIER]-Modifier-Kette und [RANDOM]-Zufallsstreuung.
+
+78. Erstelle ein 3D-Retopology für [OBJEKT] in Blender mit [METHODE]-Technik, [ANZAHL] Polygonen und [TOPOLOGIE]-Topologie-Flow.
+
+79. Modelliere eine [KREATUR]-Kreatur in Blender im [STIL]-Stil mit [EXTREM]-Extrem-Proportionen und [DETAILS]-Details.
+
+80. Entwickle ein Cloth-Simulation-Setup für [KLEIDUNG] in Blender mit [STOFF]-Stoff-Typ, [SCHWERE]-Schwerkraft-Einfluss und [KOLLISION]-Kollisionsobjekten.
+
+81. Erstelle eine Camera-Rig-Animation in Blender mit [KAMERA]-Kamera-Typ, [BEWEGUNG]-Bewegungspfad und [FOKUS]-Fokus-Ziel.
+
+82. Entwerfe einen [STIL]-Stylisierten [CHARAKTER] in Blender mit [PROPORTION]-Überzeichneten Proportionen und [FARBE]-Farbblock-Palette.
+
+83. Erstelle ein 3D-Tileset für ein [GENRE]-Spiel in Blender mit [ANZAHL] Tile-Varianten und [GRÖSSE]-Einheitsgröße.
+
+84. Modelliere ein [INNENRAUM]-Interieur in Blender mit [MÖBEL]-Möbelstücken, [BELEUCHTUNG]-Lichtquellen und [STIL]-Einrichtungsstil.
+
+85. Entwickle ein Hair-Particle-System in Blender für [CHARAKTER] mit [ANZAHL] Strähnen, [FORM]-Frisur-Form und [MATERIAL]-Haar-Material.
+
+86. Erstelle ein Normal-Map-Bake in Blender von [HOCHPOLY] auf [NIEDRIGPOLY] mit [EINSTELLUNGEN]-Bake-Einstellungen.
+
+87. Entwickle eine explosionsartige Zerstörungs-Animation in Blender mit [ZELLEN]-Cell-Fracture, [SCHWERE]-Physik und [MATERIAL]-Trümmer-Material.
+
+88. Modelliere einen [PROP]-Spiel-Gegenstand in Blender (z.B. Schlüssel, Truhe, Flasche) mit [DETAIL]-Detailgrad ready für [ENGINE]-Engine-Export.
+
+89. Erstelle ein FBX/GLTF-Export-Setup in Blender für [ENGINE] mit richtiger [SKALIERUNG], [ACHSE]-Achsenausrichtung und [MATERIAL]-Material-Konvertierung.
+
+90. Entwickle optimierte City-Block-Prop-Gruppen in Blender mit [ANZAHL] Variationen und LOD-[STUFEN]-Stufen für Open-World-Games.
+
+=== KATEGORIE 4: GAME DESIGN & BALANCING (20 Prompts) ===
+
+91. Entwirf ein Questsystem für ein [GENRE]-Spiel mit [ANZAHL] Quest-Typen, einem [BELOHNUNG]-Belohnungssystem und einer [STRUKTUR]-Struktur.
+
+92. Entwickle eine Balancing-Tabelle für [WAFFEN]-Waffen in einem [GENRE]-Spiel mit [STATS]-Stat-Werten und [SELTENHEIT]-Seltenheitsstufen.
+
+93. Erstelle ein Progressions-System für ein [GENRE]-Spiel mit [STUFEN]-Level-System, [ERFAHRUNG]-EXP-Kurve und [FREISCHALT]-Freischalt-Mechaniken.
+
+94. Entwirf ein Economy-System für ein [GENRE]-Spiel mit [WÄHRUNG]-Währungsarten, [PREIS]-Preis-Balancing und [INFLATION]-Inflationskontrolle.
+
+95. Entwickle eine Schwierigkeitskurve für [GENRE]-Spiel mit [START]-Startschwierigkeit, [STEIGUNG]-Anstiegsrate und [MAX]-Maximalschwierigkeit.
+
+96. Erstelle ein Klassen-Balancing-Konzept für ein RPG mit [ANZAHL] Klassen, [STÄRKEN]-Stärken/Schwächen und [SYNERGIE]-Synergie-Boni.
+
+97. Entwirf ein Matchmaking-System für [SPIELTYP] mit [SKILL]-Skill-Bewertung, [WARTEZEIT]-Wartezeit-Kompromiss und [TEAM]-Team-Balancing.
+
+98. Entwickle ein Ressourcen-Management-System für ein [GENRE]-Spiel mit [RESSOURCEN]-Ressourcen-Typen, [PRODUKTION]-Produktionsraten und [LAGER]-Lager-Kapazität.
+
+99. Erstelle ein Skill-Tree-Konzept für [CHARAKTER]-Klasse mit [ANZAHL] Skills, [VERZWEIGUNG]-Verzweigungen und [SYNERGIE]-Synergien.
+
+100. Entwirf eine Endgame-Schleife für [GENRE]-Spiel mit [ZIELE]-Zielen, [BELOHNUNGEN]-Belohnungen und [WIEDERSPIELBARKEIT]-Wiederspielbarkeit.
+
+101. Entwickle einen Prototypen für ein [GENRE]-Spiel mit Kern-Mechanik [MECHANIK], [DAUER]-Spielzeit und [MINIMUM]-Minimum-Viable-Product-Features.
+
+102. Erstelle eine Spieler-Onboarding-Struktur mit [TUTORIAL]-Tutorial-Phasen, [LERNZIEL]-Lernzielen und [TEST]-Test-Meilensteinen.
+
+103. Entwirf ein Feind-Design-Dokument für [GEGNER]-Gegner-Typ mit [VERHALTEN]-Verhalten, [SCHWÄCHE]-Schwächen und [BELOHNUNG]-Belohnung.
+
+104. Entwickle eine Minigame-Sammlung für [HAUPTSPIEL] mit [ANZAHL] Minigames, [ZWECK]-Spielzweck und [BELOHNUNG]-Belohnungssystem.
+
+105. Erstelle ein Crafting-Rezept-Balancing mit [MATERIAL]-Material-Seltenheiten, [REZEPT]-Rezept-Komplexität und [OUTPUT]-Output-Qualität.
+
+106. Entwirf ein Level-Design-Dokument für [LEVELTYP] mit [RAUM]-Raum-Layout, [FEIND]-Feind-Platzierung und [FLUSS]-Spieler-Flow.
+
+107. Entwickle eine Multiplayer-Spiel-Modi-Palette mit [MODI]-Modus-Varianten, [SPIELERZAHL]-Spieleranzahl und [ZIEL]-Siegbedingungen.
+
+108. Erstelle ein Loot-Drop-Balancing für [GEGNER]-Gegner-Typen mit [SELTENHEIT]-Wahrscheinlichkeiten, [GARANTIE]-Garantie-Drops und [RARITÄT]-Item-Qualität.
+
+109. Entwirf ein Time-Gating-System für ein [GENRE]-Spiel mit [COOLDOWN]-Cooldown, [ENERGIE]-Energie-System und [BESCHLEUNIGUNG]-Beschleunigungs-Möglichkeiten.
+
+110. Entwickle ein Bosskampf-Design für [BOSS]-Boss mit [PHASEN]-Phasen, [ANGRIFFE]-Angriffsmustern und [SCHWACHSTELLE]-Schwachstellen.
+
+=== KATEGORIE 5: VR/AR DEVELOPMENT (20 Prompts) ===
+
+111. Entwickle ein Teleportationssystem für VR in [ENGINE] mit [ANZAHL] Bewegungsmodi, [KOLLISION]-Kollisionserkennung und [VISUALISIERUNG]-Visualisierung.
+
+112. Erstelle ein Grab-System für VR mit [HAND]-Hand-Tracking, [OBJEKTE]-Interaktionsobjekten und [PHYSIK]-Physik-Griff.
+
+113. Implementiere ein UI-Interaktionssystem für VR mit [ZEIGER]-Laser-Pointer, [ABSTAND]-Interaktionsdistanz und [BESTÄTIGUNG]-Bestätigungs-Methode.
+
+114. Entwickle ein Snap-Turn-System für VR mit [WINKEL]-Drehungswinkel, [GESCHWINDIGKEIT]-Drehgeschwindigkeit und [KOMPORT]-Komfort-Einstellungen.
+
+115. Erstelle ein Raum-Skalierungs-Tool für AR in [ENGINE] mit [MESHING]-Raum-Meshing, [ANKER]-Anchor-Platzierung und [SKALIERUNG]-Skalierungs-Modi.
+
+116. Entwickle ein Hand-Tracking-System für VR mit [GESTEN]-Gesten-Erkennung, [FINGER]-Finger-Tracking und [AKTION]-Aktion-Zuordnung.
+
+117. Implementiere ein Spatial-Audio-System für VR mit [QUELLEN]-Audio-Quellen, [DÄMPFUNG]-Dämpfungs-Modell und [HRTF]-HRTF-Unterstützung.
+
+118. Erstelle ein Physics-Interaction-System für VR in [ENGINE] mit [OBJEKTE]-Objekten, [GEWICHT]-Gewichts-Simulation und [WERFEN]-Wurf-Physik.
+
+119. Entwickle ein Locomotion-System für VR mit [METHODE]-Bewegungsart (Arm-Swing/Jump/Slide) und [KOMPORT]-Komfort-Optionen.
+
+120. Implementiere ein AR-Multiplayer-Setup in [ENGINE] mit [SPIELER]-Spieleranzahl, [NETZWERK]-Netzwerk-Lösung und [SYNC]-Synchronisations-Methode.
+
+121. Erstelle ein VR-Menü-System mit [ANZAHL] Menü-Panels, [TYP]-Interaktionstyp und [EFFEKT]-Übergangseffekten.
+
+122. Entwickle ein Vehicle-Steuerungssystem für VR mit [RAD]-Lenkrad- oder [HEBEL]-Hebel-Steuerung, [GESCHWINDIGKEIT]-Geschwindigkeitsanzeige und [RÜCKMELDUNG]-Force-Feedback.
+
+123. Implementiere ein AR-Objekt-Platzierungs-Tool mit [ERKENNUNG]-Oberflächenerkennung, [AUSRICHTUNG]-Ausrichtungshilfen und [SPEICHERN]-Speicher-Funktion.
+
+124. Erstelle ein VR-Kampf-System mit [WAFFE]-Waffen-Typ, [SCHLAG]-Schlag/Hieb-Erkennung und [SCHADEN]-Schadens-Berechnung.
+
+125. Entwickle ein Pass-Through-AR-Modus für VR mit [KAMERA]-Kamera-Feed, [OBJEKTE]-virtuelle Überlagerungen und [BLENDING]-Blending-Modi.
+
+126. Implementiere ein Social-VR-System mit [AVATAR]-Avatar-System, [EMOTE]-Emotes und [SPRACHE]-Voice-Chat-Integration.
+
+127. Erstelle ein AR-Indoor-Navigation-System mit [PFAD]-Pfad-Findung, [MARKER]-Marker-Erkennung und [INSTRUKTION]-Navigations-Anweisungen.
+
+128. Entwickle ein VR-Training-Simulation für [SZEANRIO] mit [SCHRITTE]-Trainings-Schritten, [AUSWERTUNG]-Leistungs-Auswertung und [WIEDERHOLUNG]-Wiederholungs-Modus.
+
+129. Implementiere ein Eye-Tracking-Interaktions-System für VR mit [BLICK]-Blick-Erkennung, [FIXIERUNG]-Fixierungs-Dauer und [AKTION]-Aktion-Auslösung.
+
+130. Erstelle ein Multi-User-AR-Kollaborations-Tool mit [BENUTZER]-Benutzer-Anzahl, [SHARING]-Shared-Anchor und [KOMMUNIKATION]-Kommunikations-Kanal.
+
+=== KATEGORIE 6: PIXEL ART & 2D ART (20 Prompts) ===
+
+131. Erstelle ein Pixel-Art-Sprite eines [CHARAKTER] in [GRÖSSE]x[GRÖSSE] Pixeln mit [ANZAHL] Animationsframes und [STIL]-Farbschema.
+
+132. Entwickle ein 2D-Tileset für ein [GENRE]-Spiel mit [ANZAHL] Tile-Varianten, [GRÖSSE]-Tile-Größe und [THEMA]-Thema.
+
+133. Erstelle einen Pixel-Art-Lauf-Zyklus für [CHARAKTER] mit [FRAMES]-Frame-Anzahl, [RICHTUNG]-Richtungen und [STIL]-Animationsstil.
+
+134. Entwirf eine 2D-Gegner-Sprite-Serie für [GEGNER]-Typ mit [ZUSTÄNDE]-Animation-Zuständen (Idle/Walk/Angriff/Tod).
+
+135. Erstelle ein Pixel-Art-UI-Element-Set mit [ANZAHL] Elementen, [FARBE]-Farbpalette und [GRÖSSE]-Zielauflösung.
+
+136. Entwickle einen Pixel-Art-Hintergrund für [LEVEL]-Level-Typ in [AUFLÖSUNG]-Auflösung mit [TIEFE]-Parallax-Tiefe.
+
+137. Erstelle eine 2D-Charakter-Auswahl-Screen in Pixel-Art mit [CHARAKTERE]-Charakteren, [HIGHLIGHT]-Auswahl-Highlight und [INFOS]-Info-Anzeige.
+
+138. Entwirf Pixel-Art-Waffen-Icons für [WAFFENTYPEN]-Typen in [GRÖSSE]-Größe mit [SCHATTEN]-Schatten-Effekten und [UMRISS]-Umriss-Linien.
+
+139. Erstelle eine Pixel-Art-Item-Icon-Sammlung mit [ANZAHL] Gegenständen, [FARBE]-Farbcodierung und [SELTENHEIT]-Seltenheits-Indikatoren.
+
+140. Entwickle ein Pixel-Art-Partikel-Effekt-Set für [EFFEKT]-Effekte mit [FRAMES]-Frame-Zyklen und [FARBE]-Farbverläufen.
+
+141. Erstelle eine 2D-Animations-Sprite-Sheet für einen [CHARAKTER]-Angriff mit [FRAMES]-Frame-Anzahl, [HITBOX]-Hitbox-Markierungen und [EFFEKT]-Treffer-Effekt.
+
+142. Entwirf ein Pixel-Art-Minimap-System mit [KACHELN]-Kachel-Typen, [IKONE]-Spieler-Ikone und [AUFDECKUNG]-Aufdeckungs-Nebel.
+
+143. Erstelle ein UI-Inventar-Raster in Pixel-Art mit [SLOTS]-Slot-Anzahl, [RÄHMEN]-Rahmen-Design und [AUSWAHL]-Auswahl-Hover-Effekt.
+
+144. Entwickle einen Pixel-Art-Ladebildschirm mit [MOTIV]-Motiv, [ANIMATION]-Lade-Animation und [TIPP]-Tipp-Text-Bereich.
+
+145. Erstelle eine Pixel-Art-Kreatur/ Monster-Serie mit [ANZAHL] Variationen, [FARBE]-Farb-Palette pro Variante und [GRÖSSE]-Sprite-Größe.
+
+146. Entwirf ein 2D-GUI-Skin für ein [GENRE]-Spiel mit [FENSTER]-Fenster-Rahmen, [BUTTONS]-Button-Designs und [SCHRIFTART]-Schriftart-Integration.
+
+147. Erstelle Pixel-Art-Avatare/Porträts für [ANZAHL] Charaktere in [GRÖSSE]-Auflösung mit [EMOTIONEN]-Emotions-Varianten.
+
+148. Entwickle ein Pixel-Art-Weltkarten-Tileset mit [BIOME]-Biom-Varianten, [ÜBERGANG]-Übergangs-Tiles und [DEKO]-Deko-Objekten.
+
+149. Erstelle einen Pixel-Art-Boss-Sprite mit [FRAMES]-Riesen-Sprite-Frames, [EFFEKT]-Spezial-Effekten und [GRÖSSE]-Übergröße.
+
+150. Entwirf ein HUD-Elemente-Set für ein [GENRE]-Spiel mit [LEISTEN]-Balken, [IKONEN]-Status-Icons und [TEXT]-Text-Layout.
+
+=== KATEGORIE 7: GAME UI/UX DESIGN (15 Prompts) ===
+
+151. Desigene ein Game-UI-Element für eine [LEISTE]-Leiste in [STIL]-Stil mit [ANZAHL] Zuständen und [EFFEKT]-Effekten.
+
+152. Entwickle ein Main-Menu-Layout für ein [GENRE]-Spiel mit [OPTIONEN]-Menü-Punkten, [HINTERGRUND]-Hintergrund-Animation und [MUSIK]-Background-Music.
+
+153. Erstelle ein HUD-Layout für ein [GENRE]-Spiel mit [ELEMENTE]-HUD-Komponenten, [POSITION]-Positionierung und [TRANSPARENZ]-Transparenz-Einstellungen.
+
+154. Entwirf ein Settings-Menü mit [KATEGORIEN]-Kategorie-Tabs (Grafik/Audio/Steuerung), [SCHOBBER]-Schiebereglern und [SPEICHERN]-Auto-Save-Funktion.
+
+155. Entwickle ein Inventory-UI-Design mit [GITTER]-Grid-Layout, [FILTER]-Filter-Optionen und [TOOLTIP]-Tooltip-Informationen.
+
+156. Erstelle ein Dialog-Box-UI-System mit [CHARAKTER]-Charakter-Porträt, [TEXT]-Text-Box und [ANTWORT]-Antwort-Optionen.
+
+157. Entwirf ein Achievements/Popup-Notification-UI mit [ART]-Benachrichtigungstyp, [DAUER]-Anzeigedauer und [ANIMATION]-Ein-/Ausblend-Animation.
+
+158. Entwickle ein Pause-Menü-Overlay mit [OPTIONEN]-Menü-Optionen (Fortsetzen/Options/Quit), [TRANSITION]-Transition und [BLUR]-Blur-Hintergrund.
+
+159. Erstelle ein Skill-Tree-UI-Design mit [BAUM]-Baum-Layout, [KNOTEN]-Skill-Knoten und [VERBINDUNG]-Verbindungs-Linien.
+
+160. Entwirf ein Mini-Map-HUD-Overlay mit [RUNDECK]-Rechteck/Rund-Form, [ZOOM]-Zoom-Stufen und [IKONEN]-Icons-Skalierung.
+
+161. Entwickle ein Level-Up-Effekt-UI mit [STERNE]-Partikel-Effekten, [TEXT]-Level-Anzeige und [STATS]-Stat-Änderungs-Übersicht.
+
+162. Erstelle ein Shop/Store-UI-Design mit [WAREN]-Waren-Raster, [KATEGORIEN]-Kategorie-Filter und [KAUF]-Kauf-Bestätigung.
+
+163. Entwirf ein Loading-Screen-UI mit [FORTSCHRITT]-Progress-Bar, [TIPPS]-Loading-Tipps und [HINTERGRUND]-Hintergrund-Art.
+
+164. Entwickle ein Character-Creation-UI mit [OPTIONEN]-Anpassungs-Optionen, [VORSCHAU]-Live-3D/2D-Vorschau und [ZUFALL]-Randomize-Button.
+
+165. Erstelle ein Chat/Kommunikations-UI für Multiplayer mit [KANÄLE]-Chat-Kanälen, [EMOTES]-Emote-Support und [BENACHRICHTIGUNG]-Benachrichtigungs-System.
+
+=== KATEGORIE 8: SOUND DESIGN FÜR SPIELE (15 Prompts) ===
+
+166. Generiere ein Sound-Design-Konzept für einen [WAFFENTYP]-Waffenschuss mit [SCHICHTEN]-Schichten, [EFFEKT]-Effekten und [DAUER]-Sekunden Dauer.
+
+167. Erstelle eine UI-Sound-Effekt-Palette für [ELEMENTE]-UI-Elemente mit [KLICK]-Klick, [HOVER]-Hover und [AKTIVIERUNG]-Aktivierungs-Sounds.
+
+168. Entwickle ein Ambience-Sound-Konzept für [UMGEBUNG] mit [ELEMENTE]-Umgebungsgeräuschen und [LAUTSTÄRKE]-Lautstärke-Pegeln.
+
+169. Erstelle einen Footstep-Sound-Design-Katalog für [MATERIALIEN]-Oberflächen-Typen mit [SCHRITT]-Schritt-Varianten und [TEMPO]-Tempo-Anpassung.
+
+170. Entwirf ein Character-Voice-Set für [CHARAKTER]-Typ mit [EMOTIONEN]-Emotionen (Freude/Wut/Schmerz) und [PITCH]-Pitch-Variationen.
+
+171. Entwickle ein Musik-Loop-Konzept für [LEVEL]-Level-Typ mit [BPM]-Tempo, [STIMMUNG]-Stimmung und [LAYER]-Layer-Dynamik.
+
+172. Erstelle ein Explosion-Sound-Design mit [DISTANZ]-Distanz-Varianten (nah/fern), [SCHICHTEN]-Schichten (Knall/Dröhnen/Nachhall).
+
+173. Entwirf ein Creature/Monster-Vocal-Set für [KREATUR]-Typ mit [ANGRIFF]-Angriff, [SCHMERZ]-Schmerz und [TOD]-Tod-Sounds.
+
+174. Entwickle ein Vehicle-Engine-Sound-Konzept für [FAHRZEUG]-Typ mit [BEREICH]-Drehzahl-Bereich und [LASTGAST]-Last-Gas-Übergängen.
+
+175. Erstelle ein Magie/Skill-Sound-Paket für [ZAUBER]-Typen mit [WIRKUNG]-Wirkungs-Phasen (Cast/Impact/Sustain).
+
+176. Entwickle ein Wetter-Sound-Design mit [WETTER]-Wetter-Typen (Regen/Sturm/Wind) und [INTENSITÄT]-Intensitäts-Stufen.
+
+177. Erstelle ein Menu-Musik-Konzept für [GENRE]-Spiel mit [STIMMUNG]-Hauptstimmung, [INSTRUMENTE]-Instrumentierung und [LOOP]-Loop-Punkten.
+
+178. Entwirf ein Item-Pickup-Sound-Set mit [SELTENHEIT]-Seltenheits-Varianten und [EFFEKT]-Pickup-Charakter (Münze/Heilung/Upgrade).
+
+179. Entwickle ein Spatial-Audio-Setup für [ENGINE] mit [QUELLE]-Quellen-Typen, [REICHWEITE]-Hör-Reichweite und [OKKLUSION]-Okklusions-Einstellungen.
+
+180. Erstelle ein Cutscene/Dialog-Audio-Mix-Konzept mit [SPRACHE]-Dialog, [MUSIK]-Background-Musik und [SFX]-Sound-Effekte-Balance.
+
+=== KATEGORIE 9: GAME MARKETING & PUBLISHING (10 Prompts) ===
+
+181. Schreibe eine optimierte Steam-Store-Beschreibung für ein [GENRE]-Spiel namens [NAME] mit [ANZAHL] Hauptfeatures und [ZIELGRUPPE]-Zielgruppe.
+
+182. Erstelle eine Pressemitteilung für den Launch von [SPIELNAME] mit [ANZAHL] Kern-Botschaften und [KONTAKT]-Kontakt-Informationen.
+
+183. Entwickle einen Social-Media-Posting-Plan für die Launch-Woche von [SPIELNAME] mit [POSTS]-Posts pro Plattform und [TIMING]-Timing-Strategie.
+
+184. Schreibe einen Pitch-Text für Publisher/Investoren für [SPIELNAME] mit [GENRE]-Genre, [USP]-Unique-Selling-Point und [BUDGET]-Budget-Anforderungen.
+
+185. Erstelle eine E-Mail-Newsletter-Vorlage für den Launch von [SPIELNAME] mit [BETREFF]-Betreffzeile, [INHALT]-Inhalts-Struktur und [CTA]-Call-to-Action.
+
+186. Entwickle ein Steam-Wishlist-Kampagnen-Konzept für [SPIELNAME] mit [MASSNAHMEN]-Marketing-Aktionen und [ZIEL]-Wishlist-Zielzahl.
+
+187. Schreibe eine Kickstarter/Indiegogo-Kampagnen-Beschreibung für [SPIELNAME] mit [ZIEL]-Finanzierungsziel, [STUFEN]-Stretch-Goals und [BELOHNUNGEN]-Reward-Tiers.
+
+188. Erstelle eine Influencer/Content-Creator-Outreach-Vorlage für [SPIELNAME] mit [KEY_MESSAGE]-Key-Message und [KEY]-Spiel-Keys-Angebot.
+
+189. Entwickle eine Launch-Trailer-Beschreibung und Storyboard für [SPIELNAME] mit [DAUER]-Trailer-Dauer, [SEGMENTE]-Segment-Struktur und [MUSIK]-Musik-Charakter.
+
+190. Schreibe ein Steam-Community-Hub-Management-Konzept mit [POSTS]-Posting-Frequenz, [EVENTS]-Community-Events und [FEEDBACK]-Feedback-Management.
+
+=== KATEGORIE 10: AI FÜR GAME DEVELOPMENT (10 Prompts) ===
+
+191. Entwickle ein KI-gesteuertes NPC-Dialogsystem in [ENGINE] mit [MODELL]-KI-Modell, [ANZAHL] Dialogoptionen und dynamischer [ANPASSUNG].
+
+192. Erstelle ein KI-basiertes prozedurales Level-Design-System für [GENRE]-Spiel mit [MODELL]-Modell und [PARAMETER]-Design-Parametern.
+
+193. Implementiere einen KI-Assistenten für die Spielebalance in [ENGINE], der [STATS]-Spieler-Statistiken analysiert und [ANPASSUNG]-Anpassungen vorschlägt.
+
+194. Entwickle ein KI-gestütztes Tutorial-System, das sich an [SPIELERVERHALTEN]-Spielerverhalten anpasst und [HILFE]-gezielte Hilfestellung bietet.
+
+195. Erstelle ein KI-Content-Generation-Pipeline-Konzept für [SPIEL]-Assets mit [TYP]-Generierungs-Typ und [QUALITÄT]-Qualitätskontrolle.
+
+196. Entwickle ein KI-NPC-Verhaltenssystem mit [MODELL]-KI-Modell, das auf [SPIELERAKTIONEN] reagiert und dynamische [REAKTIONEN] erzeugt.
+
+197. Implementiere ein KI-QA-Test-System, das automatisch [FEATURES]-Features testet und [BUGS]-Bugs mit [KONTEXT]-Kontext-Informationen meldet.
+
+198. Erstelle ein KI-gestütztes Übersetzungs- und Lokalisierungssystem für [SPIELNAME] mit [SPRACHEN]-Sprach-Paketen und [KULTUR]-kulturellen Anpassungen.
+
+199. Entwickle ein KI-KI-System (Gegner-KI mit maschinellem Lernen) für [GENRE]-Spiel, das aus [SPIELERDATA] lernt und [SCHWIERIGKEIT]-adaptive Schwierigkeit bietet.
+
+200. Erstelle ein Konzept für einen KI-Game-Master in einem [GENRE]-Spiel, der [QUEST]-Quests dynamisch generiert, [WELT]-Welt-Ereignisse steuert und auf [SPIELERAKTION] reagiert.
