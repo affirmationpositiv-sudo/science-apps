@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎧 Audio-Studio-Bedarfsrechner 2026 – Podcast & Musik-Setup finden</title>
+<meta name="description" content="Finde in 2 Minuten dein perfektes Audio-Studio-Setup! Beantworte 5 Fragen zu Budget, Nutzung und Erfahrung – erhalte personalisierte Produktempfehlungen für Podcasts, Musikproduktion & Streaming. Mit Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Audio Studio Bedarfsrechner, Podcast Setup, Studio Ausrüstung, Mikrofon Beratung, Audio Interface Vergleich, Podcast Ausrüstung 2026">
+<meta name="robots" content="index, follow">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; min-height: 100vh; }
+.container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-size: 2.2em; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 8px; }
+.subtitle { text-align: center; color: #888; font-size: 1.05em; margin-bottom: 30px; }
+
+/* Progress Bar */
+.progress-bar { display: flex; justify-content: space-between; margin-bottom: 30px; position: relative; }
+.progress-bar::before { content: ''; position: absolute; top: 50%; left: 10%; right: 10%; height: 3px; background: #2A2A2A; transform: translateY(-50%); z-index: 0; }
+.progress-step { width: 40px; height: 40px; border-radius: 50%; background: #1A1A1A; border: 2px solid #2A2A2A; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9em; z-index: 1; transition: all 0.4s; }
+.progress-step.active { background: #8B5CF6; border-color: #8B5CF6; color: #fff; }
+.progress-step.done { background: #FFD700; border-color: #FFD700; color: #000; }
+
+/* Question Card */
+.question-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 30px; margin-bottom: 20px; }
+.question-card h2 { font-size: 1.3em; color: #fff; margin-bottom: 20px; }
+.question-card .q-num { color: #8B5CF6; font-weight: 600; font-size: 0.85em; margin-bottom: 4px; }
+
+/* Options */
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option { background: #141414; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+.option:hover { border-color: #8B5CF6; background: #1E1E1E; }
+.option.selected { border-color: #FFD700; background: rgba(255,215,0,0.08); box-shadow: 0 0 20px rgba(255,215,0,0.1); }
+.option .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #555; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.option.selected .radio { border-color: #FFD700; }
+.option.selected .radio::after { content: '✓'; color: #FFD700; font-weight: 700; font-size: 0.8em; }
+.option .label { flex: 1; }
+.option .label strong { color: #fff; display: block; }
+.option .label small { color: #888; font-size: 0.85em; }
+
+/* Navigation Buttons */
+.nav-btns { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.btn { padding: 12px 28px; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 0.95em; }
+.btn-primary { background: linear-gradient(135deg, #8B5CF6, #FFD700); color: #000; }
+.btn-primary:hover { transform: scale(1.02); }
+.btn-secondary { background: #2A2A2A; color: #888; }
+.btn-secondary:hover { background: #333; color: #fff; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Result */
+.result-section { display: none; }
+.result-card { background: #1A1A1A; border: 1px solid #8B5CF6; border-radius: 16px; padding: 30px; margin-bottom: 20px; }
+.result-card h2 { color: #FFD700; font-size: 1.3em; margin-bottom: 8px; }
+.result-card .total { font-size: 1.8em; font-weight: 800; color: #8B5CF6; margin: 8px 0; }
+.result-card .desc { color: #9CA3AF; font-size: 0.9em; }
+.prod-list { display: grid; gap: 12px; margin-top: 16px; }
+.prod-item { background: #141414; border: 1px solid #2A2A2A; border-radius: 10px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
+.prod-item .info h4 { color: #fff; font-size: 0.95em; }
+.prod-item .info p { color: #888; font-size: 0.82em; margin: 0; }
+.prod-item .price { color: #FFD700; font-weight: 600; font-size: 0.9em; margin: 2px 0 0; }
+.prod-item .buy-link { background: #8B5CF6; color: #fff; padding: 5px 14px; border-radius: 20px; font-size: 0.8em; text-decoration: none; font-weight: 600; white-space: nowrap; }
+.prod-item .buy-link:hover { background: #7C3AED; }
+
+/* Reset btn */
+.btn-reset { background: transparent; border: 1px solid #2A2A2A; color: #6B7280; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 0.85em; margin-top: 20px; }
+.btn-reset:hover { border-color: #8B5CF6; color: #A78BFA; }
+
+/* Sponsor CTA */
+.sponsor-cta { background: linear-gradient(135deg, #1a0a2e, #0A0A0A); border: 1px solid #8B5CF6; border-radius: 16px; padding: 24px; text-align: center; margin: 30px 0; }
+.sponsor-cta h3 { color: #fff; font-size: 1.2em; margin-bottom: 6px; }
+.sponsor-cta p { color: #9CA3AF; font-size: 0.85em; margin-bottom: 12px; }
+.sponsor-cta .btn { display: inline-block; background: linear-gradient(135deg, #8B5CF6, #FFD700); color: #000; font-weight: 700; padding: 10px 24px; border-radius: 30px; text-decoration: none; }
+
+.tips { background: #141414; border: 1px solid #2A2A2A; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.tips h3 { color: #FFD700; font-size: 1em; margin-bottom: 10px; }
+.tips ul { list-style: none; padding: 0; }
+.tips li { color: #9CA3AF; font-size: 0.85em; margin-bottom: 6px; padding-left: 20px; position: relative; }
+.tips li::before { content: '💡'; position: absolute; left: 0; }
+
+footer { text-align: center; padding: 20px; color: #555; font-size: 0.8em; }
+footer a { color: #8B5CF6; text-decoration: none; }
+
+@media (max-width: 500px) { h1 { font-size: 1.5em; } .question-card { padding: 20px; } .prod-item { flex-direction: column; align-items: flex-start; gap: 8px; } .prod-item .buy-link { align-self: flex-start; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🎧 Audio-Studio-Bedarfsrechner</h1>
+  <p class="subtitle">Beantworte 5 Fragen und erhalte dein persönliches Studio-Setup</p>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-step active" id="step1">1</div>
+    <div class="progress-step" id="step2">2</div>
+    <div class="progress-step" id="step3">3</div>
+    <div class="progress-step" id="step4">4</div>
+    <div class="progress-step" id="step5">5</div>
+  </div>
+
+  <!-- Questions -->
+  <div id="questionArea">
+    <div class="question-card" id="q1">
+      <div class="q-num">FRAGE 1 VON 5</div>
+      <h2>🎯 Wofür benötigst du dein Audio-Setup?</h2>
+      <div class="options">
+        <div class="option" onclick="selectOption(1,'podcast')"><div class="radio"></div><div class="label"><strong>🎙️ Podcast / Sprachaufnahmen</strong><small>Reine Sprachaufnahmen für Podcast, Hörbuch oder Voice-Over</small></div></div>
+        <div class="option" onclick="selectOption(1,'music')"><div class="radio"></div><div class="label"><strong>🎵 Musikproduktion</strong><small>Gesang, Instrumente, Mixing & Mastering</small></div></div>
+        <div class="option" onclick="selectOption(1,'streaming')"><div class="radio"></div><div class="label"><strong>🎮 Streaming / Gaming</strong><small>Live-Streaming mit Kommentar, Discord-Chat, Multiplayer</small></div></div>
+        <div class="option" onclick="selectOption(1,'allround')"><div class="radio"></div><div class="label"><strong>🔄 Allrounder (alles)</strong><small>Podcast, Musik & Streaming – ein Setup für alles</small></div></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="q2" style="display:none;">
+      <div class="q-num">FRAGE 2 VON 5</div>
+      <h2>💰 Welches Budget hast du für das gesamte Setup?</h2>
+      <div class="options">
+        <div class="option" onclick="selectOption(2,'minimal')"><div class="radio"></div><div class="label"><strong>💰 0 – 150 € (Minimal)</strong><small>Smartphone + günstiges Zubehör – Start mit vorhandener Hardware</small></div></div>
+        <div class="option" onclick="selectOption(2,'starter')"><div class="radio"></div><div class="label"><strong>💰 150 – 350 € (Einsteiger)</strong><small>USB-Mikrofon + Kopfhörer + einfaches Zubehör</small></div></div>
+        <div class="option" onclick="selectOption(2,'mid')"><div class="radio"></div><div class="label"><strong>💰 350 – 700 € (Fortgeschritten)</strong><small>XLR-Mikrofon + Interface + gute Kopfhörer</small></div></div>
+        <div class="option" onclick="selectOption(2,'high')"><div class="radio"></div><div class="label"><strong>💰 700 – 1500 € (Semi-Profi)</strong><small>Hochwertiges XLR-Setup + Studio-Monitore + Akustik</small></div></div>
+        <div class="option" onclick="selectOption(2,'pro')"><div class="radio"></div><div class="label"><strong>💰 1500 €+ (Profi)</strong><small>Shure SM7B / Neumann + Rodecaster + Vollausstattung</small></div></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="q3" style="display:none;">
+      <div class="q-num">FRAGE 3 VON 5</div>
+      <h2>🎚️ Wie viel Erfahrung hast du mit Audio-Technik?</h2>
+      <div class="options">
+        <div class="option" onclick="selectOption(3,'anfaenger')"><div class="radio"></div><div class="label"><strong>🌱 Anfänger</strong><small>Noch nie mit Mikrofon oder Interface gearbeitet – will einfach loslegen</small></div></div>
+        <div class="option" onclick="selectOption(3,'fortgeschritten')"><div class="radio"></div><div class="label"><strong>📈 Fortgeschritten</strong><small>Schon Erfahrung mit USB-Mikro oder einfachem Setup – will aufrüsten</small></div></div>
+        <div class="option" onclick="selectOption(3,'profi')"><div class="radio"></div><div class="label"><strong>🔥 Profi</strong><small>Kenne XLR, Gain-Staging, Kompression & EQ – will das Beste</small></div></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="q4" style="display:none;">
+      <div class="q-num">FRAGE 4 VON 5</div>
+      <h2>🏠 Wie ist dein Aufnahmeraum?</h2>
+      <div class="options">
+        <div class="option" onclick="selectOption(4,'behandelt')"><div class="radio"></div><div class="label"><strong>✅ Akustisch behandelt</strong><small>Bereits Schaumstoff, Basotec-Platten oder Diffusoren vorhanden</small></div></div>
+        <div class="option" onclick="selectOption(4,'moebliert')"><div class="radio"></div><div class="label"><strong>🛋️ Normal möbliert</strong><small>Wohnzimmer, Büro oder Schlafzimmer – Teppich, Möbel, Vorhänge</small></div></div>
+        <div class="option" onclick="selectOption(4,'hart')"><div class="radio"></div><div class="label"><strong>🏢 Harter Raum</strong><small>Fliesen, Beton, große Fenster, wenig Möbel – viel Hall</small></div></div>
+      </div>
+    </div>
+
+    <div class="question-card" id="q5" style="display:none;">
+      <div class="q-num">FRAGE 5 VON 5</div>
+      <h2>🎯 Wie viele Personen nehmen gleichzeitig auf?</h2>
+      <div class="options">
+        <div class="option" onclick="selectOption(5,'solo')"><div class="radio"></div><div class="label"><strong>👤 Solo (1 Person)</strong><small>Ich nehme alleine auf – Podcast Solo, Voice-Over oder Musik</small></div></div>
+        <div class="option" onclick="selectOption(5,'duo')"><div class="radio"></div><div class="label"><strong>👥 Duo (2 Personen)</strong><small>Ich interviewe Gäste oder habe einen Co-Host vor Ort</small></div></div>
+        <div class="option" onclick="selectOption(5,'multi')"><div class="radio"></div><div class="label"><strong>👨‍👩‍👧‍👦 Multi (3+)</strong><small>Runden-Tisch, Panel-Diskussion oder Band-Probe</small></div></div>
+      </div>
+    </div>
+
+    <div class="nav-btns" style="display:none;" id="navBtns">
+      <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">← Zurück</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="result-section" id="resultSection">
+    <div class="result-card" id="resultCard">
+      <h2>🎉 Dein personalisiertes Studio-Setup</h2>
+      <div class="total" id="totalBudget">0 €</div>
+      <div class="desc" id="setupDesc">Basierend auf deinen Angaben empfehlen wir dir folgende Produkte:</div>
+      <div class="prod-list" id="prodList"></div>
+    </div>
+
+    <div class="tips">
+      <h3>💡 Profi-Tipps für dein Setup</h3>
+      <ul id="tipsList">
+        <li>Halte 15-20 cm Abstand zum Mikrofon für optimale Klangqualität</li>
+        <li>Teste dein Setup vor der ersten richtigen Aufnahme</li>
+        <li>Nutze kostenlose KI-Tools wie Adobe Podcast Enhance zur Nachbearbeitung</li>
+      </ul>
+    </div>
+
+    <div class="sponsor-cta">
+      <h3>📖 Ausführlicher Ratgeber</h3>
+      <p>Alles über Podcast-Ausrüstung, Mikrofone, Interfaces & KI-Tools im Detail</p>
+      <a href="../blog/ki-podcast-audio-produktion-2026.html" class="btn">→ Zum Podcast-Guide 2026</a>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="btn-reset" onclick="resetQuiz()">🔄 Nochmal starten</button>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="../tools/">← Zurück zu den Tools</a> · <a href="../blog/ki-podcast-audio-produktion-2026.html">🎙️ Podcast-Guide</a></p>
+    <p style="margin-top:4px;">© 2026 Licht und Schatten · Affiliate-Links (Amazon, tag=ikune21-21)</p>
+  </footer>
+</div>
+
+<script>
+const state = { q1:null, q2:null, q3:null, q4:null, q5:null };
+let currentQuestion = 1;
+
+function selectOption(qNum, value) {
+  state['q'+qNum] = value;
+  document.querySelectorAll('#q'+qNum+' .option').forEach(o => o.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  document.getElementById('navBtns').style.display = 'flex';
+  updateProgress();
+  // Auto-advance after brief delay
+  setTimeout(() => { if (currentQuestion < 5) nextQuestion(); }, 400);
+}
+
+function updateProgress() {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById('step'+i);
+    if (state['q'+i]) {
+      el.classList.add('done');
+      el.classList.remove('active');
+    } else {
+      el.classList.remove('done');
+    }
+  }
+  const activeEl = document.getElementById('step'+currentQuestion);
+  if (activeEl && !state['q'+currentQuestion]) activeEl.classList.add('active');
+}
+
+function showQuestion(n) {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById('q'+i).style.display = (i === n) ? 'block' : 'none';
+  }
+  currentQuestion = n;
+  updateProgress();
+  document.getElementById('navBtns').style.display = state['q'+n] ? 'flex' : 'none';
+  document.getElementById('prevBtn').style.visibility = (n === 1) ? 'hidden' : 'visible';
+}
+
+function nextQuestion() {
+  if (!state['q'+currentQuestion]) return;
+  if (currentQuestion < 5) {
+    showQuestion(currentQuestion + 1);
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (currentQuestion > 1) showQuestion(currentQuestion - 1);
+}
+
+function getRecommendations() {
+  const useCase = state.q1;
+  const budget = state.q2;
+  const experience = state.q3;
+  const room = state.q4;
+  const persons = state.q5;
+
+  // Determine which category based on budget & use case
+  let recs = [];
+  let total = 0;
+  let title = '';
+  let desc = '';
+
+  const tag = 'ikune21-21';
+
+  // PERSON SELECTOR TABLE
+  const personMap = { solo: 1, duo: 2, multi: 3 };
+
+  if ((budget === 'minimal' || budget === 'starter') && useCase !== 'music') {
+    // USB Microphone setups
+    title = '🎤 USB-Mikrofon-Setup (Einsteiger)';
+    desc = 'Perfekt für Podcast-Einsteiger! USB-Mikrofon + Kopfhörer + Arm – Plug & Play, kein Interface nötig.';
+    if (budget === 'minimal') {
+      recs.push({ name: '🎤 Elgato Wave:3', desc: 'Bestes USB-Mikrofon für Einsteiger (149 €)', price: 149, url: 'https://www.amazon.de/s?k=Elgato+Wave+3&tag='+tag });
+      recs.push({ name: '🎧 Audio-Technica ATH-M20x', desc: 'Günstige Studio-Kopfhörer für Monitoring', price: 49, url: 'https://www.amazon.de/s?k=Audio+Technica+ATH-M20x&tag='+tag });
+      recs.push({ name: '🔧 InnoGear Mikrofonarm', desc: 'Günstiger aber stabiler Schwenkarm', price: 25, url: 'https://www.amazon.de/s?k=InnoGear+Mikrofonarm&tag='+tag });
+      recs.push({ name: '🛡️ Pop Filter Doppellagig', desc: 'Reduziert Plosivlaute (P,B,T)', price: 12, url: 'https://www.amazon.de/s?k=Pop+Filter+Podcast&tag='+tag });
+      total = 235;
+    } else {
+      recs.push({ name: '🎤 Rode NT-USB+', desc: 'Das beste USB-Mikrofon 2026 mit DSP', price: 179, url: 'https://www.amazon.de/s?k=Rode+NT-USB+Plus&tag='+tag });
+      recs.push({ name: '🎧 Beyerdynamic DT 770 Pro', desc: 'Professionelle Studio-Kopfhörer', price: 159, url: 'https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag='+tag });
+      recs.push({ name: '🔧 Rode PSA1', desc: 'Hochwertiger Mikrofon-Schwenkarm', price: 89, url: 'https://www.amazon.de/s?k=Rode+PSA1&tag='+tag });
+      recs.push({ name: '🛡️ Elgato Pop Filter', desc: 'Doppellagiger Pop-Filter von Elgato', price: 19, url: 'https://www.amazon.de/s?k=Elgato+Pop+Filter&tag='+tag });
+      total = 446;
+    }
+  } else if (budget === 'starter' && useCase === 'music') {
+    title = '🎵 Musikproduktion Einsteiger';
+    desc = 'USB-Mikrofon + Interface-Kombi für erste Musikaufnahmen.';
+    recs.push({ name: '🎤 Rode NT-USB+', desc: 'Vielseitiges USB-Mikrofon für Gesang & Sprache', price: 179, url: 'https://www.amazon.de/s?k=Rode+NT-USB+Plus&tag='+tag });
+    recs.push({ name: '🎧 Audio-Technica ATH-M50x', desc: 'Studio-Kopfhörer mit ausgewogenem Klang', price: 149, url: 'https://www.amazon.de/s?k=Audio+Technica+ATH-M50x&tag='+tag });
+    recs.push({ name: '🎛️ Focusrite Scarlett Solo', desc: 'Günstiges 1-Kanal Audio-Interface', price: 129, url: 'https://www.amazon.de/s?k=Focusrite+Scarlett+Solo&tag='+tag });
+    total = 457;
+  } else if (budget === 'mid' || (budget === 'starter' && persons === 'duo')) {
+    title = '🎙️ XLR-Setup (Fortgeschritten)';
+    desc = 'XLR-Mikrofon + Audio-Interface – der erste Schritt zu professionellem Sound.';
+    const micUnder200 = useCase === 'podcast' || useCase === 'streaming';
+    if (micUnder200) {
+      recs.push({ name: '🎤 Rode PodMic', desc: 'Speziell für Podcasts entwickeltes XLR-Mikrofon', price: 99, url: 'https://www.amazon.de/s?k=Rode+PodMic&tag='+tag });
+    } else {
+      recs.push({ name: '🎤 Shure SM58', desc: 'Legendäres Live- & Studio-Mikrofon', price: 99, url: 'https://www.amazon.de/s?k=Shure+SM58&tag='+tag });
+    }
+    if (useCase === 'music' || useCase === 'allround') {
+      recs.push({ name: '🎛️ Focusrite Scarlett 2i2 (4. Gen)', desc: '2-Kanal Interface mit Air-Mode', price: 189, url: 'https://www.amazon.de/s?k=Focusrite+Scarlett+2i2+4+Gen&tag='+tag });
+    } else {
+      recs.push({ name: '🎛️ Focusrite Scarlett Solo (4. Gen)', desc: '1-Kanal Interface – perfekt für Solo-Podcast', price: 129, url: 'https://www.amazon.de/s?k=Focusrite+Scarlett+Solo+4+Gen&tag='+tag });
+    }
+    recs.push({ name: '🎧 Beyerdynamic DT 770 Pro', desc: 'Geschlossene Studio-Kopfhörer für Recording', price: 159, url: 'https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag='+tag });
+    recs.push({ name: '🔧 Rode PSA1', desc: 'Mikrofon-Schwenkarm mit Kabelführung', price: 89, url: 'https://www.amazon.de/s?k=Rode+PSA1&tag='+tag });
+    recs.push({ name: '🔌 Cordial XLR-Kabel 5m', desc: 'Hochwertiges, entstörte XLR-Kabel', price: 24, url: 'https://www.amazon.de/s?k=Cordial+XLR+Kabel+5m&tag='+tag });
+    total = micUnder200 ? 500 : 500;
+    if (!micUnder200) total = 500;
+  } else if (budget === 'high' || budget === 'pro') {
+    title = '🏆 Semi-Profi bis Profi Studio';
+    desc = 'Hochwertige Komponenten für beste Audio-Qualität. Shure SM7B + Rodecaster oder Focusrite.';
+    recs.push({ name: '🎤 Shure SM7B', desc: 'Das Profi-Standard-Podcast-Mikrofon', price: 399, url: 'https://www.amazon.de/s?k=Shure+SM7B&tag='+tag });
+    recs.push({ name: '🎚️ TritonAudio FetHead', desc: 'Vorverstärker für dynamische Mikrofone (+26 dB)', price: 69, url: 'https://www.amazon.de/s?k=TritonAudio+FetHead&tag='+tag });
+    if (useCase === 'podcast' || useCase === 'streaming') {
+      recs.push({ name: '🎛️ Rode Rodecaster Duo', desc: 'Podcast-All-in-One mit Touchscreen & Soundboard', price: 499, url: 'https://www.amazon.de/s?k=Rode+Rodecaster+Duo&tag='+tag });
+    } else {
+      recs.push({ name: '🎛️ Focusrite Clarett+ 2Pre', desc: 'Profi-Interface mit exzellenten Preamps', price: 499, url: 'https://www.amazon.de/s?k=Focusrite+Clarett+2Pre&tag='+tag });
+    }
+    recs.push({ name: '🎧 Beyerdynamic DT 900 Pro X', desc: 'Offene Kopfhörer für kritisches Hören', price: 249, url: 'https://www.amazon.de/s?k=Beyerdynamic+DT+900+Pro+X&tag='+tag });
+    recs.push({ name: '🔧 Rode PSA1+', desc: 'Professioneller Mikrofonarm', price: 109, url: 'https://www.amazon.de/s?k=Rode+PSA1+Plus&tag='+tag });
+    recs.push({ name: '🧱 Akustikschaumstoff-Set (12er)', desc: 'Verbessert Raumakustik – reduziert Hall', price: 25, url: 'https://www.amazon.de/s?k=Akustikschaumstoff+12er+Set&tag='+tag });
+    total = persons === 'duo' ? 1350 * 1.7 : 1350;
+    if (persons === 'multi') total = 1350 * 2.5;
+  } else {
+    // fallback
+    title = '🎤 Empfohlenes Einsteiger-Setup';
+    desc = 'Bewährtes USB-Setup für den perfekten Start.';
+    recs.push({ name: '🎤 Rode NT-USB+', desc: 'Bestes USB-Mikrofon 2026', price: 179, url: 'https://www.amazon.de/s?k=Rode+NT-USB+Plus&tag='+tag });
+    recs.push({ name: '🎧 Beyerdynamic DT 770 Pro', desc: 'Professionelle Kopfhörer', price: 159, url: 'https://www.amazon.de/s?k=Beyerdynamic+DT+770+Pro+80&tag='+tag });
+    recs.push({ name: '🔧 Rode PSA1', desc: 'Mikrofonarm', price: 89, url: 'https://www.amazon.de/s?k=Rode+PSA1&tag='+tag });
+    total = 427;
+  }
+
+  // Add multi-person upgrade note
+  if (persons === 'duo' && recs.length > 0 && !recs.some(r => r.name.includes('Rodecaster'))) {
+    recs.push({ name: '🎛️ Focusrite Scarlett 2i2', desc: '2 XLR-Eingänge für 2 Mikrofone', price: 189, url: 'https://www.amazon.de/s?k=Focusrite+Scarlett+2i2+4+Gen&tag='+tag });
+    total += 189;
+  }
+
+  // Room treatment if hard room
+  if (room === 'hart' && !recs.some(r => r.name.includes('Akustik'))) {
+    recs.push({ name: '🧱 Akustikschaumstoff-Set', desc: '12er Set – reduziert Hall drastisch', price: 25, url: 'https://www.amazon.de/s?k=Akustikschaumstoff+Set&tag='+tag });
+    total += 25;
+  }
+
+  // Deduplicate by URL
+  const seen = new Set();
+  recs = recs.filter(r => {
+    const key = r.url.split('&tag=')[0];
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+
+  return { title, desc, total: Math.round(total), recs };
+}
+
+function showResult() {
+  document.getElementById('questionArea').style.display = 'none';
+  document.getElementById('resultSection').style.display = 'block';
+
+  const result = getRecommendations();
+  document.getElementById('totalBudget').textContent = result.total.toLocaleString('de-DE') + ' €';
+  document.getElementById('setupDesc').textContent = result.desc;
+
+  let html = '';
+  result.recs.forEach(r => {
+    html += '<div class="prod-item"><div class="info"><h4>' + r.name + '</h4><p>' + r.desc + '</p><p class="price">ca. ' + r.price.toLocaleString('de-DE') + ' €</p></div><a class="buy-link" href="' + r.url + '" target="_blank" rel="noopener">→ Amazon</a></div>';
+  });
+  document.getElementById('prodList').innerHTML = html;
+
+  // Update tips based on room
+  if (state.q4 === 'hart') {
+    document.getElementById('tipsList').innerHTML =
+      '<li>Dein Raum hat viel Hall – investiere in Akustikschaumstoff!</li>' +
+      '<li>Stelle dich mit dem Rücken zu einer Wand, nicht in die Raummitte</li>' +
+      '<li>Ein Teppich + Vorhänge reduzieren Hall schon enorm</li>' +
+      '<li>Nutze KI-Tools wie Adobe Podcast Enhance zur Nachbearbeitung</li>' +
+      '<li>Halte 15-20 cm Abstand zum Mikrofon für optimale Klangqualität</li>';
+  } else {
+    document.getElementById('tipsList').innerHTML =
+      '<li>Halte 15-20 cm Abstand zum Mikrofon für optimale Klangqualität</li>' +
+      '<li>Teste dein Setup vor der ersten richtigen Aufnahme</li>' +
+      '<li>Nutze kostenlose KI-Tools wie Adobe Podcast Enhance zur Nachbearbeitung</li>' +
+      '<li>Normalisiere auf -16 LUFS für konsistente Podcast-Lautstärke</li>';
+  }
+}
+
+function resetQuiz() {
+  for (let k in state) state[k] = null;
+  currentQuestion = 1;
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.getElementById('resultSection').style.display = 'none';
+  document.getElementById('questionArea').style.display = 'block';
+  document.getElementById('navBtns').style.display = 'none';
+  showQuestion(1);
+}
+</script>
+</body>
+</html>
