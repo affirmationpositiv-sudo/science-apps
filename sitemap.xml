@@ -447,4 +447,20 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Artikel #23: KI-Reisen & Urlaubsplanung 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-reisen-urlaubsplanung-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reisekostenrechner (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/reisekostenrechner.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>

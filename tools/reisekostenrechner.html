@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reisekostenrechner 2026 – KI-Urlaubsplaner | Licht und Schatten</title>
+<meta name="description" content="Kostenloser interaktiver Reisekostenrechner 2026: Budget für Flug, Hotel, Verpflegung, Aktivitäten & Gadgets. Mit KI-Spar-Tipps & Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Reisekostenrechner, Urlaubsbudget 2026, Reisekosten kalkulieren, Urlaubskosten berechnen, travel budget calculator, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<meta name="language" content="de">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Reisekostenrechner 2026 – Dein KI-Urlaubsbudget-Planer">
+<meta property="og:description" content="Berechne deine Reisekosten für 2026: Flug, Hotel, Verpflegung, Aktivitäten & mehr. Kostenlos & interaktiv.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lichtundschatten.github.io/tools/reisekostenrechner.html">
+<meta property="og:locale" content="de_DE">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reisekostenrechner 2026">
+<meta name="twitter:description" content="Berechne dein Urlaubsbudget 2026. Kostenlos, kein Login, im Browser.">
+
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+a{color:#A78BFA;text-decoration:none}
+a:hover{color:#FFD700}
+header{text-align:center;padding:60px 20px 30px;background:linear-gradient(135deg,#0A0A0A 0%,#1a0a2e 50%,#0A0A0A 100%)}
+header h1{font-size:2.2em;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+header .sub{color:#6B7280;font-size:1em}
+.badge{display:inline-block;background:#8B5CF6;color:#fff;padding:4px 14px;border-radius:20px;font-size:0.8em;margin-bottom:12px}
+.container{max-width:820px;margin:0 auto;padding:0 20px 60px}
+
+/* ===== CALCULATOR FORM ===== */
+.calc-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:32px;margin:24px 0}
+.calc-card h2{font-size:1.3em;color:#8B5CF6;margin-bottom:20px;border-bottom:1px solid #2A2A2A;padding-bottom:12px}
+.form-row{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:16px}
+.form-group{flex:1;min-width:180px}
+.form-group label{display:block;color:#9CA3AF;font-size:0.85em;margin-bottom:4px;font-weight:600}
+.form-group input,.form-group select{width:100%;padding:10px 14px;background:#141414;border:1px solid #333;border-radius:8px;color:#E5E5E5;font-size:1em;transition:border-color 0.3s}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:#8B5CF6}
+.form-group input[type="number"]{-moz-appearance:textfield}
+.form-group input[type="number"]::-webkit-inner-spin-button,.form-group input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+input::placeholder{color:#555}
+
+/* ===== RESULT BOX ===== */
+.result-box{display:none;margin-top:24px}
+.result-box.show{display:block}
+.result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+.result-item{background:#141414;border:1px solid #333;border-radius:12px;padding:16px;text-align:center}
+.result-item .amount{font-size:1.5em;font-weight:700;color:#FFD700}
+.result-item .label{color:#6B7280;font-size:0.8em;margin-top:2px}
+.result-total{background:linear-gradient(135deg,#1a0a2e,#0A0A0A);border:2px solid #8B5CF6;border-radius:12px;padding:20px;text-align:center;margin-bottom:20px}
+.result-total .total-amount{font-size:2.4em;font-weight:800;color:#FFD700}
+.result-total .total-label{color:#9CA3AF;font-size:0.9em}
+.progress-bar{background:#141414;border-radius:8px;height:8px;margin:16px 0;overflow:hidden}
+.progress-fill{height:100%;border-radius:8px;transition:width 0.5s ease;background:linear-gradient(90deg,#8B5CF6,#FFD700)}
+.progress-categories{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.progress-legend{display:flex;align-items:center;gap:6px;font-size:0.78em;color:#6B7280}
+.progress-legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* ===== DETAIL TABLE ===== */
+.detail-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9em}
+.detail-table th{color:#8B5CF6;padding:10px 8px;text-align:left;border-bottom:2px solid #333;font-size:0.85em}
+.detail-table td{padding:10px 8px;border-bottom:1px solid #222;color:#D1D5DB}
+.detail-table tr:hover td{background:#1A1A1A}
+.detail-table .value{text-align:right;font-weight:600;color:#FFD700}
+.detail-table .percent{text-align:right;color:#6B7280;font-size:0.85em}
+
+/* ===== SAVINGS ===== */
+.savings-box{background:#141414;border:1px solid #059669;border-radius:12px;padding:20px;margin:20px 0}
+.savings-box h3{color:#059669;margin-bottom:12px}
+.savings-tip{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;padding:10px;background:#0D1F1A;border-radius:8px}
+.savings-tip:last-child{margin-bottom:0}
+.savings-tip .tip-icon{font-size:1.2em;min-width:24px}
+.savings-tip .tip-text{color:#D1D5DB;font-size:0.88em}
+
+/* ===== AFFILIATE ===== */
+.affiliate-section{background:#1A1A1A;border:1px solid #8B5CF6;border-radius:12px;padding:24px;margin:24px 0}
+.affiliate-section h3{color:#8B5CF6;margin-bottom:12px}
+.affiliate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.affiliate-item{background:#141414;border:1px solid #2A2A2A;border-radius:10px;padding:14px;text-align:center;transition:border-color 0.3s}
+.affiliate-item:hover{border-color:#8B5CF6}
+.affiliate-item .item-icon{font-size:2em;margin-bottom:6px}
+.affiliate-item .item-name{color:#E5E5E5;font-size:0.9em;font-weight:600;margin-bottom:4px}
+.affiliate-item .item-price{color:#6B7280;font-size:0.8em;margin-bottom:8px}
+.affiliate-item .shop-btn{display:inline-block;background:#8B5CF6;color:#fff;padding:6px 16px;border-radius:6px;font-size:0.8em;font-weight:600}
+.affiliate-item .shop-btn:hover{background:#7C3AED}
+
+/* ===== FEATURES ===== */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:20px 0}
+.feature{background:#141414;border:1px solid #222;border-radius:10px;padding:16px;text-align:center}
+.feature .num{font-size:1.8em;font-weight:700;color:#8B5CF6}
+.feature .label{color:#6B7280;font-size:0.8em}
+
+/* ===== BUTTONS ===== */
+.btn{background:#8B5CF6;color:#fff;padding:12px 28px;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:background 0.3s}
+.btn:hover{background:#7C3AED}
+.btn-secondary{background:#2A2A2A;color:#E5E5E5;padding:8px 20px;border:none;border-radius:8px;font-size:0.9em;font-weight:500;cursor:pointer;margin-left:8px}
+.btn-secondary:hover{background:#333}
+.btn-print{background:#059669;color:#fff;padding:8px 20px;border:none;border-radius:8px;font-size:0.9em;cursor:pointer;margin-left:8px}
+.btn-print:hover{background:#047857}
+
+/* ===== DISCLAIMER ===== */
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:14px;margin:30px 0;font-size:0.8em;color:#6B7280;line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){header h1{font-size:1.6em}.calc-card{padding:20px}.form-group{min-width:140px}.result-grid{grid-template-columns:repeat(2,1fr)}}
+
+footer{text-align:center;padding:30px 20px;color:#555;font-size:0.82em;border-top:1px solid #1A1A1A;margin-top:20px}
+footer a{color:#8B5CF6}
+</style>
+</head>
+<body>
+
+<header>
+    <span class="badge">📊 Kostenlos · Keine Anmeldung · Browser</span>
+    <h1>🌍 Reisekostenrechner 2026</h1>
+    <p class="sub">Berechne dein Urlaubsbudget – inkl. Flug, Hotel, Aktivitäten & smarter Spar-Tipps</p>
+</header>
+
+<div class="container">
+
+<!-- Features -->
+<div class="features">
+    <div class="feature">
+        <div class="num" id="totalSites">6</div>
+        <div class="label">📊 Kosten-Kategorien</div>
+    </div>
+    <div class="feature">
+        <div class="num">📱</div>
+        <div class="label">100% Browser-basiert</div>
+    </div>
+    <div class="feature">
+        <div class="num" id="savingsCount">0</div>
+        <div class="label">💰 KI-Spar-Tipps</div>
+    </div>
+    <div class="feature">
+        <div class="num">🔗</div>
+        <div class="label">Affiliate-Links (ikune21-21)</div>
+    </div>
+</div>
+
+<!-- Calculator -->
+<div class="calc-card">
+    <h2>✈️ Reisedaten eingeben</h2>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>🗺️ Reiseziel</label>
+            <select id="destination">
+                <option value="europa-west">Westeuropa (Spanien, Italien, Frankreich)</option>
+                <option value="europa-ost">Osteuropa (Polen, Kroatien, Ungarn)</option>
+                <option value="nordafrika">Nordafrika (Marokko, Tunesien, Ägypten)</option>
+                <option value="asien">Südostasien (Thailand, Vietnam, Bali)</option>
+                <option value="usa">USA / Kanada</option>
+                <option value="fernreise" selected>Fernreise (Karibik, Malediven, Japan)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>👥 Reisende</label>
+            <input type="number" id="travelers" value="2" min="1" max="20">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>📅 Reisedauer (Tage)</label>
+            <input type="number" id="duration" value="14" min="1" max="90">
+        </div>
+        <div class="form-group">
+            <label>🏨 Unterkunfts-Typ</label>
+            <select id="accommodation">
+                <option value="budget">Hostel / Budget (20-40€/Nacht/Person)</option>
+                <option value="mid" selected>Mittelklasse (50-90€/Nacht/Person)</option>
+                <option value="comfort">Komfort (90-150€/Nacht/Person)</option>
+                <option value="luxury">Luxus (150-300€/Nacht/Person)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>✈️ Flugkosten (Hin- & Rückflug pro Person in €)</label>
+            <input type="number" id="flight" value="600" min="0" max="5000" step="50">
+        </div>
+        <div class="form-group">
+            <label>🍽️ Verpflegung pro Tag/Person in €</label>
+            <input type="number" id="food" value="35" min="0" max="200">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>🚗 Transport vor Ort (Mietwagen, Taxi, Nahverkehr) in €</label>
+            <input type="number" id="transport" value="400" min="0" max="5000" step="50">
+        </div>
+        <div class="form-group">
+            <label>🎯 Aktivitäten & Ausflüge (pro Person in €)</label>
+            <input type="number" id="activities" value="500" min="0" max="8000" step="50">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>🛍️ Gadgets & Ausrüstung (Koffer, Kopfhörer, etc.) in €</label>
+            <input type="number" id="gadgets" value="200" min="0" max="5000" step="50">
+        </div>
+        <div class="form-group">
+            <label>📋 Sonstiges (Versicherung, Visa, Trinkgeld) in €</label>
+            <input type="number" id="misc" value="200" min="0" max="5000" step="50">
+        </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:8px">
+        <button class="btn" onclick="calculate()">📊 Jetzt berechnen</button>
+        <button class="btn-secondary" onclick="resetForm()">↺ Zurücksetzen</button>
+        <button class="btn-print" onclick="window.print()">🖨️ Drucken</button>
+    </div>
+</div>
+
+<!-- Result Section -->
+<div class="result-box" id="resultBox">
+
+    <!-- Total -->
+    <div class="result-total">
+        <div class="total-label">💰 Gesamt-Reisekosten (alle Reisenden)</div>
+        <div class="total-amount" id="totalAmount">0 €</div>
+        <div class="total-label" style="margin-top:4px" id="perPerson">0 € pro Person</div>
+    </div>
+
+    <!-- Category breakdown -->
+    <div class="result-grid">
+        <div class="result-item">
+            <div class="amount" id="rFlight">0€</div>
+            <div class="label">✈️ Flug</div>
+        </div>
+        <div class="result-item">
+            <div class="amount" id="rHotel">0€</div>
+            <div class="label">🏨 Unterkunft</div>
+        </div>
+        <div class="result-item">
+            <div class="amount" id="rFood">0€</div>
+            <div class="label">🍽️ Verpflegung</div>
+        </div>
+        <div class="result-item">
+            <div class="amount" id="rTransport">0€</div>
+            <div class="label">🚗 Verkehr</div>
+        </div>
+        <div class="result-item">
+            <div class="amount" id="rActivities">0€</div>
+            <div class="label">🎯 Aktivitäten</div>
+        </div>
+        <div class="result-item">
+            <div class="amount" id="rGadgets">0€</div>
+            <div class="label">🛍️ Gadgets</div>
+        </div>
+        <div class="result-item">
+            <div class="amount" id="rMisc">0€</div>
+            <div class="label">📋 Sonstiges</div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="calc-card" style="padding:20px">
+        <h2>📊 Kostenverteilung</h2>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width:100%"></div>
+        </div>
+        <div class="progress-categories" id="progressCategories"></div>
+    </div>
+
+    <!-- Detail Table -->
+    <div class="calc-card" style="padding:20px">
+        <h2>📋 Detaillierte Kostenaufstellung</h2>
+        <table class="detail-table">
+            <thead>
+                <tr><th>Kategorie</th><th>Betrag</th><th>Anteil</th><th>Spar-Potenzial</th></tr>
+            </thead>
+            <tbody id="detailBody"></tbody>
+        </table>
+    </div>
+
+    <!-- Smart Savings Tips -->
+    <div class="savings-box" id="savingsBox">
+        <h3 style="color:#059669">💡 KI-Spar-Tipps für deine Reise</h3>
+        <div id="savingsTips"></div>
+    </div>
+
+    <!-- Affiliate Section -->
+    <div class="affiliate-section">
+        <h3>🛍️ Empfohlene Reise-Gadgets auf Amazon</h3>
+        <p style="color:#9CA3AF;font-size:0.85em;margin-bottom:16px">Mit Amazon-Partner-Links (tag=ikune21-21) – keine Mehrkosten für dich.</p>
+        <div class="affiliate-grid">
+            <div class="affiliate-item">
+                <div class="item-icon">🎧</div>
+                <div class="item-name">Sony WH-1000XM6</div>
+                <div class="item-price">ab ~350€</div>
+                <a href="https://www.amazon.de/s?k=sony+wh-1000xm6+kopfhörer&tag=ikune21-21" class="shop-btn" target="_blank">🔗 Shop</a>
+            </div>
+            <div class="affiliate-item">
+                <div class="item-icon">🔋</div>
+                <div class="item-name">Anker PowerCore 26800</div>
+                <div class="item-price">ab ~55€</div>
+                <a href="https://www.amazon.de/s?k=anker+powerbank+26800&tag=ikune21-21" class="shop-btn" target="_blank">🔗 Shop</a>
+            </div>
+            <div class="affiliate-item">
+                <div class="item-icon">🔌</div>
+                <div class="item-name">Universal-Reisestecker</div>
+                <div class="item-price">ab ~25€</div>
+                <a href="https://www.amazon.de/s?k=universal+reiseadapter+usb+c&tag=ikune21-21" class="shop-btn" target="_blank">🔗 Shop</a>
+            </div>
+            <div class="affiliate-item">
+                <div class="item-icon">📍</div>
+                <div class="item-name">Apple AirTag 4er Pack</div>
+                <div class="item-price">ab ~100€</div>
+                <a href="https://www.amazon.de/s?k=airtag+4er+pack&tag=ikune21-21" class="shop-btn" target="_blank">🔗 Shop</a>
+            </div>
+            <div class="affiliate-item">
+                <div class="item-icon">😴</div>
+                <div class="item-name">Ergonomisches Reisekissen</div>
+                <div class="item-price">ab ~35€</div>
+                <a href="https://www.amazon.de/s?k=ergonomisches+reisekissen+flugzeug&tag=ikune21-21" class="shop-btn" target="_blank">🔗 Shop</a>
+            </div>
+            <div class="affiliate-item">
+                <div class="item-icon">🧴</div>
+                <div class="item-name">Reise-Kulturbeutel wasserdicht</div>
+                <div class="item-price">ab ~15€</div>
+                <a href="https://www.amazon.de/s?k=reise+kulturbeutel+organizer+transparent&tag=ikune21-21" class="shop-btn" target="_blank">🔗 Shop</a>
+            </div>
+        </div>
+        <p style="margin-top:12px;text-align:center">
+            <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" style="color:#8B5CF6;font-weight:600">→ Alle Amazon-Angebote entdecken</a>
+        </p>
+    </div>
+</div>
+
+<!-- Cross-Links -->
+<div style="margin-top:24px;padding:16px;background:#141414;border-radius:8px;text-align:center">
+    <p style="color:#6B7280;font-size:0.85em">
+        📚 <strong>Weitere Ratgeber:</strong>
+        <a href="../blog/ki-reisen-urlaubsplanung-2026.html">KI-Reiseplanung 2026</a> ·
+        <a href="../blog/finanz-apps-2026.html">Finanz-Apps 2026</a> ·
+        <a href="../blog/passives-einkommen-ki.html">Passives Einkommen</a> ·
+        <a href="../blog/online-business-ohne-startkapital-2026.html">0€ Start</a>
+    </p>
+</div>
+
+<div class="disclaimer">
+    <strong>📢 Affiliate-Hinweis:</strong> Dieses Tool enthält Affiliate-Links zum Amazon-Partnerprogramm (tag=ikune21-21). 
+    Wenn du über einen dieser Links ein Produkt kaufst, erhalte ich eine kleine Provision – für dich entstehen keine zusätzlichen Kosten. 
+    Die berechneten Werte dienen als Richtwerte und ersetzen keine professionelle Reiseplanung.
+</div>
+
+</div>
+
+<footer>
+    <p>
+        <a href="../index.html">🏪 Startseite</a> · 
+        <a href="../blog/index.html">📝 Blog</a> · 
+        <a href="../store.html">🛒 Shop</a> ·
+        <a href="../blog/ki-reisen-urlaubsplanung-2026.html">🌍 KI-Reisen Guide</a>
+    </p>
+    <p style="margin-top:8px">© 2026 Licht und Schatten · Amazon-Partner · tag=ikune21-21</p>
+</footer>
+
+<script>
+function calculate() {
+    const dest = document.getElementById('destination').value;
+    const travelers = parseInt(document.getElementById('travelers').value) || 1;
+    const duration = parseInt(document.getElementById('duration').value) || 7;
+    const accType = document.getElementById('accommodation').value;
+    const flight = parseInt(document.getElementById('flight').value) || 0;
+    const food = parseInt(document.getElementById('food').value) || 0;
+    const transport = parseInt(document.getElementById('transport').value) || 0;
+    const activities = parseInt(document.getElementById('activities').value) || 0;
+    const gadgets = parseInt(document.getElementById('gadgets').value) || 0;
+    const misc = parseInt(document.getElementById('misc').value) || 0;
+
+    // Accommodation costs based on type
+    const accRates = { budget: 30, mid: 70, comfort: 120, luxury: 220 };
+    const accPerNight = accRates[accType] || 70;
+
+    const hotelTotal = accPerNight * duration * travelers;
+    const foodTotal = food * duration * travelers;
+    const flightTotal = flight * travelers;
+    const total = flightTotal + hotelTotal + foodTotal + transport + (activities * travelers) + gadgets + misc;
+    const perPerson = total / travelers;
+
+    // Display results
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('totalAmount').textContent = total.toLocaleString('de-DE') + ' €';
+    document.getElementById('perPerson').textContent = perPerson.toLocaleString('de-DE', { maximumFractionDigits: 0 }) + ' € pro Person';
+
+    document.getElementById('rFlight').textContent = flightTotal.toLocaleString('de-DE') + '€';
+    document.getElementById('rHotel').textContent = hotelTotal.toLocaleString('de-DE') + '€';
+    document.getElementById('rFood').textContent = foodTotal.toLocaleString('de-DE') + '€';
+    document.getElementById('rTransport').textContent = transport.toLocaleString('de-DE') + '€';
+    document.getElementById('rActivities').textContent = (activities * travelers).toLocaleString('de-DE') + '€';
+    document.getElementById('rGadgets').textContent = gadgets.toLocaleString('de-DE') + '€';
+    document.getElementById('rMisc').textContent = misc.toLocaleString('de-DE') + '€';
+
+    // Percentages
+    function pct(val) { return total > 0 ? ((val / total) * 100).toFixed(1) : 0; }
+
+    const items = [
+        { label: '✈️ Flug', val: flightTotal },
+        { label: '🏨 Unterkunft', val: hotelTotal },
+        { label: '🍽️ Verpflegung', val: foodTotal },
+        { label: '🚗 Verkehr vor Ort', val: transport },
+        { label: '🎯 Aktivitäten', val: activities * travelers },
+        { label: '🛍️ Gadgets', val: gadgets },
+        { label: '📋 Sonstiges', val: misc }
+    ];
+
+    // Detail table
+    const detailBody = document.getElementById('detailBody');
+    detailBody.innerHTML = items.map(item => {
+        const p = pct(item.val);
+        const savingPotential = item.val > 500 ? '✅ 10-20% möglich' : (item.val > 200 ? '🟡 5-15% möglich' : '🔵 Gering');
+        return `<tr><td>${item.label}</td><td class="value">${item.val.toLocaleString('de-DE')} €</td><td class="percent">${p}%</td><td>${savingPotential}</td></tr>`;
+    }).join('');
+
+    // Progress bar categories
+    const totalVal = items.reduce((s, i) => s + i.val, 0);
+    const maxWidth = Math.max(...items.map(i => i.val));
+    const progCat = document.getElementById('progressCategories');
+    const colors = ['#8B5CF6','#FFD700','#059669','#3B82F6','#EF4444','#F59E0B','#6B7280'];
+    progCat.innerHTML = items.map((item, i) => {
+        const w = maxWidth > 0 ? (item.val / maxWidth * 100) : 0;
+        return `<div style="flex:1;min-width:60px">
+            <div style="height:16px;background:#141414;border-radius:4px;overflow:hidden;margin-bottom:2px">
+                <div style="height:100%;width:${w}%;background:${colors[i]};border-radius:4px"></div>
+            </div>
+            <div class="progress-legend">
+                <span class="dot" style="background:${colors[i]}"></span>
+                ${item.label.split(' ')[0]} ${pct(item.val)}%
+            </div>
+        </div>`;
+    }).join('');
+
+    // Savings tips based on destination & budget
+    const tips = [];
+    if (flight > 400) tips.push({ icon: '✈️', text: `Flug kostet ${flight}€ pro Person. KI-Tipp: Buche 54-70 Tage vor Abflug und vergleiche mit Hopper oder Google Flights. <strong>Sparpotenzial: bis zu 30% (ca. ${Math.round(flight * 0.3)}€)</strong>.` });
+    if (accType === 'luxury' || accType === 'comfort') tips.push({ icon: '🏨', text: `${accType === 'luxury' ? 'Luxus' : 'Komfort'}-Unterkunft (${accPerNight}€/Nacht). KI-Tipp: Buche außerhalb der Hauptsaison oder in angrenzenden Stadtteilen. <strong>Sparpotenzial: bis zu 40%</strong>.` });
+    if (food > 40) tips.push({ icon: '🍽️', text: `${food}€/Tag für Verpflegung. KI-Tipp: Frühstück selbst machen + lokale Märkte statt Touristenrestaurants. <strong>Sparpotenzial: ca. 15-20€/Tag/Person</strong>.` });
+    tips.push({ icon: '📱', text: `eSIM statt Roaming: Holafly oder Airalo bieten Daten-Flatrates weltweit ab 10€. Gegenüber Roaming <strong>sparst du 80-90%</strong>.` });
+    tips.push({ icon: '💳', text: `Kreditkarte ohne Fremdwährungsgebühren nutzen (z.B. Revolut, N26). Spart 2-3% bei jeder Zahlung im Ausland.` });
+    if (dest === 'europa-ost') tips.push({ icon: '💰', text: `Osteuropa ist preiswerter als Westeuropa. Dein Budget reicht hier <strong>30-50% weiter</strong> als in Frankreich oder Italien.` });
+
+    const tipsContainer = document.getElementById('savingsTips');
+    tipsContainer.innerHTML = tips.map(t => 
+        `<div class="savings-tip"><span class="tip-icon">${t.icon}</span><span class="tip-text">${t.text}</span></div>`
+    ).join('');
+    document.getElementById('savingsCount').textContent = tips.length;
+
+    // Scroll to result
+    document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetForm() {
+    document.getElementById('resultBox').classList.remove('show');
+    document.querySelectorAll('input[type="number"]').forEach(el => el.value = el.defaultValue);
+    document.querySelectorAll('select').forEach(el => el.selectedIndex = el.defaultSelected || 0);
+}
+
+// Calculate on load with defaults
+window.addEventListener('DOMContentLoaded', function() {
+    calculate();
+});
+</script>
+
+</body>
+</html>
