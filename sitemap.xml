@@ -1722,4 +1722,40 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-chatbots-kundenservice-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-chatbot-berater.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-heim-sicherheit-ueberwachung-2026.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/smart-home-sicherheits-checker.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-beauty-kosmetik-2026.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-beauty-berater.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
