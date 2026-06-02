@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Startup-Ideen-Generator 2026 – Finde deine KI-Geschäftsidee</title>
+<meta name="description" content="Interaktiver Startup-Ideen-Generator: Beantworte 5 Fragen und erhalte personalisierte KI-Geschäftsideen für dein Startup 2026. Kostenlos, keine Anmeldung.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/startup-ideen-generator.html">
+<meta property="og:title" content="Startup-Ideen-Generator 2026">
+<meta property="og:description" content="Finde in 5 Minuten deine perfekte KI-Geschäftsidee. Personalisierte Vorschläge basierend auf deinen Fähigkeiten und Interessen.">
+<meta name="author" content="Licht und Schatten">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.container{max-width:650px;width:100%;background:#111118;border-radius:16px;padding:35px;border:1px solid #1a1a2e}
+h1{font-size:1.8em;color:#fff;margin-bottom:8px;text-align:center}
+h1 span{display:block;font-size:.5em;color:#8b5cf6;margin-top:5px}
+p.sub{color:#666;text-align:center;margin-bottom:30px;font-size:.9em}
+.step{display:none}
+.step.active{display:block}
+.step h2{font-size:1.2em;color:#fff;margin-bottom:20px;text-align:center;line-height:1.4}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.option{background:#1a1a2e;border:2px solid #2a2a3e;border-radius:10px;padding:15px;cursor:pointer;text-align:center;transition:all .2s}
+.option:hover{border-color:#8b5cf6;background:#1e1e35}
+.option.selected{border-color:#10b981;background:#0d2a1a}
+.option .emoji{font-size:1.8em;display:block;margin-bottom:6px}
+.option .label{font-size:.9em;color:#ccc;font-weight:500}
+.option .desc{font-size:.75em;color:#666;margin-top:4px}
+.btn{background:#8b5cf6;color:#fff;border:none;padding:12px 30px;border-radius:8px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:background .2s}
+.btn:hover{background:#7c3aed}
+.btn:disabled{background:#2a2a3e;cursor:not-allowed}
+.btn-secondary{background:#1a1a2e;color:#8b5cf6;border:1px solid #8b5cf6;padding:12px 30px;border-radius:8px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:all .2s}
+.btn-secondary:hover{background:#8b5cf6;color:#fff}
+.stepper{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.dot{width:10px;height:10px;border-radius:50%;background:#2a2a3e;transition:all .3s}
+.dot.active{background:#8b5cf6;transform:scale(1.3)}
+.dot.done{background:#10b981}
+#result{display:none}
+.result-card{background:#1a1a2e;border:1px solid #8b5cf6;border-radius:12px;padding:25px;margin-bottom:20px}
+.result-card h3{color:#8b5cf6;font-size:1.3em;margin-bottom:8px}
+.result-card .match{display:inline-block;background:#10b981;color:#fff;padding:3px 10px;border-radius:20px;font-size:.8em;margin-bottom:12px}
+.result-card p{color:#ccc;font-size:.9em;line-height:1.6}
+.result-card .steps{margin-top:12px;padding:12px;background:#0d0d1a;border-radius:8px;font-size:.85em;color:#aaa}
+.result-card .steps strong{color:#8b5cf6}
+.affiliate-box{background:#0d0d1a;border:1px solid #2a2a3e;border-radius:10px;padding:15px;margin-top:15px;font-size:.85em}
+.affiliate-box a{color:#8b5cf6;text-decoration:none}
+.affiliate-box a:hover{color:#a78bfa}
+.restart-btn{background:transparent;color:#666;border:1px dashed #2a2a3e;padding:8px;border-radius:8px;cursor:pointer;width:100%;margin-top:12px;font-size:.85em}
+.restart-btn:hover{color:#8b5cf6;border-color:#8b5cf6}
+@media(max-width:500px){.options{grid-template-columns:1fr}.container{padding:20px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🚀 Startup-Ideen-Generator <span>Finde deine KI-Geschäftsidee in 5 Minuten</span></h1>
+<p class="sub">Beantworte 5 Fragen und erhalte personalisierte KI-Startup-Ideen für 2026</p>
+
+<div class="stepper" id="stepper">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<div id="quiz">
+<div class="step active" data-step="1">
+  <h2>🎯 Was ist dein stärkster Skill?</h2>
+  <div class="options">
+    <div class="option" data-value="tech" onclick="select(this)"><span class="emoji">💻</span><span class="label">Technik & Entwicklung</span><span class="desc">Programmieren, No-Code, IT-Wissen</span></div>
+    <div class="option" data-value="creative" onclick="select(this)"><span class="emoji">🎨</span><span class="label">Kreativ & Content</span><span class="desc">Schreiben, Design, Video, Musik</span></div>
+    <div class="option" data-value="business" onclick="select(this)"><span class="emoji">📊</span><span class="label">Business & Vertrieb</span><span class="desc">Verkaufen, Beraten, Management</span></div>
+    <div class="option" data-value="service" onclick="select(this)"><span class="emoji">🤝</span><span class="label">Dienstleistung</span><span class="desc">Handwerk, Coaching, Service</span></div>
+  </div>
+</div>
+
+<div class="step" data-step="2">
+  <h2>💰 Wieviel Startkapital hast du?</h2>
+  <div class="options">
+    <div class="option" data-value="none" onclick="select(this)"><span class="emoji">🆓</span><span class="label">0€ – Gar nichts</span><span class="desc">Nur Zeit und Ideen</span></div>
+    <div class="option" data-value="micro" onclick="select(this)"><span class="emoji">💶</span><span class="label">50–500€</span><span class="desc">Ein bisschen Spielgeld</span></div>
+    <div class="option" data-value="medium" onclick="select(this)"><span class="emoji">💰</span><span class="label">500–5.000€</span><span class="desc">Ernsthaftes Budget</span></div>
+    <div class="option" data-value="high" onclick="select(this)"><span class="emoji">🏦</span><span class="label">5.000€+</span><span class="desc">Investitionsbereit</span></div>
+  </div>
+</div>
+
+<div class="step" data-step="3">
+  <h2>⏱️ Wie viel Zeit hast du pro Woche?</h2>
+  <div class="options">
+    <div class="option" data-value="low" onclick="select(this)"><span class="emoji">🌙</span><span class="label">5–10 Stunden</span><span class="desc">Nebenbei am Abend</span></div>
+    <div class="option" data-value="mid" onclick="select(this)"><span class="emoji">☀️</span><span class="label">10–20 Stunden</span><span class="desc">Halbtags-Nebenprojekt</span></div>
+    <div class="option" data-value="high" onclick="select(this)"><span class="emoji">🔥</span><span class="label">20–40 Stunden</span><span class="desc">Vollzeit-Gründung</span></div>
+    <div class="option" data-value="crazy" onclick="select(this)"><span class="emoji">🚀</span><span class="label">40+ Stunden</span><span class="desc">All-in, kein Plan B</span></div>
+  </div>
+</div>
+
+<div class="step" data-step="4">
+  <h2>🌍 Welcher Markt interessiert dich?</h2>
+  <div class="options">
+    <div class="option" data-value="b2b" onclick="select(this)"><span class="emoji">🏢</span><span class="label">B2B (Firmenkunden)</span><span class="desc">KMU, Agenturen, Freelancer</span></div>
+    <div class="option" data-value="b2c" onclick="select(this)"><span class="emoji">👤</span><span class="label">B2C (Endverbraucher)</span><span class="desc">Privatpersonen, Konsumenten</span></div>
+    <div class="option" data-value="niche" onclick="select(this)"><span class="emoji">🎯</span><span class="label">Nischenmarkt</span><span class="desc">Spezielle Branche oder Hobby</span></div>
+    <div class="option" data-value="global" onclick="select(this)"><span class="emoji">🌐</span><span class="label">Globaler Markt</span><span class="desc">International, skalierbar</span></div>
+  </div>
+</div>
+
+<div class="step" data-step="5">
+  <h2>💡 Welches Einkommensziel hast du?</h2>
+  <div class="options">
+    <div class="option" data-value="side" onclick="select(this)"><span class="emoji">💵</span><span class="label">€200–500/Monat</span><span class="desc">Netter Side-Hustle</span></div>
+    <div class="option" data-value="main" onclick="select(this)"><span class="emoji">💶</span><span class="label">€1.000–3.000/Monat</span><span class="desc">Hauptberuf ersetzen</span></div>
+    <div class="option" data-value="wealth" onclick="select(this)"><span class="emoji">💰</span><span class="label">€5.000–10.000/Monat</span><span class="desc">Wohlstand aufbauen</span></div>
+    <div class="option" data-value="empire" onclick="select(this)"><span class="emoji">🏰</span><span class="label">€10.000+/Monat</span><span class="desc">Imperium bauen</span></div>
+  </div>
+</div>
+</div>
+
+<button class="btn" id="nextBtn" onclick="nextStep()" disabled>Weiter →</button>
+
+<div id="result">
+  <h2 style="text-align:center;margin-bottom:20px;color:#10b981">🎉 Deine Startup-Ideen</h2>
+  <div id="resultCards"></div>
+  <button class="btn-secondary" onclick="restart()">🔄 Neu starten</button>
+  <div class="affiliate-box" style="margin-top:15px">
+    <strong>📚 Empfohlene Bücher für deine Gründung:</strong><br>
+    📖 <a href="https://www.amazon.de/dp/398221001X/?tag=ikune21-21" target="_blank" rel="nofollow">Der KI-Entrepreneur (Amazon)</a> – Der Bestseller zu KI-Startups<br>
+    📖 <a href="https://www.amazon.de/dp/B0DHRGJKPC/?tag=ikune21-21" target="_blank" rel="nofollow">KI für Unternehmer (Amazon)</a> – Praxishandbuch für Gründer<br>
+    📖 <a href="https://www.amazon.de/dp/3832805050/?tag=ikune21-21" target="_blank" rel="nofollow">Erfolgreich gründen mit KI (Amazon)</a> – Schritt-für-Schritt-Plan<br>
+    ☕ <a href="https://ko-fi.com/lichtundschatten" target="_blank" rel="noopener">Unterstütze dieses Tool auf Ko-fi</a>
+  </div>
+  <div style="text-align:center;margin-top:15px">
+    <a href="../blog/ki-startups-gruendung-2026.html" style="color:#8b5cf6;text-decoration:none;font-size:.85em">📖 Ausführlicher Ratgeber: KI-Startups & Gründung 2026</a>
+  </div>
+</div>
+</div>
+
+<script>
+const answers = {};
+let currentStep = 1;
+const TOTAL_STEPS = 5;
+
+function select(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const step = el.closest('.step');
+  const stepNum = parseInt(step.dataset.step);
+  const key = ['skill','capital','time','market','income'][stepNum-1];
+  answers[key] = el.dataset.value;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextStep() {
+  if (currentStep < TOTAL_STEPS) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    currentStep++;
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+    document.getElementById('nextBtn').disabled = true;
+    document.getElementById('nextBtn').textContent = currentStep === TOTAL_STEPS ? '🎯 Ideen generieren!' : 'Weiter →';
+    updateStepper();
+  } else {
+    generateResults();
+  }
+}
+
+function updateStepper() {
+  document.querySelectorAll('.dot').forEach((dot, i) => {
+    dot.classList.remove('active','done');
+    if (i + 1 === currentStep) dot.classList.add('active');
+    else if (i + 1 < currentStep) dot.classList.add('done');
+  });
+}
+
+function generateResults() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('stepper').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  const { skill, capital, time, market, income } = answers;
+  const ideas = [];
+
+  // Idea matching engine
+  if (skill === 'tech') {
+    ideas.push({title:'🤖 KI-Chatbot-Agentur', match:'95%', desc:'Baue massgeschneiderte KI-Chatbots für lokale Unternehmen. Mit No-Code-Tools wie n8n und kostenlosen KI-Modellen startest du für 0€.', steps:'Woche 1: Marktanalyse → Woche 2: MVP mit Bolt.new → Woche 3: 10 Kunden akquirieren → Woche 4: Skalieren'});
+    ideas.push({title:'📊 KI-Datenanalyse-Service', match:'88%', desc:'Biete Unternehmen KI-gestützte Datenanalyse an: Verkaufsprognosen, Prozessoptimierung, Kundenverhalten. Python + Pandas + KI-API = 0€ Start.', steps:'Woche 1: Toolstack aufsetzen → Woche 2: Demo-Projekt → Woche 3: 5 Pilotkunden → Woche 4: Automatisieren'});
+    ideas.push({title:'🛠️ KI-NoCode-App-Agentur', match:'82%', desc:'Erstelle KI-Apps für Unternehmen mit No-Code-Plattformen. Jedes Unternehmen braucht individuelle KI-Lösungen.', steps:'Woche 1: Plattformen lernen → Woche 2: 3 Referenz-Apps → Woche 3: Kunden akquirieren → Woche 4: Prozess automatisieren'});
+  } else if (skill === 'creative') {
+    ideas.push({title:'📹 KI-Content-Agentur', match:'94%', desc:'Produziere Blog-Artikel, Social-Media-Posts und Videos mit KI für Unternehmen. 0€ Start mit kostenlosen KI-Tools.', steps:'Woche 1: Portfolio aufbauen → Woche 2: 10 Kunden kontaktieren → Woche 3: Content produzieren → Woche 4: System automatisieren'});
+    ideas.push({title:'📚 KI-Buch-Publishing', match:'85%', desc:'Schreibe und veröffentliche E-Books mit KI auf Amazon KDP. Ein Buch in 2 Tagen, passives Einkommen für Jahre.', steps:'Woche 1: Thema + Recherche → Woche 2: Buch schreiben mit KI → Woche 3: Design + Formatierung → Woche 4: Veröffentlichen'});
+    ideas.push({title:'🎬 KI-YouTube-Kanal', match:'78%', desc:'Starte einen YouTube-Kanal mit KI-generierten Inhalten. Hörbücher, Tutorials, Erklärvideos – automatisiert.', steps:'Woche 1: Nische + Setup → Woche 2: 5 Videos mit KI → Woche 3: Hochladen + Optimieren → Woche 4: Monetarisieren'});
+  } else if (skill === 'business') {
+    ideas.push({title:'💼 KI-Beratung für KMU', match:'93%', desc:'Berate kleine Unternehmen bei der KI-Integration. 73% der KMU nutzen noch keine KI – riesiger Markt!', steps:'Woche 1: Angebot + Website → Woche 2: 5 kostenlose Erstberatungen → Woche 3: Paid-Pakete schnüren → Woche 4: Skalieren'});
+    ideas.push({title:'🛒 KI-Nischen-Affiliate-Shop', match:'87%', desc:'Starte einen SEO-optimierten Affiliate-Shop zu einem Nischenthema mit KI-generierten Produkttexten. 0€ Hosting auf GitHub Pages.', steps:'Woche 1: Nische + Domain → Woche 2: 20 Produktseiten → Woche 3: SEO optimieren → Woche 4: Traffic aufbauen'});
+    ideas.push({title:'📧 KI-Lead-Generierung', match:'80%', desc:'Generiere qualifizierte B2B-Leads mit KI für Unternehmen. Jedes Unternehmen braucht mehr Kunden.', steps:'Woche 1: Toolstack aufbauen → Woche 2: Zielgruppe definieren → Woche 3: Pilotkampagne → Woche 4: Als Service anbieten'});
+  } else if (skill === 'service') {
+    ideas.push({title:'🎓 KI-Coaching-Plattform', match:'91%', desc:'Biete Online-Kurse und Coachings zu KI-Themen an. Skool, Udemy oder eigene Plattform – 0€ Start.', steps:'Woche 1: Kurs-Outline → Woche 2: Inhalte mit KI erstellen → Woche 3: Plattform einrichten → Woche 4: Erste Schüler gewinnen'});
+    ideas.push({title:'📱 KI-Social-Media-Management', match:'84%', desc:'Verwalte Social-Media-Accounts von Unternehmen mit KI-Unterstützung. Content-Planung, Erstellung, Automatisierung.', steps:'Woche 1: Portfolio → Woche 2: 5 Kunden finden → Woche 3: Automatisierung → Woche 4: Skalieren mit KI'});
+  }
+
+  // Refine based on capital
+  if (capital === 'none') {
+    ideas.forEach(idea => { if (!idea.title.includes('0€')) idea.match = Math.max(60, parseInt(idea.match)-15)+'%'; });
+  }
+
+  // Refine based on time
+  if (time === 'low') {
+    ideas.push({title:'📝 KI-Newsletter (Nebenbei)', match:'75%', desc:'Starte einen bezahlten Newsletter zu einem KI-Thema. 2-3 Stunden pro Woche, 0€ Start, passives Einkommen.', steps:'Woche 1: Thema + Substack → Woche 2: Erster Beitrag → Woche 3: 100 Abonnenten → Woche 4: Monetarisieren'});
+  }
+
+  // Render
+  const container = document.getElementById('resultCards');
+  container.innerHTML = '';
+  ideas.slice(0,4).forEach(idea => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `<h3>${idea.title}</h3><span class="match">Match: ${idea.match}</span><p>${idea.desc}</p><div class="steps"><strong>📅 Fahrplan:</strong><br>${idea.steps}</div>`;
+    container.appendChild(card);
+  });
+}
+
+function restart() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  currentStep = 1;
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('nextBtn').style.display = 'block';
+  document.getElementById('stepper').style.display = 'flex';
+  document.getElementById('nextBtn').textContent = 'Weiter →';
+  document.getElementById('result').style.display = 'none';
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.step[data-step="1"]').classList.add('active');
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.getElementById('nextBtn').disabled = true;
+  updateStepper();
+}
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled) nextStep();
+});
+</script>
+</body>
+</html>
