@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head><title>KDP Bücher Download - Licht und Schatten</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{background:#1a1a2e;color:#e0e0e0;font-family:system-ui;max-width:800px;margin:auto;padding:20px}
+h1{color:#4a6cf7}
+a{color:#ffd700;text-decoration:none;display:block;padding:8px;margin:4px 0;background:#16213e;border-radius:8px}
+a:hover{background:#0f3460}
+</style></head>
+<body>
+<h1>📚 KDP Bücher – Licht und Schatten</h1>
+<p>Alle Bücher als DOCX ready für Amazon KDP. Autor: Licht und Schatten.</p>
+<hr>
+<div id="books"></div>
+<script>
+const books = [
+  "01_Minimalismus_fuer_Maenner.docx",
+  "02_Steuererklaerung_2026.docx",
+  "03_ChatGPT_fuer_Handwerker.docx",
+  "04_Notvorrat_fuer_Familien.docx",
+  "calisthenics_alltag.docx",
+  "ki_im_alltag_2026.docx",
+  "die_100_besten_ki_prompts.docx",
+  "kryptowaehrungen_und_ki.docx",
+  "ki_bewerbung_2026.docx",
+  "crypto_fuer_anfaenger.docx",
+  "ki_kunst_verkaaufen.docx",
+  "100_besten_KI_Prompts.docx",
+  "KI_im_Alltag_2026.docx",
+  "Kryptowaehrungen_und_KI.docx"
+];
+const div = document.getElementById('books');
+books.forEach(b => {
+  const a = document.createElement('a');
+  a.href = b;
+  a.textContent = b.replace(/_/g,' ').replace('.docx','');
+  div.appendChild(a);
+});
+</script>
+</body></html>
