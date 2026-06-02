@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" width="800" height="1200">
+<defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="30%" stop-color="#2a180a"/><stop offset="60%" stop-color="#0d0d28"/><stop offset="100%" stop-color="#050510"/></linearGradient><linearGradient id="ac" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#d4a843"/><stop offset="100%" stop-color="#ffd700"/></linearGradient></defs>
+<rect width="800" height="1200" fill="url(#bg)"/><rect x="0" y="0" width="800" height="4" fill="url(#ac)"/>
+<circle cx="600" cy="200" r="250" fill="rgba(212,168,67,0.08)" filter="blur(60px)"/><circle cx="200" cy="800" r="200" fill="rgba(255,215,0,0.06)" filter="blur(60px)"/>
+<rect x="60" y="50" width="120" height="120" rx="24" fill="rgba(255,255,255,0.04)"/><text x="120" y="125" text-anchor="middle" font-size="48">📱</text>
+<text x="400" y="280" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="300" fill="rgba(255,255,255,0.4)" letter-spacing="4">LUX IN UMBRA</text>
+<rect x="320" y="300" width="160" height="2" rx="1" fill="url(#ac)"/>
+<text x="400" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="40" font-weight="700" fill="#fff">Social Media Prompt Pack</text>
+<text x="400" y="440" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="300" fill="rgba(255,255,255,0.7)" font-style="italic">Viral Content Kit</text>
+<rect x="250" y="470" width="300" height="1" fill="rgba(255,255,255,0.1)"/>
+<g font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.5)">
+<text x="400" y="540" text-anchor="middle">✅ 12 TikTok-Prompts: Virale Hooks</text>
+<text x="400" y="570" text-anchor="middle">✅ 12 Instagram-Prompts: Reels, Stories</text>
+<text x="400" y="600" text-anchor="middle">✅ 10 YouTube-Prompts: Titel, Thumbnails</text>
+<text x="400" y="630" text-anchor="middle">✅ 14 LinkedIn-Prompts: Thought Leadership</text>
+<text x="400" y="660" text-anchor="middle">✅ 10 X/Twitter-Prompts: Threads</text>
+<text x="400" y="690" text-anchor="middle">✅ Virale Hook-Formeln + Content-Kalender</text>
+</g>
+<rect x="0" y="1130" width="800" height="70" fill="rgba(255,255,255,0.03)"/>
+<text x="400" y="1165" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.3)">14,00 EURO</text>
+</svg>

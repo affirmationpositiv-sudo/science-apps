@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energie-Spar-Rechner 2026 – KI-basierte Einsparanalyse | Licht und Schatten</title>
+<meta name="description" content="Interaktiver Energie-Spar-Rechner: Berechne dein persönliches Einsparpotential für Strom, Heizung und Wasser. Inkl. personalisierter Produktempfehlungen und Amazon-Links.">
+<meta name="keywords" content="Energie sparen Rechner, Stromkosten Rechner, Heizkosten sparen, Energiesparprodukte, Smart Home ROI, Balkonkraftwerk Rechner">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E7EB; line-height: 1.6; min-height: 100vh; }
+.header { background: linear-gradient(135deg, #1A1A2E, #0A0A0A); padding: 40px 24px; text-align: center; border-bottom: 1px solid rgba(139,92,246,0.15); }
+.header h1 { font-size: 2em; font-weight: 800; background: linear-gradient(135deg,#fff,#A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; }
+.header p { color: #9CA3AF; max-width: 600px; margin: 0 auto; }
+.container { max-width: 800px; margin: 0 auto; padding: 24px; }
+/* Progress bar */
+.progress { display: flex; gap: 8px; margin-bottom: 24px; justify-content: center; }
+.progress .step { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: 600; transition: all 0.3s; }
+.progress .step.active { background: #8B5CF6; color: #fff; box-shadow: 0 0 15px rgba(139,92,246,0.4); }
+.progress .step.done { background: #34D399; color: #fff; }
+.progress .step.pending { background: #1F2937; color: #6B7280; }
+.progress .line { width: 40px; height: 2px; align-self: center; background: #1F2937; }
+.progress .line.done { background: #34D399; }
+/* Cards */
+.card { background: #141414; border: 1px solid #222; border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+.card h2 { font-size: 1.4em; color: #A78BFA; margin-bottom: 8px; }
+.card .sub { color: #6B7280; font-size: 0.9em; margin-bottom: 20px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 6px; color: #D1D5DB; font-weight: 500; font-size: 0.95em; }
+.form-group select, .form-group input[type="range"] { width: 100%; }
+.form-group select { padding: 12px 16px; background: #1F2937; border: 1px solid #374151; border-radius: 8px; color: #fff; font-size: 1em; cursor: pointer; }
+.form-group select:focus { border-color: #8B5CF6; outline: none; }
+input[type="range"] { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 4px; background: #1F2937; outline: none; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #8B5CF6; cursor: pointer; box-shadow: 0 0 10px rgba(139,92,246,0.3); }
+input[type="range"]::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: #8B5CF6; cursor: pointer; }
+.range-value { text-align: center; font-size: 1.8em; font-weight: 700; color: #FFD700; margin: 8px 0; }
+.range-unit { color: #6B7280; font-size: 0.6em; }
+.btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+.btn { padding: 14px 32px; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: #8B5CF6; color: #fff; }
+.btn-primary:hover { background: #7C3AED; transform: translateY(-1px); }
+.btn-secondary { background: #1F2937; color: #D1D5DB; }
+.btn-secondary:hover { background: #374151; }
+/* Results */
+.result-card { background: linear-gradient(135deg, rgba(52,211,153,0.08), rgba(139,92,246,0.08)); border: 1px solid rgba(52,211,153,0.2); border-radius: 16px; padding: 28px; margin-bottom: 16px; }
+.result-card .big-num { font-size: 3em; font-weight: 800; color: #34D399; text-align: center; }
+.result-card .big-label { text-align: center; color: #9CA3AF; margin-bottom: 16px; }
+.result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0; }
+.result-grid .item { background: #1A1A2E; border-radius: 12px; padding: 16px; text-align: center; }
+.result-grid .item .val { font-size: 1.5em; font-weight: 700; color: #A78BFA; }
+.result-grid .item .lbl { font-size: 0.8em; color: #6B7280; margin-top: 4px; }
+/* Product Recommendations */
+.rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 16px 0; }
+.rec-card { background: #1A1A2E; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px; transition: all 0.2s; }
+.rec-card:hover { border-color: #8B5CF6; }
+.rec-card .icon { font-size: 2em; text-align: center; margin-bottom: 8px; }
+.rec-card h4 { color: #FFD700; font-size: 0.95em; margin-bottom: 4px; }
+.rec-card p { color: #6B7280; font-size: 0.8em; margin-bottom: 8px; }
+.rec-card .price { color: #34D399; font-size: 0.85em; }
+.rec-card .buy-btn { display: block; padding: 8px; background: #8B5CF6; color: #fff; text-align: center; border-radius: 6px; text-decoration: none; font-size: 0.85em; margin-top: 8px; }
+.rec-card .buy-btn:hover { background: #7C3AED; }
+.cta { background: linear-gradient(135deg, #1A1A2E, #141414); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 24px; text-align: center; margin: 24px 0; }
+.cta h3 { color: #FFD700; margin-bottom: 8px; }
+.cta p { color: #9CA3AF; margin-bottom: 12px; }
+.cta .btn { display: inline-block; padding: 12px 28px; background: #8B5CF6; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; }
+.cta .btn:hover { background: #7C3AED; }
+.eco-tip { background: rgba(52,211,153,0.05); border-left: 4px solid #34D399; border-radius: 4px; padding: 12px 16px; margin: 12px 0; font-size: 0.9em; color: #9CA3AF; }
+.tip-label { color: #34D399; font-weight: 600; }
+.disclaimer { background: #141414; border: 1px solid #222; border-radius: 8px; padding: 14px; margin: 20px 0; font-size: 0.82em; color: #6B7280; text-align: center; }
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>⚡ Energie-Spar-Rechner 2026</h1>
+  <p>Beantworte 6 einfache Fragen und erhalte dein persönliches Einsparpotential + maßgeschneiderte Produktempfehlungen</p>
+</div>
+
+<div class="container">
+
+  <!-- Progress -->
+  <div class="progress" id="progress">
+    <div class="step active" id="ps1">1</div><div class="line" id="pl1"></div>
+    <div class="step pending" id="ps2">2</div><div class="line" id="pl2"></div>
+    <div class="step pending" id="ps3">3</div><div class="line" id="pl3"></div>
+    <div class="step pending" id="ps4">4</div><div class="line" id="pl4"></div>
+    <div class="step pending" id="ps5">5</div><div class="line" id="pl5"></div>
+    <div class="step pending" id="ps6">6</div>
+  </div>
+
+  <!-- Step 1: Haustyp -->
+  <div class="card" id="step1">
+    <h2>🏠 Schritt 1: Dein Zuhause</h2>
+    <p class="sub">Wähle deinen Haustyp und deine Wohnfläche.</p>
+    <div class="form-group">
+      <label>Haustyp</label>
+      <select id="haustyp">
+        <option value="apartment">Wohnung (bis 80 m²)</option>
+        <option value="reihenhaus" selected>Reihenhaus / Doppelhaushälfte (80-140 m²)</option>
+        <option value="einfamilienhaus">Einfamilienhaus (140-250 m²)</option>
+        <option value="gross">Großes Haus (250+ m²)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Jährliche Stromkosten (ca.)</label>
+      <input type="range" id="stromkosten" min="400" max="3000" value="1200" step="50" oninput="document.getElementById('stromkosten_val').textContent=this.value">
+      <div class="range-value">€<span id="stromkosten_val">1.200</span> <span class="range-unit">/Jahr</span></div>
+    </div>
+    <div class="form-group">
+      <label>Jährliche Heizkosten (ca.)</label>
+      <input type="range" id="heizkosten" min="300" max="4000" value="1500" step="50" oninput="document.getElementById('heizkosten_val').textContent=this.value">
+      <div class="range-value">€<span id="heizkosten_val">1.500</span> <span class="range-unit">/Jahr</span></div>
+    </div>
+    <div class="btn-row"><button class="btn btn-primary" onclick="nextStep(1)">Weiter →</button></div>
+  </div>
+
+  <!-- Step 2: Heizung -->
+  <div class="card hidden" id="step2">
+    <h2>🌡️ Schritt 2: Deine Heizung</h2>
+    <p class="sub">Wie heizt du aktuell? Hast du smarte Thermostate?</p>
+    <div class="form-group">
+      <label>Heizungsart</label>
+      <select id="heizungsart">
+        <option value="gas">Gasheizung</option>
+        <option value="oel">Ölheizung</option>
+        <option value="fernwaerme">Fernwärme</option>
+        <option value="waermepumpe">Wärmepumpe</option>
+        <option value="strom">Nachtspeicher / Stromheizung</option>
+        <option value="pellet">Pellet / Holz</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Smart-Thermostate vorhanden?</label>
+      <select id="smart_thermostat">
+        <option value="nein">Nein, keine smarten Thermostate</option>
+        <option value="teilweise">Teilweise (1-2 Räume)</option>
+        <option value="ja" selected>Ja, in den meisten Räumen</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(2)">← Zurück</button>
+      <button class="btn btn-primary" onclick="nextStep(2)">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Solar & Strom -->
+  <div class="card hidden" id="step3">
+    <h2>☀️ Schritt 3: Solar & Eigenstrom</h2>
+    <p class="sub">Hast du eine Solaranlage / Balkonkraftwerk?</p>
+    <div class="form-group">
+      <label>Solaranlage / Balkonkraftwerk</label>
+      <select id="solar">
+        <option value="none" selected>Keine Solaranlage</option>
+        <option value="balkon">Balkonkraftwerk (bis 800W)</option>
+        <option value="dach">Dach-Solaranlage (3-10 kWp)</option>
+        <option value="dach_plus">Dach-Solar + Batteriespeicher</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Smarte Steckdosen (Energiemessung) vorhanden?</label>
+      <select id="smart_plugs">
+        <option value="0" selected>Keine smarten Steckdosen</option>
+        <option value="2">1-3 smarte Steckdosen</option>
+        <option value="5">4+ smarte Steckdosen</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(3)">← Zurück</button>
+      <button class="btn btn-primary" onclick="nextStep(3)">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Geräte -->
+  <div class="card hidden" id="step4">
+    <h2>🔌 Schritt 4: Deine Geräte</h2>
+    <p class="sub">Wie alt sind deine Hauptgeräte? Ältere Geräte verbrauchen oft 2-3x mehr Strom.</p>
+    <div class="form-group">
+      <label>Kühlschrank / Gefrierschrank</label>
+      <select id="kuehlschrank">
+        <option value="alt">Älter als 10 Jahre</option>
+        <option value="mittel" selected>5-10 Jahre alt</option>
+        <option value="neu">Neuer als 5 Jahre / A+++</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Waschmaschine</label>
+      <select id="waschmaschine">
+        <option value="alt">Älter als 10 Jahre</option>
+        <option value="mittel" selected>5-10 Jahre alt</option>
+        <option value="neu">Neuer als 5 Jahre / A+++</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Beleuchtung</label>
+      <select id="beleuchtung">
+        <option value="alt">Hauptsächlich Glühbirnen / Halogen</option>
+        <option value="gemischt" selected>Gemischt (LED + ältere Leuchtmittel)</option>
+        <option value="led">Komplett auf LED umgestellt</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Haushaltsgröße (Personen)</label>
+      <select id="personen">
+        <option value="1">1 Person</option>
+        <option value="2" selected>2 Personen</option>
+        <option value="3">3 Personen</option>
+        <option value="4">4 Personen</option>
+        <option value="5">5+ Personen</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(4)">← Zurück</button>
+      <button class="btn btn-primary" onclick="nextStep(4)">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Step 5: E-Mobilität -->
+  <div class="card hidden" id="step5">
+    <h2>🚲 Schritt 5: E-Mobilität & Wasser</h2>
+    <p class="sub">Hast du ein E-Auto, E-Bike oder möchtest deinen Wasserverbrauch optimieren?</p>
+    <div class="form-group">
+      <label>E-Auto / E-Bike Besitzer?</label>
+      <select id="emobility">
+        <option value="none" selected>Kein E-Auto / E-Bike</option>
+        <option value="ebike">E-Bike (oder geplant)</option>
+        <option value="ecar">E-Auto (oder geplant)</option>
+        <option value="both">Beide (E-Auto + E-Bike)</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Smarte Bewässerung / Wassersparen interessiert?</label>
+      <select id="wasser">
+        <option value="ja" selected>Ja, interessiert</option>
+        <option value="nein">Nein, kein Bedarf</option>
+      </select>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(5)">← Zurück</button>
+      <button class="btn btn-primary" onclick="nextStep(5)">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Step 6: Persönliche Ziele -->
+  <div class="card hidden" id="step6">
+    <h2>🎯 Schritt 6: Deine Ziele</h2>
+    <p class="sub">Was ist dir am wichtigsten? (Alles zutreffende auswählen)</p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+      <label style="display:flex;align-items:center;gap:8px;background:#1F2937;padding:10px 16px;border-radius:8px;cursor:pointer;border:1px solid #374151;">
+        <input type="checkbox" id="ziel_strom" checked onchange="updateZiele()"> ⚡ Strom sparen
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;background:#1F2937;padding:10px 16px;border-radius:8px;cursor:pointer;border:1px solid #374151;">
+        <input type="checkbox" id="ziel_heizung" checked onchange="updateZiele()"> 🌡️ Heizkosten senken
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;background:#1F2937;padding:10px 16px;border-radius:8px;cursor:pointer;border:1px solid #374151;">
+        <input type="checkbox" id="ziel_solar" onchange="updateZiele()"> ☀️ Solarstrom nutzen
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;background:#1F2937;padding:10px 16px;border-radius:8px;cursor:pointer;border:1px solid #374151;">
+        <input type="checkbox" id="ziel_wasser" onchange="updateZiele()"> 💧 Wasser sparen
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;background:#1F2937;padding:10px 16px;border-radius:8px;cursor:pointer;border:1px solid #374151;">
+        <input type="checkbox" id="ziel_emob" onchange="updateZiele()"> 🚲 E-Mobilität optimieren
+      </label>
+    </div>
+    <div class="eco-tip"><span class="tip-label">💡 Tipp:</span> Je mehr Ziele du auswählst, desto umfassender wird dein persönlicher Spartarif.</div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="prevStep(6)">← Zurück</button>
+      <button class="btn btn-primary" onclick="calculate()">🔢 Ergebnisse berechnen</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="hidden" id="results">
+    <div class="result-card">
+      <div class="big-num" id="total_savings">€0</div>
+      <div class="big-label">Dein geschätztes jährliches Einsparpotential</div>
+      <div class="result-grid">
+        <div class="item"><div class="val" id="r_strom">€0</div><div class="lbl">⚡ Strom</div></div>
+        <div class="item"><div class="val" id="r_heizung">€0</div><div class="lbl">🌡️ Heizung</div></div>
+        <div class="item"><div class="val" id="r_wasser">€0</div><div class="lbl">💧 Wasser</div></div>
+        <div class="item"><div class="val" id="r_solar">€0</div><div class="lbl">☀️ Solar-Ertrag</div></div>
+      </div>
+      <div class="eco-tip" id="tip_of_day">
+        <span class="tip-label">💡 Spartipp:</span> 1 Grad weniger Raumtemperatur spart 6% Heizkosten. Bei 1.500 € Heizkosten = 90 € pro Jahr!
+      </div>
+    </div>
+
+    <!-- Product Recommendations -->
+    <div class="card">
+      <h2>🛒 Deine persönlichen Produktempfehlungen</h2>
+      <p class="sub">Basierend auf deinen Angaben – mit Amazon Affiliate-Links (tag: ikune21-21)</p>
+      <div class="rec-grid" id="recs"></div>
+    </div>
+
+    <!-- Action Plan -->
+    <div class="cta">
+      <h3>📅 Dein 30-Tage-Aktionsplan</h3>
+      <p id="action_plan">Tausche alte Glühbirnen gegen LEDs, installiere smarte Steckdosen und prüfe deine Heizungseinstellungen. Deine ersten Schritte in eine energieeffiziente Zukunft!</p>
+    </div>
+
+    <div class="cta">
+      <h3>🌿 Interessiert an mehr?</h3>
+      <p>Lese unseren ausführlichen <a href="../blog/ki-nachhaltigkeit-green-tech-2026.html" style="color:#A78BFA;">Ratgeber KI-Nachhaltigkeit & Green Tech 2026</a> mit 30+ Produktempfehlungen und detaillierten Vergleichen.</p>
+      <a href="../blog/ki-nachhaltigkeit-green-tech-2026.html" class="btn">📖 Zum Green-Tech-Ratgeber</a>
+    </div>
+
+    <div class="disclaimer">
+      <strong>📢 Affiliate-Hinweis:</strong> Dieser Rechner enthält Affiliate-Links (Amazon-Partnerprogramm, tag: ikune21-21). Wenn du über einen dieser Links ein Produkt kaufst, erhalten wir eine kleine Provision – für dich entstehen keine zusätzlichen Kosten. Alle Angaben ohne Gewähr.
+    </div>
+
+    <div style="text-align:center;margin:20px 0;">
+      <button class="btn btn-secondary" onclick="resetCalculator()">↺ Neu starten</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const PROGRESS = ['ps1','ps2','ps3','ps4','ps5','ps6'];
+const PLINES  = ['pl1','pl2','pl3','pl4','pl5'];
+
+let currentStep = 1;
+
+function updateProgress(step) {
+  for (let i = 1; i <= 6; i++) {
+    const el = document.getElementById('ps' + i);
+    el.classList.remove('active','done','pending');
+    if (i < step) el.classList.add('done');
+    else if (i === step) el.classList.add('active');
+    else el.classList.add('pending');
+  }
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById('pl' + i);
+    el.classList.remove('done');
+    if (i < step) el.classList.add('done');
+  }
+}
+
+function showStep(step) {
+  for (let i = 1; i <= 6; i++) {
+    document.getElementById('step' + i).classList.add('hidden');
+  }
+  document.getElementById('step' + step).classList.remove('hidden');
+  currentStep = step;
+  updateProgress(step);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep(n) {
+  if (n < 6) showStep(n + 1);
+}
+
+function prevStep(n) {
+  if (n > 1) showStep(n - 1);
+}
+
+function updateZiele() {
+  // visual feedback only
+}
+
+function calculate() {
+  // Read all values
+  const haustyp = document.getElementById('haustyp').value;
+  const stromkosten = parseInt(document.getElementById('stromkosten').value);
+  const heizkosten = parseInt(document.getElementById('heizkosten').value);
+  const heizungsart = document.getElementById('heizungsart').value;
+  const smartThermostat = document.getElementById('smart_thermostat').value;
+  const solar = document.getElementById('solar').value;
+  const smartPlugs = document.getElementById('smart_plugs').value;
+  const kuehlschrank = document.getElementById('kuehlschrank').value;
+  const waschmaschine = document.getElementById('waschmaschine').value;
+  const beleuchtung = document.getElementById('beleuchtung').value;
+  const personen = parseInt(document.getElementById('personen').value);
+  const emobility = document.getElementById('emobility').value;
+  const wasser = document.getElementById('wasser').value;
+  const zielStrom = document.getElementById('ziel_strom').checked;
+  const zielHeizung = document.getElementById('ziel_heizung').checked;
+  const zielSolar = document.getElementById('ziel_solar').checked;
+  const zielWasser = document.getElementById('ziel_wasser').checked;
+  const zielEmob = document.getElementById('ziel_emob').checked;
+
+  // Calculate savings
+  let stromSpar = 0, heizungSpar = 0, wasserSpar = 0, solarErtrag = 0;
+
+  // Strom savings
+  if (zielStrom) {
+    // Smart plugs
+    if (smartPlugs === '0') stromSpar += stromkosten * 0.10;
+    else if (smartPlugs === '2') stromSpar += stromkosten * 0.05;
+
+    // Old appliances
+    if (kuehlschrank === 'alt') stromSpar += 150;
+    else if (kuehlschrank === 'mittel') stromSpar += 60;
+    if (waschmaschine === 'alt') stromSpar += 80;
+    else if (waschmaschine === 'mittel') stromSpar += 30;
+
+    // Lighting
+    if (beleuchtung === 'alt') stromSpar += 120;
+    else if (beleuchtung === 'gemischt') stromSpar += 60;
+
+    // Base saving factor
+    stromSpar += stromkosten * 0.03;
+
+    // Household size factor
+    stromSpar += personen * 15;
+  }
+
+  // Heizung savings
+  if (zielHeizung) {
+    if (smartThermostat === 'nein') heizungSpar += heizkosten * 0.25;
+    else if (smartThermostat === 'teilweise') heizungSpar += heizkosten * 0.12;
+    else heizungSpar += heizkosten * 0.03;
+
+    // By heating type
+    if (heizungsart === 'gas') heizungSpar += heizkosten * 0.05;
+    else if (heizungsart === 'oel') heizungSpar += heizkosten * 0.06;
+    else if (heizungsart === 'strom') heizungSpar += heizkosten * 0.08;
+
+    // House size factor
+    if (haustyp === 'einfamilienhaus' || haustyp === 'gross') heizungSpar *= 1.15;
+  }
+
+  // Solar
+  if (zielSolar) {
+    if (solar === 'none') {
+      solarErtrag += 240; // Balkonkraftwerk potential
+    } else if (solar === 'balkon') {
+      solarErtrag += 150; // Add battery
+    } else if (solar === 'dach') {
+      solarErtrag += 400; // Optimize consumption
+    } else if (solar === 'dach_plus') {
+      solarErtrag += 100; // Minor optimizations
+    }
+  }
+
+  // Wasser savings
+  if (zielWasser && wasser === 'ja') {
+    wasserSpar += 60; // Smart shower head + irrigation
+  }
+
+  // E-Mobility
+  if (zielEmob) {
+    if (emobility === 'ebike') {
+      stromSpar += 50; // Smart charger
+    } else if (emobility === 'ecar') {
+      stromSpar += 200; // Smart wallbox savings
+    } else if (emobility === 'both') {
+      stromSpar += 250;
+    }
+  }
+
+  // Cap total reasonable values
+  stromSpar = Math.min(stromSpar, stromkosten * 0.6);
+  heizungSpar = Math.min(heizungSpar, heizkosten * 0.4);
+  wasserSpar = Math.min(wasserSpar, 200);
+  solarErtrag = Math.min(solarErtrag, 800);
+
+  // Round
+  stromSpar = Math.round(stromSpar);
+  heizungSpar = Math.round(heizungSpar);
+  wasserSpar = Math.round(wasserSpar);
+  solarErtrag = Math.round(solarErtrag);
+  const total = stromSpar + heizungSpar + wasserSpar + solarErtrag;
+
+  // Display
+  document.getElementById('total_savings').textContent = '€' + total.toLocaleString('de-DE');
+  document.getElementById('r_strom').textContent = '€' + stromSpar.toLocaleString('de-DE');
+  document.getElementById('r_heizung').textContent = '€' + heizungSpar.toLocaleString('de-DE');
+  document.getElementById('r_wasser').textContent = '€' + wasserSpar.toLocaleString('de-DE');
+  document.getElementById('r_solar').textContent = '€' + solarErtrag.toLocaleString('de-DE');
+
+  // Tip of the day
+  const tips = [
+    '1 Grad weniger Raumtemperatur spart 6% Heizkosten.',
+    'Smarte Steckdosen erkennen Standby-Verbrauch – bis zu 15% Stromersparnis.',
+    'Ein Balkonkraftwerk (800W) spart bis zu 240 € pro Jahr bei 0 Wartung.',
+    'LED-Lampen verbrauchen 80% weniger Strom als Glühbirnen.',
+    'Eine smarte Heizungssteuerung amortisiert sich in unter 7 Monaten.',
+    'Alte Kühlschränke (10+ Jahre) verbrauchen 3x mehr Strom als moderne A+++-Geräte.',
+    'Wassersparende Duschköpfe sparen bis zu 50% Wasser und 25% Energie.',
+    'Smarte Bewässerung spart bis zu 50% Gießwasser im Garten.',
+    'Solarstrom vom Balkon: Rendite von 20-50% pro Jahr – steuerfrei!'
+  ];
+  document.getElementById('tip_of_day').innerHTML = '<span class="tip-label">💡 Spartipp:</span> ' + tips[Math.floor(Math.random() * tips.length)];
+
+  // Products
+  const products = [];
+  // Base products always shown
+  products.push({ icon: '🔌', name: 'TP-Link Tapo Smart Plug 4er', desc: 'Standby-Strom messen & automatisch abschalten. Spart bis zu 15%.', price: 'ab 34,99 €', link: 'https://www.amazon.de/s?k=tapo+smart+plug+4er+energie&tag=ikune21-21' });
+  products.push({ icon: '💡', name: 'Philips Hue LED Starter-Kit', desc: 'Smarte LED-Beleuchtung mit KI-Szenarien. Spart 80% Strom.', price: 'ab 69,99 €', link: 'https://www.amazon.de/s?k=philips+hue+starter+kit+led&tag=ikune21-21' });
+  products.push({ icon: '🌡️', name: 'tado° Smart Thermostat', desc: 'KI-gesteuerte Heizungsregelung. Spart bis zu 31% Heizkosten.', price: 'ab 149,99 €', link: 'https://www.amazon.de/s?k=tado+smart+thermostat+ki&tag=ikune21-21' });
+
+  // Conditional products
+  if (zielSolar) {
+    products.push({ icon: '☀️', name: 'Balkonkraftwerk 800W Komplettset', desc: 'Plug-and-Play-Solaranlage. Bis zu 800 kWh Jahresertrag.', price: 'ab 499 €', link: 'https://www.amazon.de/s?k=balkonkraftwerk+800w+komplettset+2026&tag=ikune21-21' });
+    products.push({ icon: '🔋', name: 'Solar-Batteriespeicher 1 kWh', desc: 'KI-gesteuerter Speicher. Eigenverbrauch von 30% auf 80%.', price: 'ab 399 €', link: 'https://www.amazon.de/s?k=solar+batteriespeicher+balkonkraftwerk+1kwh&tag=ikune21-21' });
+  }
+  if (zielEmob && (emobility === 'ecar' || emobility === 'both')) {
+    products.push({ icon: '🔌', name: 'Smarte Wallbox 11 kW mit KI', desc: 'Lädt bei Solarüberschuss & Niedertarif. Spart 200+ €/Jahr.', price: 'ab 599 €', link: 'https://www.amazon.de/s?k=wallbox+ki+ladeoptimierung+11kw&tag=ikune21-21' });
+  }
+  if (zielEmob && (emobility === 'ebike' || emobility === 'both')) {
+    products.push({ icon: '🚲', name: 'E-Bike mit KI-Reichweitenoptimierung', desc: '20% mehr Reichweite durch intelligente Motorsteuerung.', price: 'ab 2.499 €', link: 'https://www.amazon.de/s?k=e-bike+2026+reichweite&tag=ikune21-21' });
+  }
+  if (zielWasser && wasser === 'ja') {
+    products.push({ icon: '🚿', name: 'Smarte Duschbrause Wasserspar', desc: 'KI-gesteuert. Spart 30% Wasser + 25% Energie.', price: 'ab 49,95 €', link: 'https://www.amazon.de/s?k=smarte+duschbrause+wasserspar+ki&tag=ikune21-21' });
+    products.push({ icon: '🌱', name: 'Gardena smart Bewässerung', desc: 'KI-Wettersteuerung. Spart bis zu 50% Gießwasser.', price: 'ab 99,99 €', link: 'https://www.amazon.de/s?k=gardena+bewaesserungssteuerung+smart+ki&tag=ikune21-21' });
+  }
+  if (smartThermostat === 'nein' || smartThermostat === 'teilweise') {
+    products.push({ icon: '🔥', name: 'Netatmo Thermostat 3er-Pack', desc: 'KI-Heizkörperthermostate. Spart bis zu 37% Heizenergie.', price: 'ab 109,99 €', link: 'https://www.amazon.de/s?k=netatmo+heizkoerperthermostat+3er&tag=ikune21-21' });
+  }
+  if (kuehlschrank === 'alt') {
+    products.push({ icon: '❄️', name: 'A+++ Kühl-Gefrierkombination', desc: 'Energiespar-Klasse. Spart 150+ € Strom pro Jahr.', price: 'ab 499 €', link: 'https://www.amazon.de/s?k=kühlschrank+a+++++energiespar&tag=ikune21-21' });
+  }
+
+  // Render products
+  const container = document.getElementById('recs');
+  container.innerHTML = products.slice(0, 8).map(p => `
+    <div class="rec-card">
+      <div class="icon">${p.icon}</div>
+      <h4>${p.name}</h4>
+      <p>${p.desc}</p>
+      <span class="price">⭐ ${p.price}</span>
+      <a href="${p.link}" target="_blank" class="buy-btn">🔗 Bei Amazon ansehen</a>
+    </div>
+  `).join('');
+
+  // Action plan
+  let plan = '';
+  if (zielStrom) plan += '⚡ **Woche 1:** Tausche alte Glühbirnen gegen LEDs & installiere smarte Steckdosen. ';
+  if (zielHeizung) plan += '🌡️ **Woche 2:** Installiere smarte Thermostate (tado° oder Netatmo) in den Hauptwohnräumen. ';
+  if (zielSolar) plan += '☀️ **Woche 3:** Bestelle ein Balkonkraftwerk und prüfe die Anschlussmöglichkeiten. ';
+  if (zielEmob && (emobility === 'ecar' || emobility === 'both')) plan += '🔌 **Woche 4:** Installiere eine smarte Wallbox mit KI-Ladesteuerung. ';
+  if (zielWasser && wasser === 'ja') plan += '💧 **Woche 3:** Installiere wassersparende Duschköpfe & smarte Bewässerung. ';
+  if (!plan) plan = 'Beginne mit smarten Steckdosen und LED-Lampen – die kostengünstigsten Schritte mit der schnellsten Amortisation!';
+  document.getElementById('action_plan').textContent = plan;
+
+  // Show results
+  document.getElementById('step6').classList.add('hidden');
+  document.getElementById('results').classList.remove('hidden');
+  updateProgress(7);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetCalculator() {
+  document.getElementById('results').classList.add('hidden');
+  showStep(1);
+}
+</script>
+
+</body>
+</html>

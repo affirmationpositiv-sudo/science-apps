@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fiverr Portfolio – KI & Content Gigs</title>
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg:         #0d0d0f;
+            --surface:    #161618;
+            --card:       #1c1c1f;
+            --border:     #2a2a2e;
+            --accent:     #6c5ce7;
+            --accent2:    #a29bfe;
+            --green:      #00cec9;
+            --gold:       #fdcb6e;
+            --text:       #e4e4e7;
+            --muted:      #8e8e93;
+            --radius:     16px;
+            --shadow:     0 8px 32px rgba(0,0,0,.5);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ── Layout ── */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Header ── */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        header p { color: var(--muted); font-size: 1.15rem; margin-top: 8px; }
+
+        /* ── Gig Grid ── */
+        .gig-grid { padding: 60px 0; display: flex; flex-direction: column; gap: 48px; }
+
+        /* ── Gig Card ── */
+        .gig-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: transform .25s ease, border-color .25s ease;
+        }
+        .gig-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+        .gig-number {
+            display: inline-block;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--accent2);
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            padding: 2px 14px;
+            margin-bottom: 12px;
+        }
+        .gig-card h2 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .gig-card .tagline {
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* ── Beschreibung ── */
+        .gig-desc { margin-bottom: 24px; }
+        .gig-desc h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+        .gig-desc h3:first-child { margin-top: 0; }
+        .gig-desc ul {
+            list-style: none;
+            padding-left: 4px;
+        }
+        .gig-desc ul li::before {
+            content: "▸ ";
+            color: var(--accent2);
+        }
+        .gig-desc ul li { margin-bottom: 4px; }
+
+        .highlight-box {
+            background: rgba(108,92,231,.1);
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+            margin: 12px 0;
+            font-size: .95rem;
+        }
+        .highlight-box strong { color: var(--accent2); }
+
+        /* ── Pakete ── */
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin: 24px 0;
+        }
+        .package {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color .2s;
+        }
+        .package:hover { border-color: var(--accent); }
+        .package.premium { border-color: var(--gold); }
+        .package h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+        }
+        .package.basic h4 { color: #81ecec; }
+        .package.standard h4 { color: var(--accent2); }
+        .package.premium h4 { color: var(--gold); }
+        .package .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 8px 0;
+        }
+        .package .price small { font-size: 1rem; font-weight: 400; color: var(--muted); }
+        .package ul { list-style: none; margin-top: 10px; font-size: .88rem; }
+        .package ul li { margin-bottom: 4px; color: var(--muted); }
+        .package ul li::before { content: "✓ "; color: var(--green); }
+
+        .delivery {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,206,201,.12);
+            color: var(--green);
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: .9rem;
+            font-weight: 600;
+        }
+
+        /* ── Beispiel-Arbeit ── */
+        .sample {
+            margin-top: 28px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+        .sample h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+        .sample-content {
+            background: var(--surface);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+        .sample-content .label {
+            font-size: .8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+        .sample-content .body {
+            font-style: italic;
+            color: #ccc;
+            line-height: 1.7;
+        }
+        .sample-content .body strong { color: #fff; font-style: normal; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 32px 0 48px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: .9rem;
+        }
+        footer a { color: var(--accent2); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .packages { grid-template-columns: 1fr; }
+            .gig-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ═══ HEADER ═══ -->
+    <header>
+        <h1>KI &amp; Content Gigs</h1>
+        <p>5 professionelle Fiverr-Angebote – SEO-optimiert, sofort lieferbar, made in Germany</p>
+    </header>
+
+    <!-- ═══ GIG GRID ═══ -->
+    <div class="gig-grid">
+
+        <!-- ─────────── GIG 1 ─────────── -->
+        <article class="gig-card">
+            <span class="gig-number">Gig 1</span>
+            <h2>Ich schreibe KI-optimierte Blog-Artikel für dein Business</h2>
+            <p class="tagline">SEO-Content auf Deutsch, der rankt – von der Keyword-Recherche bis zur fertigen Publikation</p>
+
+            <div class="gig-desc">
+                <h3>📌 Was du bekommst</h3>
+                <ul>
+                    <li>Recherchierte, einzigartige Blog-Artikel (kein Copy &amp; Paste)</li>
+                    <li>SEO-optimiert mit Meta-Titel, Meta-Description und Keyword-Dichte</li>
+                    <li>Angenehmer, lesefreundlicher Schreibstil – perfekt für deine Zielgruppe</li>
+                    <li>Lieferung als DOCX oder direkt in WordPress/CMS</li>
+                    <li>Kostenlose Keyword-Recherche inklusive</li>
+                </ul>
+
+                <h3>🗣️ Warum mich wählen?</h3>
+                <div class="highlight-box">
+                    <strong>10+ Jahre Texterfahrung</strong> – ich kenne die deutschen Rankings.
+                    Jeder Artikel ist <strong>KI-gestützt &amp; menschlich verfeinert</strong>.
+                    Du bekommst keine generische Massenware, sondern Content,
+                    der deine Leser abholt und Google überzeugt.
+                </div>
+
+                <div class="delivery">⚡ Lieferzeit: 48h (bei Standard-Paket)</div>
+            </div>
+
+            <div class="packages">
+                <div class="package basic">
+                    <h4>Basic</h4>
+                    <div class="price">50&nbsp;€</div>
+                    <ul>
+                        <li>5 Artikel (je 600–800 Wörter)</li>
+                        <li>SEO-Grundoptimierung</li>
+                        <li>Lieferung in 48h</li>
+                    </ul>
+                </div>
+                <div class="package standard">
+                    <h4>Standard</h4>
+                    <div class="price">90&nbsp;€</div>
+                    <ul>
+                        <li>10 Artikel (je 800–1.200 Wörter)</li>
+                        <li>SEO-Recherche + Keywords</li>
+                        <li>Meta-Beschreibungen inklusive</li>
+                    </ul>
+                </div>
+                <div class="package premium">
+                    <h4>Premium</h4>
+                    <div class="price">160&nbsp;€</div>
+                    <ul>
+                        <li>20 Artikel (je 1.000–1.500 Wörter)</li>
+                        <li>SEO-Komplett-Paket</li>
+                        <li>Bildvorschläge + Social Snippets</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sample">
+                <h3>📄 Beispiel-Arbeit</h3>
+                <div class="sample-content">
+                    <div class="label">Auszug Blog-Artikel: „SEO-Trends 2025“</div>
+                    <div class="body">
+                        „<strong>Künstliche Intelligenz verändert die Suchmaschinenoptimierung grundlegend.</strong>
+                        Während Google mit SGE (Search Generative Experience) neue Antwortformate testet,
+                        müssen Texte nicht nur informativ, sondern auch <strong>dialogorientiert</strong> sein.
+                        In diesem Artikel zeige ich dir, wie du mit KI-gestützten Inhalten deine Rankings
+                        verbesserst – ohne deine Leser zu verlieren.“
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ─────────── GIG 2 ─────────── -->
+        <article class="gig-card">
+            <span class="gig-number">Gig 2</span>
+            <h2>Ich erstelle professionelle KI-Bilder für deine Website / deinen Shop</h2>
+            <p class="tagline">Hochwertige KI-Generierung in jedem Stil – Produktbilder, Hero-Grafiken, Social-Media-Visuals</p>
+
+            <div class="gig-desc">
+                <h3>📌 Was du bekommst</h3>
+                <ul>
+                    <li>Individuelle KI-Bilder nach deinem Briefing (Midjourney / DALL·E / Stable Diffusion)</li>
+                    <li>Verschiedene Stile: realistisch, cartoonhaft, 3D-Render, Ölgemälde, Sci-Fi uvm.</li>
+                    <li>Farbabstimmung auf dein Brand-Design</li>
+                    <li>Optimierte Auflösung für Web, Social Media &amp; Print</li>
+                    <li>Sofort lieferbar (innerhalb weniger Stunden)</li>
+                </ul>
+
+                <h3>🗣️ Warum mich wählen?</h3>
+                <div class="highlight-box">
+                    <strong>Über 500 generierte Projekte</strong> – ich kenne die besten Prompts und Tools.
+                    Du bekommst <strong>keine generischen Stock-Bilder</strong>, sondern einzigartige Visuals,
+                    die zu deiner Marke passen. Inklusive <strong>3 Revisions</strong> pro Paket.
+                </div>
+
+                <div class="delivery">⚡ Lieferzeit: 24h (Standard) / sofort (Basic)</div>
+            </div>
+
+            <div class="packages">
+                <div class="package basic">
+                    <h4>Basic</h4>
+                    <div class="price">30&nbsp;€</div>
+                    <ul>
+                        <li>10 KI-Bilder</li>
+                        <li>1 Stil-Vorgabe</li>
+                        <li>Web-Auflösung (1024×1024)</li>
+                    </ul>
+                </div>
+                <div class="package standard">
+                    <h4>Standard</h4>
+                    <div class="price">60&nbsp;€</div>
+                    <ul>
+                        <li>25 KI-Bilder</li>
+                        <li>2 Stil-Varianten</li>
+                        <li>HD + Web-Auflösung</li>
+                    </ul>
+                </div>
+                <div class="package premium">
+                    <h4>Premium</h4>
+                    <div class="price">100&nbsp;€</div>
+                    <ul>
+                        <li>50 KI-Bilder</li>
+                        <li>Unbegrenzte Stil-Varianten</li>
+                        <li>Print + Web + 4K</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sample">
+                <h3>🖼️ Beispiel-Arbeit</h3>
+                <div class="sample-content">
+                    <div class="label">Prompt-Beispiel: „Modernes Café – hero image“</div>
+                    <div class="body">
+                        „Ein sonnendurchflutetes Café mit <strong>skandinavischem Design</strong>,
+                        große Fenster, Pflanzen an der Wand, eine gemütliche Leseecke im Hintergrund.
+                        Stil: Fotorealistisch, warme Farben, 4K. ← Aus diesem Prompt entstand
+                        ein bildschirmfüllendes Hero-Image, das die Atmosphäre perfekt einfängt.“
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ─────────── GIG 3 ─────────── -->
+        <article class="gig-card">
+            <span class="gig-number">Gig 3</span>
+            <h2>Ich schreibe ein 100-Seiten E-Book für dein Business</h2>
+            <p class="tagline">Komplettes E-Book inklusive Cover-Design, Lektorat und mehreren Formaten</p>
+
+            <div class="gig-desc">
+                <h3>📌 Was du bekommst</h3>
+                <ul>
+                    <li>Vollständiges E-Book – inhaltlich recherchiert, strukturiert und verfasst</li>
+                    <li>Professionelles <strong>Cover-Design</strong> (KI-generiert + manuell verfeinert)</li>
+                    <li>Korrektorat &amp; Lektorat (Rechtschreibung, Stil, Lesefluss)</li>
+                    <li>Lieferung als <strong>PDF, DOCX &amp; EPUB</strong></li>
+                    <li>Inhaltsverzeichnis mit Hyperlinks</li>
+                </ul>
+
+                <h3>🗣️ Warum mich wählen?</h3>
+                <div class="highlight-box">
+                    <strong>Bereits 12 E-Books für Coaches &amp; Unternehmen verfasst.</strong>
+                    Ich übernehme das gesamte Projektmanagement – von der Gliederung bis zur
+                    Druckvorlage. Du erhältst ein <strong>publikationsfertiges E-Book</strong>,
+                    das dich als Experten positioniert.
+                </div>
+
+                <div class="delivery">⚡ Lieferzeit: 72h (Basic) – 7 Tage (Premium)</div>
+            </div>
+
+            <div class="packages">
+                <div class="package basic">
+                    <h4>Basic</h4>
+                    <div class="price">100&nbsp;€</div>
+                    <ul>
+                        <li>50 Seiten Inhalt</li>
+                        <li>Cover-Design inklusive</li>
+                        <li>PDF + DOCX</li>
+                    </ul>
+                </div>
+                <div class="package standard">
+                    <h4>Standard</h4>
+                    <div class="price">180&nbsp;€</div>
+                    <ul>
+                        <li>100 Seiten Inhalt</li>
+                        <li>Cover + Kapitelgrafiken</li>
+                        <li>PDF + DOCX + EPUB</li>
+                        <li>Korrektorat</li>
+                    </ul>
+                </div>
+                <div class="package premium">
+                    <h4>Premium</h4>
+                    <div class="price">300&nbsp;€</div>
+                    <ul>
+                        <li>200 Seiten Inhalt</li>
+                        <li>Vollständiges Lektorat</li>
+                        <li>Alle Formate + Print-PDF</li>
+                        <li>Bonus: Social-Media-Teaser</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sample">
+                <h3>📖 Beispiel-Arbeit</h3>
+                <div class="sample-content">
+                    <div class="label">Auszug E-Book: „Digitales Unternehmertum“</div>
+                    <div class="body">
+                        „<strong>Kapitel 3: Die richtige Geschäftsidee finden.</strong><br>
+                        Viele Gründer scheitern nicht an der Umsetzung, sondern an der Idee.
+                        In diesem Kapitel lernst du eine <strong>5-Schritte-Methode</strong> kennen,
+                        mit der du systematisch nach Marktlücken suchst und deine Idee auf
+                        Rentabilität prüfst – ohne stundenlange Brainstorming-Sessions.“
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ─────────── GIG 4 ─────────── -->
+        <article class="gig-card">
+            <span class="gig-number">Gig 4</span>
+            <h2>Ich baue dir eine KI-Website in 24h</h2>
+            <p class="tagline">Komplette Website – Landingpage + bis zu 10 Unterseiten – DSGVO-konform &amp; SEO-ready</p>
+
+            <div class="gig-desc">
+                <h3>📌 Was du bekommst</h3>
+                <ul>
+                    <li>Moderne, <strong>responsive Website</strong> (mobile first)</li>
+                    <li>Bis zu 10 Unterseiten (je nach Paket)</li>
+                    <li>SEO-Grundoptimierung (Meta-Tags, Open Graph, Schema.org)</li>
+                    <li>DSGVO-konform (Cookie-Hinweis, Impressum, Datenschutz)</li>
+                    <li>Hosting-Einrichtung (GitHub Pages oder Netlify) inklusive</li>
+                </ul>
+
+                <h3>🗣️ Warum mich wählen?</h3>
+                <div class="highlight-box">
+                    <strong>24h-Lieferung – ohne Qualitätsverlust.</strong>
+                    Ich nutze KI-gestützte Entwicklung, um <strong>schnell &amp; sauber</strong> zu liefern.
+                    Du bekommst keine Template-Ware, sondern einen <strong>maßgeschneiderten Auftritt</strong>,
+                    der deine Marke professionell präsentiert.
+                </div>
+
+                <div class="delivery">⚡ Lieferzeit: 24h (Basic &amp; Standard)</div>
+            </div>
+
+            <div class="packages">
+                <div class="package basic">
+                    <h4>Basic</h4>
+                    <div class="price">50&nbsp;€</div>
+                    <ul>
+                        <li>1 Seite (Landingpage)</li>
+                        <li>Responsive Design</li>
+                        <li>SEO + DSGVO</li>
+                    </ul>
+                </div>
+                <div class="package standard">
+                    <h4>Standard</h4>
+                    <div class="price">120&nbsp;€</div>
+                    <ul>
+                        <li>5 Unterseiten</li>
+                        <li>Kontaktformular</li>
+                        <li>Social-Media-Integration</li>
+                    </ul>
+                </div>
+                <div class="package premium">
+                    <h4>Premium</h4>
+                    <div class="price">250&nbsp;€</div>
+                    <ul>
+                        <li>10 Unterseiten</li>
+                        <li>Blog-Integration</li>
+                        <li>Analytics + Newsletter-Formular</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sample">
+                <h3>🌐 Beispiel-Arbeit</h3>
+                <div class="sample-content">
+                    <div class="label">Live-Projekt: Unternehmenswebsite „TechFlow GmbH“</div>
+                    <div class="body">
+                        „<strong>TechFlow GmbH</strong> – Eine 5-seitige Business-Website mit
+                        Hero-Animation, Leistungsübersicht, Referenz-Slider, Kontaktformular
+                        und DSGVO-Cookie-Banner. <strong>Ladezeit: unter 1 Sekunde</strong>,
+                        Lighthouse-Score: 98/100. Realisiert in 26 Stunden von Briefing bis Livegang.“
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- ─────────── GIG 5 ─────────── -->
+        <article class="gig-card">
+            <span class="gig-number">Gig 5</span>
+            <h2>Ich schreibe Produktbeschreibungen für Amazon / Etsy (50+ Stück)</h2>
+            <p class="tagline">Verkaufsstarke Texte, die konvertieren – mit SEO-Keywords &amp; Storytelling</p>
+
+            <div class="gig-desc">
+                <h3>📌 Was du bekommst</h3>
+                <ul>
+                    <li>Maßgeschneiderte Produktbeschreibungen für Amazon, Etsy &amp; Co.</li>
+                    <li>SEO-optimiert mit relevanten Keywords (recherchiert per Helium 10 / Merchant Words)</li>
+                    <li>Bullet Points, Produktmerkmale &amp; emotionale Story-Elemente</li>
+                    <li>Sofort lieferbar – innerhalb von 24h</li>
+                    <li>Amazon A+ Content (optional) auf Anfrage</li>
+                </ul>
+
+                <h3>🗣️ Warum mich wählen?</h3>
+                <div class="highlight-box">
+                    <strong>50+ erfolgreiche Amazon-Listings betreut</strong> mit durchschnittlich
+                    <strong>+30 % mehr Conversions</strong> nach Texterneuerung. Ich schreibe
+                    <strong>nicht nur Features, sondern Vorteile</strong> – damit Kunden
+                    verstehen, warum sie genau DEIN Produkt brauchen.
+                </div>
+
+                <div class="delivery">⚡ Lieferzeit: 24h (Standard-Paket)</div>
+            </div>
+
+            <div class="packages">
+                <div class="package basic">
+                    <h4>Basic</h4>
+                    <div class="price">40&nbsp;€</div>
+                    <ul>
+                        <li>20 Produktbeschreibungen</li>
+                        <li>Titel + 5 Bullet Points</li>
+                        <li>Keyword-Optimierung</li>
+                    </ul>
+                </div>
+                <div class="package standard">
+                    <h4>Standard</h4>
+                    <div class="price">80&nbsp;€</div>
+                    <ul>
+                        <li>50 Produktbeschreibungen</li>
+                        <li>+ Beschreibungstext (200 Wörter)</li>
+                        <li>Storytelling-Elemente</li>
+                    </ul>
+                </div>
+                <div class="package premium">
+                    <h4>Premium</h4>
+                    <div class="price">140&nbsp;€</div>
+                    <ul>
+                        <li>100 Produktbeschreibungen</li>
+                        <li>Komplett-Paket inkl. A+ Content</li>
+                        <li>Keyword-Recherche-Report</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="sample">
+                <h3>📦 Beispiel-Arbeit</h3>
+                <div class="sample-content">
+                    <div class="label">Produkt: „Handgefertigte Ledertasche“ – Amazon-Beschreibung</div>
+                    <div class="body">
+                        „<strong>✨ Zeitlose Eleganz, die Geschichten erzählt.</strong><br>
+                        Diese handgefertigte Ledertasche begleitet dich durch jeden Anlass –
+                        vom Business-Meeting bis zum Wochenend-Trip. Gefertigt aus
+                        <strong>italienischem Vollrindleder</strong> mit patentiertem
+                        Verschluss. ✓ 100 % vegan-frei ✓ Wasserabweisend ✓ 2 Jahre Garantie.
+                        <em>Jetzt bestellen und zeitlos stilvoll unterwegs sein.</em>“
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+        <p>Fiverr-Portfolio · Alle Preise inkl. MwSt. · Lieferzeiten gelten nach Briefing</p>
+        <p><a href="https://fiverr.com" target="_blank">➜ Jetzt auf Fiverr buchen</a></p>
+    </footer>
+
+</div>
+
+</body>
+</html>

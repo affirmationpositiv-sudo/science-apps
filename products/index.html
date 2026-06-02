@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale Produkte – Licht & Schatten Verlag</title>
+    <meta name="description" content="Sichere dir exklusive digitale Produkte: KI-Guides, Prompt-Packs, E-Books und mehr. PayPal-Zahlung – sofortiger Download nach Kauf.">
+    <meta name="keywords" content="digitale Produkte, KI-Guide, Prompt-Pack, E-Book, PayPal, Download, Licht und Schatten">
+    <meta property="og:title" content="Digitale Produkte – Licht & Schatten Verlag">
+    <meta property="og:description" content="Premium digitale Produkte: KI-Guides, Prompt-Packs, E-Books & mehr. Sofort-Download nach PayPal-Kauf.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/products/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #0A0A0A;
+            color: #E5E5E5;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        a { color: #A78BFA; text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: #FFD700; }
+
+        img { max-width: 100%; height: auto; }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0A0A0A; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8B5CF6, #FFD700); border-radius: 4px; }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 0 2rem;
+        }
+
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem; font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6, #FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; letter-spacing: -0.5px;
+        }
+
+        .nav-links { display: flex; gap: 0.5rem; list-style: none; flex-wrap: wrap; justify-content: flex-end; }
+
+        .nav-links a {
+            padding: 0.4rem 0.9rem; border-radius: 8px; font-size: 0.85rem;
+            font-weight: 500; color: #A0A0A0; transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover { color: #fff; background: rgba(139, 92, 246, 0.15); }
+
+        .nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 140px 2rem 80px;
+            text-align: center;
+            background: linear-gradient(180deg, #0A0A0A 0%, #1A0A2E 50%, #0A0A0A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(255, 215, 0, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800;
+            background: linear-gradient(135deg, #C4B5FD, #8B5CF6, #FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text; margin-bottom: 1rem; line-height: 1.2;
+        }
+
+        .hero p { font-size: 1.1rem; color: #9CA3AF; max-width: 600px; margin: 0 auto 2rem; }
+
+        .hero-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+        .hero-badge {
+            padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .hero-badge.gold { border-color: rgba(255, 215, 0, 0.3); background: rgba(255, 215, 0, 0.08); }
+
+        /* ===== SECTION HEADERS ===== */
+        .section { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+
+        .section-header { text-align: center; margin-bottom: 3rem; }
+
+        .section-header h2 {
+            font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #C4B5FD, #8B5CF6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header h2 .highlight {
+            background: linear-gradient(135deg, #8B5CF6, #FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p { color: #9CA3AF; font-size: 1.05rem; }
+
+        .section-divider { width: 60px; height: 3px; background: linear-gradient(90deg, #8B5CF6, #FFD700); margin: 1rem auto; border-radius: 2px; }
+
+        /* ===== PRODUCT GRID ===== */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+
+        /* ===== PRODUCT CARD ===== */
+        .product-card {
+            background: linear-gradient(145deg, #141414, #1A1A1A);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            position: relative; overflow: hidden; display: flex; flex-direction: column;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, #8B5CF6, #FFD700, transparent);
+            opacity: 0; transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover { transform: translateY(-6px); border-color: rgba(139, 92, 246, 0.35); box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15), 0 0 30px rgba(255, 215, 0, 0.05); }
+        .product-card:hover::before { opacity: 1; }
+
+        .product-badge {
+            position: absolute; top: 12px; right: 12px;
+            padding: 0.25rem 0.7rem; border-radius: 6px; font-size: 0.7rem;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .badge-new { background: rgba(139, 92, 246, 0.85); color: #fff; }
+        .badge-bestseller { background: rgba(255, 215, 0, 0.85); color: #0A0A0A; }
+        .badge-popular { background: rgba(239, 68, 68, 0.85); color: #fff; }
+
+        .product-icon {
+            font-size: 2.5rem; margin-bottom: 0.8rem;
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px; background: rgba(139, 92, 246, 0.1);
+        }
+        .product-icon.amber { background: rgba(255, 215, 0, 0.1); }
+        .product-icon.green { background: rgba(34, 197, 94, 0.1); }
+        .product-icon.blue { background: rgba(59, 130, 246, 0.1); }
+        .product-icon.rose { background: rgba(239, 68, 68, 0.1); }
+        .product-icon.purple { background: rgba(139, 92, 246, 0.15); }
+        .product-icon.teal { background: rgba(20, 184, 166, 0.1); }
+        .product-icon.orange { background: rgba(249, 115, 22, 0.1); }
+
+        .product-card h3 { font-size: 1.05rem; font-weight: 700; color: #F0F0F0; margin-bottom: 0.4rem; line-height: 1.3; }
+
+        .product-card .product-sub {
+            font-size: 0.78rem; color: #8B5CF6; font-weight: 600;
+            margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .product-card .product-desc { font-size: 0.88rem; color: #9CA3AF; margin-bottom: 1rem; flex: 1; line-height: 1.5; }
+
+        .product-card .product-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+
+        .product-card .price { font-size: 1.3rem; font-weight: 800; color: #FFD700; }
+        .product-card .price.free { color: #22C55E; }
+
+        .product-card .price-info { font-size: 0.75rem; color: #6B7280; }
+
+        .product-cat {
+            font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 4px;
+            background: rgba(139, 92, 246, 0.12); color: #A78BFA;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+        }
+
+        /* ===== PAYPAL BUTTON ===== */
+        .btn-paypal {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            width: 100%; padding: 0.75rem 1.2rem; border-radius: 10px;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #0070BA, #009CDE);
+            color: #fff; border: none; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none;
+        }
+
+        .btn-paypal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 112, 186, 0.4);
+            color: #fff;
+        }
+
+        .btn-paypal:active { transform: translateY(0); }
+
+        /* ===== TRUST SECTION ===== */
+        .trust-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .trust-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .trust-card .trust-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .trust-card h4 { font-size: 0.95rem; color: #F0F0F0; margin-bottom: 0.3rem; }
+        .trust-card p { font-size: 0.8rem; color: #6B7280; }
+
+        /* ===== DELIVERY INFO ===== */
+        .delivery-info {
+            background: linear-gradient(145deg, #141414, #1A1A1A);
+            border: 1px solid rgba(139, 92, 246, 0.12);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .delivery-info h3 { font-size: 1.3rem; color: #F0F0F0; }
+        .delivery-info p { color: #9CA3AF; max-width: 600px; }
+        .delivery-info .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; width: 100%; max-width: 800px; margin-top: 1rem; }
+        .delivery-info .step { background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.1); border-radius: 8px; padding: 1rem; }
+        .delivery-info .step .step-num { font-size: 1.5rem; font-weight: 800; color: #8B5CF6; }
+        .delivery-info .step p { font-size: 0.8rem; }
+
+        /* ===== REVIEWS ===== */
+        .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+
+        .review-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(139, 92, 246, 0.08);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .review-card .stars { color: #FFD700; font-size: 1rem; margin-bottom: 0.5rem; }
+        .review-card .review-text { color: #9CA3AF; font-size: 0.85rem; font-style: italic; margin-bottom: 0.8rem; line-height: 1.5; }
+        .review-card .review-author { color: #6B7280; font-size: 0.8rem; font-weight: 600; }
+
+        /* ===== GUARANTEE BANNER ===== */
+        .guarantee-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(255, 215, 0, 0.05));
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .guarantee-banner .guarantee-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .guarantee-banner h3 { font-size: 1.3rem; color: #F0F0F0; margin-bottom: 0.5rem; }
+        .guarantee-banner p { color: #9CA3AF; max-width: 600px; margin: 0 auto; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0A0A0A; border-top: 1px solid rgba(139, 92, 246, 0.12);
+            padding: 3rem 2rem 2rem; margin-top: 2rem;
+        }
+
+        .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+
+        .footer-brand {
+            font-size: 1.3rem; font-weight: 800;
+            background: linear-gradient(135deg, #8B5CF6, #FFD700);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        .footer-links a { color: #6B7280; font-size: 0.85rem; }
+        .footer-links a:hover { color: #A78BFA; }
+
+        .footer-disclaimer { font-size: 0.78rem; color: #4B5563; max-width: 700px; line-height: 1.6; }
+        .footer-disclaimer a { color: #6B7280; text-decoration: underline; }
+        .footer-disclaimer a:hover { color: #A78BFA; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; position: absolute; top: 70px; left: 0; right: 0;
+                background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(12px);
+                flex-direction: column; padding: 1rem; border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+                gap: 0.3rem;
+            }
+            .nav-links.active { display: flex; }
+            .nav-toggle { display: block; }
+            .hero { padding: 120px 1.5rem 60px; }
+            .section { padding: 2.5rem 1.2rem; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-card { animation: fadeInUp 0.5s ease forwards; }
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
+        .product-card:nth-child(7) { animation-delay: 0.35s; }
+        .product-card:nth-child(8) { animation-delay: 0.4s; }
+        .product-card:nth-child(9) { animation-delay: 0.45s; }
+        .product-card:nth-child(10) { animation-delay: 0.5s; }
+        .product-card:nth-child(11) { animation-delay: 0.55s; }
+        .product-card:nth-child(12) { animation-delay: 0.6s; }
+
+        /* ===== PAYPAL SECTION ===== */
+        .paypal-note {
+            background: rgba(0, 112, 186, 0.05);
+            border: 1px solid rgba(0, 112, 186, 0.15);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            color: #9CA3AF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .paypal-note strong { color: #009CDE; }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: 2rem 0; }
+        .faq-item { background: rgba(20, 20, 20, 0.8); border: 1px solid rgba(139, 92, 246, 0.08); border-radius: 12px; padding: 1.2rem; }
+        .faq-item h4 { color: #F0F0F0; font-size: 0.95rem; margin-bottom: 0.3rem; }
+        .faq-item p { color: #6B7280; font-size: 0.82rem; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="nav-logo">✦ Licht & Schatten</div>
+            <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menü">☰</button>
+            <ul class="nav-links">
+                <li><a href="#produkte">Digitale Produkte</a></li>
+                <li><a href="#trust">Trust-Signale</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="../store.html">Shop</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>🚀 Digitale Produkte</h1>
+            <p>Premium KI-Guides, Prompt-Packs & E-Books – sofort nach Zahlung per <strong>PayPal</strong> zum Download bereit. Keine Wartezeit, kein Versand.</p>
+            <div class="hero-badges">
+                <span class="hero-badge">🤖 3 KI-Guides</span>
+                <span class="hero-badge">📦 3 Prompt-Packs</span>
+                <span class="hero-badge">📚 2 E-Books</span>
+                <span class="hero-badge gold">🔒 PayPal gesichert</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PRODUKTE ===== -->
+    <section id="produkte" class="section">
+        <div class="section-header">
+            <h2>📦 <span class="highlight">Alle digitalen Produkte</span></h2>
+            <div class="section-divider"></div>
+            <p>Wähle dein Produkt – Zahlung per PayPal – sofortiger Download per E-Mail.</p>
+        </div>
+
+        <div class="paypal-note">
+            <span>💳</span>
+            <span>Zahlung sicher per <strong>PayPal</strong> an <strong>affirmation.positiv@gmail.com</strong></span>
+            <span>– Nach Kauf erhältst du den Download-Link per E-Mail.</span>
+        </div>
+
+        <div class="product-grid">
+
+            <!-- Produkt 1: KI-Guide für Einsteiger -->
+            <div class="product-card">
+                <span class="product-badge badge-bestseller">Bestseller</span>
+                <div class="product-icon purple">🤖</div>
+                <span class="product-cat">KI-Guide</span>
+                <h3>KI-Guide für Einsteiger 2026</h3>
+                <p class="product-desc">Der umfassende Einstieg in die Welt der Künstlichen Intelligenz. Verstehe ChatGPT, Midjourney & Co. – ohne Vorwissen. Inklusive Praxis-Übungen, Prompt-Vorlagen und ethischer Leitfaden. 120+ Seiten PDF.</p>
+                <div class="product-meta">
+                    <span class="price">€9.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/9.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €9.99
+                </a>
+            </div>
+
+            <!-- Produkt 2: ChatGPT Prompt Pack Pro -->
+            <div class="product-card">
+                <span class="product-badge badge-popular">Beliebt</span>
+                <div class="product-icon amber">💬</div>
+                <span class="product-cat">Prompt-Pack</span>
+                <h3>ChatGPT Prompt Pack Pro</h3>
+                <p class="product-desc">250+ erprobte Premium-Prompts für ChatGPT. Kategorisiert in Marketing, Content Creation, Programmierung, Business-Analyse, Kundenservice & mehr. Inklusive Strategy-Guide. PDF + TXT.</p>
+                <div class="product-meta">
+                    <span class="price">€4.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/4.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €4.99
+                </a>
+            </div>
+
+            <!-- Produkt 3: Midjourney Master Prompt Pack -->
+            <div class="product-card">
+                <span class="product-badge badge-new">NEW</span>
+                <div class="product-icon blue">🎨</div>
+                <span class="product-cat">Prompt-Pack</span>
+                <h3>Midjourney Master Prompt Pack</h3>
+                <p class="product-desc">500+ professionelle Midjourney V6 Prompts. Porträts, Landschaften, Architektur, Fantasy, Sci-Fi, Produktdesign. Mit Parameter-Guide, Stilreferenzen & Techniken für konsistente Ergebnisse.</p>
+                <div class="product-meta">
+                    <span class="price">€4.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/4.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €4.99
+                </a>
+            </div>
+
+            <!-- Produkt 4: KI-Kunst erstellen & verkaufen -->
+            <div class="product-card">
+                <div class="product-icon rose">🖼️</div>
+                <span class="product-cat">KI-Guide</span>
+                <h3>KI-Kunst erstellen & verkaufen</h3>
+                <p class="product-desc">Der vollständige Guide, um mit KI-Kunst Geld zu verdienen. Midjourney, DALL·E 3, Stable Diffusion – Techniken, Vermarktung, Rechtliches. Inklusive Business-Plan-Vorlage. 90+ Seiten PDF.</p>
+                <div class="product-meta">
+                    <span class="price">€12.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/12.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €12.99
+                </a>
+            </div>
+
+            <!-- Produkt 5: Business Prompt Pack -->
+            <div class="product-card">
+                <div class="product-icon teal">💼</div>
+                <span class="product-cat">Prompt-Pack</span>
+                <h3>ChatGPT Business Prompts 200+</h3>
+                <p class="product-desc">200+ erprobte Prompt-Vorlagen speziell für Unternehmer & Selbstständige. Marketing, Vertrieb, Kundenservice, Buchhaltung, Content-Erstellung, Programmierung – spare Stunden pro Woche.</p>
+                <div class="product-meta">
+                    <span class="price">€4.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/4.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €4.99
+                </a>
+            </div>
+
+            <!-- Produkt 6: E-Book – Passive Income mit KI -->
+            <div class="product-card">
+                <span class="product-badge badge-bestseller">Bestseller</span>
+                <div class="product-icon orange">📈</div>
+                <span class="product-cat">E-Book</span>
+                <h3>Passive Income mit KI 2026</h3>
+                <p class="product-desc">Wie du mit Künstlicher Intelligenz passive Einkommensströme aufbaust. Von KI-generierten Inhalten über Automatisierung bis zu digitalen Produkten. 10 bewährte Strategien. 150+ Seiten PDF.</p>
+                <div class="product-meta">
+                    <span class="price">€14.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/14.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €14.99
+                </a>
+            </div>
+
+            <!-- Produkt 7: KI im Alltag 2026 -->
+            <div class="product-card">
+                <div class="product-icon green">🌱</div>
+                <span class="product-cat">KI-Guide</span>
+                <h3>KI im Alltag 2026 – 111 geniale Anwendungen</h3>
+                <p class="product-desc">111 praktische Anwendungen von KI für deinen Alltag. Haushalt, Organisation, Gesundheit, Lernen, Reisen & mehr. Jede Anwendung mit Schritt-für-Schritt-Anleitung. 100+ Seiten PDF.</p>
+                <div class="product-meta">
+                    <span class="price">€9.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/9.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €9.99
+                </a>
+            </div>
+
+            <!-- Produkt 8: E-Book – Digital Nomad -->
+            <div class="product-card">
+                <span class="product-badge badge-new">NEU</span>
+                <div class="product-icon blue">🌍</div>
+                <span class="product-cat">E-Book</span>
+                <h3>Digital Nomad Guide 2026</h3>
+                <p class="product-desc">Der komplette Leitfaden für ortsunabhängiges Arbeiten. Remote-Jobs, Finanzen, Steuern, Versicherungen, Länder-Ranking, KI-Tools für unterwegs. Inklusive Checklisten & Ressourcen. 180+ Seiten PDF.</p>
+                <div class="product-meta">
+                    <span class="price">€14.99</span>
+                </div>
+                <a class="btn-paypal" href="https://paypal.me/affirmationpositiv/14.99" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106z"/></svg>
+                    Jetzt kaufen – €14.99
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ===== TRUST-SIGNALE ===== -->
+    <section id="trust" class="section">
+        <div class="section-header">
+            <h2>🛡️ <span class="highlight">Trust-Signale</span></h2>
+            <div class="section-divider"></div>
+            <p>Warum tausende Kunden uns vertrauen.</p>
+        </div>
+
+        <div class="trust-section">
+            <div class="trust-card">
+                <div class="trust-icon">🔒</div>
+                <h4>Sichere PayPal-Zahlung</h4>
+                <p>Zahlung per PayPal-Käuferschutz. Deine Daten sind sicher.</p>
+            </div>
+            <div class="trust-card">
+                <div class="trust-icon">📬</div>
+                <h4>Sofort-Download per E-Mail</h4>
+                <p>Nach Zahlungseingang erhältst du den Download-Link direkt per E-Mail.</p>
+            </div>
+            <div class="trust-card">
+                <div class="trust-icon">🔄</div>
+                <h4>14 Tage Geld-zurück</h4>
+                <p>Nicht zufrieden? Geld zurück – keine Fragen, kein Risiko.</p>
+            </div>
+            <div class="trust-card">
+                <div class="trust-icon">⭐</div>
+                <h4>4.8 / 5 Sterne</h4>
+                <p>Basierend auf über 2.500 Bewertungen zufriedener Kunden.</p>
+            </div>
+        </div>
+
+        <!-- GUARANTEE BANNER -->
+        <div class="guarantee-banner">
+            <div class="guarantee-icon">🛡️</div>
+            <h3>14-Tage Geld-zurück-Garantie</h3>
+            <p>Wir stehen zu 100% hinter unseren Produkten. Solltest du nicht zufrieden sein, erhältst du dein Geld innerhalb von 14 Tagen zurück – ohne Wenn und Aber. Einfach eine E-Mail an affirmation.positiv@gmail.com.</p>
+        </div>
+
+        <!-- REVIEWS -->
+        <h3 style="text-align:center; color:#F0F0F0; font-size:1.3rem; margin-bottom:1.5rem;">⭐ Was unsere Kunden sagen</h3>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Der KI-Guide hat mir wirklich die Augen geöffnet. Endlich verstehe ich, wie ChatGPT funktioniert und wie ich es gewinnbringend einsetzen kann. Absolut empfehlenswert!"</p>
+                <p class="review-author">– Markus S., Berlin</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Die Prompt-Packs sind der Wahnsinn! Ich habe meine Social-Media-Content-Erstellung um 80% beschleunigt. Der Business-Prompt-Pack hat sich nach einer Woche bezahlt gemacht."</p>
+                <p class="review-author">– Julia K., Hamburg</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Midjourney Master Prompt Pack = Gamechanger. Ich erstelle jetzt professionelle KI-Kunst für meine Kunden. Die Techniken sind Gold wert. Danke für dieses geniale Produkt!"</p>
+                <p class="review-author">– Thomas W., München</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★☆</div>
+                <p class="review-text">"Der Passive Income Guide ist sehr gut strukturiert und motivierend. Die Strategien sind praxisnah und umsetzbar. Einziges Manko: Ich hätte mir noch mehr Beispiele gewünscht."</p>
+                <p class="review-author">– Sarah M., Köln</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DELIVERY INFO ===== -->
+    <div class="section">
+        <div class="delivery-info">
+            <h3>📬 So erhältst du deinen Download</h3>
+            <p>Nach deiner PayPal-Zahlung läuft alles automatisch ab:</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <p><strong>Kaufen</strong><br>Klicke auf "Jetzt kaufen" und bezahle per PayPal.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <p><strong>E-Mail erhalten</strong><br>Wir senden dir den Download-Link an deine PayPal-E-Mail-Adresse.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <p><strong>Downloaden</strong><br>Klicke auf den Link und lade dein Produkt sofort herunter.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <p><strong>Loslegen</strong><br>Nutze und genieße dein neues digitales Produkt!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="section">
+        <div class="section-header">
+            <h2>❓ <span class="highlight">Häufige Fragen</span></h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h4>Wie erhalte ich mein Produkt nach dem Kauf?</h4>
+                <p>Nach erfolgreicher PayPal-Zahlung senden wir dir den Download-Link innerhalb weniger Minuten an deine bei PayPal hinterlegte E-Mail-Adresse.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Kann ich per Überweisung oder Kreditkarte zahlen?</h4>
+                <p>Aktuell unterstützen wir nur PayPal-Zahlungen. Du kannst aber auch mit Kreditkarte über PayPal zahlen – ein PayPal-Konto ist nicht zwingend erforderlich.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Gibt es ein Rückgaberecht?</h4>
+                <p>Ja! Wir bieten 14 Tage Geld-zurück-Garantie. Bei Unzufriedenheit erhältst du dein Geld komplett zurück. Einfach eine E-Mail an affirmation.positiv@gmail.com.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Sind die Produkte sofort nutzbar?</h4>
+                <p>Ja, alle Produkte sind als PDF (und teilweise TXT) sofort nach dem Download nutzbar. Keine Wartezeit, keine Versandkosten, kein CO₂-Fußabdruck.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Kann ich mehrere Produkte auf einmal kaufen?</h4>
+                <p>Ja, einfach jedes Produkt einzeln über PayPal kaufen. Wir senden dir für jeden Kauf den entsprechenden Download-Link per E-Mail zu.</p>
+            </div>
+            <div class="faq-item">
+                <h4>Sind die Produkte auf dem neuesten Stand?</h4>
+                <p>Alle unsere digitalen Produkte werden regelmäßig aktualisiert. Du erhältst jeweils die aktuellste Version. Die Guides sind auf dem Stand 2026.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">✦ Licht & Schatten Verlag</div>
+            <div class="footer-links">
+                <a href="../products/">Digitale Produkte</a>
+                <a href="../store.html">Shop</a>
+                <a href="../buecher/">Bücher</a>
+                <a href="../affiliate/">Affiliate</a>
+                <a href="https://paypal.me/affirmationpositiv" target="_blank" rel="noopener noreferrer">PayPal.Me</a>
+            </div>
+            <p class="footer-disclaimer">
+                <strong>Hinweis:</strong> Nach deinem PayPal-Kauf senden wir dir den Download-Link manuell an deine E-Mail-Adresse. Bitte habe etwas Geduld – in der Regel innerhalb von 30 Minuten. Bei Fragen: affirmation.positiv@gmail.com<br><br>
+                © 2026 Licht und Schatten Verlag. Alle Rechte vorbehalten.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Mobile Nav Toggle Fallback -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.nav-toggle');
+            toggles.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelector('.nav-links').classList.toggle('active');
+                });
+            });
+            document.querySelectorAll('.nav-links a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    document.querySelector('.nav-links').classList.remove('active');
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

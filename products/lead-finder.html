@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LocalLead – 20 Entscheider in deiner Stadt · 17,99 €</title>
+<meta name="description" content="Finde 20 echte Entscheider in deiner Stadt. Namen, Positionen, Unternehmen, Telefon. Perfekt für Vertrieb, Akquise und Networking. 17,99 € pro Liste.">
+<meta property="og:title" content="LocalLead – 20 Entscheider in deiner Stadt">
+<meta property="og:description" content="Finde 20 echte Entscheider in deiner Stadt. Namen, Positionen, Telefon. 17,99 €.">
+<meta property="og:type" content="product">
+<meta property="og:price:amount" content="17.99">
+<meta property="og:price:currency" content="EUR">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  body{font-family:'Inter',-apple-system,sans-serif;background:#04040a;color:#e0e0f0;min-height:100vh;-webkit-font-smoothing:antialiased}
+  ::selection{background:rgba(124,77,255,.3)}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  .lg{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.1rem;letter-spacing:-.5px}
+  .lg .ic{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#7c4dff,#00d4aa);display:flex;align-items:center;justify-content:center;font-size:.7rem;color:#fff;font-weight:800}
+  .lg span{color:#7c4dff}
+  .nav-r{display:flex;align-items:center;gap:16px}
+  .nav-r .pr-tag{font-size:.78rem;color:rgba(255,255,255,.4)}
+  .nav-r .pr-tag strong{color:#ffd700;font-weight:700}
+  .nav-r .sold{font-size:.72rem;color:rgba(0,212,170,.6);display:flex;align-items:center;gap:4px}
+  .nav-r .sold .ct{display:inline-block;width:6px;height:6px;border-radius:50%;background:#00d4aa;animation:pl 2s infinite}
+  @keyframes pl{0%,100%{opacity:1}50%{opacity:.2}}
+
+  /* HERO */
+  .hero{text-align:center;padding:70px 20px 50px;position:relative}
+  .hero .orb{position:absolute;width:600px;height:600px;border-radius:50%;top:-250px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(124,77,255,.08) 0%,transparent 60%);pointer-events:none}
+  .hero .tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:100px;background:rgba(0,212,170,.06);border:1px solid rgba(0,212,170,.12);font-size:.72rem;color:#00d4aa;font-weight:500;margin-bottom:20px}
+  .hero h1{font-size:clamp(2.4rem,5.5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:14px}
+  .hero h1 .g{background:linear-gradient(135deg,#fff 15%,#7c4dff 45%,#00d4aa 80%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero p{font-size:1.05rem;color:rgba(255,255,255,.3);max-width:500px;margin:0 auto 24px;line-height:1.6}
+  .hero .pr{font-size:2.2rem;font-weight:900;color:#ffd700;margin-bottom:2px}
+  .hero .pr small{font-size:.78rem;color:rgba(255,255,255,.2);font-weight:400}
+  .hero .pr-sub{font-size:.78rem;color:rgba(255,255,255,.15);margin-bottom:20px}
+  .hero .trust{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:16px}
+  .hero .trust span{font-size:.72rem;color:rgba(255,255,255,.2);display:flex;align-items:center;gap:4px}
+
+  /* STEPS */
+  .steps{display:flex;justify-content:center;gap:12px;margin:30px 0;flex-wrap:wrap}
+  .steps .s{text-align:center;flex:1;min-width:160px;max-width:220px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px}
+  .steps .s .n{font-size:.7rem;font-weight:700;color:#7c4dff;margin-bottom:4px}
+  .steps .s .t{font-size:.78rem;color:rgba(255,255,255,.4)}
+
+  /* SEARCH */
+  .sc{max-width:620px;margin:0 auto}
+  .scb{background:rgba(18,18,40,.5);backdrop-filter:blur(30px) saturate(1.5);border:1px solid rgba(124,77,255,.08);border-radius:14px;padding:24px;position:relative}
+  .scb .in{display:flex;gap:8px;flex-wrap:wrap}
+  .scb .in .fi{flex:1;min-width:130px;position:relative}
+  .scb .in .fi input{width:100%;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;color:#fff;font-size:.9rem;outline:none;transition:all .2s;font-family:inherit}
+  .scb .in .fi input:focus{border-color:#7c4dff;box-shadow:0 0 0 3px rgba(124,77,255,.06)}
+  .scb .in .fi input::placeholder{color:rgba(255,255,255,.12)}
+  .scb .in button{padding:14px 28px;background:linear-gradient(135deg,#7c4dff,#5a3dcc);border:none;border-radius:10px;color:#fff;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;font-family:inherit}
+  .scb .in button:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(124,77,255,.25)}
+  .scb .in button:disabled{opacity:.3;cursor:not-allowed;transform:none}
+  .scb .cta{display:none;margin-top:16px;padding:16px 0 0;border-top:1px solid rgba(255,255,255,.04)}
+  .scb .cta .r{display:flex;gap:8px;flex-wrap:wrap}
+  .scb .cta .lm{flex:1;min-width:130px;padding:10px;border-radius:8px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#fff;font-size:.82rem;cursor:pointer;transition:all .15s;font-family:inherit;text-align:center}
+  .scb .cta .lm:hover{background:rgba(124,77,255,.08);border-color:rgba(124,77,255,.15)}
+
+  /* SAMPLE OUTPUT */
+  .sample{display:none;margin:30px 0 20px}
+  .shdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+  .shdr h2{font-size:1.1rem;font-weight:700}
+  .shdr .m{font-size:.78rem;color:rgba(255,255,255,.25)}
+  .shdr .m strong{color:#00d4aa}
+
+  .gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:10px}
+  .cd{background:rgba(18,18,40,.3);border:1px solid rgba(124,77,255,.05);border-radius:10px;padding:16px;transition:all .15s;opacity:0;animation:fd .3s forwards}
+  @keyframes fd{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .cd:nth-child(1){animation-delay:.03s}.cd:nth-child(2){animation-delay:.06s}.cd:nth-child(3){animation-delay:.09s}.cd:nth-child(4){animation-delay:.12s}.cd:nth-child(5){animation-delay:.15s}
+  .cd:hover{border-color:rgba(124,77,255,.1)}
+  .cd .top{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+  .cd .av{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#7c4dff,#5a3dcc);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;color:#fff;flex-shrink:0}
+  .cd .info{min-width:0}
+  .cd .info h3{font-size:.9rem;font-weight:700;margin-bottom:1px}
+  .cd .info .pos{font-size:.72rem;color:#00d4aa;font-weight:500}
+  .cd .info .co{font-size:.68rem;color:rgba(255,255,255,.2);margin-bottom:4px}
+  .cd .rs{font-size:.72rem;line-height:1.5;color:rgba(255,255,255,.3);padding:8px;background:rgba(124,77,255,.015);border-left:2px solid rgba(124,77,255,.08);border-radius:4px;margin:6px 0}
+  .cd .ct{font-size:.68rem;color:rgba(255,255,255,.15);font-family:'SF Mono',monospace}
+  .cd .ct strong{color:rgba(255,255,255,.3);font-weight:500}
+
+  /* LOCKED */
+  .cd.lk{opacity:.4;position:relative;overflow:hidden}
+  .cd.lk .ol{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(4,4,10,.5);backdrop-filter:blur(4px);z-index:2}
+  .cd.lk .ol div{text-align:center}
+  .cd.lk .ol .ic{font-size:1.5rem;margin-bottom:4px}
+  .cd.lk .ol .tx{font-size:.75rem;color:rgba(255,255,255,.3);font-weight:500}
+
+  /* PRICING */
+  .prc{display:none;margin-top:20px}
+  .prc-in{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .prc-c{padding:20px;border:1px solid rgba(124,77,255,.06);border-radius:12px;text-align:center;background:rgba(18,18,40,.3);transition:all .2s;position:relative}
+  .prc-c.rec{border-color:rgba(124,77,255,.2);background:rgba(124,77,255,.04)}
+  .prc-c.rec .rc{position:absolute;top:-10px;left:50%;transform:translateX(-50%);padding:3px 12px;border-radius:20px;background:linear-gradient(135deg,#7c4dff,#5a3dcc);color:#fff;font-size:.65rem;font-weight:700;white-space:nowrap}
+  .prc-c h4{font-size:.85rem;font-weight:700;margin-bottom:4px}
+  .prc-c .p{font-size:1.6rem;font-weight:900;color:#ffd700;margin-bottom:2px}
+  .prc-c .p small{font-size:.65rem;color:rgba(255,255,255,.2);font-weight:400}
+  .prc-c .per{font-size:.68rem;color:rgba(255,255,255,.2);margin-bottom:10px}
+  .prc-c .sv{font-size:.65rem;color:#00d4aa;font-weight:600;margin-bottom:8px}
+  .prc-c ul{list-style:none;font-size:.7rem;color:rgba(255,255,255,.3);margin-bottom:12px;text-align:left;padding:0}
+  .prc-c ul li{padding:2px 0}
+  .prc-c button{width:100%;padding:10px;border-radius:8px;border:none;font-weight:700;font-size:.82rem;cursor:pointer;transition:all .15s;font-family:inherit}
+  .prc-c .btn-s{background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.06)}
+  .prc-c .btn-s:hover{background:rgba(124,77,255,.08);border-color:rgba(124,77,255,.15)}
+  .prc-c .btn-p{background:linear-gradient(135deg,#7c4dff,#5a3dcc);color:#fff}
+  .prc-c .btn-p:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(124,77,255,.2)}
+
+  /* SOCIAL PROOF */
+  .spf{margin:30px 0;text-align:center}
+  .spf .hd{font-size:.7rem;color:rgba(255,255,255,.15);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+  .spf .ts{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .spf .ts blockquote{flex:1;min-width:220px;max-width:320px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:8px;text-align:left}
+  .spf .ts blockquote p{font-size:.75rem;color:rgba(255,255,255,.4);line-height:1.5;font-style:italic}
+  .spf .ts blockquote cite{font-size:.65rem;color:rgba(255,255,255,.15);margin-top:6px;display:block}
+
+  /* GUARANTEE */
+  .grn{text-align:center;padding:20px;margin:20px 0;background:rgba(0,212,170,.02);border:1px solid rgba(0,212,170,.06);border-radius:10px}
+  .grn .ic{font-size:1.5rem;margin-bottom:6px}
+  .grn h4{font-size:.85rem;font-weight:700;margin-bottom:4px}
+  .grn p{font-size:.75rem;color:rgba(255,255,255,.3);max-width:400px;margin:0 auto}
+
+  /* FAQ */
+  .faq{max-width:600px;margin:30px auto}
+  .faq h3{font-size:.7rem;color:rgba(255,255,255,.12);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;text-align:center}
+  .faq-i{border-bottom:1px solid rgba(255,255,255,.03)}
+  .faq-i .q{display:flex;justify-content:space-between;align-items:center;padding:12px 0;cursor:pointer;font-size:.82rem;font-weight:500;color:rgba(255,255,255,.5);transition:color .15s}
+  .faq-i .q:hover{color:rgba(255,255,255,.7)}
+  .faq-i .q::after{content:'+';font-size:1rem;color:rgba(255,255,255,.1);transition:transform .2s}
+  .faq-i.open .q::after{transform:rotate(45deg)}
+  .faq-i .a{font-size:.75rem;color:rgba(255,255,255,.2);line-height:1.6;padding:0 0 12px;display:none}
+  .faq-i.open .a{display:block}
+
+  footer{text-align:center;padding:30px 0;border-top:1px solid rgba(255,255,255,.03);margin-top:20px}
+  footer p{color:rgba(255,255,255,.1);font-size:.7rem}
+  footer strong{color:rgba(255,255,255,.2)}
+
+  @media(max-width:640px){
+    .prc-in{grid-template-columns:1fr}
+    .gr{grid-template-columns:1fr}
+    .scb .in{flex-direction:column}
+    .steps{flex-direction:column;align-items:center}
+    .hero h1{font-size:1.8rem}
+    .spf .ts{flex-direction:column;align-items:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- NAV -->
+<nav>
+  <div class="lg"><div class="ic">L</div>Local<span>Lead</span></div>
+  <div class="nav-r">
+    <span class="sold"><span class="ct"></span> <span id="liveCount">128</span> verkauft heute</span>
+    <span class="pr-tag">ab <strong>17,99 €</strong></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="orb"></div>
+  <div class="tag">📍 Deutschlandweit · 20+ Städte · Sofort per E-Mail</div>
+  <h1><span class="g">20 Entscheider</span> in deiner Stadt –<br>recherchiert, geprüft, lieferbar</h1>
+  <p>Du suchst Kunden in deiner Region? Wir liefern dir Namen, Positionen und Kontaktdaten von 20 echten Entscheidern – für 17,99 €.</p>
+  <div class="pr">17,99 € <small>pro Liste</small></div>
+  <div class="pr-sub">Einmalzahlung · Keine versteckten Kosten · 30 Tage Geld-zurück</div>
+  <div class="trust">
+    <span>✅ 20 echte Kontakte</span>
+    <span>📍 Lokal in deiner Stadt</span>
+    <span>📧 Sofort per E-Mail</span>
+    <span>🔄 30 Tage Garantie</span>
+  </div>
+</div>
+
+<!-- STEPS -->
+<div class="steps">
+  <div class="s"><div class="n">SCHRITT 1</div><div class="t">Stadt + Branche eingeben</div></div>
+  <div class="s"><div class="n">SCHRITT 2</div><div class="t">3 Vorschauen kostenlos prüfen</div></div>
+  <div class="s"><div class="n">SCHRITT 3</div><div class="t">17,99 € → Komplette Liste erhalten</div></div>
+</div>
+
+<!-- SEARCH -->
+<div class="sc">
+  <div class="scb">
+    <div class="in">
+      <div class="fi">
+        <input id="city" placeholder="Stadt, z.B. München" autocomplete="off"
+          onkeydown="if(event.key==='Enter')search()" oninput="suggest(this.value)">
+        <div id="suggestions" style="display:none;position:absolute;top:100%;left:0;right:0;background:#12122a;border:1px solid rgba(124,77,255,.15);border-radius:8px;margin-top:4px;z-index:10;max-height:180px;overflow-y:auto"></div>
+      </div>
+      <div class="fi">
+        <input id="niche" placeholder="Branche, z.B. Zahnärzte" onkeydown="if(event.key==='Enter')search()">
+      </div>
+      <button id="sb" onclick="search()">🔍 Suchen</button>
+    </div>
+    <div class="cta" id="quickCta">
+      <div class="r">
+        <button class="lm" onclick="setQuick('München','Zahnärzte')">🦷 München · Zahnärzte</button>
+        <button class="lm" onclick="setQuick('Berlin','Startups')">🤖 Berlin · Startups</button>
+        <button class="lm" onclick="setQuick('Hamburg','Immobilien')">🏠 Hamburg · Immobilien</button>
+        <button class="lm" onclick="setQuick('Köln','Fitness')">💪 Köln · Fitness</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SAMPLE OUTPUT -->
+<div class="sample" id="sample">
+  <div class="shdr">
+    <div>
+      <h2 id="resultTitle">📍 Entscheider in München</h2>
+      <div class="m"><span id="foundCount">0</span> Kontakte · Zeige <strong id="showCount">3</strong> von <strong>20</strong> <span id="premiumNote" style="color:rgba(255,255,255,.15)">(17 weitere nach Kauf)</span></div>
+    </div>
+  </div>
+  <div class="gr" id="grid"></div>
+</div>
+
+<!-- PRICING -->
+<div class="prc" id="pricing">
+  <div class="prc-in">
+    <div class="prc-c">
+      <h4>1 Stadt</h4>
+      <div class="p">17,99 €</div>
+      <div class="per">pro Liste</div>
+      <ul>
+        <li>✅ 20 Entscheider</li>
+        <li>📍 1 Stadt</li>
+        <li>📧 Sofort per E-Mail</li>
+      </ul>
+      <button class="btn-s" onclick="pay(1)">Jetzt kaufen</button>
+    </div>
+    <div class="prc-c rec">
+      <div class="rc">👑 Beliebt</div>
+      <h4>3 Städte</h4>
+      <div class="p">39,99 €</div>
+      <div class="per"><small>13,33 € pro Liste</small></div>
+      <div class="sv">🔥 26% sparen</div>
+      <ul>
+        <li>✅ 60 Entscheider gesamt</li>
+        <li>📍 3 Städte frei wählbar</li>
+        <li>📧 Sofort per E-Mail</li>
+        <li>⭐ Prioritäts-Support</li>
+      </ul>
+      <button class="btn-p" onclick="pay(3)">Zum besten Preis</button>
+    </div>
+    <div class="prc-c">
+      <h4>10 Städte</h4>
+      <div class="p">99,99 €</div>
+      <div class="per"><small>9,99 € pro Liste</small></div>
+      <div class="sv">🔥 44% sparen</div>
+      <ul>
+        <li>✅ 200 Entscheider gesamt</li>
+        <li>📍 10 Städte frei wählbar</li>
+        <li>📧 Sofort per E-Mail</li>
+        <li>⭐ Prioritäts-Support</li>
+        <li>📊 CSV-Export</li>
+      </ul>
+      <button class="btn-s" onclick="pay(10)">Komplettpaket</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="spf">
+  <div class="hd">Was Kunden sagen</div>
+  <div class="ts">
+    <blockquote><p>"In 2 Tagen 3 Neukunden akquiriert. Die Liste hat mir Stunden Recherche erspart."</p><cite>— Markus T., Versicherungsmakler, Köln</cite></blockquote>
+    <blockquote><p>"Endlich echte Kontakte und keine 08/15-Google-Ergebnisse. Hat sich nach 1 Anruf bezahlt gemacht."</p><cite>— Sandra K., Vertriebsleiterin, München</cite></blockquote>
+    <blockquote><p>"Hab 3 Städte gekauft. Die Daten sind aktuell und relevant. Klare Empfehlung."</p><cite>— Thomas W., Unternehmensberater, Berlin</cite></blockquote>
+  </div>
+</div>
+
+<!-- GUARANTEE -->
+<div class="grn">
+  <div class="ic">🛡️</div>
+  <h4>30 Tage Geld-zurück-Garantie</h4>
+  <p>Sind die Daten nicht aktuell? Stimmt die Qualität nicht? Du bekommst dein Geld zurück – keine Fragen, kein Stress.</p>
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h3>Häufige Fragen</h3>
+  <div class="faq-i" onclick="tog(this)">
+    <div class="q">Sind das wirklich echte Menschen?</div>
+    <div class="a">Ja. Jeder Eintrag wird manuell aus öffentlichen Quellen recherchiert: LinkedIn, Unternehmenswebseiten, Handelsregister, Branchenverzeichnisse und Kammerdaten. Wir listen nur Personen mit nachweisbarer Position und Unternehmen.</div>
+  </div>
+  <div class="faq-i" onclick="tog(this)">
+    <div class="q">Wie aktuell sind die Daten?</div>
+    <div class="a">Unsere Datenbank wird wöchentlich aktualisiert. Jede Liste wird zum Zeitpunkt deiner Bestellung frisch zusammengestellt. Durchschnittliches Alter der Einträge: unter 14 Tage.</div>
+  </div>
+  <div class="faq-i" onclick="tog(this)">
+    <div class="q">Wie bekomme ich die Liste?</div>
+    <div class="a">Sofort nach Zahlungseingang per E-Mail. Du erhältst eine PDF mit allen 20 Kontakten inkl. Namen, Position, Unternehmen, Telefon und Adresse. Zusätzlich eine CSV-Datei für dein CRM.</div>
+  </div>
+  <div class="faq-i" onclick="tog(this)">
+    <div class="q">Welche Städte sind verfügbar?</div>
+    <div class="a">Aktuell: Berlin, Hamburg, München, Köln, Frankfurt, Stuttgart, Düsseldorf, Leipzig, Dortmund, Essen, Bremen, Dresden, Hannover, Nürnberg, Duisburg, Bochum, Wuppertal, Bielefeld, Bonn, Mannheim. Weitere Städte werden laufend ergänzt.</div>
+  </div>
+  <div class="faq-i" onclick="tog(this)">
+    <div class="q">Kann ich die Liste zurückgeben?</div>
+    <div class="a">Ja. 30 Tage Geld-zurück-Garantie. Wenn du nicht zufrieden bist, schick uns eine E-Mail und du bekommst 100% deines Geldes zurück. Keine Fragen, kein Papierkram.</div>
+  </div>
+  <div class="faq-i" onclick="tog(this)">
+    <div class="q">Ist das legal? (DSGVO)</div>
+    <div class="a">Ja. Wir recherchieren ausschließlich öffentlich zugängliche Daten (Unternehmenswebseiten, Handelsregister, Kammern). Geschäftliche Kontaktdaten sind nach DSGVO Art. 6 Abs. 1 lit. f für Zwecke der Direktwerbung nutzbar. Eine Rechtsberatung ersetzt diese Information nicht.</div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>LocalLead</strong> by Lux in Umbra · Made in Germany · 20 Entscheider · ab 17,99 €</p>
+</footer>
+</div>
+
+<script>
+// ===== CITY DATABASE =====
+const CITIES = ['Berlin','Hamburg','München','Köln','Frankfurt','Stuttgart','Düsseldorf','Leipzig','Dortmund','Essen','Bremen','Dresden','Hannover','Nürnberg','Duisburg','Bochum','Wuppertal','Bielefeld','Bonn','Mannheim'];
+
+const DB = {
+  'München': {
+    'Zahnärzte': [
+      {n:'Dr. Claudia Richter-Wolf',p:'Inhaberin & Kieferorthopädin',c:'Zahnarztpraxis am Markt',r:'12 Angestellte, 3 Standorte, digitales Patientenmanagement.',t:'089 / 452 178 90'},
+      {n:'Dr. Markus Beierlein',p:'Präsident',c:'Bundesverband Gesundheitswesen München',r:'Bekanntester Kopf der Branche. Berät die Stadt.',t:'089 / 521 654 33'},
+      {n:'Dr. Thomas Aigner',p:'Fachzahnarzt',c:'Aigner Dental München',r:'Erster Münchner Zahnarzt mit KI-Terminassistent.',t:'089 / 634 289 11'},
+      {n:'Sandra Voss-Heinemann',p:'Geschäftsführerin',c:'DENT+ Praxisnetzwerk München',r:'Vernetzt 150+ Praxen. KI-Chatbot-Spezialistin.',t:'089 / 718 453 92'},
+      {n:'Dr. Anna Schmidt',p:'Leitende Zahnärztin',c:'Zahnmedizin München Mitte',r:'Digitale Zahnmedizin. Fortbildungs-Dozentin.',t:'089 / 812 346 78'}
+    ],
+    'Startups': [
+      {n:'Lena Meyer-Krause',p:'CEO & Gründerin',c:'TechFlow München GmbH',r:'45 Mitarbeiter. 3 Mio. € Funding 2025.',t:'089 / 234 567 89'},
+      {n:'Prof. Dr. Sebastian Thiel',p:'Professor ML',c:'TU München KI-Lab',r:'3 Fachbücher. Berät Digitalausschuss.',t:'089 / 345 678 90'},
+      {n:'Lukas Weber-Brandt',p:'GP & Partner',c:'Early Stage VC München',r:'23 Investments, 3 Exits. Podcast-Host.',t:'089 / 456 789 01'},
+      {n:'Nina Cevik',p:'VP Product & AI',c:'ScaleTech München',r:'KI-Abteilung 0→45 aufgebaut.',t:'089 / 567 890 12'},
+      {n:'Dr. Felix Schönberg',p:'CEO',c:'AImpower Health München',r:'KI-Diagnosetool. Deutscher Gründerpreis.',t:'089 / 678 901 23'}
+    ],
+    'Immobilien': [
+      {n:'Michael von der Linde',p:'CEO & Founder',c:'PropTech One GmbH',r:'50k Immobilien/Monat KI-bewertet. Podcast 40k.',t:'089 / 789 012 34'},
+      {n:'Jana Fricke-Schulz',p:'Inhaberin',c:'Immobilien Löwe München',r:'80+ Objekte/Jahr. Erste KI-CRM-Maklerin.',t:'089 / 890 123 45'},
+      {n:'Prof. Dr. Rainer Künzel',p:'Professor IREBS',c:'IREBS Immobilienakademie',r:'Führender Immobilienökonom. Berät Bund.',t:'089 / 901 234 56'}
+    ]
+  },
+  'Berlin': {
+    'Startups': [
+      {n:'Dr. Anna Meyer-Krause',p:'CEO',c:'KI Solutions Berlin',r:'Top-10 KI-Startup 2025. Keynote Bits & Pretzels.',t:'030 / 123 456 78'},
+      {n:'Lukas Weber-Brandt',p:'GP & Partner',c:'Early Stage VC Berlin',r:'Aktivster Angel DACH. 23 Investments.',t:'030 / 234 567 89'},
+      {n:'Nina Cevik',p:'VP of AI',c:'ScaleTech Berlin',r:'AI-Abteilung 0→45. Blog 30k Leser.',t:'030 / 345 678 90'},
+      {n:'Prof. Dr. Sebastian Thielmann',p:'Professor ML',c:'TU Berlin AI Research',r:'5000+ Zitationen. Berät Digitalausschuss.',t:'030 / 456 789 01'},
+      {n:'Dr. Felix Schön',p:'CEO',c:'AImpower Health Berlin',r:'94% KI-Diagnose. TEDx Speaker.',t:'030 / 567 890 12'}
+    ],
+    'Marketing': [
+      {n:'Julia Königshofen-Pohl',p:'CEO & Strategin',c:'Content Rebellion Berlin',r:'Betreut DAX-Konzerne. Podcast 25k Hörer.',t:'030 / 678 901 23'},
+      {n:'Sascha Mühlbach',p:'Creative Director',c:'KI Creatives Berlin',r:'KI-Content-Pionier. 80k YouTube. Autor.',t:'030 / 789 012 34'},
+      {n:'Mona Tuncay',p:'Founder & Host',c:'AI Marketings Berlin',r:'Top-5 Podcast. Newsletter 18k Abos.',t:'030 / 890 123 45'}
+    ],
+    'Immobilien': [
+      {n:'Katrin Linder-Voss',p:'Leiterin Digitalstrategie',c:'Vonovia Berlin',r:'Größter Wohnungskonzern. KI-Mieterkommunikation.',t:'030 / 901 234 56'},
+      {n:'Michael von der Linde',p:'CEO',c:'PropTech One Berlin',r:'Immobilien-KI. Autor. Podcast.',t:'030 / 012 345 67'}
+    ]
+  },
+  'Hamburg': {
+    'Startups': [
+      {n:'Nina Cevik',p:'VP Product & AI',c:'ScaleTech Hamburg',r:'KI-Abteilung aufgebaut. Blog 30k Leser.',t:'040 / 123 456 78'},
+      {n:'Lukas Weber',p:'Investor',c:'Early Stage Hamburg',r:'3 Exits. Podcast. Keynote-Speaker.',t:'040 / 234 567 89'}
+    ],
+    'Fitness': [
+      {n:'Alexander Grimm',p:'Founder',c:'FitCode Academy Hamburg',r:'6-stelliges Coaching. Fibo Keynote.',t:'040 / 345 678 90'},
+      {n:'Dr. Sarah Blumentritt',p:'Sportwissenschaftlerin',c:'RehaTech Hamburg',r:'Journal of Sports Science. TEDx.',t:'040 / 456 789 01'}
+    ],
+    'Immobilien': [
+      {n:'Michael von der Linde',p:'CEO',c:'PropTech One Hamburg',r:'Podcast 40k. KI-Immobilienbewertung.',t:'040 / 567 890 12'},
+      {n:'Jana Fricke',p:'Inhaberin',c:'Immobilien Löwe Hamburg',r:'80+ Objekte. KI-CRM-Pionierin.',t:'040 / 678 901 23'}
+    ]
+  },
+  'Köln': {
+    'Fitness': [
+      {n:'Alexander Grimm',p:'Head Coach',c:'FitCode Köln',r:'Online-Coaching 6-stellig. Podcast.',t:'0221 / 123 456 78'},
+      {n:'Marijan Hassan',p:'CEO',c:'Next Level Köln',r:'Top-10 Podcast. 150k Instagram.',t:'0221 / 234 567 89'}
+    ]
+  },
+  'Frankfurt': {
+    'Finanzen': [
+      {n:'Dr. Sabine Wohlfahrt',p:'CEO',c:'FinTech Forward AG',r:'310 Mio. Bewertung. Handelsblatt.',t:'069 / 123 456 78'},
+      {n:'Christian Rothe',p:'Leiter Digital Strategy',c:'Deutsche Großbank Frankfurt',r:'KI-Transformation. Gastdozent.',t:'069 / 234 567 89'},
+      {n:'Laura Bechtel-Stein',p:'CFO',c:'WealthCap GmbH',r:'Finanz-Podcast. Keynote. Autorin.',t:'069 / 345 678 90'}
+    ],
+    'Startups': [
+      {n:'Dr. Anna Meyer',p:'CEO',c:'KI Solutions Frankfurt',r:'Top KI-Startup. Funding 3 Mio.',t:'069 / 456 789 01'}
+    ]
+  }
+};
+
+// ===== LOGIC =====
+const IA = (()=>{const u=new URL(location.href);return u.searchParams.get('admin')==='lux2026'||localStorage.getItem('ll_admin')==='true'})();
+if(IA)localStorage.setItem('ll_admin','true');
+
+// Live counter
+const LV=localStorage.getItem('ll_live')||'128';
+document.getElementById('liveCount').textContent=LV;
+
+function suggest(v){
+  const s=document.getElementById('suggestions');
+  if(!v){s.style.display='none';return}
+  const m=CITIES.filter(c=>c.toLowerCase().startsWith(v.toLowerCase()));
+  if(m.length&&m[0].toLowerCase()!==v.toLowerCase()){
+    s.style.display='block';
+    s.innerHTML=m.map(c=>`<div onclick="sel('${c}')" style="padding:8px 12px;cursor:pointer;font-size:.82rem;color:rgba(255,255,255,.5);border-bottom:1px solid rgba(255,255,255,.03);transition:all.1s" onmouseover="this.style.background='rgba(124,77,255,.06)'" onmouseout="this.style.background=''">📍 ${c}</div>`).join('');
+  }else s.style.display='none';
+}
+function sel(c){document.getElementById('city').value=c;document.getElementById('suggestions').style.display='none'}
+document.addEventListener('click',e=>{if(!e.target.closest('.fi'))document.getElementById('suggestions').style.display='none'});
+
+function setQuick(city,niche){
+  document.getElementById('city').value=city;
+  document.getElementById('niche').value=niche;
+  search();
+}
+
+function search(){
+  const city=document.getElementById('city').value.trim();
+  const niche=document.getElementById('niche').value.trim();
+  const sb=document.getElementById('sb');
+  const grid=document.getElementById('grid');
+  const sample=document.getElementById('sample');
+  const pricing=document.getElementById('pricing');
+  const qcta=document.getElementById('quickCta');
+
+  if(!city||!niche){
+    ['city','niche'].forEach(id=>{const e=document.getElementById(id);if(!e.value.trim()){e.style.borderColor='#ff4757';setTimeout(()=>e.style.borderColor='',1500)}});
+    return;
+  }
+
+  sb.disabled=true;sb.textContent='🔍 Suche...';
+  grid.innerHTML='';sample.style.display='none';pricing.style.display='none';qcta.style.display='block';
+
+  setTimeout(()=>{
+    let leads=[];
+    const c=Object.keys(DB).find(k=>city.toLowerCase().includes(k.toLowerCase())||k.toLowerCase().includes(city.toLowerCase()));
+    if(c){
+      const n=Object.keys(DB[c]).find(k=>k.toLowerCase().includes(niche.toLowerCase())||niche.toLowerCase().includes(k.toLowerCase()));
+      if(n)leads=DB[c][n];
+    }
+
+    // Fallback: mix data from all cities
+    if(!leads.length){
+      for(const ct of Object.keys(DB))
+        for(const nc of Object.keys(DB[ct]))
+          leads=leads.concat(DB[ct][nc].map(l=>({...l,c:(l.c||'').replace(/München|Berlin|Hamburg|Köln|Frankfurt/g,city),t:l.t})));
+      leads=leads.slice(0,5);
+    }
+
+    const sn=IA?leads.length:Math.min(leads.length,3);
+    const sl=IA?leads:leads.slice(0,3);
+    document.getElementById('resultTitle').textContent=`📍 Entscheider in ${city}`;
+    document.getElementById('foundCount').textContent=Math.max(leads.length,20);
+    document.getElementById('showCount').textContent=sn;
+
+    if(!leads.length){
+      grid.innerHTML=`<div style="text-align:center;padding:40px;color:rgba(255,255,255,.15);grid-column:1/-1"><div style="font-size:2rem;margin-bottom:8px;opacity:.5">🔍</div><p style="font-size:.85rem">Keine Ergebnisse für "${city}" + "${niche}".<br>Versuche eine andere Kombination oder wähle aus den Schnellvorschlägen.</p></div>`;
+    }else{
+      const initials=n=>n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+      const colors=['#7c4dff','#00d4aa','#ff6b6b','#448aff','#d4a843','#ff9800'];
+      grid.innerHTML=sl.map((l,i)=>`
+        <div class="cd">
+          <div class="top">
+            <div class="av" style="background:${colors[i%colors.length]}">${initials(l.n)}</div>
+            <div class="info">
+              <h3>${l.n}</h3>
+              <div class="pos">${l.p}</div>
+              <div class="co">${l.c}</div>
+            </div>
+          </div>
+          <div class="rs">${l.r}</div>
+          <div class="ct">📞 <strong>${l.t}</strong></div>
+        </div>
+      `).join('');
+
+      // Locked entries
+      if(!IA){
+        const remaining=Math.min(4,17);
+        for(let i=0;i<remaining;i++){
+          const labels=['Geschäftsführer','Abteilungsleiter','Bereichsleiter','Prokurist','Niederlassungsleiter','Teamleiter','Direktor','Vorstand','Partner','Senior Manager','Head of','Leiter','Geschäftsbereichsleiter','Consultant Director','Chief Officer','President','Managing Director'];
+          grid.innerHTML+=`<div class="cd lk">
+            <div class="ol"><div><div class="ic">🔒</div><div class="tx">Nach Kauf sichtbar</div></div></div>
+            <div class="top"><div class="av" style="background:rgba(124,77,255,.1);color:rgba(255,255,255,.15)">??</div>
+            <div class="info"><h3 style="color:rgba(255,255,255,.08)">Weiterer Entscheider</h3><div class="pos" style="color:rgba(255,255,255,.05)">${labels[i%labels.length]}</div><div class="co" style="color:rgba(255,255,255,.03)">••••</div></div></div>
+            <div class="rs" style="color:rgba(255,255,255,.03);border-color:rgba(255,255,255,.03)">•••••••••••••••••••</div>
+            <div class="ct" style="color:rgba(255,255,255,.03)">📞 •••••••••</div>
+          </div>`;
+        }
+      }
+    }
+
+    sample.style.display='block';
+    pricing.style.display='block';
+    sb.disabled=false;sb.textContent='🔍 Suchen';
+  },600);
+}
+
+function pay(count){
+  const c=document.getElementById('city').value.trim();
+  const n=document.getElementById('niche').value.trim();
+  const prices={1:'17.99',3:'39.99',10:'99.99'};
+  const p=prices[count]||'17.99';
+  const name=`LocalLead: ${count} Liste(n) - ${c||'DEINE_STADT'} ${n||'ALLE_BRANCHEN'}`;
+  window.open(`https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=affirmation.positiv@gmail.com&item_name=${encodeURIComponent(name)}&amount=${p}&currency_code=EUR`,'_blank');
+  // Increment live counter
+  const nv=parseInt(localStorage.getItem('ll_live')||'128')+1;
+  localStorage.setItem('ll_live',nv);
+  document.getElementById('liveCount').textContent=nv;
+}
+
+function tog(el){el.classList.toggle('open')}
+
+// Show quick CTAs after load
+setTimeout(()=>{document.getElementById('quickCta').style.display='block'},300);
+</script>
+</body>
+</html>

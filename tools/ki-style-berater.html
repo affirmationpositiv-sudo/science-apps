@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👗 KI-Style-Berater 2026 – Finde dein perfektes Style-Setup</title>
+<meta name="description" content="Interaktiver KI-Style-Berater: Beantworte 5 Fragen und erhalte personalisierte Produktempfehlungen für deinen perfekten Style – Wearables, Styling-Apps, Smart-Spiegel & mehr. Mit Amazon-Partnerlinks (tag=ikune21-21).">
+<meta name="keywords" content="Style-Berater, KI Style, Mode-Tech, Wearables, Styling-App, Smart-Spiegel, Mode Gadgets, Amazon tag=ikune21-21">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="KI-Style-Berater 2026">
+<meta property="og:description" content="Finde in 2 Minuten dein perfektes Style-Tech-Setup. Personalisierte Empfehlungen mit Amazon-Partnerlinks.">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh;line-height:1.6}
+.container{max-width:700px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:2em;font-weight:800;background:linear-gradient(135deg,#FF69B4,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:8px}
+.subtitle{text-align:center;color:#888;margin-bottom:32px;font-size:1rem}
+.progress-bar{background:#1A1A1A;border-radius:12px;height:8px;margin-bottom:32px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#8B5CF6,#FF69B4);border-radius:12px;transition:width 0.5s ease;width:0%}
+.step-counter{text-align:center;color:#666;font-size:0.85em;margin-bottom:8px}
+.question-card{background:linear-gradient(135deg,#111,#1A0A2E);border:1px solid #2A2A2A;border-radius:20px;padding:36px 32px;margin-bottom:24px;transition:all 0.3s ease;display:none}
+.question-card.active{display:block;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question-card h2{font-size:1.3em;color:#FF69B4;margin-bottom:6px}
+.question-card .q-desc{color:#888;font-size:0.9em;margin-bottom:20px}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{background:#1A1A1A;border:2px solid #2A2A2A;border-radius:14px;padding:16px 20px;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;gap:12px}
+.option:hover{background:#222;border-color:#8B5CF6}
+.option.selected{background:#2A0A2A;border-color:#FF69B4;box-shadow:0 0 20px rgba(255,105,180,0.15)}
+.option .radio{width:22px;height:22px;border-radius:50%;border:2px solid #555;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
+.option.selected .radio{border-color:#FF69B4;background:#FF69B4}
+.option.selected .radio::after{content:'✓';color:#0A0A0A;font-weight:700;font-size:14px}
+.option .opt-text{flex:1}
+.option .opt-title{font-weight:600;color:#FFF;font-size:0.95em}
+.option .opt-desc{color:#888;font-size:0.82em;margin-top:2px}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin-top:24px}
+.btn{flex:1;padding:14px 24px;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:1em}
+.btn-primary{background:linear-gradient(135deg,#8B5CF6,#FF69B4);color:#FFF}
+.btn-primary:hover{transform:scale(1.02);box-shadow:0 6px 24px rgba(139,92,246,0.3)}
+.btn-secondary{background:#2A2A2A;color:#CCC}
+.btn-secondary:hover{background:#333}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.result-card{display:none;animation:fadeIn 0.5s ease}
+.result-card.active{display:block}
+.result-header{text-align:center;margin-bottom:32px;padding:32px;background:linear-gradient(135deg,#1A0A2E,#0A0A1A);border:2px solid #FFD700;border-radius:20px}
+.result-header .emoji{font-size:48px;margin-bottom:8px}
+.result-header h2{font-size:1.6em;color:#FFD700;margin-bottom:6px}
+.result-header p{color:#AAA}
+.result-summary{background:#111;border:1px solid #2A2A2A;border-radius:16px;padding:24px;margin:20px 0}
+.result-summary h3{color:#8B5CF6;font-size:1.1em;margin-bottom:12px}
+.result-summary table{width:100%;border-collapse:collapse}
+.result-summary td{padding:8px 0;border-bottom:1px solid #1A1A1A;color:#BBB}
+.result-summary td:last-child{text-align:right;color:#FFD700;font-weight:600}
+.result-summary tr:last-child td{border-bottom:none}
+.product-grid{display:grid;gap:16px;margin:24px 0}
+.product-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:14px;padding:20px;transition:all 0.3s ease}
+.product-card:hover{border-color:#8B5CF6;transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,0.1)}
+.product-card .p-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.product-card .p-icon{font-size:24px}
+.product-card .p-title{font-weight:600;color:#FFF;flex:1}
+.product-card .p-price{color:#FFD700;font-weight:600;font-size:0.85em}
+.product-card .p-desc{color:#888;font-size:0.85em;margin-bottom:10px}
+.product-card .p-link{display:inline-block;padding:8px 18px;background:linear-gradient(135deg,#8B5CF6,#FF69B4);color:#FFF;border-radius:8px;font-size:0.82em;font-weight:600;text-decoration:none;transition:all 0.3s}
+.product-card .p-link:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(139,92,246,0.3)}
+.product-card .badge{display:inline-block;background:#2A0A2A;color:#FF69B4;padding:2px 10px;border-radius:10px;font-size:0.75em;margin-bottom:4px}
+.budget-breakdown{background:#111;border:1px solid #FFD700;border-radius:16px;padding:24px;margin:20px 0}
+.budget-breakdown h3{color:#FFD700;margin-bottom:8px}
+.budget-breakdown .total{font-size:1.8em;font-weight:800;color:#FFD700;margin:8px 0}
+.budget-breakdown .sub{color:#888;font-size:0.85em}
+.action-plan{background:#111;border-left:4px solid #FF69B4;border-radius:0 12px 12px 0;padding:20px;margin:20px 0}
+.action-plan h3{color:#FF69B4;margin-bottom:12px}
+.action-plan ol{padding-left:20px;color:#BBB}
+.action-plan li{padding:6px 0}
+.action-plan a{color:#FFD700;text-decoration:none}
+.action-plan a:hover{text-decoration:underline}
+.reset-btn{display:block;width:100%;padding:14px;margin-top:24px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;color:#888;cursor:pointer;text-align:center;font-size:0.9em;transition:all 0.3s}
+.reset-btn:hover{background:#2A2A2A;color:#FFF}
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:16px;margin:30px 0;font-size:0.8em;color:#666;text-align:center}
+.disclaimer a{color:#FFD700;text-decoration:none}
+@media(max-width:500px){.question-card{padding:24px 20px}.option{padding:12px 14px}.result-header{padding:24px 16px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div id="app">
+  <h1>👗 KI-Style-Berater</h1>
+  <p class="subtitle">Beantworte 5 Fragen – erhalte personalisierte Produktempfehlungen für deinen perfekten Style</p>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="step-counter" id="stepCounter">Frage 1 von 5</div>
+
+  <!-- Questions -->
+  <div id="questions">
+    <!-- Q1: Style-Ziel -->
+    <div class="question-card active" data-q="0">
+      <h2>🎯 Was ist dein Style-Ziel?</h2>
+      <p class="q-desc">Das bestimmt die Grundausrichtung deiner Style-Tech-Ausstattung</p>
+      <div class="options" data-question="ziel">
+        <div class="option" data-value="alltag" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">👕 Alltags-Look optimieren</div>
+            <div class="opt-desc">Täglich gut aussehen ohne großen Aufwand. KI-Outfit-Planer, Capsule-Wardrobe, smarte Basics</div>
+          </div>
+        </div>
+        <div class="option" data-value="business" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">💼 Business & Berufs-Style</div>
+            <div class="opt-desc">Perfekter Look fürs Büro, Meetings & Konferenzen. Smart Casual bis formell mit KI-Unterstützung</div>
+          </div>
+        </div>
+        <div class="option" data-value="fashion" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔥 Fashion-Statement setzen</div>
+            <div class="opt-desc">Trends erkennen, ausdrücken, neu definieren. Sneaker-Tech, Streetwear, Designer-Stücke mit KI-Analyse</div>
+          </div>
+        </div>
+        <div class="option" data-value="sport" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🏃 Sport & Active-Style</div>
+            <div class="opt-desc">Functional Fashion: Laufen, Fitness, Yoga. Smart Textiles, KI-Kompressionskleidung, Sport-Wearables</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: Budget -->
+    <div class="question-card" data-q="1">
+      <h2>💰 Wie viel möchtest du investieren?</h2>
+      <p class="q-desc">Dein Budget für Style-Tech & Mode-Gadgets (in Euro)</p>
+      <div class="options" data-question="budget">
+        <div class="option" data-value="minimal" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🟢 Minimal (0-50 €)</div>
+            <div class="opt-desc">Kostenlose Apps + einfache Gadgets. Maximaler KI-Einsatz, minimales Investment</div>
+          </div>
+        </div>
+        <div class="option" data-value="sparsam" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔵 Sparsam (50-200 €)</div>
+            <div class="opt-desc">Gute Basis: Styling-App-Premium + einfache Wearables + Basis-Zubehör</div>
+          </div>
+        </div>
+        <div class="option" data-value="komfort" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🟣 Komfort (200-500 €)</div>
+            <div class="opt-desc">Mittelklasse-Wearable + Style-Apps + gutes Fotografie-Setup für Outfit-Fotos</div>
+          </div>
+        </div>
+        <div class="option" data-value="premium" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔴 Premium (500-1.000 €)</div>
+            <div class="opt-desc">High-End-Wearable + Smart-Spiegel + Profi-Style-Tools. Rundum-Sorglos-Paket</div>
+          </div>
+        </div>
+        <div class="option" data-value="luxus" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⭐ Luxus (1.000 €+)</div>
+            <div class="opt-desc">Alles was geht: Smart-Spiegel, High-End-Wearables, Design-Tools, Personal Stylist-Abo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: Lieblings-Kategorie -->
+    <div class="question-card" data-q="2">
+      <h2>🛍️ Welche Style-Kategorie interessiert dich am meisten?</h2>
+      <p class="q-desc">Dein Hauptinteresse im Bereich Mode & Style</p>
+      <div class="options" data-question="kategorie">
+        <div class="option" data-value="outfits" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">👔 Outfits & Kombinationen</div>
+            <div class="opt-desc">Tägliche Outfit-Zusammenstellung, Farbanalyse, Stilberatung per KI-App</div>
+          </div>
+        </div>
+        <div class="option" data-value="wearables" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⌚ Wearables & Smart Fashion</div>
+            <div class="opt-desc">Smartwatches, smarte Ringe, intelligente Kleidung & Accessoires mit KI</div>
+          </div>
+        </div>
+        <div class="option" data-value="sneaker" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">👟 Sneaker & Streetwear</div>
+            <div class="opt-desc">Sneaker-Kultur, Reselling, Streetwear-Trends mit KI-Marktanalyse</div>
+          </div>
+        </div>
+        <div class="option" data-value="nachhaltig" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌱 Nachhaltige Mode</div>
+            <div class="opt-desc">Secondhand, Capsule-Wardrobe, Eco-Fashion mit KI-Rating & Transparenz</div>
+          </div>
+        </div>
+        <div class="option" data-value="design" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎨 Mode-Design & Kreation</div>
+            <div class="opt-desc">Selbst designen mit KI, Print-on-Demand, Moodboards & digitale Mode-Kreation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: Tech-Affinität -->
+    <div class="question-card" data-q="3">
+      <h2>🤖 Wie tech-affin bist du?</h2>
+      <p class="q-desc">Dein Verhältnis zu neuer Technologie im Modebereich</p>
+      <div class="options" data-question="tech">
+        <div class="option" data-value="anfaenger" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌱 Einsteiger</div>
+            <div class="opt-desc">Ich möchte einfache, selbsterklärende Apps und Gadgets. Nichts Kompliziertes!</div>
+          </div>
+        </div>
+        <div class="option" data-value="mittel" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📱 Fortgeschritten</div>
+            <div class="opt-desc">Ich nutze regelmäßig Apps & Wearables. Bin bereit für ein volles Style-Ökosystem</div>
+          </div>
+        </div>
+        <div class="option" data-value="profi" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🚀 Profi / Early Adopter</div>
+            <div class="opt-desc">Ich liebe die neueste Tech, AI-Tools und bin bereit für komplexe Setups mit maximaler Kontrolle</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5: Stil-Philosophie -->
+    <div class="question-card" data-q="4">
+      <h2>🎭 Welche Style-Philosophie beschreibt dich am besten?</h2>
+      <p class="q-desc">Deine grundsätzliche Einstellung zu Mode</p>
+      <div class="options" data-question="philosophie">
+        <div class="option" data-value="minimalist" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">♻️ Minimalist</div>
+            <div class="opt-desc">Weniger ist mehr. Capsule-Wardrobe, hochwertige Basics, zeitlose Stücke. KI hilft beim Reduzieren</div>
+          </div>
+        </div>
+        <div class="option" data-value="trendy" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔥 Trend-Scout</div>
+            <div class="opt-desc">Immer am Puls der Zeit. Neue Kollektionen, Sneaker-Drops, Fashion-News – KI als Trend-Radar</div>
+          </div>
+        </div>
+        <div class="option" data-value="individualist" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎨 Individualist</div>
+            <div class="opt-desc">Eigener Style, unabhängig von Trends. Mischt High-End mit Secondhand, DIY-Design mit KI-Unterstützung</div>
+          </div>
+        </div>
+        <div class="option" data-value="funktional" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⚡ Funktionalist</div>
+            <div class="opt-desc">Kleidung muss bequem, praktisch & technisch sein. Functional Fashion, Smart Textiles, Performance-Wear</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">← Zurück</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Weiter →</button>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <div class="emoji" id="resultEmoji">👗</div>
+      <h2 id="resultTitle">Dein KI-Style-Profil</h2>
+      <p id="resultDesc">Basierend auf deinen Antworten haben wir dein persönliches Style-Tech-Setup zusammengestellt.</p>
+    </div>
+
+    <div class="result-summary">
+      <h3>📋 Deine Auswahl</h3>
+      <table>
+        <tr><td>Style-Ziel</td><td id="rZiel">—</td></tr>
+        <tr><td>Budget</td><td id="rBudget">—</td></tr>
+        <tr><td>Hauptkategorie</td><td id="rKategorie">—</td></tr>
+        <tr><td>Tech-Affinität</td><td id="rTech">—</td></tr>
+        <tr><td>Style-Philosophie</td><td id="rPhilosophie">—</td></tr>
+      </table>
+    </div>
+
+    <div class="budget-breakdown">
+      <h3>💰 Geschätzte Gesamtkosten</h3>
+      <div class="total" id="totalCost">0 €</div>
+      <div class="sub">Empfohlenes Budget für dein persönliches Style-Tech-Setup</div>
+    </div>
+
+    <h3 style="color:#FF69B4;margin:24px 0 16px">🛒 Empfohlene Produkte für dein Style-Profil</h3>
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="action-plan">
+      <h3>🚀 Dein 7-Tage-Aktionsplan</h3>
+      <ol id="actionPlan">
+        <li><strong>Tag 1:</strong> Lade die empfohlenen Style-Apps herunter und richte deinen digitalen Kleiderschrank ein</li>
+        <li><strong>Tag 2:</strong> Mach deine KI-Farbanalyse – ein Selfie genügt</li>
+        <li><strong>Tag 3:</strong> Lass dir die ersten KI-Outfits zusammenstellen</li>
+        <li><strong>Tag 4:</strong> Optimiere deinen Kleiderschrank basierend auf KI-Analyse</li>
+        <li><strong>Tag 5:</strong> Richte dein Wearable ein und verbinde es mit Style-Apps</li>
+        <li><strong>Tag 6:</strong> Fotografiere deine Top-Outfits für die digitale Galerie</li>
+        <li><strong>Tag 7:</strong> Review & nächste Schritte planen</li>
+      </ol>
+    </div>
+
+    <a class="btn btn-primary reset-btn" href="#" onclick="resetQuiz()">🔄 Quiz zurücksetzen & neu starten</a>
+  </div>
+</div>
+
+<div class="disclaimer">
+<p><strong>Affiliate-Hinweis:</strong> Die mit * gekennzeichneten Links sind Affiliate-Links (Amazon PartnerNet, tag=ikune21-21). Wenn du über diese Links einkaufst, erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten. Alle Preise sind circa-Angaben.</p>
+</div>
+
+<script>
+let answers = [null,null,null,null,null];
+
+function selectOption(el) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const qIdx = parseInt(el.closest('.question-card').dataset.q);
+  answers[qIdx] = el.dataset.value;
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  const active = document.querySelector('.question-card.active');
+  const qIdx = parseInt(active.dataset.q);
+  if (answers[qIdx] === null) return;
+  if (qIdx === 4) { showResult(); return; }
+  active.classList.remove('active');
+  const next = document.querySelector(`[data-q="${qIdx+1}"]`);
+  next.classList.add('active');
+  updateProgress(qIdx+1);
+  updateStepCounter(qIdx+2);
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = qIdx === 3 ? '🎯 Ergebnis anzeigen' : 'Weiter →';
+}
+
+function prevQuestion() {
+  const active = document.querySelector('.question-card.active');
+  const qIdx = parseInt(active.dataset.q);
+  if (qIdx === 0) return;
+  active.classList.remove('active');
+  const prev = document.querySelector(`[data-q="${qIdx-1}"]`);
+  prev.classList.add('active');
+  updateProgress(qIdx-1);
+  updateStepCounter(qIdx);
+  document.getElementById('nextBtn').disabled = false;
+  document.getElementById('nextBtn').textContent = 'Weiter →';
+}
+
+function updateProgress(step) {
+  document.getElementById('progressFill').style.width = (step/5*100)+'%';
+}
+
+function updateStepCounter(step) {
+  document.getElementById('stepCounter').textContent = 'Frage ' + Math.min(step,5) + ' von 5';
+}
+
+function showResult() {
+  document.getElementById('questions').style.display = 'none';
+  document.querySelector('.nav-buttons').style.display = 'none';
+  document.getElementById('stepCounter').style.display = 'none';
+  document.getElementById('progressFill').style.width = '100%';
+  
+  const ziel = answers[0], budget = answers[1], kategorie = answers[2], tech = answers[3], phil = answers[4];
+  
+  // Fill summary
+  const labels = {alltag:'Alltags-Look',business:'Business-Style',fashion:'Fashion-Statement',sport:'Active-Style'};
+  document.getElementById('rZiel').textContent = labels[ziel] || ziel;
+  const budLabels = {minimal:'0-50€',sparsam:'50-200€',komfort:'200-500€',premium:'500-1.000€',luxus:'1.000€+'};
+  document.getElementById('rBudget').textContent = budLabels[budget] || budget;
+  const katLabels = {outfits:'Outfits & Kombinationen',wearables:'Wearables & Smart Fashion',sneaker:'Sneaker & Streetwear',nachhaltig:'Nachhaltige Mode',design:'Mode-Design'};
+  document.getElementById('rKategorie').textContent = katLabels[kategorie] || kategorie;
+  const techLabels = {anfaenger:'Einsteiger',mittel:'Fortgeschritten',profi:'Profi'};
+  document.getElementById('rTech').textContent = techLabels[tech] || tech;
+  const philLabels = {minimalist:'Minimalist',trendy:'Trend-Scout',individualist:'Individualist',funktional:'Funktionalist'};
+  document.getElementById('rPhilosophie').textContent = philLabels[phil] || phil;
+
+  // Title & emoji
+  const profileMap = {
+    'alltag_minimal_outfits_minimalist': {title:'Der smarte Minimalist',emoji:'♻️',desc:'Du setzt auf zeitlose Basics und KI-optimierte Capsule-Wardrobe. Weniger, aber besser.'},
+    'fashion_premium_sneaker_trendy': {title:'Der Sneaker-König',emoji:'👟',desc:'Du lebst Sneaker-Kultur. Premium-Reselling, KI-Trendanalyse und die heißesten Drops.'},
+    'business_komfort_outfits_mittel': {title:'Der Business-Profi',emoji:'💼',desc:'Perfekter Look fürs Büro mit KI-Unterstützung. Smart Casual auf Knopfdruck.'},
+    'sport_premium_wearables_funktional': {title:'Der Functional Fashionist',emoji:'🏃',desc:'Performance-Wear mit KI-Analyse. Dein Körper ist dein wichtigstes Statement.'},
+    'fashion_luxus_design_individualist': {title:'Der Mode-Designer',emoji:'🎨',desc:'Du kreierst deine eigene Mode mit KI. Vom Prompt zum fertigen Kleidungsstück.'},
+    'alltag_sparsam_outfits_anfaenger': {title:'Der Style-Einsteiger',emoji:'🌱',desc:'Einfach & effektiv: Kostenlose KI-Apps für den Start in einen besseren Style.'},
+    'business_premium_wearables_profi': {title:'Der Tech-Stylist',emoji:'⌚',desc:'High-End-Wearables + KI-Style-Integration. Dein Look ist datengetrieben.'},
+    'fashion_komfort_sneaker_mittel': {title:'Der Streetwear-Kenner',emoji:'🔥',desc:'Streetwear mit System. KI-gestützte Marktanalyse und Style-Optimierung.'},
+    'alltag_komfort_outfits_mittel': {title:'Der Alltags-Champion',emoji:'👕',desc:'Jeden Tag gut aussehen – ohne Stress. KI macht die Outfit-Wahl zum Kinderspiel.'},
+    'nachhaltig_minimal_outfits_minimalist': {title:'Der Eco-Minimalist',emoji:'🌱',desc:'Nachhaltigkeit first. Secondhand + KI-optimierte Capsule-Wardrobe mit Eco-Scoring.'}
+  };
+  const key = [ziel,budget,kategorie,phil].join('_');
+  const profile = profileMap[key] || profileMap['alltag_minimal_outfits_minimalist'] || {title:'Dein Style-Profil',emoji:'👗',desc:'Basierend auf deinen Antworten haben wir die perfekten Produkte für dich zusammengestellt.'};
+  document.getElementById('resultEmoji').textContent = profile.emoji;
+  document.getElementById('resultTitle').textContent = profile.title;
+  document.getElementById('resultDesc').textContent = profile.desc;
+
+  // Products
+  const products = getProducts(ziel, budget, kategorie, tech, phil);
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `<div class="p-header"><span class="p-icon">${p.icon}</span><span class="p-title">${p.name}</span><span class="p-price">€${p.price}</span></div><div class="p-desc">${p.desc}</div><a class="p-link" href="${p.link}" target="_blank" rel="nofollow">→ Bei Amazon ansehen*</a>`;
+    grid.appendChild(card);
+  });
+
+  // Total cost
+  const total = products.reduce((s,p) => s + parseFloat(p.price), 0);
+  document.getElementById('totalCost').textContent = total.toFixed(2).replace('.',',') + ' €';
+
+  // Action plan based on profile
+  const plans = {
+    minimal: ['Tag 1: Lade Whering & Style DNA (kostenlos) herunter','Tag 2: Erstelle deinen digitalen Kleiderschrank – 10 Minuten','Tag 3: Mach deine KI-Farbanalyse per Selfie','Tag 4: Lass dir 5 KI-Outfits aus deinem Schrank vorschlagen','Tag 5: Optimiere – welche Stücke hast du nicht getragen?','Tag 6: Erstelle eine Capsule-Wardrobe-Liste mit 10 Basics','Tag 7: Review & erste Shopping-Liste mit KI-Empfehlungen'],
+    sparsam: ['Tag 1: Style DNA Premium + Whering installieren','Tag 2: Digitaler Kleiderschrank + erstes Outfit-Shooting','Tag 3: KI-Farbanalyse durchführen','Tag 4: Basis-Wearable einrichten (z.B. Smart Band)','Tag 5: 5 KI-Outfits zusammenstellen & fotografieren','Tag 6: Erste Capsule-Wardrobe mit KI-Unterstützung','Tag 7: Review & Shopping-Liste für Lücken'],
+    komfort: ['Tag 1: Styling-App-Premium + Wearable einrichten','Tag 2: Vollständiger digitaler Kleiderschrank + Outfit-Fotos','Tag 3: KI-Farbanalyse + persönliche Palette speichern','Tag 4: Smartwatch/ Ring mit Style-Apps verbinden','Tag 5: KI-Outfit-Generator aktiv nutzen (7 Tage Challenge)','Tag 6: Outfit-Fotografie-Setup optimieren (Ringlicht, Stativ)','Tag 7: Wochen-Review: Welche Outfits funktionieren?'],
+    premium: ['Tag 1: High-End-Wearable + Style-Ökosystem einrichten','Tag 2: Smart-Spiegel oder Premium-Foto-Setup installieren','Tag 3: Komplette KI-Farbanalyse + Style-DNA-Report','Tag 4: KI-Design-Tools erkunden (Midjourney, Adobe Firefly)','Tag 5: Persönliche Capsule-Kollektion mit KI designen','Tag 6: Sneaker/Streetwear-Markt mit KI-Tools scannen','Tag 7: Komplettes Style-Dashboard: Wearable + Apps + Spiegel'],
+    luxus: ['Tag 1: LG Styler Mirror + Wearable-Ökosystem installieren','Tag 2: Profi-Style-Apps + KI-Design-Suite einrichten','Tag 3: Personal Stylist Booking + KI-Vorbereitung','Tag 4: Eigene Mode-Kollektion mit KI designen + produzieren','Tag 5: Komplette Capsule-Wardrobe mit KI-Nachhaltigkeits-Score','Tag 6: Fashion-Moodboard + KI-generierte Katalog-Shootings','Tag 7: Style-ROI-Analyse: Kosten vs. Tragehäufigkeit vs. CO₂']
+  };
+  const planSteps = plans[budget] || plans.minimal;
+  const planOl = document.getElementById('actionPlan');
+  planOl.innerHTML = '';
+  planSteps.forEach((s,i) => {
+    const li = document.createElement('li');
+    li.innerHTML = `<strong>${s.split(':')[0]}:</strong>${s.split(':')[1] || s}`;
+    planOl.appendChild(li);
+  });
+
+  document.getElementById('resultCard').classList.add('active');
+}
+
+function getProducts(ziel, budget, kategorie, tech, phil) {
+  const all = {
+    // Style-DNA App
+    dna: {icon:'📱',name:'Style DNA – KI-Farbanalyse & Stilberater',price:'4,99',desc:'Monatliches Premium-Abo. Künstliche Intelligenz analysiert deinen Farbtyp, Stil und Körperform. Personalisierte Outfit-Vorschläge.',link:'https://www.amazon.de/dp/B0B5G8HLX7?tag=ikune21-21'},
+    // Simplehuman Mirror
+    mirror: {icon:'🪞',name:'Simplehuman Sensor Mirror Pro 5x',price:'229,00',desc:'LED-Spiegel mit TrueLight-Technologie. Farbtemperatur-Wechsel von 6500K bis 2700K. Perfekt für Make-up & Outfit-Beurteilung.',link:'https://www.amazon.de/dp/B094DWJ44Y?tag=ikune21-21'},
+    // Apple Watch Ultra 3
+    awu: {icon:'⌚',name:'Apple Watch Ultra 3',price:'899,00',desc:'Das ultimative KI-Style-Wearable. Action-Taste für Outfit-Schnappschüsse, KI-Style-Vorschläge, austauschbare Armbänder.',link:'https://www.amazon.de/dp/B0DLBQ9Q8J?tag=ikune21-21'},
+    // Oura Ring
+    oura: {icon:'💍',name:'Oura Ring Gen 4 – Heritage',price:'399,00',desc:'Der schickste Health-Tracker als Ring. Titan, wasserdicht, 7 Tage Akku. Unsichtbarer KI-Style-Begleiter.',link:'https://www.amazon.de/dp/B0D91RDDBQ?tag=ikune21-21'},
+    // Samsung Galaxy Watch 7
+    sgw: {icon:'⌚',name:'Samsung Galaxy Watch 7',price:'429,00',desc:'Wear OS mit Galaxy AI. KI-basierte Stilberatung, personalisierte Watch-Faces, austauschbare Armbänder.',link:'https://www.amazon.de/dp/B0DGCKKPPB?tag=ikune21-21'},
+    // Ringlicht
+    ring: {icon:'📸',name:'LED-Ringlicht 10" mit Stativ & Halterung',price:'34,99',desc:'Perfekt für Outfit-Fotos und digitale Kleiderschrank-Aufnahmen. Dimmbar, 3 Lichtmodi.',link:'https://www.amazon.de/dp/B08FD3TX5Z?tag=ikune21-21'},
+    // Stativ
+    stativ: {icon:'📱',name:'Smartphone-Stativ mit Bluetooth-Fernauslöser',price:'19,99',desc:'Für konsistente Outfit-Fotos – unverzichtbar für den digitalen Kleiderschrank.',link:'https://www.amazon.de/dp/B08R67PGHQ?tag=ikune21-21'},
+    // AirPods Pro 3
+    airpods: {icon:'🎧',name:'Apple AirPods Pro 3 (USB-C)',price:'279,00',desc:'Adaptives Audio, KI-Transparenzmodus, Personalised Spatial Audio. Das unsichtbare Mode-Accessoire.',link:'https://www.amazon.de/dp/B0DGJ63PRZ?tag=ikune21-21'},
+    // Ray-Ban Meta
+    rayban: {icon:'🕶️',name:'Ray-Ban Meta Smart Glasses – Wayfarer',price:'349,00',desc:'KI-Kamera + Sprachassistent + Style-Beratung per Blick. Kult-Design trifft auf KI.',link:'https://www.amazon.de/dp/B0CXKSNXBN?tag=ikune21-21'},
+    // Sneaker Reinigung
+    sneakerClean: {icon:'👟',name:'Sneaker-Reinigungs-Set (Professionell)',price:'19,99',desc:'Materialgerechte Reinigung für Leder, Canvas, Mesh & Wildleder. Erhalte den Wert deiner Sammlung.',link:'https://www.amazon.de/dp/B07Q1HSD9W?tag=ikune21-21'},
+    // Sneaker Boxen
+    sneakerBox: {icon:'📦',name:'Sneaker-Aufbewahrungsboxen (6er-Set)',price:'29,99',desc:'Stapelbare, durchsichtige Boxen für die perfekte Sammlungs-Präsentation mit KI-Inventory-Management.',link:'https://www.amazon.de/dp/B08C7G9Q7F?tag=ikune21-21'},
+    // Wacom Tablet
+    wacom: {icon:'🎨',name:'Wacom Intuos Pro Grafiktablet (Medium)',price:'349,00',desc:'Das perfekte Tool für KI-gestütztes Modedesign. Präzises Stift-Tracking für Skizzen & KI-Designs.',link:'https://www.amazon.de/dp/B09KLGBNQM?tag=ikune21-21'},
+    // Digitales Maßband
+    massband: {icon:'📐',name:'Digitales Maßband mit App-Anbindung',price:'12,99',desc:'Präzise Körpermaße für KI-Größenberater. Nie wieder falsche Größen bestellen.',link:'https://www.amazon.de/dp/B0B5G8HLX7?tag=ikune21-21'},
+    // Kleiderbügel
+    buxel: {icon:'♻️',name:'Bambus-Kleiderbügel (10er-Set)',price:'14,99',desc:'Nachhaltige Bambus-Bügel für die organisierte Capsule-Wardrobe.',link:'https://www.amazon.de/dp/B07G1YXPJ8?tag=ikune21-21'},
+    // Kompressionsstrümpfe
+    kompression: {icon:'🧦',name:'Kompressionsstrümpfe (medizinisch, Stil-Design)',price:'34,99',desc:'KI-optimierte Kompressionsstrümpfe. Stil und Gesundheit vereint – in modischen Farben.',link:'https://www.amazon.de/dp/B07T1Q8P5T?tag=ikune21-21'},
+    // iPad
+    ipad: {icon:'📱',name:'Apple iPad (10. Generation)',price:'499,00',desc:'Die mobile KI-Style-Zentrale. Mit Pinterest Lens, Google Lens und AR-Anprobe-Features.',link:'https://www.amazon.de/dp/B0DJCR6CPZ?tag=ikune21-21'},
+    // Nike Pegasus
+    nike: {icon:'👟',name:'Nike Air Zoom Pegasus 41',price:'149,00',desc:'KI-optimierte Dämpfung, ReactX-Schaum, atmungsaktives Mesh. Perfekt für KI-Laufanalyse via App.',link:'https://www.amazon.de/dp/B0CNPGBPXJ?tag=ikune21-21'},
+    // HiMirror
+    himirror: {icon:'🪞',name:'HiMirror Plus+ Smart-Spiegel',price:'199,00',desc:'Hautanalyse + Outfit-Empfehlungen in einem Gerät. Der erschwingliche Smart Mirror für Zuhause.',link:'https://www.amazon.de/dp/B0C7G9Q7F?tag=ikune21-21'}
+  };
+
+  const picks = [all.dna, all.ring, all.stativ, all.massband, all.buxel];
+  
+  if (budget === 'minimal') { picks.push(all.dna, all.buxel); }
+  else if (budget === 'sparsam') { picks.push(all.ring, all.stativ, all.sneakerClean); }
+  else if (budget === 'komfort') { picks.push(all.ring, all.sgw, all.sneakerClean, all.massband); }
+  else if (budget === 'premium') { picks.push(all.awu, all.mirror, all.rayban, all.sneakerBox, all.airpods); }
+  else { picks.push(all.awu, all.oura, all.mirror, all.rayban, all.airpods, all.wacom, all.ipad); }
+
+  if (kategorie === 'sneaker') { picks.push(all.sneakerClean, all.sneakerBox); }
+  if (kategorie === 'wearables') { picks.push(all.awu, all.oura, all.sgw); }
+  if (kategorie === 'design') { picks.push(all.wacom, all.ipad); }
+  if (kategorie === 'nachhaltig') { picks.push(all.buxel, all.kompression); }
+  if (phil === 'funktional') { picks.push(all.kompression, all.nike); }
+  if (tech === 'profi') { picks.push(all.rayban, all.wacom); }
+
+  // Deduplicate by name
+  const seen = new Set();
+  return picks.filter(p => {
+    if (seen.has(p.name)) return false;
+    seen.add(p.name);
+    return true;
+  });
+}
+
+function resetQuiz() {
+  answers = [null,null,null,null,null];
+  document.getElementById('questions').style.display = 'block';
+  document.querySelector('.nav-buttons').style.display = 'flex';
+  document.getElementById('stepCounter').style.display = 'block';
+  document.getElementById('resultCard').classList.remove('active');
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  document.querySelector('[data-q="0"]').classList.add('active');
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  updateProgress(0);
+  updateStepCounter(1);
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = 'Weiter →';
+}
+</script>
+</body>
+</html>

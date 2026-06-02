@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Video-Bedarfsrechner – Finde deine perfekte Video-Ausrüstung 2026</title>
+<meta name="description" content="KI-Video-Bedarfsrechner: Beantworte 5 Fragen und erhalte eine personalisierte Empfehlung für Kamera, Software, Mikrofon und Beleuchtung – abgestimmt auf dein Budget und deine Ziele.">
+<meta name="keywords" content="KI Video Ausrüstung, Video Bedarfsrechner, Video Equipment, Kamera Empfehlung, Video Software, Mikrofon, Beleuchtung, Videoproduktion">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif; background:#0A0A0A; color:#E5E5E5; line-height:1.6; min-height:100vh; }
+.container { max-width:800px; margin:0 auto; padding:30px 24px; }
+h1 { font-size:2em; font-weight:800; background:linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+.subtitle { color:#6B7280; font-size:1em; margin-bottom:24px; }
+.badge { display:inline-block; background:rgba(139,92,246,0.15); color:#A78BFA; padding:4px 12px; border-radius:12px; font-size:0.78rem; font-weight:600; margin-bottom:12px; }
+
+.quiz-container { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:16px; padding:24px; margin:20px 0; }
+.question { margin-bottom:24px; }
+.question-label { font-weight:600; color:#E5E5E5; margin-bottom:12px; font-size:1.05em; }
+.question-label .q-num { color:#A78BFA; margin-right:6px; }
+.options { display:flex; flex-direction:column; gap:8px; }
+.option { background:#141414; border:1px solid #2A2A2A; border-radius:10px; padding:14px 18px; cursor:pointer; transition:all .2s; display:flex; align-items:center; gap:12px; }
+.option:hover { border-color:#8B5CF6; background:rgba(139,92,246,0.05); }
+.option.selected { border-color:#8B5CF6; background:rgba(139,92,246,0.1); }
+.option .radio { width:20px; height:20px; border-radius:50%; border:2px solid #4B5563; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:all .2s; }
+.option.selected .radio { border-color:#8B5CF6; background:#8B5CF6; }
+.option.selected .radio::after { content:"✓"; color:#fff; font-size:12px; font-weight:700; }
+.option .label { flex:1; color:#D1D5DB; font-size:0.95em; }
+.option .emoji { font-size:1.3em; }
+
+.btn-primary { background:linear-gradient(135deg,#8B5CF6,#6D28D9); color:#fff; border:none; padding:14px 32px; border-radius:10px; font-size:1em; font-weight:600; cursor:pointer; transition:all .2s; width:100%; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(139,92,246,.3); }
+.btn-primary:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+
+.result { display:none; }
+.result.show { display:block; }
+.result-card { background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(255,215,0,0.05)); border:1px solid rgba(139,92,246,0.3); border-radius:16px; padding:28px 24px; margin:24px 0; }
+.result-card h2 { color:#FFD700; font-size:1.4em; margin-bottom:4px; }
+.result-card .level { color:#A78BFA; font-size:0.9em; margin-bottom:16px; }
+.prod-grid { display:grid; grid-template-columns:1fr; gap:12px; margin:16px 0; }
+.prod-item { background:#141414; border:1px solid #2A2A2A; border-radius:10px; padding:14px 16px; display:flex; align-items:center; gap:12px; transition:all .2s; }
+.prod-item:hover { border-color:#8B5CF6; }
+.prod-item .icon { font-size:1.5em; }
+.prod-item .info { flex:1; }
+.prod-item .info h4 { color:#E5E5E5; font-size:0.95em; margin-bottom:2px; }
+.prod-item .info p { color:#6B7280; font-size:0.78em; }
+.prod-item .price { color:#8B5CF6; font-weight:600; font-size:0.9em; white-space:nowrap; }
+.summary { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:12px; padding:20px; margin:16px 0; }
+.summary h3 { color:#A78BFA; font-size:1em; margin-bottom:12px; }
+.summary ul { margin-left:18px; color:#D1D5DB; }
+.summary li { margin-bottom:8px; font-size:0.9em; }
+.cta-box { background:#1A1A1A; border:1px solid #2A2A2A; border-radius:12px; padding:20px; margin:16px 0; text-align:center; }
+.cta-box h3 { color:#FFD700; margin-bottom:8px; }
+.cta-box a { color:#A78BFA; }
+.reset-btn { background:transparent; border:1px solid #4B5563; color:#9CA3AF; padding:10px 24px; border-radius:8px; cursor:pointer; margin-top:12px; font-size:0.85em; transition:all .2s; }
+.reset-btn:hover { border-color:#8B5CF6; color:#A78BFA; }
+.footer-links { margin-top:40px; padding-top:20px; border-top:1px solid #2A2A2A; text-align:center; }
+.footer-links a { color:#6B7280; font-size:0.82rem; margin:0 10px; text-decoration:none; }
+.footer-links a:hover { color:#A78BFA; }
+.hidden { display:none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<span class="badge">🎬 KI-Video-Bedarfsrechner</span>
+<h1>Finde deine perfekte Video-Ausrüstung</h1>
+<p class="subtitle">Beantworte 5 Fragen und erhalte eine personalisierte Empfehlung für Kamera, Software, Mikrofon & Beleuchtung – basierend auf deinem Budget und deinen Zielen.</p>
+
+<div class="quiz-container" id="quiz">
+  <div class="question" id="q1">
+    <div class="question-label"><span class="q-num">1/5</span> Was ist dein Hauptziel mit Videos?</div>
+    <div class="options">
+      <div class="option" data-q="1" data-val="0" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">📱</span><span class="label">Social Media (TikTok, Reels, Shorts) – Kurzvideos</span>
+      </div>
+      <div class="option" data-q="1" data-val="1" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎬</span><span class="label">YouTube-Kanal aufbauen – Regelmäßige Videos</span>
+      </div>
+      <div class="option" data-q="1" data-val="2" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">💼</span><span class="label">Kundenprojekte & Agentur – Professionelle Ergebnisse</span>
+      </div>
+      <div class="option" data-q="1" data-val="3" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎓</span><span class="label">Online-Kurse & Erklärvideos – Klare Präsentation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="question hidden" id="q2">
+    <div class="question-label"><span class="q-num">2/5</span> Wie viel Budget hast du für die Startausrüstung?</div>
+    <div class="options">
+      <div class="option" data-q="2" data-val="0" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">💰</span><span class="label">0€ – Nur kostenlose Tools & vorhandene Hardware</span>
+      </div>
+      <div class="option" data-q="2" data-val="1" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">💵</span><span class="label">Bis 500€ – Einsteiger-Budget</span>
+      </div>
+      <div class="option" data-q="2" data-val="2" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">💶</span><span class="label">500–2.000€ – Fortgeschritten</span>
+      </div>
+      <div class="option" data-q="2" data-val="3" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">💎</span><span class="label">2.000€+ – Professionell</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="question hidden" id="q3">
+    <div class="question-label"><span class="q-num">3/5</span> Willst du selbst vor der Kamera stehen oder KI-Avatare nutzen?</div>
+    <div class="options">
+      <div class="option" data-q="3" data-val="0" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🤖</span><span class="label">Nur KI-Avatare – Keine Kamera nötig</span>
+      </div>
+      <div class="option" data-q="3" data-val="1" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎥</span><span class="label">Selbst vor der Kamera – Persönliche Präsenz</span>
+      </div>
+      <div class="option" data-q="3" data-val="2" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🔄</span><span class="label">Beides – Mal KI, mal selbst</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="question hidden" id="q4">
+    <div class="question-label"><span class="q-num">4/5</span> Wie wichtig ist dir Audio-Qualität?</div>
+    <div class="options">
+      <div class="option" data-q="4" data-val="0" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">📱</span><span class="label">Reicht erstmal das Handy-Mikrofon</span>
+      </div>
+      <div class="option" data-q="4" data-val="1" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎤</span><span class="label">Soll sauber klingen – Einsteiger-Mikrofon</span>
+      </div>
+      <div class="option" data-q="4" data-val="2" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎙️</span><span class="label">Professionell – Kristallklarer Sound</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="question hidden" id="q5">
+    <div class="question-label"><span class="q-num">5/5</span> Welche Art von Videos machst du hauptsächlich?</div>
+    <div class="options">
+      <div class="option" data-q="5" data-val="0" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">💬</span><span class="label">Talking Head / Vlog – Ich rede zur Kamera</span>
+      </div>
+      <div class="option" data-q="5" data-val="1" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎞️</span><span class="label">Erklärvideo / Screencast – Bildschirm + Voiceover</span>
+      </div>
+      <div class="option" data-q="5" data-val="2" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎨</span><span class="label">Produkt-Reviews / Unboxing – Nahaufnahmen wichtig</span>
+      </div>
+      <div class="option" data-q="5" data-val="3" onclick="select(this)">
+        <div class="radio"></div><span class="emoji">🎬</span><span class="label">Cinematic / Storytelling – Filmisches Ergebnis</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="submitBtn" onclick="calculateResult()" disabled>Empfehlung berechnen ✨</button>
+</div>
+
+<div class="result" id="result">
+  <div class="result-card" id="resultCard">
+    <h2 id="resultTitle">🎬 Deine Empfehlung</h2>
+    <div class="level" id="resultLevel">Level: Einsteiger</div>
+    <p id="resultDesc" style="color:#D1D5DB;margin-bottom:16px;">Basierend auf deinen Angaben empfehlen wir dir folgende Ausrüstung und Software:</p>
+
+    <div class="summary" id="summaryBox">
+      <h3>📋 Deine Auswahl</h3>
+      <ul id="summaryList"></ul>
+    </div>
+
+    <h3 style="color:#A78BFA;font-size:1em;margin:20px 0 12px;">🛒 Empfohlene Produkte</h3>
+    <div class="prod-grid" id="prodGrid"></div>
+
+    <div class="cta-box">
+      <h3>📖 Tiefer eintauchen</h3>
+      <p style="color:#9CA3AF;">Lies unseren vollständigen Guide: <a href="../blog/ki-video-produktion-2026.html">KI-Video-Produktion 2026 – Die 10 besten Tools</a></p>
+    </div>
+  </div>
+
+  <button class="reset-btn" onclick="resetQuiz()">🔄 Nochmal berechnen</button>
+</div>
+
+<div class="footer-links">
+  <a href="../blog/">← Zum Blog</a>
+  <a href="../store.html">🛒 Shop</a>
+  <a href="../tools/">🧰 Alle Tools</a>
+  <a href="../impressum/">📜 Impressum</a>
+  <a href="../datenschutz/">🔒 Datenschutz</a>
+</div>
+
+</div>
+
+<script>
+const RECS = {
+  "0_0_0_0_0": {
+    level: "KI-Only Starter",
+    desc: "Du brauchst KEINE Hardware. Alles, was du brauchst, sind KI-Tools – und die laufen in der Cloud.",
+    products: [
+      {icon:"🤖", name:"Kling AI (Free Trial)", detail:"Text-zu-Video Generator", price:"€0 Start"},
+      {icon:"✂️", name:"DaVinci Resolve 19 Free", detail:"Profi-Schnittsoftware kostenlos"},
+      {icon:"🎵", name:"YouTube Audio Library", detail:"Lizenzfreie Musik"},
+      {icon:"📝", name:"ChatGPT / Claude", detail:"Skript & Prompt-Generierung"}
+    ]
+  },
+  "0_1_0_0_0": {
+    level: "Social-Media-Starter (KI-betont)",
+    desc: "Perfekt für TikTok/Reels mit KI-Unterstützung. Preiswert und effektiv.",
+    products: [
+      {icon:"🎥", name:"Smartphone-Stativ + Ringlicht", detail:"Bessere Handy-Aufnahmen", price:"~€30"},
+      {icon:"🎤", name:"Rode NT-USB Mini", detail:"USB-Mikrofon Einsteiger", price:"~€79"},
+      {icon:"✂️", name:"CapCut (KI-Version)", detail:"KI-Schnitt + Untertitel", price:"€0"},
+      {icon:"🤖", name:"Runway Gen-3 (Trial)", detail:"KI-Video-Generator", price:"$15/Monat"}
+    ]
+  },
+  "2_3_1_2_3": {
+    level: "🏆 Profi-Produktion",
+    desc: "Du willst das Beste vom Besten. Hier ist deine professionelle Komplettausstattung.",
+    products: [
+      {icon:"🎥", name:"Sony A7 IV", detail:"Vollformat-Kamera", price:"~€2.200"},
+      {icon:"🎙️", name:"Rode NT1 + Interface", detail:"Studio-Mikrofon-Set", price:"~€250"},
+      {icon:"💡", name:"Aputure Amaran 200d", detail:"LED-Dauerlicht", price:"~€200"},
+      {icon:"✂️", name:"DaVinci Resolve Studio", detail:"Profi-Schnitt + KI-Features", price:"~€349"},
+      {icon:"🖥️", name:"MacBook Pro M4 Max", detail:"Leistung für 4K/8K", price:"~€3.500"}
+    ]
+  }
+};
+
+function getKey(answers) {
+  return Object.keys(answers).map(k => answers[k]).join("_");
+}
+
+function select(el) {
+  const q = el.dataset.q;
+  const val = el.dataset.val;
+  const parent = document.getElementById("q" + q);
+  parent.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+  el.classList.add("selected");
+  
+  // Store answer
+  window._answers = window._answers || {};
+  window._answers[q] = parseInt(val);
+  
+  // Show next question
+  const nextQ = parseInt(q) + 1;
+  if (nextQ <= 5) {
+    document.getElementById("q" + nextQ).classList.remove("hidden");
+  }
+  
+  // Enable submit if all answered
+  const answered = Object.keys(window._answers).length;
+  document.getElementById("submitBtn").disabled = answered < 5;
+}
+
+function calculateResult() {
+  const a = window._answers;
+  if (!a || Object.keys(a).length < 5) return;
+  
+  const key = getKey(a);
+  
+  // Default: fallback based on budget
+  let level, desc, products;
+  
+  if (RECS[key]) {
+    const r = RECS[key];
+    level = r.level;
+    desc = r.desc;
+    products = r.products;
+  } else {
+    // Generate dynamic recommendation
+    const budget = a[2] || 0;
+    const camGoal = a[3] || 0;
+    const audio = a[4] || 0;
+    
+    if (budget === 0) {
+      level = "💻 Digital Nomad (0€ Budget)";
+      desc = "Kein Problem! Mit diesen kostenlosen Tools produzierst du KI-Videos in Profi-Qualität – ohne einen Cent auszugeben.";
+      products = [
+        {icon:"🤖", name:"Kling AI / Pika Labs (Free)", detail:"Kostenlose KI-Video-Generatoren", price:"€0"},
+        {icon:"✂️", name:"DaVinci Resolve 19 Free", detail:"Vollwertiger Videoschnitt", price:"€0"},
+        {icon:"🎨", name:"Canva AI (Free)", detail:"Thumbnails + Covers", price:"€0"},
+        {icon:"🎵", name:"YouTube Audio Library", detail:"Lizenzfreie Musik", price:"€0"}
+      ];
+    } else if (budget === 1) {
+      level = "📱 Einsteiger (bis 500€)";
+      desc = "Mit diesem Budget bekommst du eine solide Grundausstattung für saubere Videos.";
+      products = [
+        {icon:"🎥", name:"Smartphone-Stativ + Ringlicht", detail:"Bessere Beleuchtung + Stabilität", price:"~€40"},
+        {icon:"🎤", name:"Blue Yeti Nano", detail:"USB-Mikrofon", price:"~€99"},
+        {icon:"✂️", name:"CapCut / DaVinci Resolve Free", detail:"KI-Schnitt + Untertitel", price:"€0"},
+        {icon:"🤖", name:"Kling AI + ChatGPT Plus", detail:"KI-Video + Skript", price:"~€25/Monat"}
+      ];
+    } else if (budget === 2) {
+      level = "⚡ Fortgeschritten (500–2.000€)";
+      desc = "Saubere Qualität für YouTube und Kundenprojekte. Perfektes Mittelklasse-Setup.";
+      products = [
+        {icon:"🎥", name:"Sony ZV-E10 / iPhone Pro", detail:"Vlog-Kamera oder Smartphone", price:"~€700"},
+        {icon:"🎤", name:"Rode Wireless GO II", detail:"Funkmikrofon-Set", price:"~€250"},
+        {icon:"💡", name:"LED-Panel (Neewer 660)", detail:"Dauerlicht für Talking Heads", price:"~€80"},
+        {icon:"✂️", name:"DaVinci Resolve Studio", detail:"Schnitt + KI-Features", price:"~€349"}
+      ];
+    } else {
+      level = "🚀 Profi (2.000€+)";
+      desc = "Deine professionelle Komplettausstattung für hochwertige Videoproduktion.";
+      products = [
+        {icon:"🎥", name:"Sony A7 IV / Canon R6", detail:"Vollformat-Kamera", price:"~€2.200"},
+        {icon:"🎙️", name:"Shure SM7B + Interface", detail:"Broadcast-Mikrofon", price:"~€550"},
+        {icon:"💡", name:"Aputure Amaran 200x", detail:"LED-Dauerlicht", price:"~€250"},
+        {icon:"✂️", name:"DaVinci Resolve Studio + Premiere Pro", detail:"KI-Profi-Schnitt", price:"~€600"},
+        {icon:"🖥️", name:"MacBook Pro M4 Pro/Max", detail:"Leistung für 4K/8K", price:"~€2.500"}
+      ];
+    }
+  }
+  
+  document.getElementById("resultTitle").textContent = "🎬 " + level;
+  document.getElementById("resultLevel").textContent = "Dein Level: " + level;
+  document.getElementById("resultDesc").textContent = desc;
+  
+  const grid = document.getElementById("prodGrid");
+  grid.innerHTML = "";
+  products.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "prod-item";
+    div.innerHTML = '<span class="icon">'+p.icon+'</span><div class="info"><h4>'+p.name+'</h4><p>'+p.detail+'</p></div><span class="price">'+p.price+'</span>';
+    grid.appendChild(div);
+  });
+  
+  // Summary
+  const summaries = ["📱 Focus: "+document.querySelector('#q1 .option.selected .label')?.textContent?.trim() || "Social Media", "💰 Budget: "+document.querySelector('#q2 .option.selected .label')?.textContent?.split("–")[0]?.trim() || "Mittel", "🎥 Präsentation: "+document.querySelector('#q3 .option.selected .label')?.textContent?.trim() || "KI-Avatare"];
+  const list = document.getElementById("summaryList");
+  list.innerHTML = "";
+  summaries.forEach(s => {
+    const li = document.createElement("li");
+    li.textContent = s;
+    list.appendChild(li);
+  });
+  
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result").classList.add("show");
+}
+
+function resetQuiz() {
+  window._answers = {};
+  document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+  document.querySelectorAll(".question").forEach((q,i) => {
+    if(i === 0) q.classList.remove("hidden");
+    else q.classList.add("hidden");
+  });
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").classList.remove("show");
+}
+</script>
+</body>
+</html>"""

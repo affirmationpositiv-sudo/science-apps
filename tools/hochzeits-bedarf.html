@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 KI-Hochzeits-Bedarfsrechner 2026 – Finde dein perfektes Wedding-Equipment</title>
+<meta name="description" content="Interaktiver KI-Hochzeits-Bedarfsrechner: Beantworte 5 Fragen und erhalte personalisierte Produktempfehlungen für deine Traumhochzeit – Kameras, Drohnen, Licht, Musik, Fotobox & mehr. Mit Amazon-Partnerlinks (tag=ikune21-21).">
+<meta name="keywords" content="Hochzeits-Bedarfsrechner, Hochzeitskamera Empfehlung, Hochzeitsdrohne, Hochzeitsmusik, Hochzeitsbeleuchtung, KI Hochzeit, Wedding Tech, Amazon tag=ikune21-21">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="KI-Hochzeits-Bedarfsrechner 2026">
+<meta property="og:description" content="Finde in 2 Minuten dein perfektes Hochzeits-Equipment. Personalisierte Empfehlungen mit Amazon-Partnerlinks.">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh;line-height:1.6}
+.container{max-width:700px;margin:0 auto;padding:40px 20px 80px}
+h1{font-size:2em;font-weight:800;background:linear-gradient(135deg,#FF69B4,#8B5CF6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:8px}
+.subtitle{text-align:center;color:#888;margin-bottom:32px;font-size:1rem}
+.progress-bar{background:#1A1A1A;border-radius:12px;height:8px;margin-bottom:32px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#8B5CF6,#FF69B4);border-radius:12px;transition:width 0.5s ease;width:0%}
+.step-counter{text-align:center;color:#666;font-size:0.85em;margin-bottom:8px}
+.question-card{background:linear-gradient(135deg,#111,#1A0A2E);border:1px solid #2A2A2A;border-radius:20px;padding:36px 32px;margin-bottom:24px;transition:all 0.3s ease;display:none}
+.question-card.active{display:block;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question-card h2{font-size:1.3em;color:#FF69B4;margin-bottom:6px}
+.question-card .q-desc{color:#888;font-size:0.9em;margin-bottom:20px}
+.options{display:flex;flex-direction:column;gap:10px}
+.option{background:#1A1A1A;border:2px solid #2A2A2A;border-radius:14px;padding:16px 20px;cursor:pointer;transition:all 0.25s ease;display:flex;align-items:center;gap:12px}
+.option:hover{background:#222;border-color:#8B5CF6}
+.option.selected{background:#2A0A2A;border-color:#FF69B4;box-shadow:0 0 20px rgba(255,105,180,0.15)}
+.option .radio{width:22px;height:22px;border-radius:50%;border:2px solid #555;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s}
+.option.selected .radio{border-color:#FF69B4;background:#FF69B4}
+.option.selected .radio::after{content:'✓';color:#0A0A0A;font-weight:700;font-size:14px}
+.option .opt-text{flex:1}
+.option .opt-title{font-weight:600;color:#FFF;font-size:0.95em}
+.option .opt-desc{color:#888;font-size:0.82em;margin-top:2px}
+.nav-buttons{display:flex;gap:12px;justify-content:space-between;margin-top:24px}
+.btn{flex:1;padding:14px 24px;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:all 0.3s;font-size:1em}
+.btn-primary{background:linear-gradient(135deg,#8B5CF6,#FF69B4);color:#FFF}
+.btn-primary:hover{transform:scale(1.02);box-shadow:0 6px 24px rgba(139,92,246,0.3)}
+.btn-secondary{background:#2A2A2A;color:#CCC}
+.btn-secondary:hover{background:#333}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+/* ===== RESULT ===== */
+.result-card{display:none;animation:fadeIn 0.5s ease}
+.result-card.active{display:block}
+.result-header{text-align:center;margin-bottom:32px;padding:32px;background:linear-gradient(135deg,#1A0A2E,#0A0A1A);border:2px solid #FFD700;border-radius:20px}
+.result-header .emoji{font-size:48px;margin-bottom:8px}
+.result-header h2{font-size:1.6em;color:#FFD700;margin-bottom:6px}
+.result-header p{color:#AAA}
+.result-summary{background:#111;border:1px solid #2A2A2A;border-radius:16px;padding:24px;margin:20px 0}
+.result-summary h3{color:#8B5CF6;font-size:1.1em;margin-bottom:12px}
+.result-summary table{width:100%;border-collapse:collapse}
+.result-summary td{padding:8px 0;border-bottom:1px solid #1A1A1A;color:#BBB}
+.result-summary td:last-child{text-align:right;color:#FFD700;font-weight:600}
+.result-summary tr:last-child td{border-bottom:none}
+.product-grid{display:grid;gap:16px;margin:24px 0}
+.product-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:14px;padding:20px;transition:all 0.3s ease}
+.product-card:hover{border-color:#8B5CF6;transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,0.1)}
+.product-card .p-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.product-card .p-icon{font-size:24px}
+.product-card .p-title{font-weight:600;color:#FFF;flex:1}
+.product-card .p-price{color:#FFD700;font-weight:600;font-size:0.85em}
+.product-card .p-desc{color:#888;font-size:0.85em;margin-bottom:10px}
+.product-card .p-link{display:inline-block;padding:8px 18px;background:linear-gradient(135deg,#8B5CF6,#FF69B4);color:#FFF;border-radius:8px;font-size:0.82em;font-weight:600;text-decoration:none;transition:all 0.3s}
+.product-card .p-link:hover{transform:scale(1.04);box-shadow:0 4px 16px rgba(139,92,246,0.3)}
+.product-card .badge{display:inline-block;background:#2A0A2A;color:#FF69B4;padding:2px 10px;border-radius:10px;font-size:0.75em;margin-bottom:4px}
+.budget-breakdown{background:#111;border:1px solid #FFD700;border-radius:16px;padding:24px;margin:20px 0}
+.budget-breakdown h3{color:#FFD700;margin-bottom:8px}
+.budget-breakdown .total{font-size:1.8em;font-weight:800;color:#FFD700;margin:8px 0}
+.budget-breakdown .sub{color:#888;font-size:0.85em}
+.action-plan{background:#111;border-left:4px solid #FF69B4;border-radius:0 12px 12px 0;padding:20px;margin:20px 0}
+.action-plan h3{color:#FF69B4;margin-bottom:12px}
+.action-plan ol{padding-left:20px;color:#BBB}
+.action-plan li{padding:6px 0}
+.action-plan a{color:#FFD700;text-decoration:none}
+.action-plan a:hover{text-decoration:underline}
+.reset-btn{display:block;width:100%;padding:14px;margin-top:24px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;color:#888;cursor:pointer;text-align:center;font-size:0.9em;transition:all 0.3s}
+.reset-btn:hover{background:#2A2A2A;color:#FFF}
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:16px;margin:30px 0;font-size:0.8em;color:#666;text-align:center}
+.disclaimer a{color:#FFD700;text-decoration:none}
+@media(max-width:500px){.question-card{padding:24px 20px}.option{padding:12px 14px}.result-header{padding:24px 16px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div id="app">
+  <h1>🎯 KI-Hochzeits-Bedarfsrechner</h1>
+  <p class="subtitle">Beantworte 5 Fragen – erhalte personalisierte Produktempfehlungen für deine Traumhochzeit</p>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="step-counter" id="stepCounter">Frage 1 von 5</div>
+
+  <!-- Questions -->
+  <div id="questions">
+    <!-- Q1: Hochzeits-Typ -->
+    <div class="question-card active" data-q="0">
+      <h2>🏰 Welcher Hochzeits-Typ bist du?</h2>
+      <p class="q-desc">Das bestimmt die Grundausrichtung deiner Tech-Ausstattung</p>
+      <div class="options" data-question="type">
+        <div class="option" data-value="intim" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌿 Intime Feier (10-40 Gäste)</div>
+            <div class="opt-desc">Standesamt + kleines Restaurant oder Garten. Fokus auf Atmosphäre & persönliche Momente</div>
+          </div>
+        </div>
+        <div class="option" data-value="mittel" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎉 Mittelgroße Hochzeit (40-100 Gäste)</div>
+            <div class="opt-desc">Klassische Feier mit Location, DJ, Fotograf. Mix aus Tradition & moderner Technik</div>
+          </div>
+        </div>
+        <div class="option" data-value="gross" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌟 Große Hochzeit (100+ Gäste)</div>
+            <div class="opt-desc">Riesige Feier mit Bühne, Lichtshow, mehreren Locations. Professionelles Event-Management</div>
+          </div>
+        </div>
+        <div class="option" data-value="outdoor" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🏕️ Outdoor/Scheunen-Hochzeit</div>
+            <div class="opt-desc">Garten, Scheune, Strand oder Berg. Brauchst wetterfeste & mobile Tech-Lösungen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2: Budget -->
+    <div class="question-card" data-q="1">
+      <h2>💰 Wie hoch ist dein Tech-Budget?</h2>
+      <p class="q-desc">Nur für Technik & Equipment (nicht Location, Essen, Kleidung)</p>
+      <div class="options" data-question="budget">
+        <div class="option" data-value="minimal" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🟢 Minimal (0-500 €)</div>
+            <div class="opt-desc">Setze auf kostenlose KI-Tools & Handy-Fotografie. Minimal-Investion, maximaler KI-Einsatz</div>
+          </div>
+        </div>
+        <div class="option" data-value="sparsam" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔵 Sparsam (500-1.500 €)</div>
+            <div class="opt-desc">Gute Hybrid-Lösung: KI-Software + Basis-Hardware. Macht schon richtig Eindruck</div>
+          </div>
+        </div>
+        <div class="option" data-value="komfort" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🟣 Komfort (1.500-4.000 €)</div>
+            <div class="opt-desc">Semi-Profi-Ausstattung: KI-Kamera, Drohne, DJ-Equipment. Gäste werden staunen</div>
+          </div>
+        </div>
+        <div class="option" data-value="premium" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🔴 Premium (4.000-8.000 €)</div>
+            <div class="opt-desc">Profi-Level: 2 Kameras, High-End-Drohne, KI-DJ-Setup. Wie aus dem Hochzeitsmagazin</div>
+          </div>
+        </div>
+        <div class="option" data-value="luxus" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⭐ Luxus (8.000 €+)</div>
+            <div class="opt-desc">Alles was geht: Profi-Equipment kaufen + Dienstleister buchen. Maximale Qualität</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3: wichtigster Bereich -->
+    <div class="question-card" data-q="2">
+      <h2>🎯 Was ist dir am wichtigsten?</h2>
+      <p class="q-desc">Wähle den Bereich, der dir am meisten am Herzen liegt</p>
+      <div class="options" data-question="focus">
+        <div class="option" data-value="foto" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📸 Hochzeitsfotos & Video</div>
+            <div class="opt-desc">Atemberaubende Bilder für die Ewigkeit. Kamera, Objektive, KI-Bearbeitung</div>
+          </div>
+        </div>
+        <div class="option" data-value="drohne" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🚁 Drohnen-Perspektiven</div>
+            <div class="opt-desc">Spektakuläre Luftaufnahmen von Location & Brautpaar. DJI Drohne + Gimbal</div>
+          </div>
+        </div>
+        <div class="option" data-value="musik" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎵 Musik & Party</div>
+            <div class="opt-desc">Tanzfläche zum Beben bringen. DJ-Equipment, Lautsprecher, Lichtshow</div>
+          </div>
+        </div>
+        <div class="option" data-value="atmosphäre" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">💡 Atmosphäre & Deko</div>
+            <div class="opt-desc">Romantische Stimmung mit Licht, Gästebuch, Fotobox & DIY-Deko</div>
+          </div>
+        </div>
+        <div class="option" data-value="streaming" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📡 Live-Streaming</div>
+            <div class="opt-desc">Gäste aus der Ferne teilhaben lassen. Kamera + Streaming-Setup + KI-Übersetzung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4: KI-Erfahrung -->
+    <div class="question-card" data-q="3">
+      <h2>🤖 Wie ist deine KI-Erfahrung?</h2>
+      <p class="q-desc">Je nach Erfahrung empfehlen wir einfache oder fortgeschrittene KI-Tools</p>
+      <div class="options" data-question="ki_erfahrung">
+        <div class="option" data-value="anfaenger" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🌱 KI-Neuling</div>
+            <div class="opt-desc">"Ich will einfach funktionierende Ergebnisse ohne mich einarbeiten zu müssen"</div>
+          </div>
+        </div>
+        <div class="option" data-value="fortgeschritten" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🚀 KI-Fortgeschritten</div>
+            <div class="opt-desc">"Ich nutze schon ChatGPT & Co. und will alles aus den KI-Tools rausholen"</div>
+          </div>
+        </div>
+        <div class="option" data-value="profi" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">⚡ KI-Profi</div>
+            <div class="opt-desc">"Ich bin Tech-Affine und will die neuesten KI-Features voll ausreizen"</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5: Zusätzlich -->
+    <div class="question-card" data-q="4">
+      <h2>🧩 Was möchtest du noch?</h2>
+      <p class="q-desc">Zusätzliche Extras für deine Hochzeit (Mehrfachauswahl möglich)</p>
+      <div class="options" data-question="extra">
+        <div class="option" data-value="fotobox" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">📸 KI-Fotobox / Gästebuch</div>
+            <div class="opt-desc">Digitale Fotobox mit KI-Filtern + automatisches digitales Gästebuch</div>
+          </div>
+        </div>
+        <div class="option" data-value="einladung" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">💌 KI-Einladungen & DIY-Druck</div>
+            <div class="opt-desc">KI-designte Einladungen + Drucker für selbstgemachte Karten</div>
+          </div>
+        </div>
+        <div class="option" data-value="hochzeitssong" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🎵 KI-Hochzeitssong</div>
+            <div class="opt-desc">Personalisierter Song für den ersten Tanz mit Suno AI</div>
+          </div>
+        </div>
+        <div class="option" data-value="catering" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">🍽️ KI-Catering & Logistik</div>
+            <div class="opt-desc">Sous-Vide, smarte Kühlung & KI-Menüplaner für DIY-Catering</div>
+          </div>
+        </div>
+        <div class="option" data-value="none" onclick="selectOption(this)">
+          <div class="radio"></div>
+          <div class="opt-text">
+            <div class="opt-title">✅ Keine Extras, danke</div>
+            <div class="opt-desc">Hauptsache die Basis stimmt</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()" disabled>← Zurück</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <div class="emoji">💍</div>
+      <h2>Deine KI-Hochzeits-Empfehlung</h2>
+      <p id="resultSubtitle">Basierend auf deinen Angaben</p>
+    </div>
+
+    <div class="budget-breakdown">
+      <h3>💰 Geschätzte Tech-Investition</h3>
+      <div class="total" id="totalCost">0 €</div>
+      <div class="sub">Inkl. MwSt. ohne Versandkosten · Stand Juni 2026</div>
+    </div>
+
+    <div class="result-summary">
+      <h3>📋 Deine Auswahl</h3>
+      <table id="selectionTable">
+        <tr><td>Hochzeits-Typ</td><td id="s1">–</td></tr>
+        <tr><td>Tech-Budget</td><td id="s2">–</td></tr>
+        <tr><td>Wichtigster Bereich</td><td id="s3">–</td></tr>
+        <tr><td>KI-Erfahrung</td><td id="s4">–</td></tr>
+        <tr><td>Extras</td><td id="s5">–</td></tr>
+      </table>
+    </div>
+
+    <div id="productList" class="product-grid"></div>
+
+    <div class="action-plan" id="actionPlan">
+      <h3>🎯 Deine 3 wichtigsten nächsten Schritte</h3>
+      <ol id="actionSteps"></ol>
+    </div>
+
+    <div class="disclaimer">
+      <strong>📢 Amazon-Partnerlinks (tag=ikune21-21):</strong> Wir erhalten eine kleine Provision, wenn du über diese Links kaufst – für dich entstehen keine Mehrkosten. <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">→ Alle Angebote</a>
+    </div>
+
+    <button class="reset-btn" onclick="resetQuiz()">🔄 Von vorne beginnen</button>
+  </div>
+</div>
+
+<script>
+const questions = document.querySelectorAll('.question-card');
+const progressFill = document.getElementById('progressFill');
+const stepCounter = document.getElementById('stepCounter');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+let currentStep = 0;
+const answers = {};
+
+// Product database
+const products = {
+  foto_minimal: [
+    {icon:'📱',title:'Smartphone-Stativ + Bluetooth-Auslöser',price:'~25 €',desc:'Perfekte DIY-Hochzeitsfotos mit KI-Handy-Kamera. Stativ für Gruppenfotos, Bluetooth-Auslöser für Verwacklungsfreiheit.',link:'https://www.amazon.de/s?k=Smartphone+Stativ+Bluetooth+Ausl%C3%B6ser+Hochzeit&tag=ikune21-21',badge:'Beste 25€-Investition'},
+    {icon:'📸',title:'Adobe Lightroom + Luminar Neo',price:'~15 €/Monat',desc:'KI-Bildbearbeitung für Hochzeitsfotos: Automatische Belichtung, Hautglättung, Himmelstausch. Beide Tools 30 Tage kostenlos testbar.',link:'https://www.amazon.de/s?k=Adobe+Lightroom+2026+Lizenz&tag=ikune21-21',badge:'KI-Bearbeitung'},
+    {icon:'🎨',title:'Canva AI Magic Studio',price:'Kostenlos / 12 € Premium',desc:'KI-Design für Hochzeitsfoto-Collagen, -Alben und Social-Media-Posts. Magic Eraser entfernt störende Elemente.',link:'https://www.amazon.de/s?k=Canva+Pro+Design+Hochzeit&tag=ikune21-21',badge:'Kostenlos'}
+  ],
+  foto_sparsam: [
+    {icon:'🎥',title:'DJI Osmo Pocket 3',price:'~550 €',desc:'KI-Kamera mit Gesichtsverfolgung, 4K/120fps, 3-Achsen-Stabi. Perfekt für Hochzeits-Video-Clips + Livestream. 10/10 Empfehlung.',link:'https://www.amazon.de/s?k=DJI+Osmo+Pocket+3&tag=ikune21-21',badge:'⭐ KI-Top-Tipp'},
+    {icon:'💡',title:'Ringlicht LED mit Stativ',price:'~40 €',desc:'KI-Dimmbares Ringlicht für Hochzeitsfotos & Videos. Perfekt für den Empfang und Details-Aufnahmen.',link:'https://www.amazon.de/s?k=Ringlicht+LED+Stativ+Hochzeit&tag=ikune21-21',badge:'Günstig & gut'},
+    {icon:'🎨',title:'Luminar Neo (KI-Fotobearbeitung)',price:'~80 € einmalig',desc:'Ein-Klick-KI-Hochzeitslooks. Himmelstausch, Porträt-Verbesserung, Rauschunterdrückung für alle Hochzeitsfotos.',link:'https://www.amazon.de/s?k=Luminar+Neo+Fotosoftware+Lizenz&tag=ikune21-21',badge:'KI-Bearbeitung'}
+  ],
+  foto_komfort: [
+    {icon:'📸',title:'Sony Alpha 7 IV (ILCE-7M4)',price:'~2.200 €',desc:'Die Nr.1 KI-Hochzeitskamera 2026. 33MP Vollformat, KI-Echtzeit-Autofokus, 4K/60p. Erkennt Gesichter & Tiere.',link:'https://www.amazon.de/s?k=Sony+Alpha+7+IV+ILCE-7M4+Body&tag=ikune21-21',badge:'🏆 BESTSELLER'},
+    {icon:'🔭',title:'Sony FE 50mm f/1.8 Portrait',price:'~250 €',desc:'Günstiges, scharfes Portraitobjektiv für Hochzeiten. Weiche Bokeh-Effekte, ideal für Brautpaar-Portraits.',link:'https://www.amazon.de/s?k=Sony+FE+50mm+f1.8&tag=ikune21-21',badge:'Portrait-Liebling'},
+    {icon:'🎙️',title:'RØDE Wireless GO II',price:'~350 €',desc:'KI-Kabelloses Funkmikrofon für Trau-Reden. KI-Rauschunterdrückung, 200m Reichweite, 2 Sender.',link:'https://www.amazon.de/s?k=R%C3%98DE+Wireless+GO+II&tag=ikune21-21',badge:'Tonqualität ⭐'},
+    {icon:'📸',title:'Adobe Lightroom + Premiere Pro',price:'~25 €/Monat',desc:'KI-Bildbearbeitung + KI-Videoschnitt für Hochzeitsfotos & Trailer. Automatische Untertitel, KI-Color-Grading.',link:'https://www.amazon.de/s?k=Adobe+Creative+Cloud+Fotografie+2026&tag=ikune21-21',badge:'Profi-KI-Tools'}
+  ],
+  foto_premium: [
+    {icon:'📸',title:'Canon EOS R6 Mark II',price:'~2.500 €',desc:'Canons KI-Hochzeitskamera: 40 fps Burst, Deep-Learning-AF, KI-Rauschunterdrückung. Perfekt für Dämmerungs-Hochzeiten.',link:'https://www.amazon.de/s?k=Canon+EOS+R6+Mark+II+Body&tag=ikune21-21',badge:'🏆 TOP EMPFEHLUNG'},
+    {icon:'🔭',title:'Sony FE 24-70mm f/2.8 GM II',price:'~2.000 €',desc:'Das Hochzeits-Objektiv. KI-optimierte Optik, kein chromatischer Aberration. Perfekt für Trauung + Party.',link:'https://www.amazon.de/s?k=Sony+FE+24-70mm+f2.8+GM+II&tag=ikune21-21',badge:'Profi-Optik'},
+    {icon:'🎙️',title:'RØDE Wireless GO II + RØDE NT-USB+',price:'~500 €',desc:'Professionelle Audio-Lösung für Trau-Reden + Interviews. KI-Noise-Gate, 2-Kanal-Aufnahme.',link:'https://www.amazon.de/s?k=R%C3%98DE+Wireless+GO+II+Set&tag=ikune21-21',badge:'Profi-Audio'},
+    {icon:'🎬',title:'DJI RS 4 Pro Gimbal',price:'~700 €',desc:'KI-3-Achsen-Gimbal für verwacklungsfreie Hochzeitsvideos. Automatischer Objekt-Tracking-Modus.',link:'https://www.amazon.de/s?k=DJI+RS+4+Pro+Gimbal&tag=ikune21-21',badge:'Kinofeeling'}
+  ],
+  foto_luxus: [
+    {icon:'📸',title:'2× Sony Alpha 7 V + Top-Objektive',price:'~6.500 €',desc:'Professionelles Dual-Kamera-Setup. Zweite Kamera für Trau-Reden + Gäste-Perspektive + KI-Bearbeitung.',link:'https://www.amazon.de/s?k=Sony+Alpha+7+V+Vollformat&tag=ikune21-21',badge:'⭐ LUXUS'},
+    {icon:'🎬',title:'DJI RS 4 Pro + DJI Transmission',price:'~1.400 €',desc:'Professionelles Gimbal + Video-Übertragungssystem für Hochzeitsfilme in Kinostandard.',link:'https://www.amazon.de/s?k=DJI+RS+4+Pro+Combo&tag=ikune21-21',badge:'Kinostandard'},
+    {icon:'🎙️',title:'Sennheiser EW 100P G4',price:'~700 €',desc:'Professionelles Funkmikrofon-System für absolute Ton-Sicherheit bei der Trauung. Kabellos, 100m Reichweite.',link:'https://www.amazon.de/s?k=Sennheiser+EW+100+G4+Hochzeit&tag=ikune21-21',badge:'Profi-Audio'}
+  ],
+  drohne_sparsam: [
+    {icon:'🚁',title:'DJI Mini 4 Pro',price:'~800 €',desc:'Leichte KI-Drohne (unter 250g). KI-Objekt-Tracking, 4K/100fps, Hindernisvermeidung. Kein Drohnen-Führerschein nötig!',link:'https://www.amazon.de/s?k=DJI+Mini+4+Pro+Fly+More&tag=ikune21-21',badge:'⭐ Kein Schein nötig'}
+  ],
+  drohne_komfort: [
+    {icon:'🚁',title:'DJI Mavic 3 Pro (Standard)',price:'~1.800 €',desc:'KI-Drohne mit 3-fach Kamera (Weitwinkel, Tele, Hasselblad). 5.1K/50p, KI-Objekt-Tracking 5.0, 43 min Flugzeit.',link:'https://www.amazon.de/s?k=DJI+Mavic+3+Pro+Standard&tag=ikune21-21',badge:'🏆 TESTSIEGER'}
+  ],
+  drohne_premium: [
+    {icon:'🚁',title:'DJI Mavic 3 Pro Fly More Combo',price:'~2.200 €',desc:'Komplett-Set: 3 Akkus, ND-Filter, Tasche, Ladehub. KI-Tracking, Hindernisvermeidung in alle Richtungen, 5.1K/50p.',link:'https://www.amazon.de/s?k=DJI+Mavic+3+Pro+Fly+More+Combo&tag=ikune21-21',badge:'⭐ BESTSELLER'}
+  ],
+  music_minimal: [
+    {icon:'🎵',title:'JBL Charge 5 (WLAN)',price:'~150 €',desc:'KI-fähiger Bluetooth-Lautsprecher. KI-Raumanpassung, Party-Modus für Kopplung mehrerer Boxen. Perfekt für 10-30 Gäste.',link:'https://www.amazon.de/s?k=JBL+Charge+5+WLAN&tag=ikune21-21',badge:'Kompakt & kraftvoll'},
+    {icon:'🎵',title:'Spotify AI DJ + Suno AI',price:'Kostenlos',desc:'KI-Playlist-Generator + personalisierter KI-Hochzeitssong für den ersten Tanz. Kostenlos nutzbar.',link:'https://www.amazon.de/s?k=Spotify+Premium+Gutschein+Hochzeit&tag=ikune21-21',badge:'Kostenlose KI'}
+  ],
+  music_sparsam: [
+    {icon:'🔊',title:'JBL PartyBox 310',price:'~450 €',desc:'240W KI-Lautsprecher. KI-Rückkopplungsunterdrückung, 18h Akku, Lichteffekte. Perfekt für 40-80 Gäste.',link:'https://www.amazon.de/s?k=JBL+PartyBox+310&tag=ikune21-21',badge:'💰 BESTER PREIS/LEISTUNG'},
+    {icon:'🎵',title:'Suno AI + Virtual DJ KI',price:'Kostenlos',desc:'KI-Hochzeitssong für den ersten Tanz + KI-DJ-Software mit automatischer Playlist und BPM-Erkennung.',link:'https://www.amazon.de/s?k=DJ+Software+Hochzeit+2026&tag=ikune21-21',badge:'Kostenlos'}
+  ],
+  music_komfort: [
+    {icon:'🔊',title:'JBL PartyBox 310 (2×)',price:'~900 €',desc:'2× JBL PartyBox für Stereo-Sound. KI-Rückkopplungsunterdrückung, Party-Modus für Kopplung. Perfekt für 80-150 Gäste.',link:'https://www.amazon.de/s?k=JBL+PartyBox+310+2er+Set&tag=ikune21-21',badge:'Stereo-Power'},
+    {icon:'🎧',title:'Pioneer DJ DDJ-FLX10',price:'~1.500 €',desc:'KI-DJ-Controller mit Track-Separation, Beat-Sync, KI-Energieanalyse. Mittelt zwischen Generationen (60+ & 20+).',link:'https://www.amazon.de/s?k=Pioneer+DDJ-FLX10&tag=ikune21-21',badge:'KI-DJ-Power'},
+    {icon:'🎵',title:'Suno AI Pro',price:'~10 €/Monat',desc:'Unbegrenzte KI-Hochzeitssongs generieren. Perfekt für: Einmarsch, ersten Tanz, Abendessen-Hintergrundmusik.',link:'https://www.amazon.de/s?k=Suno+AI+Premium+Musik&tag=ikune21-21',badge:'KI-Musik'}
+  ],
+  music_premium: [
+    {icon:'🎧',title:'Pioneer DJ DDJ-FLX10 + DJ-Headphones',price:'~1.700 €',desc:'Professioneller KI-DJ-Controller + Monitoring-Kopfhörer. Hochzeits-DJ auf Profi-Niveau.',link:'https://www.amazon.de/s?k=Pioneer+DDJ-FLX10+DJ+Kopfh%C3%B6rer&tag=ikune21-21',badge:'Profi-DJ'},
+    {icon:'🔊',title:'JBL EON One Compact (KI-PA)',price:'~1.200 €',desc:'Professionelles KI-PA-System für Hochzeiten. KI-gestützte Raumkorrektur, Bluetooth, 8h Akku. Deckt 200+ Gäste ab.',link:'https://www.amazon.de/s?k=JBL+EON+One+Compact+PA&tag=ikune21-21',badge:'KI-PA-System'}
+  ],
+  atmosphere_minimal: [
+    {icon:'💡',title:'Philips Hue White & Color (2×)',price:'~70 €',desc:'KI-fähige Smart-Birnen für Hochzeitstisch. Stimmungslicht per App – von romantisch bis Party.',link:'https://www.amazon.de/s?k=Philips+Hue+White+Color+2er+Set&tag=ikune21-21',badge:'Smarte Deko'},
+    {icon:'💌',title:'Canva AI (kostenlos)',price:'0 €',desc:'KI-Einladungen & Menükarten selbst designen. 100+ Hochzeitsvorlagen, KI-Textgenerierung, Magic Eraser.',link:'https://www.amazon.de/s?k=Hochzeitseinladungen+Vorlagen+KI&tag=ikune21-21',badge:'Kostenlos'}
+  ],
+  atmosphere_sparsam: [
+    {icon:'💡',title:'Philips Hue Lightstrip Gradient',price:'~100 €',desc:'KI-LED-Streifen für Hochzeitstische. KI-Synchronisation mit Musik (via Hue Sync), dynamische Farbverläufe.',link:'https://www.amazon.de/s?k=Philips+Hue+Lightstrip+Gradient&tag=ikune21-21',badge:'⭐ Stimmungsmacher'},
+    {icon:'🖨️',title:'HP Envy Inspire 7955e',price:'~120 €',desc:'KI-Drucker mit KI-Bildoptimierung für selbstgestaltete Einladungen, Menükarten, Tischkarten. 6 Monate Tinte kostenlos.',link:'https://www.amazon.de/s?k=HP+Envy+Inspire+7955e&tag=ikune21-21',badge:'DIY-Druck'},
+    {icon:'💌',title:'Hochzeitseinladungen Premium-Set',price:'~25 €',desc:'300g/m² Papier, Umschläge, Siegel. Für den professionellen Feinschliff deiner KI-designten Einladungen.',link:'https://www.amazon.de/s?k=Hochzeitseinladungen+Set+Premium+Papier&tag=ikune21-21',badge:'Papier-Qualität'}
+  ],
+  atmosphere_komfort: [
+    {icon:'💡',title:'Philips Hue Gradient + Lightstrip + 2× Birnen',price:'~230 €',desc:'Komplettes KI-Ambient-Set für Hochzeit: Tischlicht + Wandlicht + Musik-Synchronisation.',link:'https://www.amazon.de/s?k=Philips+Hue+Gradient+Lightstrip+Birne+Set&tag=ikune21-21',badge:'Ambient-Komplettset'},
+    {icon:'📸',title:'KI-Fotobox mit Ausdruck (Miete)',price:'~300 €',desc:'KI-Fotobox mit Gesichtserkennung, KI-Hintergrundentfernung, lustigen KI-Filtern. Inkl. Sofortausdruck + digitales Gästebuch.',link:'https://www.amazon.de/s?k=Fotobox+KI+Hochzeit+mieten&tag=ikune21-21',badge:'⭐ Party-Hit'},
+    {icon:'🔦',title:'KI-Moving-Head-Licht-Set (2×)',price:'~150 €',desc:'KI-gesteuerte Lichteffekte mit Musikerkennung. Automatische Choreographie für Einmarsch, ersten Tanz, Party.',link:'https://www.amazon.de/s?k=Moving+Head+LED+Hochzeit+KI&tag=ikune21-21',badge:'Lichtshow'}
+  ],
+  atmosphere_premium: [
+    {icon:'💡',title:'Philips Hue Full Event Set',price:'~500 €',desc:'Profi-KI-Beleuchtung für Hochzeitslocations: 10× Birnen, 3× Lightstrip, Bridge. Komplette Lichtsteuerung per App/Sprache.',link:'https://www.amazon.de/s?k=Philips+Hue+Starter+Set+gro%C3%9F&tag=ikune21-21',badge:'Profi-Licht'},
+    {icon:'📸',title:'KI-Fotobox + Stand alone (Kauf)',price:'~1.200 €',desc:'Eigene KI-Fotobox mit Gesichtserkennung, Greenscreen, Social-Media-Integration. Für alle zukünftigen Events.',link:'https://www.amazon.de/s?k=Fotobox+KI+Professional+kaufen&tag=ikune21-21',badge:'🎯 Eigeninvestment'},
+    {icon:'🖼️',title:'Digitaler KI-Bilderrahmen (49"+)',price:'~350 €',desc:'Großformatiger digitaler Bilderrahmen für den Empfang. Lädt Hochzeitsfotos via WLAN, KI-wählt beste Bilder.',link:'https://www.amazon.de/s?k=Digitaler+Bilderrahmen+gro%C3%9F+Hochzeit&tag=ikune21-21',badge:'Gästemagnet'}
+  ],
+  streaming_sparsam: [
+    {icon:'📡',title:'DJI Osmo Pocket 3 + Stativ',price:'~580 €',desc:'KI-Kamera mit Gesichtsverfolgung + Live-Streaming über WLAN. Perfekt für Trauungs-Livestream für entfernte Gäste.',link:'https://www.amazon.de/s?k=DJI+Osmo+Pocket+3+Stativ&tag=ikune21-21',badge:'⭐ Streaming-Star'},
+    {icon:'💡',title:'Ringlicht LED USB',price:'~30 €',desc:'KI-dimmbares Licht für schöne Streaming-Beleuchtung der Trau-Reden. Inkl. Handyhalterung.',link:'https://www.amazon.de/s?k=Ringlicht+LED+USB+C+Streaming&tag=ikune21-21',badge:'Günstiges Licht'}
+  ],
+  streaming_komfort: [
+    {icon:'📡',title:'DJI Osmo Pocket 3 Creator Combo',price:'~700 €',desc:'KI-Kamera + Mikrofon + Stativ + WLAN-Modul. Komplett-Set für Hochzeits-Streaming in 4K.',link:'https://www.amazon.de/s?k=DJI+Osmo+Pocket+3+Creator+Combo&tag=ikune21-21',badge:'⭐ Streaming-Komplettset'},
+    {icon:'🎙️',title:'USB-Kondensatormikrofon (RØDE NT-USB+)',price:'~170 €',desc:'KI-Kondensatormikrofon für klaren Ton beim Live-Streaming der Trau-Reden. Plug & Play.',link:'https://www.amazon.de/s?k=R%C3%98DE+NT-USB+Mini&tag=ikune21-21',badge:'Kristallklar'}
+  ],
+  streaming_premium: [
+    {icon:'📸',title:'Sony A7 IV + Capture Card + Streaming-PC',price:'~3.000 €',desc:'Professionelles Live-Streaming-Setup für Hochzeiten in 4K. KI-Kamera mit Gesichts-AF, KI-Streaming-Software, Mehrsprachen-Untertitel.',link:'https://www.amazon.de/s?k=Sony+Alpha+7+IV+Live+Streaming+Set&tag=ikune21-21',badge:'🏆 PROFESSIONAL'},
+    {icon:'🌐',title:'Starlink Mini (für Outdoor-Hochzeit)',price:'~350 € + 50 €/Monat',desc:'Satelliten-Internet für abgelegene Hochzeitslocations. Perfekt für Live-Streaming im Garten, auf der Alm oder am Strand.',link:'https://www.amazon.de/s?k=Starlink+Mini+Internet+Reise&tag=ikune21-21',badge:'🚀 Outdoor-Streaming'}
+  ]
+};
+
+// Default products for each budget level (base recommendations)
+const baseProducts = {
+  minimal: [
+    {icon:'🤖',title:'ChatGPT / Claude AI',price:'Kostenlos',desc:'KI-Assistent für Hochzeitsplanung: Texte für Einladungen, Reden, Gästebuch-Einträge. Frag einfach nach einem Hochzeitsplan!',link:'https://www.amazon.de/s?k=ChatGPT+Plus+Abonnement&tag=ikune21-21',badge:'Kostenlos'},
+    {icon:'🎵',title:'Spotify Premium 3 Monate',price:'~30 €',desc:'KI-gestützte Hochzeits-Playlists mit Spotify AI DJ. Werbefrei, Offline-Modus für Locations ohne Internet.',link:'https://www.amazon.de/s?k=Spotify+Premium+Gutschein+3+Monate&tag=ikune21-21',badge:'Musik-Basis'},
+    {icon:'📱',title:'Powerbank 20.000 mAh',price:'~25 €',desc:'Riesen-Akkupack für den Hochzeitstag – Handys, KI-Geräte und Kameras müssen den ganzen Tag durchhalten.',link:'https://www.amazon.de/s?k=Powerbank+20000mAh+schnellladung&tag=ikune21-21',badge:'Unverzichtbar'}
+  ],
+  sparsam: [
+    {icon:'📱',title:'Powerbank 20.000 mAh (2×)',price:'~50 €',desc:'Zwei Powerbanks für den Hochzeitstag. Ein Muss, wenn Kameras, Handys und KI-Geräte den ganzen Tag laufen.',link:'https://www.amazon.de/s?k=Powerbank+20000mAh+schnellladung+2er+Set&tag=ikune21-21',badge:'Notfall-Set'},
+    {icon:'🔌',title:'Mehrfachsteckdosen-Leiste (4× USB-C)',price:'~25 €',desc:'Für die zentrale Ladestation auf der Hochzeit. Alle Gäste können ihre Geräte laden.',link:'https://www.amazon.de/s?k=Steckdosenleiste+USB+C+PD+Hochzeit&tag=ikune21-21',badge:'Gäste-Service'}
+  ],
+  komfort: [
+    {icon:'🔌',title':'Anker PowerHouse 535 (Powerstation)',price:'~500 €',desc:'KI-Notstromversorgung für Outdoor-Hochzeiten. 500Wh, 5× USB, 2× AC. Hält Kameras, Drohne & Licht den ganzen Tag am Laufen.',link:'https://www.amazon.de/s?k=Anker+PowerHouse+535+Powerstation&tag=ikune21-21',badge:'🔋 Outdoor-Energie'},
+    {icon:'📱',title:'Backup-SSD 2TB für Hochzeitsfotos',price:'~120 €',desc:'Sichere alle Hochzeitsfotos doppelt (SSD + Cloud). KI-Sortierung der Bilder nach Personen & Orten.',link:'https://www.amazon.de/s?k=Externe+SSD+2TB+USB+C+Hochzeit&tag=ikune21-21',badge:'Datensicherung'}
+  ],
+  premium: [
+    {icon:'🔌',title':'EcoFlow River 2 Pro (Powerstation)',price:'~800 €',desc:'Profi-Powerstation für Hochzeiten. 768Wh, Schnellladung, App-Steuerung. Strom für Drohne, Kameras, Licht, DJ-Equipment.',link:'https://www.amazon.de/s?k=EcoFlow+River+2+Pro+Powerstation&tag=ikune21-21',badge:'⚡ Profi-Energie'},
+    {icon:'💾',title:'NAS + Cloud Backup System',price:'~400 €',desc:'Sichere Speicherung aller Hochzeitsfotos & Videos. KI-Sortierung, automatisches Backup, Gäste-Zugriff per Link.',link:'https://www.amazon.de/s?k=Synology+NAS+2Bay+Backup+Hochzeit&tag=ikune21-21',badge:'Datensicherheit'}
+  ],
+  luxus: [
+    {icon:'🔌',title':'EcoFlow Delta 2 Max (Powerstation)',price:'~1.800 €',desc:'Luxus-Stromversorgung für ganze Hochzeitslocations. 2kWh, Solar-ready, 15 Steckdosen. Betreibt DJ, Licht, Streaming & mehr.',link:'https://www.amazon.de/s?k=EcoFlow+Delta+2+Max+Powerstation&tag=ikune21-21',badge:'LUXUS'},
+    {icon:'💾',title':'Synology DS224+ (NAS) + 2× 4TB SSD',price:'~750 €',desc:'Enterprise-Speicher für Hochzeitsfotos & Videos. KI-Gesichtserkennung, automatisches Multi-Backup, Gästeportal.',link:'https://www.amazon.de/s?k=Synology+DS224+NAS+4TB&tag=ikune21-21',badge:'Enterprise'}
+  ]
+};
+
+// Extra product combos
+const extraProducts = {
+  fotobox: {icon:'📸',title:'KI-Fotobox (Miete/Kauf)',price:'~300-1.200 €',desc:'KI-Fotobox mit Gesichtserkennung, KI-Filtern, Greenscreen und Sofortausdruck. Inkl. digitalem Gästebuch für Erinnerungen.',link:'https://www.amazon.de/s?k=KI+Fotobox+Hochzeit+mieten+oder+kaufen&tag=ikune21-21',badge:'Party-Hit'},
+  einladung: {icon:'💌',title:'HP Envy + Premium-Papier + Siegel-Set',price:'~170 €',desc:'Komplett-Set für selbstgestaltete KI-Einladungen: KI-Drucker (HP Envy 7955e), 300g Premium-Papier, Hochzeitssiegel, Umschläge.',link:'https://www.amazon.de/s?k=HP+Envy+Inspire+Hochzeitsdrucker+Set&tag=ikune21-21',badge:'DIY-Komplettset'},
+  hochzeitssong: {icon:'🎵',title:'Suno AI Pro + JBL Charge 5',price:'~160 €',desc:'Personalisierten KI-Hochzeitssong für den ersten Tanz generieren + JBL-Lautsprecher für die Wiedergabe. Unvergesslicher Moment.',link:'https://www.amazon.de/s?k=JBL+Charge+5+WLAN+Suno+AI&tag=ikune21-21',badge:'🎯 Einzigartig'},
+  catering: {icon:'🍽️',title:'Sous-Vide-Garer + Smarte Kühlbox',price:'~250 €',desc:'KI-Sous-Vide-Garer für perfekte Massen-Gasterung + smarte Kühlbox für Getränke. Ideal für DIY-Catering.',link:'https://www.amazon.de/s?k=Sous+Vide+Garer+KI+K%C3%BChlbox+Hochzeit&tag=ikune21-21',badge:'Catering-Helfer'}
+};
+
+function selectOption(el) {
+  const optionsGroup = el.closest('.options');
+  const isExtra = optionsGroup.dataset.question === 'extra';
+  if (isExtra) {
+    el.classList.toggle('selected');
+  } else {
+    optionsGroup.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+}
+
+function getSelectedValue(questionName) {
+  const optionsGroup = document.querySelector(`.options[data-question="${questionName}"]`);
+  if (!optionsGroup) return null;
+  if (questionName === 'extra') {
+    const selected = optionsGroup.querySelectorAll('.option.selected');
+    const vals = Array.from(selected).map(o => o.dataset.value).filter(v => v !== 'none');
+    return vals.length > 0 ? vals : ['none'];
+  }
+  const selected = optionsGroup.querySelector('.option.selected');
+  return selected ? selected.dataset.value : null;
+}
+
+function nextQuestion() {
+  // Validate current question
+  const qName = ['type','budget','focus','ki_erfahrung','extra'][currentStep];
+  const val = getSelectedValue(qName);
+  if (!val || (Array.isArray(val) && val.length === 0)) {
+    nextBtn.textContent = '👆 Bitte wählen!';
+    setTimeout(() => { nextBtn.textContent = currentStep === 4 ? '→ Auswerten' : 'Weiter →'; }, 1000);
+    return;
+  }
+  if (currentStep === 4) {
+    showResults();
+    return;
+  }
+  questions[currentStep].classList.remove('active');
+  currentStep++;
+  questions[currentStep].classList.add('active');
+  updateNav();
+}
+
+function prevQuestion() {
+  if (currentStep === 0) return;
+  questions[currentStep].classList.remove('active');
+  currentStep--;
+  questions[currentStep].classList.add('active');
+  updateNav();
+}
+
+function updateNav() {
+  progressFill.style.width = ((currentStep + 1) / 5 * 100) + '%';
+  stepCounter.textContent = `Frage ${currentStep + 1} von 5`;
+  prevBtn.disabled = currentStep === 0;
+  nextBtn.textContent = currentStep === 4 ? '→ Auswerten' : 'Weiter →';
+}
+
+function showResults() {
+  const type = getSelectedValue('type');
+  const budget = getSelectedValue('budget');
+  const focus = getSelectedValue('focus');
+  const ki = getSelectedValue('ki_erfahrung');
+  const extras = getSelectedValue('extra');
+
+  // Hide questions, show results
+  document.getElementById('questions').style.display = 'none';
+  const resultCard = document.getElementById('resultCard');
+  resultCard.classList.add('active');
+
+  // Fill selection summary
+  const typeLabels = {intim:'Intime Feier (10-40)', mittel:'Mittelgroß (40-100)', gross:'Groß (100+)', outdoor:'Outdoor/Scheune'};
+  const budgetLabels = {minimal:'Minimal (0-500€)', sparsam:'Sparsam (500-1.500€)', komfort:'Komfort (1.500-4.000€)', premium:'Premium (4.000-8.000€)', luxus:'Luxus (8.000€+)'};
+  const focusLabels = {foto:'📸 Fotos & Video', drohne:'🚁 Drohne', musik:'🎵 Musik & Party', atmosphäre:'💡 Atmosphäre & Deko', streaming:'📡 Live-Streaming'};
+  const kiLabels = {anfaenger:'KI-Neuling 🌱', fortgeschritten:'KI-Fortgeschritten', profi:'KI-Profi ⚡'};
+  document.getElementById('s1').textContent = typeLabels[type] || type;
+  document.getElementById('s2').textContent = budgetLabels[budget] || budget;
+  document.getElementById('s3').textContent = focusLabels[focus] || focus;
+  document.getElementById('s4').textContent = kiLabels[ki] || ki;
+  document.getElementById('s5').textContent = extras && extras[0] !== 'none' ? extras.join(', ') : 'Keine Extras';
+
+  // Determine cost range
+  const costs = {minimal:'0 – 500 €', sparsam:'500 – 1.500 €', komfort:'1.500 – 4.000 €', premium:'4.000 – 8.000 €', luxus:'ab 8.000 €'};
+  document.getElementById('totalCost').textContent = costs[budget] || 'Individuell';
+
+  // Build product list
+  const productList = document.getElementById('productList');
+  productList.innerHTML = '';
+  const seenProducts = new Set();
+
+  function addProduct(p) {
+    const key = p.title + p.price;
+    if (seenProducts.has(key)) return;
+    seenProducts.add(key);
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="p-header">
+        <span class="p-icon">${p.icon}</span>
+        <span class="p-title">${p.title}</span>
+        <span class="p-price">${p.price}</span>
+      </div>
+      ${p.badge ? `<span class="badge">${p.badge}</span>` : ''}
+      <div class="p-desc">${p.desc}</div>
+      <a class="p-link" href="${p.link}" target="_blank">🔗 Bei Amazon ansehen →</a>
+    `;
+    productList.appendChild(card);
+  }
+
+  // 1. Focus-specific products
+  const focusKey = focus + '_' + budget;
+  if (products[focusKey]) products[focusKey].forEach(addProduct);
+
+  // 2. Base products for budget
+  if (baseProducts[budget]) baseProducts[budget].forEach(addProduct);
+
+  // 3. Extra products
+  if (extras && extras[0] !== 'none') {
+    extras.forEach(extra => {
+      if (extraProducts[extra]) addProduct(extraProducts[extra]);
+    });
+  }
+
+  // 4. Fallback: if no products matched, add some general ones
+  if (seenProducts.size === 0) {
+    addProduct({icon:'📸',title:'Sony Alpha 7 IV + Kit',price:'~2.500 €',desc:'Die Nr.1 KI-Hochzeitskamera 2026 mit KI-Echtzeit-AF, 33MP & 4K.',link:'https://www.amazon.de/s?k=Sony+Alpha+7+IV+Kit+Objektiv&tag=ikune21-21',badge:'Bestseller'});
+    addProduct({icon:'🚁',title:'DJI Mavic 3 Pro',price:'~2.200 €',desc:'KI-Drohne mit Hindernisvermeidung & KI-Objekt-Tracking für Hochzeiten.',link:'https://www.amazon.de/s?k=DJI+Mavic+3+Pro+Fly+More+Combo&tag=ikune21-21',badge:'Drohne'});
+    addProduct({icon:'📱',title:'Powerbank 20.000 mAh',price:'~25 €',desc:'Unverzichtbar für den Hochzeitstag!',link:'https://www.amazon.de/s?k=Powerbank+20000mAh+schnellladung&tag=ikune21-21',badge:'Muss'});
+  }
+
+  // Action steps
+  const actionSteps = document.getElementById('actionSteps');
+  const steps = [
+    `📦 <strong>Priorität 1:</strong> <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">Jetzt wichtigste Tech-Geräte bei Amazon bestellen</a> (${budgetLabels[budget]} Budget)`,
+    `📝 <strong>Priorität 2:</strong> Unsere <a href="../blog/ki-hochzeit-events-2026.html">KI-Hochzeit & Events 2026 Ratgeber</a> lesen – detaillierte Tipps für dein Budget`,
+    `📸 <strong>Priorität 3:</strong> Lade die KI-Planungs-App (kostenlos) und erstelle deinen Hochzeits-Tech-Fahrplan`
+  ];
+  actionSteps.innerHTML = steps.map(s => `<li>${s}</li>`).join('');
+
+  // Scroll to top of result
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+
+function resetQuiz() {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  currentStep = 0;
+  document.querySelectorAll('.question-card').forEach((q, i) => q.classList.toggle('active', i === 0));
+  document.getElementById('questions').style.display = 'block';
+  document.getElementById('resultCard').classList.remove('active');
+  updateNav();
+}
+</script>
+</div>
+</body>
+</html>

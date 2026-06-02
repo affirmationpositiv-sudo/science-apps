@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Heimwerker-Bedarfsrechner 2026 – Finde dein perfektes Werkzeug- & Garten-Setup</title>
+<meta name="description" content="Interaktiver KI-Heimwerker-Bedarfsrechner: 5 Fragen zu Projekt, Budget, Erfahrung & Werkzeug – erhalte personalisierte Werkzeug-, Garten- & Hardware-Empfehlungen mit Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Heimwerker Bedarfsrechner, Werkzeug Empfehlung, Bosch, Makita, Mähroboter, Gartengeräte, Akku Werkzeug, Heimwerken, Garten, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+h1 { font-size: 2.4em; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; text-align: center; }
+.subtitle { text-align: center; color: #6B7280; margin-bottom: 10px; }
+.progress { background: #1A1A1A; border-radius: 20px; height: 12px; margin: 20px 0; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #8B5CF6, #FFD700); border-radius: 20px; transition: width 0.5s ease; width: 0%; }
+.progress-text { text-align: center; color: #6B7280; font-size: 0.85em; margin-bottom: 24px; }
+
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+
+h2 { font-size: 1.4em; font-weight: 700; color: #fff; margin-bottom: 20px; text-align: center; }
+
+.options { display: grid; gap: 10px; }
+.option { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px; }
+.option:hover { border-color: #8B5CF6; background: #242424; }
+.option.selected { border-color: #8B5CF6; background: #1a0a2e; box-shadow: 0 0 15px rgba(139,92,246,.2); }
+.option input { display: none; }
+.option .icon { font-size: 24px; }
+.option .label { flex: 1; }
+.option .label strong { display: block; color: #fff; font-size: 1em; }
+.option .label span { color: #888; font-size: 0.85em; }
+
+.btn-row { text-align: center; margin-top: 24px; }
+.btn { display: inline-block; background: linear-gradient(135deg, #8B5CF6, #FFD700); color: #000; font-weight: 700; padding: 12px 32px; border-radius: 30px; font-size: 1.1em; border: none; cursor: pointer; transition: all 0.3s; }
+.btn:hover { transform: scale(1.05); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Result */
+.result { display: none; }
+.result.active { display: block; }
+.result-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 24px; margin-bottom: 16px; transition: all 0.3s; }
+.result-card:hover { border-color: #8B5CF6; }
+.result-card h3 { color: #FFD700; font-size: 1.2em; margin-bottom: 8px; }
+.result-card .price { color: #A78BFA; font-size: 0.9em; font-weight: 600; }
+.result-card p { color: #9CA3AF; font-size: 0.9em; margin: 6px 0 10px; }
+.result-card .buy { display: inline-block; background: #8B5CF6; color: #fff; padding: 5px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; text-decoration: none; }
+.result-card .buy:hover { background: #7C3AED; }
+
+.summary-box { background: linear-gradient(135deg, #1a0a2e, #0A0A0A); border: 1px solid #8B5CF6; border-radius: 16px; padding: 24px; text-align: center; margin: 20px 0; }
+.summary-box h3 { color: #fff; font-size: 1.3em; margin-bottom: 8px; }
+.summary-box .big { font-size: 2.5em; font-weight: 800; color: #FFD700; }
+.summary-box p { color: #9CA3AF; }
+.reset-btn { display: inline-block; background: #2A2A2A; color: #fff; padding: 10px 24px; border-radius: 30px; text-decoration: none; margin-top: 16px; font-weight: 600; transition: all 0.3s; }
+.reset-btn:hover { background: #8B5CF6; }
+
+.tip { background: #141414; border-left: 3px solid #FFD700; border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 0.9em; }
+.tip strong { color: #FFD700; }
+
+footer { text-align: center; padding: 30px; color: #555; font-size: 0.8em; }
+
+@media (max-width: 600px) { h1 { font-size: 1.6em; } .container { padding: 24px 16px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔧 KI-Heimwerker-Bedarfsrechner</h1>
+<p class="subtitle">Beantworte 5 Fragen – erhalte personalisierte Werkzeug- & Garten-Empfehlungen</p>
+
+<div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+<p class="progress-text" id="progressText">Schritt 1 von 5</p>
+
+<div id="quiz">
+
+<!-- Question 1 -->
+<div class="quiz-step active" data-step="1">
+  <h2>🏗️ Welches Projekt planst du?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q1" value="moebel"><span class="icon">🛋️</span><span class="label"><strong>Möbelbau & Inneneinrichtung</strong><span>Regale, Tische, Betten selber bauen</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="renovierung"><span class="icon">🏠</span><span class="label"><strong>Renovierung & Wohnung</strong><span>Streichen, Tapezieren, Fliesen, Boden verlegen</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="garten"><span class="icon">🌿</span><span class="label"><strong>Gartenarbeit & Landschaftsbau</strong><span>Rasen mähen, Hecken schneiden, Beete anlegen</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="werkstatt"><span class="icon">🔩</span><span class="label"><strong>Werkstatt & Reparaturen</strong><span>Allgemeine Reparaturen, Heimwerker-Projekte</span></span></label>
+    <label class="option"><input type="radio" name="q1" value="komplett"><span class="icon">🏡</span><span class="label"><strong>Rundum-Sorglos: Alles auf einmal</strong><span>Haus & Garten komplett ausstatten</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="nextStep(1)">Weiter →</button></div>
+</div>
+
+<!-- Question 2 -->
+<div class="quiz-step" data-step="2">
+  <h2>💰 Welches Budget hast du für Werkzeug & Geräte?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q2" value="mini"><span class="icon">💶</span><span class="label"><strong>Minimal: bis 100€</strong><span>Einsteiger-Setup für kleine Projekte</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="mittel"><span class="icon">💶💶</span><span class="label"><strong>Fortgeschritten: 100-500€</strong><span>Solide Ausstattung für die meisten Projekte</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="profi"><span class="icon">💶💶💶</span><span class="label"><strong>Profi: 500-1.500€</strong><span>Professionelle Marken-Qualität</span></span></label>
+    <label class="option"><input type="radio" name="q2" value="luxus"><span class="icon">💶💶💶💶</span><span class="label"><strong>Luxus: über 1.500€</strong><span>Höchste Qualität & maximale Automatisierung</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(2)">← Zurück</button><button class="btn" onclick="nextStep(2)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Question 3 -->
+<div class="quiz-step" data-step="3">
+  <h2>🧠 Wie erfahren bist du als Heimwerker?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q3" value="anfaenger"><span class="icon">🌱</span><span class="label"><strong>Anfänger</strong><span>Ich habe noch nie ein Werkzeug in der Hand gehalten</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="gelegentlich"><span class="icon">🔧</span><span class="label"><strong>Gelegentlich</strong><span>Ich habe schon einfache Projekte gemacht</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="fortgeschritten"><span class="icon">⚡</span><span class="label"><strong>Fortgeschritten</strong><span>Ich renoviere und baue regelmäßig</span></span></label>
+    <label class="option"><input type="radio" name="q3" value="profi"><span class="icon">🏆</span><span class="label"><strong>Profi/Handwerker</strong><span>Ich kenne mich bestens aus (oder bin gelernter Handwerker)</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(3)">← Zurück</button><button class="btn" onclick="nextStep(3)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Question 4 -->
+<div class="quiz-step" data-step="4">
+  <h2>🛠️ Welche Werkzeuge hast du bereits?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q4" value="nichts"><span class="icon">📦</span><span class="label"><strong>Noch gar nichts</strong><span>Ich fange bei Null an</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="basis"><span class="icon">🪛</span><span class="label"><strong>Basis-Handwerkzeuge</strong><span>Hammer, Schraubendreher, Zange, Maßband</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="etwas"><span class="icon">🔌</span><span class="label"><strong>Ein paar Kabelgeräte</strong><span>Alte Bohrmaschine, Stichsäge (Kabel)</span></span></label>
+    <label class="option"><input type="radio" name="q4" value="vieles"><span class="icon">⚡</span><span class="label"><strong>Schon gut ausgestattet</strong><span>Mehrere Akku-Geräte, Werkbank, etc.</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(4)">← Zurück</button><button class="btn" onclick="nextStep(4)" style="margin-left:10px;">Weiter →</button></div>
+</div>
+
+<!-- Question 5 -->
+<div class="quiz-step" data-step="5">
+  <h2>🤖 Wie viel Automatisierung möchtest du?</h2>
+  <div class="options">
+    <label class="option"><input type="radio" name="q5" value="manuel"><span class="icon">🛠️</span><span class="label"><strong>Alles von Hand</strong><span>Klassische Werkzeuge, kein Schnickschnack</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="smart"><span class="icon">📱</span><span class="label"><strong>Smarte Helfer (etwas)</strong><span>Ein paar smarte Geräte, aber nicht übertreiben</span></span></label>
+    <label class="option"><input type="radio" name="q5" value="vollautomatik"><span class="icon">🤖</span><span class="label"><strong>Vollautomatik</strong><span>Mähroboter, Saugroboter, smarte Bewässerung – her damit!</span></span></label>
+  </div>
+  <div class="btn-row"><button class="btn" onclick="prevStep(5)">← Zurück</button><button class="btn" onclick="calculateResult()" style="margin-left:10px;">✅ Ergebnis anzeigen</button></div>
+</div>
+
+</div>
+
+<!-- Result -->
+<div class="result" id="result">
+  <div class="summary-box" id="summaryBox">
+    <h3>🔧 Dein persönliches Heimwerker-Setup</h3>
+    <p id="summaryText"></p>
+  </div>
+  <div id="resultGrid"></div>
+  <div class="tip" id="resultTip">
+    <strong>💡 Tipp:</strong> <span id="tipText">Starte mit einem Basis-Set und erweitere nach und nach – so vermeidest du Fehlkäufe.</span>
+  </div>
+  <div style="text-align:center; margin-top:20px;">
+    <a href="../blog/ki-heimwerken-garten-2026.html" class="btn" style="display:inline-block; text-decoration:none;">📖 Zum Ratgeber-Artikel</a>
+    <a href="#" onclick="resetQuiz()" class="reset-btn" style="display:inline-block; margin-left:10px;">🔄 Neu starten</a>
+  </div>
+</div>
+
+<footer>
+  <p>🔗 Amazon-Partnerlinks (tag=ikune21-21) • <a href="../datenschutz/" style="color:#555;">Datenschutz</a></p>
+</footer>
+
+</div>
+
+<script>
+let answers = {};
+
+const products = {
+  mini: {
+    moebel: [
+      { name: "Einhell Akku-Bohrschrauber 18V", desc: "Kompakter Bohrschrauber für erste Möbelprojekte. 20+1 Drehmomentstufen.", price: "ca. 49€", link: "https://www.amazon.de/s?k=einhell+akku+bohrschrauber+18v&tag=ikune21-21" },
+      { name: "Bosch Home and Garden Akku-Schrauber IXO 6", desc: "Leichter Handschrauber für Möbelmontage. Ideal für Anfänger.", price: "ca. 59€", link: "https://www.amazon.de/s?k=bosch+ixo+6+akku+schrauber&tag=ikune21-21" },
+      { name: "Maßband 5m + Winkel + Bleistift Set", desc: "Basis-Messwerkzeug für präzise Möbelprojekte.", price: "ca. 15€", link: "https://www.amazon.de/s?k=massband+werkzeug+heimwerker+set&tag=ikune21-21" }
+    ],
+    renovierung: [
+      { name: "Einhell Akku-Bohrschrauber 18V Set", desc: "Bohrer & Bit-Set inklusive. Ideal für Regale, Bilder & Co.", price: "ca. 69€", link: "https://www.amazon.de/s?k=einhell+akku+bohrschrauber+set+18v&tag=ikune21-21" },
+      { name: "Bosch Home & Garden Farbspritzsystem", desc: "Einfaches Streichen ohne Pinsel – auch für Anfänger.", price: "ca. 79€", link: "https://www.amazon.de/s?k=bosch+farbspritzsystem+pfs+1000&tag=ikune21-21" },
+      { name: "Maler-Krepp + Abdeckfolie Set", desc: "Muss für jede Renovierung. Saubere Kanten garantiert.", price: "ca. 19€", link: "https://www.amazon.de/s?k=maler+krepp+abdeckfolie+set&tag=ikune21-21" }
+    ],
+    garten: [
+      { name: "Einhell Akku-Heckenschere 18V", desc: "Leichte Heckenschere für kleine Gärten. 50cm Messer.", price: "ca. 69€", link: "https://www.amazon.de/s?k=einhell+akku+heckenschere+18v&tag=ikune21-21" },
+      { name: "Fiskars Gartenschere + Astschere Set", desc: "Basis-Gartenschere-Set für Rosen, Sträucher & kleine Äste.", price: "ca. 39€", link: "https://www.amazon.de/s?k=fiskars+garten+schere+set&tag=ikune21-21" },
+      { name: "LED Solar-Gartenleuchten 12er-Pack", desc: "Solarbetrieben, KI-Dämmerungssensor. 0€ Stromkosten.", price: "ca. 39€", link: "https://www.amazon.de/s?k=led+solar+gartenleuchten+12er&tag=ikune21-21" }
+    ],
+    werkstatt: [
+      { name: "Einhell Akku-Bohrschrauber 18V", desc: "Basismodell für alle anfallenden Reparaturen.", price: "ca. 49€", link: "https://www.amazon.de/s?k=einhell+akku+bohrschrauber+18v&tag=ikune21-21" },
+      { name: "Werkzeugkoffer 43-teilig", desc: "Kompletter Werkzeugkoffer mit allen Basics.", price: "ca. 39€", link: "https://www.amazon.de/s?k=werkzeugkoffer+43+teilig&tag=ikune21-21" },
+      { name: "Kärcher WV 6 Plus Fenstersauger", desc: "Streifenfreie Fenster – in Minuten erledigt.", price: "ca. 39€", link: "https://www.amazon.de/s?k=kaercher+wv6+plus+fenstersauger&tag=ikune21-21" }
+    ],
+    komplett: [
+      { name: "Einhell 18V Power-X-Change Akku Set", desc: "Bohrschrauber + Heckenschere + Leuchte. 3 Geräte, 1 Akku-System.", price: "ca. 89€", link: "https://www.amazon.de/s?k=einhell+power+x+change+akku+set&tag=ikune21-21" },
+      { name: "GARDENA smart Bewässerungssteuerung", desc: "KI-Wetteranpassung. Spart bis zu 50% Wasser.", price: "ca. 79€", link: "https://www.amazon.de/s?k=gardena+smart+bewaesserung+steuerung&tag=ikune21-21" },
+      { name: "LED Solar-Wegelleuchten 6er-Pack", desc: "Warmweißes Licht für den Gartenweg. Automatisch an/aus.", price: "ca. 24€", link: "https://www.amazon.de/s?k=solar+wegelleuchten+led+6er&tag=ikune21-21" }
+    ]
+  },
+  mittel: {
+    moebel: [
+      { name: "Bosch Professional GSR 18V-90 C Bohrschrauber", desc: "KI-App-Steuerung, Bluetooth. Profi-Qualität für anspruchsvolle Möbelprojekte.", price: "ca. 189€", link: "https://www.amazon.de/s?k=bosch+professional+gsr+18v-90+c&tag=ikune21-21" },
+      { name: "Bosch Professional GIM 60 L Digital-Wasserwaage", desc: "KI-Neigungsmesser mit App. Perfekt für präzise Möbelmontage.", price: "ca. 109€", link: "https://www.amazon.de/s?k=bosch+gim+60+l+digital+wasserwaage&tag=ikune21-21" },
+      { name: "Bosch Akku-Stichsäge GST 18V-LI B", desc: "Saubere Kurvenschnitte für Möbelbau. Akkubetrieben.", price: "ca. 139€", link: "https://www.amazon.de/s?k=bosch+akku+stichsaege+gst+18v&tag=ikune21-21" }
+    ],
+    renovierung: [
+      { name: "Makita DHR243Z Akku-Bohrhammer", desc: "AVT-Anti-Vibration für ermüdungsfreies Bohren in Beton.", price: "ca. 199€", link: "https://www.amazon.de/s?k=makita+dhr243z+akku+bohrhammer&tag=ikune21-21" },
+      { name: "Makita Akku-Winkelschleifer DGA452Z", desc: "Zum Schneiden von Fliesen & Metall, 18V.", price: "ca. 89€", link: "https://www.amazon.de/s?k=makita+akku+winkelschleifer+dga452z&tag=ikune21-21" },
+      { name: "Einhell Akku-Farbspritzpistole TE-AS 18/200 Li", desc: "Gleichmäßiger Farbauftrag ohne Pinselstriche.", price: "ca. 49€", link: "https://www.amazon.de/s?k=einhell+akku+farbspritzpistole&tag=ikune21-21" }
+    ],
+    garten: [
+      { name: "Gardena smart SILENO city 250 Mähroboter", desc: "KI-gesteuerter Mähroboter. Leise (54 dB), App-Steuerung.", price: "ca. 579€", link: "https://www.amazon.de/s?k=gardena+smart+silen+city+250&tag=ikune21-21" },
+      { name: "STIHL HSA 94 Akku-Heckenschere", desc: "Professionelle Heckenschere mit KI-Ladestandsanzeige.", price: "ca. 229€", link: "https://www.amazon.de/s?k=stihl+hsa+94+akku+heckenschere&tag=ikune21-21" },
+      { name: "GARDENA smart Bewässerungssteuerung + Sensor", desc: "Komplett-Set für automatische, KI-gesteuerte Bewässerung.", price: "ca. 128€", link: "https://www.amazon.de/s?k=gardena+smart+bewaesserung+mit+sensor&tag=ikune21-21" }
+    ],
+    werkstatt: [
+      { name: "Makita 18V Akku-Bohrschrauber Set 5-teilig", desc: "Bohrschrauber + Säge + Leuchte + 2 Akkus. Komplett-Set.", price: "ca. 299€", link: "https://www.amazon.de/s?k=makita+18v+akku+set+5+teilig&tag=ikune21-21" },
+      { name: "Bosch Professional GLM 120-40 C Laser", desc: "KI-Laserentfernungsmesser mit App-Dokumentation.", price: "ca. 229€", link: "https://www.amazon.de/s?k=bosch+professional+glm+120-40+c&tag=ikune21-21" },
+      { name: "Kärcher K5 Premium Smart Control Hochdruckreiniger", desc: "KI-Druckanpassung für jede Oberfläche.", price: "ca. 419€", link: "https://www.amazon.de/s?k=kaercher+k5+premium+smart+control&tag=ikune21-21" }
+    ],
+    komplett: [
+      { name: "Gardena smart SILENO City + Bewässerungs-Bundle", desc: "Mähroboter + Bewässerungssteuerung + Sensor. Garten-Komplettlösung.", price: "ca. 707€", link: "https://www.amazon.de/s?k=gardena+smart+silen+city+bewaesserung&tag=ikune21-21" },
+      { name: "Makita 18V Akku-Bohrschrauber + Stichsäge Set", desc: "2 Top-Geräte für alle Renovierungs- & Möbelprojekte.", price: "ca. 229€", link: "https://www.amazon.de/s?k=makita+akku+bohrschrauber+stichsaege&tag=ikune21-21" },
+      { name: "Bosch Professional GLM 120-40 C Laser", desc: "Präzise Messungen für alle Bauprojekte.", price: "ca. 229€", link: "https://www.amazon.de/s?k=bosch+professional+glm+120-40+c&tag=ikune21-21" },
+      { name: "Philips Hue Outdoor Centura Leuchte", desc: "Smarte Gartenbeleuchtung mit Bewegungsmelder.", price: "ca. 79€", link: "https://www.amazon.de/s?k=philips+hue+outdoor+centura&tag=ikune21-21" }
+    ]
+  },
+  profi: {
+    moebel: [
+      { name: "Festool CXS 18 Akku-Bohrschrauber Set", desc: "Präzises Arbeiten an Möbeln. Extrem kompakt & leistungsstark.", price: "ca. 399€", link: "https://www.amazon.de/s?k=festool+cxs+18+akku+bohrschrauber&tag=ikune21-21" },
+      { name: "Festool TS 60 K Akku-Tauchsäge", desc: "Perfekte Schnitte für Plattenmaterial. Mit Führungsschiene.", price: "ca. 699€", link: "https://www.amazon.de/s?k=festool+ts+60+k+akku+tauchsaege&tag=ikune21-21" },
+      { name: "Festool CT 15 E Sauger Bluetooth", desc: "Automatische Einschaltung per Bluetooth. Saubere Werkstatt.", price: "ca. 379€", link: "https://www.amazon.de/s?k=festool+ct+15+e+sauger&tag=ikune21-21" },
+      { name: "Bosch Professional GIM 60 L Digital-Wasserwaage", desc: "KI-Wasserwaage mit App. Für Präzisionsarbeit.", price: "ca. 109€", link: "https://www.amazon.de/s?k=bosch+gim+60+l+digital+wasserwaage&tag=ikune21-21" }
+    ],
+    renovierung: [
+      { name: "Milwaukee M18 FUEL Bohrschrauber", desc: "One-Key-Technologie, KI-Drehmomentspeicher. Profi-Standard.", price: "ca. 249€", link: "https://www.amazon.de/s?k=milwaukee+m18+fuel+bohrschrauber&tag=ikune21-21" },
+      { name: "Milwaukee M18 FUEL Akku-Winkelschleifer", desc: "Zum Schneiden, Trennen & Schleifen. 9.000 U/min.", price: "ca. 199€", link: "https://www.amazon.de/s?k=milwaukee+akku+winkelschleifer+m18&tag=ikune21-21" },
+      { name: "Worx Landroid Vision L1000 Mähroboter", desc: "KI-Kamera-Navigation, kein Begrenzungskabel nötig.", price: "ca. 899€", link: "https://www.amazon.de/s?k=worx+landroid+vision+l1000&tag=ikune21-21" },
+      { name: "Kärcher K5 Premium Smart Control", desc: "KI-Druckanpassung. Für Fassaden, Terrasse, Auto.", price: "ca. 419€", link: "https://www.amazon.de/s?k=kaercher+k5+premium+smart+control&tag=ikune21-21" }
+    ],
+    garten: [
+      { name: "Husqvarna Automower 450X EPOS", desc: "Satellitengesteuert, kein Begrenzungskabel. KI-Hinderniserkennung.", price: "ca. 2.799€", link: "https://www.amazon.de/s?k=husqvarna+automower+450x+epos&tag=ikune21-21" },
+      { name: "STIHL HSA 94 + HTA 50 Akku-Hecken- & Astscheren-Set", desc: "Professionelle Gartengeräte. Leise und kraftvoll.", price: "ca. 419€", link: "https://www.amazon.de/s?k=stihl+akku+heckenschere+set&tag=ikune21-21" },
+      { name: "Rain Bird ST8I-2.0 WiFi Bewässerungssteuerung", desc: "8 Zonen KI-Wetteranpassung. Profi-Bewässerung.", price: "ca. 129€", link: "https://www.amazon.de/s?k=rain+bird+st8i+bewaesserung+wifi&tag=ikune21-21" }
+    ],
+    werkstatt: [
+      { name: "Milwaukee M18 FUEL Akku-Komplett-Set", desc: "Bohrschrauber + Schlagschrauber + Winkelschleifer + Säge + Leuchte + 2 Akkus", price: "ca. 799€", link: "https://www.amazon.de/s?k=milwaukee+m18+fuel+akku+set+komplett&tag=ikune21-21" },
+      { name: "Festool CT 15 E Sauger + Absaugset", desc: "Werkstattsauger mit automatischer Zuschaltung.", price: "ca. 379€", link: "https://www.amazon.de/s?k=festool+ct+15+e+sauger+absaugset&tag=ikune21-21" },
+      { name: "Roborock S8 Pro Ultra Saugroboter", desc: "KI-Objekterkennung, selbstreinigend. Hält die Werkstatt sauber.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=roborock+s8+pro+ultra&tag=ikune21-21" }
+    ],
+    komplett: [
+      { name: "Milwaukee M18 FUEL System Komplettset", desc: "Alles dabei: Bohrschrauber, Schlagschrauber, Winkelschleifer, Säge, Leuchte", price: "ca. 799€", link: "https://www.amazon.de/s?k=milwaukee+m18+fuel+system+set&tag=ikune21-21" },
+      { name: "Husqvarna Automower 450X EPOS Mähroboter", desc: "KI-Navigation per Satellit. Der intelligenteste Mähroboter 2026.", price: "ca. 2.799€", link: "https://www.amazon.de/s?k=husqvarna+automower+450x+epos&tag=ikune21-21" },
+      { name: "Roborock S8 Pro Ultra Saugroboter", desc: "KI-Objekterkennung. Hält Haus und Werkstatt sauber.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=roborock+s8+pro+ultra&tag=ikune21-21" },
+      { name: "Philips Hue Outdoor Starter Set", desc: "Smarte Außenbeleuchtung für den Garten.", price: "ca. 199€", link: "https://www.amazon.de/s?k=philips+hue+outdoor+starter+set&tag=ikune21-21" }
+    ]
+  },
+  luxus: {
+    moebel: [
+      { name: "Festool DOMINO XL DFC 100", desc: "Professionelle Dübelmaschine für perfekte Möbelverbindungen.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=festool+domino+xl+df+100&tag=ikune21-21" },
+      { name: "Festool WS 65-20 Akku-Werkstatt-Set", desc: "CXS + TSC + HKC im Systemkoffer. Komplette Werkstatt.", price: "ca. 1.899€", link: "https://www.amazon.de/s?k=festool+akku+werkstatt+set&tag=ikune21-21" },
+      { name: "Festool CT 26 E Sauger + Absaug-Set", desc: "Werkstattsauger Profi-Klasse. Mit Fernbedienung.", price: "ca. 569€", link: "https://www.amazon.de/s?k=festool+ct+26+e+absaugung&tag=ikune21-21" }
+    ],
+    renovierung: [
+      { name: "Festool TSC 55 K Akku-Tauchsäge", desc: "Batteriebetrieben, mit Führungsschiene. Der Goldstandard.", price: "ca. 749€", link: "https://www.amazon.de/s?k=festool+tsc+55+k+akku+tauchsaege&tag=ikune21-21" },
+      { name: "Festool PLANEX LHS 225 Akku-Schleifer", desc: "Staubfreies Schleifen mit Absaugung. Perfekt für Renovierung.", price: "ca. 499€", link: "https://www.amazon.de/s?k=festool+planex+lhs+225+akku&tag=ikune21-21" },
+      { name: "Husqvarna Automower 450X EPOS", desc: "Der beste Mähroboter auf dem Markt. Satellitengesteuert.", price: "ca. 2.799€", link: "https://www.amazon.de/s?k=husqvarna+automower+450x+epos&tag=ikune21-21" }
+    ],
+    garten: [
+      { name: "Husqvarna Automower 450X EPOS", desc: "Spitzen-Mähroboter mit Satellitensteuerung. KI & GPS.", price: "ca. 2.799€", link: "https://www.amazon.de/s?k=husqvarna+automower+450x+epos&tag=ikune21-21" },
+      { name: "Rain Bird ST8I + 8 Sensoren Bewässerungssystem", desc: "Professionelle 8-Zonen KI-Bewässerung für große Gärten.", price: "ca. 349€", link: "https://www.amazon.de/s?k=rain+bird+bewaesserung+8+zonen+wifi&tag=ikune21-21" },
+      { name: "Stihl HSA 94 + HTA 50 + BGA 86 Akku-Profi-Set", desc: "Komplettes Akku-Garten-Set von Stihl.", price: "ca. 649€", link: "https://www.amazon.de/s?k=stihl+akku+garten+set&tag=ikune21-21" }
+    ],
+    werkstatt: [
+      { name: "Festool Werkstatteinrichtung Komplett", desc: "Werkbank, Schränke, Absaugung - alles aus einer Hand.", price: "ca. 3.499€", link: "https://www.amazon.de/s?k=festool+werkstatteinrichtung+profi&tag=ikune21-21" },
+      { name: "Roborock S8 Pro Ultra Saugroboter", desc: "Hält die Werkstatt automatisch sauber.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=roborock+s8+pro+ultra&tag=ikune21-21" },
+      { name: "Festool CT 36 E AC Sauger", desc: "AutoClean-Funktion. Der leistungsstärkste Festool-Sauger.", price: "ca. 879€", link: "https://www.amazon.de/s?k=festool+ct+36+e+ac+sauger&tag=ikune21-21" }
+    ],
+    komplett: [
+      { name: "Festool Systemkoffer-Komplettset", desc: "CXS + TSC + HKC + Schleifer + Sauger. Die ultimative Werkstatt.", price: "ca. 3.899€", link: "https://www.amazon.de/s?k=festool+akku+system+komplett&tag=ikune21-21" },
+      { name: "Husqvarna Automower 450X EPOS", desc: "KI-Mähroboter mit EPOS-Satellitensteuerung. Bester auf dem Markt.", price: "ca. 2.799€", link: "https://www.amazon.de/s?k=husqvarna+automower+450x+epos&tag=ikune21-21" },
+      { name: "Roborock S8 Pro Ultra", desc: "KI-Saug- & Wischroboter. Selbstreinigend. Höchste Komfortstufe.", price: "ca. 1.299€", link: "https://www.amazon.de/s?k=roborock+s8+pro+ultra&tag=ikune21-21" },
+      { name: "Philips Hue Outdoor Komplett-Set", desc: "Centura + Lily + Calla. Komplette Gartenbeleuchtung.", price: "ca. 399€", link: "https://www.amazon.de/s?k=philips+hue+outdoor+komplett+set&tag=ikune21-21" }
+    ]
+  }
+};
+
+const tips = {
+  anfaenger: "Als Anfänger: Starte mit einem Basis-Set (Bohrschrauber + Handwerkzeuge) und erweitere nach und nach. Viele Baumärkte bieten auch günstige Einsteiger-Sets an.",
+  gelegentlich: "Du hast schon Erfahrung? Investiere in Qualität bei den Geräten, die du am häufigsten nutzt (Bohrschrauber, Säge). Günstige Marken wie Einhell sind ideal für Gelegenheitsnutzer.",
+  fortgeschritten: "Als fortgeschrittener Heimwerker lohnen sich Profi-Marken (Bosch Professional, Makita). Ein gutes Akku-System mit mehreren Geräten spart langfristig Geld.",
+  profi: "Als Profi solltest du in Festool oder Milwaukee investieren. Die Qualität und Langlebigkeit rechtfertigen den Preis. Auch smarte Automatisierung lohnt sich."
+};
+
+function initQuiz() {
+  document.querySelectorAll('.option input').forEach(input => {
+    input.addEventListener('change', function() {
+      this.closest('.option').parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      this.closest('.option').classList.add('selected');
+    });
+  });
+}
+
+function nextStep(n) {
+  let selected = document.querySelector('.quiz-step[data-step="'+n+'"] input:checked');
+  if (!selected) { alert('Bitte wähle eine Option aus.'); return; }
+  answers['q'+n] = selected.value;
+  document.querySelector('.quiz-step[data-step="'+n+'"]').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="'+(n+1)+'"]').classList.add('active');
+  updateProgress(n+1);
+}
+
+function prevStep(n) {
+  document.querySelector('.quiz-step[data-step="'+n+'"]').classList.remove('active');
+  document.querySelector('.quiz-step[data-step="'+(n-1)+'"]').classList.add('active');
+  updateProgress(n-1);
+}
+
+function updateProgress(step) {
+  let pct = ((step-1) / 5) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = 'Schritt ' + step + ' von 5';
+}
+
+function calculateResult() {
+  let q5 = document.querySelector('.quiz-step[data-step="5"] input:checked');
+  if (!q5) { alert('Bitte wähle eine Option aus.'); return; }
+  answers.q5 = q5.value;
+
+  let budget = answers.q2;
+  let projekt = answers.q1;
+  let erfahrung = answers.q3;
+  let auto = answers.q5;
+
+  // Build result
+  let grid = document.getElementById('resultGrid');
+  grid.innerHTML = '';
+
+  let items = products[budget] && products[budget][projekt] ? products[budget][projekt] : products.mittel.komplett;
+
+  items.forEach(item => {
+    let card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = '<h3>' + item.name + '</h3><p>' + item.desc + '</p><span class="price">' + item.price + '</span> <a href="' + item.link + '" target="_blank" rel="noopener" class="buy">💰 Bei Amazon ansehen</a>';
+    grid.appendChild(card);
+  });
+
+  // Add automation suggestions
+  if (auto === 'smart' || auto === 'vollautomatik') {
+    let extra = document.createElement('div');
+    extra.className = 'result-card';
+    let autoItems = auto === 'vollautomatik'
+      ? [{n:"Worx Landroid Vision Mähroboter", d:"KI-Kamera-Navigation, kein Begrenzungskabel", p:"ca. 899€", l:"https://www.amazon.de/s?k=worx+landroid+vision+l1000&tag=ikune21-21"},
+         {n:"Roborock S8 Pro Ultra Saugroboter", d:"KI-Objekterkennung, selbstreinigend", p:"ca. 1.299€", l:"https://www.amazon.de/s?k=roborock+s8+pro+ultra&tag=ikune21-21"},
+         {n:"GARDENA smart Bewässerungssteuerung + Sensor", d:"KI-Wetteranpassung, 50% Wassersparnis", p:"ca. 128€", l:"https://www.amazon.de/s?k=gardena+smart+bewaesserung+mit+sensor&tag=ikune21-21"}]
+      : [{n:"GARDENA smart Bewässerungssteuerung", d:"KI-Wetteranpassung, app-gesteuert", p:"ca. 79€", l:"https://www.amazon.de/s?k=gardena+smart+bewaesserung&tag=ikune21-21"}];
+    let html = '<h3>🤖 Smarte Helfer (empfohlen für dich)</h3>';
+    autoItems.forEach(a => {
+      html += '<p style="margin:8px 0;"><strong>' + a.n + '</strong> – ' + a.d + ' <span class="price">' + a.p + '</span> <a href="' + a.l + '" target="_blank" rel="noopener" class="buy">💰 Bei Amazon</a></p>';
+    });
+    extra.innerHTML = html;
+    grid.appendChild(extra);
+  }
+
+  // Summary
+  let labels = {mini: 'Einsteiger (bis 100€)', mittel: 'Fortgeschritten (100-500€)', profi: 'Profi (500-1.500€)', luxus: 'Luxus (über 1.500€)'};
+  let projLabels = {moebel: 'Möbelbau & Inneneinrichtung', renovierung: 'Renovierung', garten: 'Gartenarbeit', werkstatt: 'Werkstatt', komplett: 'Rundum-Sorglos'};
+  let erfLabels = {anfaenger: 'Anfänger', gelegentlich: 'Gelegenheit', fortgeschritten: 'Fortgeschritten', profi: 'Profi/Handwerker'};
+  document.getElementById('summaryText').innerHTML = 'Dein Setup: <strong>' + projLabels[projekt] + '</strong> · Budget: <strong>' + labels[budget] + '</strong> · Erfahrung: <strong>' + erfLabels[erfahrung] + '</strong><br><span class="big">' + items.length + '</span> Produkt-Empfehlungen <span style="font-size:0.7em;color:#888;">mit Amazon-Links (tag=ikune21-21)</span>';
+
+  // Tip
+  document.getElementById('tipText').textContent = tips[erfahrung] || tips.anfaenger;
+
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').classList.add('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('progressText').textContent = '✅ Ergebnis bereit!';
+}
+
+function resetQuiz() {
+  answers = {};
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.option input').forEach(i => i.checked = false);
+  document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+  document.querySelector('.quiz-step[data-step="1"]').classList.add('active');
+  document.getElementById('result').classList.remove('active');
+  document.getElementById('quiz').style.display = 'block';
+  updateProgress(1);
+}
+
+initQuiz();
+</script>
+</body>
+</html>

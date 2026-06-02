@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Projektkosten-Rechner 2026 – Kostenloses Tool | Licht und Schatten</title>
+<meta name="description" content="Kostenloser KI-Projektkosten-Rechner 2026: Berechne in 30 Sekunden die Kosten deines nächsten Projekts mit KI-Unterstützung. Inkl. Vergleich: Mit vs. Ohne KI.">
+<meta name="keywords" content="Projektkosten Rechner, KI Projektkosten, Projektkalkulation, Projektmanagement Kosten, KI Kostenersparnis, Budgetplaner, Licht und Schatten">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#0A0A0A; color:#E5E5E5; line-height:1.6; min-height:100vh; }
+.container { max-width:700px; margin:0 auto; padding:20px; }
+h1 { font-size:2em; font-weight:800; background:linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+.sub { color:#888; margin-bottom:24px; }
+.card { background:#151525; border:1px solid #2A2A5A; border-radius:12px; padding:24px; margin:16px 0; }
+label { display:block; color:#A78BFA; font-weight:600; margin-bottom:6px; margin-top:14px; }
+input, select { width:100%; padding:10px 14px; background:#1A1A3A; border:1px solid #3A3A6A; border-radius:8px; color:#fff; font-size:1em; }
+input:focus, select:focus { outline:none; border-color:#8B5CF6; }
+button { width:100%; padding:12px; background:linear-gradient(135deg,#8B5CF6,#6D28D9); border:none; border-radius:8px; color:#fff; font-size:1.1em; font-weight:700; cursor:pointer; margin-top:18px; transition:transform .2s; }
+button:hover { transform:translateY(-2px); }
+.result { margin-top:20px; display:none; }
+.result.show { display:block; }
+.result-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0; }
+.result-card { background:#1A1A3A; border:1px solid #3A3A6A; border-radius:10px; padding:16px; text-align:center; }
+.result-card .label { color:#888; font-size:.85em; margin-bottom:4px; }
+.result-card .value { font-size:1.6em; font-weight:800; color:#4ADE80; }
+.result-card .value.ohne { color:#EF4444; }
+.result-card .value.mit { color:#4ADE80; }
+.savings { background:#0D2D0D; border:1px solid #1D4D1D; border-radius:10px; padding:16px; text-align:center; margin-top:12px; }
+.savings .value { font-size:2em; font-weight:800; color:#FFD700; }
+.savings .label { color:#4ADE80; font-size:.9em; }
+.input-group { margin-bottom:4px; }
+.hint { color:#666; font-size:.8em; margin-top:2px; }
+footer { text-align:center; padding:30px 20px; color:#555; font-size:.85em; border-top:1px solid #1A1A1A; margin-top:40px; }
+footer a { color:#8B5CF6; text-decoration:none; }
+@media (max-width:600px) { .result-grid { grid-template-columns:1fr; } h1 { font-size:1.5em; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📊 KI-Projektkosten-Rechner</h1>
+<p class="sub">Berechne in 30 Sekunden, wie viel dein nächstes Projekt kostet – und wie viel <strong>KI dir spart</strong>.</p>
+
+<div class="card">
+<div class="input-group">
+<label>📋 Projekttyp</label>
+<select id="projectType">
+<option value="web">Website/App entwickeln</option>
+<option value="marketing">Marketing-Kampagne</option>
+<option value="content">Content-Erstellung (Blog, Social Media)</option>
+<option value="research">Recherche & Analyse</option>
+<option value="design">Design-Projekt (Logo, UI, Print)</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>⏱️ Geschätzter Aufwand (Stunden)</label>
+<input type="number" id="hours" value="40" min="1" max="1000">
+<div class="hint">Typisch: 10-20h (klein) · 40-80h (mittel) · 100-500h (groß)</div>
+</div>
+
+<div class="input-group">
+<label>👥 Teamgröße</label>
+<select id="teamSize">
+<option value="1">1 Person (Solo)</option>
+<option value="2">2 Personen</option>
+<option value="3">3-5 Personen (Klein-Team)</option>
+<option value="6">6-10 Personen (Team)</option>
+<option value="11">11+ Personen (Groß-Team)</option>
+</select>
+</div>
+
+<div class="input-group">
+<label>💰 Stundensatz pro Person (€)</label>
+<input type="number" id="rate" value="85" min="10" max="500">
+<div class="hint">Einsteiger 30-50€ · Mittel 60-100€ · Profi 100-200€+</div>
+</div>
+
+<div class="input-group">
+<label>🤖 KI-Nutzungsgrad</label>
+<select id="kiLevel">
+<option value="30">Minimal (10-20% KI)</option>
+<option value="40" selected>Moderat (30-50% KI) ✅ Empfohlen</option>
+<option value="55">Hoch (50-70% KI)</option>
+<option value="70">Maximal (70-90% KI)</option>
+</select>
+</div>
+
+<button onclick="calculate()">💰 Kosten berechnen</button>
+
+<div class="result" id="result">
+<h3 style="margin-bottom:12px; color:#FFD700;">📊 Ergebnisse</h3>
+<div class="result-grid">
+<div class="result-card">
+<div class="label">Ohne KI (traditionell)</div>
+<div class="value ohne" id="kostenOhne">0€</div>
+</div>
+<div class="result-card">
+<div class="label">Mit KI-Unterstützung</div>
+<div class="value mit" id="kostenMit">0€</div>
+</div>
+</div>
+<div class="savings">
+<div class="value" id="ersparnis">0€</div>
+<div class="label">💰 Deine KI-Ersparnis</div>
+<p style="color:#888; font-size:.85em; margin-top:8px;" id="ersparnisProzent"></p>
+</div>
+<div style="margin-top:16px; padding:12px; background:#1A1A2A; border-radius:8px; font-size:.9em; color:#AAA;">
+<p>💡 <strong>Tipp:</strong> Mit <a href="https://amzn.to/3ZP9Qp" target="_blank" rel="nofollow sponsored" style="color:#A78BFA;">Notion AI</a> oder <a href="https://clickup.com/" target="_blank" rel="nofollow" style="color:#A78BFA;">ClickUp KI</a> kannst du diese Ersparnis sofort realisieren.</p>
+</div>
+</div>
+</div>
+
+<p style="text-align:center; color:#666; font-size:.85em; margin-top:16px;">
+🔗 Autor: <strong>Licht und Schatten</strong> · <a href="https://affirmationpositiv-sudo.github.io/science-apps/blog/">📝 Blog</a> · <a href="https://affirmationpositiv-sudo.github.io/science-apps/">🏪 Portfolio</a>
+</p>
+
+</div>
+
+<script>
+function calculate() {
+const projectType = document.getElementById('projectType');
+const hoursEl = document.getElementById('hours');
+const teamEl = document.getElementById('teamSize');
+const rateEl = document.getElementById('rate');
+const kiLevelEl = document.getElementById('kiLevel');
+
+const hours = parseInt(hoursEl.value) || 40;
+const teamMultiplier = parseInt(teamEl.value) || 1;
+const rate = parseInt(rateEl.value) || 85;
+const kiSavings = parseInt(kiLevelEl.value) || 40;
+
+const ohneKI = hours * teamMultiplier * rate;
+const mitKI = ohneKI * (1 - kiSavings/100);
+
+document.getElementById('kostenOhne').textContent = ohneKI.toLocaleString('de-DE') + ' €';
+document.getElementById('kostenMit').textContent = mitKI.toLocaleString('de-DE', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' €';
+
+const ersparnis = ohneKI - mitKI;
+document.getElementById('ersparnis').textContent = ersparnis.toLocaleString('de-DE', {minimumFractionDigits:0, maximumFractionDigits:0}) + ' €';
+document.getElementById('ersparnisProzent').textContent = 'Das sind ' + Math.round(kiSavings) + '% Ersparnis – ' + (ersparnis/ohneKI*100).toFixed(0) + '% deiner Projektkosten!';
+
+document.getElementById('result').classList.add('show');
+}
+</script>
+
+<footer>
+<p>© 2026 <strong>Licht und Schatten</strong> – Autor: Licht und Schatten</p>
+<p><a href="https://affirmationpositiv-sudo.github.io/science-apps/">🏪 Startseite</a> · <a href="https://affirmationpositiv-sudo.github.io/science-apps/blog/">📝 Blog</a> · <a href="https://affirmationpositiv-sudo.github.io/science-apps/shop/">🛒 Shop</a></p>
+<p>Amazon-Partner (ikune21-21) | Made with ❤️ und KI</p>
+</footer>
+</body>
+</html>
