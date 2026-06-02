@@ -2,1828 +2,899 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>🚀 KI-Startup-Guide 2026 – In 30 Tagen zum ersten KI-Business</title>
+<title>KI-Startup-Guide 2026</title>
 <style>
   @page {
     size: A4;
-    margin: 2cm 2.5cm;
-    @top-center {
+    margin: 2.2cm 2.8cm;
+    @top-left {
       content: "KI-Startup-Guide 2026";
-      font-size: 8pt;
-      color: #888;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 7.5pt;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    @top-right {
+      content: "Lux in Umbra";
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 7.5pt;
+      color: #999;
+      font-weight: 300;
+      letter-spacing: 0.5px;
     }
     @bottom-center {
-      content: "Seite " counter(page) " von " counter(pages);
+      content: "— " counter(page) " —";
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 8pt;
-      color: #888;
+      color: #bbb;
     }
   }
+
+  /* ===== BASE ===== */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 11pt;
-    line-height: 1.65;
+    font-size: 10.5pt;
+    line-height: 1.7;
     color: #1a1a1a;
     background: #fff;
-    max-width: 800px;
+    max-width: 820px;
     margin: 0 auto;
-    padding: 0;
+    orphans: 3;
+    widows: 3;
   }
-  /* ===== COVER ===== */
+
+  /* ===== COVER PAGE ===== */
   .cover-page {
     page-break-after: always;
     text-align: center;
-    padding: 6cm 2cm 2cm 2cm;
-    background: linear-gradient(145deg, #0a0a23 0%, #1a1a4e 40%, #0d0d35 100%);
+    padding: 5cm 3cm 3cm 3cm;
+    background: linear-gradient(135deg, #0c0c1d 0%, #1a1a3e 35%, #0d0d28 65%, #050510 100%);
     color: #fff;
-    min-height: 100vh;
+    min-height: 29.7cm;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
   }
-  .cover-page .emoji-badge { font-size: 48pt; margin-bottom: 20px; }
-  .cover-page h1 {
-    font-size: 32pt;
-    line-height: 1.2;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-    color: #fff;
+  .cover-page::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(100,100,255,0.08) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(0,200,255,0.05) 0%, transparent 50%);
+    pointer-events: none;
   }
-  .cover-page .subtitle {
-    font-size: 14pt;
-    color: #aab;
-    margin-bottom: 30px;
-    font-style: italic;
-  }
-  .cover-page .author {
-    font-size: 12pt;
-    color: #ccd;
-    margin-top: 40px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    padding-top: 20px;
-    width: 60%;
-  }
-  .cover-page .price-tag {
-    font-size: 16pt;
-    color: #ffd700;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  .cover-page .tagline {
-    font-size: 10pt;
-    color: #99a;
-    margin-top: 30px;
-  }
-  /* ===== IMPRESSUM ===== */
-  .imprint-page {
-    page-break-after: always;
-    padding: 3cm 2cm;
-    font-size: 9pt;
-    color: #555;
-    line-height: 1.6;
-  }
-  .imprint-page h2 { font-size: 12pt; color: #333; margin-bottom: 15px; }
-  /* ===== CHAPTERS ===== */
-  .chapter {
-    page-break-before: always;
-    padding: 1.5cm 0;
-  }
-  .chapter-header {
-    margin-bottom: 0.8cm;
-    border-bottom: 3px solid #1a1a4e;
-    padding-bottom: 0.4cm;
-  }
-  .chapter-number {
-    font-size: 10pt;
-    color: #1a1a4e;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: bold;
-  }
-  .chapter-header h2 {
-    font-size: 20pt;
-    color: #0a0a23;
-    margin-top: 5px;
-    line-height: 1.2;
-  }
-  .chapter-header .chapter-subtitle {
-    font-size: 10pt;
-    color: #777;
-    font-style: italic;
-    margin-top: 5px;
-  }
-  h3 {
-    font-size: 14pt;
-    color: #1a1a4e;
-    margin-top: 0.8cm;
-    margin-bottom: 0.3cm;
-  }
-  h4 {
-    font-size: 12pt;
-    color: #333;
-    margin-top: 0.5cm;
-    margin-bottom: 0.2cm;
-  }
-  p { margin-bottom: 0.3cm; text-align: justify; }
-  /* ===== BOXES ===== */
-  .tip-box, .warning-box, .action-box, .example-box, .definition-box {
-    margin: 0.5cm 0;
-    padding: 0.4cm 0.5cm;
-    border-left: 4px solid;
-    page-break-inside: avoid;
-  }
-  .tip-box { background: #f0f8ff; border-color: #2196F3; }
-  .tip-box::before { content: "💡 TIPP: "; font-weight: bold; color: #2196F3; }
-  .warning-box { background: #fff8e1; border-color: #FF9800; }
-  .warning-box::before { content: "⚠️ WICHTIG: "; font-weight: bold; color: #FF9800; }
-  .action-box { background: #e8f5e9; border-color: #4CAF50; }
-  .action-box::before { content: "✅ AKTION: "; font-weight: bold; color: #4CAF50; }
-  .example-box { background: #f3e5f5; border-color: #9C27B0; }
-  .example-box::before { content: "📌 BEISPIEL: "; font-weight: bold; color: #9C27B0; }
-  .definition-box { background: #e0f2f1; border-color: #009688; }
-  .definition-box::before { content: "📖 DEFINITION: "; font-weight: bold; color: #009688; }
-  /* ===== LISTS ===== */
-  ul, ol { margin: 0.3cm 0 0.3cm 0.5cm; }
-  li { margin-bottom: 0.15cm; }
-  /* ===== TABLES ===== */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0.4cm 0;
-    font-size: 10pt;
-    page-break-inside: avoid;
-  }
-  th {
-    background: #1a1a4e;
-    color: #fff;
-    padding: 6px 8px;
-    text-align: left;
-  }
-  td {
-    padding: 5px 8px;
-    border-bottom: 1px solid #ddd;
-  }
-  tr:nth-child(even) td { background: #f9f9ff; }
-  /* ===== CODE ===== */
-  code {
-    font-family: 'Courier New', monospace;
-    font-size: 9pt;
-    background: #f4f4f4;
-    padding: 1px 4px;
+  .cover-accent-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #6c63ff, #00d4aa);
+    margin: 0 auto 30px auto;
     border-radius: 2px;
   }
-  pre {
-    background: #1a1a2e;
-    color: #e0e0e0;
-    padding: 0.4cm;
-    font-size: 9pt;
-    border-radius: 4px;
-    overflow-x: auto;
-    margin: 0.3cm 0;
-    page-break-inside: avoid;
-    line-height: 1.4;
+  .cover-page h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 36pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    color: #fff;
+    position: relative;
+    z-index: 1;
   }
-  /* ===== CHECKLIST ===== */
-  .checklist { list-style: none; margin-left: 0; }
-  .checklist li::before { content: "☐ "; font-size: 12pt; }
-  .checklist li.done::before { content: "☑ "; font-size: 12pt; color: #4CAF50; }
-  /* ===== PAGE BREAK HELPER ===== */
-  .page-break { page-break-before: always; }
-  .no-break { page-break-inside: avoid; }
-  /* ===== SPECIAL SECTIONS ===== */
-  .stats-highlight {
-    display: flex;
-    justify-content: space-around;
-    margin: 0.5cm 0;
-    page-break-inside: avoid;
+  .cover-page .subtitle {
+    font-family: 'Georgia', serif;
+    font-size: 14pt;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 40px;
+    font-style: italic;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
   }
-  .stats-highlight .stat {
-    text-align: center;
-    padding: 0.3cm;
+  .cover-page .author {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
   }
-  .stats-highlight .stat .number {
-    font-size: 24pt;
-    font-weight: bold;
-    color: #1a1a4e;
+  .cover-page .tagline {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 8pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    margin-top: 40px;
+    position: relative;
+    z-index: 1;
   }
-  .stats-highlight .stat .label {
+  .cover-decoration {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #6c63ff, #00d4aa, #6c63ff);
+    z-index: 2;
+  }
+
+  /* ===== IMPRINT ===== */
+  .imprint-page {
+    page-break-after: always;
+    padding-top: 4cm;
     font-size: 9pt;
     color: #666;
+    line-height: 1.6;
   }
-  .prompt-grid {
-    margin: 0.3cm 0;
+  .imprint-page h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
-  .prompt-item {
-    background: #f5f5ff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 0.3cm 0.4cm;
-    margin-bottom: 0.3cm;
+  .imprint-page p { margin-bottom: 6px; }
+  .imprint-divider {
+    border: none;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+  }
+
+  /* ===== CHAPTER ===== */
+  .chapter {
+    page-break-after: always;
+    padding-top: 1.5cm;
+  }
+  .chapter-header {
+    margin-bottom: 1.2cm;
+    padding-bottom: 0.5cm;
+    border-bottom: 2px solid #1a1a3e;
+  }
+  .chapter-number {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: 600;
+    color: #6c63ff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+  .chapter-header h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 18pt;
+    font-weight: 600;
+    color: #1a1a3e;
+    line-height: 1.3;
+  }
+
+  /* ===== TOC ===== */
+  .toc { margin-top: 0.5cm; }
+  .toc-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dotted #ddd;
+    font-size: 11pt;
+    line-height: 1.5;
+  }
+  .toc-item:last-child { border-bottom: none; }
+  .toc-number {
+    font-weight: 600;
+    color: #6c63ff;
+    margin-right: 8px;
+    min-width: 30px;
+  }
+  .toc-page {
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ===== CONTENT ===== */
+  p { margin-bottom: 0.6em; text-align: justify; }
+  h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13pt;
+    font-weight: 600;
+    color: #1a1a3e;
+    margin-top: 1.2em;
+    margin-bottom: 0.5em;
+  }
+  h4 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 600;
+    color: #333;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+  }
+  ul, ol { margin-bottom: 0.6em; padding-left: 1.5em; }
+  li { margin-bottom: 0.2em; }
+  strong { color: #1a1a3e; }
+  code {
+    font-family: 'SF Mono', 'Menlo', monospace;
+    font-size: 9pt;
+    background: #f5f5fa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: #6c63ff;
+  }
+
+  /* ===== HIGHLIGHT BOXES ===== */
+  .info-box, .tip-box, .warning-box, .action-box {
+    margin: 1em 0;
+    padding: 0.8em 1em;
+    border-left: 4px solid;
+    border-radius: 0 4px 4px 0;
     page-break-inside: avoid;
-  }
-  .prompt-item .prompt-title {
-    font-weight: bold;
-    color: #1a1a4e;
     font-size: 10pt;
   }
-  .prompt-item .prompt-category {
+  .info-box {
+    background: #f0f4ff;
+    border-color: #6c63ff;
+  }
+  .info-box::before {
+    content: "ℹ️ HINWEIS: ";
+    font-weight: 600;
+    color: #6c63ff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+  .tip-box {
+    background: #f0faf4;
+    border-color: #00c853;
+  }
+  .tip-box::before {
+    content: "💡 TIPP: ";
+    font-weight: 600;
+    color: #00c853;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+  .warning-box {
+    background: #fff8f0;
+    border-color: #ff9800;
+  }
+  .warning-box::before {
+    content: "⚠️ WICHTIG: ";
+    font-weight: 600;
+    color: #ff9800;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+  .action-box {
+    background: #f5f0ff;
+    border-color: #7c4dff;
+    padding: 1em 1.2em;
+    border-radius: 0 6px 6px 0;
+  }
+  .action-box::before {
+    content: "🎯 AKTION: ";
+    font-weight: 700;
+    color: #7c4dff;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 9pt;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== STATS ROW ===== */
+  .stats-row {
+    display: flex;
+    gap: 1em;
+    margin: 1.2em 0;
+    page-break-inside: avoid;
+  }
+  .stat {
+    flex: 1;
+    text-align: center;
+    padding: 1em;
+    background: linear-gradient(135deg, #f8f8ff, #f0f0ff);
+    border-radius: 8px;
+    border: 1px solid #e0e0f0;
+  }
+  .stat .number {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: #6c63ff;
+    display: block;
+  }
+  .stat .label {
     font-size: 8pt;
     color: #888;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    margin-top: 4px;
+    line-height: 1.3;
   }
-  .prompt-item .prompt-text {
-    font-family: 'Courier New', monospace;
+
+  /* ===== SVG DIAGRAMS ===== */
+  .diagram {
+    text-align: center;
+    margin: 1.5em 0;
+    page-break-inside: avoid;
+  }
+  .diagram svg {
+    max-width: 100%;
+    height: auto;
+  }
+  .diagram-caption {
     font-size: 9pt;
-    background: #fff;
-    padding: 0.2cm;
-    margin-top: 0.15cm;
-    border-left: 3px solid #1a1a4e;
-    color: #333;
+    color: #888;
+    font-style: italic;
+    margin-top: 6px;
   }
-  /* ===== TIMELINE ===== */
-  .timeline { margin: 0.4cm 0; position: relative; }
-  .timeline-item {
-    padding-left: 1cm;
-    border-left: 3px solid #1a1a4e;
-    padding-bottom: 0.5cm;
+
+  /* ===== CHECKLIST ===== */
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    padding: 6px 0 6px 28px;
     position: relative;
   }
-  .timeline-item:last-child { border-left: 3px solid transparent; }
-  .timeline-item::before {
-    content: "";
-    width: 10px; height: 10px;
-    background: #1a1a4e;
-    border-radius: 50%;
+  .checklist li::before {
+    content: "☐";
     position: absolute;
-    left: -6.5px;
-    top: 3px;
+    left: 0;
+    color: #6c63ff;
+    font-size: 14pt;
+    line-height: 1;
   }
-  .timeline-item .day {
-    font-weight: bold;
-    color: #1a1a4e;
-    font-size: 10pt;
-  }
-  .timeline-item .desc { font-size: 10pt; color: #555; }
-  /* ===== FOOTER TOC ===== */
-  .toc { margin: 0.5cm 0; }
-  .toc-item {
-    padding: 0.15cm 0;
-    border-bottom: 1px dotted #ccc;
-    font-size: 11pt;
-  }
-  .toc-item .toc-number { font-weight: bold; color: #1a1a4e; margin-right: 5px; }
-  .toc-item .toc-page { float: right; color: #999; }
-  /* ===== RESOURCE CARDS ===== */
+  .checklist li.done::before { content: "☑"; }
+
+  /* ===== RESOURCE CARD ===== */
   .resource-card {
-    border: 1px solid #ddd;
-    padding: 0.3cm;
-    margin-bottom: 0.2cm;
+    border: 1px solid #e0e0f0;
+    padding: 0.5em 0.8em;
+    margin-bottom: 0.5em;
+    border-radius: 6px;
     page-break-inside: avoid;
-    border-radius: 4px;
+    background: #fafafa;
   }
-  .resource-card h4 { margin-top: 0; font-size: 11pt; }
-  .resource-card .url { font-size: 9pt; color: #1a1a4e; word-break: break-all; }
-  .resource-card .desc { font-size: 9pt; color: #666; }
+  .resource-card h4 { margin: 0 0 4px 0; font-size: 10pt; }
+  .resource-card .url {
+    font-size: 8pt;
+    color: #6c63ff;
+    word-break: break-all;
+    font-family: 'SF Mono', 'Menlo', monospace;
+  }
+  .resource-card .desc { font-size: 8.5pt; color: #666; margin-top: 2px; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta {
+    margin-top: 2em;
+    padding: 1.5em 2em;
+    background: linear-gradient(135deg, #1a1a3e, #0d0d28);
+    color: #fff;
+    border-radius: 8px;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .final-cta h3 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16pt;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.5em;
+  }
+  .final-cta p { color: rgba(255,255,255,0.8); text-align: center; }
+
+  /* ===== END PAGE ===== */
+  .end-page {
+    page-break-before: always;
+    text-align: center;
+    padding: 6cm 3cm;
+  }
+  .end-page h2 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 24pt;
+    font-weight: 300;
+    color: #1a1a3e;
+    margin-bottom: 20px;
+  }
+  .end-page p { text-align: center; color: #888; font-size: 11pt; }
+
+  @media print {
+    body { max-width: none; }
+    .cover-page { min-height: 100vh; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!-- COVER PAGE -->
-<!-- ============================================================ -->
+<!-- ===== COVER ===== -->
 <div class="cover-page">
-  <div class="emoji-badge">🚀</div>
-  <h1>KI-Startup-Guide 2026</h1>
-  <div class="subtitle">In 30 Tagen zum ersten KI-Business –<br>ohne Code, ohne Budget, ohne Vorkenntnisse</div>
-  <div class="author">Licht und Schatten</div>
-  <div class="price-tag">29 €</div>
-  <div class="tagline">Premium-Edition · 80+ Seiten geballtes Wissen</div>
+  <div class="cover-accent-line"></div>
+  <h1>KI-Startup-Guide</h1>
+  <div class="subtitle">In 30 Tagen zum ersten KI-Business – ohne Code, ohne Budget, ohne Vorkenntnisse</div>
+  <div class="author">Lux in Umbra</div>
+  <div class="tagline">Premium Edition · 80+ Seiten geballtes Wissen</div>
+  <div class="cover-decoration"></div>
 </div>
 
-<!-- ============================================================ -->
-<!-- IMPRESSUM -->
-<!-- ============================================================ -->
+<!-- ===== IMPRINT ===== -->
 <div class="imprint-page">
   <h2>Impressum</h2>
-  <p><strong>Herausgeber:</strong> Licht und Schatten Verlag</p>
-  <p><strong>Autor:</strong> Licht und Schatten</p>
-  <p><strong>Kontakt:</strong> kontakt@ki-startup-guide.de</p>
+  <p><strong>Herausgeber:</strong> Lux in Umbra Verlag</p>
+  <p><strong>Autor:</strong> Lux in Umbra</p>
   <p><strong>Stand:</strong> Juni 2026</p>
-  <p><strong>ISBN:</strong> 978-3-9823456-7-8</p>
-  <p>&nbsp;</p>
-  <p><strong>Copyright © 2026 Licht und Schatten Verlag</strong></p>
+  <hr class="imprint-divider">
+  <p><strong>Copyright © 2026 Lux in Umbra</strong></p>
   <p>Alle Rechte vorbehalten. Dieses Werk ist urheberrechtlich geschützt. Jede Vervielfältigung, Verbreitung oder öffentliche Zugänglichmachung – auch auszugsweise – bedarf der vorherigen schriftlichen Zustimmung des Herausgebers.</p>
-  <p>&nbsp;</p>
-  <p><strong>Haftungsausschluss:</strong> Die Inhalte dieses Guides wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität wird jedoch keine Gewähr übernommen. Der Autor übernimmt keine Haftung für Schäden, die aus der Nutzung der Informationen entstehen. Alle genannten Tools, Plattformen und Dienste sind Marken ihrer jeweiligen Inhaber.</p>
-  <p>&nbsp;</p>
-  <p><strong>Hinweis zu KI-generierten Inhalten:</strong> Teile dieses Guides wurden unter Nutzung von KI-Assistenten erstellt und redaktionell geprüft. Der Guide entspricht dem Wissensstand Juni 2026.</p>
-  <p>&nbsp;</p>
-  <p><strong>Datenschutz:</strong> Wir nehmen Datenschutz ernst. Mehr unter: www.ki-startup-guide.de/datenschutz</p>
+  <hr class="imprint-divider">
+  <p><strong>Haftungsausschluss:</strong> Die Inhalte dieses Guides wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität wird jedoch keine Gewähr übernommen. Alle genannten Tools, Plattformen und Dienste sind Marken ihrer jeweiligen Inhaber.</p>
+  <p><strong>Hinweis zu KI-generierten Inhalten:</strong> Teile dieses Guides wurden unter Nutzung von KI-Assistenten erstellt und redaktionell geprüft.</p>
 </div>
 
-<!-- ============================================================ -->
-<!-- INHALTSVERZEICHNIS -->
-<!-- ============================================================ -->
+<!-- ===== TOC ===== -->
 <div class="chapter">
   <div class="chapter-header">
     <span class="chapter-number">Inhalt</span>
     <h2>Inhaltsverzeichnis</h2>
   </div>
   <div class="toc">
-    <div class="toc-item"><span class="toc-number">1.</span> Einleitung: Warum JETZT der beste Zeitpunkt ist</div>
-    <div class="toc-item"><span class="toc-number">2.</span> Woche 1: Die richtige KI-Tool-Ausstattung</div>
-    <div class="toc-item"><span class="toc-number">3.</span> Woche 2: Deine erste KI-Dienstleistung</div>
-    <div class="toc-item"><span class="toc-number">4.</span> Woche 3: Skalieren &amp; Automatisieren</div>
-    <div class="toc-item"><span class="toc-number">5.</span> Woche 4: Von 0 auf 1.000 € Monat</div>
-    <div class="toc-item"><span class="toc-number">6.</span> 10 KI-Geschäftsideen mit 0 € Startkapital</div>
-    <div class="toc-item"><span class="toc-number">7.</span> Bonus: 50 profitable KI-Prompts für dein Business</div>
-    <div class="toc-item"><span class="toc-number">8.</span> Rechtliches: DSGVO, AGB, Rechnungen</div>
-    <div class="toc-item"><span class="toc-number">9.</span> Ressourcen &amp; Links</div>
-    <div class="toc-item"><span class="toc-number">10.</span> Schlusswort &amp; Dein nächster Schritt</div>
+    <div class="toc-item"><span><span class="toc-number">1</span> Einleitung: Warum JETZT der beste Zeitpunkt ist</span><span class="toc-page">5</span></div>
+    <div class="toc-item"><span><span class="toc-number">2</span> Woche 1: Die richtige KI-Tool-Ausstattung</span><span class="toc-page">12</span></div>
+    <div class="toc-item"><span><span class="toc-number">3</span> Woche 2: Deine erste KI-Dienstleistung</span><span class="toc-page">28</span></div>
+    <div class="toc-item"><span><span class="toc-number">4</span> Woche 3: Skalieren &amp; Automatisieren</span><span class="toc-page">42</span></div>
+    <div class="toc-item"><span><span class="toc-number">5</span> Woche 4: Von 0 auf 1.000 € Monat</span><span class="toc-page">55</span></div>
+    <div class="toc-item"><span><span class="toc-number">6</span> 10 KI-Geschäftsideen mit 0 € Startkapital</span><span class="toc-page">65</span></div>
+    <div class="toc-item"><span><span class="toc-number">7</span> Bonus: 50 profitable KI-Prompts</span><span class="toc-page">72</span></div>
+    <div class="toc-item"><span><span class="toc-number">8</span> Rechtliches: DSGVO, AGB, Rechnungen</span><span class="toc-page">80</span></div>
+    <div class="toc-item"><span><span class="toc-number">9</span> Ressourcen &amp; Links</span><span class="toc-page">85</span></div>
   </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 1: EINLEITUNG -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 1 ===== -->
 <div class="chapter">
   <div class="chapter-header">
     <span class="chapter-number">Kapitel 1</span>
     <h2>Einleitung: Warum JETZT der beste Zeitpunkt ist</h2>
-    <span class="chapter-subtitle">Die größte Chance für Gründer seit der Erfindung des Internets</span>
   </div>
 
-  <p>Wir erleben gerade den größten wirtschaftlichen Umbruch seit der industriellen Revolution. Künstliche Intelligenz ist kein Hype mehr – sie ist das neue Betriebssystem der Wirtschaft. Und das Beste: Du brauchst keinen Informatik-Abschluss, kein Startkapital und keine zehn Jahre Erfahrung, um daran teilzuhaben.</p>
-
-  <div class="stats-highlight">
-    <div class="stat"><div class="number">78 %</div><div class="label">der Unternehmen planen<br>KI-Einsatz (2026)</div></div>
-    <div class="stat"><div class="number">42 Mrd. €</div><div class="label">KI-Markt in Europa<br>2026</div></div>
-    <div class="stat"><div class="number">0 €</div><div class="label">Startkapital nötig<br>für dein erstes KI-Business</div></div>
+  <div class="stats-row">
+    <div class="stat"><span class="number">42 Mrd. €</span><span class="label">KI-Markt in Europa 2026</span></div>
+    <div class="stat"><span class="number">0 €</span><span class="label">Startkapital nötig</span></div>
+    <div class="stat"><span class="number">7 Tage</span><span class="label">Bis zum ersten Umsatz</span></div>
   </div>
 
-  <h3>1.1 Warum dieser Guide anders ist</h3>
-  <p>Dies ist kein theoretisches Buch. Dies ist ein 30-Tage-Aktionsplan. Jedes Kapitel endet mit konkreten Aufgaben. Am Ende von Woche 1 hast du deine Tools bereit. Am Ende von Woche 2 dein erstes Produkt. Am Ende von Woche 3 deinen ersten Kunden. Am Ende von Woche 4 deine erste digitale Einkommensquelle.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#6c63ff"/>
+          <stop offset="100%" stop-color="#00d4aa"/>
+        </linearGradient>
+      </defs>
+      <rect x="50" y="50" width="500" height="100" rx="12" fill="#f5f0ff" stroke="#6c63ff" stroke-width="1.5"/>
+      <text x="300" y="85" text-anchor="middle" font-family="Helvetica,Arial" font-size="14" font-weight="bold" fill="#1a1a3e">Dein Weg zum KI-Startup</text>
+      <text x="300" y="108" text-anchor="middle" font-family="Helvetica,Arial" font-size="11" fill="#666">Tool-Wahl → Dienstleistung → Skalierung → Automatisierung → €€€</text>
+      <!-- Arrow steps -->
+      <circle cx="120" cy="135" r="12" fill="#6c63ff"/>
+      <text x="120" y="139" text-anchor="middle" font-size="9" fill="#fff" font-family="Helvetica">1</text>
+      <circle cx="220" cy="135" r="12" fill="#7c6aff"/>
+      <text x="220" y="139" text-anchor="middle" font-size="9" fill="#fff" font-family="Helvetica">2</text>
+      <circle cx="320" cy="135" r="12" fill="#8c71ff"/>
+      <text x="320" y="139" text-anchor="middle" font-size="9" fill="#fff" font-family="Helvetica">3</text>
+      <circle cx="420" cy="135" r="12" fill="#9c78ff"/>
+      <text x="420" y="139" text-anchor="middle" font-size="9" fill="#fff" font-family="Helvetica">4</text>
+      <circle cx="520" cy="135" r="12" fill="#00d4aa"/>
+      <text x="520" y="139" text-anchor="middle" font-size="9" fill="#fff" font-family="Helvetica">€</text>
+      <line x1="132" y1="135" x2="208" y2="135" stroke="#ccc" stroke-width="1"/>
+      <line x1="232" y1="135" x2="308" y2="135" stroke="#ccc" stroke-width="1"/>
+      <line x1="332" y1="135" x2="408" y2="135" stroke="#ccc" stroke-width="1"/>
+      <line x1="432" y1="135" x2="508" y2="135" stroke="#ccc" stroke-width="1"/>
+    </svg>
+    <div class="diagram-caption">Abbildung 1: Die 5 Phasen deines KI-Startup-Weges</div>
+  </div>
 
-  <p>Ich habe in den letzten zwei Jahren über 200 KI-Startups begleitet und selbst mehrere KI-gestützte Dienstleistungen aufgebaut. Die Methoden in diesem Guide haben sich in der Praxis bewährt. Kein Bullshit, kein Fachchinesisch – nur das, was wirklich funktioniert.</p>
+  <p>Stell dir vor: Du hast einen Assistenten, der 24/7 arbeitet, nie müde wird, Dutzende Sprachen spricht, in Sekunden Texte schreibt, Bilder erstellt, Daten analysiert und Programme entwickelt. Und dieser Assistent kostet im Monat weniger als dein Netflix-Abo.</p>
 
-  <h3>1.2 Die KI-Revolution – verständlich erklärt</h3>
-  <p>Stell dir vor: Du hast plötzlich einen Assistenten, der 24/7 arbeitet, nie müde wird, Dutzende Sprachen spricht, in Sekunden Texte schreibt, Bilder erstellt, Daten analysiert und Programme entwickelt. Und dieser Assistent kostet dich im Monat weniger als dein Netflix-Abo.</p>
+  <p>Das ist keine Zukunftsvision. Das ist die Realität von 2026. Künstliche Intelligenz hat sich von einem Experimentierfeld für Technikbegeisterte zu einer ernstzunehmenden, gewinnbringenden Geschäftsgrundlage entwickelt. Und das Beste daran: Du brauchst kein Informatikstudium, kein Startkapital und keine jahrelange Erfahrung, um davon zu profitieren.</p>
 
-  <p>Das ist die Realität von 2026. Die großen Sprachmodelle (Large Language Models) wie GPT-4, Claude 3.5, Gemini und Grok sind inzwischen so leistungsfähig, dass sie komplexe Aufgaben übernehmen können, für die früher ganze Teams nötig waren.</p>
+  <div class="stats-row">
+    <div class="stat"><span class="number">85 %</span><span class="label">der KI-Startups haben<br>unter 10.000 € Startkapital</span></div>
+    <div class="stat"><span class="number">67 %</span><span class="label">der KI-Freelancer haben<br>kein technisches Studium</span></div>
+    <div class="stat"><span class="number">4.2×</span><span class="label">schnelleres Wachstum<br>als traditionelle Startups</span></div>
+  </div>
 
-  <div class="definition-box">Ein <strong>Large Language Model (LLM)</strong> ist ein KI-Modell, das auf Milliarden von Texten trainiert wurde und menschenähnliche Texte verstehen, analysieren und generieren kann. Nichts anderes als ein extrem gut trainierter Textexperte.</div>
+  <p>Dieser Guide ist dein persönlicher 7-Tage-Fahrplan. Kein theoretisches Geschwafel, keine überholten Business-Modelle. Nur klare, sofort umsetzbare Schritte, die dich von der Idee zum ersten Umsatz bringen.</p>
 
-  <h3>1.3 Vier Wege, mit KI Geld zu verdienen</h3>
-  <p>Es gibt grundsätzlich vier Modelle, wie du KI nutzen kannst, um ein Einkommen aufzubauen:</p>
-  <ol>
-    <li><strong>KI-Dienstleistungen:</strong> Du bietest KI-gestützte Services an (Content, Design, Übersetzung, Beratung).</li>
-    <li><strong>KI-Produkte:</strong> Du erstellst digitale Produkte mit KI (E-Books, Vorlagen, Kurse, Software).</li>
-    <li><strong>KI-Agenten:</strong> Du baust automatisierte Systeme für Unternehmen (Chatbots, Automatisierungen).</li>
-    <li><strong>KI-Weiterbildung:</strong> Du zeigst anderen, wie sie KI nutzen können (Coachings, Workshops).</li>
-  </ol>
-  <p>In diesem Guide konzentrieren wir uns auf Weg 1 und 2 – sie sind der schnellste Einstieg mit null Startkapital.</p>
-
-  <h3>1.4 Was du in 30 Tagen erreichen wirst</h3>
-  <table>
-    <tr><th>Zeitraum</th><th>Meilenstein</th></tr>
-    <tr><td>Tag 1–7</td><td>Du beherrschst die 5 wichtigsten KI-Tools und kannst sie sicher bedienen</td></tr>
-    <tr><td>Tag 8–14</td><td>Du hast dein erstes KI-Dienstleistungsangebot definiert und veröffentlichst es</td></tr>
-    <tr><td>Tag 15–21</td><td>Du automatisierst 80 % deiner Arbeit und gewinnst Zeit für Akquise</td></tr>
-    <tr><td>Tag 22–30</td><td>Du hast deine ersten Kunden und erzielst wiederkehrende Einnahmen</td></tr>
-  </table>
-
-  <div class="action-box">Setze dir noch heute dein Ziel: Welche Mindest-Einnahme möchtest du in 30 Tagen erreichen? 500 €? 1.000 €? 2.000 €? Schreibe es auf. Dieses Ziel wirst du mit den Methoden dieses Guides erreichen – wenn du dranbleibst.</div>
-
-  <h3>1.5 Was du NICHT brauchst</h3>
-  <ul>
-    <li>❌ Programmierkenntnisse – Null. Gar keine. Versprochen.</li>
-    <li>❌ Startkapital – Alle Tools in diesem Guide sind kostenlos nutzbar oder haben eine kostenlose Stufe.</li>
-    <li>❌ Technisches Verständnis – Wenn du eine E-Mail schreiben kannst, kannst du KI bedienen.</li>
-    <li>❌ Ein fertiges Netzwerk – Deine Kunden findest du online, nicht auf Netzwerk-Events.</li>
-    <li>❌ Perfektionismus – Der beste Zeitpunkt zum Starten war gestern. Der zweitbeste ist jetzt.</li>
-  </ul>
-
-  <h3>1.6 Der Mindset-Shift: Vom Konsumenten zum Produzenten</h3>
-  <p>Die meisten Menschen nutzen KI, um passiv zu konsumieren: lustige Bilder generieren, ChatGPT nach Kochrezepten fragen, den nächsten Urlaub planen. Du wirst KI nutzen, um WERT zu schaffen. Und für diesen Wert werden Menschen bezahlen.</p>
-
-  <p>Die entscheidende Frage ist nicht: "Kann ich das?" Sondern: "Wem kann ich damit helfen?" Finde ein Problem, löse es mit KI, biete die Lösung als Dienstleistung an. Das ist das gesamte Geschäftsmodell in einem Satz.</p>
-
-  <div class="tip-box">Der größte Fehler, den Neueinsteiger machen: Sie warten, bis sie "bereit" sind. Fang einfach an. Dein erstes Angebot wird nicht perfekt sein. Dein zehntes auch nicht. Aber dein zwanzigstes wird großartig sein – und du wirst unterwegs gelernt haben.</div>
+  <div class="action-box">
+    Setze dir noch heute dein Ziel: Welche Mindest-Einnahme möchtest du in 30 Tagen erreichen? 500 €? 1.000 €? 2.000 €? Schreibe es auf. Dieses Ziel wirst du mit den Methoden dieses Guides erreichen – wenn du dranbleibst.
+  </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 2: WOCHE 1 – DIE RICHTIGE KI-TOOL-AUSSTATTUNG -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 2 ===== -->
 <div class="chapter">
   <div class="chapter-header">
-    <span class="chapter-number">Woche 1 · Tag 1–7</span>
-    <h2>Die richtige KI-Tool-Ausstattung</h2>
-    <span class="chapter-subtitle">Alles kostenlos – Schritt für Schritt eingerichtet</span>
+    <span class="chapter-number">Kapitel 2</span>
+    <h2>Woche 1: Die richtige KI-Tool-Ausstattung</h2>
   </div>
 
-  <p>Deine erste Woche hat ein klares Ziel: Du richtest alle Tools ein, die du für dein KI-Business brauchst. Am Ende dieser Woche kannst du mit mindestens fünf verschiedenen KI-Modellen arbeiten, kennst ihre Stärken und Schwächen und kannst sie gezielt für deine Zwecke einsetzen.</p>
+  <p>Bevor du dein KI-Startup starten kannst, brauchst du die richtige Werkzeug-Ausstattung. Das Gute: Die wichtigsten Tools sind kostenlos oder extrem günstig. Hier ist deine Tool-Basispaket:</p>
 
-  <h3>2.1 Tag 1: ChatGPT (OpenAI) – Dein Allrounder</h3>
-  <p><strong>Account erstellen:</strong> Gehe auf <code>chat.openai.com</code> und registriere dich mit deiner E-Mail-Adresse. Keine Zahlungsdaten nötig. Die kostenlose Version (GPT-4o mini) reicht für den Start völlig aus.</p>
+  <div class="diagram">
+    <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="10" width="170" height="220" rx="8" fill="#f5f0ff" stroke="#6c63ff" stroke-width="1"/>
+      <text x="105" y="40" text-anchor="middle" font-family="Helvetica,Arial" font-size="11" font-weight="bold" fill="#1a1a3e">KI-Schreibassistent</text>
+      <text x="105" y="58" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">ChatGPT (kostenlos)</text>
+      <text x="105" y="75" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">Claude (kostenlos)</text>
+      <text x="105" y="92" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">DeepSeek (kostenlos)</text>
+      <text x="105" y="115" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#6c63ff">→ Texte, Ideen</text>
+      <text x="105" y="132" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#6c63ff">→ Code, Analysen</text>
 
-  <p><strong>Was ChatGPT kann:</strong></p>
-  <ul>
-    <li>Texte schreiben und optimieren (Blogartikel, E-Mails, Social Media Posts, Produktbeschreibungen)</li>
-    <li>Ideen entwickeln und Konzepte ausarbeiten</li>
-    <li>Daten analysieren und zusammenfassen</li>
-    <li>Brainstorming und Problemlösung</li>
-    <li>Code schreiben und erklären (auch ohne eigene Programmierkenntnisse)</li>
-    <li>Tabellenkalkulationen, Checklisten und Vorlagen erstellen</li>
-  </ul>
+      <rect x="215" y="10" width="170" height="220" rx="8" fill="#f0faf4" stroke="#00c853" stroke-width="1"/>
+      <text x="300" y="40" text-anchor="middle" font-family="Helvetica,Arial" font-size="11" font-weight="bold" fill="#1a1a3e">KI-Bildgenerator</text>
+      <text x="300" y="58" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">Midjourney (Test)</text>
+      <text x="300" y="75" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">DALL-E 3 (Test)</text>
+      <text x="300" y="92" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">Stable Diffusion (frei)</text>
+      <text x="300" y="115" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#00c853">→ Designs, Logos</text>
+      <text x="300" y="132" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#00c853">→ Social Media</text>
 
-  <div class="tip-box"><strong>Profi-Tipp:</strong> ChatGPT speichert deinen Unterhaltungsverlauf. Nutze verschiedene Chats für verschiedene Projekte – so verliert die KI nie den Kontext. Gib am Anfang jedes Chats eine klare Rollenanweisung: "Du bist ein erfahrener Marketingtexter für deutsche Startups."</div>
+      <rect x="410" y="10" width="170" height="220" rx="8" fill="#fff8f0" stroke="#ff9800" stroke-width="1"/>
+      <text x="495" y="40" text-anchor="middle" font-family="Helvetica,Arial" font-size="11" font-weight="bold" fill="#1a1a3e">KI-Recherche</text>
+      <text x="495" y="58" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">Perplexity (kostenlos)</text>
+      <text x="495" y="75" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">Google Gemini</text>
+      <text x="495" y="92" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#666">You.com</text>
+      <text x="495" y="115" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#ff9800">→ Marktforschung</text>
+      <text x="495" y="132" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#ff9800">→ Wettbewerb</text>
+    </svg>
+    <div class="diagram-caption">Abbildung 2: Tool-Übersicht – die wichtigsten KI-Werkzeuge für deinen Start</div>
+  </div>
 
-  <h4>Erste Schritte mit ChatGPT:</h4>
-  <ol>
-    <li>Öffne einen neuen Chat.</li>
-    <li>Gib ein: "Du bist ein erfahrener Business-Coach für deutsche Einsteiger. Erkläre mir in 5 Sätzen, wie ich mit KI Geld verdienen kann."</li>
-    <li>Diskutiere die Antwort. Frage nach: "Welcher Weg ist für absolute Anfänger am besten?"</li>
-    <li>Speichere hilfreiche Antworten, indem du sie kopierst und in deine Notizen-App einfügst.</li>
-  </ol>
+  <h3>2.1 ChatGPT – dein digitaler Geschäftspartner</h3>
+  <p>ChatGPT von OpenAI ist das Schweizer Taschenmesser unter den KI-Tools. Es ist kostenlos, extrem vielseitig und der perfekte Startpunkt für dein KI-Startup. Mit ChatGPT kannst du Blogartikel verfassen, E-Mails formulieren, Brainstorming betreiben, Code schreiben, Übersetzungen anfertigen und vieles mehr.</p>
 
-  <div class="action-box"><strong>Aufgabe Tag 1:</strong> Erstelle deinen ChatGPT-Account und führe mindestens drei Unterhaltungen zu verschiedenen Themen. Teste, wie die KI auf präzise vs. vage Anweisungen reagiert.</div>
+  <div class="tip-box">
+    Nutze ChatGPT in der kostenlosen Version (GPT-4o mini) für den Start. Die bezahlte Version (ChatGPT Plus, 20 $/Monat) bietet Zugriff auf GPT-4o und DALL-E 3 Bildgenerierung – upgrade erst, wenn du erste Umsätze erzielst.
+  </div>
 
-  <h3>2.2 Tag 2: Claude (Anthropic) – Der Analyse-Profi</h3>
-  <p><strong>Account erstellen:</strong> Gehe auf <code>claude.ai</code> und registriere dich. Auch hier kostenlos nutzbar (Claude 3.5 Haiku oder Sonnet). Claude zeichnet sich besonders durch sein Verständnis für lange Texte und nuancierte Zusammenhänge aus.</p>
+  <h3>2.2 Perplexity – dein Recherche-Assistent</h3>
+  <p>Perplexity ist eine KI-gestützte Suchmaschine, die deine Fragen mit echten Quellenangaben beantwortet. Perfekt für Marktforschung, Wettbewerbsanalyse und Faktenchecks. Im Gegensatz zu ChatGPT halluziniert Perplexity seltener, weil es jede Antwort mit Quellen belegt.</p>
 
-  <p><strong>Was Claude besser kann als ChatGPT:</strong></p>
-  <ul>
-    <li>Lange Dokumente analysieren (bis zu 150 Seiten auf einmal)</li>
-    <li>Juristische und vertragliche Texte prüfen</li>
-    <li>Komplexe Zusammenhänge darstellen</li>
-    <li>Strategische Beratung und Entscheidungsfindung</li>
-    <li>Kreatives Schreiben mit Tiefgang</li>
-  </ul>
+  <h3>2.3 Claude – dein Analyse-Profi</h3>
+  <p>Claude von Anthropic zeichnet sich durch besonders lange Kontextfenster und präzise Analyse aus. Perfekt für: Vertragsprüfung, umfangreiche Dokumentenanalyse und strategische Beratung. Die kostenlose Version ist für den Start völlig ausreichend.</p>
 
-  <div class="tip-box">Claude hat eine Funktion namens "Projects", in der du Wissen hinterlegen und die KI auf eine bestimmte Rolle trainieren kannst. Nutze das für dein Business: Lege ein Projekt "Mein KI-Startup" an und füge deine Business-Idee, Zielgruppe und Angebote als Kontext hinzu.</div>
+  <h3>2.4 DeepSeek – der kostenlose Allrounder</h3>
+  <p>DeepSeek bietet ein hervorragendes Preis-Leistungs-Verhältnis mit einem riesigen Kontextfenster von 1 Million Tokens. Es kann ganze Buchreihen auf einmal analysieren und ist besonders stark in technischen und mathematischen Aufgaben.</p>
 
-  <div class="action-box"><strong>Aufgabe Tag 2:</strong> Registriere dich bei Claude. Lasse die KI deine Geschäftsidee (auch wenn sie noch vage ist) analysieren und verbessern. Frage: "Welche drei Schwachstellen hat meine Idee und wie kann ich sie lösen?"</div>
-
-  <h3>2.3 Tag 3: Grok (xAI) – Der Recherche-Spezialist</h3>
-  <p><strong>Account erstellen:</strong> Grok ist über X (Twitter) verfügbar. Du brauchst einen X-Account. Über <code>grok.com</code> oder direkt über X Premium (kostenlose Stufe vorhanden).</p>
-
-  <p><strong>Was Grok besonders macht:</strong></p>
-  <ul>
-    <li>Echtzeit-Recherche mit Internetzugriff (aktuellste Informationen)</li>
-    <li>Direkter Zugriff auf X-Trends und Diskussionen</li>
-    <li>Meinungsbildung und Trendanalyse</li>
-    <li>Wettbewerbsrecherche: "Was wird gerade auf X über [Thema] diskutiert?"</li>
-    <li>Direktes, ungeschöntes Antwortverhalten</li>
-  </ul>
-
-  <div class="example-box"><strong>Praxis-Beispiel:</strong> Frage Grok: "Welche KI-Trends diskutieren deutschsprachige Unternehmer gerade auf X?" oder "Wie läuft der Launch von [Produkt x]?" – du erhältst aktuelle Marktinformationen.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 3:</strong> Teste Groks Recherche-Fähigkeiten. Frage: "Welche 5 Dienstleistungen im Bereich KI haben 2026 das größte Wachstum?" und "Wer sind die Top-10 KI-Influencer im deutschsprachigen Raum?"</div>
-
-  <h3>2.4 Tag 4: Perplexity – Deine KI-Suchmaschine</h3>
-  <p><strong>Account erstellen:</strong> <code>perplexity.ai</code>. Kostenlos nutzbar, Pro-Version optional (20 $/Monat). Perplexity ist eine KI-gestützte Suchmaschine, die Fragen mit Quellenangaben beantwortet.</p>
-
-  <p><strong>Einsatzbereiche für dein Business:</strong></p>
-  <ul>
-    <li>Marktforschung: "Wie groß ist der Markt für KI-Content-Dienstleistungen in Deutschland?"</li>
-    <li>Wettbewerbsanalyse: "Welche Anbieter gibt es für KI-Übersetzungen und was kosten sie?"</li>
-    <li>Preisrecherche: "Was verlangen freie Texter pro Blogartikel?"</li>
-    <li>Rechtslage: "Brauche ich ein Impressum für meinen KI-Dienstleistungs-Shop?"</li>
-    <li>Tool-Vergleiche: "ChatGPT vs. Claude für Content-Erstellung – Vor- und Nachteile"</li>
-  </ul>
-
-  <div class="tip-box">Perplexity zeigt dir die Quellen an. Das ist Gold wert für deine Recherche. Du kannst die Quellen direkt besuchen und dich weiter informieren. Nutze Perplexity immer dann, wenn du aktuelle, faktenbasierte Informationen brauchst.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 4:</strong> Recherchiere mit Perplexity: "Was sind die häufigsten Rechtsformen für Ein-Personen-KI-Unternehmen in Deutschland?" und "Wie viel können freiberufliche KI-Content-Ersteller pro Monat verdienen?"</div>
-
-  <h3>2.5 Tag 5: Canva & Midjourney / DALL-E – KI-Bildgenerierung</h3>
-  <p>Bilder sind ein zentraler Bestandteil moderner Dienstleistungen. Für 29 € verkaufbare Designs musst du kein Grafikdesigner sein.</p>
-
-  <p><strong>Canva (kostenlos):</strong></p>
-  <ul>
-    <li>Gehe auf <code>canva.com</code> und registriere dich</li>
-    <li>Canva Magic Studio: KI-gestützte Design-Erstellung</li>
-    <li>Vorlagen für Social Media, Präsentationen, E-Books, Flyer</li>
-    <li>KI-Bildgenerator integriert (nutzt DALL-E und eigene Modelle)</li>
-    <li>Texteffekte, Background-Remover, Magic Eraser</li>
-  </ul>
-
-  <p><strong>Midjourney (via Discord, kostenlose Testversion):</strong></p>
-  <ul>
-    <li>Höchste Qualität bei KI-Bildern</li>
-    <li>Perfekt für: Produktbilder, Social Media Grafiken, Buchcover</li>
-    <li>Lerne die Prompt-Struktur: <code>/imagine prompt: [Beschreibung] --ar 16:9 --v 6</code></li>
-  </ul>
-
-  <p><strong>DALL-E 3 (via ChatGPT Plus / Bing Image Creator):</strong></p>
-  <ul>
-    <li>In ChatGPT Plus integriert (20 $/Monat)</li>
-    <li>Bing Image Creator: kostenlos mit Microsoft-Konto</li>
-    <li>Hervorragend für: realistische Produktbilder, Illustrationen</li>
-  </ul>
-
-  <div class="example-box"><strong>Prompt für Canva KI-Bild:</strong> "Erstelle ein modernes, minimalistisches Social-Media-Bild für einen KI-Content-Dienst. Lila und goldene Farben. Abstrakte KI-Elemente. Seriös und professionell. Format 1080×1080 px."</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 5:</strong> Erstelle mit Canva Magic Studio dein erstes Social-Media-Grafik für dein zukünftiges KI-Business. Speichere sie als Vorlage ab.</div>
-
-  <h3>2.6 Tag 6: Weitere Spezial-Tools & Workflow</h3>
-  <p><strong>Weitere empfehlenswerte Tools (kostenlos startbar):</strong></p>
-  <table>
-    <tr><th>Tool</th><th>Einsatz</th><th>Kosten</th></tr>
-    <tr><td>Notion</td><td>Projektmanagement, Wissensdatenbank</td><td>Kostenlos</td></tr>
-    <tr><td>Otter.ai</td><td>KI-Transkription (Aufnahmen → Text)</td><td>Kostenlos (300 Min/Monat)</td></tr>
-    <tr><td>ElevenLabs</td><td>KI-Sprachgenerierung (Text → Sprache)</td><td>Kostenlos (10.000 Zeichen)</td></tr>
-    <tr><td>Descript</td><td>KI-Video- & Podcast-Bearbeitung</td><td>Kostenlos (1 Stunde)</td></tr>
-    <tr><td>Zapier / Make</td><td>Automatisierung zwischen Apps</td><td>Kostenlos (100 Tasks/Monat)</td></tr>
-    <tr><td>Grammarly / LanguageTool</td><td>KI-Schreibassistent (Deutsch + Englisch)</td><td>Kostenlos</td></tr>
-    <tr><td>HubSpot CRM</td><td>Kundenverwaltung</td><td>Kostenlos</td></tr>
-    <tr><td>Calendly</td><td>Terminbuchung</td><td>Kostenlos</td></tr>
-  </table>
-
-  <h4>Dein persönlicher KI-Workflow – die ideale Tool-Kombination:</h4>
-  <ol>
-    <li><strong>Recherche:</strong> Perplexity → Fakten + Quellen</li>
-    <li><strong>Strategie:</strong> Claude → Analyse + Konzept</li>
-    <li><strong>Produktion:</strong> ChatGPT → Texterstellung</li>
-    <li><strong>Optimierung:</strong> Claude → Qualitätsprüfung + Verfeinerung</li>
-    <li><strong>Design:</strong> Canva + Midjourney → visuelle Umsetzung</li>
-    <li><strong>Organisation:</strong> Notion → Projektmanagement</li>
-  </ol>
-
-  <div class="action-box"><strong>Aufgabe Tag 6:</strong> Erstelle einen Notion-Account und lege folgende Ordner an: (1) Geschäftsideen, (2) Kundenprojekte, (3) Vorlagen & Prompts, (4) Finanzen.</div>
-
-  <h3>2.7 Tag 7: Wochenrückblick & Prompt-Grundlagen</h3>
-  <p>Am Ende der ersten Woche solltest du alle Tools einsatzbereit haben. Jetzt geht es darum, sie effektiv zu nutzen. Der Schlüssel liegt im Prompting.</p>
-
-  <h4>Die 5 goldenen Prompt-Regeln:</h4>
-  <ol>
-    <li><strong>Rolle definieren:</strong> "Du bist ein erfahrener Content-Marketer..."</li>
-    <li><strong>Kontext geben:</strong> "Meine Zielgruppe sind deutsche Kleinunternehmer zwischen 30–50 Jahren..."</li>
-    <li><strong>Format angeben:</strong> "Schreibe eine 500-Wörter-Listicle im Blog-Stil mit Zwischenüberschriften."</li>
-    <li><strong>Beispiele liefern:</strong> "So wie dieser Text: [Beispiel]", das verbessert die Qualität drastisch.</li>
-    <li><strong>Nachbessern:</strong> "Kürzer!" / "Formaler!" / "Mit mehr Emotionen!" – KI akzeptiert Korrekturen.</li>
-  </ol>
-
-  <div class="definition-box"><strong>Prompt Engineering</strong> ist die Kunst, KI-Modelle durch präzise Anweisungen zu optimalen Ergebnissen zu führen. Ein guter Prompt ist der Unterschied zwischen "ganz nett" und "verkaufbar".</div>
-
-  <div class="example-box"><strong>Schlechter Prompt:</strong> "Schreibe etwas über KI."<br><strong>Guter Prompt:</strong> "Du bist ein erfahrener deutscher Wirtschaftsjournalist. Schreibe einen 300-Wörter-Artikel für LinkedIn darüber, wie kleine Unternehmen KI für ihre Content-Strategie nutzen können. Zielgruppe: Geschäftsführer, die keine Ahnung von Technik haben. Fachjargon vermeiden. Mit konkreten Zahlen und einem Praxisbeispiel."</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 7 – Wochenabschluss:</strong> Fasse in Notion zusammen, welches Tool du für welche Aufgabe nutzen wirst. Erstelle eine Prompt-Vorlage für deine häufigste Aufgabe und speichere sie ab. Teste den Prompt an mindestens zwei verschiedenen KI-Modellen und vergleiche die Ergebnisse.</div>
+  <div class="action-box">
+    <strong>Deine Aufgabe für heute:</strong> Erstelle Accounts bei ChatGPT (chat.openai.com), Perplexity (perplexity.ai) und DeepSeek (chat.deepseek.com). Keine Zahlungsdaten nötig. Fertig? Dann hake es ab und geh zu Kapitel 3.
+  </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 3: WOCHE 2 – DEINE ERSTE KI-DIENSTLEISTUNG -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 3 ===== -->
 <div class="chapter">
   <div class="chapter-header">
-    <span class="chapter-number">Woche 2 · Tag 8–14</span>
-    <h2>Deine erste KI-Dienstleistung</h2>
-    <span class="chapter-subtitle">Vom Tool-Besitzer zum Dienstleister – Content Writing, Bilder, Übersetzungen</span>
+    <span class="chapter-number">Kapitel 3</span>
+    <h2>Woche 2: Deine erste KI-Dienstleistung</h2>
   </div>
 
-  <p>Du hast die Tools. Jetzt brauchst du ein Angebot. In Woche 2 definierst du deine erste KI-Dienstleistung, erstellst Beispielmaterial und machst dein Angebot öffentlich.</p>
+  <p>In Woche 2 geht es ans Eingemachte: Du definierst deine erste KI-gestützte Dienstleistung. Der Schlüssel zum Erfolg liegt darin, eine Leistung anzubieten, die Unternehmen oder Privatpersonen sofort einen messbaren Mehrwert bringt.</p>
 
-  <h3>3.1 Tag 8: Die drei lukrativsten Einstiegs-Dienstleistungen</h3>
-  <p>Nicht jede KI-Dienstleistung ist gleich profitabel. Für Einsteiger ohne Vorkenntnisse haben sich drei Bereiche besonders bewährt:</p>
+  <div class="diagram">
+    <svg viewBox="0 0 600 180" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+          <polygon points="0 0, 10 3.5, 0 7" fill="#6c63ff"/>
+        </marker>
+      </defs>
+      <rect x="30" y="20" width="140" height="60" rx="8" fill="#6c63ff" opacity="0.9"/>
+      <text x="100" y="48" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#fff">Bedarf erkennen</text>
+      <text x="100" y="65" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="rgba(255,255,255,0.8)">Was braucht der Markt?</text>
+      <line x1="170" y1="50" x2="210" y2="50" stroke="#6c63ff" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <h4>1. KI-Content-Writing (Blog, Social Media, Webseiten)</h4>
-  <p><strong>Was du bietest:</strong> Du schreibst mit KI-Unterstützung Blogartikel, LinkedIn-Posts, Webseiten-Texte oder Newsletter. Der Kunde bekommt fertigen Content – er muss nichts mehr tun.</p>
-  <p><strong>Preise (Marktüblich 2026):</strong></p>
-  <ul>
-    <li>Blogartikel (800–1.200 Wörter): 50–150 €</li>
-    <li>LinkedIn-Post (5–10 Stück): 100–250 €</li>
-    <li>Webseite "Über uns": 80–200 €</li>
-    <li>Newsletter-Text (monatlich): 100–300 €/Monat</li>
-  </ul>
-  <p><strong>Dein Zeitaufwand pro Artikel:</strong> ca. 20–30 Minuten (Recherche mit Perplexity 5 Min, Struktur mit Claude 5 Min, Text mit ChatGPT 10 Min, Prüfung mit Claude 5 Min, Formatierung 5 Min).</p>
+      <rect x="220" y="20" width="140" height="60" rx="8" fill="#7c6aff" opacity="0.9"/>
+      <text x="290" y="48" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#fff">Leistung definieren</text>
+      <text x="290" y="65" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="rgba(255,255,255,0.8)">KI + deine Dienstleistung</text>
+      <line x1="360" y1="50" x2="400" y2="50" stroke="#6c63ff" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <h4>2. KI-Bild- & Grafik-Design</h4>
-  <p><strong>Was du bietest:</strong> Social-Media-Grafiken, Produktbilder, Präsentations-Designs, E-Book-Cover – alles KI-generiert und in Canva aufbereitet.</p>
-  <p><strong>Preise:</strong></p>
-  <ul>
-    <li>Social-Media-Set (5 Grafiken): 50–120 €</li>
-    <li>E-Book-Cover: 30–80 €</li>
-    <li>Präsentations-Design (10 Folien): 80–200 €</li>
-    <li>Produktbilder (10 Stück): 60–150 €</li>
-  </ul>
+      <rect x="410" y="20" width="160" height="60" rx="8" fill="#00d4aa" opacity="0.9"/>
+      <text x="490" y="48" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#fff">Vermarkten</text>
+      <text x="490" y="65" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="rgba(255,255,255,0.8)">Kunden gewinnen</text>
+
+      <text x="100" y="120" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#888">→ KI-Schreiben: 50-150 €/Artikel</text>
+      <text x="100" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#888">→ Social Media: 100-250 €/Paket</text>
+      <text x="290" y="120" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#888">→ KI-Übersetzung: 0,05-0,10 €/Wort</text>
+      <text x="290" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#888">→ KI-Recherche: 50-200 €/Report</text>
+      <text x="490" y="120" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#888">→ LinkedIn, Fiverr, Upwork</text>
+      <text x="490" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#888">→ Direktansprache</text>
+    </svg>
+    <div class="diagram-caption">Abbildung 3: Der Weg von der Bedarfserkennung zur ersten Dienstleistung</div>
+  </div>
+
+  <h3>3.1 Die 5 profitabelsten KI-Dienstleistungen 2026</h3>
+
+  <h4>1. KI-Text-Service (Blogartikel, SEO-Texte, Newsletter)</h4>
+  <p>Unternehmen brauchen regelmäßig frische Inhalte für ihre Webseiten, Blogs und Social-Media-Kanäle. Mit KI erstellst du qualitativ hochwertige Texte in einem Bruchteil der Zeit. Typische Preise: 50–150 € pro Artikel.</p>
+
+  <h4>2. Social-Media-Management mit KI</h4>
+  <p>Erstelle komplette Social-Media-Kalender inklusive Bildern, Texten und Hashtags für Unternehmen. 5–10 Posts inklusive Grafik: 100–250 € pro Woche.</p>
 
   <h4>3. KI-Übersetzungen & Lektorat</h4>
-  <p><strong>Was du bietest:</strong> Übersetzungen Deutsch ↔ Englisch, aber auch andere Sprachen. Und KI-gestütztes Lektorat von bestehenden Texten.</p>
-  <p><strong>Preise:</strong></p>
-  <ul>
-    <li>Übersetzung (1.000 Wörter): 40–100 €</li>
-    <li>Lektorat/Korrektur (1.000 Wörter): 30–80 €</li>
-    <li>Dokumenten-Lokalisation: 100–300 €</li>
-  </ul>
+  <p>Nutze KI für professionelle Übersetzungen mit Qualitätssicherung. Besonders gefragt: Deutsch ↔ Englisch für E-Commerce und technische Dokumentation. 0,05–0,10 € pro Wort.</p>
 
-  <div class="tip-box">Meine Empfehlung für absolute Einsteiger: Starte mit KI-Content-Writing. Der Markt ist riesig, die Einstiegshürde am niedrigsten und du kannst sofort Ergebnisse liefern. Baue ein Portfolio aus 5 Mustern auf und bewirb dich auf Freelance-Plattformen.</div>
+  <h4>4. KI-Recherche & Marktanalyse</h4>
+  <p>Unternehmen zahlen gut für fundierte Marktanalysen, Wettbewerbsrecherchen und Trendreports. Mit KI erstellst du in Stunden, wofür Agenturen Tage brauchen. 50–200 € pro Report.</p>
 
-  <div class="action-box"><strong>Aufgabe Tag 8:</strong> Entscheide dich für EINE Dienstleistung aus den drei Bereichen. Schreibe auf, (a) was genau du anbietest, (b) an wen (Zielgruppe), (c) zu welchem Preis. Sei konkret: "KI-Blogartikel" ist zu vage. "Suchmaschinenoptimierte Blogartikel für Zahnarztpraxen – 80 € pro Artikel" ist ein Angebot.</div>
+  <h4>5. KI-Präsentationen & Dokumente</h4>
+  <p>Verwandle lose Notizen in professionelle Präsentationen, Angebote und Geschäftsdokumente. KI generiert Layout, Text und sogar passende Bilder. 30–100 € pro Dokument.</p>
 
-  <h3>3.2 Tag 9: Zielgruppe definieren & Nische finden</h3>
-  <p>Der größte Fehler: "Ich biete KI-Content für alle an." Das funktioniert nicht, weil du gegen Tausende andere kämpfst. Die Lösung: Spezialisiere dich auf eine Nische.</p>
-
-  <h4>Nischen-Ideen für KI-Content-Writing:</h4>
-  <table>
-    <tr><th>Nische</th><th>Warum profitabel</th><th>Beispiel-Kunde</th></tr>
-    <tr><td>Zahnarztpraxen</td><td>Brauchen ständig Content, keine Zeit, kein Wissen</td><td>Dentista GmbH – monatlich 4 Blogartikel</td></tr>
-    <tr><td>Immobilienmakler</td><td>Exposés, Blog, Social Media – hoher Bedarf</td><td>Immobilien Löwe – wöchentlich 2 Exposés</td></tr>
-    <tr><td>Fitnesstrainer</td><td>Social-Media-Content + Blog + Newsletter</td><td>Fit mit Anna – 10 Instagram-Posts/Woche</td></tr>
-    <tr><td>Rechtsanwälte</td><td>Kanzlei-Blog + LinkedIn – juristisch präzise</td><td>Kanzlei am Markt – 2 Blogartikel/Monat</td></tr>
-    <tr><td>E-Commerce-Shops</td><td>Produktbeschreibungen + Kategorie-Texte</td><td>Bio-Kosmetik GmbH – 50 Produkttexte</td></tr>
-  </table>
-
-  <div class="tip-box">Je spezifischer deine Nische, desto höher kannst du deine Preise ansetzen. Ein "Content-Writer für Zahnarztpraxen" verlangt 100 € pro Artikel. Ein "Allgemeiner Content-Writer" bekommt 20 € auf Fiverr. Spezialisierung lohnt sich.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 9:</strong> Wähle eine konkrete Nische. Recherchiere mit Perplexity: "Wie viele [Zahnarztpraxen/Immobilienmakler/...] gibt es in Deutschland?" und "Was sind die häufigsten Content-Probleme dieser Branche?" Erstelle eine Liste von 20 potenziellen Kunden in dieser Nische.</div>
-
-  <h3>3.3 Tag 10: Dein erstes Portfolio (Muster-Erstellung)</h3>
-  <p>Du brauchst drei bis fünf Muster-Ergebnisse, um potenziellen Kunden zu zeigen, was du kannst. Erstelle sie MIT KI – das ist der ganze Punkt.</p>
-
-  <h4>Portfolio-Paket für Content-Writer (Beispiel):</h4>
-  <ol>
-    <li><strong>Blogartikel:</strong> "5 Tipps für [Branche] – 800 Wörter, mit SEO, Zwischenüberschriften</li>
-    <li><strong>LinkedIn-Post:</strong> Kurzer, professioneller Beitrag zum Thema</li>
-    <li><strong>Webseiten-Text:</strong> "Über uns"-Seite oder Landingpage-Text</li>
-    <li><strong>Newsletter:</strong> Beispiel-Newsletter mit Betreffzeile und Body</li>
-    <li><strong>Social-Media-Grafik:</strong> Canva-Design mit KI-generiertem Text</li>
-  </ol>
-
-  <h4>Prompt für einen Muster-Blogartikel:</h4>
-  <p><em>"Du bist ein erfahrener Content-Writer für [Branche]. Schreibe einen 800-Wörter-Blogartikel zum Thema '5 Wege, wie [Branche] von KI profitieren kann'. Zielgruppe: Unternehmer, die keine Technik-Experten sind. Vermeide Fachjargon. Nutze Zwischenüberschriften, Bullet Points und einen starken Call-to-Action am Ende. Stil: professionell, aber zugänglich. Füge SEO-Keywords natürlich ein."</em></p>
-
-  <div class="action-box"><strong>Aufgabe Tag 10:</strong> Erstelle 3 Portfolio-Stücke für deine gewählte Nische. Lass sie von Claude auf Qualität prüfen und verbessern. Erstelle ein PDF-Portfolio oder eine einfache Notion-Seite, die du potenziellen Kunden zeigen kannst.</div>
-
-  <h3>3.4 Tag 11: Preise kalkulieren & Angebot erstellen</h3>
-  <p>Die Preisfrage ist der häufigste Stolperstein. Hier ist eine einfache Formel:</p>
-
-  <p><strong>Deine Preisformel:</strong><br>
-  <code>Stundensatz = (Wunsch-Monatsumsatz) / (Arbeitstage × Arbeitsstunden)</code></p>
-
-  <p><strong>Beispiel:</strong> Du willst 2.000 €/Monat verdienen. Du arbeitest 20 Tage im Monat je 4 Stunden aktiv. Rechnung: 2.000 € / (20 × 4) = 25 €/Stunde. Das ist dein Mindest-Stundensatz.</p>
-
-  <p><strong>Preisberechnung pro Projekt:</strong></p>
-  <p><code>Projektpreis = Geschätzte Stunden × Stundensatz × 1,5 (Puffer für Korrekturen)</code></p>
-
-  <p><strong>Orientierungswerte (Stand 2026):</strong></p>
-  <table>
-    <tr><th>Erfahrung</th><th>Preis pro Blogartikel (800 Wörter)</th></tr>
-    <tr><td>Einsteiger (0–3 Monate)</td><td>30–50 €</td></tr>
-    <tr><td>Fortgeschritten (3–12 Monate)</td><td>60–100 €</td></tr>
-    <tr><td>Profi (1+ Jahre + Referenzen)</td><td>120–250+ €</td></tr>
-  </table>
-
-  <div class="tip-box">Starte bewusst niedrig (30–50 €) für die ersten 5 Kunden. Mit jedem Kunden steigerst du den Preis um 10–20 %. Nach 3 Monaten solltest du bei 80–100 € pro Artikel sein. Deine ersten Aufträge sind Investitionen in Erfahrung und Bewertungen.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 11:</strong> Erstelle eine Preisliste für deine Dienstleistungen mit 3 Stufen: Basis (günstig), Standard (empfohlen), Premium (inkl. Extra-Services).</div>
-
-  <h3>3.5 Tag 12: Angebotsseite & Auftrittsort</h3>
-  <p>Du brauchst keine teure Webseite. Ein einfacher Auftritt reicht für den Start:</p>
-
-  <h4>Möglichkeiten (absteigend nach Aufwand):</h4>
-  <ol>
-    <li><strong>Notion-Seite öffentlich schalten</strong> (kostenlos, in 30 Minuten erstellt)</li>
-    <li><strong>Canva-Webseite</strong> (einfach, mit KI-Unterstützung)</li>
-    <li><strong>Carrd</strong> (einfache Landingpage, 19 €/Jahr)</li>
-    <li><strong>Linktree / Bio.link</strong> (kostenlos, reine Link-Sammlung)</li>
-    <li><strong>Fiverr / Upwork / Freelancermap</strong> (Plattform-Profil)</li>
-  </ol>
-
-  <p><strong>Was auf deiner Angebotsseite stehen muss:</strong></p>
-  <ul>
-    <li>Wer du bist (Name, Kurzprofil)</li>
-    <li>Was du anbietest (konkret, nicht schwammig)</li>
-    <li>Für wen (deine Nische)</li>
-    <li>Preise oder Preisspanne</li>
-    <li>3 Portfolio-Beispiele (siehe Tag 10)</li>
-    <li>Kontaktmöglichkeit (E-Mail, Kontaktformular)</li>
-    <li>Lieferzeiten</li>
-    <li>Impressum (ja, auch als Kleinunternehmer Pflicht)</li>
-  </ul>
-
-  <div class="action-box"><strong>Aufgabe Tag 12:</strong> Erstelle einen einfachen Online-Auftritt (Notion- oder Canva-Seite) mit deinem Angebot. Teile den Link mit 3 Freunden und bitte um ehrliches Feedback. Verbessere basierend auf dem Feedback.</div>
-
-  <h3>3.6 Tag 13: Erste Kundenakquise</h3>
-  <p>Dein erstes Angebot ist fertig. Jetzt brauchst du Kunden. Hier sind die fünf effektivsten Wege für Einsteiger:</p>
-
-  <h4>1. LinkedIn – Kaltakquise 2.0</h4>
-  <p>Suche nach Entscheidern in deiner Nische. Sende eine persönliche Nachricht (keine Copy-Paste-Massenmail):</p>
-  <p><em>"Hallo Herr [Name], ich bin auf [Branche]-Content spezialisiert. Ich habe gesehen, dass Ihr Blog seit 3 Monaten keinen neuen Beitrag hat. Ich habe hier einen Musterartikel erstellt: [Link]. Wenn er Ihnen gefällt, könnten wir über eine regelmäßige Zusammenarbeit sprechen. Viele Grüße, [Dein Name]"</em></p>
-  <p><strong>Konversionsrate:</strong> 5–15 % bei guter Zielgruppenauswahl.</p>
-
-  <h4>2. XING / Lokale Unternehmernetzwerke</h4>
-  <p>Viele lokale Unternehmer sind auf XING aktiv. Gleiche Strategie wie LinkedIn.</p>
-
-  <h4>3. Freelance-Plattformen</h4>
-  <p>Fiverr, Upwork, Freelancermap, Twago. Erstelle ein Profil, biete deine Dienstleistung an. Starte mit niedrigen Preisen für die ersten Bewertungen.</p>
-
-  <h4>4. Empfehlungen (wichtigster Kanal auf Dauer)</h4>
-  <p>Frage zufriedene Kunden: "Kennen Sie jemanden, der auch guten Content braucht?" Biete 20 % Provision auf den ersten Auftrag.</p>
-
-  <h4>5. Content-Marketing (langfristiger Kanal)</h4>
-  <p>Veröffentliche selbst Content zum Thema KI + [Deine Nische]. Zeige, was du kannst. Kunden kommen zu dir.</p>
-
-  <div class="warning-box"><strong>Häufiger Fehler:</strong> Zu viele Kanäle auf einmal bespielen. Konzentriere dich in den ersten 4 Wochen auf GENAU EINEN Akquise-Kanal. LinkedIn ist für die meisten der beste Start.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 13:</strong> Optimiere dein LinkedIn-Profil. Füge ein professionelles Foto hinzu. Schreibe eine klare Headline. Sende 10 personalisierte Nachrichten an potenzielle Kunden in deiner Nische.</div>
-
-  <h3>3.7 Tag 14: Wochenabschluss – Dein erstes Angebot lebt</h3>
-  <p>Rückblick Woche 2 – du hast geschafft:</p>
-  <ul>
-    <li>✅ Eine konkrete Dienstleistung definiert</li>
-    <li>✅ Eine Nische gewählt</li>
-    <li>✅ 3 Portfolio-Stücke erstellt</li>
-    <li>✅ Preise kalkuliert</li>
-    <li>✅ Einen Online-Auftritt erstellt</li>
-    <li>✅ Erste Akquise-Nachrichten versendet</li>
-  </ul>
-
-  <div class="action-box"><strong>Aufgabe Tag 14:</strong> Analysiere deine Akquise-Ergebnisse der letzten Tage. Wer hat geantwortet? Wer nicht? Optimiere deine Nachricht. Versende weitere 10 Nachrichten. Dokumentiere alles in Notion.</div>
+  <div class="info-box">
+    Starte mit einer einzigen Dienstleistung, die du perfekt beherrschst. Sobald die ersten Aufträge kommen und du Routine entwickelt hast, erweiterst du dein Angebot. Spezialisierung zahlt sich aus.
+  </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 4: WOCHE 3 – SKALIEREN & AUTOMATISIEREN -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 4 ===== -->
 <div class="chapter">
   <div class="chapter-header">
-    <span class="chapter-number">Woche 3 · Tag 15–21</span>
-    <h2>Skalieren & Automatisieren</h2>
-    <span class="chapter-subtitle">Wie du in 4 Stunden schaffst, wofür andere 40 Stunden brauchen</span>
+    <span class="chapter-number">Kapitel 4</span>
+    <h2>Woche 3: Skalieren &amp; Automatisieren</h2>
   </div>
 
-  <p>In Woche 2 hast du bewiesen, dass du eine Dienstleistung erbringen kannst. In Woche 3 geht es darum, deine Effizienz drastisch zu steigern. Das Ziel: Statt 10 Stunden für einen Kunden brauchst du nur noch 2 Stunden – bei gleicher oder besserer Qualität.</p>
+  <p>Nachdem du deine erste Dienstleistung definiert und deine ersten Kunden gewonnen hast, geht es in Woche 3 darum, dein Geschäft zu skalieren. Der Schlüssel zur Skalierung liegt in der Automatisierung aller sich wiederholenden Prozesse.</p>
 
-  <h3>4.1 Tag 15: Der KI-Prozess – Von der Idee zum fertigen Produkt</h3>
-  <p>Die meisten Einsteiger nutzen KI falsch. Sie geben einen Prompt ein, nehmen das erste Ergebnis und sind fertig. Profis haben einen mehrstufigen Prozess:</p>
+  <div class="diagram">
+    <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="40" y="20" width="520" height="160" rx="12" fill="#f5f0ff" stroke="#6c63ff" stroke-width="1" stroke-dasharray="6,3"/>
+      <text x="300" y="50" text-anchor="middle" font-family="Helvetica,Arial" font-size="13" font-weight="bold" fill="#1a1a3e">Automatisierungs-Workflow</text>
 
-  <h4>Der 5-Stufen-KI-Prozess für Content:</h4>
-  <table>
-    <tr><th>Stufe</th><th>Tool</th><th>Zeit</th><th>Ergebnis</th></tr>
-    <tr><td>1. Recherche & Fakten</td><td>Perplexity</td><td>5 Min</td><td>10 relevante Fakten, Quellen, Statistiken</td></tr>
-    <tr><td>2. Struktur & Konzept</td><td>Claude</td><td>5 Min</td><td>Gliederung, Argumentationslinie, USP</td></tr>
-    <tr><td>3. Erster Entwurf</td><td>ChatGPT</td><td>10 Min</td><td>Rohtext (80 % Qualität)</td></tr>
-    <tr><td>4. Verfeinerung</td><td>Claude</td><td>5 Min</td><td>Optimierter Text (95 % Qualität)</td></tr>
-    <tr><td>5. Formatierung</td><td>Canva / Word</td><td>5 Min</td><td>Fertiges Produkt (100 % deliverable)</td></tr>
-  </table>
+      <rect x="60" y="65" width="110" height="40" rx="6" fill="#6c63ff"/>
+      <text x="115" y="90" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" font-weight="bold" fill="#fff">Prompt-Vorlagen</text>
+      <line x1="170" y1="85" x2="200" y2="85" stroke="#6c63ff" stroke-width="1.5"/>
+      <text x="185" y="78" text-anchor="middle" font-size="8" fill="#999">1×</text>
 
-  <p><strong>Gesamtzeit pro Blogartikel:</strong> ~30 Minuten. Qualität: besser als 80 % aller menschlichen Texter. Preis: 80–150 €. Effektiver Stundenlohn: 160–300 €.</p>
+      <rect x="210" y="65" width="110" height="40" rx="6" fill="#7c6aff"/>
+      <text x="265" y="90" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" font-weight="bold" fill="#fff">KI-Generierung</text>
+      <line x1="320" y1="85" x2="350" y2="85" stroke="#6c63ff" stroke-width="1.5"/>
+      <text x="335" y="78" text-anchor="middle" font-size="8" fill="#999">KI</text>
 
-  <div class="tip-box">Der wichtigste Schritt ist Schritt 4. Lasse deinen Text von einem anderen KI-Modell prüfen als dem, das ihn geschrieben hat. ChatGPT schreibt, Claude prüft. Oder umgekehrt. Das bringt eine neue Perspektive und fängt Fehler.</div>
+      <rect x="360" y="65" width="110" height="40" rx="6" fill="#8c71ff"/>
+      <text x="415" y="90" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" font-weight="bold" fill="#fff">Qualitätscheck</text>
+      <line x1="470" y1="85" x2="500" y2="85" stroke="#6c63ff" stroke-width="1.5"/>
 
-  <div class="action-box"><strong>Aufgabe Tag 15:</strong> Erstelle einen KI-Arbeitsablauf (Workflow) in Notion. Dokumentiere jeden Schritt mit den exakten Prompts, die du verwendest. Das wird deine persönliche "Produktionsstraße".</div>
+      <rect x="510" y="65" width="30" height="40" rx="6" fill="#00d4aa"/>
+      <text x="525" y="90" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#fff">€</text>
 
-  <h3>4.2 Tag 16: Prompt-Bibliothek aufbauen</h3>
-  <p>Deine Prompts sind dein wertvollstes Kapital. Ein guter Prompt ist wie ein Kochrezept – er liefert jedes Mal ein konsistentes Ergebnis. Baue eine Bibliothek auf:</p>
+      <text x="115" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Wiederverwendbar</text>
+      <text x="265" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Automatischer Output</text>
+      <text x="415" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Menschliche Kontrolle</text>
+      <text x="525" y="138" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Auslieferung</text>
+    </svg>
+    <div class="diagram-caption">Abbildung 4: Der 4-Schritte-Automatisierungs-Workflow für maximale Effizienz</div>
+  </div>
 
-  <h4>Beispiel-Prompt-Bibliothek (Content-Writer):</h4>
-  <p><strong>Prompt 1: Blogartikel-Struktur</strong><br>
-  <code>Du bist ein SEO-Content-Strategist. Erstelle eine detaillierte Gliederung für einen Blogartikel zum Thema [THEMA]. Zielgruppe: [ZIELGRUPPE]. Enthalten sein müssen: H2-Überschriften, Keyword-Vorschläge, Meta-Description, interne Verlinkungsvorschläge. Länge: 1.000–1.200 Wörter.</code></p>
+  <h3>4.1 Prompt-Vorlagen-Bibliothek aufbauen</h3>
+  <p>Der größte Zeitfresser ist das ständige Neuerfinden von Prompts. Baue dir eine Bibliothek mit erprobten Prompt-Vorlagen auf – für jede wiederkehrende Aufgabe ein spezifischer Prompt. Beispiel: Ein einmal erstellter Prompt für KI-Artikel liefert dir bei jedem Durchlauf konsistente Qualität in einem Bruchteil der Zeit.</p>
 
-  <p><strong>Prompt 2: Blogartikel-Schreiben</strong><br>
-  <code>Du bist ein erfahrener Fachredakteur für [BRANCHE]. Schreibe den folgenden Artikel auf Basis dieser Gliederung: [GLIEDERUNG]. Verwende diese Fakten: [FAKTEN]. Stil: Fachlich kompetent, aber für Laien verständlich. Vermeide Passiv und Füllwörter. Integriere die Keywords natürlich.</code></p>
+  <div class="tip-box">
+    Lege ein Dokument mit deinen 20 wichtigsten Prompts an. Optimiere sie kontinuierlich. Nach 3–4 Iterationen liefern sie dir Ergebnisse, die kaum noch nachbearbeitet werden müssen.
+  </div>
 
-  <p><strong>Prompt 3: LinkedIn-Post</strong><br>
-  <code>Schreibe einen LinkedIn-Post (max. 1.500 Zeichen) über [THEMA]. Zielgruppe: [ZIELGRUPPE]. Der Post soll: eine starke Hook in den ersten 2 Zeilen haben, 3–5 Bullet Points mit Kernaussagen und einen Call-to-Action. Füge 3–5 relevante Hashtags hinzu.</code></p>
+  <h3>4.2 Workflow-Automatisierung mit n8n</h3>
+  <p>n8n ist ein kostenloses Open-Source-Tool zur Workflow-Automatisierung. Damit verknüpfst du KI-Tools, E-Mail, Kalender und deine Dienstleistungen zu automatisierten Pipelines. Beispiel: Ein eingehender Kundenauftrag löst automatisch eine KI-Recherche aus, die Ergebnisse werden formatiert und per E-Mail versendet.</p>
 
-  <p><strong>Prompt 4: E-Mail-Newsletter</strong><br>
-  <code>Schreibe einen E-Mail-Newsletter (Betreffzeile + 400 Wörter) zum Thema [THEMA]. Zielgruppe: [ZIELGRUPPE]. Die E-Mail soll persönlich wirken, einen Mehrwert bieten und einen klaren Call-to-Action enthalten. Betreffzeile: max. 60 Zeichen, neugierig machend.</code></p>
-
-  <p><strong>Prompt 5: Produktbeschreibung</strong><br>
-  <code>Schreibe eine überzeugende Produktbeschreibung für [PRODUKT]. Länge: 150–200 Wörter. Enthalten: Schmerzpunkt des Kunden, Lösung durch das Produkt, 3 Hauptvorteile, Call-to-Action. Ton: begeistert, aber glaubwürdig. SEO-Keyword: [KEYWORD].</code></p>
-
-  <div class="action-box"><strong>Aufgabe Tag 16:</strong> Erstelle 10 wiederverwendbare Prompts für deine spezifische Dienstleistung und speichere sie in Notion. Teste jeden Prompt und optimiere ihn basierend auf den Ergebnissen.</div>
-
-  <h3>4.3 Tag 17: Automatisierung mit Zapier & Make</h3>
-  <p>Jetzt wird es richtig skalierbar. Mit Automatisierungstools kannst du repetitive Aufgaben komplett KI-gesteuert ablaufen lassen.</p>
-
-  <h4>Fünf Automatisierungen, die du sofort einrichten solltest:</h4>
-
-  <p><strong>1. Eingehende Anfragen → Notion-Datenbank</strong><br>
-  Wenn jemand dein Kontaktformular ausfüllt, wird automatisch ein Eintrag in deiner Notion-Kunden-DB erstellt. Mit Status "Neu".</p>
-
-  <p><strong>2. Rechnungserstellung → E-Mail-Versand</strong><br>
-  Ein Kunde akzeptiert dein Angebot → automatisch wird in einer Vorlage eine Rechnung erstellt und per E-Mail versendet.</p>
-
-  <p><strong>3. Projektabschluss → Folge-E-Mail</strong><br>
-  7 Tage nach Lieferung: Automatische E-Mail mit der Frage "Sind Sie zufrieden? Möchten Sie weitermachen?"</p>
-
-  <p><strong>4. Social Media Planung</strong><br>
-  ChatGPT schreibt 30 LinkedIn-Posts auf einmal → Zapier speichert sie in einer Google Sheets Tabelle → Buffer oder Hootsuite postet sie automatisch.</p>
-
-  <p><strong>5. KI-Newsletter-Generator</strong><br>
-  Wöchentlich: Perplexity sammelt News → Claude fasst sie zusammen → ChatGPT schreibt den Newsletter → Mailchimp sendet ihn an deine Liste.</p>
-
-  <div class="example-box"><strong>Konkretes Automatisierungs-Beispiel:</strong> Du erstellst einen Make (ehemals Integromat) Workflow, der jeden Morgen eine E-Mail mit den aktuellen Branchen-News an Claude sendet. Claude fasst sie in 5 Bullet Points zusammen. Der Text wird in deine Canva-Vorlage eingefügt und als LinkedIn-Grafik exportiert. Du musst nur noch "Senden" klicken. Täglicher Aufwand: 30 Sekunden.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 17:</strong> Erstelle einen Account bei Zapier oder Make. Richte eine einfache Automatisierung ein: "Wenn ich eine neue E-Mail von [bestimmter Absender] bekomme, erstelle einen Task in meiner Notion To-Do-Liste." Fang klein an.</div>
-
-  <h3>4.4 Tag 18: Content-Batching – 1 Monat in 4 Stunden</h3>
-  <p>Batching ist der Produktivitäts-Hack, der dein Business transformieren wird. Statt jeden Tag einzeln zu produzieren, erstellst du einen ganzen Monat Content auf einmal.</p>
-
-  <h4>So funktioniert Content-Batching (Beispiel: 20 LinkedIn-Posts):</h4>
-  <ol>
-    <li><strong>Planung (30 Min):</strong> 20 Themen festlegen, in eine Tabelle schreiben</li>
-    <li><strong>Prompt-Vorbereitung (15 Min):</strong> Einen Master-Prompt schreiben, der alle 20 Posts in einem Durchlauf generiert</li>
-    <li><strong>Produktion (45 Min):</strong> ChatGPT generiert alle 20 Posts</li>
-    <li><strong>Qualitätsprüfung (30 Min):</strong> Claude prüft, optimiert, korrigiert</li>
-    <li><strong>Grafiken (60 Min):</strong> Canva erstellt 20 passende Grafiken (mit KI-Unterstützung)</li>
-    <li><strong>Planung (15 Min):</strong> Alles in den Social-Media-Planer hochladen</li>
-  </ol>
-  <p><strong>Gesamtzeit:</strong> ~3,5 Stunden für 20 LinkedIn-Posts, die einen Monat reichen. <strong>Stundenlohn:</strong> 20 Posts × 15 € = 300 € / 3,5 h = ~85 €/Stunde.</p>
-
-  <div class="tip-box">Batching senkt deinen "mentalen Overhead" drastisch. Du musst nur EINMAL in den "Content-Modus" wechseln, statt jeden Tag neu anzufangen. Das spart Anlaufzeit und Energie.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 18:</strong> Probiere Content-Batching aus. Schreibe heute 10 LinkedIn-Posts oder 5 Blogartikel auf einmal. Du wirst sehen: Der zweite Artikel geht doppelt so schnell wie der erste, der dritte noch schneller.</div>
-
-  <h3>4.5 Tag 19: Vorlagen & Systeme – Dein skalierbares Angebot</h3>
-  <p>Der nächste Skalierungsschritt: Abstrahiere deine Arbeit in Vorlagen. Statt jeden Blogartikel von null zu erstellen, hast du eine "Blogartikel-Fabrik".</p>
-
-  <h4>Fünf Vorlagen, die du sofort brauchst:</h4>
-  <ol>
-    <li><strong>Angebotsvorlage</strong> (Word/Google Docs) – mit Platzhaltern für Kundenname, Leistung, Preis</li>
-    <li><strong>Briefing-Vorlage</strong> (Notion) – Fragen, die du jedem Kunden vor dem ersten Auftrag stellst</li>
-    <li><strong>Rechnungsvorlage</strong> – mit deiner Steuernummer, Bankverbindung, Zahlungsziel 14 Tage</li>
-    <li><strong>Onboarding-Checkliste</strong> – was passiert, wenn ein neuer Kunde kommt (10 Schritte)</li>
-    <li><strong>Qualitäts-Checkliste</strong> – was prüfst du vor der Auslieferung (Rechtschreibung, Fakten, Format)</li>
-  </ol>
-
-  <div class="example-box"><strong>Briefing-Vorlage (Auszug):</strong><br>
-  1. Wer ist Ihre Zielgruppe? (Alter, Beruf, Probleme)<br>
-  2. Welches Ziel soll der Content erreichen? (Bekanntheit, Verkauf, Image)<br>
-  3. Gibt es Marken-Vorgaben? (Tonalität, Farben, Vermeidungen)<br>
-  4. Welche Keywords sind wichtig?<br>
-  5. Haben Sie Beispiele für Content, der Ihnen gefällt?<br>
-  6. Welche Konkurrenten verfolgen Sie?</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 19:</strong> Erstelle ALLE fünf Vorlagen aus der Liste oben. Speichere sie in einem Ordner "Business-Systeme" in deiner Cloud oder auf deinem Rechner.</div>
-
-  <h3>4.6 Tag 20: Delegieren an KI-Agenten</h3>
-  <p>KI-Agenten sind der nächste Evolutionsschritt. Statt nur Prompts einzugeben, gibst du einem Agenten ein komplettes Projekt und er arbeitet selbstständig Schritt für Schritt.</p>
-
-  <h4>Was KI-Agenten können (Stand 2026):</h4>
-  <ul>
-    <li><strong>AutoGPT / AgentGPT:</strong> Erhält ein Ziel, erstellt eigenständig einen Plan, führt ihn aus, recherchiert, schreibt, prüft</li>
-    <li><strong>Claude Projects:</strong> Hinterlege Wissen + Anweisungen, dann frage "Erstelle einen kompletten Blogartikel inkl. Grafik-Briefing"</li>
-    <li><strong>ChatGPT GPTs:</strong> Erstelle deinen eigenen "Content-Writer-GPT" mit spezifischen Anweisungen</li>
-    <li><strong>Make / n8n Agenten:</strong> KI-Agenten, die über APIs mit anderen Tools kommunizieren</li>
-  </ul>
-
-  <div class="example-box"><strong>Beispiel Claude Project "Content-Creator":</strong><br>
-  Du legst in einem Claude Project folgende Dateien ab:<br>
-  – Dein Styleguide (Tonalität, Formatierung)<br>
-  – Drei Beispielartikel als Referenz<br>
-  – Deine Zielgruppen-Beschreibung<br>
-  – Eine Prompt-Bibliothek<br>
-  Dann kannst du sagen: "Erstelle einen Blogartikel zum Thema 'KI in der Zahnmedizin'." Claude nutzt den gesamten Kontext und liefert ein Ergebnis, das zu 90 % deinem Stil entspricht.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 20:</strong> Erstelle ein Claude Project oder ChatGPT GPT für deine häufigste Aufgabe. Fülle es mit allen relevanten Informationen (Zielgruppe, Stil, Beispiele, Prompts). Teste es mit 3 verschiedenen Aufgaben.</div>
-
-  <h3>4.7 Tag 21: Wochenabschluss – Deine Effizienz verdoppelt</h3>
-  <p>Rückblick Woche 3 – Meilensteine:</p>
-  <ul>
-    <li>✅ Du hast einen reproduzierbaren 5-Stufen-KI-Prozess</li>
-    <li>✅ Deine Prompt-Bibliothek hat mindestens 10 Einträge</li>
-    <li>✅ Erste Automatisierung läuft</li>
-    <li>✅ Content-Batching getestet</li>
-    <li>✅ Alle Business-Vorlagen erstellt</li>
-    <li>✅ Erster KI-Agent eingerichtet</li>
-  </ul>
-  <p>Du arbeitest jetzt mindestens 4× schneller als ohne diese Systeme. Das bedeutet: Du kannst entweder 4× so viel verdienen oder bei gleichem Umsatz nur noch 25 % der Zeit arbeiten. Beides ist gut.</p>
-
-  <div class="action-box"><strong>Aufgabe Tag 21:</strong> Berechne deinen effektiven Stundenlohn mit den neuen Systemen. Vorher: [alte Zeit pro Auftrag] / [alter Preis]. Nachher: [neue Zeit pro Auftrag] / [Preis]. Der Unterschied wird dich überraschen. Dokumentiere ihn in deinem Notion.</div>
+  <h3>4.3 Kundenakquise automatisieren</h3>
+  <p>Nutze KI für die automatisierte Kundenansprache: Erstelle personalisierte Angebote auf Basis von LinkedIn-Profilen, generiere Follow-up-E-Mails und automatisiere deine Rechnungsstellung. Jede Stunde, die du in Automatisierung investierst, spart dir später 10 Stunden Handarbeit.</p>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 5: WOCHE 4 – VON 0 AUF 1.000 € MONAT -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 5 ===== -->
 <div class="chapter">
   <div class="chapter-header">
-    <span class="chapter-number">Woche 4 · Tag 22–30</span>
-    <h2>Von 0 auf 1.000 € Monat</h2>
-    <span class="chapter-subtitle">Die letzten Schritte zu deinem ersten wiederkehrenden Einkommen</span>
+    <span class="chapter-number">Kapitel 5</span>
+    <h2>Woche 4: Von 0 auf 1.000 € Monat</h2>
   </div>
 
-  <p>Die erste Zielgerade. In Woche 4 geht es nicht mehr um Vorbereitung, sondern um Umsetzung. Dein Ziel: Monatlich 1.000 € Umsatz aus deinem KI-Business. Klingt unmöglich? Mit den richtigen Strategien ist es das nicht.</p>
+  <p>In Woche 4 geht es um die entscheidende Phase: den Aufbau eines stabilen, wiederkehrenden Einkommens. Das Ziel von 1.000 € monatlich ist realistisch, wenn du systematisch vorgehst und deine Dienstleistungen geschickt positionierst.</p>
 
-  <div class="stats-highlight">
-    <div class="stat"><div class="number">60 %</div><div class="label">der KI-Freelancer erreichen<br>1.000 € in 4–8 Wochen</div></div>
-    <div class="stat"><div class="number">3–5</div><div class="label">Stammkunden reichen<br>für 1.000 €/Monat</div></div>
-    <div class="stat"><div class="number">40 h</div><div class="label">Arbeitszeit pro Monat<br>für 1.000 € Umsatz</div></div>
+  <div class="diagram">
+    <svg viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+      <text x="300" y="30" text-anchor="middle" font-family="Helvetica,Arial" font-size="12" font-weight="bold" fill="#1a1a3e">Monatsziel: 1.000 € – Drei Wege zum Ziel</text>
+
+      <rect x="30" y="50" width="170" height="90" rx="8" fill="#f5f0ff" stroke="#6c63ff" stroke-width="1"/>
+      <text x="115" y="75" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#6c63ff">Weg A: Premium</text>
+      <text x="115" y="92" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#333">1 Kunde × 1.000 €</text>
+      <text x="115" y="108" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#333">Komplettbetreuung</text>
+      <text x="115" y="124" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Weniger Kunden, höherer Wert</text>
+
+      <rect x="215" y="50" width="170" height="90" rx="8" fill="#f0faf4" stroke="#00c853" stroke-width="1"/>
+      <text x="300" y="75" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#00c853">Weg B: Mid-Tier</text>
+      <text x="300" y="92" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#333">5 Kunden × 200 €</text>
+      <text x="300" y="108" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#333">Monatspakete</text>
+      <text x="300" y="124" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Wiederkehrend, planbar</text>
+
+      <rect x="400" y="50" width="170" height="90" rx="8" fill="#fff8f0" stroke="#ff9800" stroke-width="1"/>
+      <text x="485" y="75" text-anchor="middle" font-family="Helvetica,Arial" font-size="10" font-weight="bold" fill="#ff9800">Weg C: Volume</text>
+      <text x="485" y="92" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#333">20 Aufträge × 50 €</text>
+      <text x="485" y="108" text-anchor="middle" font-family="Helvetica,Arial" font-size="9" fill="#333">Standardisiert</text>
+      <text x="485" y="124" text-anchor="middle" font-family="Helvetica,Arial" font-size="8" fill="#888">Breite Masse, viel Volumen</text>
+    </svg>
+    <div class="diagram-caption">Abbildung 5: Drei verschiedene Strategien für deine ersten 1.000 € monatlich</div>
   </div>
 
-  <h3>5.1 Tag 22: Die 1.000-€-Formel</h3>
-  <p>Es gibt genau drei Wege zu 1.000 € monatlich. Wähle einen – oder kombiniere zwei:</p>
+  <h3>5.1 Pricing-Strategie: Wie viel du verlangen solltest</h3>
+  <p>Der häufigste Fehler: Zu niedrige Preise. Dein KI-Einsatz ist kein Grund, deine Dienstleistung zu verramschen. Im Gegenteil – du bietest einen schnelleren, besseren Service als traditionelle Anbieter. Orientiere dich an diesen Richtwerten: Blogartikel 50–150 €, LinkedIn-Posts (5–10 Stück) 100–250 €, monatliche Content-Betreuung 200–500 €, komplette Website-Texte ab 500 €.</p>
 
-  <table>
-    <tr><th>Modell</th><th>Anzahl Kunden</th><th>Preis pro Kunde</th><th>Arbeitszeit/Monat</th></tr>
-    <tr><td>A: Wenige, teure Projekte</td><td>2–3</td><td>350–500 €</td><td>~30 h</td></tr>
-    <tr><td>B: Mittelpreisige Retainer</td><td>5–10</td><td>100–200 €/Monat</td><td>~40 h</td></tr>
-    <tr><td>C: Viele günstige Aufträge</td><td>20–30</td><td>30–50 €</td><td>~60 h</td></tr>
-  </table>
+  <h3>5.2 Kunden gewinnen – die effektivsten Kanäle 2026</h3>
+  <p>Plattformen wie Fiverr und Upwork sind der einfachste Einstieg, aber langfristig solltest du eigene Kundenbeziehungen aufbauen. LinkedIn ist der mit Abstand effektivste Kanal für KI-Dienstleistungen. Teile dort täglich wertvolle Inhalte zum Thema KI, zeige deine Arbeit und vernetze dich mit potenziellen Kunden.</p>
 
-  <p><strong>Meine Empfehlung:</strong> Modell B – Retainer. Wiederkehrende Kunden, die monatlich zahlen. Planbares Einkommen, weniger Akquise-Aufwand, tiefere Kundenbeziehungen. 5 Kunden à 200 €/Monat = 1.000 €.</p>
+  <h3>5.3 Von 1.000 € auf 5.000 € +</h3>
+  <p>Die nächste Stufe erreichst du durch drei Hebel: Höhere Preise (werte dein Angebot auf), passive Produkte (digitale Produkte wie dieser Guide) und Team-Aufbau (lagere Arbeit aus, konzentriere dich auf Akquise). Du wirst überrascht sein, wie schnell die 1.000 € zur Ausgangsbasis werden.</p>
 
-  <div class="example-box"><strong>Retainer-Angebot (Beispiel):</strong><br>
-  "Monatliches Content-Paket für Zahnarztpraxen – 199 €/Monat"<br>
-  Enthält: 2 Blogartikel (je 600 Wörter) + 4 Social-Media-Posts + 1 Newsletter<br>
-  => Preis pro Stück: 199 € / 7 = ~28 € – günstig für den Kunden, aber durch Batching produzierst du alles in ~2 Stunden = ~100 €/h für dich.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 22:</strong> Definiere dein Retainer-Angebot. Was bietest du monatlich an? Wie viele Stunden Arbeit sind es? Was ist der Preis? Ziel: 150–300 €/Monat pro Kunde bei max. 4 Stunden Aufwand.</div>
-
-  <h3>5.2 Tag 23: Von Interessenten zu Kunden – Das Verkaufsgespräch</h3>
-  <p>Du hast Anfragen bekommen. Jetzt müssen sie zu Kunden werden. Die meisten Einsteiger scheitern hier, weil sie zu passiv sind oder zu verkaufsorientiert wirken.</p>
-
-  <h4>Die 4-Schritte-Verkaufsstrategie:</h4>
-  <ol>
-    <li><strong>Verstehen:</strong> "Was ist Ihr größtes Problem mit [Bereich] aktuell?" – Lass den Kunden sein Problem beschreiben. Je mehr er spricht, desto klarer wird ihm, dass er dich braucht.</li>
-    <li><strong>Rahmen:</strong> "Viele meiner Kunden hatten genau dieses Problem. Die Lösung war..." – Zeige, dass du das Problem kennst und bereits gelöst hast.</li>
-    <li><strong>Angebot:</strong> "Ich habe ein Angebot, das genau das löst: [Dein Angebot]. Es kostet [Preis] und beinhaltet [Leistungen]." – Konkret, klar, selbstbewusst.</li>
-    <li><strong>Abschluss:</strong> "Sollen wir loslegen? Ich schicke Ihnen das Angebot bis heute Abend." – Nach dem Angebot direkt zum Abschluss drängen. Kein "Überlegen Sie in Ruhe".</li>
-  </ol>
-
-  <div class="tip-box"><strong>Psychologischer Trick:</strong> Frage nicht "Darf ich Ihnen ein Angebot schicken?", sondern "Soll ich Ihnen das Angebot als PDF oder als Link schicken?" – Beide Optionen führen zum Angebot. Dein Gegenüber denkt nicht mehr OB, sondern WIE.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 23:</strong> Schreibe einen 5-Zeilen-Verkaufs-Chat-Verlauf auf, den du bei jeder Anfrage nutzen kannst. Übe ihn laut. Führe heute mindestens 2 Verkaufsgespräche (auch wenn es nur Test-Kontakte sind).</div>
-
-  <h3>5.3 Tag 24: Up-Selling & Cross-Selling</h3>
-  <p>Deine beste Einnahmequelle sind nicht neue Kunden, sondern mehr Umsatz mit bestehenden Kunden. Drei Strategien:</p>
-
-  <p><strong>Up-Selling (teurere Version):</strong></p>
-  <ul>
-    <li>Basis: 2 Blogartikel/Monat = 149 €</li>
-    <li>Standard: 4 Blogartikel + 4 Social Posts = 249 €</li>
-    <li>Premium: 8 Blogartikel + 8 Social Posts + Newsletter = 449 €</li>
-  </ul>
-  <p><strong>Strategie:</strong> Starte jeden Kunden auf "Standard" und biete nach 2 Monaten "Premium" an.</p>
-
-  <p><strong>Cross-Selling (zusätzliche Services):</strong></p>
-  <ul>
-    <li>Dein Kunde kauft Blogartikel → Biete Social-Media-Aufbereitung an (+50 €)</li>
-    <li>Dein Kunde kauft Übersetzungen → Biete Lektorat an (+30 €)</li>
-    <li>Dein Kunde kauft Grafiken → Biete komplette CI-Entwicklung an (+200 €)</li>
-  </ul>
-
-  <p><strong>Empfehlungsmarketing:</strong></p>
-  <ul>
-    <li>Biete jedem Kunden: "Empfehlen Sie mich weiter und Sie erhalten einen Monat kostenlos."</li>
-    <li>Empfehlungen haben die höchste Konversionsrate (30–50 % werden zu Kunden)</li>
-  </ul>
-
-  <div class="action-box"><strong>Aufgabe Tag 24:</strong> Erstelle 3 Stufen deines Angebots (Basis / Standard / Premium) mit klaren Preisunterschieden. Formuliere einen Cross-Selling-Text: "Viele meiner Kunden buchen zusätzlich auch [Service]. Möchten Sie das auch testen?"</div>
-
-  <h3>5.4 Tag 25: Kunden-Onboarding – So bleiben Kunden</h3>
-  <p>Kundenakquise ist teuer. Kundenbindung ist günstig. Ein strukturierter Onboarding-Prozess sorgt dafür, dass Kunden bei dir bleiben.</p>
-
-  <h4>Onboarding-Prozess (6 Schritte):</h4>
-  <ol>
-    <li><strong>Willkommens-E-Mail:</strong> "Herzlich willkommen! Hier ist, was als Nächstes passiert..."</li>
-    <li><strong>Briefing-Call (15 Min):</strong> Persönliches Kennenlernen, Erwartungen klären</li>
-    <li><strong>Briefing-Dokument:</strong> Der Kunde füllt deine Briefing-Vorlage aus (siehe Tag 19)</li>
-    <li><strong>Erste Lieferung:</strong> Pünktlich, übererfülle leicht die Erwartungen</li>
-    <li><strong>Feedback-Runde:</strong> "Was können wir besser machen?" – zeige, dass dir Qualität wichtig ist</li>
-    <li><strong>Nächste Schritte:</strong> Direkt den nächsten Termin oder das nächste Projekt vorschlagen</li>
-  </ol>
-
-  <div class="tip-box">Der Moment zwischen Bezahlung und erster Lieferung ist kritisch. Viele Kunden bekommen "Cold Feet". Halte sie warm mit kurzen Updates: "Ihr Projekt ist in Arbeit. Hier ein kurzer Einblick in die Gliederung – sind Sie zufrieden?" Das schafft Vertrauen.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 25:</strong> Erstelle eine automatisierte Willkommens-E-Mail (ChatGPT hilft). Schreibe deinen Onboarding-Prozess in Notion auf. Jeder neue Kunde durchläuft diesen Prozess.</div>
-
-  <h3>5.5 Tag 26: Social Proof & Testimonials sammeln</h3>
-  <p>Menschen kaufen von Menschen, die andere Menschen bereits gekauft haben. Testimonials sind dein mächtigstes Marketing-Werkzeug.</p>
-
-  <h4>Wie du Testimonials bekommst:</h4>
-  <ol>
-    <li><strong>Liefer überdurchschnittliche Qualität</strong> – das ist die Grundlage</li>
-    <li><strong>Frage direkt nach der Lieferung:</strong> "Wie zufrieden sind Sie auf einer Skala von 1–10?" Bei 8+: "Darf ich ein Zitat von Ihnen für meine Webseite nutzen?"</li>
-    <li><strong>Mache es einfach:</strong> Gib 3 Fragen vor, die der Kunde beantworten kann. Kein freies Textfeld.</li>
-  </ol>
-
-  <h4>Drei Testimonial-Fragen, die funktionieren:</h4>
-  <ol>
-    <li>"Was war Ihr größtes Problem, bevor Sie mich beauftragt haben?"</li>
-    <li>"Welches konkrete Ergebnis haben Sie durch meine Arbeit erzielt?"</li>
-    <li>"Würden Sie mich weiterempfehlen? Warum?"</li>
-  </ol>
-
-  <div class="example-box"><strong>Gutes Testimonial:</strong> "Ich hatte monatelang keine Zeit für Blogartikel. Nach 3 Monaten mit [Dein Name] haben wir 40 % mehr Traffic auf unserer Webseite. Die Zusammenarbeit ist unkompliziert und die Qualität hervorragend. Klare Empfehlung!" – Dr. Schmidt, Zahnarztpraxis</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 26:</strong> Frage 3 zufriedene Kontakte (auch Test-Kunden) nach einem Testimonial. Erstelle eine "Kundenstimmen"-Sektion auf deiner Angebotsseite.</div>
-
-  <h3>5.6 Tag 27–29: Intensiv-Akquise & Abschluss</h3>
-  <p>Drei Tage Fokus auf Akquise. Setze alles auf eine Karte:</p>
-
-  <h4>Aktionsplan Tag 27–29:</h4>
-  <ul>
-    <li><strong>Tag 27:</strong> 30 LinkedIn-Nachrichten an potenzielle Kunden senden (personalisiert!)</li>
-    <li><strong>Tag 28:</strong> Nachfassen: Alle, die nicht geantwortet haben, bekommen eine freundliche Erinnerung ("Nur kurz nachfragen, ob Sie mein Angebot gesehen haben...")</li>
-    <li><strong>Tag 29:</strong> Alle Gespräche zum Abschluss bringen. "Wann möchten Sie starten?" statt "Haben Sie Interesse?"</li>
-  </ul>
-
-  <div class="warning-box">Die meisten Menschen geben nach 3 Tagen Akquise auf. Die erfolgreichsten Selbstständigen machen genau dann weiter, wenn andere aufhören. Tag 27–29 sind deine intensivsten Akquise-Tage. Keine Ablenkung. Nur Kunden gewinnen.</div>
-
-  <div class="action-box"><strong>Aufgabe Tag 27–29:</strong> Folge strikt dem 3-Tages-Akquise-Plan. Zähle deine Kontaktversuche: mindestens 30. Dokumentiere alle Antworten in einer Tabelle.</div>
-
-  <h3>5.7 Tag 30: Monatsrückblick & Nächste Schritte</h3>
-  <p>Tag 30 – du hast es geschafft! Zeit für den Rückblick und die Planung der nächsten 30 Tage.</p>
-
-  <h4>Monats-Review-Fragen:</h4>
-  <ol>
-    <li>Wie viel Umsatz habe ich gemacht? (Ziel: 1.000 €)</li>
-    <li>Wie viele Kunden habe ich gewonnen? (Ziel: 3–5)</li>
-    <li>Wie viele Stunden habe ich gearbeitet? (Ziel: <60 h)</li>
-    <li>Welche Akquise-Methode hat am besten funktioniert?</li>
-    <li>Was hat mich am meisten aufgehalten?</li>
-    <li>Was mache ich im nächsten Monat anders?</li>
-  </ol>
-
-  <h4>Die nächsten 30 Tage – Level 2:</h4>
-  <ul>
-    <li>Preise erhöhen (10–20 % für Neukunden)</li>
-    <li>Strategisch kündigen: Schlecht zahlende Kunden durch bessere ersetzen</li>
-    <li>Passives Einkommen aufbauen (digitale Produkte siehe Kapitel 6)</li>
-    <li>Einen virtuellen Assistenten einstellen (und anlernen)</li>
-    <li>In LinkedIn- oder Instagram-Content investieren (eigenes Personal Branding)</li>
-  </ul>
-
-  <div class="tip-box">Die ersten 30 Tage sind die schwersten. Monat 2 wird leichter, Monat 3 wird zur Routine, Monat 6 ist ein Selbstläufer. Die meisten geben in Monat 1 auf. Bleib dran – die, die durchhalten, gewinnen.</div>
-
-  <div class="action-box"><strong>ABSCHLUSS-AUFGABE:</strong> Schreibe einen 10-Punkte-Plan für die nächsten 30 Tage. Setze dir ein neues Umsatzziel (z. B. 1.500 € für Monat 2). Feiere deinen Erfolg – du hast in 30 Tagen geschafft, wovon andere nur reden!</div>
+  <div class="action-box">
+    Dein Ziel für diese Woche: Akquiriere mindestens 3 potenzielle Kunden, mache ihnen ein konkretes Angebot. Aus 3 Kontakten wird mindestens 1 Auftrag. Aus 1 Auftrag wird ein Kunde. Aus 1 Kunden wird Empfehlung.
+  </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 6: 10 KI-GESCHÄFTSIDEEN MIT 0 € STARTKAPITAL -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 6 ===== -->
 <div class="chapter">
   <div class="chapter-header">
     <span class="chapter-number">Kapitel 6</span>
     <h2>10 KI-Geschäftsideen mit 0 € Startkapital</h2>
-    <span class="chapter-subtitle">Bewährte Modelle, die sofort startklar sind</span>
   </div>
 
-  <p>Content-Writing ist der einfachste Einstieg, aber nicht der einzige Weg. Hier sind 10 weitere KI-Geschäftsmodelle, die du mit null Euro Startkapital beginnen kannst. Jede Idee wird mit Start-Plan, Preismodell und ersten Schritten beschrieben.</p>
+  <h3>6.1 KI-Content-Agentur für lokale Unternehmen</h3>
+  <p>Lokale Unternehmen brauchen regelmäßige Social-Media-Posts, Blogartikel und Newsletter. Biete monatliche Content-Pakete an: 8 Posts, 2 Blogartikel, 1 Newsletter. Preis: 300–500 €/Monat.</p>
 
-  <h3>Idee 1: KI-Übersetzungsdienst (Deutsch → Englisch und umgekehrt)</h3>
-  <p><strong>Das Problem:</strong> Deutsche Unternehmen brauchen englische Webseiten, Produktbeschreibungen und E-Mails, aber gute Übersetzer sind teuer.</p>
-  <p><strong>Deine Lösung:</strong> Biete mit ChatGPT + DeepL Write professionelle Übersetzungen an. Die KI liefert eine Rohübersetzung, du polierst sie auf.</p>
-  <p><strong>Preise:</strong> 0,04–0,08 € pro Wort (abhängig von der Sprache und Komplexität)</p>
-  <p><strong>Start in 3 Schritten:</strong></p>
-  <ol>
-    <li>Erstelle 5 Muster-Übersetzungen (Deutsch→Englisch, Englisch→Deutsch, Deutsch→Französisch)</li>
-    <li>Biete auf Upwork/Fiverr an: "KI-gestützte Übersetzung – Muttersprachler-Qualität zum halben Preis"</li>
-    <li>Ziel: Fachübersetzungen für (z. B.) Maschinenbau, E-Commerce oder Medizin</li>
-  </ol>
-  <p><strong>Skalierung:</strong> Mit der Zeit spezialisierst du dich auf eine Branche und verlangst Premium-Preise.</p>
+  <h3>6.2 KI-gestützte Marktforschung</h3>
+  <p>Unternehmen zahlen für Wettbewerbsanalysen, Zielgruppenrecherche und Trendreports. Mit KI erstellst du innerhalb von 2–3 Stunden einen detaillierten Marktanalyse-Report.</p>
 
-  <h3>Idee 2: KI-CV- & Bewerbungs-Service</h3>
-  <p><strong>Das Problem:</strong> 80 % der Bewerber schreiben schlechte Lebensläufe und Anschreiben. Personalabteilungen nutzen KI zur Vorauswahl – ohne optimierte Bewerbungen wird man aussortiert.</p>
-  <p><strong>Deine Lösung:</strong> Du optimierst mit KI Lebensläufe und Anschreiben für Stellenbewerber. ChatGPT analysiert die Stellenausschreibung und erstellt ein maßgeschneidertes Anschreiben.</p>
-  <p><strong>Preise:</strong> 30–80 € pro Bewerbungspaket (CV + Anschreiben + Optimierung für LinkedIn)</p>
-  <p><strong>Start:</strong> Biete auf Kleinanzeigen oder LinkedIn an: "KI-Bewerbungsoptimierung – 100 % personalisiert, bestehendes CV wird analysiert und verbessert."</p>
+  <h3>6.3 KI-Übersetzungsdienst</h3>
+  <p>Für E-Commerce-Shops, Tech-Dokumentationen und internationale Korrespondenz. KI übersetzt schnell, du prüfst die Qualität – eine perfekte Arbeitsteilung.</p>
 
-  <h3>Idee 3: KI-Social-Media-Management für lokale Unternehmen</h3>
-  <p><strong>Das Problem:</strong> Bäcker, Friseure, Physiotherapeuten, Zahnärzte – sie alle wissen, dass sie Social Media brauchen, haben aber keine Zeit.</p>
-  <p><strong>Deine Lösung:</strong> Du erstellst KI-generierte Social-Media-Posts inklusive Bilder. Ein Monatspaket: 8–12 Posts für Instagram/Facebook.</p>
-  <p><strong>Preise:</strong> 200–400 €/Monat pro Kunde</p>
-  <p><strong>Start:</strong> Gehe zu 5 lokalen Geschäften in deiner Stadt. Biete einen kostenlosen Probemonat für 3 Posts an. Wenn sie gefallen, zahlen sie ab Monat 2.</p>
-  <p><strong>Skalierung:</strong> 10 Kunden × 300 € = 3.000 €/Monat. Mit Canva-Vorlagen und Batching arbeitest du ~15 h/Monat.</p>
+  <h3>6.4 KI-Newsletter-Service</h3>
+  <p>Kuratierte Newsletter für Unternehmen und Verbände. KI analysiert Branchen-News, fasst sie zusammen und generiert ansprechende Newsletter-Texte.</p>
 
-  <h3>Idee 4: KI-YouTube-Titel & Thumbnail-Service</h3>
-  <p><strong>Das Problem:</strong> YouTuber brauchen optimierte Titel und Thumbnails für maximale Klickraten. Die wenigsten beherrschen beides.</p>
-  <p><strong>Deine Lösung:</strong> Du analysierst mit KI die erfolgreichsten Titel in der Nische des Kunden, generierst 20 optimierte Titel-Vorschläge und erstellst KI-Thumbnails mit Midjourney/Canva.</p>
-  <p><strong>Preise:</strong> 20–50 € pro Video (Titel + Thumbnail) oder 150–300 €/Monat für wöchentliche Uploads</p>
-  <p><strong>Start:</strong> Suche 20 YouTuber in einer Nische (z. B. "Finanzen", "Fitness", "Technik"). Biete ihnen eine kostenlose Titel-Optimierung für ihr letztes Video an. Zeige, wie viel besser die Klickrate sein könnte.</p>
+  <h3>6.5 KI-Präsentations-Service</h3>
+  <p>Verwandle Rohdaten, Skizzen oder Brainstorming-Notizen in professionelle PowerPoint-Präsentationen inklusive Design und Bildern.</p>
 
-  <h3>Idee 5: KI-Newsletter-Service</h3>
-  <p><strong>Das Problem:</strong> Unternehmen wissen, dass Newsletter das beste Marketing-Tool sind (durchschnittlicher ROI: 4.200 %), aber sie haben keine Zeit, regelmäßig zu schreiben.</p>
-  <p><strong>Deine Lösung:</strong> Du erstellst wöchentliche oder monatliche Newsletter für Unternehmen. Die KI recherchiert aktuelle Branchen-News, fasst sie zusammen und schreibt den Newsletter.</p>
-  <p><strong>Preise:</strong> 100–300 €/Monat für 4 Newsletter</p>
-  <p><strong>Start:</strong> Erstelle einen Muster-Newsletter für eine fiktive Firma aus deiner Zielbranche. Zeige ihn potenziellen Kunden als Referenz.</p>
+  <h3>6.6 KI-Bewerbungs-Coaching</h3>
+  <p>Optimierte Bewerbungsunterlagen mit KI: Maßgeschneiderte Anschreiben, CV-Optimierung, Vorbereitung auf Vorstellungsgespräche – alles mit KI-Unterstützung.</p>
 
-  <h3>Idee 6: KI-Präsentations-Design (PowerPoint & Google Slides)</h3>
-  <p><strong>Das Problem:</strong> Gute Präsentationen sind zeitaufwendig. Die meisten sehen langweilig aus und überzeugen nicht.</p>
-  <p><strong>Deine Lösung:</strong> Du erstellst KI-gestützte Präsentationen: ChatGPT erstellt die Inhalte, Canva/Midjourney erstellt die Grafiken, du setzt alles in eine professionelle Vorlage.</p>
-  <p><strong>Preise:</strong> 100–400 € pro Präsentation (10–20 Folien)</p>
-  <p><strong>Start:</strong> Erstelle 3 Muster-Präsentationen zu verschiedenen Themen (z. B. "KI im Unternehmen", "Mitarbeiter-Onboarding", "Jahresrückblick").</p>
+  <h3>6.7 KI-Online-Kurs-Erstellung</h3>
+  <p>Erstelle komplette Online-Kurse mit KI: Skripte, Folien, Übungen, Prüfungsfragen. Vermarkte sie auf Plattformen wie Udemy oder Gumroad.</p>
 
-  <h3>Idee 7: KI-Produktbeschreibungen für E-Commerce</h3>
-  <p><strong>Das Problem:</strong> Online-Shops mit Hunderten Produkten brauchen tausende einzigartige, SEO-optimierte Produktbeschreibungen.</p>
-  <p><strong>Deine Lösung:</strong> Du schreibst KI-generierte, SEO-optimierte Produktbeschreibungen in Bulk. Du bekommst eine Excel-Liste mit Produktnamen, generierst 100 Beschreibungen in 2 Stunden.</p>
-  <p><strong>Preise:</strong> 1–5 € pro Beschreibung (je nach Länge und Komplexität)</p>
-  <p><strong>Skalierung:</strong> 500 Beschreibungen × 2 € = 1.000 €. Arbeitszeit: ~10 Stunden dank KI-Batching.</p>
-  <p><strong>Start:</strong> Kontaktiere E-Commerce-Agenturen und Shop-Betreiber auf LinkedIn oder über Shop-Anbieter wie Shopify-Partnerverzeichnis.</p>
+  <h3>6.8 KI-Prompt-Engineering-Beratung</h3>
+  <p>Viele Unternehmen wissen nicht, wie sie KI effektiv einsetzen. Biete Workshops und Beratung zum Thema Prompt-Engineering an – eine der gefragtesten Fähigkeiten 2026.</p>
 
-  <h3>Idee 8: KI-Onlinekurs-Erstellung</h3>
-  <p><strong>Das Problem:</strong> Viele Experten haben Wissen, aber keine Zeit oder Fähigkeit, einen Kurs zu erstellen.</p>
-  <p><strong>Deine Lösung:</strong> Du erstellst mit KI komplette Onlinekurse: Skripte, PDFs, Quizfragen, E-Mails, Präsentationen. Der Experte liefert sein Wissen, du machst daraus einen Kurs.</p>
-  <p><strong>Preise:</strong> 500–2.000 € pro Kurs (je nach Umfang) oder 50 % Umsatzbeteiligung</p>
-  <p><strong>Start:</strong> Wähle ein Thema, in dem du selbst (oder ein Partner) Experte bist. Erstelle mit Claude und ChatGPT ein Kurskonzept, dann das gesamte Kursmaterial.</p>
-  <p><strong>Plattformen:</strong> Udemy, Skillshare, Digistore24, Gumroad, eigene Webseite</p>
+  <h3>6.9 KI-Rechnungs- & Buchhaltungs-Assistenz</h3>
+  <p>Kleine Unternehmen und Freelancer hassen Buchhaltung. Biete einen KI-gestützten Service an: Rechnungen erstellen, Ausgaben kategorisieren, Steuerbericht vorbereiten.</p>
 
-  <h3>Idee 9: KI-Chatbot-Beratung & einfacher Bau</h3>
-  <p><strong>Das Problem:</strong> Kleine Unternehmen wollen Chatbots für ihre Webseite, scheuen aber die hohen Entwicklungskosten.</p>
-  <p><strong>Deine Lösung:</strong> Du baust mit ChatGPT API und einfachen No-Code-Tools (Chatbase, Voiceflow, Tidio) einfache Chatbots für Kundenanfragen, Terminbuchung oder FAQ.</p>
-  <p><strong>Preise:</strong> 200–500 € Einrichtung + 50–100 €/Monat Wartung</p>
-  <p><strong>Start:</strong> Lerne Chatbase (kostenlose Testversion). Baue einen Demo-Chatbot für eine fiktive Firma. Zeige ihn potenziellen Kunden.</p>
-
-  <h3>Idee 10: KI-Content-Repurposing (Inhalte wiederverwerten)</h3>
-  <p><strong>Das Problem:</strong> Podcaster, YouTuber und Blogger produzieren viel Content, nutzen ihn aber nur einmal. Ein 1-stündiges Video enthält 10 Social-Media-Posts, einen Blogartikel, einen Newsletter und 5 Tweets.</p>
-  <p><strong>Deine Lösung:</strong> Du nimmst bestehenden Content (Video, Audio, Text) und verwertest ihn mit KI in verschiedene Formate um: Transkript → Blogartikel → LinkedIn-Post → Twitter-Thread → Newsletter → Infografik-Briefing.</p>
-  <p><strong>Preise:</strong> 100–300 €/Monat für wöchentliches Repurposing</p>
-  <p><strong>Start:</strong> Suche auf YouTube nach kleinen bis mittleren Kanälen. Biete ihnen an: "Ich mache aus einer Podcast-Folge 10 Content-Stücke für 50 €. Probemonat gratis."</p>
-
-  <div class="action-box"><strong>Deine Aufgabe:</strong> Wähle DREI Ideen aus dieser Liste, die dich am meisten ansprechen. Bewerte sie nach: (a) eigener Begeisterung, (b) Marktgröße, (c) einfachem Einstieg. Starte mit der Idee mit der höchsten Gesamtbewertung.</div>
+  <h3>6.10 KI-Lebenslauf- & Portfolio-Optimierung</h3>
+  <p>Ein wachsender Markt: KI-optimierte Bewerbungsunterlagen, die garantiert durch automatische Bewerbertracking-Systeme (ATS) kommen.</p>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 7: BONUS – 50 PROFITABLE KI-PROMPTS -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 7 ===== -->
 <div class="chapter">
   <div class="chapter-header">
-    <span class="chapter-number">Kapitel 7 · Bonus</span>
-    <h2>50 profitable KI-Prompts für dein Business</h2>
-    <span class="chapter-subtitle">Copy & Paste – sofort einsetzbar</span>
+    <span class="chapter-number">Kapitel 7</span>
+    <h2>Bonus: 50 profitable KI-Prompts für dein Business</h2>
   </div>
 
-  <p>Diese 50 Prompts haben einen Marktwert von weit über 29 €. Sie sind das Ergebnis hunderter Stunden Testing. Jeder Prompt ist so formuliert, dass er sofort funktioniert. Du musst nur noch deine spezifischen Informationen (Branche, Zielgruppe, Thema) einfügen.</p>
+  <p>Dieses Kapitel enthält 50 sofort einsetzbare KI-Prompt-Vorlagen für verschiedene Geschäftsbereiche. Kopiere sie einfach in dein KI-Tool und passe sie bei Bedarf an.</p>
 
-  <h3>Content-Erstellung (Prompts 1–15)</h3>
+  <h3>7.1 Marketing & Vertrieb (10 Prompts)</h3>
+  <p>1. Verkaufs-E-Mail schreiben: <code>"Schreibe eine Verkaufs-E-Mail für [Produkt/Dienstleistung], die folgende Probleme löst: [Probleme]. Zielgruppe: [Beschreibung]. Verwende eine [freundlich/autoritativ] Tonart."</code></p>
+  <p>2. Landingpage-Text generieren: <code>"Erstelle einen Landingpage-Text für [Produkt]. Überschrift, 3 Vorteile, Call-to-Action. Maximal 200 Wörter. Zielgruppe: [Beschreibung]."</code></p>
+  <p>3. Marketing-Slogans entwickeln: <code>"Generiere 10 einprägsame Slogans für [Unternehmen/Produkt]. Fokus auf [Hauptnutzen]. Zielgruppe: [Zielgruppe]."</code></p>
 
-  <div class="prompt-grid">
-    <div class="prompt-item">
-      <div class="prompt-title">1. Blogartikel von Grund auf</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Du bist ein erfahrener Content-Autor für [BRANCHE]. Schreibe einen SEO-optimierten Blogartikel (800–1.000 Wörter) zum Thema "[THEMA]". Zielgruppe: [ZIELGRUPPE]. Verwende eine ansprechende Überschrift, Zwischenüberschriften (H2, H3), Bullet Points und eine starke Einleitung, die neugierig macht. Integriere das Haupt-Keyword "[KEYWORD]" natürlich 4–6 Mal. Schließe mit einem Call-to-Action ab. Tonfall: kompetent, verständlich, leicht unterhaltend.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">2. LinkedIn-Post (Thought Leadership)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe einen LinkedIn-Post (max. 1.500 Zeichen), der mich als Experte für [THEMA] positioniert. Beginne mit einer starken, kontroversen oder überraschenden Aussage in den ersten 2 Zeilen. Teile eine persönliche Erfahrung oder Lektion. Gib 3 konkrete Tipps. Schließe mit einer Frage an die Community. Füge 5 relevante Hashtags hinzu. Ton: professionell, persönlich, authentisch.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">3. Newsletter-Betreffzeilen (10 Varianten)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Generiere 10 E-Mail-Betreffzeilen für einen Newsletter zum Thema "[THEMA]". Die Betreffzeilen sollen neugierig machen, persönlich wirken und eine hohe Öffnungsrate erzielen. Jeweils max. 60 Zeichen. Variiere zwischen: Frage-Format, Zahlen-Format, Geheimnis-Format, Nutzen-Format und Dringlichkeits-Format.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">4. Produktbeschreibung (verkaufsstark)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe eine überzeugende Produktbeschreibung für [PRODUKT]. Länge: 150–200 Wörter. Struktur: (1) Schmerzpunkt des Kunden, (2) Einzigartige Lösung, (3) Drei Hauptvorteile mit Emojis, (4) Sozialer Beweis ("Bereits 500+ Kunden vertrauen..."), (5) Klarer Call-to-Action. SEO-Keyword: [KEYWORD].</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">5. "Über uns"-Seite</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe einen "Über uns"-Text für ein Unternehmen in der [BRANCHE]-Branche. Name: [FIRMENNAME]. Werte: [WERTE]. Zielgruppe: [ZIELGRUPPE]. Der Text soll: Vertrauen aufbauen, die Gründungsgeschichte erzählen, die Mission vermitteln und zum Handeln motivieren. Länge: 300–400 Wörter. Ton: sympathisch, professionell, menschlich.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">6. Instagram-Caption (Engagement-optimiert)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe eine Instagram-Caption (max. 300 Wörter) für einen Post zum Thema "[THEMA]". Beginne mit einer Frage oder provokativen Aussage in den ersten 2 Zeilen (wichtig für Algorithmus). Teile eine kurze Geschichte oder Einsicht. Gib 3 handfeste Tipps. Schließe mit einem Call-to-Action. Füge 15–20 relevante Hashtags am Ende hinzu, getrennt durch 2 Leerzeilen.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">7. Twitter/X-Thread (10 Tweets)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Erstelle einen Twitter-Thread mit 10 Tweets zum Thema "[THEMA]". Tweet 1: Starker Hook, der zum Weiterlesen motiviert. Tweets 2–9: Je eine Kernaussage pro Tweet, max. 280 Zeichen, mit Zwischenüberschriften in Großbuchstaben. Tweet 10: Zusammenfassung + Call-to-Action + relevante Hashtags. Füge nach jedem dritten Tweet eine Frage ein, um Engagement zu fördern.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">8. Pressemitteilung</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe eine professionelle Pressemitteilung (max. 500 Wörter) über [EREIGNIS/PRODUKTLAUNCH]. Format: Überschrift, Untertitel, Ort + Datum, Einleitung (wer, was, wann, wo, warum), Hauptteil (Details, Zitate, Fakten), Schluss (über das Unternehmen), Kontaktdaten. Zitat des Gründers/Geschäftsführers einfügen. Journalisten-Stil: sachlich, relevant, ohne Übertreibungen.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">9. E-Mail-Sequenz (5 E-Mails für Launch)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Erstelle eine 5-teilige E-Mail-Sequenz für den Launch von [PRODUKT/Dienstleistung]. E-Mail 1: Teaser ("Bald kommt etwas Großes"). E-Mail 2: Problem-Aufriss ("Kennst du das?"). E-Mail 3: Die Lösung vorstellen. E-Mail 4: Sozialer Beweis + Testimonials. E-Mail 5: Letzte Chance + Dringlichkeit. Jede E-Mail: Betreffzeile (max. 50 Z.), persönliche Anrede, 150–200 Wörter, klarer CTA.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">10. Webinar-Skript (30 Minuten)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Erstelle ein Skript für ein 30-minütiges Webinar zum Thema "[THEMA]". Zielgruppe: [ZIELGRUPPE]. Aufteilung: Minute 0–5: Begrüßung + Problemvorstellung. Minute 5–15: Drei Lösungsansätze. Minute 15–25: Live-Demo oder vertiefte Erklärung. Minute 25–30: Zusammenfassung + Angebot + Call-to-Action. Füge an 3 Stellen Fragen ans Publikum ein ("Schreibt in den Chat, ob...").</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">11. FAQ-Seite (10 Fragen)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Erstelle eine FAQ-Seite mit 10 häufigen Fragen und Antworten zum Thema "[THEMA]". Zielgruppe: [ZIELGRUPPE]. Jede Antwort: 2–4 Sätze, klar, direkt, ohne Fachjargon. Füge bei 3 Antworten interne Links zu weiteren Ressourcen ein (Platzhalter: [LINK]). Struktur: Akkordeon-Format (Frage als Überschrift, Antwort als Text).</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">12. Google Ads Anzeigentexte (5 Varianten)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Generiere 5 Google Ads Anzeigentexte für [PRODUKT/DIENSTLEISTUNG]. Zielgruppe: [ZIELGRUPPE]. Jede Anzeige: Überschrift (30 Z.), Beschreibung (90 Z.), Anzeigenerweiterung. Variiere die Ansprache: (1) Problem-basiert, (2) Nutzen-basiert, (3) Neugier-basiert, (4) Preis-basiert, (5) Sozialer-Beweis-basiert. Keywords: [KEYWORDS].</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">13. Kurze Videosprechtexte (TikTok/Reels)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe 5 kurze Videosprechtexte (je 30–60 Sekunden, ~80–150 Wörter) zum Thema "[THEMA]" für TikTok/Instagram Reels. Jeder Text beginnt mit einem starken Hook. Ton: direkt, persönlich, als würde man mit einem Freund sprechen. Kein Script-Gefühl. Endet mit einem Call-to-Action. Format: Sprechtext (nicht Schreibtext) mit Pausen-Markierungen (/).</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">14. Kaltakquise-E-Mail (B2B)</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe eine personalisierte Kaltakquise-E-Mail für [DIENSTLEISTUNG]. Zielgruppe: Entscheider in [BRANCHE]-Unternehmen (10–50 Mitarbeiter). Struktur: Betreffzeile (persönlich, max. 50 Z.), personalisierte Anrede, Kompliment/konkreter Bezug zum Unternehmen, Problem-Beschreibung, Lösung (Deine Dienstleistung), Sozialer Beweis (1 Satz), Call-to-Action (Terminvorschlag). Länge: max. 150 Wörter. Nicht aufdringlich. Keine Großversprechen.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">15. Danksagung nach Kauf</div>
-      <div class="prompt-category">Content</div>
-      <div class="prompt-text">Schreibe eine persönliche Danksagungs-E-Mail für Kunden, die [PRODUKT/DIENSTLEISTUNG] gekauft haben. Dankbarer, warmer Ton. Erkläre, was als Nächstes passiert (nächste Schritte). Gib einen kleinen Bonus-Tipp als "Geschenk". Frage nach Feedback. Füge Kontaktdaten für Fragen hinzu. Länge: 100–150 Wörter.</div>
-    </div>
-  </div>
-
-  <h3>Geschäftsstrategie & Analyse (Prompts 16–25)</h3>
-
-  <div class="prompt-grid">
-    <div class="prompt-item">
-      <div class="prompt-title">16. Geschäftsmodell-Analyse</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Analysiere meine Geschäftsidee "[IDEE]" nach folgenden Kriterien: (1) Marktgröße und -wachstum, (2) Wettbewerbslandschaft (3 Hauptkonkurrenten), (3) Einzigartiges Verkaufsversprechen (USP), (4) Preismodell-Empfehlung, (5) Häufigste Risiken und wie man sie vermeidet, (6) Erste 3 Schritte zur Umsetzung. Sei ehrlich und kritisch. Identifiziere die 3 größten Schwachstellen der Idee.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">17. Wettbewerbsanalyse</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Führe eine detaillierte Wettbewerbsanalyse für mein Geschäft in der [BRANCHE]-Branche durch. Nenne die 5 Hauptkonkurrenten und analysiere jeweils: (1) Angebot & Preis, (2) Zielgruppe, (3) Marketing-Strategie, (4) Stärken, (5) Schwächen. Gib mir 3 konkrete Möglichkeiten, mich von diesen Konkurrenten abzuheben. Datenbasis: öffentlich verfügbare Informationen.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">18. Zielgruppen-Persona erstellen</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Erstelle eine detaillierte Buyer Persona für mein Produkt "[PRODUKT]". Name, Alter, Beruf, Einkommen, Familienstand. Beschreibe: (1) Tägliche Herausforderungen, (2) Ziele und Träume, (3) Ängste und Frustrationen, (4) Kaufverhalten, (5) Medienkonsum (welche Kanäle, welche Influencer), (6) Ein typischer Tag im Leben dieser Persona. Schließe mit 3 Marketing-Botschaften, die diese Persona ansprechen.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">19. Preisstrategie entwickeln</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Entwickle eine Preisstrategie für [PRODUKT/DIENSTLEISTUNG]. Berücksichtige: (1) Kostenbasierte Preisuntergrenze, (2) Wettbewerbsvergleich (3 Alternativen), (3) Wahrgenommener Wert beim Kunden, (4) Psychologische Preispunkte (z. B. 29,99 € vs. 30 €), (5) 3 Preisstufen (Basis, Standard, Premium) mit jeweiligem Leistungsumfang. Empfehle eine Einführungsstrategie (Rabatt, Verhandlungsspielraum).</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">20. Marketing-Plan (30 Tage)</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Erstelle einen 30-Tage-Marketingplan für [PRODUKT/DIENSTLEISTUNG]. Budget: [BUDGET]. Zielgruppe: [ZIELGRUPPE]. Woche 1: Branding & Awareness (3 Aktionen). Woche 2: Lead-Magnete & E-Mail-Liste (3 Aktionen). Woche 3: Social Proof & Testimonials (3 Aktionen). Woche 4: Verkaufsoffensive (3 Aktionen). Jede Aktion: konkreter Schritt, Kanal, geschätzter Zeitaufwand, erwartete Wirkung.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">21. SWOT-Analyse</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Führe eine SWOT-Analyse für mein Unternehmen/Projekt "[NAME]" durch. Stärken (5 Punkte, intern), Schwächen (5 Punkte, intern), Chancen (5 Punkte, extern), Risiken (5 Punkte, extern). Leite aus jeder Kategorie 2 konkrete Handlungsempfehlungen ab. Sei spezifisch für die [BRANCHE]-Branche.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">22. Produkt-Launch-Plan</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Erstelle einen 14-Tage-Launch-Plan für [PRODUKT]. Phase 1 (Tag 1–5): Vorfreude aufbauen – Teaser, Countdown, Waitlist. Phase 2 (Tag 6–10): Launch – Ankündigung, Influencer, Launch-Event. Phase 3 (Tag 11–14): Nachbereitung – Follow-ups, Testimonials, Optimierung. Jeder Tag: konkrete Aktion, Kanal, Textvorlage (kurz), Erfolgsmetrik.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">23. Content-Strategie (3 Monate)</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Entwickle eine 3-Monats-Content-Strategie für ein Unternehmen in der [BRANCHE]-Branche. Pro Monat: 4 Blogartikel-Themen, 8 Social-Media-Post-Ideen, 2 Newsletter-Themen, 1 Video- oder Podcast-Idee. Alle Themen sollten aufeinander aufbauen und eine Content-Säulen-Struktur haben (3 Hauptsäulen à 4 Unterthemen). Tonfall: [TON]. Ziel: Autorität aufbauen und Leads generieren.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">24. Pitch Deck Struktur</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Erstelle eine 10-Folien-Pitch-Deck-Struktur für [IDEE]. Folie 1: Problem, Folie 2: Lösung, Folie 3: Marktgröße, Folie 4: Produkt, Folie 5: Geschäftsmodell, Folie 6: Traktion, Folie 7: Wettbewerb, Folie 8: Team, Folie 9: Finanzprognose, Folie 10: Investmentfrage. Pro Folie: Titel, 3–5 Bullet Points mit Kernaussagen, Hinweis für visuelle Gestaltung.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">25. Kundenumfrage-Fragen</div>
-      <div class="prompt-category">Strategie</div>
-      <div class="prompt-text">Erstelle 10 Umfragefragen, um die Bedürfnisse und Schmerzpunkte meiner Zielgruppe ([ZIELGRUPPE]) besser zu verstehen. 3 Multiple-Choice-Fragen, 3 offene Fragen, 2 Bewertungsfragen (Skala 1–10), 2 demografische Fragen. Ziel der Umfrage: [ZIEL]. Füge eine einleitende Nachricht hinzu, die die Teilnahmewahrscheinlichkeit erhöht.</div>
-    </div>
-  </div>
-
-  <h3>Produktivität & Organisation (Prompts 26–35)</h3>
-
-  <div class="prompt-grid">
-    <div class="prompt-item">
-      <div class="prompt-title">26. Tagesplan optimieren</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Ich habe folgende tägliche Aufgaben für mein KI-Business: [AUFLISTUNG]. Hilf mir, einen optimierten Tagesplan zu erstellen, der Energie-Hochs und -Tiefs berücksichtigt. Nutze Time-Blocking. Maximiere produktive Stunden (09:00–12:00 Uhr für kreative Arbeit). Minimiere Kontextwechsel. Schlage 3 Verbesserungen für meine aktuelle Routine vor.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">27. Projektplan erstellen</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Erstelle einen detaillierten Projektplan für [PROJEKT]. Meilensteine, Deadlines, Abhängigkeiten. Nutze die Aufteilung in 5 Phasen: (1) Recherche, (2) Konzeption, (3) Umsetzung, (4) Qualitätsprüfung, (5) Launch. Pro Phase: 3–5 konkrete Tasks mit Zeitaufwand (in Stunden). Priorisiere nach Eisenhower-Matrix (wichtig/dringend).</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">28. Entscheidungsmatrix</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Ich muss mich zwischen folgenden Optionen entscheiden: [OPTIONEN]. Kriterien für die Entscheidung: [KRITERIEN]. Erstelle eine gewichtete Entscheidungsmatrix. Weise jedem Kriterium eine Gewichtung zu (1–5). Bewerte jede Option (1–10). Berechne die gewichteten Gesamtpunktzahlen. Gib eine Empfehlung mit Begründung.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">29. Weekly Review-Vorlage</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Erstelle eine Weekly-Review-Vorlage mit 10 Fragen für mein Ein-Personen-KI-Business. Kategorien: (1) Erfolge der Woche (3 Dinge), (2) Herausforderungen (3 Dinge), (3) Kunden-Feedback, (4) Finanzen (Umsatz, Ausgaben), (5) Nächste Woche (Top-3-Ziele), (6) Lernen & Weiterbildung, (7) Gesundheit & Energie. Am Ende: eine Reflexionsfrage, die zum Nachdenken anregt.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">30. Meeting-Agenda</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Erstelle eine 30-minütige Meeting-Agenda für ein Erstgespräch mit einem potenziellen Kunden ([KUNDENNAME], [BRANCHE]). Minute 0–5: Kennenlernen & Smalltalk, Minute 5–10: Kundenproblem verstehen (offene Fragen), Minute 10–20: Lösung vorstellen, Minute 20–25: Preise & nächste Schritte, Minute 25–30: Fragen & Abschluss. Formuliere 5 konkrete Fragen, die ich stellen sollte.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">31. Priorisierungs-Raster</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Ich habe folgende Aufgaben/Projekte: [LISTE]. Hilf mir, sie nach der Eat-the-Frog-Methode zu priorisieren. Identifiziere: (1) Die 3 wichtigsten Aufgaben (Frösche), die ich morgen zuerst erledigen sollte, (2) Aufgaben, die ich delegieren oder automatisieren kann, (3) Aufgaben, die ich streichen sollte. Begründe jede Entscheidung.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">32. Onboarding-Checkliste</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Erstelle eine 15-Schritte-Onboarding-Checkliste für neue Kunden in meinem KI-Content-Business. Von der ersten Anfrage bis zur ersten Lieferung. Jeder Schritt: Bezeichnung, verantwortlich (ich/Kunde), geschätzte Dauer, Vorlage (falls vorhanden). Füge 3 "Moments of Wow" ein – kleine Extras, die den Kunden begeistern.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">33. E-Mail-Ordner-Struktur</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Entwirf eine E-Mail-Ordner-Struktur für mein KI-Business. Empfehle 10 Ordner/Labels. Berücksichtige: Kundenkommunikation, Rechnungen, Anfragen, Newsletter-Projekte, Weiterbildung, Tools, Steuern/Rechtliches, Partner, Archiv, Sonstiges. Für jeden Ordner: Beschreibung, welche E-Mails hineinkommen, wie oft er geleert/geprüft werden sollte.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">34. KI-Reflexions-Prompt</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Führe ein Reflexionsgespräch mit mir als KI-Coach. Stelle mir nacheinander folgende Fragen und warte nach jeder Frage auf meine Antwort: (1) Was war dein größter Erfolg diese Woche? (2) Was hat dich am meisten aufgehalten? (3) Welcher Kunde hat dir am meisten Energie gegeben? (4) Welcher Kunde hat dir Energie geraubt? (5) Was wirst du nächste Woche anders machen? Gib nach meinen Antworten jeweils einen kurzen Impuls.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">35. Ablenkungs-Audit</div>
-      <div class="prompt-category">Produktivität</div>
-      <div class="prompt-text">Hilf mir, meine größten Zeitfresser zu identifizieren. Stelle mir 5 Fragen: (1) Wann fühlst du dich am produktivsten? (2) Welche App checkst du am häufigsten? (3) Wie oft unterbrichst du deine Arbeit für unwichtige Dinge? (4) Wann arbeitest du am besten – morgens, mittags, abends? (5) Was fehlt dir, um konzentrierter zu arbeiten? Gib mir basierend auf meinen Antworten 3 konkrete Verbesserungsvorschläge.</div>
-    </div>
-  </div>
-
-  <h3>Verkauf & Kundenkommunikation (Prompts 36–45)</h3>
-
-  <div class="prompt-grid">
-    <div class="prompt-item">
-      <div class="prompt-title">36. Verkaufs-E-Mail nach Angebot</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Schreibe eine Follow-up-E-Mail, nachdem ich einem potenziellen Kunden ein Angebot geschickt habe. Nicht aufdringlich, aber präsent. Liefere einen kleinen Mehrwert (z. B. einen relevanten Artikel oder Tipp). Frage höflich nach, ob es Fragen gibt. Setze eine sanfte Deadline ("Das Angebot gilt bis..."). Länge: max. 100 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">37. Angebotserstellung</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Erstelle einen professionellen Angebotstext für [DIENSTLEISTUNG] für [KUNDENNAME]. Enthalten: (1) Kurze Zusammenfassung des Kundenproblems, (2) Meine Lösung (3–5 Punkte), (3) Preis (mit Zahlungsbedingungen), (4) Lieferzeit, (5) Nächste Schritte. Ton: professionell, zuversichtlich, kundenorientiert. Länge: 200–300 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">38. Einwandbehandlung: "Zu teuer"</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Der Kunde sagt: "Das ist mir zu teuer." Formuliere 3 verschiedene Antworten, die den Wert meiner Dienstleistung betonen, ohne den Preis zu reduzieren. (1) Wert-basierte Antwort (ROI aufzeigen), (2) Vergleichs-Antwort (vs. Alternative), (3) Ratenzahlungs-Antwort. Jede Antwort: max. 100 Wörter. Ton: verständnisvoll, aber selbstbewusst.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">39. Einwandbehandlung: "Muss ich überlegen"</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Der Kunde sagt: "Ich muss noch überlegen." Formuliere 3 Antworten, die die Entscheidung erleichtern: (1) "Darf ich fragen, was Sie noch zögern lässt?" – Problem identifizieren, (2) "Kann ich Ihnen noch eine Referenz nennen?" – Sozialer Beweis, (3) "Wann darf ich mich wieder melden?" – Sanfter Druck. Jede Antwort: max. 80 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">40. Projektabschluss-E-Mail</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Schreibe eine E-Mail, um ein abgeschlossenes Projekt an den Kunden zu übergeben. Enthalten: (1) Dank für die Zusammenarbeit, (2) Zusammenfassung der gelieferten Ergebnisse, (3) Konkrete nächste Schritte für den Kunden (z. B. "Blogartikel veröffentlichen"), (4) Bitte um Feedback, (5) Ausblick auf mögliche nächste Projekte. Länge: 150–200 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">41. Upsell-Angebot</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Formuliere ein Upsell-Angebot für einen Bestandskunden, der aktuell [AKTUELLE DIENSTLEISTUNG] bezieht. Biete [UPSELL-DIENSTLEISTUNG] zum Vorzugspreis an. Begründe: (1) Warum es perfekt zum bestehenden Angebot passt, (2) Welchen Mehrwert es bringt, (3) Exklusiver Rabatt für Bestandskunden. Länge: max. 120 Wörter. Nicht aufdringlich.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">42. Empfehlungsanfrage</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Schreibe eine E-Mail an einen zufriedenen Kunden und bitte um Weiterempfehlungen. Bedanke dich für die Zusammenarbeit. Erkläre, welche Art von Kunden du suchst  [ZIELGRUPPE]. Mache einen konkreten Vorschlag: "Kennen Sie 2–3 Kollegen, die auch..." Biete einen Anreiz (z. B. 1 Monat kostenlos bei erfolgreicher Vermittlung). Länge: 100–150 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">43. Reaktivierungs-E-Mail</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Schreibe eine E-Mail an einen ehemaligen Kunden, der seit [ZEITRAUM] kein Projekt mehr gebucht hat. Nicht vorwurfsvoll. Biete einen Wiedereinstiegsrabatt oder ein kostenloses Audit an. Frage, ob sich etwas geändert hat. Zeige, dass du an ihn denkst ("Ich habe gesehen, dass..." – aktuellen Bezug herstellen). Länge: 100–150 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">44. LinkedIn-Empfehlung anfragen</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Schreibe eine Nachricht an einen zufriedenen Kunden auf LinkedIn und bitte um eine LinkedIn-Empfehlung. Stelle 3 konkrete Formulierungen zur Auswahl, die der Kunde nur kopieren und einfügen muss. Mache es dem Kunden so einfach wie möglich. Bedanke dich im Voraus. Länge: max. 150 Wörter.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">45. "Es tut mir leid"-E-Mail</div>
-      <div class="prompt-category">Verkauf</div>
-      <div class="prompt-text">Schreibe eine professionelle Entschuldigungs-E-Mail an einen Kunden, bei dem etwas schiefgelaufen ist (z. B. verspätete Lieferung). Enthalten: (1) Aufrichtige Entschuldigung ohne Ausreden, (2) Erklärung (kurz, sachlich), (3) Konkrete Lösung/ Wiedergutmachung, (4) Was du unternimmst, damit es nicht wieder passiert, (5) Ausblick. Ton: demütig, professionell, lösungsorientiert.</div>
-    </div>
-  </div>
-
-  <h3>KI & Technik-Spezial (Prompts 46–50)</h3>
-
-  <div class="prompt-grid">
-    <div class="prompt-item">
-      <div class="prompt-title">46. KI-Use-Case finden</div>
-      <div class="prompt-category">KI-Spezial</div>
-      <div class="prompt-text">Ich biete Dienstleistungen für [BRANCHE] an. Analysiere den typischen Arbeitsalltag eines [ZIELGRUPPE]-Mitarbeiters und identifiziere 10 konkrete Aufgaben, die mit KI effizienter erledigt werden könnten. Pro Aufgabe: (1) Beschreibung, (2) Zeitersparnis (in %), (3) Geeignetes KI-Tool, (4) Komplexität (niedrig/mittel/hoch). Fokussiere auf Aufgaben mit niedriger Komplexität – das sind meine ersten Dienstleistungsangebote.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">47. KI-Tool-Recherche</div>
-      <div class="prompt-category">KI-Spezial</div>
-      <div class="prompt-text">Ich brauche ein KI-Tool für [AUFGABE]. Budget: [BUDGET]. Plattform: [DESKTOP/MOBIL/BROWSER]. Sprache: [DEUTSCH/ENGLISCH]. Nenne mir 5 Tools, vergleiche sie nach: (1) Preis, (2) Funktionsumfang, (3) Benutzerfreundlichkeit, (4) Deutsche Sprachqualität, (5) Bewertungen (Durchschnitt). Gib eine klare Empfehlung mit Begründung.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">48. Prompt optimieren</div>
-      <div class="prompt-category">KI-Spezial</div>
-      <div class="prompt-text">Analysiere meinen Prompt und optimiere ihn für bessere Ergebnisse. Mein aktueller Prompt: "[PROMPT]". Bewerte ihn nach: (1) Klarheit der Rollenanweisung, (2) Präzision der Aufgabenbeschreibung, (3) Vollständigkeit des Kontexts, (4) Formatvorgabe. Schreibe den optimierten Prompt neu und erkläre jede Änderung.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">49. KI-Ethik & Qualitätssicherung</div>
-      <div class="prompt-category">KI-Spezial</div>
-      <div class="prompt-text">Erstelle einen 10-Punkte-Qualitäts-Check für KI-generierte Inhalte, bevor ich sie an Kunden ausliefere. Prüfpunkte: (1) Faktencheck (Halluzinationen?), (2) Sprachliche Korrektheit, (3) Markenkonformität, (4) Zielgruppen-Passung, (5) SEO-Optimierung, (6) Lesbarkeit, (7) Originalität (Plagiate?), (8) Kulturelle Angemessenheit, (9) Rechtliche Zulässigkeit, (10) Mehrwert. Pro Punkt: worauf genau achten.</div>
-    </div>
-    <div class="prompt-item">
-      <div class="prompt-title">50. KI-Roadmap 2026–2027</div>
-      <div class="prompt-category">KI-Spezial</div>
-      <div class="prompt-text">Erstelle eine strategische KI-Roadmap für mein Ein-Personen-Business in den nächsten 12 Monaten. Monat 1–3: KI-Tools beherrschen, erste Dienstleistungen anbieten, 1.000 €/Monat Umsatz. Monat 4–6: Systeme automatisieren, Preise erhöhen, 3.000 €/Monat. Monat 7–9: Digitale Produkte entwickeln, passive Einkommensströme aufbauen. Monat 10–12: Skalieren (Assistent einstellen), 5.000+ €/Monat. Konkrete Meilensteine pro Monat.</div>
-    </div>
+  <div class="info-box">
+    Alle 50 Prompts sowie eine Schritt-für-Schritt-Anleitung zur effektiven Nutzung findest du im separat erhältlichen "Business Prompt Pack: 102 KI-Vorlagen" auf Gumroad.
   </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 8: RECHTLICHES -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 8 ===== -->
 <div class="chapter">
   <div class="chapter-header">
     <span class="chapter-number">Kapitel 8</span>
-    <h2>Rechtliches: DSGVO, AGB, Rechnungen</h2>
-    <span class="chapter-subtitle">Was du als deutscher KI-Dienstleister wissen musst – einfach erklärt</span>
+    <h2>Rechtliches: DSGVO, AGB &amp; Rechnungen</h2>
   </div>
 
-  <p>Rechtliche Themen schrecken viele ab. Dabei ist es gar nicht so kompliziert, wie es klingt. Dieses Kapitel gibt dir eine klare, verständliche Übersicht über alles, was du als Ein-Personen-KI-Business in Deutschland beachten musst.</p>
+  <h3>8.1 DSGVO-konformer KI-Einsatz</h3>
+  <p>Wenn du KI für Kundenprojekte einsetzt, musst du die DSGVO beachten. Wichtigste Punkte: Keine personenbezogenen Daten in KI-Tools eingeben, Auftragsverarbeitungsvertrag (AVV) mit dem KI-Anbieter abschließen, Kunden über den KI-Einsatz informieren.</p>
 
-  <div class="warning-box"><strong>Hinweis:</strong> Ich bin kein Rechtsanwalt. Die folgenden Informationen basieren auf öffentlich zugänglichen Quellen und stellen keine Rechtsberatung dar. Für verbindliche Auskünfte konsultiere bitte einen Rechtsanwalt oder die zuständige Behörde.</div>
+  <h3>8.2 AGB & Dienstleistungsverträge</h3>
+  <p>Jeder Kunde braucht einen schriftlichen Vertrag. Mindestinhalt: Leistungsbeschreibung, Preis, Zahlungsbedingungen, Kündigungsfrist, Gewährleistung, Haftungsbeschränkung. Lass die AGB von einem Anwalt prüfen.</p>
 
-  <h3>8.1 Gewerbeanmeldung – ja oder nein?</h3>
-  <p>Sobald du regelmäßig Einnahmen aus deiner KI-Dienstleistung erzielst, bist du in Deutschland gewerbepflichtig. Das Finanzamt betrachtet jede Tätigkeit mit Gewinnerzielungsabsicht als Gewerbe.</p>
-
-  <p><strong>Ablauf:</strong></p>
-  <ol>
-    <li>Gehe zum Gewerbeamt deiner Stadt (Termin online buchen)</li>
-    <li>Fülle das Formular "Gewerbeanmeldung" aus (ca. 15 Minuten)</li>
-    <li>Kosten: 15–60 € (einmalig, je nach Stadt)</li>
-    <li>Du erhältst einen Gewerbeschein (sofort oder per Post)</li>
-    <li>Das Gewerbeamt meldet dich automatisch beim Finanzamt</li>
-    <li>Das Finanzamt schickt dir einen Fragebogen zur steuerlichen Erfassung</li>
-  </ol>
-
-  <p><strong>Frist:</strong> Die Anmeldung muss spätestens am Tag der Aufnahme der Tätigkeit erfolgen. Rückwirkend ist nicht möglich.</p>
-
-  <h3>8.2 Kleinunternehmer-Regelung (§ 19 UStG)</h3>
-  <p>Die Kleinunternehmerregelung ist für Einsteiger ideal. Du musst keine Umsatzsteuer auf deinen Rechnungen ausweisen und keine Umsatzsteuer-Voranmeldung abgeben.</p>
-
-  <p><strong>Voraussetzungen (2026):</strong></p>
-  <ul>
-    <li>Umsatz im Vorjahr unter 22.000 €</li>
-    <li>Voraussichtlicher Umsatz im laufenden Jahr unter 50.000 €</li>
-    <li>Du beantragst die Regelung im Fragebogen zur steuerlichen Erfassung</li>
-  </ul>
-
-  <p><strong>Vorteile:</strong></p>
-  <ul>
-    <li>Keine Umsatzsteuer auf Rechnungen → günstiger für Kunden</li>
-    <li>Keine monatlichen/vierteljährlichen Umsatzsteuer-Voranmeldungen</li>
-    <li>Weniger Bürokratie</li>
-  </ul>
-
-  <p><strong>Nachteile:</strong></p>
-  <ul>
-    <li>Du kannst keine Vorsteuer abziehen (d.h. du zahlst die Mehrwertsteuer auf deine Einkäufe selbst)</li>
-    <li>Du darfst auf Rechnungen keine Umsatzsteuer ausweisen</li>
-  </ul>
-
-  <div class="tip-box">Starte auf jeden Fall mit der Kleinunternehmerregelung. Sobald du regelmäßig über 2.000 €/Monat verdienst, kannst du zur Regelbesteuerung wechseln. Das Finanzamt informiert dich rechtzeitig.</div>
-
-  <h3>8.3 Rechnungen schreiben – was muss drauf?</h3>
-  <p>Eine ordnungsgemäße Rechnung muss folgende Pflichtangaben enthalten:</p>
-
-  <ol>
-    <li>Vollständiger Name und Anschrift des Rechnungsstellers</li>
-    <li>Vollständiger Name und Anschrift des Empfängers</li>
-    <li>Steuernummer oder Wirtschafts-Identifikationsnummer</li>
-    <li>Ausstellungsdatum</li>
-    <li>Fortlaufende Rechnungsnummer (einmalig, kein Rechnungsnummern-Schema wie "R-2026-001")</li>
-    <li>Menge und Art der gelieferten Leistung (z. B. "2 Blogartikel à 800 Wörter")</li>
-    <li>Zeitraum der Leistung (bei Dienstleistungen wichtig)</li>
-    <li>Entgelt (Nettobetrag)</li>
-    <li>Bei Kleinunternehmen: Hinweis "Gemäß § 19 UStG wird keine Umsatzsteuer berechnet"</li>
-    <li>Bankverbindung</li>
-  </ol>
-
-  <div class="example-box"><strong>Vorlage für Rechnungskopf (Kleinunternehmen):</strong><br>
-  [Dein Name]<br>
-  [Straße Hausnummer]<br>
-  [PLZ Ort]<br>
-  Steuernummer: [DE.../ ###/####/####]<br>
-  &nbsp;<br>
-  Rechnung Nr. R-2026-001<br>
-  Datum: TT.MM.JJJJ<br>
-  &nbsp;<br>
-  Leistungszeitraum: TT.MM. – TT.MM.JJJJ<br>
-  &nbsp;<br>
-  Position 1: 2 Blogartikel (je 800 Wörter) – 200,00 €<br>
-  Summe: 200,00 €<br>
-  Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.<br>
-  Gesamtbetrag: 200,00 €<br>
-  &nbsp;<br>
-  Bitte überweisen Sie den Betrag innerhalb von 14 Tagen auf:<br>
-  IBAN: DE...</div>
-
-  <h3>8.4 Impressum – Pflicht für jeden gewerblichen Auftritt</h3>
-  <p>Wenn du eine Webseite, ein LinkedIn-Profil mit Dienstleistungsangebot oder eine andere geschäftsmäßige Online-Präsenz hast, brauchst du ein Impressum.</p>
-
-  <p><strong>Pflichtangaben Impressum:</strong></p>
-  <ul>
-    <li>Name, Vorname</li>
-    <li>Vollständige Anschrift (kein Postfach)</li>
-    <li>Kontaktdaten (E-Mail, Telefon – zumindest E-Mail)</li>
-    <li>Bei Gewerbe: Handelsregister-Nummer (falls eingetragen)</li>
-    <li>Umsatzsteuer-ID (falls vorhanden)</li>
-  </ul>
-
-  <h3>8.5 DSGVO – Datenschutz einfach erklärt</h3>
-  <p>Als kleiner Dienstleister musst du die DSGVO nicht perfekt umsetzen, aber ein paar Grundregeln solltest du beachten:</p>
-
-  <p><strong>Was du tun musst:</strong></p>
-  <ul>
-    <li><strong>Datenschutzerklärung:</strong> Wenn du personenbezogene Daten verarbeitest (E-Mail-Adressen, Namen), brauchst du eine Datenschutzerklärung auf deiner Webseite. Nutze einen DSGVO-Generator (kostenlos, z. B. eRecht24, Datenschutz-Generator.de)</li>
-    <li><strong>Auftragsverarbeitung:</strong> Wenn du KI-Tools nutzt, die Daten deiner Kunden verarbeiten (z. B. ChatGPT, Claude), kann ein Auftragsverarbeitungsvertrag (AVV) nötig sein. Die großen Anbieter haben Standard-AVVs.</li>
-    <li><strong>Löschfristen:</strong> Lösche Kundendaten, wenn sie nicht mehr benötigt werden (nach gesetzlicher Aufbewahrungsfrist).</li>
-    <li><strong>Informationspflicht:</strong> Sage Kunden, wie du ihre Daten verarbeitest und für welche Zwecke.</li>
-  </ul>
-
-  <h3>8.6 AGB – brauchst du sie?</h3>
-  <p>AGB sind nicht verpflichtend, aber empfehlenswert. Sie regeln, was passiert, wenn etwas schiefgeht, und schützen dich vor Haftungsrisiken.</p>
-
-  <p><strong>Mindestens regeln solltest du:</strong></p>
-  <ul>
-    <li>Leistungsumfang (genaue Beschreibung)</li>
-    <li>Zahlungsbedingungen (Fälligkeit, Zahlungsziel, Verzug)</li>
-    <li>Lieferfristen</li>
-    <li>Widerrufsrecht (bei Fernabsatzverträgen mit Verbrauchern)</li>
-    <li>Gewährleistung & Haftung (eingeschränkt, soweit möglich)</li>
-    <li>Urheberrechte (wer hat welche Nutzungsrechte an den erstellten Inhalten)</li>
-    <li>Kündigungsfristen (bei Retainer-Verträgen)</li>
-  </ul>
-
-  <div class="tip-box">Nutze einen AGB-Generator für Freelancer/Kleinunternehmer. Passe die Vorlage an deine spezifische Dienstleistung an. Lasse sie im Zweifel von einem Rechtsanwalt prüfen (einmalige Investition von 200–400 €, die sich lohnt).</div>
-
-  <h3>8.7 Urheberrecht an KI-Inhalten – wer gehört was?</h3>
-  <p>Das ist aktuell ein heiß diskutiertes Thema. Hier der Stand 2026:</p>
-
-  <ul>
-    <li><strong>Deutschland/EU:</strong> KI-generierte Inhalte sind nicht urheberrechtlich geschützt, wenn kein "menschlicher Schöpfungsbeitrag" vorliegt. Deine Leistung (Prompt Engineering, Auswahl, Bearbeitung) ist der schützenswerte Teil.</li>
-    <li><strong>Vertraglich regeln:</strong> Vereinbare mit deinen Kunden, dass die Nutzungsrechte an den gelieferten Inhalten vollständig auf sie übergehen. Du übernimmst keine Haftung für die KI-generierten Inhalte.</li>
-    <li><strong>Kennzeichnung:</strong> Eine Kennzeichnungspflicht für KI-Inhalte gibt es in der EU (AI Act). Informiere Kunden transparent über den KI-Einsatz.</li>
-  </ul>
-
-  <h3>8.8 Steuern – vereinfacht</h3>
-  <p>Als Selbstständiger bist du für deine Steuern selbst verantwortlich. Hier das Wichtigste:</p>
-
-  <table>
-    <tr><th>Steuerart</th><th>Fälligkeit</th><th>Besonderheit für Kleinunternehmer</th></tr>
-    <tr><td>Einkommensteuer</td><td>Jährlich (Steuererklärung bis 31.07. des Folgejahres)</td><td>Du zahlst Steuer auf deinen Gewinn (Einnahmen − Ausgaben)</td></tr>
-    <tr><td>Umsatzsteuer</td><td>Nicht nötig bei Kleinunternehmerregelung</td><td>Du weist keine USt aus, gibst keine Voranmeldung ab</td></tr>
-    <tr><td>Gewerbesteuer</td><td>Jährlich, wenn Gewinn über 24.500 € (Freibetrag)</td><td>Die meisten Einsteiger bleiben unter dem Freibetrag</td></tr>
-  </table>
-
-  <p><strong>Betriebsausgaben (Steuerlich absetzbar):</strong></p>
-  <ul>
-    <li>KI-Tool-Abonnements (ChatGPT Plus, Claude Pro, Midjourney)</li>
-    <li>Internet- und Telefonkosten (anteilig)</li>
-    <li>Hardware (Laptop, Monitor, Maus, Tastatur)</li>
-    <li>Weiterbildung (Kurse, Bücher, Konferenzen)</li>
-    <li>Arbeitszimmer (wenn den Mittelpunkt der Tätigkeit)</li>
-    <li>Versicherungen (Berufshaftpflicht, Rechtschutz)</li>
-    <li>Fachliteratur und Software</li>
-  </ul>
-
-  <div class="action-box"><strong>Aufgabe Rechtliches:</strong> (1) Melde dein Gewerbe an (wenn noch nicht geschehen). (2) Entscheide dich für die Kleinunternehmerregelung. (3) Erstelle eine Rechnungsvorlage. (4) Schreibe ein Impressum für deine Angebotsseite. (5) Erstelle eine einfache Datenschutzerklärung mit einem Generator. (6) Lege einen Ordner "Steuern 2026" an und sammle ab sofort alle Belege.</div>
+  <h3>8.3 Rechnungen & Steuern</h3>
+  <p>Als Selbstständiger musst du Rechnungen mit Pflichtangaben ausstellen: Name, Adresse, Steuernummer, Rechnungsdatum, Rechnungsnummer, Leistungsbeschreibung, Netto-Betrag, Mehrwertsteuer, Brutto-Betrag. Tools wie Lexoffice oder sevDesk helfen dir dabei.</p>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 9: RESSOURCEN & LINKS -->
-<!-- ============================================================ -->
+<!-- ===== KAPITEL 9 ===== -->
 <div class="chapter">
   <div class="chapter-header">
     <span class="chapter-number">Kapitel 9</span>
-    <h2>Ressourcen & Links</h2>
-    <span class="chapter-subtitle">Alles auf einen Blick: Tools, Plattformen, Weiterbildung</span>
+    <h2>Ressourcen &amp; Links</h2>
   </div>
-
-  <p>Hier findest du alle im Guide genannten Ressourcen plus weitere Empfehlungen – übersichtlich sortiert.</p>
-
-  <h3>KI-Tools (Alle kostenlos startbar)</h3>
 
   <div class="resource-card">
     <h4>ChatGPT (OpenAI)</h4>
     <div class="url">chat.openai.com</div>
-    <div class="desc">Allround-KI für Texte, Ideen, Analysen. GPT-4o mini kostenlos, GPT-4o / o3 für 20 €/Monat.</div>
+    <div class="desc">Kostenlose KI für Texte, Code, Analysen. GPT-4o mini gratis, GPT-4o ab 20 $/Monat.</div>
+  </div>
+  <div class="resource-card">
+    <h4>Perplexity AI</h4>
+    <div class="url">perplexity.ai</div>
+    <div class="desc">KI-Suchmaschine mit Quellenangabe. Perfekt für Recherche.</div>
   </div>
   <div class="resource-card">
     <h4>Claude (Anthropic)</h4>
     <div class="url">claude.ai</div>
-    <div class="desc">Bester Analyse-Partner, hervorragend für lange Texte und Strategie. Claude 3.5 Sonnet kostenlos, Opus für 18 €/Monat.</div>
+    <div class="desc">KI mit langem Kontextfenster. Ideal für Analyse großer Dokumente.</div>
   </div>
   <div class="resource-card">
-    <h4>Grok (xAI)</h4>
-    <div class="url">grok.com</div>
-    <div class="desc">Echtzeit-Recherche via X (Twitter). Kostenlose Stufe vorhanden, Premium für 8 €/Monat.</div>
+    <h4>DeepSeek</h4>
+    <div class="url">chat.deepseek.com</div>
+    <div class="desc">Kostenloser KI-Assistent mit 1M Token Kontext. Starke Analyse-Fähigkeiten.</div>
   </div>
   <div class="resource-card">
-    <h4>Perplexity</h4>
-    <div class="url">perplexity.ai</div>
-    <div class="desc">KI-Suchmaschine mit Quellenangaben. Unverzichtbar für Marktforschung und Faktenchecks. Kostenlos, Pro für 20 $/Monat.</div>
+    <h4>n8n – Workflow-Automatisierung</h4>
+    <div class="url">n8n.io</div>
+    <div class="desc">Open-Source-Automatisierung. Verknüpft KI, E-Mail, APIs & mehr.</div>
   </div>
   <div class="resource-card">
-    <h4>DeepL Write</h4>
-    <div class="url">deepl.com/write</div>
-    <div class="desc">KI-Schreibassistent für bessere Formulierungen. Hervorragend für Übersetzungen.</div>
+    <h4>Lexoffice – Buchhaltung</h4>
+    <div class="url">lexoffice.de</div>
+    <div class="desc">Online-Buchhaltung für Selbstständige. Rechnungen, Angebote, Steuer.</div>
   </div>
   <div class="resource-card">
-    <h4>Canva Magic Studio</h4>
-    <div class="url">canva.com</div>
-    <div class="desc">KI-Design-Tool. Kostenlose Version mit vielen KI-Features. Pro für 12,99 €/Monat.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Midjourney</h4>
-    <div class="url">midjourney.com (via Discord)</div>
-    <div class="desc">Höchste KI-Bildqualität. Ab 10 $/Monat. Kostenlose Testversion.</div>
-  </div>
-  <div class="resource-card">
-    <h4>ElevenLabs</h4>
-    <div class="url">elevenlabs.io</div>
-    <div class="desc">KI-Sprachgenerierung. Bis 10.000 Zeichen/Monat kostenlos. Prime ab 99 €/Monat.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Notion</h4>
-    <div class="url">notion.so</div>
-    <div class="desc">Projektmanagement & Wissensdatenbank. Kostenlos für Einzelpersonen.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Zapier / Make</h4>
-    <div class="url">zapier.com / make.com</div>
-    <div class="desc">Automatisierung zwischen Apps. Kostenlos mit 100 Tasks/Monat.</div>
-  </div>
-
-  <h3>Freelance-Plattformen (Kostenlos registrieren)</h3>
-
-  <div class="resource-card">
-    <h4>Fiverr</h4>
+    <h4>Fiverr – Marktplatz für Dienstleistungen</h4>
     <div class="url">fiverr.com</div>
-    <div class="desc">Beste Plattform für KI-Dienstleistungen. Riesige Nachfrage. Startpreise: 10–50 €.</div>
+    <div class="desc">Internationaler Marktplatz für KI-Dienstleistungen. Guter Startpunkt.</div>
   </div>
   <div class="resource-card">
-    <h4>Upwork</h4>
-    <div class="url">upwork.com</div>
-    <div class="desc">Höherpreisige Projekte. Gut für B2B. Freemium-Modell (20 % Provision bei ersten Kunden).</div>
-  </div>
-  <div class="resource-card">
-    <h4>Freelancermap</h4>
-    <div class="url">freelancermap.de</div>
-    <div class="desc">Deutsche Plattform für IT- und Content-Freelancer. Seriöse Kunden.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Twago</h4>
-    <div class="url">twago.de</div>
-    <div class="desc">Deutsche Freelance-Plattform. Gute Einstiegsmöglichkeit.</div>
-  </div>
-  <div class="resource-card">
-    <h4>XING / LinkedIn</h4>
-    <div class="url">linkedin.com / xing.com</div>
-    <div class="desc">Beste Plattformen für B2B-Akquise. Kostenloses Profil reicht für den Start.</div>
-  </div>
-
-  <h3>Tools für deine Business-Verwaltung</h3>
-
-  <div class="resource-card">
-    <h4>Lexoffice / sevDesk</h4>
-    <div class="url">lexoffice.de / sevdesk.de</div>
-    <div class="desc">Buchhaltungssoftware für Selbstständige. Rechnungen, Angebote, Steuer. Ab 9,90 €/Monat.</div>
-  </div>
-  <div class="resource-card">
-    <h4>HubSpot CRM (Kostenlos)</h4>
-    <div class="url">hubspot.de</div>
-    <div class="desc">Kundenverwaltung, E-Mail-Tracking, Deal-Pipeline. Dauerhaft kostenlos.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Calendly</h4>
-    <div class="url">calendly.com</div>
-    <div class="desc">Terminbuchung ohne E-Mail-Chaos. Kostenlos für 1:1-Termine.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Mailchimp / Brevo</h4>
-    <div class="url">mailchimp.com / brevo.com</div>
-    <div class="desc">E-Mail-Marketing für Newsletter. Kostenlos bis 2.000 Kontakte.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Bufffer / Hootsuite</h4>
-    <div class="url">buffer.com / hootsuite.com</div>
-    <div class="desc">Social-Media-Planung. Buffer kostenlos für 3 Kanäle.</div>
-  </div>
-
-  <h3>Rechtliche Ressourcen</h3>
-
-  <div class="resource-card">
-    <h4>Gewerbeanmeldung (Gewerbeamt deiner Stadt)</h4>
-    <div class="desc">Einfach "Gewerbeanmeldung [Stadt]" googlen. Ca. 15–60 € einmalig.</div>
-  </div>
-  <div class="resource-card">
-    <h4>eRecht24 – Datenschutz-Generator</h4>
-    <div class="url">erecht24.de</div>
-    <div class="desc">Kostenloser DSGVO-konformer Datenschutzerklärungs-Generator.</div>
-  </div>
-  <div class="resource-card">
-    <h4>AGB-Vorlagen für Freelancer</h4>
-    <div class="url">agb.de / rechtssicher.de / trustami.de</div>
-    <div class="desc">Kostenpflichtig (ca. 30–100 €), aber rechtssicher. Empfohlen für den Start.</div>
-  </div>
-  <div class="resource-card">
-    <h4>IHK – Existenzgründung</h4>
-    <div class="url">ihk.de</div>
-    <div class="desc">Kostenlose Beratung und Leitfäden für Gründer. Sehr empfehlenswert.</div>
-  </div>
-
-  <h3>Weiterbildung (Kostenlos bis günstig)</h3>
-
-  <div class="resource-card">
-    <h4>DeepLearning.AI (Coursera)</h4>
-    <div class="url">deeplearning.ai</div>
-    <div class="desc">Kostenlose KI-Kurse von Andrew Ng. Auch für Nicht-Techniker geeignet.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Google KI Kurse</h4>
-    <div class="url">ai.google/education</div>
-    <div class="desc">Kostenlose Kurse zu KI-Grundlagen und Tools.</div>
-  </div>
-  <div class="resource-card">
-    <h4>Udemy – ChatGPT für Business</h4>
-    <div class="url">udemy.com</div>
-    <div class="desc">Häufig Kurse für 10–20 € im Angebot. Suche nach "ChatGPT Business Deutsch".</div>
-  </div>
-  <div class="resource-card">
-    <h4>YouTube-Kanäle (Kostenlos)</h4>
-    <div class="desc">"KI-Insights", "Digitales Unternehmertum", "Matt Wolfe", "The AI Advantage" – Top-Kanäle für KI-Business.</div>
-  </div>
-
-  <h3>Community & Netzwerke</h3>
-
-  <div class="resource-card">
-    <h4>Reddit: r/KI_Business, r/ChatGPIT_de</h4>
-    <div class="url">reddit.com</div>
-    <div class="desc">Deutsche KI-Communities. Kostenlos. Viel Austausch und Tipps.</div>
-  </div>
-  <div class="resource-card">
-    <h4>LinkedIn – KI-Experten folgen</h4>
-    <div class="desc">Folge: Sascha Lobo, Fabian Westerheide, Lena-Sophie Müller, Philipp Klöckner – tägliche KI-Updates.</div>
-  </div>
-  <div class="resource-card">
-    <h4>KI-Startup-Guide Community</h4>
-    <div class="url">community.ki-startup-guide.de</div>
-    <div class="desc">Exklusive Community für Käufer dieses Guides. Austausch, Q&A, Jobbörse. (Zugangscode im Kauf enthalten)</div>
+    <h4>Gumroad – Verkauf digitaler Produkte</h4>
+    <div class="url">gumroad.com</div>
+    <div class="desc">Plattform für den Verkauf von PDFs, Kursen & Templates.</div>
   </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- KAPITEL 10: SCHLUSSWORT -->
-<!-- ============================================================ -->
+<!-- ===== SCHLUSSWORT ===== -->
 <div class="chapter">
   <div class="chapter-header">
-    <span class="chapter-number">Kapitel 10</span>
-    <h2>Schlusswort & Dein nächster Schritt</h2>
-    <span class="chapter-subtitle">Die KI-Revolution wartet nicht – und du auch nicht</span>
+    <span class="chapter-number">Schlusswort</span>
+    <h2>Dein nächster Schritt</h2>
   </div>
 
-  <p>Du hast es geschafft. Du hast 80+ Seiten geballtes KI-Startup-Wissen durchgearbeitet. Du kennst jetzt die Tools, die Strategien, die Geschäftsmodelle und die rechtlichen Grundlagen.</p>
+  <p>Du hast jetzt alles, was du brauchst. Die Tools sind kostenlos. Das Wissen ist in diesem Guide. Der Markt wartet auf dich. Es gibt keinen perfekten Zeitpunkt – es gibt nur JETZT.</p>
 
-  <p>Aber Wissen allein verändert nichts. Erst die Umsetzung macht den Unterschied.</p>
+  <p>Die KI-Revolution ist keine ferne Zukunft. Sie passiert in diesem Moment. Und während andere noch überlegen, ob sie einsteigen sollen, kannst du bereits deine erste Dienstleistung anbieten, deinen ersten Kunden betreuen und dein erstes Geld verdienen.</p>
 
-  <h3>Die 30-Sekunden-Regel</h3>
-  <p>Die meisten Menschen lesen einen Guide wie diesen, denken "Super Sache!" und legen ihn zur Seite. Drei Wochen später erinnern sie sich an 10 % des Inhalts. Ein Jahr später haben sie nichts umgesetzt.</p>
+  <p>Der Unterschied zwischen denen, die von der KI-Revolution profitieren, und denen, die nur zuschauen, ist nicht Talent oder Glück. Es ist der eine Schritt: Anfangen.</p>
 
-  <p>Ich möchte, dass dir das nicht passiert. Deshalb bitte ich dich um eines:</p>
+  <div class="final-cta">
+    <h3>Dein erster Schritt heute:</h3>
+    <p>Wähle eine der 10 Geschäftsideen aus Kapitel 6.</p>
+    <p>Erstelle in den nächsten 24 Stunden ein konkretes Angebot.</p>
+    <p>Kontaktiere deinen ersten potenziellen Kunden.</p>
+    <p style="margin-top: 12px; opacity: 0.7;">Mehr Vorlagen, Prompts und Tools findest du im Sortiment von Lux in Umbra auf Gumroad.</p>
+  </div>
 
-  <p><strong>Starte innerhalb der nächsten 30 Sekunden.</strong></p>
-  <p>Nicht heute Abend. Nicht morgen. Nicht nächste Woche. JETZT.</p>
-  <p>Öffne einen neuen Tab. Gehe auf ChatGPT. Gib einen Prompt ein. Erstelle dein erstes Content-Stück. Oder öffne LinkedIn und schreibe eine Nachricht an einen potenziellen Kunden.</p>
-  <p>Der erste Schritt ist der schwerste. Aber er ist auch der wichtigste.</p>
+  <p style="margin-top: 2em; text-align: center; color: #999; font-style: italic;">Erfolg ist kein Zufall. Es ist das Ergebnis von Wissen, Umsetzung und Beharrlichkeit.<br>Du hast das Wissen. Jetzt kommt die Umsetzung.</p>
+</div>
 
-  <h3>Die 3 größten Fehler, die du vermeiden solltest</h3>
-  <ol>
-    <li><strong>Perfektionismus:</strong> Dein erstes Angebot wird nicht perfekt sein. Dein erster Blogartikel auch nicht. Liefer trotzdem ab. Besser wird man durch Machen, nicht durch Planen.</li>
-    <li><strong>Zu viele Ideen gleichzeitig:</strong> Wähle EINE Idee, EINEN Kanal, EINE Dienstleistung. Mach das 30 Tage lang. Dann evaluiere und justiere.</li>
-    <li><strong>Aufhören zu früh:</strong> Die erste Woche ist aufregend. Die zweite ist anstrengend. Die dritte ist frustrierend. Die vierte wird belohnt. 80 % geben in Woche 2 oder 3 auf. Gehöre zu den 20 %, die durchhalten.</li>
-  </ol>
-
-  <h3>Meine persönliche Garantie</h3>
-  <p>Ich habe diesen Guide nicht geschrieben, weil ich Bücher liebe. Ich habe ihn geschrieben, weil ich weiß, dass KI die größte Chance für finanzielle Freiheit ist, die wir in unserem Leben sehen werden.</p>
-  <p>Ich habe selbst mit null Euro angefangen und in 6 Monaten ein KI-Business aufgebaut, das mir monatlich über 5.000 € einbringt. Ich bin kein Genie. Ich kann nicht programmieren. Ich kannte niemanden in der Branche. Ich habe einfach angefangen, systematisch gearbeitet und nicht aufgegeben.</p>
-  <p>Du kannst das auch.</p>
-  <p>Die KI-Revolution ist das größte "Level Playing Field" der Geschichte. Zum ersten Mal haben Einsteiger die gleichen Werkzeuge wie multinationale Konzerne. Ein 20-jähriger Student mit ChatGPT kann Inhalte in der gleichen Qualität produzieren wie ein 50-köpfiges Marketing-Team.</p>
-  <p>Und diese Schere geht weiter auseinander. In 12 Monaten wird KI noch leistungsfähiger sein. In 24 Monaten noch mehr. Die, die heute starten, werden in 2 Jahren unschlagbar sein – einfach weil sie Erfahrung haben, die andere nicht haben.</p>
-
-  <h3>Deine ersten 5 Aktionen – mach sie jetzt:</h3>
-  <ol>
-    <li><strong>Registriere dich bei ChatGPT, Claude und Perplexity</strong> (5 Minuten)</li>
-    <li><strong>Wähle eine Dienstleistung und eine Nische</strong> (10 Minuten)</li>
-    <li><strong>Erstelle ein Portfolio-Stück mit KI</strong> (20 Minuten)</li>
-    <li><strong>Baue eine einfache Angebotsseite</strong> (30 Minuten)</li>
-    <li><strong>Schreibe 5 potenzielle Kunden an</strong> (15 Minuten)</li>
-  </ol>
-  <p><strong>Gesamtzeit: 80 Minuten. Potenzieller Return: Tausende Euro.</strong></p>
-  <p>Das ist der beste ROI, den du je erzielen wirst.</p>
-
-  <div class="action-box"><strong>Letzte Aktion:</strong> Schließe dieses Buch nicht, ohne einen der 5 Schritte oben gemacht zu haben. Egal welchen. Mach JETZT einen Schritt. Danach den nächsten. Und den übernächsten. In 30 Tagen wirst du mir danken.</div>
-
-  <p>&nbsp;</p>
-  <p style="text-align: center; font-style: italic; color: #666;">— Dein Guide durch die KI-Revolution<br>Licht und Schatten</p>
-  <p>&nbsp;</p>
-  <p style="text-align: center; font-size: 9pt; color: #999;">KI-Startup-Guide 2026 · In 30 Tagen zum ersten KI-Business · Version 1.0 · Juni 2026<br>
-  Erhältlich unter: www.ki-startup-guide.de</p>
+<!-- ===== END PAGE ===== -->
+<div class="end-page">
+  <h2>KI-Startup-Guide</h2>
+  <p>Ein Produkt von <strong>Lux in Umbra</strong></p>
+  <p style="margin-top: 20px; font-size: 9pt; color: #aaa;">© 2026 Lux in Umbra. Alle Rechte vorbehalten.</p>
 </div>
 
 </body>
