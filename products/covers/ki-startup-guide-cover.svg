@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" width="800" height="1200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="30%" stop-color="#1a0a2e"/>
+      <stop offset="60%" stop-color="#0d0d28"/>
+      <stop offset="100%" stop-color="#050510"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c4dff"/>
+      <stop offset="100%" stop-color="#00d4aa"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1200" fill="url(#bg)"/>
+  <rect x="0" y="0" width="800" height="4" fill="url(#accent)"/>
+  <!-- Grid overlay -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="500" x2="800" y2="500" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="600" x2="800" y2="600" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="1200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="1200" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="1200" stroke="#fff" stroke-width="0.5"/>
+  </g>
+  <!-- Orbs -->
+  <circle cx="600" cy="200" r="250" fill="rgba(124,77,255,0.08)" filter="blur(60px)"/>
+  <circle cx="200" cy="800" r="200" fill="rgba(0,212,170,0.06)" filter="blur(60px)"/>
+  <!-- Content -->
+  <rect x="60" y="50" width="120" height="120" rx="24" fill="rgba(124,77,255,0.1)"/>
+  <text x="120" y="125" text-anchor="middle" font-size="48" fill="#7c4dff">🚀</text>
+  <text x="400" y="280" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="300" fill="rgba(255,255,255,0.4)" letter-spacing="4" text-transform="uppercase">LUX IN UMBRA</text>
+  <rect x="320" y="300" width="160" height="2" rx="1" fill="url(#accent)"/>
+  <text x="400" y="400" text-anchor="middle" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#fff" letter-spacing="1">KI-Startup-Guide</text>
+  <text x="400" y="450" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="300" fill="rgba(255,255,255,0.7)" font-style="italic">In 30 Tagen zum ersten KI-Business</text>
+  <rect x="250" y="480" width="300" height="1" fill="rgba(255,255,255,0.1)"/>
+  <text x="400" y="530" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.5)">Ohne Code · Ohne Budget · Ohne Vorkenntnisse</text>
+  <!-- Features -->
+  <g font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.6)">
+    <text x="400" y="620" text-anchor="middle">✅ 91 Seiten · 12 Kapitel · 30-Tage-Plan</text>
+    <text x="400" y="650" text-anchor="middle">✅ KI-Tools · Dienstleistungen · Skalierung</text>
+    <text x="400" y="680" text-anchor="middle">✅ 50 profitable KI-Prompts</text>
+  </g>
+  <!-- Bottom bar -->
+  <rect x="0" y="1130" width="800" height="70" fill="rgba(255,255,255,0.03)"/>
+  <text x="400" y="1165" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.3)" letter-spacing="2">ISBN 978-3-XXXXXX-0-0 · 29,00 €</text>
+  <text x="400" y="1178" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="9" fill="rgba(255,255,255,0.15)">WWW.KI-STARTUP-GUIDE.DE</text>
+</svg>

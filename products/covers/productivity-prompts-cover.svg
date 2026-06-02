@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200" width="800" height="1200">
+<defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#0a0a1a"/><stop offset="30%" stop-color="#0a2e1a"/><stop offset="60%" stop-color="#0d0d28"/><stop offset="100%" stop-color="#050510"/></linearGradient><linearGradient id="ac" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#00d4aa"/><stop offset="100%" stop-color="#00e676"/></linearGradient></defs>
+<rect width="800" height="1200" fill="url(#bg)"/><rect x="0" y="0" width="800" height="4" fill="url(#ac)"/>
+<circle cx="600" cy="200" r="250" fill="rgba(0,212,170,0.08)" filter="blur(60px)"/><circle cx="200" cy="800" r="200" fill="rgba(0,230,118,0.06)" filter="blur(60px)"/>
+<rect x="60" y="50" width="120" height="120" rx="24" fill="rgba(255,255,255,0.04)"/><text x="120" y="125" text-anchor="middle" font-size="48">⚡</text>
+<text x="400" y="280" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" font-weight="300" fill="rgba(255,255,255,0.4)" letter-spacing="4">LUX IN UMBRA</text>
+<rect x="320" y="300" width="160" height="2" rx="1" fill="url(#ac)"/>
+<text x="400" y="390" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#fff">Productivity</text>
+<text x="400" y="435" text-anchor="middle" font-family="Georgia, serif" font-size="44" font-weight="700" fill="#fff">Prompt Pack</text>
+<text x="400" y="475" text-anchor="middle" font-family="Georgia, serif" font-size="16" font-weight="300" fill="rgba(255,255,255,0.7)" font-style="italic">KI-Workflow Optimierung</text>
+<rect x="250" y="500" width="300" height="1" fill="rgba(255,255,255,0.1)"/>
+<g font-family="Helvetica Neue, Arial, sans-serif" font-size="13" fill="rgba(255,255,255,0.5)">
+<text x="400" y="560" text-anchor="middle">✅ 18 Aufgabenmanagement-Prompts</text>
+<text x="400" y="590" text-anchor="middle">✅ 15 Zeitplanung-Prompts: Batching</text>
+<text x="400" y="620" text-anchor="middle">✅ 14 E-Mail-Prompts: Inbox Zero</text>
+<text x="400" y="650" text-anchor="middle">✅ 16 Fokus-Prompts: Deep Work</text>
+<text x="400" y="680" text-anchor="middle">✅ 18 Workflow-Prompts: Automatisierung</text>
+<text x="400" y="710" text-anchor="middle">✅ Inbox Zero Strategie + Tagesplanung</text>
+</g>
+<rect x="0" y="1130" width="800" height="70" fill="rgba(255,255,255,0.03)"/>
+<text x="400" y="1165" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.3)">14,00 EURO</text>
+</svg>
