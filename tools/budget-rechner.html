@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget-Rechner</title>
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.container {
+  max-width: 800px;
+  width: 100%;
+  background: #161b22;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  border: 1px solid #30363d;
+}
+
+/* ===== HEADER ===== */
+h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f0f6fc;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h1 span { background: #238636; color: #fff; font-size: 14px; padding: 2px 10px; border-radius: 20px; }
+.subtitle { color: #8b949e; font-size: 14px; margin-bottom: 28px; }
+
+/* ===== INPUT GRID ===== */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) { .input-grid { grid-template-columns: 1fr; } }
+.input-group { display: flex; flex-direction: column; gap: 4px; }
+.input-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.input-group input {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 16px;
+  color: #f0f6fc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+.input-group input:focus {
+  outline: none;
+  border-color: #58a6ff;
+  box-shadow: 0 0 0 3px rgba(88,166,255,0.2);
+}
+.input-group input::placeholder { color: #484f58; }
+.input-group .currency-wrap { position: relative; }
+.input-group .currency-wrap::before {
+  content: '\20AC';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #484f58;
+  font-weight: 600;
+  pointer-events: none;
+}
+.input-group .currency-wrap input { padding-left: 32px; }
+
+/* ===== CALCULATE BUTTON ===== */
+.btn-calc {
+  width: 100%;
+  padding: 14px;
+  background: #238636;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 24px;
+  font-family: inherit;
+}
+.btn-calc:hover { background: #2ea043; }
+.btn-calc:active { transform: scale(0.98); }
+
+/* ===== RESULTS ===== */
+.results { display: none; }
+.results.show { display: block; }
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+@media (max-width: 600px) { .result-grid { grid-template-columns: 1fr; } }
+.result-card {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 16px;
+}
+.result-card .label {
+  font-size: 12px;
+  color: #8b949e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.result-card .value {
+  font-size: 24px;
+  font-weight: 700;
+}
+.result-card .value.green { color: #3fb950; }
+.result-card .value.yellow { color: #d29922; }
+.result-card .value.red { color: #f85149; }
+
+/* ===== SAVINGS PROGRESS ===== */
+.savings-section { margin-bottom: 24px; }
+.savings-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #f0f6fc;
+}
+.progress-bar-bg {
+  background: #21262d;
+  border-radius: 8px;
+  height: 24px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #30363d;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  min-width: 0;
+}
+.progress-bar-fill.low { background: linear-gradient(90deg, #f85149, #d29922); }
+.progress-bar-fill.mid { background: linear-gradient(90deg, #d29922, #3fb950); }
+.progress-bar-fill.high { background: linear-gradient(90deg, #3fb950, #2ea043); }
+.progress-bar-fill.done { background: linear-gradient(90deg, #2ea043, #238636); }
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #8b949e;
+  margin-top: 4px;
+}
+
+/* ===== PIE CHART (CSS) ===== */
+.chart-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.pie-wrapper { position: relative; flex-shrink: 0; }
+.pie-chart {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: #21262d;
+  position: relative;
+  clip-path: inset(0 round 50%);
+}
+.pie-slice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.pie-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: #161b22;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid #30363d;
+}
+.pie-center .total-label { font-size: 10px; color: #8b949e; text-transform: uppercase; }
+.pie-center .total-val { font-size: 20px; font-weight: 700; color: #f0f6fc; }
+
+/* Legend */
+.chart-legend { flex: 1; min-width: 180px; }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 14px;
+}
+.legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.legend-pct {
+  margin-left: auto;
+  color: #8b949e;
+  font-size: 12px;
+}
+.legend-val {
+  margin-left: auto;
+  color: #f0f6fc;
+  font-weight: 600;
+  font-size: 13px;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+/* ===== TIPS ===== */
+.tips-section {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+.tips-section h2 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tips-section ul { list-style: none; padding: 0; }
+.tips-section li {
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c9d1d9;
+}
+.tips-section li::before {
+  content: '\26A0';
+  margin-right: 8px;
+  color: #d29922;
+}
+.tips-section li.good::before {
+  content: '\2705';
+  margin-right: 8px;
+  color: #3fb950;
+}
+
+/* ===== AFFILIATE LINKS ===== */
+.affiliate-section {
+  border-top: 1px solid #30363d;
+  padding-top: 20px;
+  margin-top: 4px;
+}
+.affiliate-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #8b949e;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.affiliate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 600px) { .affiliate-grid { grid-template-columns: 1fr; } }
+.affiliate-card {
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 14px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.affiliate-card:hover { border-color: #58a6ff; }
+.affiliate-card .book-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+.affiliate-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f0f6fc;
+  margin-bottom: 4px;
+}
+.affiliate-card p {
+  font-size: 12px;
+  color: #8b949e;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+.affiliate-card a {
+  display: inline-block;
+  background: #1f6feb;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.affiliate-card a:hover { background: #388bfd; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: #484f58;
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <h1>Budget-Rechner <span>v1.0</span></h1>
+  <p class="subtitle">Verwalte deine Finanzen – berechne Ausgaben, Ersparnisse &amp; erhalte Tipps.</p>
+
+  <!-- Inputs -->
+  <div class="input-grid">
+    <div class="input-group">
+      <label for="income">Monatseinkommen (netto)</label>
+      <div class="currency-wrap"><input type="number" id="income" placeholder="z.B. 3000" min="0" step="100"></div>
+    </div>
+    <div class="input-group">
+      <label for="savingsGoal">Sparziel (monatlich)</label>
+      <div class="currency-wrap"><input type="number" id="savingsGoal" placeholder="z.B. 500" min="0" step="50"></div>
+    </div>
+    <div class="input-group">
+      <label for="rent">Miete</label>
+      <div class="currency-wrap"><input type="number" id="rent" placeholder="z.B. 900" min="0" step="50"></div>
+    </div>
+    <div class="input-group">
+      <label for="food">Lebensmittel</label>
+      <div class="currency-wrap"><input type="number" id="food" placeholder="z.B. 350" min="0" step="10"></div>
+    </div>
+    <div class="input-group">
+      <label for="transport">Transport / Mobilität</label>
+      <div class="currency-wrap"><input type="number" id="transport" placeholder="z.B. 150" min="0" step="10"></div>
+    </div>
+    <div class="input-group">
+      <label for="insurance">Versicherungen</label>
+      <div class="currency-wrap"><input type="number" id="insurance" placeholder="z.B. 200" min="0" step="10"></div>
+    </div>
+    <div class="input-group">
+      <label for="entertainment">Freizeit &amp; Unterhaltung</label>
+      <div class="currency-wrap"><input type="number" id="entertainment" placeholder="z.B. 150" min="0" step="10"></div>
+    </div>
+  </div>
+
+  <button class="btn-calc" id="calcBtn">Jetzt berechnen</button>
+
+  <!-- Results (hidden until first calculation) -->
+  <div class="results" id="results">
+
+    <!-- Summary cards -->
+    <div class="result-grid">
+      <div class="result-card">
+        <div class="label">Gesamtausgaben</div>
+        <div class="value red" id="totalExpenses">0,00 &euro;</div>
+      </div>
+      <div class="result-card">
+        <div class="label">&Uuml;briges Geld</div>
+        <div class="value green" id="remainingMoney">0,00 &euro;</div>
+      </div>
+    </div>
+
+    <!-- Savings progress bar -->
+    <div class="savings-section">
+      <h2>Sparfortschritt</h2>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill low" id="progressFill" style="width:0%">0%</div>
+      </div>
+      <div class="progress-text">
+        <span id="savedLabel">0,00 &euro; gespart</span>
+        <span id="goalLabel">Ziel: 0,00 &euro;</span>
+      </div>
+    </div>
+
+    <!-- Pie chart -->
+    <div class="chart-row">
+      <div class="pie-wrapper">
+        <div class="pie-chart" id="pieChart">
+          <!-- Slice segments will be injected via JS -->
+        </div>
+        <div class="pie-center">
+          <div class="total-label">Ausgaben</div>
+          <div class="total-val" id="pieTotal">0</div>
+        </div>
+      </div>
+      <div class="chart-legend" id="pieLegend">
+        <!-- Legend items injected via JS -->
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips-section" id="tipsSection">
+      <h2>&#128161; Finanz-Tipps</h2>
+      <ul id="tipsList"></ul>
+    </div>
+
+    <!-- Affiliate links -->
+    <div class="affiliate-section">
+      <h3>&#128218; Empfohlene Finanz-B&uuml;cher</h3>
+      <div class="affiliate-grid">
+        <div class="affiliate-card">
+          <div class="book-icon">&#128214;</div>
+          <h4>Der reichste Mann von Babylon</h4>
+          <p>George S. Clason – zeitlose Prinzipien f&uuml;r Wohlstand.</p>
+          <a href="https://www.amazon.de/dp/3868822033?tag=ikune21-21" target="_blank" rel="noopener">Bei Amazon ansehen</a>
+        </div>
+        <div class="affiliate-card">
+          <div class="book-icon">&#128214;</div>
+          <h4>Rich Dad Poor Dad</h4>
+          <p>Robert T. Kiyosaki – der Klassiker &uuml;ber finanzielle Bildung.</p>
+          <a href="https://www.amazon.de/dp/3868822033?tag=ikune21-21" target="_blank" rel="noopener">Bei Amazon ansehen</a>
+        </div>
+        <div class="affiliate-card">
+          <div class="book-icon">&#128214;</div>
+          <h4>Das einzige Buch, das Du &uuml;ber Finanzen lesen solltest</h4>
+          <p>Thomas Kehl – einfache Strategien f&uuml;r deine Finanzen.</p>
+          <a href="https://www.amazon.de/dp/3868822033?tag=ikune21-21" target="_blank" rel="noopener">Bei Amazon ansehen</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /results -->
+
+  <div class="footer">
+    Budget-Rechner &copy; 2026 &ndash; Alle Angaben ohne Gew&auml;hr.
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const COLORS = [
+    '#f85149',  /* Rent / red */
+    '#d29922',  /* Food / yellow */
+    '#58a6ff',  /* Transport / blue */
+    '#3fb950',  /* Insurance / green */
+    '#bc8cff',  /* Entertainment / purple */
+  ];
+
+  const CATEGORIES = ['rent','food','transport','insurance','entertainment'];
+  const LABELS = {
+    rent: 'Miete',
+    food: 'Lebensmittel',
+    transport: 'Mobilit&auml;t',
+    insurance: 'Versicherungen',
+    entertainment: 'Freizeit'
+  };
+
+  const $ = id => document.getElementById(id);
+
+  function parseVal(id) {
+    const v = parseFloat($(id).value);
+    return isNaN(v) || v < 0 ? 0 : v;
+  }
+
+  function fmt(n) {
+    return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+
+  function calculate() {
+    const income      = parseVal('income');
+    const rent        = parseVal('rent');
+    const food        = parseVal('food');
+    const transport   = parseVal('transport');
+    const insurance   = parseVal('insurance');
+    const entertainment = parseVal('entertainment');
+    const savingsGoal = parseVal('savingsGoal');
+
+    const expenses = rent + food + transport + insurance + entertainment;
+    const remaining = income - expenses;
+    const saved = Math.max(0, remaining); // what you could save (if positive)
+    const savingsPct = savingsGoal > 0 ? Math.min(100, (saved / savingsGoal) * 100) : 0;
+
+    // Show results
+    $('results').classList.add('show');
+
+    // Total expenses
+    const totalEl = $('totalExpenses');
+    totalEl.textContent = fmt(expenses) + ' \u20AC';
+    totalEl.className = 'value ' + (expenses > income ? 'red' : (expenses > income * 0.7 ? 'yellow' : 'green'));
+
+    // Remaining money
+    const remEl = $('remainingMoney');
+    remEl.textContent = fmt(remaining) + ' \u20AC';
+    if (remaining < 0) {
+      remEl.className = 'value red';
+    } else if (remaining < income * 0.1) {
+      remEl.className = 'value yellow';
+    } else {
+      remEl.className = 'value green';
+    }
+
+    // Progress bar
+    const fill = $('progressFill');
+    fill.style.width = Math.round(savingsPct) + '%';
+    fill.textContent = Math.round(savingsPct) + '%';
+    fill.className = 'progress-bar-fill';
+    if (savingsPct >= 100) fill.classList.add('done');
+    else if (savingsPct >= 60) fill.classList.add('high');
+    else if (savingsPct >= 30) fill.classList.add('mid');
+    else fill.classList.add('low');
+    if (savingsPct < 8) fill.textContent = ''; // hide text on tiny bar
+
+    $('savedLabel').textContent = fmt(saved) + ' \u20AC gespart';
+    $('goalLabel').textContent = 'Ziel: ' + fmt(savingsGoal) + ' \u20AC';
+
+    // Pie chart
+    const vals = [rent, food, transport, insurance, entertainment];
+    const total = vals.reduce((a,b) => a+b, 0);
+    renderPie(vals, total);
+
+    // Tips
+    generateTips(income, expenses, remaining, savingsPct, rent, food, transport, insurance, entertainment, savingsGoal);
+  }
+
+  /* ===== PIE CHART (pure CSS conic-gradient) ===== */
+  function renderPie(vals, total) {
+    const pie = $('pieChart');
+    const legend = $('pieLegend');
+
+    $('pieTotal').textContent = fmt(total) + '\u20AC';
+
+    if (total === 0) {
+      pie.style.background = '#21262d';
+      pie.innerHTML = '';
+      legend.innerHTML = '<div class="legend-item" style="color:#8b949e">Keine Ausgaben erfasst.</div>';
+      return;
+    }
+
+    // Build conic-gradient
+    let gradientParts = [];
+    let cumAngle = 0;
+    const segments = [];
+
+    vals.forEach((v, i) => {
+      if (v === 0) return;
+      const pct = v / total;
+      const deg = pct * 360;
+      const start = cumAngle;
+      const end = cumAngle + deg;
+      gradientParts.push(COLORS[i] + ' ' + start + 'deg ' + end + 'deg');
+      segments.push({ index: i, value: v, pct: pct, start: start, end: end, color: COLORS[i] });
+      cumAngle = end;
+    });
+
+    if (gradientParts.length === 0) {
+      pie.style.background = '#21262d';
+      pie.innerHTML = '';
+      legend.innerHTML = '<div class="legend-item" style="color:#8b949e">Keine Ausgaben erfasst.</div>';
+      return;
+    }
+
+    pie.style.background = 'conic-gradient(' + gradientParts.join(', ') + ')';
+    pie.innerHTML = '';
+
+    // Legend
+    let legendHtml = '';
+    segments.forEach(s => {
+      const label = LABELS[CATEGORIES[s.index]] || CATEGORIES[s.index];
+      legendHtml += '<div class="legend-item">'
+        + '<div class="legend-row">'
+        + '<div class="legend-dot" style="background:' + s.color + '"></div>'
+        + '<span>' + label + '</span>'
+        + '<span class="legend-pct">' + (s.pct * 100).toFixed(1) + '%</span>'
+        + '<span class="legend-val">' + fmt(s.value) + ' \u20AC</span>'
+        + '</div>'
+        + '</div>';
+    });
+    legend.innerHTML = legendHtml;
+  }
+
+  /* ===== TIPS ===== */
+  function generateTips(income, expenses, remaining, savingsPct, rent, food, transport, insurance, entertainment, savingsGoal) {
+    const list = $('tipsList');
+    const tips = [];
+
+    // 1) Overall budget health
+    if (remaining < 0) {
+      tips.push({ text: 'Deine Ausgaben (&euro;' + fmt(expenses) + ') &uuml;bersteigen dein Einkommen (&euro;' + fmt(income) + '). Reduziere Ausgaben oder erh&ouml;he dein Einkommen.', good: false });
+    } else if (remaining < income * 0.1) {
+      tips.push({ text: 'Nur ' + fmt(remaining) + ' &euro; bleiben &uuml;brig (unter 10 % des Einkommens). Versuche, Ausgaben zu senken.', good: false });
+    } else if (remaining >= income * 0.2) {
+      tips.push({ text: 'Starke finanzielle Disziplin! &Uuml;ber 20 % deines Einkommens bleibt &uuml;brig.', good: true });
+    } else {
+      tips.push({ text: 'Dir bleiben ' + fmt(remaining) + ' &euro; &uuml;brig. Ein guter Ansatz, aber optimierbar.', good: false });
+    }
+
+    // 2) Rent check
+    if (income > 0) {
+      const rentPct = (rent / income) * 100;
+      if (rentPct > 40) {
+        tips.push({ text: 'Deine Miete betr&auml;gt ' + rentPct.toFixed(0) + '% des Einkommens. Empfohlen sind max. 30–35 %.', good: false });
+      } else if (rentPct <= 30) {
+        tips.push({ text: 'Mietkosten mit ' + rentPct.toFixed(0) + ' % im gesunden Rahmen.', good: true });
+      }
+    }
+
+    // 3) Food check
+    if (food > 500) {
+      tips.push({ text: 'Lebensmittelausgaben von ' + fmt(food) + ' &euro; sind hoch. Meal-Prep und Einkaufslisten helfen zu sparen.', good: false });
+    } else if (food > 0 && food <= 250) {
+      tips.push({ text: 'Lebensmittelausgaben mit ' + fmt(food) + ' &euro; sehr sparsam.', good: true });
+    }
+
+    // 4) Transport
+    if (transport > 200) {
+      tips.push({ text: 'Transportkosten von ' + fmt(transport) + ' &euro; sind relativ hoch. Pr&uuml;fe &ouml;ffentliche Verkehrsmittel oder Fahrrad.', good: false });
+    }
+
+    // 5) Entertainment
+    if (entertainment > 200) {
+      tips.push({ text: '&Uuml;ber ' + fmt(200) + ' &euro; f&uuml;r Freizeit ist viel. Ein Budget von max. 10 % des Einkommens ist empfehlenswert.', good: false });
+    }
+
+    // 6) Savings goal
+    if (savingsGoal > 0) {
+      if (savingsPct >= 100) {
+        tips.push({ text: 'Sparziel von ' + fmt(savingsGoal) + ' &euro; erreicht oder &uuml;bertroffen! Gro&szlig;artig!', good: true });
+      } else if (remaining > 0 && savingsPct < 50) {
+        tips.push({ text: 'Erst ' + Math.round(savingsPct) + '% des Sparziels erreicht. Versuche, Ausgaben zu reduzieren oder das Ziel anzupassen.', good: false });
+      } else if (remaining > 0) {
+        tips.push({ text: 'Gut auf dem Weg zum Sparziel (' + Math.round(savingsPct) + ' % erreicht).', good: true });
+      }
+    } else {
+      tips.push({ text: 'Setze ein monatliches Sparziel, um deine Ersparnisse gezielt zu steigern.', good: false });
+    }
+
+    // 7) Insurance check
+    if (insurance > 400) {
+      tips.push({ text: 'Versicherungskosten von ' + fmt(insurance) + ' &euro; sind &uuml;berdurchschnittlich. Pr&uuml;fe, ob du Doppelversicherungen hast.', good: false });
+    }
+
+    // Render
+    list.innerHTML = '';
+    tips.forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t.text;
+      li.innerHTML = t.text; // allow HTML in text
+      if (t.good) li.classList.add('good');
+      list.appendChild(li);
+    });
+  }
+
+  // Bind calculate button
+  $('calcBtn').addEventListener('click', calculate);
+
+  // Allow Enter key to trigger calculation
+  document.querySelectorAll('.input-group input').forEach(inp => {
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') calculate();
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>

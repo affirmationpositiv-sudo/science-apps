@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Content Generator</title>
+<style>
+  :root {
+    --bg-primary: #0d1117;
+    --bg-secondary: #161b22;
+    --bg-card: #1c2333;
+    --bg-input: #0d1117;
+    --border: #30363d;
+    --border-focus: #58a6ff;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --text-muted: #6e7681;
+    --accent: #58a6ff;
+    --accent-hover: #79c0ff;
+    --success: #3fb950;
+    --warning: #d29922;
+    --danger: #f85149;
+    --purple: #bc8cff;
+    --orange: #f0883e;
+    --pink: #f778ba;
+    --cyan: #39d2c0;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    --radius: 8px;
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p { color: var(--text-secondary); margin-top: 8px; font-size: 0.95rem; }
+
+  /* CARDS */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 1.2rem; }
+
+  /* FORM ELEMENTS */
+  label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  input[type="text"],
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  input[type="text"]:focus,
+  textarea:focus,
+  select:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(88,166,255,0.15);
+  }
+  textarea { resize: vertical; min-height: 120px; font-family: var(--font-mono); font-size: 0.85rem; }
+  .form-group { margin-bottom: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+  .hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--text-muted); }
+  .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+  /* RESULTS */
+  .result-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+  }
+  .result-box:empty { display: none; }
+  .result-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--success); }
+  .badge-yellow { background: rgba(210,153,34,0.15); color: var(--warning); }
+  .badge-red { background: rgba(248,81,73,0.15); color: var(--danger); }
+  .badge-purple { background: rgba(188,140,255,0.15); color: var(--purple); }
+
+  /* KEYWORD DENSITY TABLE */
+  .density-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 0.85rem;
+  }
+  .density-table th {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 2px solid var(--border);
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .density-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .density-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--bg-primary);
+    overflow: hidden;
+    max-width: 200px;
+  }
+  .density-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .bar-green { background: var(--success); }
+  .bar-yellow { background: var(--warning); }
+  .bar-red { background: var(--danger); }
+  .bar-purple { background: var(--purple); }
+
+  /* READABILITY GAUGE */
+  .gauge-container {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .gauge {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .gauge svg { transform: rotate(-90deg); }
+  .gauge-bg { fill: none; stroke: var(--bg-primary); stroke-width: 8; }
+  .gauge-fill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+  .gauge-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .gauge-score { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+  .gauge-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+  .readability-details { flex: 1; min-width: 200px; }
+  .readability-details .stat { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+  .readability-details .stat:last-child { border-bottom: none; }
+  .readability-details .stat-value { color: var(--text-primary); font-weight: 600; }
+
+  /* SCORE RINGS */
+  .score-ring {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+  }
+  .score-ring-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* HEADER LIST */
+  .header-tree { margin-top: 12px; }
+  .header-tree .h { color: var(--accent); font-weight: 600; }
+  .header-tree .h1 { color: var(--pink); font-size: 1rem; }
+  .header-tree .h2 { color: var(--purple); padding-left: 24px; }
+  .header-tree .h3 { color: var(--cyan); padding-left: 48px; }
+  .header-tree .h4 { color: var(--orange); padding-left: 72px; }
+  .header-tree .h-item { padding: 6px 0; border-bottom: 1px solid rgba(48,54,61,0.4); font-size: 0.9rem; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .tab {
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .tab:hover { color: var(--text-primary); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* AFFILIATE SECTION */
+  .affiliate-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 12px;
+  }
+  @media (max-width: 700px) { .affiliate-grid { grid-template-columns: 1fr; } }
+  .affiliate-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .affiliate-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+  }
+  .affiliate-card .book-icon {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+  }
+  .affiliate-card h3 { font-size: 0.95rem; margin-bottom: 6px; }
+  .affiliate-card p { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 12px; }
+  .affiliate-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: linear-gradient(135deg, #f0883e, #d29922);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s;
+  }
+  .affiliate-btn:hover { opacity: 0.9; }
+  .affiliate-tag { font-size: 0.7rem; color: var(--text-muted); margin-top: 8px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 30px;
+  }
+
+  /* UTILITIES */
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mb-8 { margin-bottom: 8px; }
+  .hidden { display: none; }
+  .flex { display: flex; }
+  .gap-8 { gap: 8px; }
+  .items-center { align-items: center; }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    display: none;
+    z-index: 1000;
+    max-width: 360px;
+    font-size: 0.85rem;
+  }
+  .toast.show { display: block; animation: fadeInUp 0.3s ease; }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .toast-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    margin-left: 12px;
+    padding: 0 4px;
+  }
+
+  /* Word count meta */
+  .word-meta { color: var(--text-muted); font-size: 0.78rem; display: flex; gap: 16px; margin-top: 8px; }
+
+  /* Copy btn */
+  .copy-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 2px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    float: right;
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🚀 SEO Content Generator</h1>
+    <p>Generate SEO-optimized titles, meta descriptions, header outlines, keyword density analysis & readability scores — all in your browser.</p>
+  </header>
+
+  <!-- INPUT SECTION -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📝</span> Content Details</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="topic">Topic / Main Subject</label>
+        <input type="text" id="topic" placeholder="e.g., Organic Gardening Tips for Beginners" />
+      </div>
+      <div class="form-group">
+        <label for="keywords">Target Keywords (comma-separated)</label>
+        <input type="text" id="keywords" placeholder="e.g., organic gardening, beginner garden, soil health" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="targetAudience">Target Audience <span class="hint">(optional — helps tailor tone)</span></label>
+      <input type="text" id="targetAudience" placeholder="e.g., beginner gardeners, small business owners, developers" />
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="generateAll()">🎯 Generate SEO Content</button>
+      <button class="btn btn-secondary" onclick="clearAll()">✕ Clear All</button>
+    </div>
+  </div>
+
+  <!-- RESULTS TABS -->
+  <div class="card">
+    <div class="tabs" id="resultTabs">
+      <button class="tab active" data-tab="tab-titles">📰 Titles</button>
+      <button class="tab" data-tab="tab-meta">📋 Meta Description</button>
+      <button class="tab" data-tab="tab-headers">🏗️ Header Outline</button>
+      <button class="tab" data-tab="tab-density">📊 Keyword Density</button>
+      <button class="tab" data-tab="tab-readability">📖 Readability</button>
+      <button class="tab" data-tab="tab-brief">📄 Content Brief</button>
+    </div>
+
+    <!-- TITLES -->
+    <div class="tab-content active" id="tab-titles">
+      <p class="hint">Click any title to copy it. Each follows a proven SEO pattern for click-through rates.</p>
+      <div id="titlesOutput"></div>
+    </div>
+
+    <!-- META DESCRIPTION -->
+    <div class="tab-content" id="tab-meta">
+      <div id="metaOutput"></div>
+    </div>
+
+    <!-- HEADER OUTLINE -->
+    <div class="tab-content" id="tab-headers">
+      <p class="hint">A hierarchical outline of SEO-optimized headers for your content. Adjust as needed.</p>
+      <div id="headersOutput"></div>
+    </div>
+
+    <!-- KEYWORD DENSITY -->
+    <div class="tab-content" id="tab-density">
+      <div class="form-group">
+        <label for="densityContent">Paste your content to analyze keyword density</label>
+        <textarea id="densityContent" placeholder="Paste or generate content above, then paste it here to analyze keyword density and frequency..."></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="analyzeDensity()">🔍 Analyze Keyword Density</button>
+      <div id="densityOutput" class="mt-16"></div>
+    </div>
+
+    <!-- READABILITY -->
+    <div class="tab-content" id="tab-readability">
+      <div class="form-group">
+        <label for="readabilityContent">Paste content to analyze readability</label>
+        <textarea id="readabilityContent" placeholder="Paste content to analyze Flesch Reading Ease score, grade level, and reading statistics..."></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="analyzeReadability()">📖 Analyze Readability</button>
+      <div id="readabilityOutput" class="mt-16"></div>
+    </div>
+
+    <!-- CONTENT BRIEF -->
+    <div class="tab-content" id="tab-brief">
+      <div id="briefOutput"></div>
+    </div>
+  </div>
+
+  <!-- AMAZON AFFILIATE BOOKS -->
+  <div class="card">
+    <div class="card-title"><span class="icon">📚</span> Resources — Recommended SEO &amp; Marketing Books</div>
+    <div class="affiliate-grid">
+      <div class="affiliate-card">
+        <div class="book-icon">📘</div>
+        <h3>SEO 2024: Learn Search Engine Optimization</h3>
+        <p>Actionable SEO strategies, keyword research, technical SEO &amp; link building for beginners &amp; pros.</p>
+        <a class="affiliate-btn" href="https://www.amazon.com/dp/B0C71GN2JG?tag=ikune21-21" target="_blank" rel="noopener">Check Price →</a>
+        <div class="affiliate-tag">#1 Best Seller — Search Engine Optimization</div>
+      </div>
+      <div class="affiliate-card">
+        <div class="book-icon">📗</div>
+        <h3>Content Marketing Strategies For Dummies</h3>
+        <p>Master content planning, distribution &amp; analytics. Turn readers into customers with data-driven content.</p>
+        <a class="affiliate-btn" href="https://www.amazon.com/dp/1119893796?tag=ikune21-21" target="_blank" rel="noopener">Check Price →</a>
+        <div class="affiliate-tag">Essential reading for content marketers</div>
+      </div>
+      <div class="affiliate-card">
+        <div class="book-icon">📕</div>
+        <h3>Everybody Writes: Your Go-To Guide to Ridiculously Good Content</h3>
+        <p>Ann Handley's modern classic on writing web content that ranks, resonates &amp; converts readers.</p>
+        <a class="affiliate-btn" href="https://www.amazon.com/dp/111983370X?tag=ikune21-21" target="_blank" rel="noopener">Check Price →</a>
+        <div class="affiliate-tag">Top-rated writing &amp; content guide</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    SEO Content Generator &mdash; All processing is done client-side in your browser. No data is sent to any server.<br>
+    <small>As an Amazon Associate I earn from qualifying purchases.</small>
+  </footer>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span id="toastMsg"></span>
+  <button class="toast-close" onclick="hideToast()">✕</button>
+</div>
+
+<script>
+/* =========================================================
+   SEO CONTENT GENERATOR — Client-Side Engine
+   ========================================================= */
+
+// --- UTILITY ---
+function getEl(id) { return document.getElementById(id); }
+
+function showToast(msg) {
+  const t = getEl('toast');
+  getEl('toastMsg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(hideToast, 3000);
+}
+
+function hideToast() { getEl('toast').classList.remove('show'); }
+
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('📋 Copied!')).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    showToast('📋 Copied!');
+  });
+}
+
+function capitalize(str) { return str.replace(/\b\w/g, c => c.toUpperCase()); }
+
+function getKeywords() {
+  const raw = getEl('keywords').value.trim();
+  if (!raw) return [];
+  return raw.split(',').map(k => k.trim()).filter(k => k.length > 0);
+}
+
+function getTopic() { return getEl('topic').value.trim(); }
+
+function getAudience() { return getEl('targetAudience').value.trim(); }
+
+// --- TAB SYSTEM ---
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+    this.classList.add('active');
+    getEl(this.dataset.tab).classList.add('active');
+  });
+});
+
+// --- TITLE GENERATOR ---
+function generateTitles(topic, keywords, audience) {
+  const kws = keywords.length > 0 ? keywords : [topic.toLowerCase().split(' ').slice(0, 3).join(' ')];
+  const kw = kws[0];
+  const kwCap = capitalize(kw);
+  const topicCap = capitalize(topic);
+
+  const patterns = [
+    // How-to
+    `How to ${topicCap}: A Complete Guide for ${audience || 'Beginners'}`,
+    `${topicCap}: The Ultimate ${audience ? audience + ' ' : ''}Guide`,
+    // List-style
+    `10 Proven ${kwCap} Strategies You Need to Try in 2024`,
+    `7 ${capitalize(kws[1] || kw)} Tips That Will Transform Your ${topicCap}`,
+    // Question-based
+    `Is ${kwCap} Worth It? Here's What ${keywords.length > 1 ? 'the Data Says' : 'You Need to Know'}`,
+    `Why ${kwCap} Matters More Than Ever (Plus ${keywords.length > 1 ? 'Key Strategies' : 'How to Get Started'})`,
+    // Benefit-driven
+    `The ${audience || 'Smart'} Guide to ${topicCap}: Save Time & Boost Results`,
+    `${topicCap} Made Simple: A Step-by-Step Blueprint for ${audience || 'Success'}`,
+    // Number/stat
+    `${Math.floor(Math.random() * 5) + 5} ${kwCap} Mistakes That Are Costing You ${audience ? 'Results' : 'Traffic'} (And How to Fix Them)`,
+    // Comparison
+    `${kwCap} vs ${capitalize(kws[1] || 'Traditional Approaches')}: Which One ${audience ? 'Works Best' : 'Should You Choose'}?`,
+    // Definitive
+    `${topicCap}: The Definitive ${Math.random() > 0.5 ? 'Beginner\'s Guide' : 'Guide for 2024'}`,
+    // Secret/reveal
+    `The Secret to ${topicCap} Nobody Is Talking About`,
+  ];
+
+  // Shuffle slightly for variety
+  const shuffled = patterns.sort(() => Math.random() - 0.3);
+  return shuffled.slice(0, 6);
+}
+
+// --- META DESCRIPTION GENERATOR ---
+function generateMeta(topic, keywords, audience) {
+  const kws = keywords.length > 0 ? keywords : [topic];
+  const topicCap = capitalize(topic);
+  const aud = audience ? ` for ${audience}` : '';
+  const kwList = kws.slice(0, 3).map(k => capitalize(k)).join(', ');
+
+  const options = [
+    `Looking for the best ${kws[0]} tips${aud}? This comprehensive guide covers everything you need to know about ${topicCap}. Learn proven strategies, expert insights, and actionable steps to get results.`,
+    `Discover proven ${kws[0]} strategies${aud}. In this guide, we break down ${topicCap} into simple, actionable steps. Includes expert tips on ${kwList} to help you succeed faster.`,
+    `Master ${topicCap}${aud ? ' with our expert guide' : ''}. From ${kws[0]} best practices to advanced ${kws.length > 1 ? kws[1] + ' techniques' : 'optimization strategies'}, this comprehensive resource has everything you need.`,
+    `Your complete resource for ${topicCap}${aud}. Learn the essential ${kwList} techniques, avoid common mistakes, and implement strategies that actually work. Start improving your results today.`,
+  ];
+
+  // Pick best — try to hit 150-160 chars
+  let best = options[0];
+  for (const opt of options) {
+    if (opt.length >= 145 && opt.length <= 165) { best = opt; break; }
+    if (Math.abs(opt.length - 155) < Math.abs(best.length - 155)) best = opt;
+  }
+  return best;
+}
+
+// --- HEADER OUTLINE GENERATOR ---
+function generateHeaders(topic, keywords, audience) {
+  const kwCap = keywords.length > 0 ? capitalize(keywords[0]) : capitalize(topic);
+  const topicCap = capitalize(topic);
+  const kws = keywords.length > 0 ? keywords : [topic];
+  const aud = audience || 'Your Audience';
+
+  const h1 = `${topicCap}: The Complete Guide${audience ? ' for ' + capitalize(audience) : ''}`;
+
+  const h2s = [
+    `Why ${kwCap} Matters for ${capitalize(aud)}`,
+    `Getting Started with ${topicCap}`,
+    `${capitalize(kws[0])}: Key Concepts and Best Practices`,
+    `Common ${kwCap} Mistakes to Avoid`,
+    `Advanced ${capitalize(kws[kws.length > 1 ? 1 : 0])} Strategies`,
+    `How to Measure Success with ${topicCap}`,
+  ];
+
+  const h3s = {
+    0: [`What Is ${kwCap}?`, `The Evolution of ${topicCap}`, `Why ${aud} Should Care About ${topicCap}`],
+    1: [`Essential Tools for ${topicCap}`, `Setting Up Your First ${kwCap} Project`, `Quick Wins: ${topicCap} in 5 Minutes`],
+    2: [`Understanding the Fundamentals`, `${kwCap} Frameworks That Work`, `Case Study: ${kwCap} in Action`],
+    3: [`The #1 ${kwCap} Mistake`, `How to Spot Problems Early`, `Recovery Strategies That Work`],
+    4: [`Scaling Your ${kwCap} Efforts`, `Automation and ${kwCap}`, `Expert-Level Techniques`],
+    5: [`Key Metrics to Track`, `Tools for Monitoring ${topicCap}`, `When to Pivot Your Strategy`],
+  };
+
+  return { h1, h2s, h3s };
+}
+
+// --- CONTENT BRIEF GENERATOR ---
+function generateBrief(topic, keywords, audience, titles, meta) {
+  const kws = keywords.length > 0 ? keywords : [topic.toLowerCase()];
+  const topicCap = capitalize(topic);
+  const aud = audience || 'general audience';
+
+  // Word count suggestion based on topic complexity
+  const wordSuggestion = kws.length > 3 ? '2000-3000' : '1200-2000';
+
+  // Suggested internal & external linking
+  const linkSuggestions = [
+    { type: 'Internal', desc: `Link to your ${kws[0]} category or related cornerstone content` },
+    { type: 'External', desc: `Cite authoritative sources (industry studies, .edu/.gov data)` },
+    { type: 'Internal', desc: 'Cross-link to related guides or tool pages' },
+  ];
+
+  // Target questions to answer
+  const questions = [
+    `What is ${kws[0]} and why does it matter?`,
+    `How does ${kws[0]} compare to alternatives?`,
+    `What are the biggest challenges with ${topicCap}?`,
+    `What tools/resources are needed for ${topicCap}?`,
+    `How can ${aud} measure success with ${topicCap}?`,
+  ];
+
+  return {
+    topic: topicCap,
+    targetAudience: aud,
+    suggestedWordCount: wordSuggestion,
+    primaryKeywords: kws,
+    suggestedTitle: titles[0],
+    metaDescription: meta,
+    questionsToAnswer: questions,
+    suggestedLinks: linkSuggestions,
+    tone: audience ? 'Professional, educational, tailored to ' + aud : 'Professional yet accessible, suitable for mixed audiences',
+    formattingTips: [
+      'Use short paragraphs (2-4 sentences max) for web readability',
+      'Add bullet points and numbered lists for scannability',
+      'Include at least one image or diagram per 500 words',
+      'Use descriptive alt text for all images with target keywords',
+      'Add a table of contents for pieces over 1500 words',
+    ],
+  };
+}
+
+// --- RENDER FUNCTIONS ---
+
+function renderTitles(titles) {
+  const out = getEl('titlesOutput');
+  out.innerHTML = titles.map((t, i) =>
+    `<div class="result-box" style="cursor:pointer;margin-top:8px;position:relative;" onclick="copyToClipboard('${t.replace(/'/g, "\\'")}')" title="Click to copy">
+      <span style="color:var(--text-muted);font-weight:600;margin-right:8px;">${i + 1}.</span>${t}
+      <span class="copy-btn" style="float:right;">📋 Copy</span>
+    </div>`
+  ).join('');
+}
+
+function renderMeta(meta) {
+  const out = getEl('metaOutput');
+  const len = meta.length;
+  const charClass = len >= 140 && len <= 165 ? 'badge-green' : len < 140 ? 'badge-yellow' : 'badge-red';
+  const charNote = len >= 140 && len <= 165 ? '✅ Ideal length' : len < 140 ? '⚠️ Too short (aim for 140-165)' : '⚠️ Too long (SERP may truncate)';
+
+  out.innerHTML = `
+    <div class="result-label">Meta Description <span class="badge ${charClass}">${len} chars — ${charNote}</span></div>
+    <div class="result-box" style="position:relative;">
+      ${meta}
+      <button class="copy-btn" onclick="event.stopPropagation(); copyToClipboard('${meta.replace(/'/g, "\\'")}')">📋 Copy</button>
+    </div>
+    <div class="mt-8" style="font-size:0.85rem;color:var(--text-secondary);">
+      🎯 <strong>Best practice:</strong> Keep meta descriptions between 140–165 characters. This one is <strong>${len} chars</strong>.
+    </div>
+  `;
+}
+
+function renderHeaders(headers) {
+  const out = getEl('headersOutput');
+  const h3Keys = Object.keys(headers.h3s);
+  let html = `<div class="header-tree">`;
+  html += `<div class="h-item h1"><span class="h h1">H1:</span> ${headers.h1}</div>`;
+  headers.h2s.forEach((h2, i) => {
+    html += `<div class="h-item h2"><span class="h h2">H2:</span> ${h2}</div>`;
+    if (headers.h3s[i]) {
+      headers.h3s[i].forEach(h3 => {
+        html += `<div class="h-item h3"><span class="h h3">H3:</span> ${h3}</div>`;
+      });
+    }
+  });
+  html += `</div>`;
+  html += `<div class="btn-group mt-8"><button class="btn btn-secondary" onclick="copyHeadersOutline()">📋 Copy Full Outline</button></div>`;
+  out.innerHTML = html;
+  window._headersOutline = headers;
+}
+
+function copyHeadersOutline() {
+  if (!window._headersOutline) return;
+  const h = window._headersOutline;
+  let text = `H1: ${h.h1}\n`;
+  h.h2s.forEach((h2, i) => {
+    text += `\nH2: ${h2}\n`;
+    if (h.h3s[i]) {
+      h.h3s[i].forEach(h3 => { text += `  H3: ${h3}\n`; });
+    }
+  });
+  copyToClipboard(text);
+}
+
+function renderBrief(brief) {
+  const out = getEl('briefOutput');
+  out.innerHTML = `
+    <div class="result-label">📄 Content Brief</div>
+    <div style="margin-top:8px;">
+      <div class="form-row">
+        <div class="stat" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text-secondary);">📌 Topic</span><strong>${brief.topic}</strong></div>
+        <div class="stat" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text-secondary);">👤 Audience</span><strong>${brief.targetAudience}</strong></div>
+        <div class="stat" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text-secondary);">📏 Word Count</span><strong>${brief.suggestedWordCount} words</strong></div>
+        <div class="stat" style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);"><span style="color:var(--text-secondary);">🗣️ Tone</span><strong>${brief.tone}</strong></div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <strong style="color:var(--text-secondary);font-size:0.85rem;">🔑 Primary Keywords</strong>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">
+          ${brief.primaryKeywords.map(k => `<span style="background:rgba(88,166,255,0.1);color:var(--accent);border:1px solid rgba(88,166,255,0.2);padding:4px 12px;border-radius:12px;font-size:0.8rem;">${capitalize(k)}</span>`).join('')}
+        </div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <strong style="color:var(--text-secondary);font-size:0.85rem;">📖 Questions This Content Should Answer</strong>
+        <ul style="margin-top:6px;padding-left:20px;color:var(--text-primary);font-size:0.85rem;list-style-type:'❓ ';">
+          ${brief.questionsToAnswer.map(q => `<li style="margin:4px 0;">${q}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div style="margin-top:16px;">
+        <strong style="color:var(--text-secondary);font-size:0.85rem;">🔗 Suggested Links</strong>
+        <ul style="margin-top:6px;padding-left:20px;font-size:0.85rem;list-style-type:'🔗 ';">
+          ${brief.suggestedLinks.map(l => `<li style="margin:4px 0;"><strong>${l.type}:</strong> ${l.desc}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div style="margin-top:16px;">
+        <strong style="color:var(--text-secondary);font-size:0.85rem;">✏️ Formatting Tips</strong>
+        <ul style="margin-top:6px;padding-left:20px;font-size:0.85rem;list-style-type:'✅ ';">
+          ${brief.formattingTips.map(t => `<li style="margin:4px 0;">${t}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="result-box" style="margin-top:16px;">
+        <strong>Suggested Title:</strong> ${brief.suggestedTitle}
+        \n<strong>Meta Description:</strong> ${brief.metaDescription}
+      </div>
+    </div>
+  `;
+}
+
+// --- KEYWORD DENSITY ANALYZER ---
+function analyzeDensity() {
+  const content = getEl('densityContent').value.trim();
+  const keywords = getKeywords();
+  const out = getEl('densityOutput');
+
+  if (!content) {
+    out.innerHTML = `<div style="color:var(--warning);padding:12px;border:1px solid rgba(210,153,34,0.3);border-radius:6px;">⚠️ Please paste some content to analyze.</div>`;
+    return;
+  }
+
+  // Clean and tokenize
+  const words = content.toLowerCase().match(/\b[a-z]{2,}\b/g) || [];
+  const totalWords = words.length;
+  if (totalWords === 0) {
+    out.innerHTML = `<div style="color:var(--warning);...">⚠️ No words found. Please paste valid content.</div>`;
+    return;
+  }
+
+  // Word frequency
+  const freq = {};
+  words.forEach(w => { freq[w] = (freq[w] || 0) + 1; });
+
+  // Sort by frequency
+  const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+
+  // Show top 20 frequent words + keyword-specific analysis
+  const topWords = sorted.slice(0, 20);
+
+  // Keyword density for target keywords
+  const keywordData = keywords.map(kw => {
+    const kwLower = kw.toLowerCase();
+    const kwWords = kwLower.split(/\s+/);
+    let count = 0;
+
+    if (kwWords.length === 1) {
+      count = freq[kwLower] || 0;
+    } else {
+      // Multi-word: search as phrase in content
+      const contentLower = content.toLowerCase();
+      let idx = 0;
+      while ((idx = contentLower.indexOf(kwLower, idx)) !== -1) {
+        // Check word boundaries
+        const before = idx === 0 || /\W/.test(contentLower[idx - 1]);
+        const after = (idx + kwLower.length >= contentLower.length) || /\W/.test(contentLower[idx + kwLower.length]);
+        if (before && after) count++;
+        idx++;
+      }
+    }
+
+    const density = totalWords > 0 ? ((count / totalWords) * 100) : 0;
+    return { keyword: kw, count, density, wordCount: kwWords.length };
+  });
+
+  // Build density table
+  let keywordRows = keywordData.map(kd => {
+    const pct = Math.min(kd.density, 10);
+    const barWidth = Math.round((pct / 10) * 100);
+    const barColor = kd.density < 0.5 ? 'bar-green' : kd.density < 2 ? 'bar-yellow' : 'bar-red';
+    const status = kd.density < 0.5 ? '⚠️ Low' : kd.density < 2 ? '✅ Good' : '❌ Over-optimized';
+    return `<tr>
+      <td><strong>${capitalize(kd.keyword)}</strong></td>
+      <td>${kd.count}</td>
+      <td>${kd.density.toFixed(2)}%</td>
+      <td>
+        <div class="density-bar"><div class="density-bar-fill ${barColor}" style="width:${barWidth}%"></div></div>
+      </td>
+      <td><span class="badge ${kd.density < 0.5 ? 'badge-yellow' : kd.density < 2 ? 'badge-green' : 'badge-red'}">${status}</span></td>
+    </tr>`;
+  }).join('');
+
+  // Top words table
+  let topWordRows = topWords.map(([word, count]) => {
+    const density = (count / totalWords) * 100;
+    const pct = Math.min(density, 10);
+    const barWidth = Math.round((pct / 10) * 100);
+    const isKeyword = keywords.some(kw => kw.toLowerCase() === word);
+    return `<tr${isKeyword ? ' style="background:rgba(88,166,255,0.05);"' : ''}>
+      <td>${word}${isKeyword ? ' <span style="color:var(--accent);font-size:0.7rem;">★ KW</span>' : ''}</td>
+      <td>${count}</td>
+      <td>${density.toFixed(2)}%</td>
+      <td><div class="density-bar"><div class="density-bar-fill bar-purple" style="width:${barWidth}%"></div></div></td>
+    </tr>`;
+  }).join('');
+
+  const uniqueWords = Object.keys(freq).length;
+  const avgWordLength = words.reduce((sum, w) => sum + w.length, 0) / totalWords;
+
+  out.innerHTML = `
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;font-size:0.85rem;">
+      <span>📊 <strong>${totalWords}</strong> total words</span>
+      <span>📝 <strong>${uniqueWords}</strong> unique words</span>
+      <span>📏 <strong>${avgWordLength.toFixed(1)}</strong> avg word length</span>
+    </div>
+
+    ${keywords.length > 0 ? `
+    <div class="result-label">Target Keyword Density</div>
+    <table class="density-table">
+      <thead><tr><th>Keyword</th><th>Count</th><th>Density</th><th>Distribution</th><th>Status</th></tr></thead>
+      <tbody>${keywordRows}</tbody>
+    </table>
+    <div class="mt-8" style="font-size:0.8rem;color:var(--text-secondary);">
+      💡 <strong>Best practice:</strong> Keyword density of <strong>0.5%–2%</strong> is optimal. Below 0.5% may not rank; above 2% risks over-optimization penalties.
+    </div>
+    ` : `
+    <div style="color:var(--warning);padding:12px;border:1px solid rgba(210,153,34,0.3);border-radius:6px;">
+      ⚠️ No target keywords entered above. Add keywords in the "Content Details" section to track their density. Showing top words instead.
+    </div>
+    `}
+
+    <div class="mt-16 result-label">Most Frequent Words</div>
+    <table class="density-table">
+      <thead><tr><th>Word</th><th>Count</th><th>Density</th><th>Distribution</th></tr></thead>
+      <tbody>${topWordRows}</tbody>
+    </table>
+    <div class="mt-8" style="font-size:0.78rem;color:var(--text-muted);">★ KW = matches one of your target keywords</div>
+  `;
+}
+
+// --- READABILITY ANALYZER (Flesch Reading Ease) ---
+function analyzeReadability() {
+  const content = getEl('readabilityContent').value.trim();
+  const out = getEl('readabilityOutput');
+
+  if (!content) {
+    out.innerHTML = `<div style="color:var(--warning);padding:12px;border:1px solid rgba(210,153,34,0.3);border-radius:6px;">⚠️ Please paste content to analyze.</div>`;
+    return;
+  }
+
+  const sentences = content.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  const totalSentences = sentences.length;
+
+  const words = content.match(/\b[a-z']+\b/gi) || [];
+  const totalWords = words.length;
+  if (totalWords === 0) {
+    out.innerHTML = `<div style="color:var(--warning);...">⚠️ No words found.</div>`;
+    return;
+  }
+
+  // Syllable count (simplified — count vowel groups)
+  function countSyllables(word) {
+    word = word.toLowerCase().replace(/[^a-z]/g, '');
+    if (word.length <= 3) return 1;
+    // Count vowel groups
+    const vowels = word.match(/[aeiouy]+/gi);
+    if (!vowels) return 1;
+    let count = vowels.length;
+    // Adjust for silent e
+    if (word.endsWith('e') && word.length > 2 && !word.endsWith('le')) count--;
+    // Adjust for -es, -ed endings
+    if ((word.endsWith('es') || word.endsWith('ed')) && word.length > 3) count--;
+    // Minimum 1
+    return Math.max(1, count);
+  }
+
+  const totalSyllables = words.reduce((sum, w) => sum + countSyllables(w), 0);
+
+  // Flesch Reading Ease
+  const fre = totalSentences > 0 && totalWords > 0
+    ? 206.835 - 1.015 * (totalWords / totalSentences) - 84.6 * (totalSyllables / totalWords)
+    : 0;
+  const score = Math.max(0, Math.min(100, Math.round(fre * 10) / 10));
+
+  // Flesch-Kincaid Grade Level
+  const gradeLevel = totalSentences > 0 && totalWords > 0
+    ? 0.39 * (totalWords / totalSentences) + 11.8 * (totalSyllables / totalWords) - 15.59
+    : 0;
+  const grade = Math.max(1, Math.round(gradeLevel * 10) / 10);
+
+  // Interpretation
+  let interpretation, color, readingAge;
+  if (score >= 90) { interpretation = 'Very Easy'; color = '#3fb950'; readingAge = '10-11 yrs'; }
+  else if (score >= 80) { interpretation = 'Easy'; color = '#39d2c0'; readingAge = '11-12 yrs'; }
+  else if (score >= 70) { interpretation = 'Fairly Easy'; color = '#58a6ff'; readingAge = '12-13 yrs'; }
+  else if (score >= 60) { interpretation = 'Standard'; color = '#d29922'; readingAge = '13-15 yrs'; }
+  else if (score >= 50) { interpretation = 'Fairly Difficult'; color = '#f0883e'; readingAge = '15-17 yrs'; }
+  else if (score >= 30) { interpretation = 'Difficult'; color = '#f85149'; readingAge = '17-19 yrs'; }
+  else { interpretation = 'Very Confusing'; color = '#f85149'; readingAge = 'College+'; }
+
+  // Gauge circle
+  const circumference = 2 * Math.PI * 48;
+  const offset = circumference - (score / 100) * circumference;
+
+  // Avg words per sentence, avg syllables per word
+  const avgWordsPerSentence = totalSentences > 0 ? (totalWords / totalSentences).toFixed(1) : 0;
+  const avgSyllablesPerWord = totalWords > 0 ? (totalSyllables / totalWords).toFixed(2) : 0;
+
+  // Reading time
+  const readingTimeMin = Math.ceil(totalWords / 238); // avg reading speed
+  const readingTime = readingTimeMin < 1 ? '< 1 min' : readingTimeMin + ' min';
+
+  out.innerHTML = `
+    <div class="gauge-container">
+      <div class="gauge">
+        <svg width="120" height="120" viewBox="0 0 120 120">
+          <circle class="gauge-bg" cx="60" cy="60" r="48"/>
+          <circle class="gauge-fill" cx="60" cy="60" r="48"
+            stroke="${color}"
+            stroke-dasharray="${circumference}"
+            stroke-dashoffset="${offset}"/>
+        </svg>
+        <div class="gauge-text">
+          <div class="gauge-score" style="color:${color}">${score}</div>
+          <div class="gauge-label">Flesch Score</div>
+        </div>
+      </div>
+      <div class="readability-details">
+        <div class="stat"><span>📊 Score</span><span class="stat-value" style="color:${color}">${score} — ${interpretation}</span></div>
+        <div class="stat"><span>🎓 Grade Level</span><span class="stat-value">${grade}</span></div>
+        <div class="stat"><span>👶 Reading Age</span><span class="stat-value">${readingAge}</span></div>
+        <div class="stat"><span>📝 Total Words</span><span class="stat-value">${totalWords}</span></div>
+        <div class="stat"><span>📏 Sentences</span><span class="stat-value">${totalSentences}</span></div>
+        <div class="stat"><span>🔤 Avg Words/Sentence</span><span class="stat-value">${avgWordsPerSentence}</span></div>
+        <div class="stat"><span>🔡 Avg Syllables/Word</span><span class="stat-value">${avgSyllablesPerWord}</span></div>
+        <div class="stat"><span>⏱️ Reading Time</span><span class="stat-value">${readingTime}</span></div>
+        <div class="stat"><span>📖 Total Syllables</span><span class="stat-value">${totalSyllables}</span></div>
+      </div>
+    </div>
+    <div class="mt-16" style="font-size:0.82rem;color:var(--text-secondary);padding:12px;background:var(--bg-secondary);border-radius:6px;">
+      <strong>Formula:</strong> Flesch Reading Ease = 206.835 − 1.015 × (words/sentences) − 84.6 × (syllables/words)<br>
+      <strong>Target:</strong> 60–70+ for general web content. Blog posts aim for 65–85. Technical content may be 30–50.
+    </div>
+  `;
+}
+
+// --- MAIN GENERATE FUNCTION ---
+function generateAll() {
+  const topic = getTopic();
+  const keywords = getKeywords();
+  const audience = getAudience();
+
+  if (!topic) {
+    showToast('⚠️ Please enter a topic first.');
+    getEl('topic').focus();
+    return;
+  }
+
+  // Generate everything
+  const titles = generateTitles(topic, keywords, audience);
+  const meta = generateMeta(topic, keywords, audience);
+  const headers = generateHeaders(topic, keywords, audience);
+  const brief = generateBrief(topic, keywords, audience, titles, meta);
+
+  // Render
+  renderTitles(titles);
+  renderMeta(meta);
+  renderHeaders(headers);
+  renderBrief(brief);
+
+  // Switch to Titles tab
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+  document.querySelector('[data-tab="tab-titles"]').classList.add('active');
+  getEl('tab-titles').classList.add('active');
+
+  showToast('✅ SEO content generated successfully!');
+}
+
+// --- CLEAR ---
+function clearAll() {
+  getEl('topic').value = '';
+  getEl('keywords').value = '';
+  getEl('targetAudience').value = '';
+  getEl('densityContent').value = '';
+  getEl('readabilityContent').value = '';
+  getEl('titlesOutput').innerHTML = '';
+  getEl('metaOutput').innerHTML = '';
+  getEl('headersOutput').innerHTML = '';
+  getEl('densityOutput').innerHTML = '';
+  getEl('readabilityOutput').innerHTML = '';
+  getEl('briefOutput').innerHTML = '';
+  showToast('🧹 All fields cleared.');
+}
+
+// --- ENTER KEY SUPPORT ---
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && (e.target.id === 'topic' || e.target.id === 'keywords' || e.target.id === 'targetAudience')) {
+    generateAll();
+  }
+});
+
+// --- AUTO-POPULATE DENSITY & READABILITY FROM SAMPLE ---
+// (Not auto, but user can paste. No auto-populate to avoid confusion.)
+</script>
+</body>
+</html>
