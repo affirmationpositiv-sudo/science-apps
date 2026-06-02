@@ -6,7 +6,7 @@ base_url = 'https://affirmationpositiv-sudo.github.io/science-apps'
 exclude_dirs = {'node_modules', '.git', 'dist', 'assets', '__pycache__', '.expo', '.fseventsd'}
 exclude_files = {'admin.html'}
 
-today = '2026-06-02'
+today = '2026-06-03'
 
 dir_priority = {
     '': 1.0,
