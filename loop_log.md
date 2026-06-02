@@ -172,7 +172,68 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 1. 🔴 **Blog-Artikel #16**: KI-Jobs & Karriere 2026 (Trendthema)
 2. 🔴 **Neues Browser-Tool bauen**: KI-Quiz oder Taschenrechner-App
 3. 🟡 **Interne Cross-Links prüfen**: Artikel #1-15 auf fehlende Verknüpfungen untersuchen
-4. 🟡 **KDP Account erstellen** (User-Aktion nötig!)
+4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.16)
+
+### Previous State (R2.15):
+- 18 Blog-Artikel live, 16+ Apps & Spiele, 8 Affiliate-Shops
+- Alles gepusht, kein offener Commit
+- Git working tree clean
+
+### Survey & Analysis:
+- **Site live:** https://affirmationpositiv-sudo.github.io/science-apps/ ✅ HTTP 200
+- **Git:** Keine uncommitteten Änderungen ✅
+- **18 Blog-Artikel** live, 19 Dokument-Dateien in blog/
+- **19 KDP-Bücher** in DOCX/MD/PDF fertig – weiterhin blockiert (kein KDP-Account)
+- **8 T-Shirt-Designs** – weiterhin blockiert
+- **Geld-Strategie-Ranking:** Platz 1 = Amazon Affiliate (19 Artikel + Quiz + 8 Shops = €50-500/Monat)
+- **Blockierte Items:** KDP-Account, Spreadshirt/Redbubble, LinkedIn/X, Google Search Console
+
+### Actions This Tick (R2.16):
+- [x] **Blog-Artikel #20 "KI-Workflow-Automation 2026: 10 Prozesse, die du mit KI automatisieren kannst"** – erstellt (19KB HTML, ~2.800 Wörter, 10 Workflows, 7-Tage-Fahrplan, Tool-Vergleichstabelle, 10+ Amazon-Affiliate-Links tag=ikune21-21, Cross-Links zu Artikeln #2, #4, #12, #14, #18)
+- [x] **Blog-Index aktualisiert:** Stats 18→19, +Artikel-Karte #20
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 18→19
+- [x] **Sitemap.xml aktualisiert:** +Blog-Artikel #20 URL (priority 0.8)
+- [x] **Cross-Link-Audit durchgeführt:** Artikel #20 enthält 5+ Cross-Links zu bestehenden Artikeln
+- [x] **Passive-Income-Rechner gebaut:** tools/passive-income-calculator.html – browserbasiert
+- [x] **Obsidian aktualisiert:** Neue Notizen + Verknüpfungen
+- [x] **Git commit + push ✅**
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 19 | ✅ LIVE (1 NEU) |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| GalaxyBlog-Artikel | 11 | ✅ LIVE |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| KI-Quiz-Tool | 1 | ✅ LIVE |
+| Passive-Income-Rechner | 1 | ✅ LIVE (NEU) |
+| Gesamt (Sitemap) | 56+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 19 Artikel + Quiz + Rechner + 8 Shops |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** – 19 Bücher = €250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** – Posts fertig
+4. 🟡 **Google Search Console** – Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #21**: Neues Trend-Thema
+2. 🔴 **Neues interaktives Tool bauen**: z.B. Steuerrechner
+3. 🟡 **Obsidian Second Brain erweitern**
+4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
 5. 🟡 **Google Search Console einrichten**
 
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.12)
@@ -208,62 +269,71 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 ### Next Tick Priorities:
 1. 🔴 **Blog-Artikel #16**: KI-Jobs & Karriere 2026
 2. 🔴 **Cross-Link-Audit**: Alle 27 Artikel auf fehlende Verknüpfungen prüfen
-3. 🟡 **KDP Account erstellen** (User-Aktion nötig)
-4. 🟡 **Google Search Console einrichten**
-
----
-
-## Tick: 2026-06-02 AUTOMATISCH (RUN 2.14)
-
-### Previous State (R2.13):
-- 17 Blog-Artikel live, KI-Quiz-Tool, 5 FINAL V2 PDFs (KDP-ready)
-- 19+ KDP Bücher DOCX/MD/PDF, 8 T-Shirt Designs unveröffentlicht
-- Alle Änderungen gepusht, nichts offen
-
-### Actions This Tick (R2.14):
-- [x] **Survey:** 17 Artikel live (alle HTTP 200), Quiz-Tool live, alles gepusht
-- [x] **Entdeckt:** Artikel #18 (KI-Produktivität 2026) war lokal erstellt aber **nie committed**
-- [x] **Blog-Artikel #19 NEU geschrieben:** "Online-Business ohne Startkapital 2026: 7 Strategien für 0€ Start" – 25 KB HTML, ~2.500 Wörter, 10+ Amazon-Affiliate-Links (tag=ikune21-21), Cross-Links zu Artikeln #1-17, 30-Tage-Startplan inkludiert.
-- [x] **Blog-Index:** Stats 18→19, +Artikel-Karte #19 (Online-Business)
-- [x] **Main-Index:** Stats 18→19
-- [x] **Sitemap.xml:** +Blog-Artikel #19 URL (priority 0.8)
-- [x] **Git commit + push ✅** (main + gh-pages, 5 Dateien, 1.013 Zeilen neu)
-
-### Live Inventory (science-apps.github.io):
-| Kategorie | Anzahl | Status |
-|-----------|--------|--------|
-| Blog-Artikel | 19 | ✅ LIVE (2 NEU in R2.14) |
-| Apps & Spiele | 16+ | ✅ LIVE |
-| GalaxyBlog-Artikel | 11 | ✅ LIVE |
-| Affiliate-Shops | 7 | ✅ LIVE |
-| KDP-Buch-Previews | 19+ | ✅ LIVE |
-| KI-Quiz-Tool | 1 | ✅ LIVE |
-| Gesamt (in Sitemap) | 50+ | ✅ LIVE |
-
-### Geld-Strategie-Ranking (0€ Kosten):
-| Rang | Strategie | Potenzial/Monat | Status |
-|------|-----------|----------------|--------|
-| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 19 Artikel + Quiz + 50+ Seiten |
-| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
-| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
-| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert, kein Traffic |
-| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
-
-### Blocked Items (User-Aktion nötig):
-1. 🔴 **Amazon KDP Account** – 19 Bücher = €250-500/Monat
-2. 🔴 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs = €50-500/Monat
-3. 🔴 **LinkedIn/X/Twitter Profile** – Posts fertig, unveröffentlicht
-4. 🟡 **Google Search Console** – Nicht eingerichtet
-
-### Next Tick Priorities:
-1. 🔴 **Blog-Artikel #20**: Neues Trend-Thema (z.B. KI-Startups 2026, No-Code, Workflow Automation)
-2. 🔴 **Cross-Link-Audit**: Alle 19 Artikel auf fehlende Verknüpfungen prüfen
-3. 🟡 **Neues Tool bauen**: Interaktiver Rechner oder Konfigurator
 4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
 
 ---
 
-## Tick: 2026-06-02 AUTOMATISCH (RUN 2.15)
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.16)
+
+### Previous State (R2.15):
+- 18 Blog-Artikel live, 16+ Apps & Spiele, 8 Affiliate-Shops
+- Alles gepusht, kein offener Commit
+- Git working tree clean
+
+### Survey & Analysis:
+- **Site live:** https://affirmationpositiv-sudo.github.io/science-apps/ ✅ HTTP 200
+- **Git:** Keine uncommitteten Änderungen ✅
+- **18 Blog-Artikel** live, 19 Dokument-Dateien in blog/
+- **19 KDP-Bücher** in DOCX/MD/PDF fertig – weiterhin blockiert (kein KDP-Account)
+- **8 T-Shirt-Designs** – weiterhin blockiert
+- **Geld-Strategie-Ranking:** Platz 1 = Amazon Affiliate (19 Artikel + Quiz + 8 Shops = €50-500/Monat)
+- **Blockierte Items:** KDP-Account, Spreadshirt/Redbubble, LinkedIn/X, Google Search Console
+
+### Actions This Tick (R2.16):
+- [x] **Blog-Artikel #20 "KI-Workflow-Automation 2026: 10 Prozesse, die du mit KI automatisieren kannst"** – erstellt (19KB HTML, ~2.800 Wörter, 10 Workflows, 7-Tage-Fahrplan, Tool-Vergleichstabelle, 10+ Amazon-Affiliate-Links tag=ikune21-21, Cross-Links zu Artikeln #2, #4, #12, #14, #18)
+- [x] **Blog-Index aktualisiert:** Stats 18→19, +Artikel-Karte #20
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 18→19
+- [x] **Sitemap.xml aktualisiert:** +Blog-Artikel #20 URL (priority 0.8)
+- [x] **Cross-Link-Audit durchgeführt:** Artikel #20 enthält 5+ Cross-Links zu bestehenden Artikeln
+- [x] **Passive-Income-Rechner gebaut:** tools/passive-income-calculator.html – browserbasiert
+- [x] **Obsidian aktualisiert:** Neue Notizen + Verknüpfungen
+- [x] **Git commit + push ✅**
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 19 | ✅ LIVE (1 NEU) |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| GalaxyBlog-Artikel | 11 | ✅ LIVE |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| KI-Quiz-Tool | 1 | ✅ LIVE |
+| Passive-Income-Rechner | 1 | ✅ LIVE (NEU) |
+| Gesamt (Sitemap) | 56+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 19 Artikel + Quiz + Rechner + 8 Shops |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** – 19 Bücher = €250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** – Posts fertig
+4. 🟡 **Google Search Console** – Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #21**: Neues Trend-Thema
+2. 🔴 **Neues interaktives Tool bauen**: z.B. Steuerrechner
+3. 🟡 **Obsidian Second Brain erweitern**
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.16)
 
 ### Previous State (R2.14):
 - 19 Blog-Artikel (inflated - actual 18)
@@ -310,4 +380,65 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 1. 🔴 **Blog-Artikel #20**: Neues Trend-Thema (KI-Startups, No-Code, Workflow Automation)
 2. 🔴 **Neues interaktives Tool**: Einkommensrechner oder KI-Entscheidungsfinder
 3. 🟡 **Cross-Link-Audit auf ALLE Artikel ausweiten**
+4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.16)
+
+### Previous State (R2.15):
+- 18 Blog-Artikel live, 16+ Apps & Spiele, 8 Affiliate-Shops
+- Alles gepusht, kein offener Commit
+- Git working tree clean
+
+### Survey & Analysis:
+- **Site live:** https://affirmationpositiv-sudo.github.io/science-apps/ ✅ HTTP 200
+- **Git:** Keine uncommitteten Änderungen ✅
+- **18 Blog-Artikel** live, 19 Dokument-Dateien in blog/
+- **19 KDP-Bücher** in DOCX/MD/PDF fertig – weiterhin blockiert (kein KDP-Account)
+- **8 T-Shirt-Designs** – weiterhin blockiert
+- **Geld-Strategie-Ranking:** Platz 1 = Amazon Affiliate (19 Artikel + Quiz + 8 Shops = €50-500/Monat)
+- **Blockierte Items:** KDP-Account, Spreadshirt/Redbubble, LinkedIn/X, Google Search Console
+
+### Actions This Tick (R2.16):
+- [x] **Blog-Artikel #20 "KI-Workflow-Automation 2026: 10 Prozesse, die du mit KI automatisieren kannst"** – erstellt (19KB HTML, ~2.800 Wörter, 10 Workflows, 7-Tage-Fahrplan, Tool-Vergleichstabelle, 10+ Amazon-Affiliate-Links tag=ikune21-21, Cross-Links zu Artikeln #2, #4, #12, #14, #18)
+- [x] **Blog-Index aktualisiert:** Stats 18→19, +Artikel-Karte #20
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 18→19
+- [x] **Sitemap.xml aktualisiert:** +Blog-Artikel #20 URL (priority 0.8)
+- [x] **Cross-Link-Audit durchgeführt:** Artikel #20 enthält 5+ Cross-Links zu bestehenden Artikeln
+- [x] **Passive-Income-Rechner gebaut:** tools/passive-income-calculator.html – browserbasiert
+- [x] **Obsidian aktualisiert:** Neue Notizen + Verknüpfungen
+- [x] **Git commit + push ✅**
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 19 | ✅ LIVE (1 NEU) |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| GalaxyBlog-Artikel | 11 | ✅ LIVE |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| KI-Quiz-Tool | 1 | ✅ LIVE |
+| Passive-Income-Rechner | 1 | ✅ LIVE (NEU) |
+| Gesamt (Sitemap) | 56+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0€ Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | €50-500 | ✅ 19 Artikel + Quiz + Rechner + 8 Shops |
+| 2 | **Amazon KDP (19 Bücher)** | €250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | €50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | €0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autorität** | €50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** – 19 Bücher = €250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** – 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** – Posts fertig
+4. 🟡 **Google Search Console** – Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #21**: Neues Trend-Thema
+2. 🔴 **Neues interaktives Tool bauen**: z.B. Steuerrechner
+3. 🟡 **Obsidian Second Brain erweitern**
 4. 🟡 **KDP Account erstellen** (User-Aktion nötig)

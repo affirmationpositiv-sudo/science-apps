@@ -399,4 +399,20 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Artikel #20: KI-Workflow-Automation 2026 -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-workflow-automation-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Passive Income Calculator -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/passive-income-calculator.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

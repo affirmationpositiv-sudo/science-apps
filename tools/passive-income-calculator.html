@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Passive Income Calculator – Berechne dein passives Einkommen 2026</title>
+<meta name="description" content="Berechne dein passives Einkommen aus 5 Quellen: Amazon KDP, Affiliate-Marketing, digitale Produkte, Print-on-Demand und Investitionen. Mit Amazon-Affiliate-Links.">
+<meta name="author" content="Licht und Schatten">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;padding:20px}
+.container{max-width:700px;margin:0 auto;background:#111118;border-radius:16px;padding:40px;border:1px solid #1a1a2e}
+h1{font-size:1.8em;color:#fff;margin-bottom:8px;text-align:center}
+.sub{color:#6b7280;text-align:center;margin-bottom:30px;font-size:.9em}
+.source{background:#0d0d14;border:1px solid #1a1a2e;border-radius:10px;padding:18px 20px;margin-bottom:14px}
+.source label{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;color:#a78bfa;font-weight:600;font-size:.95em}
+.source input{width:100%;padding:10px 14px;background:#1a1a2e;border:1px solid #2a2a3e;border-radius:6px;color:#fff;font-size:1em}
+.source input:focus{outline:2px solid #8b5cf6;border-color:#8b5cf6}
+.source .hint{font-size:.75em;color:#6b7280;margin-top:4px}
+.result-box{background:linear-gradient(135deg,#1a1a2e,#111118);border:1px solid #8b5cf6;border-radius:12px;padding:24px;text-align:center;margin:24px 0}
+.result-box .total{font-size:2.5em;font-weight:800;color:#ffd700}
+.result-box .label{color:#9ca3af;margin-top:4px;font-size:.9em}
+.breakdown{margin:20px 0}
+.breakdown-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1a1a2e;font-size:.9em}
+.breakdown-item .val{color:#ffd700;font-weight:600}
+.btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,#8b5cf6,#059669);border:none;border-radius:8px;color:#fff;font-size:1.1em;font-weight:700;cursor:pointer;transition:opacity .3s;margin-bottom:16px}
+.btn:hover{opacity:.9}
+.btn-sec{background:linear-gradient(135deg,#2a2a3e,#1a1a2e)}
+.affiliate-box{background:linear-gradient(135deg,#1a1a2e,#111118);border:1px solid #2a1a4e;border-radius:10px;padding:14px 18px;margin:16px 0;font-size:.85em}
+.affiliate-box a{color:#fbbf24;text-decoration:none}
+.affiliate-box a:hover{text-decoration:underline}
+.back-link{display:block;text-align:center;margin-top:20px;color:#6b7280;font-size:.85em;text-decoration:none}
+.back-link:hover{color:#a78bfa}
+@media(max-width:600px){.container{padding:20px}h1{font-size:1.4em}.result-box .total{font-size:2em}}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>💰 Passive Income Calculator</h1>
+<p class="sub">Berechne dein monatliches passives Einkommen aus 5 Quellen</p>
+
+<div class="source">
+<label>📚 Amazon KDP (Bücher) <span>€/Monat</span></label>
+<input type="number" id="kdp" value="0" min="0" step="50" placeholder="z.B. 300">
+<p class="hint">Durchschnittlicher Umsatz deiner KDP-Bücher pro Monat</p>
+</div>
+
+<div class="source">
+<label>🔗 Amazon Affiliate <span>€/Monat</span></label>
+<input type="number" id="affiliate" value="0" min="0" step="20" placeholder="z.B. 150">
+<p class="hint">Provisionen aus Blog-Artikeln, Shops und Affiliate-Links</p>
+</div>
+
+<div class="source">
+<label>📦 Digitale Produkte <span>€/Monat</span></label>
+<input type="number" id="digital" value="0" min="0" step="50" placeholder="z.B. 200">
+<p class="hint">Prompt-Packs, Vorlagen, Online-Kurse, Coaching</p>
+</div>
+
+<div class="source">
+<label>👕 Print-on-Demand <span>€/Monat</span></label>
+<input type="number" id="pod" value="0" min="0" step="20" placeholder="z.B. 100">
+<p class="hint">T-Shirt-Designs auf Spreadshirt, Redbubble, Amazon Merch</p>
+</div>
+
+<div class="source">
+<label>📈 Investitionen & Zinsen <span>€/Monat</span></label>
+<input type="number" id="invest" value="0" min="0" step="50" placeholder="z.B. 80">
+<p class="hint">Dividenden, ETF-Zinsen, Sparplan-Erträge</p>
+</div>
+
+<button class="btn" onclick="calculate()">🧮 Berechnen</button>
+<button class="btn btn-sec" onclick="resetAll()">↺ Zurücksetzen</button>
+
+<div id="result" class="result-box" style="display:none">
+<div class="label">Dein passives Monatseinkommen</div>
+<div class="total" id="total">€0</div>
+<div class="label" style="margin-top:8px" id="yearly">€0 / Jahr</div>
+</div>
+
+<div id="breakdown" class="breakdown" style="display:none">
+<div class="breakdown-item"><span>📚 Amazon KDP</span><span class="val" id="bkdp">€0</span></div>
+<div class="breakdown-item"><span>🔗 Amazon Affiliate</span><span class="val" id="baff">€0</span></div>
+<div class="breakdown-item"><span>📦 Digitale Produkte</span><span class="val" id="bdig">€0</span></div>
+<div class="breakdown-item"><span>👕 Print-on-Demand</span><span class="val" id="bpod">€0</span></div>
+<div class="breakdown-item"><span>📈 Investitionen</span><span class="val" id="binv">€0</span></div>
+<div class="breakdown-item" style="border-bottom:none;font-weight:700"><span>📊 Gesamt</span><span class="val" id="btot">€0</span></div>
+</div>
+
+<div class="affiliate-box">
+<strong>📌 Dein Weg zu mehr passivem Einkommen:</strong><br>
+→ <a href="../blog/passives-einkommen-ki.html">Passives Einkommen mit KI – 5 Wege</a><br>
+→ <a href="../blog/ki-affiliate-marketing-2026.html">KI-Affiliate-Marketing – 7 Strategien</a><br>
+→ <a href="../blog/online-business-ohne-startkapital-2026.html">Online-Business ohne Startkapital</a><br>
+→ <a href="../blog/ki-workflow-automation-2026.html">KI-Workflow-Automation – 10 Prozesse</a><br>
+→ <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" rel="noopener">🏪 Alle Produkte bei Amazon entdecken</a>
+</div>
+
+<a href="index.html" class="back-link">← Zurück zu den Tools</a>
+</div>
+
+<script>
+function calculate() {
+const kdp = parseFloat(document.getElementById('kdp').value) || 0;
+const aff = parseFloat(document.getElementById('affiliate').value) || 0;
+const dig = parseFloat(document.getElementById('digital').value) || 0;
+const pod = parseFloat(document.getElementById('pod').value) || 0;
+const inv = parseFloat(document.getElementById('invest').value) || 0;
+const total = kdp + aff + dig + pod + inv;
+const yearly = total * 12;
+
+document.getElementById('total').textContent = '€' + total.toLocaleString('de-DE');
+document.getElementById('yearly').textContent = '€' + yearly.toLocaleString('de-DE') + ' / Jahr';
+
+document.getElementById('bkdp').textContent = '€' + kdp.toLocaleString('de-DE');
+document.getElementById('baff').textContent = '€' + aff.toLocaleString('de-DE');
+document.getElementById('bdig').textContent = '€' + dig.toLocaleString('de-DE');
+document.getElementById('bpod').textContent = '€' + pod.toLocaleString('de-DE');
+document.getElementById('binv').textContent = '€' + inv.toLocaleString('de-DE');
+document.getElementById('btot').textContent = '€' + total.toLocaleString('de-DE');
+
+document.getElementById('result').style.display = 'block';
+document.getElementById('breakdown').style.display = 'block';
+}
+function resetAll() {
+document.querySelectorAll('.source input').forEach(i => i.value = 0);
+document.getElementById('result').style.display = 'none';
+document.getElementById('breakdown').style.display = 'none';
+}
+</script>
+</body>
+</html>
