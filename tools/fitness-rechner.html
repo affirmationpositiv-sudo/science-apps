@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Fitness-Rechner 2026</title>
+<meta name="author" content="Licht und Schatten">
+<meta name="description" content="Finde dein perfektes Fitness-Equipment und Wearable – personalisierte Empfehlungen mit Amazon Affiliate Links.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#21262d;--border:#30363d;--text:#e6edf3;--text2:#8b949e;--accent:#58a6ff;--accent2:#3fb950;--accent3:#d29922;--orange:#f0883e;--red:#f85149;--radius:12px;--transition:0.3s ease}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:20px}
+header{text-align:center;padding:40px 20px 20px}
+header h1{font-size:2.2rem;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
+header h1 i{margin-right:12px}
+header p{color:var(--text2);margin-top:8px;font-size:1.05rem}
+header .author{color:var(--text2);font-size:0.85rem;margin-top:4px;opacity:0.7}
+
+/* Progress */
+.progress-bar{display:flex;justify-content:center;gap:8px;margin:30px 0 20px}
+.prog-step{display:flex;align-items:center;gap:8px;background:var(--bg2);padding:8px 16px;border-radius:20px;border:1px solid var(--border);font-size:0.85rem;color:var(--text2);transition:var(--transition)}
+.prog-step.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.prog-step.done{background:var(--accent2);color:#fff;border-color:var(--accent2)}
+.prog-step .num{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.2);font-weight:700;font-size:0.8rem}
+.prog-step.done .num,.prog-step.active .num{background:rgba(255,255,255,0.25)}
+.prog-step i{margin-right:2px}
+
+/* Card */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:30px;margin-bottom:20px;animation:fadeIn 0.4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card h2{font-size:1.4rem;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.card h2 i{color:var(--accent)}
+.card .subtitle{color:var(--text2);margin-bottom:24px;font-size:0.95rem}
+
+/* Options Grid */
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.option{cursor:pointer;padding:18px 16px;border:2px solid var(--border);border-radius:var(--radius);text-align:center;transition:var(--transition);background:var(--bg3);position:relative}
+.option:hover{border-color:var(--accent);background:rgba(88,166,255,0.08)}
+.option.selected{border-color:var(--accent);background:rgba(88,166,255,0.12);box-shadow:0 0 20px rgba(88,166,255,0.15)}
+.option .icon{font-size:2rem;margin-bottom:8px;display:block}
+.option .label{font-weight:600;font-size:0.95rem}
+.option .desc{color:var(--text2);font-size:0.8rem;margin-top:4px}
+.option .check{position:absolute;top:8px;right:8px;color:var(--accent);opacity:0;transition:var(--transition);font-size:1rem}
+.option.selected .check{opacity:1}
+
+/* Buttons */
+.btn-group{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{padding:12px 28px;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#4090e0;transform:translateY(-1px)}
+.btn-primary:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+.btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--border)}
+.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-outline:hover{color:var(--text);border-color:var(--text2)}
+.btn-accent2{background:var(--accent2);color:#0d1117}
+.btn-accent2:hover{background:#36a046;transform:translateY(-1px)}
+
+/* Results */
+.results{display:none}
+.results.visible{display:block}
+.result-header{text-align:center;padding:20px 0 30px}
+.result-header h2{font-size:1.6rem;color:var(--accent2)}
+.result-header p{color:var(--text2);font-size:1rem;margin-top:4px}
+.result-summary{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.result-summary span{background:var(--bg2);padding:6px 14px;border-radius:16px;font-size:0.85rem;color:var(--text2);border:1px solid var(--border)}
+.result-summary span i{margin-right:6px;color:var(--accent)}
+
+/* Product Cards */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.product-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:var(--transition);display:flex;flex-direction:column}
+.product-card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 24px rgba(0,0,0,0.3)}
+.product-card .p-icon{font-size:2.2rem;margin-bottom:10px;color:var(--accent)}
+.product-card h3{font-size:1rem;font-weight:600;margin-bottom:4px;line-height:1.3}
+.product-card .p-brand{font-size:0.8rem;color:var(--text2);margin-bottom:8px}
+.product-card .p-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.product-card .p-tags span{font-size:0.7rem;padding:2px 8px;border-radius:10px;background:rgba(88,166,255,0.12);color:var(--accent);border:1px solid rgba(88,166,255,0.2)}
+.product-card .p-price{font-size:1.3rem;font-weight:700;color:var(--orange);margin-bottom:4px}
+.product-card .p-price small{font-size:0.75rem;color:var(--text2);font-weight:400}
+.product-card .p-desc{color:var(--text2);font-size:0.85rem;margin-bottom:12px;flex-grow:1}
+.product-card .p-link{display:block;text-align:center;padding:10px;background:var(--orange);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:var(--transition)}
+.product-card .p-link:hover{background:#e07a2e;transform:translateY(-1px)}
+.product-card .p-link i{margin-right:6px}
+
+/* Restart / Reset */
+.restart-area{text-align:center;margin-top:30px}
+.disclaimer{font-size:0.75rem;color:var(--text2);text-align:center;margin-top:30px;padding:16px;border-top:1px solid var(--border);opacity:0.7}
+.disclaimer a{color:var(--text2);text-decoration:underline}
+
+/* Step indicator dots */
+.step-dots{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:var(--transition)}
+.dot.active{background:var(--accent);box-shadow:0 0 8px rgba(88,166,255,0.5)}
+.dot.done{background:var(--accent2)}
+
+/* Utility */
+.hidden{display:none!important}
+.text-center{text-align:center}
+.mt-20{margin-top:20px}
+.mb-20{margin-bottom:20px}
+
+@media(max-width:600px){
+  .container{padding:12px}
+  header h1{font-size:1.6rem}
+  .card{padding:20px 16px}
+  .options{grid-template-columns:1fr 1fr}
+  .prog-step span{display:none}
+  .prog-step{padding:8px}
+  .product-grid{grid-template-columns:1fr}
+  .btn{padding:10px 20px;font-size:0.9rem}
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="app">
+  <header>
+    <h1><i class="fas fa-robot"></i> KI-Fitness-Rechner 2026</h1>
+    <p>Finde dein perfektes Fitness-Equipment & Wearable in 3 Schritten</p>
+    <div class="author">von Licht und Schatten</div>
+  </header>
+
+  <!-- Progress -->
+  <div class="progress-bar" id="progressBar">
+    <div class="prog-step active" data-step="1"><span class="num">1</span><span><i class="fas fa-bullseye"></i> Ziel</span></div>
+    <div class="prog-step" data-step="2"><span class="num">2</span><span><i class="fas fa-wallet"></i> Budget</span></div>
+    <div class="prog-step" data-step="3"><span class="num">3</span><span><i class="fas fa-location-dot"></i> Ort</span></div>
+  </div>
+
+  <!-- Step 1: Fitness-Ziel -->
+  <div class="card" id="step1">
+    <h2><i class="fas fa-bullseye"></i> Schritt 1: Dein Fitness-Ziel</h2>
+    <p class="subtitle">Wähle dein primäres Ziel – darauf passen wir die Empfehlungen ab.</p>
+    <div class="options">
+      <div class="option" data-value="abnehmen" onclick="selectOption(this,'step1')">
+        <span class="icon"><i class="fas fa-weight-scale"></i></span>
+        <span class="label">Abnehmen</span>
+        <span class="desc">Fett verbrennen, Gewicht reduzieren</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="muskeln" onclick="selectOption(this,'step1')">
+        <span class="icon"><i class="fas fa-dumbbell"></i></span>
+        <span class="label">Muskeln aufbauen</span>
+        <span class="desc">Krafttraining, Muskelwachstum</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="ausdauer" onclick="selectOption(this,'step1')">
+        <span class="icon"><i class="fas fa-heart-pulse"></i></span>
+        <span class="label">Ausdauer</span>
+        <span class="desc">Kondition, Cardio, Durchhaltevermögen</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="allgemein" onclick="selectOption(this,'step1')">
+        <span class="icon"><i class="fas fa-person-running"></i></span>
+        <span class="label">Allgemeine Fitness</span>
+        <span class="desc">Ganzheitlich fit & gesund bleiben</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+    </div>
+    <div class="btn-group">
+      <div></div>
+      <button class="btn btn-primary" id="btnStep1" onclick="nextStep(1)" disabled><i class="fas fa-arrow-right"></i> Weiter</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Budget -->
+  <div class="card hidden" id="step2">
+    <h2><i class="fas fa-wallet"></i> Schritt 2: Dein Budget</h2>
+    <p class="subtitle">Wie viel möchtest du ausgeben? Wir finden passende Produkte.</p>
+    <div class="options">
+      <div class="option" data-value="0-50" onclick="selectOption(this,'step2')">
+        <span class="icon"><i class="fas fa-coins"></i></span>
+        <span class="label">€0 – €50</span>
+        <span class="desc">Günstige Einsteiger-Produkte</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="50-150" onclick="selectOption(this,'step2')">
+        <span class="icon"><i class="fas fa-sack-dollar"></i></span>
+        <span class="label">€50 – €150</span>
+        <span class="desc">Gutes Mittelklasse-Equipment</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="150-500" onclick="selectOption(this,'step2')">
+        <span class="icon"><i class="fas fa-money-bill-wave"></i></span>
+        <span class="label">€150 – €500</span>
+        <span class="desc">Hochwertige Profi-Geräte</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="500+" onclick="selectOption(this,'step2')">
+        <span class="icon"><i class="fas fa-gem"></i></span>
+        <span class="label">€500+</span>
+        <span class="desc">Premium: Smart-Geräte & Großgeräte</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="prevStep(2)"><i class="fas fa-arrow-left"></i> Zurück</button>
+      <button class="btn btn-primary" id="btnStep2" onclick="nextStep(2)" disabled><i class="fas fa-arrow-right"></i> Weiter</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Trainingsort -->
+  <div class="card hidden" id="step3">
+    <h2><i class="fas fa-location-dot"></i> Schritt 3: Dein Trainingsort</h2>
+    <p class="subtitle">Wo trainierst du am liebsten? Das beeinflusst die Gerätewahl.</p>
+    <div class="options">
+      <div class="option" data-value="zuhause" onclick="selectOption(this,'step3')">
+        <span class="icon"><i class="fas fa-house-chimney"></i></span>
+        <span class="label">Zuhause</span>
+        <span class="desc">Home Gym, Wohnzimmer, Balkon</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="studio" onclick="selectOption(this,'step3')">
+        <span class="icon"><i class="fas fa-building"></i></span>
+        <span class="label">Fitnessstudio</span>
+        <span class="desc">Im Gym mit professionellen Geräten</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="draussen" onclick="selectOption(this,'step3')">
+        <span class="icon"><i class="fas fa-tree"></i></span>
+        <span class="label">Draußen</span>
+        <span class="desc">Park, Laufstrecke, Outdoor-Parcours</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+      <div class="option" data-value="gemischt" onclick="selectOption(this,'step3')">
+        <span class="icon"><i class="fas fa-shuffle"></i></span>
+        <span class="label">Gemischt</span>
+        <span class="desc">Flexibel – mal da, mal dort</span>
+        <span class="check"><i class="fas fa-check-circle"></i></span>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="prevStep(3)"><i class="fas fa-arrow-left"></i> Zurück</button>
+      <button class="btn btn-accent2" id="btnStep3" onclick="generateResults()" disabled><i class="fas fa-wand-magic-sparkles"></i> Ergebnisse anzeigen</button>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div class="results" id="results">
+    <div class="result-header">
+      <h2><i class="fas fa-check-circle"></i> Deine personalisierten Empfehlungen</h2>
+      <p>Basierend auf deinen Angaben haben wir die passendsten Produkte für dich ausgewählt.</p>
+    </div>
+    <div class="result-summary" id="resultSummary"></div>
+    <div class="product-grid" id="productGrid"></div>
+    <div class="restart-area">
+      <button class="btn btn-outline" onclick="restart()"><i class="fas fa-rotate-left"></i> Neu starten</button>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <i class="fas fa-info-circle"></i> *Preise sind ca. Angaben und können abweichen. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. <a href="https://amazon.de" target="_blank" rel="nofollow">Letzte Preise auf Amazon prüfen</a>.
+  </div>
+</div>
+
+<script>
+// ===== PRODUCT DATABASE (25+ Produkte) =====
+const products = [
+  {
+    id:1, name:'Fitbit Charge 6', brand:'Fitbit', icon:'fas fa-clock',
+    price:'€99,95', amazon:'https://amazon.de/dp/B0CHH1V6G2/?tag=ikune21-21',
+    goals:['abnehmen','allgemein','ausdauer'], budgets:['50-150'], locations:['zuhause','draussen','gemischt','studio'],
+    desc:'Fortschrittlicher Fitness-Tracker mit EKG, Schlafanalyse, Herzfrequenz & Stress-Management.',
+    tags:['Tracker','Herzfrequenz','Schlaf']
+  },
+  {
+    id:2, name:'Garmin Venu 3', brand:'Garmin', icon:'fas fa-clock',
+    price:'€449,00', amazon:'https://amazon.de/dp/B0CGV39Q5P/?tag=ikune21-21',
+    goals:['abnehmen','ausdauer','allgemein','muskeln'], budgets:['150-500'], locations:['zuhause','draussen','gemischt','studio'],
+    desc:'Premium GPS-Smartwatch mit Body Battery, Trainingsanalyse & 30+ Sportmodi. Ideal für alle Ziele.',
+    tags:['Smartwatch','GPS','Profi']
+  },
+  {
+    id:3, name:'Xiaomi Smart Band 9', brand:'Xiaomi', icon:'fas fa-clock',
+    price:'€39,99', amazon:'https://amazon.de/dp/B0D911FHJG/?tag=ikune21-21',
+    goals:['abnehmen','allgemein','ausdauer'], budgets:['0-50'], locations:['zuhause','draussen','gemischt','studio'],
+    desc:'Erschwingliches Fitness-Armband mit AMOLED-Display, Herzfrequenz & Schlaftracking.',
+    tags:['Tracker','Einsteiger','AMOLED']
+  },
+  {
+    id:4, name:'Apple Watch Series 10', brand:'Apple', icon:'fas fa-apple-whole',
+    price:'€499,00', amazon:'https://amazon.de/dp/B0DGJ5X8XW/?tag=ikune21-21',
+    goals:['abnehmen','ausdauer','allgemein','muskeln'], budgets:['500+'], locations:['zuhause','draussen','gemischt','studio'],
+    desc:'Die neueste Apple Watch mit Gesundheits-App, EKG, Blutsauerstoff & Activity-Ringen.',
+    tags:['Smartwatch','Premium','Gesundheit']
+  },
+  {
+    id:5, name:'Polar H10 Herzfrequenzgurt', brand:'Polar', icon:'fas fa-heart-pulse',
+    price:'€69,90', amazon:'https://amazon.de/dp/B07L6KYG3J/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein'], budgets:['50-150'], locations:['zuhause','draussen','studio','gemischt'],
+    desc:'Medizinisch genauer Brustgurt für präzise Herzfrequenzmessung – Goldstandard für Ausdauersport.',
+    tags:['Herzfrequenz','Profi','Cardio']
+  },
+  {
+    id:6, name:'Kurzhantel-Set 20 kg', brand:'Sportsteak', icon:'fas fa-dumbbell',
+    price:'€79,99', amazon:'https://amazon.de/dp/B08G8Y7ZJK/?tag=ikune21-21',
+    goals:['muskeln','allgemein'], budgets:['50-150'], locations:['zuhause','studio','gemischt'],
+    desc:'Komplettes 20-kg-Hantel-Set mit mehreren Gewichtsscheiben für Kraftaufbau zuhause.',
+    tags:['Hanteln','Kraft','Anfänger']
+  },
+  {
+    id:7, name:'Verstellbare Kurzhanteln 24 kg', brand:'AtivaFit', icon:'fas fa-dumbbell',
+    price:'€249,99', amazon:'https://amazon.de/dp/B0C4YQQG5W/?tag=ikune21-21',
+    goals:['muskeln','allgemein'], budgets:['150-500'], locations:['zuhause','studio','gemischt'],
+    desc:'Platzsparende, verstellbare Hanteln von 2–24 kg – perfekt für progressive Muskelaufbau.',
+    tags:['Hanteln','Verstellbar','Kraft']
+  },
+  {
+    id:8, name:'Kettlebell 16 kg', brand:'Rogue', icon:'fas fa-dumbbell',
+    price:'€89,90', amazon:'https://amazon.de/dp/B07KS4VZGC/?tag=ikune21-21',
+    goals:['muskeln','allgemein','ausdauer'], budgets:['50-150'], locations:['zuhause','studio','draussen','gemischt'],
+    desc:'Robuste Gusseisen-Kettlebell für Schwünge, Kniebeugen & Functional Training.',
+    tags:['Kettlebell','Kraft','Functional']
+  },
+  {
+    id:9, name:'Kettlebell 24 kg', brand:'Rogue', icon:'fas fa-dumbbell',
+    price:'€129,90', amazon:'https://amazon.de/dp/B07KS55B7D/?tag=ikune21-21',
+    goals:['muskeln','allgemein'], budgets:['50-150','150-500'], locations:['zuhause','studio','draussen','gemischt'],
+    desc:'Schwere Kettlebell für fortgeschrittenes Krafttraining und explosive Übungen.',
+    tags:['Kettlebell','Kraft','Fortgeschritten']
+  },
+  {
+    id:10, name:'SmarterHome Yogamatte Premium', brand:'SmarterHome', icon:'fas fa-rug',
+    price:'€34,99', amazon:'https://amazon.de/dp/B0B5G8L7TR/?tag=ikune21-21',
+    goals:['allgemein','abnehmen'], budgets:['0-50'], locations:['zuhause','studio','draussen','gemischt'],
+    desc:'Dick gepolsterte Yoga- & Gymnastikmatte mit Tragegurt – rutschfest & umweltfreundlich.',
+    tags:['Yoga','Matte','Bequem']
+  },
+  {
+    id:11, name:'Widerstandsbänder-Set (5 Stufen)', brand:'TheraBand', icon:'fas fa-circle',
+    price:'€29,95', amazon:'https://amazon.de/dp/B07Q4VYM9N/?tag=ikune21-21',
+    goals:['muskeln','allgemein','abnehmen'], budgets:['0-50'], locations:['zuhause','draussen','gemischt','studio'],
+    desc:'Set mit 5 verschiedenen Widerstandsstufen – ideal für Ganzkörpertraining & Rehabilitation.',
+    tags:['Bänder','Widerstand','Mobil']
+  },
+  {
+    id:12, name:'TheraBand Latexband extra stark', brand:'TheraBand', icon:'fas fa-circle',
+    price:'€19,95', amazon:'https://amazon.de/dp/B00ECKSGGK/?tag=ikune21-21',
+    goals:['muskeln','allgemein'], budgets:['0-50'], locations:['zuhause','draussen','studio','gemischt'],
+    desc:'Einzelnes Latex-Widerstandsband mit hohem Widerstand – perfekt für Kraftübungen.',
+    tags:['Bänder','Kraft','Einsteiger']
+  },
+  {
+    id:13, name:'Springseil Speed Rope Pro', brand:'CrossFit', icon:'fas fa-arrow-rotate-left',
+    price:'€24,95', amazon:'https://amazon.de/dp/B07P8L5Q1W/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein'], budgets:['0-50'], locations:['zuhause','draussen','gemischt'],
+    desc:'Leichtes Speed Rope aus Stahlseil mit Kugellagern – für schnelles Cardio-Training.',
+    tags:['Springseil','Cardio','Schnell']
+  },
+  {
+    id:14, name:'Rudermaschine RSX500', brand:'Sportsteak', icon:'fas fa-water',
+    price:'€449,00', amazon:'https://amazon.de/dp/B08D3HGHK3/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein','muskeln'], budgets:['150-500'], locations:['zuhause','gemischt'],
+    desc:'Wasserwiderstand-Rudergerät mit Bluetooth-App-Anbindung – Ganzkörpertraining für Zuhause.',
+    tags:['Rudern','Cardio','Ganzkörper']
+  },
+  {
+    id:15, name:'Sony WF-1000XM5 Bluetooth-Kopfhörer', brand:'Sony', icon:'fas fa-headphones',
+    price:'€249,00', amazon:'https://amazon.de/dp/B0B8SMF8J6/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein','muskeln'], budgets:['150-500'], locations:['zuhause','draussen','studio','gemischt'],
+    desc:'True-Wireless-Kopfhörer mit branchenführendem Noise-Cancelling & wasserdichtem Design.',
+    tags:['Kopfhörer','Bluetooth','NC']
+  },
+  {
+    id:16, name:'JBL Tune Flex Bluetooth-Kopfhörer', brand:'JBL', icon:'fas fa-headphones',
+    price:'€79,99', amazon:'https://amazon.de/dp/B0B5XN2Z4C/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein'], budgets:['50-150'], locations:['zuhause','draussen','gemischt','studio'],
+    desc:'Kabellose In-Ear-Kopfhörer mit JBL Pure Bass Sound & wasserfestem Gehäuse für Sport.',
+    tags:['Kopfhörer','Bluetooth','Sport']
+  },
+  {
+    id:17, name:'Sennheiser Sport True Wireless', brand:'Sennheiser', icon:'fas fa-headphones',
+    price:'€149,90', amazon:'https://amazon.de/dp/B0BC7VXYQJ/?tag=ikune21-21',
+    goals:['ausdauer','allgemein','abnehmen'], budgets:['150-500'], locations:['zuhause','draussen','studio','gemischt'],
+    desc:'Sport-Kopfhörer mit adaptivem Noise-Cancelling, Schweißschutz & erstklassigem Klang.',
+    tags:['Kopfhörer','Sport','Premium']
+  },
+  {
+    id:18, name:'Withings Body Smart Waage', brand:'Withings', icon:'fas fa-weight-scale',
+    price:'€119,95', amazon:'https://amazon.de/dp/B0CMWZK1NX/?tag=ikune21-21',
+    goals:['abnehmen','allgemein','ausdauer'], budgets:['50-150'], locations:['zuhause','gemischt'],
+    desc:'Smart-Waage mit Körperfettmessung, Muskelmasse, Knochenmasse & WLAN-Sync.',
+    tags:['Waage','Smart','Körperfett']
+  },
+  {
+    id:19, name:'RENPHO Körperfettwaage Bluetooth', brand:'RENPHO', icon:'fas fa-weight-scale',
+    price:'€29,99', amazon:'https://amazon.de/dp/B07PNFLJWP/?tag=ikune21-21',
+    goals:['abnehmen','allgemein'], budgets:['0-50'], locations:['zuhause','gemischt'],
+    desc:'Günstige Smart-Waage mit 13 Körpermesswerten & App-Anbindung – ideal zum Abnehmen.',
+    tags:['Waage','Bluetooth','Einsteiger']
+  },
+  {
+    id:20, name:'Xiaomi Mi Body Composition Scale 2', brand:'Xiaomi', icon:'fas fa-weight-scale',
+    price:'€34,99', amazon:'https://amazon.de/dp/B08HMLFGKC/?tag=ikune21-21',
+    goals:['abnehmen','allgemein'], budgets:['0-50'], locations:['zuhause','gemischt'],
+    desc:'Intelligente Körperfettwaage mit BMI, Muskelmasse & synchronisierbarer App.',
+    tags:['Waage','Smart','Günstig']
+  },
+  {
+    id:21, name:'Blackroll Standard Faszienrolle', brand:'Blackroll', icon:'fas fa-circle',
+    price:'€34,90', amazon:'https://amazon.de/dp/B00ECKSGGK/?tag=ikune21-21',
+    goals:['allgemein','muskeln','abnehmen'], budgets:['0-50'], locations:['zuhause','studio','gemischt'],
+    desc:'Professionelle Faszienrolle aus rutschfestem Material – für Regeneration & Mobility.',
+    tags:['Faszien','Regeneration','Mobility']
+  },
+  {
+    id:22, name:'Klimmzugstange Türreck', brand:'Sportsteak', icon:'fas fa-tent',
+    price:'€32,99', amazon:'https://amazon.de/dp/B07RL9HZGK/?tag=ikune21-21',
+    goals:['muskeln','allgemein'], budgets:['0-50'], locations:['zuhause'],
+    desc:'Kompakte Klimmzugstange für den Türrahmen – Oberkörper- & Rückenmuskeltraining.',
+    tags:['Klimmzug','Oberkörper','Zuhause']
+  },
+  {
+    id:23, name:'TRX All-in-One Suspension Trainer', brand:'TRX', icon:'fas fa-person-walking',
+    price:'€169,95', amazon:'https://amazon.de/dp/B074Z6FL7Z/?tag=ikune21-21',
+    goals:['muskeln','allgemein','abnehmen'], budgets:['150-500'], locations:['zuhause','draussen','studio','gemischt'],
+    desc:'Professionelles Schlingentraining für Ganzkörper-Kraft & Stabilität – überall nutzbar.',
+    tags:['TRX','Functional','Ganzkörper']
+  },
+  {
+    id:24, name:'Pilates-Ball Mini', brand:'Sissel', icon:'fas fa-circle',
+    price:'€12,95', amazon:'https://amazon.de/dp/B001V74J5Q/?tag=ikune21-21',
+    goals:['allgemein','abnehmen'], budgets:['0-50'], locations:['zuhause','studio','gemischt'],
+    desc:'Kleiner Gymnastikball für Pilates, Bauchtraining & Gleichgewichtsübungen.',
+    tags:['Pilates','Ball','Balance']
+  },
+  {
+    id:25, name:'Garmin Edge 540 Fahrrad-Computer', brand:'Garmin', icon:'fas fa-bicycle',
+    price:'€299,99', amazon:'https://amazon.de/dp/B0BT3QJG6G/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein'], budgets:['150-500'], locations:['draussen','gemischt'],
+    desc:'GPS-Fahrradcomputer mit Leistungsmessung, Navigation & Trainingsanalyse für Radsportler.',
+    tags:['Fahrrad','GPS','Radsport']
+  },
+  {
+    id:26, name:'Springseil Leder', brand:'POWRX', icon:'fas fa-arrow-rotate-left',
+    price:'€14,99', amazon:'https://amazon.de/dp/B07Q4VM3FJ/?tag=ikune21-21',
+    goals:['ausdauer','abnehmen','allgemein'], budgets:['0-50'], locations:['zuhause','draussen','gemischt'],
+    desc:'Klassisches Lederspringseil mit Holzgriffen – langlebig & geschmeidig für Cardio.',
+    tags:['Springseil','Cardio','Klassisch']
+  },
+  {
+    id:27, name:'Gymband Set 6er', brand:'LIVI', icon:'fas fa-circle',
+    price:'€18,99', amazon:'https://amazon.de/dp/B0B5G8L7TR/?tag=ikune21-21',
+    goals:['muskeln','allgemein','abnehmen'], budgets:['0-50'], locations:['zuhause','draussen','studio','gemischt'],
+    desc:'6 Latex-Widerstandsbänder in verschiedenen Stärken – vielseitiges Ganzkörpertraining.',
+    tags:['Bänder','Set','Vielseitig']
+  }
+];
+
+// ===== STATE =====
+let state = { goal:null, budget:null, location:null };
+
+function selectOption(el,step){
+  const parent=el.closest('.card');
+  parent.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const val=el.dataset.value;
+  if(step==='step1'){ state.goal=val; document.getElementById('btnStep1').disabled=false; }
+  else if(step==='step2'){ state.budget=val; document.getElementById('btnStep2').disabled=false; }
+  else if(step==='step3'){ state.location=val; document.getElementById('btnStep3').disabled=false; }
+}
+
+function nextStep(n){
+  document.getElementById('step'+n).classList.add('hidden');
+  document.getElementById('step'+(n+1)).classList.remove('hidden');
+  updateProgress(n,true);
+  // Scroll to top
+  document.querySelector('.container').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function prevStep(n){
+  document.getElementById('step'+n).classList.add('hidden');
+  document.getElementById('step'+(n-1)).classList.remove('hidden');
+  updateProgress(n,false);
+  document.querySelector('.container').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function updateProgress(n,forward){
+  const steps=document.querySelectorAll('.prog-step');
+  steps.forEach((s,i)=>{
+    const idx=i+1;
+    s.classList.remove('active','done');
+    if(forward){
+      if(idx<=n) s.classList.add('done');
+      if(idx===n+1) s.classList.add('active');
+    } else {
+      if(idx<n) s.classList.add('done');
+      if(idx===n-1) s.classList.add('active');
+    }
+  });
+}
+
+function generateResults(){
+  const resultsDiv=document.getElementById('results');
+  const summary=document.getElementById('resultSummary');
+  const grid=document.getElementById('productGrid');
+
+  // Hide all step cards
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.add('hidden');
+  document.getElementById('step3').classList.add('hidden');
+
+  // Set all progress to done
+  document.querySelectorAll('.prog-step').forEach(s=>{s.classList.remove('active');s.classList.add('done')});
+
+  // Filter products
+  const goalNames={abnehmen:'Abnehmen',muskeln:'Muskeln aufbauen',ausdauer:'Ausdauer',allgemein:'Allgemeine Fitness'};
+  const budgetNames={'0-50':'€0–50','50-150':'€50–150','150-500':'€150–500','500+':'€500+'};
+  const locNames={zuhause:'Zuhause',studio:'Fitnessstudio',draussen:'Draußen',gemischt:'Gemischt'};
+
+  let matched=products.filter(p=>{
+    const g=p.goals.includes(state.goal);
+    const b=p.budgets.includes(state.budget);
+    const l=p.locations.includes(state.location);
+    // Score: goal match is most important, then budget, then location
+    return g && b && l;
+  });
+
+  // Sort: prefer products that match all three perfectly, and give priority to those with more relevant tags
+  matched.sort((a,b)=>{
+    // Prefer products that match the goal most specifically
+    const aPerf=a.goals.includes(state.goal)?1:0;
+    const bPerf=b.goals.includes(state.goal)?1:0;
+    if(bPerf!==aPerf) return bPerf-aPerf;
+    return 0;
+  });
+
+  // If we have too few matches, add some partial matches
+  if(matched.length<5){
+    const partials=products.filter(p=>{
+      const already=matched.find(m=>m.id===p.id);
+      if(already) return false;
+      const g=p.goals.includes(state.goal);
+      const b=p.budgets.includes(state.budget);
+      const l=p.locations.includes(state.location);
+      // At least two out of three match
+      return (g&&b) || (g&&l) || (b&&l);
+    });
+    matched=[...matched,...partials];
+  }
+
+  // Limit to top 10
+  const top=matched.slice(0,10);
+
+  // Build summary
+  summary.innerHTML=`
+    <span><i class="fas fa-bullseye"></i> ${goalNames[state.goal]||state.goal}</span>
+    <span><i class="fas fa-wallet"></i> ${budgetNames[state.budget]||state.budget}</span>
+    <span><i class="fas fa-location-dot"></i> ${locNames[state.location]||state.location}</span>
+    <span><i class="fas fa-box"></i> ${top.length} Empfehlungen</span>
+  `;
+
+  // Build product grid
+  grid.innerHTML='';
+  if(top.length===0){
+    grid.innerHTML='<div class="card" style="text-align:center;grid-column:1/-1"><p style="color:var(--text2);font-size:1.1rem"><i class="fas fa-face-frown"></i> Leider keine passenden Produkte gefunden. Versuche andere Kriterien.</p></div>';
+  } else {
+    top.forEach(p=>{
+      const div=document.createElement('div');
+      div.className='product-card';
+      div.innerHTML=`
+        <div class="p-icon"><i class="${p.icon}"></i></div>
+        <h3>${p.name}</h3>
+        <div class="p-brand">${p.brand}</div>
+        <div class="p-tags">${p.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+        <div class="p-price">${p.price} <small>ca.</small></div>
+        <div class="p-desc">${p.desc}</div>
+        <a class="p-link" href="${p.amazon}" target="_blank" rel="nofollow sponsored"><i class="fas fa-shopping-cart"></i> Preis prüfen</a>
+      `;
+      grid.appendChild(div);
+    });
+  }
+
+  resultsDiv.classList.add('visible');
+  resultsDiv.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function restart(){
+  state={goal:null,budget:null,location:null};
+  document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('btnStep1').disabled=true;
+  document.getElementById('btnStep2').disabled=true;
+  document.getElementById('btnStep3').disabled=true;
+  document.getElementById('results').classList.remove('visible');
+  document.querySelectorAll('.card').forEach(c=>c.classList.add('hidden'));
+  document.getElementById('step1').classList.remove('hidden');
+  document.querySelectorAll('.prog-step').forEach(s=>{s.classList.remove('active','done')});
+  document.querySelector('.prog-step[data-step="1"]').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Initialize progress
+document.querySelector('.prog-step[data-step="1"]').classList.add('active');
+</script>
+</body>
+</html>

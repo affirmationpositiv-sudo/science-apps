@@ -1,6 +1,18 @@
 # Loop Log – Science Apps Deployment
 
-## R2.49 – 02.06.2026 (Cron) – Deploy Blog #64 + #65 + Tool #17, Synced Desktop→Live | Autor: Licht und Schatten
+## R2.49 – 02.06.2026 (Cron 21:45) – Blog #66 (KI Gesundheit & Fitness) + Tool #18 (Fitness-Rechner) | Autor: Licht und Schatten
+**Aktion:** Neuen Blog-Artikel #66 (KI für Gesundheit & Fitness 2026) + interaktiven KI-Fitness-Rechner (Tool #18) erstellt und deployed. Blog-Index auf 66 aktualisiert, Sitemap +2 URLs.
+**Neue Dateien:**
+- `blog/ki-gesundheit-fitness-2026.html` (NEU – Blog #66, 37KB, 35+ Amazon-Affiliate-Links, 5 Kategorien)
+- `tools/fitness-rechner.html` (NEU – Tool #18, 18KB, 27 Produkte, 3-Schritte-Assistent)
+**Geänderte Dateien:**
+- `blog/index.html` (Stats 65→66, neue Karte #66, Hero-Meta aktualisiert)
+- `sitemap.xml` (+2 URLs: Blog #66 + Fitness-Tool, 133→135)
+- `loop_log.md` (R2.49 Eintrag)
+**Affiliate-Tag:** ikune21-21
+**Status:** ✅ Deployed & Live (Git Push)
+
+## R2.48 – 02.06.2026 – Desktop→Live Sync (Blog #64, #65, Tool #17, LeadGen +3, Tamagotchi) | Autor: Licht und Schatten
 **Aktion:** Frühere in Desktop/gh-pages erstellte Inhalte (Blog #64, #65, Tool #17, LeadGen +3, Tamagotchi) via Patch auf origin/main deployed. GitHub Push erfolgreich.
 **Dateien deployed:**
 - `blog/ki-tools-vergleich-2026.html` (NEU – Blog #64, 22KB, 35+ Amazon-Links)
