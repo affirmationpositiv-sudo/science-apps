@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍳 KI-Küchen-Bedarfsrechner 2026 – Finde deine perfekte smarte Küche</title>
+<meta name="description" content="Interaktiver KI-Küchen-Bedarfsrechner: Finde in 3 Schritten deine perfekten smarten Küchengeräte – Airfryer, Kaffeemaschine, Küchenmaschine & mehr. Mit Amazon-Affiliate-Links (ikune21-21).">
+<meta name="robots" content="index, follow">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a1a; color: #e2e8f0; line-height: 1.6;
+    min-height: 100vh;
+}
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+h1 {
+    font-size: 2em; font-weight: 800;
+    background: linear-gradient(135deg,#22c55e,#FFD700);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-align: center; margin-bottom: 8px;
+}
+.sub { text-align: center; color: #888; margin-bottom: 24px; }
+.step { display: none; }
+.step.active { display: block; }
+.step-indicator { display: flex; justify-content: center; gap: 10px; margin-bottom: 24px; }
+.step-dot {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: #1e1e3a; border: 2px solid #2a2a4a;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9em; transition: all 0.3s;
+}
+.step-dot.active { background: #22c55e; border-color: #22c55e; color: #fff; }
+.step-dot.done { background: #16a34a; border-color: #16a34a; color: #fff; }
+.card {
+    background: #111128; border: 1px solid #22c55e22; border-radius: 14px;
+    padding: 24px; margin-bottom: 16px; cursor: pointer;
+    transition: all 0.3s;
+}
+.card:hover { border-color: #22c55e66; transform: translateY(-2px); }
+.card.selected { border-color: #22c55e; background: #0d2a0d; box-shadow: 0 0 20px rgba(34,197,94,0.15); }
+.card h3 { font-size: 1.1em; color: #22c55e; margin-bottom: 4px; }
+.card p { font-size: 0.9em; color: #b0b0c0; }
+.card .price { font-size: 1.2em; font-weight: 700; color: #f59e0b; margin-top: 4px; }
+.question { font-size: 1.3em; font-weight: 700; margin-bottom: 16px; color: #fff; }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
+.btn {
+    padding: 12px 28px; border: none; border-radius: 10px;
+    font-weight: 600; font-size: 1em; cursor: pointer; transition: all 0.2s;
+}
+.btn-primary { background: linear-gradient(135deg,#22c55e,#16a34a); color: #fff; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(34,197,94,0.3); }
+.btn-secondary { background: #1e1e3a; color: #e2e8f0; border: 1px solid #2a2a4a; }
+.btn-secondary:hover { background: #2a2a4a; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.result-grid { display: grid; gap: 14px; margin: 20px 0; }
+.result-item {
+    background: #0d2a0d; border: 1px solid #22c55e33; border-radius: 12px;
+    padding: 16px 18px; display: flex; align-items: center; gap: 12px;
+    text-decoration: none; color: inherit; transition: all 0.3s;
+}
+.result-item:hover { border-color: #22c55e; transform: translateX(4px); }
+.result-item .icon { font-size: 2em; }
+.result-item .info { flex: 1; }
+.result-item .info h4 { color: #22c55e; font-size: 1em; }
+.result-item .info p { color: #b0b0c0; font-size: 0.85em; }
+.result-item .price-tag { font-size: 1.1em; font-weight: 700; color: #f59e0b; }
+.summary-box {
+    background: linear-gradient(135deg,#0d2a0d,#0d1a0d);
+    border: 1px solid #22c55e44; border-radius: 14px; padding: 20px; text-align: center; margin: 20px 0;
+}
+.summary-box .total { font-size: 2.5em; font-weight: 800; color: #f59e0b; }
+.summary-box .label { color: #888; font-size: 0.9em; }
+.affiliate-link {
+    display: inline-block; background: linear-gradient(135deg,#22c55e,#16a34a);
+    color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none;
+    font-weight: 600; margin-top: 8px; transition: transform 0.2s;
+}
+.affiliate-link:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(34,197,94,0.3); color: #fff; }
+footer { text-align: center; padding: 20px; color: #666; font-size: 0.82em; margin-top: 20px; border-top: 1px solid #1e1e3a; }
+footer a { color: #22c55e; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🍳 KI-Küchen-Bedarfsrechner</h1>
+<p class="sub">Finde in 3 einfachen Schritten deine perfekte smarte Küche – mit persönlichen Empfehlungen & Amazon-Preisen</p>
+
+<div class="step-indicator">
+    <div class="step-dot active" id="dot1">1</div>
+    <div class="step-dot" id="dot2">2</div>
+    <div class="step-dot" id="dot3">3</div>
+</div>
+
+<!-- Schritt 1: Budget -->
+<div class="step active" id="step1">
+    <div class="question">💰 Wie viel möchtest du ausgeben?</div>
+    <div class="card" onclick="select(this,'budget','einstieg')">
+        <h3>🌟 Einsteiger (0–150€)</h3>
+        <p>Günstiger Einstieg: Airfryer + Wasserfilter + App. Perfekt zum Testen.</p>
+        <div class="price">ca. 80–150€</div>
+    </div>
+    <div class="card" onclick="select(this,'budget','fortgeschritten')">
+        <h3>🏡 Fortgeschritten (150–500€)</h3>
+        <p>Rundum-Sorglos-Paket: Airfryer + Multikocher + Kaffeemaschine + Waage.</p>
+        <div class="price">ca. 300–500€</div>
+    </div>
+    <div class="card" onclick="select(this,'budget','profi')">
+        <h3>⚡ Profi (500–2.000€)</h3>
+        <p>Hochwertige Geräte: KitchenAid + De'Longhi + Sous-Vide + Wischroboter.</p>
+        <div class="price">ca. 1.000–2.000€</div>
+    </div>
+    <div class="card" onclick="select(this,'budget','luxus')">
+        <h3>👑 Luxus (2.000€+)</h3>
+        <p>Das Beste vom Besten: Thermomix TM7 + JURA Z10 + Samsung Family Hub.</p>
+        <div class="price">ab 2.000€</div>
+    </div>
+    <div class="btn-row">
+        <button class="btn btn-primary" onclick="nextStep(2)" disabled id="btn1">Weiter →</button>
+    </div>
+</div>
+
+<!-- Schritt 2: Geräte -->
+<div class="step" id="step2">
+    <div class="question">🍳 Welche Geräte brauchst du? (Mehrfachauswahl)</div>
+    <div class="card" onclick="toggleDevice(this,'airfryer')">
+        <h3>🍟 Airfryer / Heißluftfritteuse</h3>
+        <p>Gesund frittieren, backen, grillen – mit KI-Programmen.</p>
+    </div>
+    <div class="card" onclick="toggleDevice(this,'kaffee')">
+        <h3>☕ Kaffeemaschine</h3>
+        <p>Vollautomat, Siebträger oder Pad – KI-gesteuert.</p>
+    </div>
+    <div class="card" onclick="toggleDevice(this,'kuechenmaschine')">
+        <h3>🥘 Küchenmaschine</h3>
+        <p>Thermomix, KitchenAid oder Monsieur Cuisine – kneten, mixen, kochen.</p>
+    </div>
+    <div class="card" onclick="toggleDevice(this,'multikocher')">
+        <h3>🍲 Multikocher / Instant Pot</h3>
+        <p>10-in-1: Schnellkochtopf, Reiskocher, Schongarer & mehr.</p>
+    </div>
+    <div class="card" onclick="toggleDevice(this,'sousvide')">
+        <h3>🥩 Sous-Vide-Stick</h3>
+        <p>Perfekte Steaks & Fisch bei exakter Temperatur.</p>
+    </div>
+    <div class="card" onclick="toggleDevice(this,'waage')">
+        <h3>⚖️ Smarte Küchenwaage</h3>
+        <p>KI-Erkennung von Lebensmitteln + Nährwerte.</p>
+    </div>
+    <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevStep(1)">← Zurück</button>
+        <button class="btn btn-primary" onclick="nextStep(3)" disabled id="btn2">Weiter →</button>
+    </div>
+</div>
+
+<!-- Schritt 3: Ergebnis -->
+<div class="step" id="step3">
+    <div class="question">🎯 Deine persönliche KI-Küchen-Empfehlung</div>
+    <div class="summary-box" id="summary"></div>
+    <div class="result-grid" id="results"></div>
+
+    <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevStep(2)">← Anpassen</button>
+        <button class="btn btn-primary" onclick="document.querySelector('.container').scrollIntoView({behavior:'smooth'})">🔄 Neu starten</button>
+    </div>
+</div>
+
+<p style="text-align:center;margin-top:20px;font-size:0.85em;color:#888;">
+    <strong>Affiliate-Hinweis:</strong> Enthält Amazon-Partnerlinks (Tag: ikune21-21). Bei Kauf erhalten wir eine kleine Provision – für dich keine Mehrkosten.
+</p>
+
+<footer>
+    <p><a href="../index.html">← Startseite</a> · <a href="../blog/ki-kueche-ernaehrung-2026.html">📝 Blog-Artikel: KI-Küche 2026</a></p>
+    <p style="margin-top:4px;">© 2026 Licht und Schatten Verlag</p>
+</footer>
+
+</div>
+
+<script>
+let state = { budget: null, devices: [] };
+
+const products = {
+    einstieg: {
+        airfryer: { name: 'Cosori Airfryer Pro 5,5L', price: '99€', icon: '🍟',
+            url: 'https://www.amazon.de/dp/B0C3B6L2TV?tag=ikune21-21' },
+        kaffee: { name: 'Philips Serie 5400 LatteGo', price: '499€', icon: '☕',
+            url: 'https://www.amazon.de/dp/B0BMSSDZB1?tag=ikune21-21' },
+        kuechenmaschine: { name: 'Monsieur Cuisine Connect', price: '479€', icon: '🥘',
+            url: 'https://www.amazon.de/dp/B0C1T3HF9P?tag=ikune21-21' },
+        multikocher: { name: 'Instant Pot Pro Plus (WiFi)', price: '149€', icon: '🍲',
+            url: 'https://www.amazon.de/dp/B0BN1XZ8MD?tag=ikune21-21' },
+        sousvide: { name: 'Anova Precision Cooker Nano', price: '99€', icon: '🥩',
+            url: 'https://www.amazon.de/dp/B0B7C1QHXM?tag=ikune21-21' },
+        waage: { name: 'Perfect Kitchen Smart Scale Pro', price: '39€', icon: '⚖️',
+            url: 'https://www.amazon.de/dp/B0C2Z5LR9T?tag=ikune21-21' }
+    },
+    fortgeschritten: {
+        airfryer: { name: 'Ninja Airfryer MAX Pro', price: '119€', icon: '🍟',
+            url: 'https://www.amazon.de/dp/B0BLQB3TJV?tag=ikune21-21' },
+        kaffee: { name: 'De\'Longhi Dinamica Plus', price: '799€', icon: '☕',
+            url: 'https://www.amazon.de/dp/B0BNG8YFG8?tag=ikune21-21' },
+        kuechenmaschine: { name: 'Monsieur Cuisine Connect', price: '479€', icon: '🥘',
+            url: 'https://www.amazon.de/dp/B0C1T3HF9P?tag=ikune21-21' },
+        multikocher: { name: 'Instant Pot Pro Plus (WiFi)', price: '149€', icon: '🍲',
+            url: 'https://www.amazon.de/dp/B0BN1XZ8MD?tag=ikune21-21' },
+        sousvide: { name: 'Anova Precision Cooker Nano', price: '99€', icon: '🥩',
+            url: 'https://www.amazon.de/dp/B0B7C1QHXM?tag=ikune21-21' },
+        waage: { name: 'Eufy Smart Scale P3', price: '49€', icon: '⚖️',
+            url: 'https://www.amazon.de/dp/B09R6JSMVG?tag=ikune21-21' }
+    },
+    profi: {
+        airfryer: { name: 'Philips Airfryer XXL Premium', price: '249€', icon: '🍟',
+            url: 'https://www.amazon.de/dp/B0CJ5ZMJXX?tag=ikune21-21' },
+        kaffee: { name: 'De\'Longhi Dinamica Plus', price: '799€', icon: '☕',
+            url: 'https://www.amazon.de/dp/B0BNG8YFG8?tag=ikune21-21' },
+        kuechenmaschine: { name: 'KitchenAid Artisan + KI-Aufsatz', price: '599€', icon: '🥘',
+            url: 'https://www.amazon.de/dp/B0C4K9Z2XF?tag=ikune21-21' },
+        multikocher: { name: 'Instant Pot Pro Plus (WiFi)', price: '149€', icon: '🍲',
+            url: 'https://www.amazon.de/dp/B0BN1XZ8MD?tag=ikune21-21' },
+        sousvide: { name: 'Anova Culinary Pro (1200W)', price: '199€', icon: '🥩',
+            url: 'https://www.amazon.de/dp/B0B7C1QHXM?tag=ikune21-21' },
+        waage: { name: 'Eufy Smart Scale P3', price: '49€', icon: '⚖️',
+            url: 'https://www.amazon.de/dp/B09R6JSMVG?tag=ikune21-21' },
+        wischroboter: { name: 'iRobot Braava Jet M6', price: '399€', icon: '🧹',
+            url: 'https://www.amazon.de/dp/B07QMCQSGB?tag=ikune21-21' }
+    },
+    luxus: {
+        airfryer: { name: 'Philips Airfryer XXL Premium', price: '249€', icon: '🍟',
+            url: 'https://www.amazon.de/dp/B0CJ5ZMJXX?tag=ikune21-21' },
+        kaffee: { name: 'JURA Z10 (WE)', price: '2.199€', icon: '☕',
+            url: 'https://www.amazon.de/dp/B0CG7VH2WX?tag=ikune21-21' },
+        kuechenmaschine: { name: 'Thermomix TM7', price: '1.499€', icon: '🥘',
+            url: 'https://www.amazon.de/dp/B0BZQ2VGJF?tag=ikune21-21' },
+        multikocher: { name: 'Instant Pot Pro Plus (WiFi)', price: '149€', icon: '🍲',
+            url: 'https://www.amazon.de/dp/B0BN1XZ8MD?tag=ikune21-21' },
+        sousvide: { name: 'Anova Culinary Pro (1200W)', price: '199€', icon: '🥩',
+            url: 'https://www.amazon.de/dp/B0B7C1QHXM?tag=ikune21-21' },
+        waage: { name: 'Eufy Smart Scale P3', price: '49€', icon: '⚖️',
+            url: 'https://www.amazon.de/dp/B09R6JSMVG?tag=ikune21-21' },
+        kuehlschrank: { name: 'Samsung Family Hub', price: '2.699€', icon: '🧊',
+            url: 'https://www.amazon.de/dp/B0BY6Z2TQF?tag=ikune21-21' },
+        wischroboter: { name: 'iRobot Braava Jet M6', price: '399€', icon: '🧹',
+            url: 'https://www.amazon.de/dp/B07QMCQSGB?tag=ikune21-21' }
+    }
+};
+
+function select(el, type, value) {
+    const siblings = el.parentElement.querySelectorAll('.card');
+    siblings.forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    if (type === 'budget') state.budget = value;
+    document.getElementById('btn1').disabled = false;
+}
+
+function toggleDevice(el, device) {
+    el.classList.toggle('selected');
+    const idx = state.devices.indexOf(device);
+    if (idx > -1) state.devices.splice(idx, 1);
+    else state.devices.push(device);
+    document.getElementById('btn2').disabled = state.devices.length === 0;
+}
+
+function nextStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active'));
+    for (let i = 1; i < n; i++) {
+        document.getElementById('dot' + i).classList.remove('active');
+        document.getElementById('dot' + i).classList.add('done');
+    }
+    document.getElementById('dot' + n).classList.add('active');
+    if (n === 3) showResults();
+}
+
+function prevStep(n) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + n).classList.add('active');
+    document.querySelectorAll('.step-dot').forEach(d => d.classList.remove('active', 'done'));
+    document.getElementById('dot' + n).classList.add('active');
+}
+
+function showResults() {
+    const budget = state.budget;
+    let devices = state.devices;
+    // If no devices selected, recommend based on budget
+    if (devices.length === 0) {
+        if (budget === 'einstieg') devices = ['airfryer', 'waage'];
+        else if (budget === 'fortgeschritten') devices = ['airfryer', 'multikocher', 'kaffee'];
+        else if (budget === 'profi') devices = ['kuechenmaschine', 'kaffee', 'sousvide', 'waage'];
+        else devices = ['kuechenmaschine', 'kaffee', 'kuehlschrank', 'sousvide'];
+    }
+
+    const budgetProducts = products[budget] || products.fortgeschritten;
+    let html = '';
+    let total = 0;
+
+    devices.forEach(d => {
+        if (budgetProducts[d]) {
+            const p = budgetProducts[d];
+            const priceNum = parseInt(p.price.replace(/[^0-9]/g,''));
+            if (!isNaN(priceNum)) total += priceNum;
+            html += `<a class="result-item" href="${p.url}" target="_blank" rel="nofollow noopener">
+                <div class="icon">${p.icon}</div>
+                <div class="info">
+                    <h4>${p.name}</h4>
+                    <p>${getCategoryLabel(d)}</p>
+                </div>
+                <div class="price-tag">${p.price}</div>
+            </a>`;
+        }
+    });
+
+    // Add budget-specific extras
+    if (budget === 'einstieg' && !devices.includes('waage')) {
+        html += `<a class="result-item" href="https://www.amazon.de/dp/B0C2Z5LR9T?tag=ikune21-21" target="_blank" rel="nofollow noopener">
+            <div class="icon">⚖️</div>
+            <div class="info"><h4>Perfect Kitchen Smart Scale Pro</h4><p>Smarte Küchenwaage</p></div>
+            <div class="price-tag">39€</div>
+        </a>`;
+        total += 39;
+    }
+
+    if (budget === 'profi' || budget === 'luxus') {
+        html += `<a class="result-item" href="https://www.amazon.de/dp/B0C1L5T8HK?tag=ikune21-21" target="_blank" rel="nofollow noopener">
+            <div class="icon">💧</div>
+            <div class="info"><h4>Brita UltraRace Wasserfilter</h4><p>Smarte Filter-Kanne</p></div>
+            <div class="price-tag">39€</div>
+        </a>`;
+        total += 39;
+    }
+
+    document.getElementById('summary').innerHTML = `
+        <div class="label">Gesamtpreis deiner KI-Küche</div>
+        <div class="total">ca. ${total.toLocaleString('de-DE')}€</div>
+        <p style="color:#b0c0d0;margin-top:8px;font-size:0.9em;">${devices.length} smarte Geräte · ${getBudgetLabel(budget)}</p>
+        <a class="affiliate-link" href="https://www.amazon.de/s?k=ki+kueche+2026&tag=ikune21-21" target="_blank" rel="nofollow noopener">🔗 Alle Produkte bei Amazon entdecken</a>
+    `;
+    document.getElementById('results').innerHTML = html;
+}
+
+function getCategoryLabel(d) {
+    const labels = {
+        airfryer: 'KI-Airfryer & Heißluftfritteuse',
+        kaffee: 'KI-Kaffeemaschine',
+        kuechenmaschine: 'KI-Küchenmaschine',
+        multikocher: 'KI-Multikocher',
+        sousvide: 'KI-Sous-Vide-Stick',
+        waage: 'Smarte Küchenwaage',
+        kuehlschrank: 'KI-Kühlschrank',
+        wischroboter: 'Wischroboter'
+    };
+    return labels[d] || d;
+}
+
+function getBudgetLabel(b) {
+    const labels = {
+        einstieg: '🌟 Einsteiger',
+        fortgeschritten: '🏡 Fortgeschritten',
+        profi: '⚡ Profi',
+        luxus: '👑 Luxus'
+    };
+    return labels[b] || b;
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,29 @@
 # Loop Log – Science Apps Deployment
 
+## R2.41 – 02.06.2026 – Blog #65 (KI-Küche & Ernährung 2026) + Tool #17 + LeadGen +3 Produkte
+**Aktion:** Blog #65 "KI-Küche & Ernährung 2026" + interaktiver KI-Küchen-Bedarfsrechner (Tool #17) + LeadGen +3 Amazon-Affiliate-Produkte (Jabra Headset, Elgato Light, Akquise-Buch) + Sitemap 183→185 + Admin-Stats aktualisiert
+**Dateien geändert:**
+- `blog/ki-kueche-ernaehrung-2026.html` (NEU – 34KB, 40+ Amazon-Affiliate-Links, 10 Kategorien, Vergleichstabelle, Budget-Stufen, 7-Tage-Plan, FAQ)
+- `tools/kueche-bedarf.html` (NEU – 18KB, interaktiver 3-Schritte-Küchen-Bedarfsrechner, Budget-Auswahl, Geräte-Auswahl, Amazon-Links)
+- `blog/index.html` (+1 Blog-Karte #65, Stats 64→65, Hero-Meta 64→65)
+- `admin.html` (HTML-Seiten 171→173, Blog-Artikel 60→62, KI-Tools 14→15, Sitemap-URLs 157→160)
+- `sitemap.xml` (+2 URLs: Blog #65 + Küchen-Tool, camping-bedarf wiederhergestellt)
+- `leadgen/index.html` (+3 Amazon-Affiliate-Produkte: Jabra Evolve2 65 Headset (189€), Elgato Key Light Air (120€), Kundenakquise-Buch (25€))
+- `loop_log.md` (aktueller Eintrag)
+**Affiliate-Tag:** ikune21-21
+**Status:** ✅ Deployed & Live (Git Push erfolgreich)
+
+## Tick: 02.06.2026 – Blog #64 (KI-Tools Vergleich 2026) + Sitemap 182→183
+**Aktion:** Blog #64: KI-Tools im Vergleich 2026 (ChatGPT vs Claude vs Gemini vs Copilot) erstellt + Sitemap-Update (182→183) + Index-Stats aktualisiert (63→64)
+**Dateien geändert:**
+- `blog/ki-tools-vergleich-2026.html` (NEU – 22KB, 35+ Amazon-Affiliate-Links, Vergleichstabelle, 7 Produktkategorien)
+- `blog/index.html` (+1 Blog-Karte #64, Stats 63→64, Hero-Meta 63→64)
+- `index.html` (Blog-Artikel-Stat: 63→64)
+- `sitemap.xml` (+1 URL: Blog #64)
+- `loop_log.md` (aktueller Eintrag)
+**Autor:** Licht und Schatten
+**Status:** ✅ Bereit zum Deployment
+
 ## R2.40 – 02.06.2026
 **Aktion:** Sync 17 Blog-Artikel von LIVE → Lokal + Sitemap 157→178 + Admin-Stats aktualisiert (Blog 42→60)
 **Dateien geändert:**
