@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔐 KI-Sicherheits-Checker – Deine persönliche Sicherheitsanalyse 2026</title>
+<meta name="description" content="Interaktiver KI-Sicherheits-Checker: Beantworte 10 Fragen und erhalte deine persönliche Sicherheitsbewertung mit Produktempfehlungen für Passwort-Manager, 2FA, VPN, Backups & mehr.">
+<meta name="keywords" content="Sicherheits-Checker, digitale Sicherheit, Datenschutz-Test, Passwort-Sicherheit, 2FA-Check, VPN-Test, Sicherheits-Score, ikune21-21">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; min-height: 100vh; }
+.container { max-width: 700px; margin: 0 auto; padding: 24px; }
+h1 { font-size: 2em; font-weight: 800; background: linear-gradient(135deg, #8B5CF6, #FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin: 30px 0 8px; }
+.subtitle { text-align: center; color: #9CA3AF; margin-bottom: 30px; font-size: 0.95em; }
+.badge { display: inline-block; background: rgba(139, 92, 246, 0.15); color: #A78BFA; padding: 4px 14px; border-radius: 20px; font-size: 0.8em; font-weight: 600; margin: 0 auto 12px; text-align: center; width: fit-content; }
+.step-indicator { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; }
+.step-dot { width: 36px; height: 36px; border-radius: 50%; background: #1A1A1A; border: 2px solid #2A2A2A; display: flex; align-items: center; justify-content: center; font-size: 0.75em; font-weight: 700; color: #6B7280; transition: all 0.3s; }
+.step-dot.active { background: #8B5CF6; border-color: #8B5CF6; color: #fff; }
+.step-dot.done { background: #065F46; border-color: #059669; color: #fff; }
+.progress-bar { height: 4px; background: #1A1A1A; border-radius: 2px; margin-bottom: 28px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #8B5CF6, #FFD700); border-radius: 2px; transition: width 0.5s ease; }
+.quiz-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 32px; margin-bottom: 20px; }
+.quiz-card h2 { font-size: 1.3em; margin-bottom: 6px; color: #fff; }
+.quiz-card .q-num { color: #8B5CF6; font-weight: 700; font-size: 0.85em; margin-bottom: 4px; }
+.quiz-card .q-text { color: #D1D5DB; margin-bottom: 20px; font-size: 0.9em; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option { background: #141414; border: 2px solid #2A2A2A; border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: all 0.2s; font-size: 0.95em; color: #D1D5DB; display: flex; align-items: center; gap: 12px; }
+.option:hover { border-color: #8B5CF6; background: rgba(139, 92, 246, 0.08); }
+.option.selected { border-color: #8B5CF6; background: rgba(139, 92, 246, 0.15); color: #fff; }
+.option .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #4B5563; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.option.selected .radio { border-color: #8B5CF6; }
+.option.selected .radio::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #8B5CF6; }
+.option .pts { margin-left: auto; font-size: 0.75em; color: #6B7280; }
+.nav-buttons { display: flex; gap: 12px; justify-content: space-between; margin-top: 20px; }
+.btn { padding: 12px 28px; border-radius: 10px; font-size: 0.95em; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: #8B5CF6; color: #fff; }
+.btn-primary:hover { background: #7C3AED; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-secondary { background: #1A1A1A; color: #9CA3AF; border: 1px solid #2A2A2A; }
+.btn-secondary:hover { border-color: #8B5CF6; color: #fff; }
+
+/* RESULTS */
+.result-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 32px; margin-bottom: 20px; text-align: center; }
+.score-ring { width: 140px; height: 140px; border-radius: 50%; margin: 20px auto; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.score-num { font-size: 2.5em; font-weight: 800; }
+.score-label { font-size: 0.8em; opacity: 0.8; }
+.score-bad { background: rgba(239,68,68,0.2); border: 4px solid #EF4444; color: #EF4444; }
+.score-medium { background: rgba(245,158,11,0.2); border: 4px solid #F59E0B; color: #F59E0B; }
+.score-good { background: rgba(16,185,129,0.2); border: 4px solid #10B981; color: #10B981; }
+.score-excellent { background: rgba(139,92,246,0.2); border: 4px solid #8B5CF6; color: #8B5CF6; }
+.rec-card { background: #141414; border: 1px solid #2A2A2A; border-radius: 12px; padding: 20px; margin: 12px 0; display: flex; gap: 14px; align-items: flex-start; }
+.rec-icon { font-size: 28px; flex-shrink: 0; }
+.rec-info h4 { color: #fff; font-size: 1em; margin-bottom: 4px; }
+.rec-info p { color: #9CA3AF; font-size: 0.85em; margin: 4px 0; }
+.rec-info .price { color: #FFD700; font-weight: 600; font-size: 0.85em; }
+.rec-info .btn-sm { display: inline-block; background: #8B5CF6; color: #fff; padding: 4px 12px; border-radius: 6px; font-size: 0.75em; font-weight: 600; margin-top: 6px; text-decoration: none; }
+.rec-info .btn-sm:hover { background: #7C3AED; }
+.weakness-list { list-style: none; margin: 12px 0; }
+.weakness-list li { padding: 8px 12px; background: rgba(239,68,68,0.08); border-left: 3px solid #EF4444; margin: 6px 0; border-radius: 0 8px 8px 0; font-size: 0.9em; color: #FCA5A5; }
+.strength-list { list-style: none; margin: 12px 0; }
+.strength-list li { padding: 8px 12px; background: rgba(16,185,129,0.08); border-left: 3px solid #10B981; margin: 6px 0; border-radius: 0 8px 8px 0; font-size: 0.9em; color: #6EE7B7; }
+.action-plan { background: linear-gradient(135deg, #1A1A1A, #141414); border: 1px solid #2A2A2A; border-radius: 12px; padding: 24px; margin: 16px 0; }
+.action-plan h4 { color: #FFD700; margin-bottom: 12px; }
+.action-plan ol { color: #D1D5DB; margin-left: 20px; }
+.action-plan li { margin: 8px 0; }
+.restart-btn { display: block; background: #8B5CF6; color: #fff; text-align: center; padding: 14px 24px; border-radius: 12px; font-weight: 700; font-size: 1.05em; margin: 24px 0; cursor: pointer; border: none; width: 100%; }
+.restart-btn:hover { background: #7C3AED; }
+footer { text-align: center; padding: 30px 20px; color: #555; font-size: 0.82em; border-top: 1px solid #1A1A1A; margin-top: 30px; }
+footer a { color: #8B5CF6; text-decoration: none; }
+.hidden { display: none; }
+.share-btns { display: flex; gap: 10px; justify-content: center; margin: 16px 0; }
+.share-btns a { padding: 8px 16px; border-radius: 8px; font-size: 0.85em; font-weight: 600; text-decoration: none; color: #fff; background: #1A1A1A; border: 1px solid #2A2A2A; }
+.share-btns a:hover { border-color: #8B5CF6; }
+@media (max-width: 600px) { .quiz-card { padding: 20px; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <span class="badge" style="display:block;text-align:center;">🧪 Interaktiver Sicherheits-Check 2026</span>
+  <h1>🔐 KI-Sicherheits-Checker</h1>
+  <p class="subtitle">Beantworte 10 Fragen und erhalte deine persönliche Sicherheitsbewertung + maßgeschneiderte Produktempfehlungen</p>
+
+  <div id="stepDots" class="step-indicator"></div>
+  <div id="progressBar" class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+
+  <!-- QUIZ -->
+  <div id="quizArea">
+    <div id="quizCard" class="quiz-card"></div>
+    <div class="nav-buttons">
+      <button id="prevBtn" class="btn btn-secondary" onclick="prevQuestion()">← Zurück</button>
+      <button id="nextBtn" class="btn btn-primary" onclick="nextQuestion()">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resultArea" class="hidden">
+    <div id="resultCard" class="result-card"></div>
+    <div id="recsArea"></div>
+    <button class="restart-btn" onclick="restart()">🔄 Test wiederholen</button>
+    <div style="text-align:center;margin:16px 0;">
+      <a href="../blog/ki-datenschutz-digitales-erbe-2026.html" style="color:#A78BFA;">📝 Ausführlichen Ratgeber lesen →</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:20px 0;font-size:0.85em;color:#6B7280;">
+    <a href="../index.html">🏪 Startseite</a> · <a href="../blog/index.html">📝 Blog</a>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Licht und Schatten · <a href="../impressum/index.html">Impressum</a> · <a href="../datenschutz/index.html">Datenschutz</a><br>
+  <span style="font-size:0.8em;">Amazon-Partnerwerbung. Alle Preise und Verfügbarkeiten entnehmen Sie bitte der aktuellen Amazon-Produktseite.</span>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "Wie verwaltest du deine Passwörter?",
+    desc: "Passwort-Manager sind die Basis digitaler Sicherheit.",
+    options: [
+      { text: "Ich nutze einen Passwort-Manager (Bitwarden, 1Password, Dashlane)", pts: 10 },
+      { text: "Ich nutze den Browser-Passwort-Manager (Chrome, Safari, Edge)", pts: 5 },
+      { text: "Ich merke mir meine Passwörter oder schreibe sie auf", pts: 2 },
+      { text: "Ich nutze überall dasselbe Passwort", pts: 0 }
+    ]
+  },
+  {
+    q: "Welche Zwei-Faktor-Authentisierung (2FA) nutzt du?",
+    desc: "2FA schützt dich selbst bei gestohlenen Passwörtern.",
+    options: [
+      { text: "Hardware-Sicherheitsschlüssel (YubiKey, Google Titan)", pts: 10 },
+      { text: "Authenticator-App (Google Authenticator, Authy, Microsoft)", pts: 7 },
+      { text: "SMS-Codes", pts: 3 },
+      { text: "Ich nutze keine 2FA", pts: 0 }
+    ]
+  },
+  {
+    q: "Nutzt du ein VPN?",
+    desc: "Ein VPN verschlüsselt deinen gesamten Internetverkehr.",
+    options: [
+      { text: "Ja, ein bezahltes VPN (NordVPN, ExpressVPN, ProtonVPN)", pts: 10 },
+      { text: "Ja, ein kostenloses VPN", pts: 4 },
+      { text: "Nur im öffentlichen WLAN", pts: 3 },
+      { text: "Nein, ich nutze kein VPN", pts: 0 }
+    ]
+  },
+  {
+    q: "Wie sicherst du deine Daten?",
+    desc: "Die 3-2-1-Regel: 3 Kopien, 2 Medien, 1 externer Ort.",
+    options: [
+      { text: "Lokales Backup + Cloud-Backup + NAS (3-2-1-Regel)", pts: 10 },
+      { text: "Lokales Backup (externe Festplatte/SSD)", pts: 6 },
+      { text: "Nur Cloud-Backup (iCloud, Google Drive, OneDrive)", pts: 4 },
+      { text: "Ich sichere meine Daten nicht", pts: 0 }
+    ]
+  },
+  {
+    q: "Hast du ein digitales Erbe geplant?",
+    desc: "Was passiert mit deinen Daten, wenn du nicht mehr da bist?",
+    options: [
+      { text: "Ja, digitales Testament + Notfall-Zugriff im Passwort-Manager", pts: 10 },
+      { text: "Ich habe einen Notfall-Kontakt in meinem Passwort-Manager", pts: 6 },
+      { text: "Familie kennt mein Handy-Passwort", pts: 3 },
+      { text: "Nein, daran habe ich noch nie gedacht", pts: 0 }
+    ]
+  },
+  {
+    q: "Wie schützt du dein Smart Home?",
+    desc: "IoT-Geräte sind die häufigste Einfallspforte für Hacker.",
+    options: [
+      { text: "Gäste-WLAN + geänderte Passwörter + aktuelle Firmware", pts: 10 },
+      { text: "Gäste-WLAN für IoT-Geräte", pts: 6 },
+      { text: "Nur Standard-Passwörter geändert", pts: 3 },
+      { text: "Ich habe keine Smart-Home-Geräte / nicht abgesichert", pts: 1 }
+    ]
+  },
+  {
+    q: "Wie gehst du mit verdächtigen E-Mails um?",
+    desc: "KI-Phishing ist 2026 die größte Cyber-Bedrohung.",
+    options: [
+      { text: "Ich prüfe Absender + Link-Ziele + nutze KI-Phishing-Schutz", pts: 10 },
+      { text: "Ich prüfe Absender und Link-Ziele", pts: 7 },
+      { text: "Ich klicke nur, wenn es vertraut aussieht", pts: 2 },
+      { text: "Ich klicke auf Links in E-Mails, wenn sie wichtig aussehen", pts: 0 }
+    ]
+  },
+  {
+    q: "Welche Antivirus-/Sicherheit-Software nutzt du?",
+    desc: "KI-gestützte Sicherheits-Software erkennt Bedrohungen in Echtzeit.",
+    options: [
+      { text: "Bezahlte KI-Sicherheitssuite (Norton 360, Bitdefender, McAfee)", pts: 10 },
+      { text: "Kostenloses Antivirus (Windows Defender, Avast Free)", pts: 5 },
+      { text: "Nur das, was mit dem PC kam", pts: 2 },
+      { text: "Ich nutze keine Sicherheits-Software", pts: 0 }
+    ]
+  },
+  {
+    q: "Überwachst du deine Identität im Dark Web?",
+    desc: "Gestohlene Daten landen oft im Dark Web – bevor du etwas merkst.",
+    options: [
+      { text: "Ja, mit Dark-Web-Monitoring (Bitdefender, NordProtect)", pts: 10 },
+      { text: "Ich nutze haveibeenpwned.com oder ähnliche Dienste", pts: 5 },
+      { text: "Ich weiß, was Dark-Web-Monitoring ist, nutze es aber nicht", pts: 2 },
+      { text: "Was ist Dark-Web-Monitoring?", pts: 0 }
+    ]
+  },
+  {
+    q: "Wie sicher ist dein WLAN-Router?",
+    desc: "Der Router ist die Haustür deines digitalen Zuhauses.",
+    options: [
+      { text: "Firewall aktiv + UPnP aus + Gäste-WLAN + aktuelles Firmware", pts: 10 },
+      { text: "Standard-Passwort geändert + Firewall aktiv", pts: 6 },
+      { text: "Nur das Standard-Passwort geändert", pts: 3 },
+      { text: "Ich habe nichts am Router konfiguriert", pts: 0 }
+    ]
+  }
+];
+
+const products = {
+  low: [
+    { icon: '🔑', name: 'Bitwarden Premium', desc: 'Open-Source-Passwort-Manager, nur 10 €/Jahr. Sichere deine Passwörter sofort.', price: 'ab 10 €/Jahr', link: 'https://www.amazon.de/s?k=bitwarden+premium+2026&tag=ikune21-21' },
+    { icon: '🔐', name: 'YubiKey 5 NFC', desc: 'Hardware-Sicherheitsschlüssel für 2FA. Immun gegen Phishing.', price: 'ca. 55 €', link: 'https://www.amazon.de/s?k=yubikey+5+nfc+2026&tag=ikune21-21' },
+    { icon: '🛡️', name: 'NordVPN (2 Jahre)', desc: 'Testsieger VPN mit KI-Bedrohungsschutz. Nur 3 €/Monat.', price: 'ab 3 €/Monat', link: 'https://www.amazon.de/s?k=nordvpn+2026+abonnement&tag=ikune21-21' }
+  ],
+  medium: [
+    { icon: '💾', name: 'Samsung T7 Shield SSD 2TB', desc: 'Externe SSD für Backups. Wasserdicht, stoßfest, 1050 MB/s.', price: 'ca. 140 €', link: 'https://www.amazon.de/s?k=samsung+t7+shield+2tb+2026&tag=ikune21-21' },
+    { icon: '🛡️', name: 'Norton 360 Deluxe (5 Geräte)', desc: 'KI-Sicherheitssuite + VPN + Dark-Web-Monitoring + 50 GB Cloud.', price: 'ca. 40 €/Jahr', link: 'https://www.amazon.de/s?k=norton+360+deluxe+2026+5+geraete&tag=ikune21-21' },
+    { icon: '🔐', name: '1Password Families', desc: 'Passwort-Manager für die ganze Familie. Inkl. Travel Mode.', price: 'ca. 5 €/Monat', link: 'https://www.amazon.de/s?k=1password+familien+2026&tag=ikune21-21' }
+  ],
+  good: [
+    { icon: '🖥️', name: 'Synology DS223j NAS', desc: '2-Bay-NAS für automatische Backups. Perfekt für die 3-2-1-Regel.', price: 'ca. 180 €', link: 'https://www.amazon.de/s?k=synology+ds223j+nase+2026&tag=ikune21-21' },
+    { icon: '📶', name: 'TP-Link Deco XE75 Mesh-WLAN', desc: 'Wi-Fi 6E mit KI-Sicherheit. Gäste-WLAN + IoT-Schutz.', price: 'ca. 200 €', link: 'https://www.amazon.de/s?k=tp+link+deco+xe75+2026&tag=ikune21-21' },
+    { icon: '🕵️', name: 'Bitdefender Identity Protection', desc: 'KI-Dark-Web-Monitoring für deine Identität.', price: 'ca. 3 €/Monat', link: 'https://www.amazon.de/s?k=bitdefender+digital+identity+protection+2026&tag=ikune21-21' }
+  ],
+  excellent: [
+    { icon: '🔐', name: 'YubiKey 5 NFC (2er-Pack)', desc: 'Haupt- + Backup-Key für maximale 2FA-Sicherheit.', price: 'ca. 100 €', link: 'https://www.amazon.de/s?k=yubikey+5+nfc+2er+pack+2026&tag=ikune21-21' },
+    { icon: '🔒', name: 'FRITZ!Box 5690 Pro', desc: 'Made in Germany Router mit integrierter Sicherheits-KI.', price: 'ca. 280 €', link: 'https://www.amazon.de/s?k=fritzbox+5690+pro+2026&tag=ikune21-21' },
+    { icon: '📜', name: 'Feuerfester Safe', desc: 'Für Master-Passwort, Seed-Phrase & Backup-SSD.', price: 'ca. 60-150 €', link: 'https://www.amazon.de/s?k=feuerfester+safe+dokumente+2026&tag=ikune21-21' }
+  ]
+};
+
+const LEVELS = {
+  low: { label: '🔴 Kritisch', desc: 'Deine digitale Sicherheit hat dringenden Handlungsbedarf!' },
+  medium: { label: '🟡 Verbesserungswürdig', desc: 'Gute Ansätze, aber es gibt deutliche Lücken.' },
+  good: { label: '🟢 Gut', desc: 'Du bist auf einem guten Weg. Einige Optimierungen möglich.' },
+  excellent: { label: '🟣 Exzellent', desc: 'Deine digitale Sicherheit ist vorbildlich!' }
+};
+
+let currentStep = 0;
+let answers = [];
+let maxScore = questions.length * 10;
+
+function init() {
+  const dots = document.getElementById('stepDots');
+  dots.innerHTML = '';
+  for (let i = 0; i < questions.length; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (i === 0 ? ' active' : '');
+    dot.textContent = i + 1;
+    dots.appendChild(dot);
+  }
+  answers = new Array(questions.length).fill(null);
+  showQuestion(0);
+}
+
+function showQuestion(index) {
+  const q = questions[index];
+  const card = document.getElementById('quizCard');
+  let optionsHtml = '';
+  q.options.forEach((opt, oi) => {
+    const selected = answers[index] === oi ? 'selected' : '';
+    optionsHtml += `<div class="option ${selected}" onclick="selectOption(${index}, ${oi})">
+      <div class="radio"></div>
+      <span>${opt.text}</span>
+      <span class="pts">+${opt.pts} Pkt.</span>
+    </div>`;
+  });
+  card.innerHTML = `
+    <div class="q-num">Frage ${index + 1} / ${questions.length}</div>
+    <h2>${q.q}</h2>
+    <p class="q-text">${q.desc}</p>
+    <div class="options">${optionsHtml}</div>
+  `;
+  document.getElementById('prevBtn').style.display = index === 0 ? 'none' : 'inline-block';
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.textContent = index === questions.length - 1 ? '🎯 Auswerten' : 'Weiter →';
+  nextBtn.disabled = answers[index] === null;
+  updateDots(index);
+  updateProgress(index);
+  document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function selectOption(qIndex, oIndex) {
+  answers[qIndex] = oIndex;
+  // Update visual
+  const options = document.querySelectorAll('.option');
+  options.forEach((el, i) => {
+    el.classList.toggle('selected', i === oIndex);
+  });
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  if (currentStep < questions.length - 1) {
+    currentStep++;
+    showQuestion(currentStep);
+  } else {
+    showResults();
+  }
+}
+
+function prevQuestion() {
+  if (currentStep > 0) {
+    currentStep--;
+    showQuestion(currentStep);
+  }
+}
+
+function updateDots(index) {
+  const dots = document.querySelectorAll('.step-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i === index) dot.classList.add('active');
+    else if (answers[i] !== null) dot.classList.add('done');
+  });
+}
+
+function updateProgress(index) {
+  const pct = ((index + 1) / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function getScore() {
+  let total = 0;
+  answers.forEach((a, i) => {
+    if (a !== null) total += questions[i].options[a].pts;
+  });
+  return total;
+}
+
+function getLevel(score) {
+  const pct = score / maxScore;
+  if (pct < 0.3) return 'low';
+  if (pct < 0.55) return 'medium';
+  if (pct < 0.8) return 'good';
+  return 'excellent';
+}
+
+function getWeaknesses() {
+  const weak = [];
+  answers.forEach((a, i) => {
+    if (a === null || questions[i].options[a].pts < 4) {
+      weak.push(questions[i].q);
+    }
+  });
+  return weak;
+}
+
+function getStrengths() {
+  const strong = [];
+  answers.forEach((a, i) => {
+    if (a !== null && questions[i].options[a].pts >= 8) {
+      strong.push(questions[i].q);
+    }
+  });
+  return strong;
+}
+
+function showResults() {
+  const score = getScore();
+  const level = getLevel(score);
+  const levelInfo = LEVELS[level];
+  const weaknesses = getWeaknesses();
+  const strengths = getStrengths();
+
+  document.getElementById('quizArea').classList.add('hidden');
+  document.getElementById('resultArea').classList.remove('hidden');
+
+  const ringClass = level === 'low' ? 'score-bad' : level === 'medium' ? 'score-medium' : level === 'good' ? 'score-good' : 'score-excellent';
+  const pct = Math.round((score / maxScore) * 100);
+
+  const resultCard = document.getElementById('resultCard');
+  resultCard.innerHTML = `
+    <div style="font-size:1.2em;margin-bottom:8px;">${levelInfo.label}</div>
+    <div class="score-ring ${ringClass}">
+      <div class="score-num">${pct}%</div>
+      <div class="score-label">von 100%</div>
+    </div>
+    <p style="font-size:1.05em;margin:8px 0;">${score} / ${maxScore} Punkte</p>
+    <p style="color:#9CA3AF;font-size:0.9em;">${levelInfo.desc}</p>
+  `;
+
+  let recsHtml = '';
+
+  if (weaknesses.length > 0) {
+    recsHtml += '<h3 style="margin-top:24px;color:#EF4444;">🔴 Schwachstellen</h3><ul class="weakness-list">';
+    weaknesses.forEach(w => { recsHtml += `<li>⚠️ ${w}</li>`; });
+    recsHtml += '</ul>';
+  }
+
+  if (strengths.length > 0) {
+    recsHtml += '<h3 style="margin-top:20px;color:#10B981;">🟢 Stärken</h3><ul class="strength-list">';
+    strengths.forEach(s => { recsHtml += `<li>✅ ${s}</li>`; });
+    recsHtml += '</ul>';
+  }
+
+  // Product recommendations
+  const recProducts = products[level] || products.low;
+  recsHtml += '<h3 style="margin-top:28px;color:#FFD700;">🎯 Deine persönlichen Produktempfehlungen</h3>';
+  if (level === 'excellent') {
+    recsHtml += '<p style="color:#9CA3AF;font-size:0.9em;margin-bottom:12px;">Fast perfekt! Hier sind Premium-Optimierungen für den letzten Feinschliff:</p>';
+  } else if (level === 'good') {
+    recsHtml += '<p style="color:#9CA3AF;font-size:0.9em;margin-bottom:12px;">Du bist gut unterwegs. Diese Produkte schließen die letzten Lücken:</p>';
+  } else {
+    recsHtml += '<p style="color:#9CA3AF;font-size:0.9em;margin-bottom:12px;">Starte mit diesen Basislösungen – deine Sicherheit verbessert sich sofort:</p>';
+  }
+
+  recProducts.forEach(p => {
+    recsHtml += `<div class="rec-card">
+      <div class="rec-icon">${p.icon}</div>
+      <div class="rec-info">
+        <h4>${p.name}</h4>
+        <p>${p.desc}</p>
+        <span class="price">${p.price}</span><br>
+        <a class="btn-sm" href="${p.link}" target="_blank" rel="noopener">🔗 Bei Amazon ansehen</a>
+      </div>
+    </div>`;
+  });
+
+  // Action plan
+  recsHtml += '<div class="action-plan"><h4>📋 Dein 7-Tage-Aktionsplan</h4><ol>';
+  if (level === 'low') {
+    recsHtml += '<li><strong>Tag 1:</strong> Passwort-Manager installieren (Bitwarden ist kostenlos)</li>';
+    recsHtml += '<li><strong>Tag 2:</strong> Top-10-Passwörter ändern (E-Mail, Banking, Amazon)</li>';
+    recsHtml += '<li><strong>Tag 3:</strong> 2FA auf allen wichtigen Konten aktivieren</li>';
+    recsHtml += '<li><strong>Tag 4:</strong> VPN installieren – besonders für öffentliche WLANs</li>';
+    recsHtml += '<li><strong>Tag 5:</strong> Backup-Lösung aufsetzen (externe SSD + Cloud)</li>';
+    recsHtml += '<li><strong>Tag 6:</strong> Router-Sicherheit prüfen (Firewall, Gäste-WLAN)</li>';
+    recsHtml += '<li><strong>Tag 7:</strong> Digitales Erbe planen (Notfall-Zugriff + Konten-Liste)</li>';
+  } else if (level === 'medium') {
+    recsHtml += '<li><strong>Tag 1:</strong> Fehlende 2FA aktivieren – idealerweise mit Hardware-Key</li>';
+    recsHtml += '<li><strong>Tag 2:</strong> Bezahltes VPN abschließen (NordVPN ab 3 €/Monat)</li>';
+    recsHtml += '<li><strong>Tag 3:</strong> Vollständige Backup-Strategie umsetzen (3-2-1-Regel)</li>';
+    recsHtml += '<li><strong>Tag 4:</strong> KI-Sicherheitssuite installieren (Norton 360 oder Bitdefender)</li>';
+    recsHtml += '<li><strong>Tag 5:</strong> Digitales Erbe dokumentieren + Notfall-Zugriff einrichten</li>';
+    recsHtml += '<li><strong>Tag 6:</strong> Smart Home absichern (Gäste-WLAN, Passwörter, Updates)</li>';
+    recsHtml += '<li><strong>Tag 7:</strong> Dark-Web-Monitoring für deine Identität aktivieren</li>';
+  } else {
+    recsHtml += '<li><strong>Tag 1:</strong> Hardware-Sicherheitsschlüssel (YubiKey) nachrüsten</li>';
+    recsHtml += '<li><strong>Tag 2:</strong> NAS oder zweites Backup-Medium anschaffen</li>';
+    recsHtml += '<li><strong>Tag 3:</strong> Digitales Erbe finalisieren (Notar + Passwort-Manager Legacy)</li>';
+    recsHtml += '<li><strong>Tag 4:</strong> Smart-Home-Netzwerk optimieren (IoT-Segmentierung)</li>';
+    recsHtml += '<li><strong>Tag 5:</strong> Premium-KI-Sicherheitssuite einrichten</li>';
+    recsHtml += '<li><strong>Tag 6:</strong> Phishing-Training für die ganze Familie durchführen</li>';
+    recsHtml += '<li><strong>Tag 7:</strong> Monatlichen Sicherheits-Check als Routine etablieren</li>';
+  }
+  recsHtml += '</ol></div>';
+
+  // Share + blog link
+  recsHtml += `<div class="share-btns">
+    <a href="#" onclick="navigator.clipboard.writeText('Mein Sicherheits-Score: ${pct}% 🔐 Mach den Test: https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-sicherheits-checker.html');alert('Link kopiert!');return false;">📋 Ergebnis teilen</a>
+    <a href="../blog/ki-datenschutz-digitales-erbe-2026.html">📝 Ratgeber lesen</a>
+  </div>`;
+
+  recsHtml += '<div style="margin:16px 0;padding:12px;background:#141414;border-radius:8px;font-size:0.82em;color:#6B7280;text-align:center;"><strong>📢 Affiliate-Hinweis:</strong> Die Empfehlungen enthalten Affiliate-Links (Amazon-Partnerprogramm, tag=ikune21-21). Für dich entstehen keine Mehrkosten.</div>';
+
+  document.getElementById('recsArea').innerHTML = recsHtml;
+  document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function restart() {
+  currentStep = 0;
+  answers = [];
+  document.getElementById('resultArea').classList.add('hidden');
+  document.getElementById('quizArea').classList.remove('hidden');
+  init();
+}
+
+window.onload = init;
+</script>
+
+</body>
+</html>
