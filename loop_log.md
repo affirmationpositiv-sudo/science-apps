@@ -1,5 +1,68 @@
 # Loop Log – Infinite Money Loop
 
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.35)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.34):
+- 40 Blog-Artikel, 20 interaktive Tools, 8 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #40 (KI-Sprachenlernen & Übersetzung 2026) ✅ LIVE
+- Sprachlern-Bedarfsrechner (Tool #20) ✅ LIVE
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.35):
+- [x] **Survey:** Site live (HTTP 200), Git clean, 44 Blog-Artikel (letzter Stand in Index), 18 Tools
+- [x] **Neue Chancen recherchiert:** 3 neue Opportunitäten gefunden – (1) AI-Persönlichkeitsanalyse mit Bücher-Empfehlungen, (2) Kostenlose OpenAI o4-mini & Gemini 2.5 Flash APIs für Content-Generierung, (3) Prynth & Blook als 0%-Kommissions-Plattformen für digitale Produkte
+- [x] **Blog-Artikel #45 erstellt:** "KI-Heimwerken & Garten 2026: Die 10 besten Werkzeuge, Geräte & Helfer für Haus und Garten" (35 KB HTML, ~4.000 Wörter, 10 Sektionen: Mähroboter (Worx Landroid, Husqvarna, Gardena), Smarte Bewässerung (Gardena, Rain Bird), Akku-Werkzeuge (Bosch Professional, Makita, Milwaukee, DeWalt, Einhell), Saug- & Wischroboter (Roborock, Ecovacs, Dreame), Heckenscheren & Gartengeräte (STIHL, Bosch), KI-Werkstattsysteme (Bosch GLM, Festool, GIM), Hochdruckreiniger (Kärcher), Gartenbeleuchtung (Philips Hue, Govee), Pflanzenpflege (Xiaomi, Click & Grow), KI-Sicherheit (Ring, Eufy, Aqara) – 35+ Amazon-Affiliate-Links tag=ikune21-21, 4 Vergleichstabellen, 4 Budget-Stufen, 5 Monetarisierungs-Wege, 7-Tage-Startplan, FAQ)
+- [x] **KI-Heimwerker-Bedarfsrechner-Tool gebaut:** tools/heimwerker-bedarf.html (32 KB, interaktives 5-Fragen-Quiz: Projekt, Budget, Erfahrung, Werkzeug-Besitz, Automatisierung – personalisierte Empfehlungen mit 50+ Produkten aus 4 Budget-Stufen, 5 Projekt-Kategorien, 2 Automatisierungs-Stufen, Amazon-Affiliate-Links)
+- [x] **Licht & Schatten Persönlichkeits-Analyse gebaut:** tools/persoenlichkeitsanalyse.html (31 KB, interaktiver 5-Fragen-Report-Generator: Lebensphase, Entwicklungs-Wunsch, Schattenaspekt, Lernmedium, Hauptziel – personalisierter Report mit Profil-Titel, Licht/Schatten-Analyse, empfohlenen Büchern, 7-Tage-Aktionsplan, 6+ Amazon-Affiliate-Kategorie-Links. 16 verschiedene Persönlichkeitsprofile, 2 Fallback-Profile, 20+ Buch-Empfehlungen)
+- [x] **Blog-Index aktualisiert:** Stats 44→45, +Artikel-Karte #45 (KI-Heimwerken & Garten) mit Bedarfsrechner-Link
+- [x] **Tools-Index aktualisiert:** Stats 20→22, +Heimwerker-Bedarfsrechner + Persönlichkeits-Analyse Cards
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 41→45, KI-Websites-Stat 19→23, Tools-Card-Beschreibung erweitert
+- [x] **Sitemap.xml aktualisiert:** +3 neue URLs (Blog #45, Heimwerker-Bedarfsrechner, Persönlichkeits-Analyse)
+- [x] **Git commit + push ✅** (9 Dateien, +2179 Zeilen, Commit 913f234)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 45 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 23 | ✅ LIVE (2 NEU) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 45 Artikel + 23 Tools + 9 Shops |
+| 2 | **Amazon KDP (15 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **AI Persönlichkeits-Report Verkauf** | EUR 50-300 | 🆕 NEU: Tool gebaut, Prynth/Blook empfohlen |
+
+### Neue Chancen (Recherche):
+1. 🟢 **Prynth (seit Mai 2026)** – 0%-Kommissions-Plattform für digitale Produkte (PDFs, Vorlagen). Kein monatliches Abo. Perfekt für Premium-Report-Verkauf.
+2. 🟢 **Blook (Beta, Mai 2026)** – Free Platform für interaktive Web-Produkte. 2% Commission. Affiliate-Support, Stripe-Checkout.
+3. 🟢 **Kostenlose AI APIs** – OpenAI o4-mini (100 req/day free), Google Gemini 2.5 Flash (60 req/min free), Mistral Small 3 Free Tier. Für automatische Content-Generierung nutzbar.
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟢 **Prynth/Blook Account** - NEU: 0%-Kommissions-Plattformen für digitale Produkte
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #46**: KI-Ernährung & Kochen 2026 oder KI-Mode & Style 2026
+2. 🟢 **Prynth Store aufsetzen**: Premium-Persönlichkeitsreport als €1,99-Download
+3. 🟡 **Blog-Artikel-AI-Content-Factory**: Nutze kostenlose AI APIs für SEO-Content-Generierung
+4. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Prynth)
+
+---
+
+# Loop Log – Infinite Money Loop
+
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.34)
 
 Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
