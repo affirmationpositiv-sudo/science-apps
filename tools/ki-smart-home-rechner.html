@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Home ROI Rechner 2026 – Lohnt sich dein Smart Home Investment?</title>
+<meta name="description" content="Berechne kostenlos, ob und wie schnell sich dein Smart-Home-Investment amortisiert. Individuell anpassbar: Heizung, Strom, Beleuchtung, Sicherheit. Mit Amazon-Affiliate-Empfehlungen.">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Licht und Schatten">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0A0A0A;color:#fff;line-height:1.6;padding:20px;min-height:100vh}
+.container{max-width:700px;margin:0 auto;background:#1A1A1A;border-radius:16px;padding:40px;border:1px solid #2A2A2A}
+h1{font-size:2em;font-weight:800;background:linear-gradient(135deg,#059669,#0284c7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin-bottom:4px}
+.subtitle{text-align:center;color:#888;font-size:.95em;margin-bottom:30px}
+.form-group{margin-bottom:20px}
+label{display:block;font-weight:600;margin-bottom:6px;color:#ddd;font-size:.95em}
+label small{font-weight:400;color:#888}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:6px;background:#2A2A2A;border-radius:3px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;background:#059669;border-radius:50%;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;background:#059669;border-radius:50%;cursor:pointer;border:none}
+.range-value{display:inline-block;background:#059669;color:#fff;padding:2px 14px;border-radius:20px;font-weight:600;font-size:.9em;margin-top:4px}
+select{width:100%;padding:10px 14px;background:#2A2A2A;color:#fff;border:1px solid #3A3A3A;border-radius:8px;font-size:1em;cursor:pointer}
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#059669,#0284c7);border:none;border-radius:10px;color:#fff;font-size:1.1em;font-weight:700;cursor:pointer;margin:10px 0}
+.btn:hover{opacity:.9}
+.results{background:#0D1B2A;border:1px solid #059669;border-radius:12px;padding:24px;margin:20px 0;display:none}
+.results h3{color:#059669;font-size:1.3em;margin-bottom:16px;text-align:center}
+.result-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1A2A3A}
+.result-row:last-child{border-bottom:none}
+.result-label{color:#aaa}
+.result-value{color:#fff;font-weight:600}
+.result-highlight{font-size:1.5em;font-weight:800;color:#059669;text-align:center;padding:16px 0}
+.result-bar{height:12px;background:#1A2A3A;border-radius:6px;margin:8px 0;overflow:hidden}
+.result-bar-fill{height:100%;background:linear-gradient(90deg,#059669,#0284c7);border-radius:6px;transition:width .5s}
+.info-box{background:#111;border-left:4px solid #0284c7;border-radius:8px;padding:16px 20px;margin:24px 0}
+.info-box p{color:#b0c4ff;font-size:.9rem;margin:0}
+.affiliate-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:15px 0}
+.affiliate-card{background:#2A2A2A;border-radius:10px;padding:16px;text-align:center;text-decoration:none;color:#fff;transition:all .3s}
+.affiliate-card:hover{transform:translateY(-2px);border-color:#059669;box-shadow:0 5px 15px rgba(5,150,105,.2)}
+.affiliate-card .emoji{font-size:2em}
+.affiliate-card .name{font-size:.85em;font-weight:600;margin-top:6px}
+.affiliate-card .price{color:#059669;font-size:.8em;margin-top:4px}
+footer{text-align:center;padding:20px;color:#555;font-size:.8em}
+footer a{color:#059669;text-decoration:none}
+@media(max-width:600px){.container{padding:20px}h1{font-size:1.5em}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏠 Smart Home ROI Rechner</h1>
+  <p class="subtitle">Finde in 2 Minuten heraus, ob und wie schnell sich Smart Home für dich lohnt</p>
+
+  <div class="form-group">
+    <label>🏠 Wohngröße <span id="sizeVal">80 m²</span></label>
+    <input type="range" id="size" min="30" max="250" value="80" oninput="updateRange('size','sizeVal',' m²')">
+  </div>
+
+  <div class="form-group">
+    <label>💶 Monatliche Energiekosten (Strom+Heizung) <span id="energyVal">200 €</span></label>
+    <input type="range" id="energy" min="50" max="600" value="200" oninput="updateRange('energy','energyVal',' €')">
+  </div>
+
+  <div class="form-group">
+    <label>🏡 Wohne im: <span id="livingVal">Eigenheim</span></label>
+    <select id="living" onchange="document.getElementById('livingVal').textContent=this.options[this.selectedIndex].text">
+      <option value="own">Eigenheim</option>
+      <option value="rent" selected>Mietwohnung</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>🔧 Schon Smart-Home-Geräte? <span id="smartVal">Nein, ganz neu</span></label>
+    <select id="smart" onchange="document.getElementById('smartVal').textContent=this.options[this.selectedIndex].text">
+      <option value="none" selected>Nein, ganz neu</option>
+      <option value="some">1-2 Geräte</option>
+      <option value="partial">3-5 Geräte</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>🌍 Bundesland (Strompreis-Korrektur) <span id="stateVal">NRW</span></label>
+    <select id="state" onchange="document.getElementById('stateVal').textContent=this.options[this.selectedIndex].text">
+      <option>Baden-Württemberg</option>
+      <option>Bayern</option>
+      <option>Berlin</option>
+      <option>Brandenburg</option>
+      <option>Bremen</option>
+      <option>Hamburg</option>
+      <option>Hessen</option>
+      <option>Mecklenburg-Vorpommern</option>
+      <option>Niedersachsen</option>
+      <option selected>NRW</option>
+      <option>Rheinland-Pfalz</option>
+      <option>Saarland</option>
+      <option selected>Sachsen</option>
+      <option selected>Sachsen-Anhalt</option>
+      <option selected>Schleswig-Holstein</option>
+      <option selected>Thüringen</option>
+    </select>
+  </div>
+
+  <button class="btn" onclick="calculateROI()">📊 Jetzt ROI berechnen</button>
+
+  <div class="results" id="results">
+    <h3>📈 Dein Smart Home ROI</h3>
+    <div id="resultContent"></div>
+  </div>
+
+  <div class="info-box">
+    <p>💡 <strong>Hinweis:</strong> Alle Berechnungen basieren auf Durchschnittswerten (Stand 2026). Deine tatsächliche Ersparnis kann abweichen. Investiere in Qualität – günstige No-Name-Geräte halten oft nur 1-2 Jahre.</p>
+  </div>
+
+  <div id="affiliateSection" style="display:none">
+    <h3 style="color:#059669;margin-bottom:12px;text-align:center">🛒 Empfohlene Smart-Home-Produkte bei Amazon</h3>
+    <div class="affiliate-grid">
+      <a href="https://www.amazon.de/s?k=tado+smart+thermostat+starter+kit&tag=ikune21-21" target="_blank" rel="noopener" class="affiliate-card">
+        <div class="emoji">🌡️</div>
+        <div class="name">Tado° Thermostat</div>
+        <div class="price">ca. 80€</div>
+      </a>
+      <a href="https://www.amazon.de/s?k=philips+hue+starter+set+2026&tag=ikune21-21" target="_blank" rel="noopener" class="affiliate-card">
+        <div class="emoji">💡</div>
+        <div class="name">Philips Hue Set</div>
+        <div class="price">ca. 60€</div>
+      </a>
+      <a href="https://www.amazon.de/s?k=ring+video+doorbell+pro+2026&tag=ikune21-21" target="_blank" rel="noopener" class="affiliate-card">
+        <div class="emoji">🔔</div>
+        <div class="name">Ring Türklingel</div>
+        <div class="price">ca. 180€</div>
+      </a>
+      <a href="https://www.amazon.de/s?k=shelly+smart+home+starter&tag=ikune21-21" target="_blank" rel="noopener" class="affiliate-card">
+        <div class="emoji">⚡</div>
+        <div class="name">Shelly Energiemonitor</div>
+        <div class="price">ab 15€</div>
+      </a>
+    </div>
+    <p style="text-align:center;margin-top:12px;">
+      <a href="https://www.amazon.de/s?k=smart+home+2026+komplett&tag=ikune21-21" target="_blank" rel="noopener" style="color:#059669;font-weight:600;">→ Alle Smart-Home-Produkte bei Amazon entdecken</a>
+    </p>
+  </div>
+
+  <p style="text-align:center;margin-top:20px;color:#555;">
+    <a href="../blog/ki-immobilien-smart-home-2026.html" style="color:#059669;">📖 Zum Blog-Artikel</a> · 
+    <a href="../tools/" style="color:#059669;">🔧 Alle Tools</a>
+  </p>
+</div>
+
+<footer>
+  <p>© 2026 <a href="../">Licht und Schatten</a> · Amazon-Partner (tag=ikune21-21)</p>
+</footer>
+
+<script>
+function updateRange(sliderId, displayId, suffix) {
+  document.getElementById(displayId).textContent = document.getElementById(sliderId).value + suffix;
+}
+
+function calculateROI() {
+  const size = parseInt(document.getElementById('size').value);
+  const energy = parseInt(document.getElementById('energy').value);
+  const living = document.getElementById('living').value;
+  const smart = document.getElementById('smart').value;
+  
+  // Berechnungen basierend auf Durschnittswerten 2026
+  let investment = 0;
+  let annualSaving = 0;
+  
+  // Basisinvestment nach Wohnungsgröße
+  if (size <= 50) {
+    investment = 350; // Kleine Wohnung: 2 Thermostate + Hue Starter + 1 Steckdose
+    annualSaving = energy * 0.15 * 12; // 15% Ersparnis
+  } else if (size <= 100) {
+    investment = 600; // Standard: 3 Thermostate + Hue + Ring + Steckdosen
+    annualSaving = energy * 0.20 * 12; // 20% Ersparnis
+  } else if (size <= 150) {
+    investment = 900; // Groß: 5 Thermostate + Hue + Ring + Shelly + Sensoren
+    annualSaving = energy * 0.25 * 12; // 25% Ersparnis
+  } else {
+    investment = 1200; // Sehr groß: Komplettset
+    annualSaving = energy * 0.30 * 12; // 30% Ersparnis
+  }
+  
+  // Korrektur für Mietwohnungen (weniger Heizungs-Geräte möglich)
+  if (living === 'rent') {
+    investment *= 0.7;
+    annualSaving *= 0.75;
+  }
+  
+  // Korrektur für bereits vorhandene Smart-Home-Geräte
+  if (smart === 'some') {
+    investment *= 0.6;
+  } else if (smart === 'partial') {
+    investment *= 0.3;
+  }
+  
+  // Steuervergünstigung (20% der Kosten absetzbar bei Handwerkerleistung)
+  const taxSave = investment * 0.20 * 0.20; // 20% von 20% Handwerkerbonus
+  
+  // Amortisationszeit
+  const yearsToROI = investment / (annualSaving + taxSave);
+  
+  // 10-Jahres-Gesamtersparnis
+  const tenYearSaving = (annualSaving + taxSave) * 10 - investment;
+  
+  // Monatliche Ersparnis
+  const monthlySaving = (annualSaving + taxSave) / 12;
+  
+  // Ergebnisse anzeigen
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('affiliateSection').style.display = 'block';
+  
+  let roiEmoji = '😊';
+  let roiClass = '#059669';
+  if (yearsToROI <= 1) { roiEmoji = '🔥'; roiClass = '#22c55e'; }
+  else if (yearsToROI <= 2) { roiEmoji = '👍'; roiClass = '#059669'; }
+  else if (yearsToROI <= 4) { roiEmoji = '🤔'; roiClass = '#f59e0b'; }
+  else { roiEmoji = '😬'; roiClass = '#ef4444'; }
+  
+  document.getElementById('resultContent').innerHTML = `
+    <div class="result-highlight" style="color:${roiClass}">
+      ${roiEmoji} Amortisation nach <strong>${yearsToROI.toFixed(1)} Jahren</strong>
+    </div>
+    
+    <div class="result-row">
+      <span class="result-label">💰 Geschätzte Anfangsinvestition</span>
+      <span class="result-value">${investment.toFixed(0)} €</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">📉 Jährliche Energie-Ersparnis</span>
+      <span class="result-value">${annualSaving.toFixed(0)} €</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">🧾 Steuerbonus (Handwerker, 1x)</span>
+      <span class="result-value">${taxSave.toFixed(0)} €</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">📅 Monatliche Ersparnis</span>
+      <span class="result-value" style="color:#059669;font-weight:700">${monthlySaving.toFixed(0)} €</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">📊 Ersparnis in 10 Jahren</span>
+      <span class="result-value" style="color:#22c55e;font-weight:700">${tenYearSaving.toFixed(0)} €</span>
+    </div>
+    
+    <div style="margin-top:16px;padding:12px;background:#0A1A0A;border-radius:8px;text-align:center">
+      <p style="color:#22c55e;font-weight:600;margin:0">Smart Home lohnt sich ${yearsToROI <= 2 ? '🔟/🔟' : yearsToROI <= 4 ? '7️⃣/🔟' : '4️⃣/🔟'}</p>
+      <p style="color:#888;font-size:.9em;margin-top:4px">
+        ${yearsToROI <= 1 ? 'Beste Entscheidung! Du sparst sofort Geld.' : 
+          yearsToROI <= 2 ? 'Sehr gute Investition – schnell amortisiert.' : 
+          yearsToROI <= 4 ? 'Lohnt sich – etwas Geduld nötig.' : 
+          'Bei dir lohnt es sich aktuell weniger. Fokussiere zuerst auf energiesparende Einzelgeräte.'}
+      </p>
+    </div>
+    
+    <div style="margin-top:16px;padding:12px;background:#1A1A2E;border-radius:8px;text-align:center">
+      <p style="color:#aaa;font-size:.85em;margin:0">
+        <strong>Nächster Schritt:</strong> Mit einem Tado° Thermostat (ab 80€) starten und sofort sparen.
+        <br><a href="https://www.amazon.de/s?k=tado+starter+kit+smart+thermostat&tag=ikune21-21" target="_blank" rel="noopener" style="color:#059669;font-weight:600;">→ Bei Amazon ansehen</a>
+      </p>
+    </div>
+  `;
+  
+  // Scroll zu Ergebnissen
+  document.getElementById('results').scrollIntoView({behavior:'smooth',block:'center'});
+}
+</script>
+</body>
+</html>

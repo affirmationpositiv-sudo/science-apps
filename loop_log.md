@@ -1,5 +1,57 @@
 # Loop Log – Infinite Money Loop
 
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.27)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.26):
+- 30 Blog-Artikel, 12 interaktive Tools, 8 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #30 (KI-Fitness & Personal Training 2026) ✅ LIVE
+- KI-Fitness-Trainer Tool ✅ LIVE
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.27):
+- [x] **Blog-Artikel #31 erstellt:** "KI-Immobilien & Smart Home 2026: Smarte Investments, Hausautomation & energieeffizientes Wohnen mit KI" (24 KB HTML, ~4.500 Wörter, 8 Hauptsektionen, 3 Vergleichstabellen, 7-Tage-Aufbau-Plan, 25+ Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **Smart Home ROI Rechner Tool gebaut:** tools/ki-smart-home-rechner.html (13 KB, interaktiv, 4 Eingabefelder: Wohnungsgröße, Energiekosten, Wohnstatus, Smart-Home-Vorwissen – generiert individuelle Amortisationszeit, 10-Jahres-Prognose + Amazon-Affiliate-Showcase)
+- [x] **Blog-Index aktualisiert:** Stats 30→31, +Artikel-Karte #31 (KI-Immobilien & Smart Home)
+- [x] **Tools-Index aktualisiert:** +Smart Home ROI Rechner Card (13. Tool im Grid)
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 30→31, Tools-Stat 12→13
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #31 + Smart Home ROI Rechner)
+- [x] **Git commit + push ✅** (7 Dateien, ~+850 Zeilen, Commit pending)
+- [x] **Obsidian Second Brain aktualisiert:** +R2.27 Log-Eintrag, +Cross-Links zu Immobilien/Smart Home
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 31 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 13 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| Gesamt (Sitemap) | 94+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 31 Artikel + 13 Tools + 8 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #32**: KI-Nachhaltigkeit & Green Tech 2026 oder KI-Gaming & Entertainment 2026
+2. 🔴 **Neues interaktives Tool**: Energie-Spar-Rechner oder KI-Immobilien-Investment-Rechner
+3. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Social Media)
+
+---
+
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.26)
 
 Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/

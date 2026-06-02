@@ -550,4 +550,20 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog Artikel #31: KI-Immobilien & Smart Home 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-immobilien-smart-home-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tools: Smart Home ROI Rechner (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-smart-home-rechner.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
