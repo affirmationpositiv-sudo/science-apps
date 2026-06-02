@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Home-Office & Ergonomie 2026: Die 40+ besten Produkte für produktives Arbeiten von zu Hause – Schreibtische, Stühle, Monitore, Beleuchtung und mehr. ✅ Jetzt lesen!">
+  <title>Home-Office & Ergonomie 2026: 40+ Produkte für produktives Arbeiten ✦ Licht & Schatten</title>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:16px}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.7;min-height:100vh}
+    a{color:#8B5CF6;text-decoration:none;transition:color .2s}
+    a:hover{color:#FFD700}
+    img{max-width:100%;height:auto;border-radius:8px}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    /* ===== NAVBAR ===== */
+    .navbar{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(139,92,246,.15);padding:14px 0}
+    .navbar .container{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .nav-brand{font-size:1.3rem;font-weight:700;color:#FFD700;letter-spacing:.5px}
+    .nav-brand .star{color:#8B5CF6;margin-right:4px}
+    .nav-links{display:flex;gap:24px;flex-wrap:wrap}
+    .nav-links a{color:#B0B0B0;font-size:.92rem;font-weight:500;padding:4px 0;border-bottom:2px solid transparent}
+    .nav-links a:hover,.nav-links a.active{color:#FFD700;border-bottom-color:#8B5CF6}
+
+    /* ===== HERO ===== */
+    .hero{text-align:center;padding:60px 20px 40px}
+    .hero .badge{display:inline-block;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);color:#8B5CF6;padding:6px 18px;border-radius:20px;font-size:.85rem;font-weight:600;margin-bottom:20px}
+    .hero h1{font-size:2.6rem;font-weight:800;color:#FFFFFF;line-height:1.2;margin-bottom:16px}
+    .hero h1 span{color:#FFD700}
+    .hero p{font-size:1.1rem;color:#B0B0B0;max-width:750px;margin:0 auto 20px}
+    .hero-meta{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;font-size:.9rem;color:#888}
+    .hero-meta span{display:flex;align-items:center;gap:6px}
+
+    /* ===== TOC ===== */
+    .toc{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.12);border-radius:12px;padding:30px 35px;margin:20px 0 50px}
+    .toc h3{color:#FFD700;font-size:1.15rem;margin-bottom:16px}
+    .toc ol{list-style:none;counter-reset:section;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px 20px;padding-left:0}
+    .toc li{counter-increment:section;margin-bottom:4px}
+    .toc li::before{content:counter(section) ".";color:#8B5CF6;font-weight:700;margin-right:8px}
+    .toc a{color:#C0C0C0;font-size:.95rem;transition:color .2s}
+    .toc a:hover{color:#FFD700}
+
+    /* ===== SECTION ===== */
+    section{padding:50px 0}
+    section h2{font-size:1.8rem;font-weight:700;color:#FFFFFF;margin-bottom:12px;display:flex;align-items:center;gap:12px}
+    section h2 .sec-num{background:#8B5CF6;color:#fff;font-size:.9rem;font-weight:700;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0}
+    section p.section-intro{color:#B0B0B0;font-size:1.02rem;margin-bottom:28px;max-width:900px}
+
+    /* ===== PRODUCT GRID ===== */
+    .prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+    .prod-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:22px;transition:all .25s;display:flex;flex-direction:column}
+    .prod-card:hover{border-color:#8B5CF6;transform:translateY(-3px);box-shadow:0 8px 30px rgba(139,92,246,.1)}
+    .prod-budget{display:inline-block;background:rgba(255,215,0,.1);color:#FFD700;font-size:.75rem;font-weight:600;padding:3px 10px;border-radius:12px;margin-bottom:10px;align-self:flex-start}
+    .prod-name{font-size:1.08rem;font-weight:700;color:#FFFFFF;margin-bottom:8px}
+    .prod-desc{color:#999;font-size:.89rem;line-height:1.5;margin-bottom:10px;flex:1}
+    .prod-price{color:#8B5CF6;font-weight:600;font-size:.92rem;margin-bottom:14px}
+    .prod-link{display:inline-block;background:#8B5CF6;color:#fff!important;font-weight:600;font-size:.85rem;padding:10px 18px;border-radius:6px;text-align:center;transition:all .25s;border:none;cursor:pointer}
+    .prod-link:hover{background:#7C3AED;transform:scale(1.02)}
+
+    /* ===== COMPARISON TABLE ===== */
+    .cmp-table-wrap{overflow-x:auto;margin:30px 0}
+    .cmp-table{width:100%;border-collapse:collapse;font-size:.89rem;min-width:700px}
+    .cmp-table th{background:rgba(139,92,246,.12);color:#FFD700;padding:12px 14px;text-align:left;font-weight:600;border-bottom:2px solid rgba(139,92,246,.3)}
+    .cmp-table td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.06);color:#C0C0C0}
+    .cmp-table tr:hover td{background:rgba(139,92,246,.06)}
+    .cmp-table .rating{color:#FFD700;font-weight:600}
+
+    /* ===== BUDGET-STUFEN ===== */
+    .budget-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+    .budget-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:20px;text-align:center}
+    .budget-card .b-level{font-size:1.4rem;font-weight:800;color:#FFD700;margin-bottom:6px}
+    .budget-card .b-range{color:#8B5CF6;font-weight:600;font-size:1rem;margin-bottom:4px}
+    .budget-card .b-desc{color:#999;font-size:.85rem}
+
+    /* ===== STARTPLAN ===== */
+    .plan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+    .plan-card{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.1);border-radius:10px;padding:20px;position:relative}
+    .plan-card .day{position:absolute;top:10px;right:14px;color:rgba(139,92,246,.4);font-size:2.2rem;font-weight:800;line-height:1}
+    .plan-card h4{color:#FFD700;font-size:1.05rem;margin-bottom:8px}
+    .plan-card p{color:#999;font-size:.88rem}
+
+    /* ===== FAQ ===== */
+    .faq-grid{display:grid;gap:14px}
+    .faq-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:18px 22px}
+    .faq-item h4{color:#8B5CF6;font-size:.98rem;margin-bottom:6px}
+    .faq-item p{color:#B0B0B0;font-size:.9rem}
+
+    /* ===== DISCLAIMER ===== */
+    .disclaimer{background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.15);border-radius:8px;padding:18px 22px;margin:30px 0;font-size:.85rem;color:#B0B0B0}
+
+    /* ===== FOOTER ===== */
+    footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,.06);color:#666;font-size:.82rem}
+    footer .brand{color:#FFD700;font-weight:700}
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:768px){
+      .hero h1{font-size:1.9rem}
+      .navbar .container{flex-direction:column;gap:8px}
+      .nav-links{gap:14px;justify-content:center}
+      .toc ol{grid-template-columns:1fr}
+      .prod-grid{grid-template-columns:1fr}
+      .budget-grid{grid-template-columns:1fr 1fr}
+      .plan-grid{grid-template-columns:1fr}
+      section h2{font-size:1.4rem}
+      .hero-meta{gap:14px;flex-direction:column;align-items:center}
+    }
+    @media(max-width:480px){
+      .budget-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand"><span class="star">✦</span> Licht &amp; Schatten</div>
+      <div class="nav-links">
+        <a href="../index.html">Start</a>
+        <a href="../store.html">Shop</a>
+        <a href="../buecher/">Bücher</a>
+        <a href="index.html" class="active">Blog</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <span class="badge">🏠 Home-Office</span>
+    <h1>Home-Office &amp; <span>Ergonomie 2026</span></h1>
+    <p>Die 40+ besten Produkte für produktives Arbeiten von zu Hause – von höhenverstellbaren Schreibtischen über ergonomische Stühle bis hin zu smarter Beleuchtung. Dein Rundum-Sorglos-Guide für ein gesünderes Arbeitsumfeld.</p>
+    <div class="hero-meta">
+      <span>📅 3. Juni 2026</span>
+      <span>👁️ Lesezeit: ca. 22 Minuten</span>
+      <span>📋 10 Kategorien | 40+ Produkte</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- ===== TABLE OF CONTENTS ===== -->
+    <div class="toc">
+      <h3>📑 Inhaltsverzeichnis</h3>
+      <ol>
+        <li><a href="#sec1">Höhenverstellbare Schreibtische</a></li>
+        <li><a href="#sec2">Ergonomische Bürostühle</a></li>
+        <li><a href="#sec3">Monitorarme &amp; Halterungen</a></li>
+        <li><a href="#sec4">Bildschirme &amp; Monitore</a></li>
+        <li><a href="#sec5">Beleuchtung &amp; Lampen</a></li>
+        <li><a href="#sec6">Tastaturen &amp; Mäuse</a></li>
+        <li><a href="#sec7">Headsets &amp; Audio</a></li>
+        <li><a href="#sec8">Kabelmanagement &amp; Organisation</a></li>
+        <li><a href="#sec9">Stehhilfen &amp; Balance-Boards</a></li>
+        <li><a href="#sec10">Luftreiniger &amp; Raumklima</a></li>
+        <li><a href="#vergleich">Vergleichstabelle</a></li>
+        <li><a href="#budget">Budget-Stufen (50&euro; – 5.000&euro;+)</a></li>
+        <li><a href="#startplan">7-Tage-Startplan</a></li>
+        <li><a href="#faq">Häufige Fragen (FAQ)</a></li>
+      </ol>
+    </div>
+
+    <!-- ===== SECTION 1 – SCHREIBTISCHE ===== -->
+    <section id="sec1">
+      <h2><span class="sec-num">1</span> Höhenverstellbare Schreibtische</h2>
+      <p class="section-intro">Ein stufenlos höhenverstellbarer Schreibtisch ist das Fundament jedes ergonomischen Home-Office. Er ermöglicht den dynamischen Wechsel zwischen Sitzen und Stehen, entlastet die Wirbelsäule und fördert die Durchblutung. 2026 setzen die Hersteller auf leistungsstarke Motoren, stabile Rahmen und clevere Memory-Funktionen. Wir haben die besten Modelle für dich zusammengestellt.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Flexispot E7 Pro</div>
+          <div class="prod-desc">Leistungsstarke Dual-Motoren, Traglast 120 kg, Höhenbereich 58–123 cm, Memory-Panel mit 4 Positionen. Ideal für große Bildschirme und schwere Lasten.</div>
+          <div class="prod-price">Ca. 599&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0CQ1STN4P/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Flexispot E8</div>
+          <div class="prod-desc">Das Top-Modell 2026 mit 3-stufigen Motoren, Kollisionsschutz und besonders leiser Fahrt. Bis 160 kg Traglast – stabil wie ein Fels.</div>
+          <div class="prod-price">Ca. 749&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0D4K7M2Q8/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">UpDown MUV-Pro</div>
+          <div class="prod-desc">Deutsches Design, Frame aus massivem Stahl, 3-stufig teleskopierbar. Memory-Controller inklusive und eine besonders saubere Kabelführung.</div>
+          <div class="prod-price">Ca. 449&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0BNYM4R7H/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Husky 180 x 80 cm</div>
+          <div class="prod-desc">Robuster Kurbelschreibtisch aus massiver Buche. Manuelle Höhenverstellung von 68–87 cm. Günstig, nachhaltig und extrem stabil – ein Geheimtipp.</div>
+          <div class="prod-price">Ca. 249&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08XL5Q3MW/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">IKEA Bekant</div>
+          <div class="prod-desc">Der Klassiker mit elektrischer Höhenverstellung (65–125 cm) und melaminharzbeschichteter Tischplatte. Solide Verarbeitung, großzügige Beinfreiheit.</div>
+          <div class="prod-price">Ca. 399&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08FMNSPG4/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Jarvis Bamboo</div>
+          <div class="prod-desc">Umweltfreundliche Bambusplatte, 2-motoriges Getriebe, programmierbare Höhen. Extrem leise und mit 7 Jahren Garantie.</div>
+          <div class="prod-price">Ca. 679&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09YDF3KRM/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 2 – BÜROSTÜHLE ===== -->
+    <section id="sec2">
+      <h2><span class="sec-num">2</span> Ergonomische Bürostühle</h2>
+      <p class="section-intro">Der Bürostuhl ist die zweite Säule der Ergonomie. Nur mit einer perfekt anpassbaren Sitzfläche, Lordosenstütze und atmungsaktiver Rückenlehne bleibt der Rücken auch nach 8 Stunden fit. 2026 setzen die Hersteller auf Mesh-Technologie, 4D-Armlehnen und dynamische Sitzmechaniken. Hier sind die besten Stühle für jedes Budget.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Herman Miller Aeron</div>
+          <div class="prod-desc">Der Legende unter den Bürostühlen – atmungsaktives Mesh, Kinemat-Sitzneigung und 8-Zonen-Polstergurt. In drei Größen erhältlich. Unverwüstlich.</div>
+          <div class="prod-price">Ca. 1.899&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B00NRWMUSS/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Steelcase Gesture</div>
+          <div class="prod-desc">Beste 4D-Armlehnen am Markt, LiveBack-Technologie, die sich der Wirbelsäule anpasst. Ideal für intensive Bildschirmarbeit.</div>
+          <div class="prod-price">Ca. 1.749&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0764H3VM6/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Sihoo M57</div>
+          <div class="prod-desc">Bestseller mit 3D-verstellbarer Lordosenstütze, Kippmechanik und verstellbarer Sitzfläche. Perfektes Preis-Leistungs-Verhältnis.</div>
+          <div class="prod-price">Ca. 319&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08B6B2TCB/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Interstuhl 172is</div>
+          <div class="prod-desc">Made in Germany – extrem hochwertig verarbeitet, Synchronmechanik, atmungsaktiver Netzrücken. Ein Bürostuhl fürs Leben.</div>
+          <div class="prod-price">Ca. 1.299&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07D1VG1HM/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">IKEA Markus</div>
+          <div class="prod-desc">Der bekannteste Budget-Stuhl mit Netzrücken, verstellbaren Armlehnen und hoher Rückenlehne. Besser als sein Ruf – und unschlagbar günstig.</div>
+          <div class="prod-price">Ca. 179&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08RS29T2H/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Herman Miller Sayl</div>
+          <div class="prod-desc">Modulares Design mit federnder Rückenlehne ohne massiven Rahmen. Sehr leicht, modern und in vielen Farben erhältlich.</div>
+          <div class="prod-price">Ca. 649&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B01K3CNL4M/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 3 – MONITORARME ===== -->
+    <section id="sec3">
+      <h2><span class="sec-num">3</span> Monitorarme &amp; Halterungen</h2>
+      <p class="section-intro">Ein Monitorarm schafft Platz auf dem Schreibtisch und ermöglicht die optimale Positionierung des Bildschirms auf Augenhöhe. Das beugt Nackenverspannungen vor und sorgt für eine aufrechte Kopfhaltung. Ob Einzel- oder Doppelarm – die richtige Halterung ist eine der günstigsten Ergonomie-Upgrades überhaupt.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Ergotron HX</div>
+          <div class="prod-desc">Der schwerste und stabilste Monitorarm – trägt bis zu 19 kg und passt für Ultrawide-Monitore bis 49 Zoll. Federdruck-Mechanik für butterweiche Bewegung.</div>
+          <div class="prod-price">Ca. 259&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07L8Y1P8G/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">AmazonBasics Monitorarm</div>
+          <div class="prod-desc">Eine solide, günstige Alternative zum Ergotron LX. Gasfeder-Mechanik für 3,6–11,3 kg, Kabelmanagement inklusive.</div>
+          <div class="prod-price">Ca. 119&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07VSBGYT2/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">North Bayou G40</div>
+          <div class="prod-desc">Erschwinglicher Doppelarm für zwei Monitore bis 27 Zoll. Vollbeweglich, mit Gasfeder und integrierter Kabelführung.</div>
+          <div class="prod-price">Ca. 49&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08C7KG7LJ/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Ergotron LX Dual</div>
+          <div class="prod-desc">Der Referenz-Doppelarm für alle, die mit zwei Bildschirmen arbeiten. Perfekt einstellbar, hochwertig verarbeitet, 15 Jahre Garantie.</div>
+          <div class="prod-price">Ca. 229&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B00B21TLPW/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Huanuo Einzelarm</div>
+          <div class="prod-desc">Günstiger Einstiegsarm für Monitore bis 32 Zoll. Gasfeder, 360 Grad Rotation, einfache Montage per Klemm- oder Durchführung.</div>
+          <div class="prod-price">Ca. 29&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07PPJ6V4X/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 4 – MONITORE ===== -->
+    <section id="sec4">
+      <h2><span class="sec-num">4</span> Bildschirme &amp; Monitore</h2>
+      <p class="section-intro">Der Monitor ist das Fenster zur digitalen Welt. Für konzentriertes Arbeiten brauchst du ausreichend Bildschirmfläche, eine entspiegelte Oberfläche und eine ergonomisch sinnvolle Größe. 2026 sind 27 Zoll der Standard, 4K-Auflösung ist Pflicht und USB-C mit Power Delivery macht den Schreibtisch kabelfrei.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Dell UltraSharp U2724D</div>
+          <div class="prod-desc">27" IPS Black mit 2560x1440, 120 Hz, USB-C-Hub mit 90W Power Delivery. Fantastische Farbdarstellung, ideal für lange Arbeitstage.</div>
+          <div class="prod-price">Ca. 589&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0CT3Y4Z1B/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">LG 27UP850N-W</div>
+          <div class="prod-desc">27" 4K-IPS mit USB-C (90W PD), P3-Farbraum und entspiegelter Oberfläche. Perfekt für Design und Office – und das zu einem fairen Preis.</div>
+          <div class="prod-price">Ca. 429&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09RQ12XT4/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Samsung S27A702</div>
+          <div class="prod-desc">27" 4K-IPS mit 60 Hz, entspiegelt und flimmerfrei. Bietet ein hervorragendes Bild für den Alltag, ohne das Konto zu sprengen.</div>
+          <div class="prod-price">Ca. 269&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08Q1MPX6K/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">BenQ PD3225U</div>
+          <div class="prod-desc">32" 4K mit Thunderbolt 3, hervorragender Werkskalibrierung und einem speziellen Mac-Modus. Der Profi-Monitor für kreative Köpfe.</div>
+          <div class="prod-price">Ca. 1.099&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0BZMXK3KW/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Dell S2722QC</div>
+          <div class="prod-desc">27" 4K USB-C Monitor mit integrierten Lautsprechern und schlankem Design. Perfekt für den platzsparenden Arbeitsplatz.</div>
+          <div class="prod-price">Ca. 349&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09V3TZF6W/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 5 – BELEUCHTUNG ===== -->
+    <section id="sec5">
+      <h2><span class="sec-num">5</span> Beleuchtung &amp; Lampen</h2>
+      <p class="section-intro">Gute Beleuchtung ist ein oft unterschätzter Faktor für die Produktivität. Zu wenig Licht ermüdet die Augen, falsches Licht verursacht Kopfschmerzen. Die richtige Schreibtischbeleuchtung reduziert Blendeffekte auf dem Bildschirm und sorgt für eine angenehme Arbeitsatmosphäre – besonders in den dunklen Wintermonaten.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">BenQ ScreenBar Pro</div>
+          <div class="prod-desc">Asymmetrische Monitorleuchte, die den Schreibtisch ausleuchtet ohne den Bildschirm zu blenden. Automatische Helligkeitsanpassung, Funkfernbedienung.</div>
+          <div class="prod-price">Ca. 149&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0C6V3Z1H8/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Philips Hue Play 2er-Pack</div>
+          <div class="prod-desc">Individuell steuerbare Farb-LEDs mit Ambient-Beleuchtung hinter dem Monitor. Perfekt für Fokussierung und Augenschonung, steuerbar per App.</div>
+          <div class="prod-price">Ca. 89&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07G2X7Z1D/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Elgato Key Light Air</div>
+          <div class="prod-desc">Professionelle LED-Panel-Leuchte für Videocalls und konzentriertes Arbeiten. Dimmbar, farbtemperaturverstellbar (3000–6500K), leise Kühlung.</div>
+          <div class="prod-price">Ca. 159&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07ZPFL5LY/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Xiaomi Mi LED Desk Lamp 1S</div>
+          <div class="prod-desc">Schlanke LED-Tischleuchte mit 180°-Klappmechanismus, indirekter Beleuchtung und Smart-Home-Anbindung. Unglaublich günstig für die Qualität.</div>
+          <div class="prod-price">Ca. 44&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08C6H4W6L/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Philips Hue Gradient Signe</div>
+          <div class="prod-desc">Stehleuchte mit Farbverlaufs-LED, ideal als Ambient-Lichtquelle im Home-Office. Diffuses Licht, das den Raum sanft ausleuchtet.</div>
+          <div class="prod-price">Ca. 129&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08DG4264L/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Baseus LED-Schreibtischlampe</div>
+          <div class="prod-desc">USB-C-betriebene Schreibtischlampe mit 5 Helligkeitsstufen, 3 Farbtemperaturen und flexiblem Arm. Günstig und effektiv.</div>
+          <div class="prod-price">Ca. 24&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0B5K9N1YR/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 6 – TASTATUREN & MÄUSE ===== -->
+    <section id="sec6">
+      <h2><span class="sec-num">6</span> Tastaturen &amp; Mäuse</h2>
+      <p class="section-intro">Hände und Handgelenke sind im Home-Office am stärksten belastet. Ergonomische Tastaturen und Mäuse beugen dem Karpaltunnelsyndrom und Sehnenscheidenentzündungen vor. 2026 setzen wir auf geteilte Tastaturen, vertikale Mäuse und hochwertige Materialspezifikationen.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Logitech MX Mechanical</div>
+          <div class="prod-desc">Vollwertige mechanische Tastatur mit Logitechs hauseigenen taktilen Schaltern. Beleuchtet, Multi-Device, USB-C – kompromisslos gut.</div>
+          <div class="prod-price">Ca. 179&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09TMZBK3D/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Logitech MX Master 3S</div>
+          <div class="prod-desc">Die Referenzmaus für Produktivität – 8.000 DPI, leise Klicks, MagSpeed-Scrollrad, USB-C, kompatibel mit Windows, Mac, Linux und iPad.</div>
+          <div class="prod-price">Ca. 109&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09HM94V2M/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Microsoft Sculpt Ergonomic Desktop</div>
+          <div class="prod-desc">Geteilte Tastatur mit gewölbtem Design und separate Maus mit vertikaler Griffhaltung. Zertifiziert für höchste Ergonomie-Standards.</div>
+          <div class="prod-price">Ca. 119&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B00C32H7O4/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">ZSA Moonlander Mark I</div>
+          <div class="prod-desc">Geteilte, voll programmierbare mechanische Tastatur mit Daumen-Clustern. Perfekt ergonomisch, jede Taste frei belegbar. Der Endgegner der Schreibgesundheit.</div>
+          <div class="prod-price">Ca. 399&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08L7Y9R7C/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Logitech MX Keys Mini</div>
+          <div class="prod-desc">Kompakte, kabellose Tastatur mit perfektem Tippgefühl und Hintergrundbeleuchtung. Ideal für kleine Schreibtische.</div>
+          <div class="prod-price">Ca. 99&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09RT9J2V1/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Logitech M750 Signature</div>
+          <div class="prod-desc">Ergonomische Maus mit leisen Klicks, bequemer Form und SmartWheel-Scrollen. Perfekt für den schmalen Geldbeutel.</div>
+          <div class="prod-price">Ca. 39&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0C1DFM2K6/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 7 – HEADSETS ===== -->
+    <section id="sec7">
+      <h2><span class="sec-num">7</span> Headsets &amp; Audio</h2>
+      <p class="section-intro">Ob tägliche Meeting-Marathons oder konzentriertes Deep Work – ein gutes Headset ist im Home-Office unverzichtbar. 2026 zählen aktive Geräuschunterdrückung (ANC), kristallklare Mikrofonqualität und hoher Tragekomfort für stundenlange Nutzung zu den wichtigsten Features.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Jabra Evolve2 85</div>
+          <div class="prod-desc">Das Business-Flaggschiff: exzellentes ANC, 8-Mikrofon-Array, Busylight und erstklassiger Tragekomfort. Microsoft Teams-zertifiziert.</div>
+          <div class="prod-price">Ca. 429&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08C4P8M1L/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Sony WH-1000XM5</div>
+          <div class="prod-desc">Branchenführendes ANC, hervorragende Sprachqualität und 30 Stunden Laufzeit. Perfekt als Allrounder für Arbeit und Freizeit.</div>
+          <div class="prod-price">Ca. 329&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B09Y2MYL9F/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Sennheiser Momentum 4</div>
+          <div class="prod-desc">Hervorragende Audiophilie-Klangqualität mit adaptivem ANC. Der Fokus liegt auf Musikgenuss – dennoch stark in Meetings.</div>
+          <div class="prod-price">Ca. 349&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0B6XN7CSX/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Logitech Zone Wireless 2</div>
+          <div class="prod-desc">Business-Headset mit ANC und ausklappbarem Mikrofon. Ideal für Videocalls, kompatibel mit Teams, Zoom und Google Meet.</div>
+          <div class="prod-price">Ca. 249&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0B1VQ1N6F/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Jabra Evolve2 30</div>
+          <div class="prod-desc">Kabelgebundenes Einstiegs-Headset mit hervorragender Mikrofonqualität und bequemen Ohrpolstern. Kein ANC, aber solide Audioqualität.</div>
+          <div class="prod-price">Ca. 79&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08DB2HTR3/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">HyperX Cloud II</div>
+          <div class="prod-desc">Der Klassiker für Sprachkommunikation mit 7.1 Surround Sound. Bequem, robust und mit herausnehmbarem Mikrofon.</div>
+          <div class="prod-price">Ca. 69&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B00SAYCVTQ/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 8 – KABELMANAGEMENT ===== -->
+    <section id="sec8">
+      <h2><span class="sec-num">8</span> Kabelmanagement &amp; Organisation</h2>
+      <p class="section-intro">Ein aufgeräumter Schreibtisch ist ein produktiver Schreibtisch. Nichts stört den Workflow mehr als ein Chaos aus Kabeln, Netzteilen und herumliegenden Geräten. Mit den richtigen Organisationslösungen wird dein Home-Office nicht nur ordentlicher, sondern du sparst dir täglich wertvolle Minuten bei der Suche nach Kabeln und Zubehör.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">IKEA Signum</div>
+          <div class="prod-desc">Das bekannteste Kabelmanagement-System – ein Gitterkorb, der unter dem Schreibtisch montiert wird. Hält Netzteile und Kabel sauber versteckt.</div>
+          <div class="prod-price">Ca. 25&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B002L5S9NS/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">JUXURIO Kabelkanal 80 cm</div>
+          <div class="prod-desc">Selbstklebender Kabelkanal zur Wandmontage. Versteckt Kabel sauber und lackierbar. Ideal für Mietwohnungen und saubere Installationen.</div>
+          <div class="prod-price">Ca. 14&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07QLB57S1/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Cable Matters Klett-Kabelbinder</div>
+          <div class="prod-desc">100er-Pack wiederverwendbare Klett-Kabelbinder in verschiedenen Farben. Perfekt zur farbcodierten Organisation aller Kabel im Büro.</div>
+          <div class="prod-price">Ca. 9&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B01DBGT4BY/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Bluelounge Kickflip Desktop</div>
+          <div class="prod-desc">Kompakte Kabelbox aus massivem Aluminium, die auf dem Schreibtisch liegt und Kabel ordentlich bündelt. Modernes Design, praktisch im Alltag.</div>
+          <div class="prod-price">Ca. 49&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0B5L2XT3W/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Vivo Untertisch-Schublade</div>
+          <div class="prod-desc">Schublade aus Stahl zur Montage unter der Tischplatte. Perfekt für Tastatur, Maus, Stifte und kleine Utensilien – hält den Tisch frei.</div>
+          <div class="prod-price">Ca. 49&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07T3CNKLG/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Cable Management Box</div>
+          <div class="prod-desc">Kabelbox aus Kunststoff für Steckdosenleisten und Netzteile. Schlicht, effektiv und mit Deckel – reduziert Kabelchaos auf null.</div>
+          <div class="prod-price">Ca. 19&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B08C5TKV3Z/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 9 – STEHHILFEN ===== -->
+    <section id="sec9">
+      <h2><span class="sec-num">9</span> Stehhilfen &amp; Balance-Boards</h2>
+      <p class="section-intro">Stehhilfen und Balance-Boards sind die perfekte Ergänzung zum höhenverstellbaren Schreibtisch. Sie aktivieren die Rumpfmuskulatur, verbessern die Haltung und machen das Stehen am Schreibtisch zu einem echten Workout für die Tiefenmuskulatur. Perfekt für alle, die mehr Bewegung in den Home-Office-Alltag bringen wollen.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Topstar Stehhilfe Sitness 40</div>
+          <div class="prod-desc">Die bekannteste Stehhilfe Deutschlands mit beweglicher Sitzfläche. Sie zwingt den Körper zur aktiven Balance und stärkt die Rückenmuskulatur.</div>
+          <div class="prod-price">Ca. 159&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B008M1L4N6/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Topstar Sitness X3</div>
+          <div class="prod-desc">Weiterentwicklung der Sitness-Reihe mit höherer Rückenlehne und ergonomisch geformter Sitzfläche. Ideal für langes Stehen.</div>
+          <div class="prod-price">Ca. 199&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07XNZ1WQ6/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Gaiam Balance Board</div>
+          <div class="prod-desc">Wackelbrett aus Holz mit rutschfester Oberfläche. Trainiert die Tiefenmuskulatur und verbessert die Koordination – günstiger Einstieg ins Stehen.</div>
+          <div class="prod-price">Ca. 39&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B001N4Q6P4/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">FLx Desk Board Pro</div>
+          <div class="prod-desc">Hightech-Balance-Board aus Birkensperrholz mit flexibler Unterseite. Trainiert Rumpf, Beine und Rücken während der Arbeit – leise, stabil, effektiv.</div>
+          <div class="prod-price">Ca. 249&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07QF9V9DZ/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Kybun Kugel-Pad</div>
+          <div class="prod-desc">Luftgefüllte Standhilfe in Kugelform. Massiert die Füße, fördert die Mikrobewegung und entlastet die Gelenke beim Stehen.</div>
+          <div class="prod-price">Ca. 99&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B001H0J3I2/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 10 – LUFTREINIGER ===== -->
+    <section id="sec10">
+      <h2><span class="sec-num">10</span> Luftreiniger &amp; Raumklima</h2>
+      <p class="section-intro">Die Luftqualität im Home-Office hat einen direkten Einfluss auf Konzentration und Wohlbefinden. Zu hohe CO2-Werte machen müde, trockene Heizungsluft belastet die Schleimhäute, und Feinstaub sowie Pollen können Allergien auslösen. Ein guter Luftreiniger oder ein Luftbefeuchter sorgt für ein gesundes Raumklima und steigert die Produktivität um bis zu 15 %.</p>
+      <div class="prod-grid">
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Philips Series 3000i AC3033</div>
+          <div class="prod-desc">Leistungsstarker Luftreiniger für Räume bis 100 m². NanoProtect-Filter, smarter Auto-Modus und App-Steuerung. Leise im Schlafmodus.</div>
+          <div class="prod-price">Ca. 399&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07SM61B1N/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Premium</span>
+          <div class="prod-name">Dyson Purifier Hot+Cool HP07</div>
+          <div class="prod-desc">3-in-1: Luftreiniger, Heizlüfter und Ventilator mit HEPA-Filter und Aktivkohlefilter. Erfasst Luftqualität in Echtzeit und reagiert automatisch.</div>
+          <div class="prod-price">Ca. 549&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B0862CTDNS/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Levoit Core 300</div>
+          <div class="prod-desc">Kompakter HEPA-Luftreiniger für kleine bis mittlere Räume (bis 40 m²). Leise, effektiv, mit Timer und drei Stufen. Bester Preisleistungssieger.</div>
+          <div class="prod-price">Ca. 89&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07RLWLC2K/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Philips Series 2000i AC2889</div>
+          <div class="prod-desc">HEPA-Luftreiniger mit NanoProtect-Filter für Räume bis 75 m². Entfernt 99,97 % der Partikel. App-gesteuert mit Luftqualitätsanzeige.</div>
+          <div class="prod-price">Ca. 229&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07SKHM4P2/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Budget</span>
+          <div class="prod-name">Levoit LV600S Luftbefeuchter</div>
+          <div class="prod-desc">Ultraschall-Luftbefeuchter für 36 Stunden Laufzeit. Ideal für trockene Heizungsluft im Winter. Warm- und Kaltnebel, App-Steuerung.</div>
+          <div class="prod-price">Ca. 49&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07RTVW3M6/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+        <div class="prod-card">
+          <span class="prod-budget">💰 Mittelklasse</span>
+          <div class="prod-name">Dyson Pure Cool Me</div>
+          <div class="prod-desc">Persönlicher Luftreiniger mit HEPA-Filter und Dyson Air Multiplier. Ideal für den Schreibtisch – leise, kompakt und effektiv.</div>
+          <div class="prod-price">Ca. 289&euro;</div>
+          <a class="prod-link" href="https://www.amazon.de/dp/B07RLHXKRW/?tag=ikune21-21" target="_blank" rel="nofollow">→ Preis prüfen</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 11 – VERGLEICHSTABELLE ===== -->
+    <section id="vergleich">
+      <h2><span class="sec-num">✦</span> Vergleichstabelle: Die 15 besten Produkte im Überblick</h2>
+      <p class="section-intro">Damit du die wichtigsten Produkte auf einen Blick vergleichen kannst, haben wir eine übersichtliche Tabelle mit Kategorie, Preis, unserem Urteil und der Budget-Stufe erstellt. So findest du garantiert das passende Produkt für deine Bedürfnisse.</p>
+
+      <div class="cmp-table-wrap">
+        <table class="cmp-table">
+          <thead>
+            <tr>
+              <th>Produkt</th>
+              <th>Kategorie</th>
+              <th>Preis</th>
+              <th>Unser Urteil</th>
+              <th>Budget-Stufe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Flexispot E7 Pro</td><td>Schreibtisch</td><td>599&euro;</td><td class="rating">★★★★★</td><td>Mittelklasse</td></tr>
+            <tr><td>Flexispot E8</td><td>Schreibtisch</td><td>749&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>Herman Miller Aeron</td><td>Stuhl</td><td>1.899&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>Sihoo M57</td><td>Stuhl</td><td>319&euro;</td><td class="rating">★★★★☆</td><td>Mittelklasse</td></tr>
+            <tr><td>IKEA Markus</td><td>Stuhl</td><td>179&euro;</td><td class="rating">★★★★☆</td><td>Budget</td></tr>
+            <tr><td>Ergotron HX</td><td>Monitorarm</td><td>259&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>Dell UltraSharp U2724D</td><td>Monitor</td><td>589&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>LG 27UP850N-W</td><td>Monitor</td><td>429&euro;</td><td class="rating">★★★★☆</td><td>Mittelklasse</td></tr>
+            <tr><td>BenQ ScreenBar Pro</td><td>Beleuchtung</td><td>149&euro;</td><td class="rating">★★★★★</td><td>Mittelklasse</td></tr>
+            <tr><td>Logitech MX Master 3S</td><td>Maus</td><td>109&euro;</td><td class="rating">★★★★★</td><td>Mittelklasse</td></tr>
+            <tr><td>ZSA Moonlander</td><td>Tastatur</td><td>399&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>Jabra Evolve2 85</td><td>Headset</td><td>429&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>Philips Series 3000i</td><td>Luftreiniger</td><td>399&euro;</td><td class="rating">★★★★★</td><td>Premium</td></tr>
+            <tr><td>Topstar Sitness 40</td><td>Stehhilfe</td><td>159&euro;</td><td class="rating">★★★★☆</td><td>Mittelklasse</td></tr>
+            <tr><td>Levoit Core 300</td><td>Luftreiniger</td><td>89&euro;</td><td class="rating">★★★★☆</td><td>Budget</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== SECTION 12 – BUDGET-STUFEN ===== -->
+    <section id="budget">
+      <h2><span class="sec-num">✦</span> Die 5 Budget-Stufen: Von 50&euro; bis 5.000&euro;+</h2>
+      <p class="section-intro">Egal ob du ein kleines Budget hast oder in die Premium-Klasse investieren möchtest – wir zeigen dir, was in jeder Preisklasse machbar ist. Die gute Nachricht: Auch mit kleinem Geldbeutel kannst du dein Home-Office deutlich ergonomischer gestalten.</p>
+
+      <div class="budget-grid">
+
+        <div class="budget-card">
+          <div class="b-level">Stufe 1</div>
+          <div class="b-range">50&euro; – 200&euro;</div>
+          <div class="b-desc">Basis-Ausstattung: Kabelmanagement, Balance-Board, Mauspad mit Handgelenkstütze, einfache Monitorerhöhung und eine gute Schreibtischlampe.</div>
+        </div>
+
+        <div class="budget-card">
+          <div class="b-level">Stufe 2</div>
+          <div class="b-range">200&euro; – 500&euro;</div>
+          <div class="b-desc">Solide Grundlage: IKEA Bekant Tisch, Sihoo M57 Stuhl und eine einfache Monitorhalterung. Dazu eine vernünftige Maus und Tastatur.</div>
+        </div>
+
+        <div class="budget-card">
+          <div class="b-level">Stufe 3</div>
+          <div class="b-range">500&euro; – 1.500&euro;</div>
+          <div class="b-desc">Komfort-Zone: Flexispot E7 Pro Schreibtisch, Herman Miller Sayl Stuhl, BenQ ScreenBar und ein 27"-4K-Monitor mit USB-C.</div>
+        </div>
+
+        <div class="budget-card">
+          <div class="b-level">Stufe 4</div>
+          <div class="b-range">1.500&euro; – 3.000&euro;</div>
+          <div class="b-desc">Professionell: ZSA Moonlander Tastatur, Steelcase Gesture Stuhl, Ergotron Doppelarm, Dyson Luftreiniger und Jabra Evolve2 85.</div>
+        </div>
+
+        <div class="budget-card">
+          <div class="b-level">Stufe 5</div>
+          <div class="b-range">3.000&euro; – 5.000&euro;+</div>
+          <div class="b-desc">Traum-Office: Herman Miller Aeron, Flexispot E8, 2x Dell UltraSharp 32", Philips Hue Vollausstattung, FLx Board und Dyson HP07.</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 13 – 7-TAGE-STARTPLAN ===== -->
+    <section id="startplan">
+      <h2><span class="sec-num">✦</span> 7-Tage-Startplan: Dein Weg zum ergonomischen Home-Office</h2>
+      <p class="section-intro">Rom wurde nicht an einem Tag erbaut – und ein ergonomisches Home-Office auch nicht. Mit unserem 7-Tage-Plan richtest du Schritt für Schritt deinen Arbeitsplatz ein, ohne dich zu überfordern. Jeden Tag kümmerst du dich um eine andere Kategorie.</p>
+
+      <div class="plan-grid">
+
+        <div class="plan-card">
+          <span class="day">1</span>
+          <h4>Tag 1: Höhenverstellbarer Schreibtisch</h4>
+          <p>Beginne mit der Basis. Entscheide dich für einen elektrisch höhenverstellbaren Schreibtisch und montiere ihn. Miss deine ideale Sitz- und Stehhöhe aus und notiere sie dir für die Memory-Funktion.</p>
+        </div>
+
+        <div class="plan-card">
+          <span class="day">2</span>
+          <h4>Tag 2: Ergonomischer Bürostuhl</h4>
+          <p>Stelle deinen neuen Stuhl auf deine Körpermaße ein: Sitzhöhe, Lordosenstütze, Armlehnen und Rückenlehnenneigung. Deine Füße sollten flach auf dem Boden stehen, die Oberschenkel waagerecht sein.</p>
+        </div>
+
+        <div class="plan-card">
+          <span class="day">3</span>
+          <h4>Tag 3: Monitor &amp; Monitorarm</h4>
+          <p>Positioniere deinen Monitor so, dass die Oberkante des Bildschirms auf Augenhöhe ist. Der Abstand sollte etwa eine Armlänge betragen. Nutze einen Monitorarm für maximale Flexibilität und Platz auf dem Schreibtisch.</p>
+        </div>
+
+        <div class="plan-card">
+          <span class="day">4</span>
+          <h4>Tag 4: Tastatur &amp; Maus</h4>
+          <p>Richte deine ergonomische Tastatur und Maus ein. Die Tastatur sollte direkt vor dir liegen, die Maus auf gleicher Höhe. Teste verschiedene Positionen und nutze bei Bedarf eine Handgelenkstütze.</p>
+        </div>
+
+        <div class="plan-card">
+          <span class="day">5</span>
+          <h4>Tag 5: Beleuchtung</h4>
+          <p>Optimiere die Ausleuchtung deines Arbeitsplatzes. Vermeide direktes Licht auf dem Bildschirm. Eine Monitorleuchte wie die BenQ ScreenBar reduziert Blendeffekte. Ergänze mit Ambient-Licht für die Abendstunden.</p>
+        </div>
+
+        <div class="plan-card">
+          <span class="day">6</span>
+          <h4>Tag 6: Audio &amp; Organisation</h4>
+          <p>Richte dein Headset für Meetings ein und sorge für ein aufgeräumtes Kabelmanagement. Installiere Kabelkanäle und eine Untertisch-Box für Netzteile. Ein aufgeräumter Arbeitsplatz steigert die Produktivität messbar.</p>
+        </div>
+
+        <div class="plan-card">
+          <span class="day">7</span>
+          <h4>Tag 7: Feintuning &amp; Raumklima</h4>
+          <p>Überprüfe alle Einstellungen noch einmal. Stelle den Luftreiniger oder Luftbefeuchter auf. Richte deine Stehhilfe oder dein Balance-Board ein. Lege fest, wann du sitzt und wann du stehst – ein Wechsel alle 45 Minuten ist ideal.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== SECTION 14 – FAQ ===== -->
+    <section id="faq">
+      <h2><span class="sec-num">✦</span> Häufig gestellte Fragen (FAQ)</h2>
+      <p class="section-intro">Hier beantworten wir die wichtigsten Fragen rund um das Thema Home-Office &amp; Ergonomie. Wenn du weitere Fragen hast, schreibe uns gerne einen Kommentar!</p>
+
+      <div class="faq-grid">
+
+        <div class="faq-item">
+          <h4>Welche Schreibtischhöhe ist bei einem normalen Tisch ideal?</h4>
+          <p>Die ideale Schreibtischhöhe liegt bei etwa 72–76 cm für sitzende Tätigkeiten. Bei einem höhenverstellbaren Tisch sollte der Bereich von 65 cm (sitzend) bis 125 cm (stehend) abgedeckt sein. Deine Ellenbogen sollten beim Tippen einen 90-Grad-Winkel bilden.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Wie viel sollte ich für einen guten Bürostuhl ausgeben?</h4>
+          <p>Für einen wirklich ergonomischen Bürostuhl solltest du mindestens 250–400&euro; einplanen. Modelle wie der Sihoo M57 (ca. 319&euro;) bieten ein hervorragendes Preis-Leistungs-Verhältnis. Premium-Modelle ab 1.000&euro; (Herman Miller, Steelcase) lohnen sich bei intensiver Nutzung über viele Jahre.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Bringen Balance-Boards und Stehhilfen wirklich etwas?</h4>
+          <p>Ja, absolut. Stehhilfen wie der Topstar Sitness 40 aktivieren die Rumpfmuskulatur und verbessern die Körperhaltung. Balance-Boards schulen die Tiefenmuskulatur und die Koordination. Beide sind sinnvolle Ergänzungen – aber kein Ersatz für regelmäßige Bewegung und Pausen.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Ist 4K am Monitor wirklich nötig oder reichen 1440p?</h4>
+          <p>Für reine Büroarbeit ist WQHD (2560x1440) bei 27 Zoll völlig ausreichend und meist die bessere Wahl, da die Schriftgröße angenehmer ist und du keine Skalierung benötigst. 4K lohnt sich bei 27" oder 32" für design- und bildbearbeitungsintensive Tätigkeiten oder wenn du viel mit mehreren Fenstern parallel arbeitest.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Wie oft sollte ich im Home-Office aufstehen?</h4>
+          <p>Die 45/15-Regel hat sich bewährt: 45 Minuten sitzen, dann 15 Minuten stehen oder eine Bewegungspause einlegen. Noch besser ist der Wechsel alle 30 Minuten. Wichtig ist, dass du mindestens alle 60 Minuten aufstehst, um die Wirbelsäule zu entlasten und die Durchblutung anzuregen.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Welche Farbtemperatur ist am besten für den Bildschirm?</h4>
+          <p>Tagsüber ist eine Farbtemperatur von 5.500–6.500 Kelvin (neutral bis kühl) ideal, da sie den Tag-Nacht-Rhythmus unterstützt und wach hält. Ab etwa 18 Uhr solltest du auf 3.000–4.000 Kelvin (warmweiß) umschalten, um die Melatoninproduktion nicht zu stören. Viele Monitore und Tools wie f.lux oder Windows Nachtmodus machen das automatisch.</p>
+        </div>
+
+        <div class="faq-item">
+          <h4>Kann ich ergonomische Produkte von der Steuer absetzen?</h4>
+          <p>Ja, in Deutschland können ergonomische Arbeitsmittel wie Schreibtische, Bürostühle, Monitore und Tastaturen als Werbungskosten oder Betriebsausgaben steuerlich geltend gemacht werden. Voraussetzung ist, dass du den Arbeitsplatz beruflich nutzt. Elektronische Helfer wie Headsets und Luftreiniger sind ebenfalls absetzbar. Bewahre unbedingt alle Rechnungen auf!</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== AFFILIATE DISCLAIMER ===== -->
+    <div class="disclaimer">
+      <strong>🔗 Affiliate-Hinweis:</strong> Die mit * gekennzeichneten Links sind Affiliate-Links. Wenn du über diese Links ein Produkt kaufst, erhalten wir eine kleine Provision – für dich entstehen dadurch keine zusätzlichen Kosten. Du unterstützt damit unsere Arbeit und hilfst uns, weiterhin qualitativ hochwertige Inhalte zu erstellen. Vielen Dank! 💜
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="container">
+      <p class="brand">✦ Licht &amp; Schatten</p>
+      <p>Home-Office &amp; Ergonomie 2026 – Die besten Produkte für produktives Arbeiten von zu Hause</p>
+      <p style="margin-top:12px">Letzte Aktualisierung: Juni 2026 | Alle Preise ohne Gewähr | <a href="mailto:hallo@lichtundschatten.de">Kontakt</a></p>
+      <p style="margin-top:8px;color:#555">Hinweis: Dieser Artikel dient ausschließlich zu Informationszwecken und stellt keine Kaufberatung dar. Die vorgestellten Produkte basieren auf Recherche und subjektiven Erfahrungen.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

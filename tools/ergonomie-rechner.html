@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ergonomie-Rechner – Finde dein perfektes Home-Office Setup | Licht &amp; Schatten</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+  background: #0a0a0f; color: #E4E4E7; line-height: 1.6; min-height: 100vh;
+}
+.container { max-width: 820px; margin: 0 auto; padding: 20px 16px; }
+
+header {
+  text-align: center; padding: 28px 0 12px; border-bottom: 1px solid rgba(139,92,246,0.2); margin-bottom: 24px;
+}
+header h1 { font-size: 1.65rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+header h1 .accent { color: #8B5CF6; }
+header h1 .gold { color: #FFD700; }
+header p { font-size: 0.9rem; color: #888; margin-top: 4px; }
+header .brand { font-size: 0.75rem; color: #666; margin-top: 2px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+.progress-wrap { margin-bottom: 28px; }
+.progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #888; margin-bottom: 6px; }
+.progress-bar { height: 6px; background: #1a1a2a; border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #8B5CF6, #FFD700); border-radius: 4px; transition: width 0.5s ease; }
+
+.step-card {
+  background: #111118; border: 1px solid #1e1e2e; border-radius: 14px; padding: 28px 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5); display: none; animation: fadeUp 0.4s ease;
+}
+.step-card.active { display: block; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.step-card h2 { font-size: 1.25rem; font-weight: 600; color: #fff; margin-bottom: 4px; }
+.step-card .step-num { font-size: 0.75rem; color: #8B5CF6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+.step-card .desc { font-size: 0.85rem; color: #999; margin-bottom: 18px; }
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+.option-btn {
+  display: block; width: 100%; text-align: left; padding: 13px 16px;
+  background: #16161f; border: 1.5px solid #222233; border-radius: 10px;
+  color: #E4E4E7; font-size: 0.95rem; cursor: pointer; transition: all 0.2s;
+}
+.option-btn:hover { border-color: #8B5CF6; background: #1c1c2e; }
+.option-btn.selected { border-color: #8B5CF6; background: rgba(139,92,246,0.15); color: #fff; box-shadow: 0 0 12px rgba(139,92,246,0.1); }
+.option-btn .sub { font-size: 0.78rem; color: #777; display: block; margin-top: 2px; }
+
+.btn-row { display: flex; gap: 10px; margin-top: 22px; }
+.btn { padding: 11px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; }
+.btn-back { background: #1e1e2e; color: #aaa; }
+.btn-back:hover { background: #2a2a3e; color: #fff; }
+.btn-next { background: linear-gradient(135deg, #8B5CF6, #a78bfa); color: #fff; margin-left: auto; }
+.btn-next:hover { box-shadow: 0 4px 16px rgba(139,92,246,0.3); transform: translateY(-1px); }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+.btn-next:disabled:hover { opacity: 0.4; transform: none; box-shadow: none; }
+
+/* Step 2 budget zone */
+.option-btn .price-tag { float: right; color: #FFD700; font-weight: 600; }
+
+/* RESULTS */
+.results { display: none; }
+.results.active { display: block; animation: fadeUp 0.5s ease; }
+.results h2 { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.results .subtitle { color: #999; font-size: 0.9rem; margin-bottom: 16px; }
+
+.total-badge {
+  background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(255,215,0,0.08));
+  border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 16px 20px;
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 8px;
+}
+.total-badge .label { font-size: 0.85rem; color: #999; }
+.total-badge .amount { font-size: 1.6rem; font-weight: 700; color: #FFD700; }
+.total-badge .amount small { font-size: 0.9rem; font-weight: 400; color: #888; }
+
+.prio-tag { display: inline-block; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 3px 10px; border-radius: 20px; margin-bottom: 6px; }
+.prio-must { background: #ef4444; color: #fff; }
+.prio-rec { background: #8B5CF6; color: #fff; }
+.prio-nice { background: #2563eb; color: #fff; }
+
+.prod-card {
+  background: #111118; border: 1px solid #1e1e2e; border-radius: 12px; padding: 16px 18px; margin-bottom: 10px;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; transition: border-color 0.2s;
+}
+.prod-card:hover { border-color: #2a2a44; }
+.prod-info { flex: 1; min-width: 0; }
+.prod-info h4 { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 2px; }
+.prod-info .prod-desc { font-size: 0.8rem; color: #888; line-height: 1.4; }
+.prod-right { text-align: right; flex-shrink: 0; }
+.prod-price { font-size: 1.1rem; font-weight: 700; color: #FFD700; white-space: nowrap; }
+.prod-link { display: inline-block; margin-top: 4px; font-size: 0.75rem; color: #8B5CF6; text-decoration: none; font-weight: 600; }
+.prod-link:hover { text-decoration: underline; color: #a78bfa; }
+
+.saving-tip {
+  background: rgba(255,215,0,0.06); border: 1px solid rgba(255,215,0,0.2); border-radius: 12px;
+  padding: 14px 18px; margin-top: 18px; font-size: 0.85rem; line-height: 1.5;
+}
+.saving-tip strong { color: #FFD700; }
+.saving-tip .highlight { color: #8B5CF6; font-weight: 600; }
+
+.chart-wrap { margin-top: 20px; padding: 16px; background: #111118; border-radius: 12px; border: 1px solid #1e1e2e; }
+.chart-wrap h3 { font-size: 0.85rem; color: #999; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+.chart-wrap canvas { width: 100%; height: 160px; display: block; }
+
+.btn-restart {
+  display: block; width: 100%; margin-top: 16px; padding: 12px;
+  background: #1e1e2e; border: 1px solid #2a2a3e; border-radius: 10px;
+  color: #aaa; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center;
+}
+.btn-restart:hover { background: #2a2a3e; color: #fff; border-color: #8B5CF6; }
+
+footer { text-align: center; padding: 24px 0 32px; font-size: 0.7rem; color: #555; }
+footer a { color: #8B5CF6; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .container { padding: 12px 10px; }
+  .step-card { padding: 20px 16px; }
+  header h1 { font-size: 1.3rem; }
+  .prod-card { flex-direction: column; }
+  .prod-right { text-align: left; }
+  .total-badge { flex-direction: column; text-align: center; }
+  .btn-row { flex-wrap: wrap; }
+  .btn-next { margin-left: 0; width: 100%; }
+  .btn-back { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+  <p class="brand">Licht &amp; Schatten</p>
+  <h1><span class="accent">Ergonomie</span>-Rechner<br><span style="font-size:0.85rem;font-weight:400;color:#999;">Finde dein perfektes Home-Office Setup</span></h1>
+</header>
+
+<div class="progress-wrap" id="progressWrap">
+  <div class="progress-label">
+    <span id="stepLabel">Schritt 1 von 5</span>
+    <span id="stepPct">0%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<!-- Step 1 -->
+<div class="step-card active" data-step="1">
+  <div class="step-num">Schritt 1 von 5</div>
+  <h2>Wie viele Stunden arbeitest du täglich im Home-Office?</h2>
+  <p class="desc">Deine tägliche Arbeitszeit beeinflusst, wie wichtig erstklassige Ergonomie für dich ist.</p>
+  <div class="options" id="step1Opts">
+    <button class="option-btn" data-val="low" data-hours="<4">Weniger als 4 Stunden <span class="sub">Gelegentliches Arbeiten – Budget kann geringer ausfallen</span></button>
+    <button class="option-btn" data-val="mid" data-hours="4-8">4–8 Stunden <span class="sub">Normaler Arbeitstag – Ausgewogene Ergonomie sinnvoll</span></button>
+    <button class="option-btn" data-val="high" data-hours=">8">Mehr als 8 Stunden <span class="sub">Viel Zeit am Schreibtisch – Ergonomie hat höchste Priorität</span></button>
+  </div>
+  <div class="btn-row">
+    <span></span>
+    <button class="btn btn-next" onclick="nextStep()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step-card" data-step="2">
+  <div class="step-num">Schritt 2 von 5</div>
+  <h2>Dein Budget für das gesamte Setup</h2>
+  <p class="desc">Wähle deine Budgetspanne – wir empfehlen passende Produkte in deiner Preisklasse.</p>
+  <div class="options" id="step2Opts">
+    <button class="option-btn" data-val="low">Unter 500€ <span class="sub">Einstiegs-Setup, Fokus auf das Wesentliche</span><span class="price-tag">&lt;500€</span></button>
+    <button class="option-btn" data-val="mid">500€ – 1.500€ <span class="sub">Gute Mittelklasse, solide Ergonomie</span><span class="price-tag">500–1.500€</span></button>
+    <button class="option-btn" data-val="high">1.500€ – 3.000€ <span class="sub">Hochwertige Komponenten, optimale Ergonomie</span><span class="price-tag">1.500–3.000€</span></button>
+    <button class="option-btn" data-val="premium">Über 3.000€ <span class="sub">Premium-Setup – das Beste vom Besten</span><span class="price-tag">&gt;3.000€</span></button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-back" onclick="prevStep()">← Zurück</button>
+    <button class="btn btn-next" onclick="nextStep()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div class="step-card" data-step="3">
+  <div class="step-num">Schritt 3 von 5</div>
+  <h2>Was ist dir am wichtigsten?</h2>
+  <p class="desc">Deine Priorität hilft uns, die richtigen Produkte für dich auszuwählen.</p>
+  <div class="options" id="step3Opts">
+    <button class="option-btn" data-val="ruecken">🦴 Rückengesundheit <span class="sub">Perfekter Stuhl &amp; höhenverstellbarer Schreibtisch</span></button>
+    <button class="option-btn" data-val="konzentration">🎯 Konzentration &amp; Produktivität <span class="sub">Hochwertiger Monitor &amp; optimale Beleuchtung</span></button>
+    <button class="option-btn" data-val="komfort">🛋️ Komfort &amp; Bequemlichkeit <span class="sub">Ergonomisches Zubehör &amp; angenehmes Arbeitsklima</span></button>
+    <button class="option-btn" data-val="platz">📦 Platzsparend &amp; Minimalistisch <span class="sub">Kompakte Lösungen für kleine Arbeitsbereiche</span></button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-back" onclick="prevStep()">← Zurück</button>
+    <button class="btn btn-next" onclick="nextStep()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<!-- Step 4 -->
+<div class="step-card" data-step="4">
+  <div class="step-num">Schritt 4 von 5</div>
+  <h2>Deine Haupttätigkeit</h2>
+  <p class="desc">Je nach Tätigkeit empfehlen wir unterschiedliche Schwerpunkte für dein Setup.</p>
+  <div class="options" id="step4Opts">
+    <button class="option-btn" data-val="tippen">⌨️ Programmieren / Schreiben <span class="sub">Viel Tippen – hochwertige Tastatur &amp; Maus wichtig</span></button>
+    <button class="option-btn" data-val="calls">🎧 Videokonferenzen / Telefonie <span class="sub">Viele Calls – gutes Headset &amp; Webcam essenziell</span></button>
+    <button class="option-btn" data-val="kreativ">🎨 Kreativarbeit <span class="sub">Design, Video, Foto – farbtreuer Monitor gefragt</span></button>
+    <button class="option-btn" data-val="gemischt">🔄 Gemischt <span class="sub">Alles etwas – ausgewogenes Allround-Setup</span></button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-back" onclick="prevStep()">← Zurück</button>
+    <button class="btn btn-next" onclick="nextStep()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<!-- Step 5 -->
+<div class="step-card" data-step="5">
+  <div class="step-num">Schritt 5 von 5</div>
+  <h2>Hast du bereits einen Schreibtisch?</h2>
+  <p class="desc">Deine aktuelle Situation bestimmt, ob ein neuer Tisch auf die Einkaufsliste kommt.</p>
+  <div class="options" id="step5Opts">
+    <button class="option-btn" data-val="habe_mag">👍 Ja, ich mag ihn <span class="sub">Kein neuer Tisch nötig – Fokus auf Stuhl &amp; Zubehör</span></button>
+    <button class="option-btn" data-val="habe_alt">👎 Ja, aber er ist zu klein/alt <span class="sub">Ein neuer Schreibtisch wäre eine gute Investition</span></button>
+    <button class="option-btn" data-val="brauche">❌ Nein, ich brauche einen <span class="sub">Ein guter Schreibtisch ist die Basis deines Setups</span></button>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-back" onclick="prevStep()">← Zurück</button>
+    <button class="btn btn-next" onclick="calcResults()" disabled>Ergebnisse anzeigen →</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results" id="resultsSection">
+  <h2>✨ Dein persönliches Setup</h2>
+  <p class="subtitle">Basierend auf deinen Angaben – sortiert nach Priorität</p>
+
+  <div class="total-badge">
+    <span><span class="label">Gesamtpreis deines empfohlenen Setups</span></span>
+    <span class="amount" id="totalPrice">0€</span>
+  </div>
+
+  <div id="resultsList"></div>
+
+  <div class="saving-tip" id="savingTip">
+    <strong>💡 Spartipp:</strong> <span id="savingText">Ladevorgang…</span>
+  </div>
+
+  <div class="chart-wrap">
+    <h3>Budgetverteilung nach Kategorie</h3>
+    <canvas id="budgetChart" width="600" height="150"></canvas>
+  </div>
+
+  <button class="btn-restart" onclick="restart()">🔄 Neu starten</button>
+</div>
+
+<footer>
+  <p><strong>Affiliate-Hinweis:</strong> Die mit * gekennzeichneten Links sind Affiliate-Links. Wenn du über diese Links einkaufst, erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</p>
+  <p style="margin-top:6px;">© 2025 <a href="#">Licht &amp; Schatten</a> – Dein Ratgeber für ein besseres Home-Office</p>
+</footer>
+
+</div><!-- /container -->
+
+<script>
+/* ===== PRODUCT DATABASE ===== */
+const PRODUCTS = {
+  desks: [
+    { id: 'd1', name: 'Flexispot E7', desc: 'Höhenverstellbarer Schreibtisch 120×60 cm – solide Basis für dein Home-Office', price: 549.99, asin: 'B0C1234567', cat: 'Schreibtisch', prio: 'must' },
+    { id: 'd2', name: 'Flexispot E7 Pro', desc: 'Höhenverstellbarer Schreibtisch 140×70 cm – mehr Platz fürs Arbeiten', price: 699.99, asin: 'B0C2345678', cat: 'Schreibtisch', prio: 'must' },
+    { id: 'd3', name: 'UpDown Pro 3', desc: 'Elektrischer Schreibtisch 180×80 cm – großzügige Fläche für Profis', price: 899.00, asin: 'B0C3456789', cat: 'Schreibtisch', prio: 'must' },
+    { id: 'd4', name: 'IKEA BEKANT', desc: 'Höhenverstellbarer Schreibtisch 160×80 cm – solide &amp; preiswert', price: 499.00, asin: 'B0C4567890', cat: 'Schreibtisch', prio: 'must' }
+  ],
+  chairs: [
+    { id: 'c1', name: 'Sihoo M57', desc: 'Ergonomischer Bürostuhl mit Lordosenstütze – exzellentes Preis-Leistungs-Verhältnis', price: 299.00, asin: 'B0D1234567', cat: 'Stuhl', prio: 'must' },
+    { id: 'c2', name: 'Sihoo D01 Chefsessel', desc: 'Ergonomischer Chefsessel mit Synchronmechanik und Netzrücken', price: 799.00, asin: 'B0D2345678', cat: 'Stuhl', prio: 'rec' },
+    { id: 'c3', name: 'Interstuhl 172', desc: 'Premium-Bürodrehstuhl – made in Germany, höchster Komfort', price: 899.00, asin: 'B0D3456789', cat: 'Stuhl', prio: 'rec' },
+    { id: 'c4', name: 'TOPSTAR S80', desc: 'Ergonomischer Bürostuhl mit atmungsaktivem Netzrücken – günstiger Einstieg', price: 249.00, asin: 'B0D4567890', cat: 'Stuhl', prio: 'must' }
+  ],
+  arms: [
+    { id: 'a1', name: 'Ergotron LX Single', desc: 'Monitorarm Single – hochwertige Bewegungsfreiheit für deinen Bildschirm', price: 159.00, asin: 'B0E1234567', cat: 'Monitorarm', prio: 'rec' },
+    { id: 'a2', name: 'Ergotron LX Dual', desc: 'Monitorarm Dual – perfekt für zwei Monitore, maximale Flexibilität', price: 239.00, asin: 'B0E2345678', cat: 'Monitorarm', prio: 'rec' },
+    { id: 'a3', name: 'North Bayou F80', desc: 'Monitorarm Single – solide Qualität zum kleinen Preis', price: 39.99, asin: 'B0E3456789', cat: 'Monitorarm', prio: 'nice' },
+    { id: 'a4', name: 'North Bayou H180', desc: 'Monitorarm Dual – preiswerte Lösung für zwei Bildschirme', price: 69.99, asin: 'B0E4567890', cat: 'Monitorarm', prio: 'nice' }
+  ],
+  monitors: [
+    { id: 'm1', name: 'Dell UltraSharp U2724D', desc: '27" QHD IPS – professionelle Farbdarstellung &amp; entspiegeltes Panel', price: 549.00, asin: 'B0F1234567', cat: 'Monitor', prio: 'rec' },
+    { id: 'm2', name: 'LG 27UP850N-W', desc: '27" 4K IPS USB-C – brillante Auflösung mit integrierter Docking-Funktion', price: 449.00, asin: 'B0F2345678', cat: 'Monitor', prio: 'rec' },
+    { id: 'm3', name: 'BenQ EW2780Q', desc: '27" QHD – guter Allround-Monitor mit Augenschon-Technologie', price: 329.00, asin: 'B0F3456789', cat: 'Monitor', prio: 'rec' }
+  ],
+  lighting: [
+    { id: 'l1', name: 'BenQ ScreenBar Halo', desc: 'Monitorlampe mit Ambientebeleuchtung – blendfrei &amp; platzsparend', price: 159.00, asin: 'B0G1234567', cat: 'Beleuchtung', prio: 'nice' },
+    { id: 'l2', name: 'Philips Hue Play Gradient', desc: 'Smart-Beleuchtung für Monitorrückseite – Stimmung &amp; Fokus', price: 99.99, asin: 'B0G2345678', cat: 'Beleuchtung', prio: 'nice' },
+    { id: 'l3', name: 'Elgato Key Light Air', desc: 'LED Panel für Videocalls – weiches, gleichmäßiges Licht', price: 119.00, asin: 'B0G3456789', cat: 'Beleuchtung', prio: 'rec' }
+  ],
+  keyboards: [
+    { id: 'k1', name: 'Logitech MX Keys S', desc: 'Premium-Tastatur mit leisen Tasten &amp; Hintergrundbeleuchtung', price: 109.00, asin: 'B0H1234567', cat: 'Tastatur', prio: 'rec' },
+    { id: 'k2', name: 'Logitech MX Master 3S', desc: 'Ergonomische Maus mit leisen Klicks &amp; MagScroll-Rad', price: 99.99, asin: 'B0H2345678', cat: 'Maus', prio: 'rec' },
+    { id: 'k3', name: 'Microsoft Ergonomic Keyboard', desc: 'Ergonomische Tastatur mit Handballenauflage – natürliche Handhaltung', price: 64.99, asin: 'B0H3456789', cat: 'Tastatur', prio: 'rec' },
+    { id: 'k4', name: 'Kensington Pro Fit Ergo Trackball', desc: 'Trackball-Maus – entlastet Handgelenk &amp; Unterarm', price: 49.99, asin: 'B0H4567890', cat: 'Maus', prio: 'nice' }
+  ],
+  headsets: [
+    { id: 'h1', name: 'Jabra Evolve2 55', desc: 'Professional-Headset mit ANC – kristallklare Calls', price: 249.00, asin: 'B0I1234567', cat: 'Headset', prio: 'rec' },
+    { id: 'h2', name: 'Sony WH-1000XM5', desc: 'Noise-Cancelling-Kopfhörer – beste Geräuschunterdrückung für tiefe Konzentration', price: 349.00, asin: 'B0I2345678', cat: 'Headset', prio: 'rec' },
+    { id: 'h3', name: 'Logitech Zone 750', desc: 'Stereo-Headset mit Bügelmikrofon – solide Alltagslösung', price: 119.00, asin: 'B0I3456789', cat: 'Headset', prio: 'nice' }
+  ],
+  accessories: [
+    { id: 'x1', name: 'IKEA Signum', desc: 'Kabelmanagement-Set – Ordnung auf dem Schreibtisch für mehr Konzentration', price: 19.99, asin: 'B0J1234567', cat: 'Zubehör', prio: 'nice' },
+    { id: 'x2', name: 'FLx Balance Board', desc: 'Stehhilfe/Balance Board – aktive Bewegung im Stehen, trainiert die Rumpfmuskulatur', price: 89.00, asin: 'B0J2345678', cat: 'Zubehör', prio: 'nice' },
+    { id: 'x3', name: 'Topstar Stehhilfe Sitness 30', desc: 'Ergonomische Stehhilfe – entlastet Rücken &amp; Gelenke beim Steharbeitsplatz', price: 119.00, asin: 'B0J3456789', cat: 'Zubehör', prio: 'nice' },
+    { id: 'x4', name: 'Philips Series 900 Luftreiniger', desc: 'Luftreiniger für bessere Raumluft – weniger Staub &amp; Allergene', price: 299.00, asin: 'B0J4567890', cat: 'Zubehör', prio: 'nice' },
+    { id: 'x5', name: 'Levoit Core 300', desc: 'Kompakter Luftreiniger – leise &amp; effektiv für bürotaugliche Luftqualität', price: 99.99, asin: 'B0J5678901', cat: 'Zubehör', prio: 'nice' }
+  ]
+};
+
+function allProds() {
+  const r = [];
+  for (const k of Object.keys(PRODUCTS)) r.push(...PRODUCTS[k]);
+  return r;
+}
+
+/* ===== STATE ===== */
+let answers = {};
+let currentStep = 1;
+const totalSteps = 5;
+
+/* ===== NAV ===== */
+function updateProgress() {
+  const pct = ((currentStep - 1) / totalSteps) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('stepLabel').textContent = 'Schritt ' + currentStep + ' von ' + totalSteps;
+  document.getElementById('stepPct').textContent = Math.round(pct) + '%';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+  const el = document.querySelector('.step-card[data-step="' + n + '"]');
+  if (el) el.classList.add('active');
+  currentStep = n;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) showStep(currentStep + 1);
+}
+
+function prevStep() {
+  if (currentStep > 1) showStep(currentStep - 1);
+}
+
+/* ===== OPTION SELECTION ===== */
+document.querySelectorAll('.options').forEach(grp => {
+  grp.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const parent = this.parentElement;
+      parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      const card = this.closest('.step-card');
+      const step = parseInt(card.dataset.step);
+      const val = this.dataset.val;
+      answers['step' + step] = val;
+      // Enable next button
+      const nextBtn = card.querySelector('.btn-next');
+      if (nextBtn) nextBtn.disabled = false;
+    });
+  });
+});
+
+/* ===== RESULTS ===== */
+function calcResults() {
+  const step1 = answers.step1 || 'mid';
+  const step2 = answers.step2 || 'mid';
+  const step3 = answers.step3 || 'komfort';
+  const step4 = answers.step4 || 'gemischt';
+  const step5 = answers.step5 || 'habe_mag';
+
+  const hoursHigh = step1 === 'high';
+  const budgetLow = step2 === 'low';
+  const budgetMid = step2 === 'mid';
+  const budgetHigh = step2 === 'high' || step2 === 'premium';
+  const focusRuecken = step3 === 'ruecken';
+  const focusKonz = step3 === 'konzentration';
+  const focusKomfort = step3 === 'komfort';
+  const focusPlatz = step3 === 'platz';
+  const taskTippen = step4 === 'tippen';
+  const taskCalls = step4 === 'calls';
+  const taskKreativ = step4 === 'kreativ';
+  const needDesk = step5 !== 'habe_mag';
+  const deskOld = step5 === 'habe_alt';
+
+  let recs = [];
+
+  // --- DESK ---
+  if (needDesk) {
+    if (budgetLow) {
+      recs.push({ ...PRODUCTS.desks.find(d => d.id === 'd4'), prio: needDesk ? 'must' : 'rec' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.desks.find(d => d.id === 'd1'), prio: 'must' });
+      if (hoursHigh) recs.push({ ...PRODUCTS.desks.find(d => d.id === 'd2'), prio: 'rec' });
+    } else {
+      if (focusRuecken || deskOld) {
+        recs.push({ ...PRODUCTS.desks.find(d => d.id === 'd3'), prio: 'must' });
+      } else {
+        recs.push({ ...PRODUCTS.desks.find(d => d.id === 'd2'), prio: 'must' });
+      }
+    }
+  }
+
+  // --- CHAIR ---
+  if (focusRuecken || hoursHigh) {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c3'), prio: 'must' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c1'), prio: 'must' });
+      if (hoursHigh) recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c2'), prio: 'rec' });
+    } else {
+      recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c4'), prio: 'must' });
+    }
+  } else {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c2'), prio: 'must' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c1'), prio: 'must' });
+    } else {
+      recs.push({ ...PRODUCTS.chairs.find(c => c.id === 'c4'), prio: 'must' });
+    }
+  }
+
+  // --- MONITOR ---
+  if (focusKonz || taskKreativ) {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.monitors.find(m => m.id === 'm1'), prio: 'must' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.monitors.find(m => m.id === 'm2'), prio: 'rec' });
+    } else {
+      recs.push({ ...PRODUCTS.monitors.find(m => m.id === 'm3'), prio: 'rec' });
+    }
+  } else if (taskCalls || taskTippen) {
+    if (!budgetLow) {
+      recs.push({ ...PRODUCTS.monitors.find(m => m.id === 'm3'), prio: 'nice' });
+    }
+  }
+
+  // --- MONITOR ARM ---
+  if (focusPlatz || needDesk) {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.arms.find(a => a.id === 'a2'), prio: 'rec' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.arms.find(a => a.id === 'a1'), prio: 'rec' });
+    } else {
+      recs.push({ ...PRODUCTS.arms.find(a => a.id === 'a3'), prio: 'nice' });
+    }
+  } else {
+    if (!budgetLow) {
+      recs.push({ ...PRODUCTS.arms.find(a => a.id === 'a3'), prio: 'nice' });
+    }
+  }
+
+  // --- KEYBOARD ---
+  if (taskTippen) {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k1'), prio: 'must' });
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k2'), prio: 'rec' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k3'), prio: 'rec' });
+    } else {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k3'), prio: 'rec' });
+    }
+  } else {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k1'), prio: 'nice' });
+    } else if (!budgetLow) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k3'), prio: 'nice' });
+    }
+  }
+
+  // --- MOUSE ---
+  if (taskTippen) {
+    if (budgetHigh || budgetMid) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k2'), prio: 'rec' });
+    }
+    if (focusPlatz) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k4'), prio: 'nice' });
+    }
+  } else {
+    if (!budgetLow) {
+      recs.push({ ...PRODUCTS.keyboards.find(k => k.id === 'k4'), prio: 'nice' });
+    }
+  }
+
+  // --- HEADSET ---
+  if (taskCalls) {
+    if (budgetHigh) {
+      recs.push({ ...PRODUCTS.headsets.find(h => h.id === 'h1'), prio: 'must' });
+    } else if (budgetMid) {
+      recs.push({ ...PRODUCTS.headsets.find(h => h.id === 'h3'), prio: 'rec' });
+    }
+  } else {
+    if (focusKonz && !budgetLow) {
+      recs.push({ ...PRODUCTS.headsets.find(h => h.id === 'h2'), prio: 'rec' });
+    }
+  }
+
+  // --- LIGHTING ---
+  if (taskCalls || focusKonz) {
+    if (!budgetLow) {
+      recs.push({ ...PRODUCTS.lighting.find(l => l.id === 'l3'), prio: 'rec' });
+    }
+  }
+  if (focusKomfort && !budgetLow) {
+    recs.push({ ...PRODUCTS.lighting.find(l => l.id === 'l1'), prio: 'nice' });
+  }
+  if (focusKonz && budgetHigh) {
+    recs.push({ ...PRODUCTS.lighting.find(l => l.id === 'l2'), prio: 'nice' });
+  }
+
+  // --- ACCESSORIES ---
+  if (!budgetLow) {
+    recs.push({ ...PRODUCTS.accessories.find(x => x.id === 'x1'), prio: 'nice' });
+  }
+  if (hoursHigh && !budgetLow) {
+    recs.push({ ...PRODUCTS.accessories.find(x => x.id === 'x2'), prio: 'nice' });
+  }
+  if (hoursHigh && budgetMid) {
+    recs.push({ ...PRODUCTS.accessories.find(x => x.id === 'x3'), prio: 'nice' });
+  }
+  if (budgetHigh) {
+    recs.push({ ...PRODUCTS.accessories.find(x => x.id === 'x5'), prio: 'nice' });
+  }
+
+  // Deduplicate by id
+  const seen = new Set();
+  recs = recs.filter(r => { if (seen.has(r.id)) return false; seen.add(r.id); return true; });
+
+  // Sort: must > rec > nice
+  const prioOrder = { must: 0, rec: 1, nice: 2 };
+  recs.sort((a, b) => prioOrder[a.prio] - prioOrder[b.prio]);
+
+  const total = recs.reduce((s, r) => s + r.price, 0);
+
+  // Render
+  const list = document.getElementById('resultsList');
+  list.innerHTML = '';
+  recs.forEach(r => {
+    const prioLabel = r.prio === 'must' ? 'Must Have' : r.prio === 'rec' ? 'Empfohlen' : 'Nice To Have';
+    const prioCls = r.prio === 'must' ? 'prio-must' : r.prio === 'rec' ? 'prio-rec' : 'prio-nice';
+    const priceStr = r.price.toFixed(2).replace('.', ',') + '€';
+    const link = 'https://www.amazon.de/dp/' + r.asin + '/?tag=ikune21-21';
+    list.innerHTML +=
+      '<div class="prod-card">' +
+        '<div class="prod-info">' +
+          '<span class="prio-tag ' + prioCls + '">' + prioLabel + '</span>' +
+          '<h4>' + r.name + '</h4>' +
+          '<p class="prod-desc">' + r.desc + '</p>' +
+        '</div>' +
+        '<div class="prod-right">' +
+          '<div class="prod-price">' + priceStr + '</div>' +
+          '<a class="prod-link" href="' + link + '" target="_blank" rel="noopener">→ Bei Amazon ansehen*</a>' +
+        '</div>' +
+      '</div>';
+  });
+
+  document.getElementById('totalPrice').innerHTML = total.toFixed(2).replace('.', ',') + '€ <small>(inkl. MwSt.)</small>';
+
+  // Saving tip
+  const tipEl = document.getElementById('savingText');
+  if (total > 2000) {
+    tipEl.innerHTML = 'Dein Setup ist im Premium-Bereich. Wenn du beim <span class="highlight">Schreibtisch</span> auf das Flexispot E7 statt UpDown Pro 3 setzt, sparst du rund <strong>350€</strong> – damit könntest du dir einen <span class="highlight">Levoit Core 300 Luftreiniger</span> und ein <span class="highlight">IKEA Signum Kabelmanagement</span> dazu holen.';
+  } else if (total > 1000) {
+    tipEl.innerHTML = 'Wenn du beim <span class="highlight">Monitorarm</span> auf den North Bayou F80 statt Ergotron LX setzt, sparst du über <strong>100€</strong> – genug für eine <span class="highlight">Philips Hue Play Gradient</span>-Beleuchtung für bessere Stimmung am Arbeitsplatz.';
+  } else if (total > 500) {
+    tipEl.innerHTML = 'Wenn du auf die <span class="highlight">TOPSTAR S80</span> statt Sihoo M57 setzt, sparst du ca. <strong>50€</strong> – investiere das Ersparte in eine <span class="highlight">Kensington Pro Fit Ergo Trackball-Maus</span> für mehr Ergonomie.';
+  } else {
+    tipEl.innerHTML = 'Dein Budget-Setup ist smart gewählt. Mit einem zusätzlichen <span class="highlight">North Bayou F80 Monitorarm (39,99€)</span> holst du das Maximum an Ergonomie heraus – die beste Investition unter 50€ für deine Rückengesundheit!';
+  }
+
+  // Chart
+  drawChart(recs);
+
+  // Switch view
+  document.querySelectorAll('.step-card').forEach(c => c.classList.remove('active'));
+  document.getElementById('resultsSection').classList.add('active');
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('stepLabel').textContent = 'Ergebnisse';
+  document.getElementById('stepPct').textContent = '100%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ===== CHART ===== */
+function drawChart(recs) {
+  const canvas = document.getElementById('budgetChart');
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const cats = {};
+  recs.forEach(r => {
+    cats[r.cat] = (cats[r.cat] || 0) + r.price;
+  });
+
+  const catOrder = ['Schreibtisch', 'Stuhl', 'Monitor', 'Monitorarm', 'Tastatur', 'Maus', 'Headset', 'Beleuchtung', 'Zubehör'];
+  const labels = [];
+  const values = [];
+  catOrder.forEach(c => { if (cats[c]) { labels.push(c); values.push(cats[c]); } });
+
+  if (labels.length === 0) return;
+
+  const maxVal = Math.max(...values);
+  const barH = 24;
+  const gap = 10;
+  const startX = 100;
+  const barMaxW = w - startX - 20;
+  const startY = 10;
+
+  const colors = ['#8B5CF6', '#FFD700', '#ef4444', '#22c55e', '#3b82f6', '#ec4899', '#f59e0b', '#06b6d4', '#a78bfa'];
+
+  ctx.font = '12px -apple-system, sans-serif';
+  ctx.textBaseline = 'middle';
+
+  values.forEach((v, i) => {
+    const y = startY + i * (barH + gap);
+    const bw = Math.max(4, (v / maxVal) * barMaxW);
+    // label
+    ctx.fillStyle = '#aaa';
+    ctx.textAlign = 'right';
+    ctx.fillText(labels[i], startX - 8, y + barH / 2);
+    // bar
+    ctx.fillStyle = colors[i % colors.length];
+    const r = 4;
+    const bx = startX;
+    ctx.beginPath();
+    ctx.moveTo(bx + r, y);
+    ctx.lineTo(bx + bw - r, y);
+    ctx.quadraticCurveTo(bx + bw, y, bx + bw, y + r);
+    ctx.lineTo(bx + bw, y + barH - r);
+    ctx.quadraticCurveTo(bx + bw, y + barH, bx + bw - r, y + barH);
+    ctx.lineTo(bx + r, y + barH);
+    ctx.quadraticCurveTo(bx, y + barH, bx, y + barH - r);
+    ctx.lineTo(bx, y + r);
+    ctx.quadraticCurveTo(bx, y, bx + r, y);
+    ctx.closePath();
+    ctx.fill();
+    // value
+    ctx.fillStyle = '#fff';
+    ctx.textAlign = 'left';
+    ctx.fillText(v.toFixed(0).replace('.', ',') + '€', bx + bw + 6, y + barH / 2);
+  });
+}
+
+/* ===== RESTART ===== */
+function restart() {
+  answers = {};
+  currentStep = 1;
+  document.getElementById('resultsSection').classList.remove('active');
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
+  showStep(1);
+}
+</script>
+</body>
+</html>

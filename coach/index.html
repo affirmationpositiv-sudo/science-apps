@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKUNE – AI-Powered Personal Development</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e0e0e0; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  
+  .hero { padding: 100px 0 60px; text-align: center; background: linear-gradient(180deg, #0a0a0a 0%, #111 100%); }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5em; color: #d4a843; margin-bottom: 20px; }
+  .hero p { font-size: 1.2em; color: #999; max-width: 600px; margin: 0 auto 30px; line-height: 1.7; }
+  
+  .lead-magnet { background: #111; border: 1px solid #d4a843; border-radius: 16px; padding: 50px; text-align: center; margin: 40px auto; max-width: 600px; }
+  .lead-magnet h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: #d4a843; margin-bottom: 15px; }
+  .lead-magnet p { color: #aaa; margin-bottom: 25px; }
+  .lead-magnet .form { display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin: 0 auto; }
+  .lead-magnet input { padding: 14px 18px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: #fff; font-size: 1em; }
+  .lead-magnet button { padding: 14px 25px; border-radius: 8px; border: none; background: #d4a843; color: #0a0a0a; font-weight: 600; font-size: 1.05em; cursor: pointer; }
+  
+  .features { padding: 60px 0; }
+  .features h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: #fff; text-align: center; margin-bottom: 40px; }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+  .feature { background: #111; border: 1px solid #222; border-radius: 12px; padding: 30px; }
+  .feature h3 { color: #d4a843; margin-bottom: 10px; font-size: 1.1em; }
+  .feature p { color: #888; font-size: .9em; line-height: 1.6; }
+  
+  .pricing { padding: 60px 0; }
+  .pricing h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: #fff; text-align: center; margin-bottom: 40px; }
+  .price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .price-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 30px; text-align: center; }
+  .price-card.featured { border-color: #d4a843; }
+  .price-card h3 { color: #fff; margin-bottom: 10px; }
+  .price-card .price { color: #d4a843; font-size: 2em; font-weight: 700; margin: 15px 0; }
+  .price-card ul { list-style: none; margin: 20px 0; }
+  .price-card li { color: #888; padding: 6px 0; border-bottom: 1px solid #1a1a1a; font-size: .9em; }
+  .price-card .btn { display: inline-block; padding: 12px 30px; border-radius: 8px; text-decoration: none; background: #d4a843; color: #0a0a0a; font-weight: 600; }
+  
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.2em; }
+    .feature-grid, .price-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <h1>IKUNE</h1>
+    <p>Personal Development powered by AI. Stop struggling alone – let AI help you become the best version of yourself.</p>
+    <div class="lead-magnet">
+      <h2>🎯 Free Guide</h2>
+      <p>"The 7 Biggest AI Mistakes in Daily Life – And How to Fix Them"</p>
+      <div class="form">
+        <input type="email" placeholder="Your email address" disabled>
+        <button onclick="alert('Coming soon! Email affirmation.positiv@gmail.com')">Send Me the Free Guide →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="container">
+    <h2>What IKUNE Offers</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>🤖 AI Coaching</h3>
+        <p>Personalized AI-powered coaching sessions. Set goals, track progress, get accountability – all with AI.</p>
+      </div>
+      <div class="feature">
+        <h3>📚 Smart Courses</h3>
+        <p>Learn high-income skills, financial literacy, and personal development with AI-enhanced curricula.</p>
+      </div>
+      <div class="feature">
+        <h3>🎯 Daily Prompts</h3>
+        <p>Receive tailored AI prompts for reflection, productivity, and growth – delivered daily to your inbox.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="container">
+    <h2>Start Your Journey</h2>
+    <div class="price-grid">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price">€19</div>
+        <ul>
+          <li>4 AI coaching modules</li>
+          <li>12 prompt templates</li>
+          <li>Email support</li>
+          <li>Lifetime access</li>
+        </ul>
+        <a class="btn" href="#" onclick="alert('Coming soon via Gumroad!')">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <h3>Pro</h3>
+        <div class="price">€49</div>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>Weekly live Q&A</li>
+          <li>Private WhatsApp group</li>
+          <li>Personal AI audit</li>
+        </ul>
+        <a class="btn" href="#" onclick="alert('Coming soon via Gumroad!')">Go Pro</a>
+      </div>
+      <div class="price-card">
+        <h3>Mastermind</h3>
+        <div class="price">€197</div>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>8-week intensive program</li>
+          <li>1-on-1 coaching session</li>
+          <li>Joint project collaboration</li>
+        </ul>
+        <a class="btn" href="#" onclick="alert('Coming soon via Gumroad!')">Join Mastermind</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:40px 0;text-align:center;border-top:1px solid #1a1a1a;color:#555;font-size:.9em;">
+  <p>© 2026 IKUNE by Licht und Schatten. Contact: affirmation.positiv@gmail.com</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+{
+  "token_last5": "68dUI",
+  "bot_username": "Yesaryour_bot",
+  "bot_id": 8725644192,
+  "welcome_text": "🎯 *Willkommen im Licht & Schatten Verlag!*\n\nDein deutscher Buchladen für praxisnahe Ratgeber.\n\n📚 *Unsere Bücher:*\n• Passives Einkommen mit KI 2026 - 9,99€\n• KI-Tools für Anfänger 2026 - 8,99€\n• Duales Studium 2026 - 9,99€\n• Steuererklärung 2026 - 9,99€\n• Notvorrat für Familien 2026 - 7,99€\n• Krypto für Anfänger 2026 - 8,99€\n• KI-Kunst 2026 - 8,99€\n• ChatGPT für Handwerker 2026 - 8,99€\n\n💳 *Zahlung:* PayPal an affirmation.positiv@gmail.com\n📎 *Lieferung:* PDF per E-Mail\n\n👉 /buecher - Alle Bücher anzeigen\n👉 /bestellen - Bestellvorgang starten",
+  "keyboard": {
+    "inline_keyboard": [
+      [
+        {
+          "text": "📚 Alle Bücher",
+          "callback_data": "buecher"
+        }
+      ],
+      [
+        {
+          "text": "🛒 Jetzt bestellen",
+          "callback_data": "bestellen"
+        }
+      ],
+      [
+        {
+          "text": "📧 Kontakt",
+          "callback_data": "kontakt"
+        }
+      ]
+    ]
+  },
+  "products": [
+    {
+      "id": 1,
+      "title": "Passives Einkommen mit KI 2026",
+      "price": "9,99€",
+      "desc": "Praktische Strategien für automatisierte Einkommensquellen mit KI",
+      "file": "KDP_Books/Passives_Einkommen_mit_KI_2026.docx"
+    },
+    {
+      "id": 2,
+      "title": "KI-Tools für Anfänger 2026",
+      "price": "8,99€",
+      "desc": "Der praktische Einstieg in ChatGPT, Midjourney und Co.",
+      "file": "KDP_Books/KI_Tools_fuer_Anfaenger_2026.docx"
+    },
+    {
+      "id": 3,
+      "title": "Duales Studium 2026",
+      "price": "9,99€",
+      "desc": "Der komplette Guide - von der Bewerbung bis zum Berufseinstieg",
+      "file": "KDP_Books/Duales_Studium_2026.docx"
+    },
+    {
+      "id": 4,
+      "title": "Steuererklärung 2026 für Freiberufler",
+      "price": "9,99€",
+      "desc": "Schritt für Schritt zu mehr Rückerstattung",
+      "file": "KDP_Books/Steuererklaerung_2026_Freiberufler.docx"
+    },
+    {
+      "id": 5,
+      "title": "Notvorrat für Familien 2026",
+      "price": "7,99€",
+      "desc": "14 Tage Autarkie mit Kindern - inkl. vegetarischer Optionen",
+      "file": "KDP_Books/Notvorrat_fuer_Familien_2026.docx"
+    },
+    {
+      "id": 6,
+      "title": "Krypto für Anfänger 2026",
+      "price": "8,99€",
+      "desc": "Bitcoin, Ethereum und KI-Trading verständlich erklärt",
+      "file": "KDP_Books/Krypto_fuer_Anfaenger_2026.docx"
+    },
+    {
+      "id": 7,
+      "title": "KI-Kunst erstellen & verkaufen 2026",
+      "price": "8,99€",
+      "desc": "Midjourney, DALL-E und Stable Diffusion",
+      "file": "KDP_Books/ki_kunst_2026.docx"
+    },
+    {
+      "id": 8,
+      "title": "ChatGPT für Handwerker 2026",
+      "price": "8,99€",
+      "desc": "Rechnungen, Angebote und Kundenkommunikation mit KI",
+      "file": "KDP_Books/ChatGPT_fuer_Handwerker_2026.docx"
+    }
+  ]
+}

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garten-Planer & Budget-Rechner 2026 – Interaktiv | Licht und Schatten</title>
+  <meta name="description" content="Interaktiver Garten-Planer & Budget-Rechner 2026. Berechne dein optimales Garten-Setup: Budget, Fläche, Schwerpunkte. Inkl. Produktempfehlungen mit Amazon-Affiliate-Links (tag=ikune21-21).">
+  <meta name="keywords" content="Garten Planer, Budget Rechner Garten, Terrassen Rechner, Gartenmöbel Budget, Sommer Garten 2026, Gartenkosten berechnen, Amazon Affiliate, ikune21-21">
+  <meta name="author" content="Licht und Schatten">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Garten-Planer & Budget-Rechner 2026">
+  <meta property="og:description" content="Interaktiver Budget-Rechner für deinen Garten: Budget, Fläche & Prioritäten eingeben – fertige Produkt-Empfehlungen erhalten.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/garten-planer.html">
+  <meta property="og:site_name" content="Licht und Schatten">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+    a{color:#A78BFA;text-decoration:none}
+    a:hover{color:#FFD700}
+    .container{max-width:1100px;margin:0 auto;padding:30px 24px}
+    h1{font-size:2.6em;font-weight:800;text-align:center;background:linear-gradient(135deg,#22C55E,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+    .subtitle{text-align:center;color:#9CA3AF;font-size:1.1em;margin-bottom:40px}
+    .planner-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:20px}
+    @media(max-width:768px){.planner-layout{grid-template-columns:1fr}}
+    .panel{background:#141414;border:1px solid #2A2A2A;border-radius:16px;padding:28px}
+    .panel h2{font-size:1.4em;color:#22C55E;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+    .form-group{margin-bottom:20px}
+    .form-group label{display:block;color:#9CA3AF;font-size:0.9rem;font-weight:600;margin-bottom:6px}
+    .form-group .hint{color:#6B7280;font-size:0.8rem;margin-top:4px}
+    .form-group input[type="range"]{width:100%;height:8px;-webkit-appearance:none;background:#2A2A2A;border-radius:4px;outline:none;margin-top:8px}
+    .form-group input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;background:#22C55E;border-radius:50%;cursor:pointer;transition:all 0.2s}
+    .form-group input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+    .form-group input[type="range"]::-moz-range-thumb{width:24px;height:24px;background:#22C55E;border-radius:50%;cursor:pointer;border:none}
+    .slider-value{font-size:1.1rem;font-weight:700;color:#22C55E;margin-top:4px}
+    .checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .checkbox-item{display:flex;align-items:center;gap:10px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;padding:12px 14px;cursor:pointer;transition:all 0.2s}
+    .checkbox-item:hover{border-color:#22C55E}
+    .checkbox-item.active{border-color:#22C55E;background:rgba(34,197,94,0.08)}
+    .checkbox-item input[type="checkbox"]{width:18px;height:18px;accent-color:#22C55E;cursor:pointer}
+    .checkbox-item .cb-label{font-size:0.9rem;color:#E5E5E5;cursor:pointer}
+    select{width:100%;padding:12px 16px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;color:#E5E5E5;font-size:1rem;outline:none;cursor:pointer;transition:border-color 0.2s}
+    select:focus{border-color:#22C55E}
+    .btn-calc{display:block;width:100%;padding:14px;background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;border:none;border-radius:10px;font-size:1.1rem;font-weight:700;cursor:pointer;transition:all 0.3s;margin-top:24px}
+    .btn-calc:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,197,94,0.3)}
+    .result-panel{background:#141414;border:1px solid #2A2A2A;border-radius:16px;padding:28px}
+    .result-panel h2{font-size:1.4em;color:#22C55E;margin-bottom:20px}
+    .result-placeholder{text-align:center;padding:60px 20px;color:#6B7280}
+    .result-placeholder .big-icon{font-size:4rem;margin-bottom:16px}
+    .result-placeholder p{font-size:1rem}
+    .budget-breakdown{margin:20px 0}
+    .budget-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #2A2A2A}
+    .budget-row:last-child{border-bottom:none}
+    .budget-row .cat{color:#9CA3AF;font-size:0.9rem}
+    .budget-row .cat-price{color:#22C55E;font-weight:600;font-size:0.95rem}
+    .budget-row .cat-bar{flex:1;height:6px;background:#2A2A2A;border-radius:3px;margin:0 16px;overflow:hidden}
+    .budget-row .cat-bar-inner{height:100%;border-radius:3px;transition:width 0.5s}
+    .budget-total{display:flex;justify-content:space-between;padding:14px 0 0;border-top:2px solid #22C55E;margin-top:10px;font-size:1.15rem}
+    .budget-total .total-label{color:#E5E5E5;font-weight:700}
+    .budget-total .total-price{color:#FFD700;font-weight:800}
+    .prod-recs{margin-top:24px}
+    .prod-recs h3{color:#22C55E;font-size:1.1rem;margin-bottom:12px}
+    .rec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+    .rec-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;padding:14px;display:flex;flex-direction:column}
+    .rec-card .rec-name{font-weight:700;color:#fff;font-size:0.95rem}
+    .rec-card .rec-price{color:#22C55E;font-size:0.9rem;margin:4px 0}
+    .rec-card .rec-link{display:inline-block;background:#22C55E;color:#fff;padding:4px 12px;border-radius:6px;font-size:0.8rem;font-weight:600;text-align:center;transition:background 0.3s;align-self:flex-start;margin-top:6px}
+    .rec-card .rec-link:hover{background:#16A34A;color:#fff}
+    .config-summary{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:10px;padding:16px;margin-bottom:20px;font-size:0.9rem}
+    .config-summary div{margin:4px 0;color:#9CA3AF}
+    .config-summary strong{color:#E5E5E5}
+    .amazon-btn{display:inline-block;background:#FF9900;color:#fff;padding:10px 20px;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.3s;text-align:center}
+    .amazon-btn:hover{background:#FF8200;color:#fff;transform:translateY(-2px)}
+    .disclaimer{text-align:center;padding:30px 0;color:#6B7280;font-size:0.8rem}
+    .badge{display:inline-block;background:rgba(34,197,94,0.12);color:#22C55E;padding:4px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:16px}
+    footer{text-align:center;padding:40px 24px;color:#6B7280;font-size:0.85rem;border-top:1px solid #1A1A1A}
+    .animate-in{animation:fadeIn 0.4s ease-out}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+<div class="container" style="padding-top:50px;">
+  <div style="text-align:center;margin-bottom:40px;">
+    <span class="badge">🌿 Interaktiv · Kostenlos</span>
+    <h1>Garten-Planer & Budget-Rechner</h1>
+    <p class="subtitle">Finde die perfekte Ausstattung für deinen Garten, deine Terrasse oder deinen Balkon – basierend auf deinem Budget und deinen Wünschen.</p>
+  </div>
+
+  <div class="planner-layout">
+    <!-- Input Panel -->
+    <div class="panel">
+      <h2>⚙️ Deine Angaben</h2>
+      
+      <div class="form-group">
+        <label>💰 Gesamtbudget: <span id="budgetDisplay" class="slider-value">1.000 €</span></label>
+        <input type="range" id="budgetSlider" min="100" max="5000" value="1000" step="50">
+        <div class="hint">Wähle dein Wunschbudget für die gesamte Garten-Ausstattung</div>
+      </div>
+
+      <div class="form-group">
+        <label>📐 Garten-/Terrassengröße</label>
+        <select id="gardenSize">
+          <option value="small">Klein (bis 20 m² – Balkon/Terrasse)</option>
+          <option value="medium" selected>Mittel (20–100 m² – durchschnittlicher Garten)</option>
+          <option value="large">Groß (100–300 m² – großer Garten)</option>
+          <option value="xlarge">Sehr groß (über 300 m² – Anwesen/Grundstück)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>🎯 Schwerpunkte (mehrere möglich)</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item active" id="cb-sitting">
+            <input type="checkbox" id="prio-sitting" checked> <span class="cb-label">🛋️ Sitzgelegenheiten</span>
+          </label>
+          <label class="checkbox-item active" id="cb-grill">
+            <input type="checkbox" id="prio-grill" checked> <span class="cb-label">🔥 Grill & BBQ</span>
+          </label>
+          <label class="checkbox-item" id="cb-lighting">
+            <input type="checkbox" id="prio-lighting"> <span class="cb-label">💡 Beleuchtung</span>
+          </label>
+          <label class="checkbox-item" id="cb-garden">
+            <input type="checkbox" id="prio-garden"> <span class="cb-label">🌱 Pflanzen & Hochbeet</span>
+          </label>
+          <label class="checkbox-item" id="cb-pool">
+            <input type="checkbox" id="prio-pool"> <span class="cb-label">🏊 Pool & Wellness</span>
+          </label>
+          <label class="checkbox-item" id="cb-shade">
+            <input type="checkbox" id="prio-shade"> <span class="cb-label">⛱️ Sonnenschutz</span>
+          </label>
+          <label class="checkbox-item" id="cb-tools">
+            <input type="checkbox" id="prio-tools"> <span class="cb-label">🔧 Gartengeräte</span>
+          </label>
+          <label class="checkbox-item" id="cb-water">
+            <input type="checkbox" id="prio-water"> <span class="cb-label">💧 Bewässerung</span>
+          </label>
+        </div>
+        <div class="hint">Wähle mindestens 2–3 Schwerpunkte für beste Ergebnisse</div>
+      </div>
+
+      <button class="btn-calc" onclick="calculatePlan()">🌿 Gartenplan berechnen</button>
+    </div>
+
+    <!-- Result Panel -->
+    <div class="result-panel" id="resultPanel">
+      <h2>📊 Dein Garten-Plan</h2>
+      <div class="result-placeholder" id="placeholder">
+        <div class="big-icon">🌻</div>
+        <p>Wähle dein Budget, die Gartengröße und deine Schwerpunkte –<br>dann klicke auf <strong>"Gartenplan berechnen"</strong>.</p>
+      </div>
+      <div id="resultContent" style="display:none;"></div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>📢 Affiliate-Hinweis:</strong> Die empfohlenen Produkte enthalten Affiliate-Links zum Amazon-Partnerprogramm (tag=ikune21-21). 
+    Wenn du über einen dieser Links ein Produkt kaufst, erhalten wir eine kleine Provision – für dich entstehen keine zusätzlichen Kosten.
+  </div>
+</div>
+
+<footer>
+  <p><strong>✦ Licht & Schatten</strong> | <a href="../index.html">Startseite</a> | <a href="../blog/index.html">Blog</a> | <a href="index.html">Tools</a></p>
+  <p style="margin-top:8px;">Amazon-Partnerwerbung. © 2026 Licht und Schatten</p>
+</footer>
+
+<script>
+// Product database with Amazon affiliate links
+const PRODUCTS = {
+  sitting: [
+    { name: 'Polyrattan Lounge-Set 7-tlg.', price: 549, url: 'https://www.amazon.de/s?k=garten+rattan+lounge+set+7+teilig&tag=ikune21-21', size: 'large' },
+    { name: 'Akazienholz Gartenmöbel-Set 6 Stühle', price: 429, url: 'https://www.amazon.de/s?k=akazienholz+gartenmöbel+set+6+stühle&tag=ikune21-21', size: 'large' },
+    { name: 'Textilene-Klappsessel 2er-Set', price: 129, url: 'https://www.amazon.de/s?k=textilene+klappsessel+garten+2er+set&tag=ikune21-21', size: 'medium' },
+    { name: 'Sonnenliege klappbar mit Auflage', price: 89, url: 'https://www.amazon.de/s?k=sonnenliege+klappbar+mit+auflage&tag=ikune21-21', size: 'small' },
+    { name: 'Garten-Klapptisch rund 90 cm', price: 59, url: 'https://www.amazon.de/s?k=garten+klapptisch+rund+90+cm&tag=ikune21-21', size: 'small' },
+    { name: 'Balkon-Sitzgruppe 4-tlg.', price: 199, url: 'https://www.amazon.de/s?k=balkon+sitzgruppe+4+teilig&tag=ikune21-21', size: 'small' }
+  ],
+  grill: [
+    { name: 'Weber Spirit II E-310 Gasgrill', price: 599, url: 'https://www.amazon.de/dp/B07HR8XNLH?tag=ikune21-21', size: 'large' },
+    { name: 'Weber Original Kettle 57 cm', price: 149, url: 'https://www.amazon.de/dp/B01DX5BKRY?tag=ikune21-21', size: 'medium' },
+    { name: 'BBQ-Zubehör-Set 16-tlg. Edelstahl', price: 39, url: 'https://www.amazon.de/s?k=grillbesteck+set+edelstahl+16+teilig&tag=ikune21-21', size: 'small' },
+    { name: 'Elektrogrill Tischgrill 2000W', price: 79, url: 'https://www.amazon.de/s?k=balkon+elektrogrill+2000w+abdeckhaube&tag=ikune21-21', size: 'small' },
+    { name: 'Gusseisen-Grillpfanne für Gasgrill', price: 49, url: 'https://www.amazon.de/s?k=gusseisen+grillpfanne+gasgrill&tag=ikune21-21', size: 'medium' }
+  ],
+  lighting: [
+    { name: 'Solar-Lichterkette 30 LED 10 m', price: 19, url: 'https://www.amazon.de/s?k=solar+lichterkette+30+led+10m&tag=ikune21-21', size: 'small' },
+    { name: 'Solar-Wegeleuchten 4er-Set Edelstahl', price: 29, url: 'https://www.amazon.de/s?k=solar+wegeleuchten+edelstahl+4er+set&tag=ikune21-21', size: 'medium' },
+    { name: 'Solar-Bodenstrahler RGB 6er-Set', price: 39, url: 'https://www.amazon.de/s?k=solar+bodenstrahler+rgb+6er+set&tag=ikune21-21', size: 'medium' },
+    { name: 'LED-Außenstrahler 50W mit Bewegungsmelder', price: 35, url: 'https://www.amazon.de/s?k=led+außenstrahler+50w+bewegungsmelder&tag=ikune21-21', size: 'large' }
+  ],
+  garden: [
+    { name: 'Hochbeet aus Lärchenholz 120×80 cm', price: 89, url: 'https://www.amazon.de/s?k=hochbeet+lärche+120+80+80+cm&tag=ikune21-21', size: 'small' },
+    { name: 'Gewächshaus Aluminium 6 m²', price: 599, url: 'https://www.amazon.de/s?k=gewächshaus+aluminium+6+m²+hohlkammerplatten&tag=ikune21-21', size: 'large' },
+    { name: 'Kräuterschnecke Stein 120 cm', price: 149, url: 'https://www.amazon.de/s?k=kräuterschnecke+stein+120+cm&tag=ikune21-21', size: 'medium' },
+    { name: 'Blumenkasten 100 cm mit Bewässerungssystem', price: 29, url: 'https://www.amazon.de/s?k=blumenkasten+100+cm+bewässerung&tag=ikune21-21', size: 'small' },
+    { name: 'Pflanzkübel 60 cm Terrakotta-Optik 2er-Set', price: 45, url: 'https://www.amazon.de/s?k=pflanzkübel+terrakotta+60+cm+2er+set&tag=ikune21-21', size: 'small' }
+  ],
+  pool: [
+    { name: 'Aufstellpool 4,5×2,2 m Frame-Pool', price: 299, url: 'https://www.amazon.de/s?k=aufstellpool+4+5m+frame+pool&tag=ikune21-21', size: 'large' },
+    { name: 'Sandfilteranlage 4.000 L/h', price: 129, url: 'https://www.amazon.de/s?k=sandfilteranlage+4000+l+h+pool&tag=ikune21-21', size: 'large' },
+    { name: 'Whirlpool aufblasbar 4-5 Personen', price: 549, url: 'https://www.amazon.de/s?k=whirlpool+aufblasbar+4+personen+massagedüsen&tag=ikune21-21', size: 'large' },
+    { name: 'Pool-Abdeckplane rund 450 cm', price: 35, url: 'https://www.amazon.de/s?k=pool+abdeckplane+rund+450+cm&tag=ikune21-21', size: 'medium' }
+  ],
+  shade: [
+    { name: 'Ampelschirm 3×3 m mit Ständer', price: 199, url: 'https://www.amazon.de/s?k=ampelschirm+3x3+meter+mit+ständer&tag=ikune21-21', size: 'medium' },
+    { name: 'Faltpavillon 3×3 m mit Seitenwänden', price: 149, url: 'https://www.amazon.de/s?k=faltpavillon+3x3+seitenwände&tag=ikune21-21', size: 'large' },
+    { name: 'Gelenkarmmarkise 4×3 m', price: 349, url: 'https://www.amazon.de/s?k=gelenkarmmarkise+4m+stoff&tag=ikune21-21', size: 'large' },
+    { name: 'Gartenschirm 2,5 m Bambus', price: 69, url: 'https://www.amazon.de/s?k=gartenschirm+bambus+2+5+meter&tag=ikune21-21', size: 'small' }
+  ],
+  tools: [
+    { name: 'Akku-Rasenmäher 40V mit Radantrieb', price: 399, url: 'https://www.amazon.de/s?k=akku+rasenmäher+40v+radantrieb&tag=ikune21-21', size: 'large' },
+    { name: 'Akku-Rasentrimmer 18V mit Fadenkopf', price: 89, url: 'https://www.amazon.de/s?k=akku+rasentrimmer+18v+fadenkopf&tag=ikune21-21', size: 'medium' },
+    { name: 'Akku-Heckenschere 65 cm Schwert', price: 99, url: 'https://www.amazon.de/s?k=akku+heckenschere+65+cm&tag=ikune21-21', size: 'medium' },
+    { name: 'Mähroboter mit App-Steuerung 500 m²', price: 599, url: 'https://www.amazon.de/s?k=mähroboter+app+steuerung+500+m²&tag=ikune21-21', size: 'large' },
+    { name: 'Gartenschere Bypass Edelstahl', price: 19, url: 'https://www.amazon.de/s?k=gartenschere+bypass+edelstahl&tag=ikune21-21', size: 'small' },
+    { name: 'Gartenhandschuhe Gr. 9, gepolstert 2er-Set', price: 15, url: 'https://www.amazon.de/s?k=gartenhandschuhe+gepolstert+gr+9&tag=ikune21-21', size: 'small' }
+  ],
+  water: [
+    { name: 'GARDENA Bewässerungs-Set Tropfbewässerung', price: 49, url: 'https://www.amazon.de/dp/B002UD0HZW?tag=ikune21-21', size: 'small' },
+    { name: 'GARDENA Bewässerungssteuerung Matic', price: 59, url: 'https://www.amazon.de/dp/B0002YUOKQ?tag=ikune21-21', size: 'medium' },
+    { name: 'Gartenschlauch 30 m mit Schlauchwagen', price: 69, url: 'https://www.amazon.de/s?k=gartenschlauch+30m+schlauchwagen&tag=ikune21-21', size: 'medium' },
+    { name: 'Regentonne 200 L mit Deckel & Hahn', price: 39, url: 'https://www.amazon.de/s?k=regentonne+200+liter+deckel+hahn&tag=ikune21-21', size: 'medium' },
+    { name: 'Oszillierender Rasensprenger 300 m²', price: 25, url: 'https://www.amazon.de/s?k=rasensprenger+oszillierend+300+m²&tag=ikune21-21', size: 'large' }
+  ]
+};
+
+// Category display info
+const CATEGORIES = {
+  sitting: { icon: '🛋️', label: 'Sitzgelegenheiten', color: '#8B5CF6' },
+  grill: { icon: '🔥', label: 'Grill & BBQ', color: '#F97316' },
+  lighting: { icon: '💡', label: 'Beleuchtung', color: '#FACC15' },
+  garden: { icon: '🌱', label: 'Pflanzen & Hochbeet', color: '#22C55E' },
+  pool: { icon: '🏊', label: 'Pool & Wellness', color: '#06B6D4' },
+  shade: { icon: '⛱️', label: 'Sonnenschutz', color: '#EAB308' },
+  tools: { icon: '🔧', label: 'Gartengeräte', color: '#A78BFA' },
+  water: { icon: '💧', label: 'Bewässerung', color: '#3B82F6' }
+};
+
+// Size multipliers
+const SIZE_MULTIPLIER = { small: 0.5, medium: 1.0, large: 1.5, xlarge: 2.0 };
+
+// Update budget display
+document.getElementById('budgetSlider').addEventListener('input', function() {
+  document.getElementById('budgetDisplay').textContent = Number(this.value).toLocaleString('de-DE') + ' €';
+});
+
+// Checkbox click handlers
+document.querySelectorAll('.checkbox-item').forEach(function(el) {
+  el.addEventListener('click', function(e) {
+    if (e.target.type !== 'checkbox') {
+      const cb = this.querySelector('input[type="checkbox"]');
+      cb.checked = !cb.checked;
+      this.classList.toggle('active');
+    }
+  });
+});
+document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(function(cb) {
+  cb.addEventListener('change', function() {
+    this.closest('.checkbox-item').classList.toggle('active');
+  });
+});
+
+// Size-specific product filtering
+function getProductsForSize(category, size) {
+  return PRODUCTS[category].filter(function(p) {
+    if (size === 'small') return p.size === 'small';
+    if (size === 'medium') return p.size === 'small' || p.size === 'medium';
+    if (size === 'large') return p.size === 'small' || p.size === 'medium' || p.size === 'large';
+    return true;
+  });
+}
+
+function calculatePlan() {
+  const budget = parseInt(document.getElementById('budgetSlider').value);
+  const size = document.getElementById('gardenSize').value;
+
+  const priorities = [];
+  if (document.getElementById('prio-sitting').checked) priorities.push('sitting');
+  if (document.getElementById('prio-grill').checked) priorities.push('grill');
+  if (document.getElementById('prio-lighting').checked) priorities.push('lighting');
+  if (document.getElementById('prio-garden').checked) priorities.push('garden');
+  if (document.getElementById('prio-pool').checked) priorities.push('pool');
+  if (document.getElementById('prio-shade').checked) priorities.push('shade');
+  if (document.getElementById('prio-tools').checked) priorities.push('tools');
+  if (document.getElementById('prio-water').checked) priorities.push('water');
+
+  if (priorities.length < 1) {
+    alert('Bitte wähle mindestens einen Schwerpunkt aus.');
+    return;
+  }
+
+  const sizeMult = SIZE_MULTIPLIER[size];
+  const perCategory = Math.floor(budget / priorities.length);
+  const totalSpent = {};
+
+  const selectedProducts = {};
+  let totalUsed = 0;
+
+  priorities.forEach(function(cat) {
+    const avail = getProductsForSize(cat, size);
+    avail.sort(function(a,b) { return a.price - b.price; });
+    let budgetCat = perCategory;
+    const chosen = [];
+
+    avail.forEach(function(p) {
+      if (budgetCat >= p.price) {
+        chosen.push(p);
+        budgetCat -= p.price;
+      }
+    });
+
+    selectedProducts[cat] = chosen;
+    const spent = chosen.reduce(function(sum, p) { return sum + p.price; }, 0);
+    totalSpent[cat] = spent;
+    totalUsed += spent;
+  });
+
+  // Render results
+  const resultDiv = document.getElementById('resultContent');
+  const placeholder = document.getElementById('placeholder');
+  placeholder.style.display = 'none';
+  resultDiv.style.display = 'block';
+
+  let html = '<div class="animate-in">';
+
+  // Config summary
+  const sizeLabel = document.getElementById('gardenSize').options[document.getElementById('gardenSize').selectedIndex].text;
+  html += '<div class="config-summary">';
+  html += '<div><strong>Budget:</strong> ' + budget.toLocaleString('de-DE') + ' €</div>';
+  html += '<div><strong>Größe:</strong> ' + sizeLabel + '</div>';
+  html += '<div><strong>Schwerpunkte:</strong> ' + priorities.map(function(c) { return CATEGORIES[c].icon + ' ' + CATEGORIES[c].label; }).join(', ') + '</div>';
+  html += '</div>';
+
+  // Budget breakdown
+  html += '<div class="budget-breakdown">';
+  html += '<h3 style="color:#22C55E;margin-bottom:12px;">💰 Budget-Aufteilung</h3>';
+  priorities.forEach(function(cat) {
+    const info = CATEGORIES[cat];
+    const spent = totalSpent[cat] || 0;
+    const pct = Math.min(100, Math.round((spent / budget) * 100));
+    html += '<div class="budget-row">';
+    html += '<span class="cat">' + info.icon + ' ' + info.label + '</span>';
+    html += '<div class="cat-bar"><div class="cat-bar-inner" style="width:' + pct + '%;background:' + info.color + '"></div></div>';
+    html += '<span class="cat-price">' + spent.toLocaleString('de-DE') + ' €</span>';
+    html += '</div>';
+  });
+  html += '<div class="budget-total">';
+  html += '<span class="total-label">💰 Gesamtkosten</span>';
+  html += '<span class="total-price">' + totalUsed.toLocaleString('de-DE') + ' €' + (totalUsed <= budget ? '' : ' (Budget überschritten)') + '</span>';
+  html += '</div>';
+  html += '</div>';
+
+  // Product recommendations by category
+  html += '<div class="prod-recs">';
+  html += '<h3>📦 Empfohlene Produkte</h3>';
+  priorities.forEach(function(cat) {
+    const info = CATEGORIES[cat];
+    const items = selectedProducts[cat] || [];
+    if (items.length === 0) return;
+    html += '<div style="margin-bottom:16px;">';
+    html += '<h4 style="color:' + info.color + ';font-size:0.95rem;margin-bottom:8px;">' + info.icon + ' ' + info.label + '</h4>';
+    html += '<div class="rec-grid">';
+    items.forEach(function(p) {
+      html += '<div class="rec-card">';
+      html += '<div class="rec-name">' + p.name + '</div>';
+      html += '<div class="rec-price">ca. ' + p.price.toLocaleString('de-DE') + ' €</div>';
+      html += '<a href="' + p.url + '" class="rec-link" target="_blank" rel="nofollow sponsored">→ Bei Amazon</a>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+
+  // Amazon CTA
+  html += '<div style="text-align:center;margin-top:24px;">';
+  html += '<a href="https://www.amazon.de/s?tag=ikune21-21" class="amazon-btn" target="_blank" rel="nofollow sponsored">🛒 Alle Produkte bei Amazon entdecken</a>';
+  html += '</div>';
+
+  // Link to the full blog article
+  html += '<div style="text-align:center;margin-top:16px;">';
+  html += '<a href="../blog/sommer-garten-terrasse-2026.html" style="color:#22C55E;font-size:0.9rem;">📖 Ausführlichen Ratgeber lesen →</a>';
+  html += '</div>';
+
+  html += '</div>';
+  resultDiv.innerHTML = html;
+}
+
+// Auto-calculate on load
+window.addEventListener('DOMContentLoaded', function() {
+  // Pre-calculate with defaults
+  setTimeout(calculatePlan, 200);
+});
+</script>
+
+</body>
+</html>

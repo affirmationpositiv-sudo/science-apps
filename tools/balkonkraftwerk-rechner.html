@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balkonkraftwerk-Rechner 2026 – Kostenersparnis & Amortisation berechnen</title>
+  <meta name="description" content="Berechne mit unserem interaktiven Balkonkraftwerk-Rechner deine persönliche Stromersparnis, Amortisationszeit und CO₂-Einsparung. Mit individuellen Parametern für Anlagengröße, Standort, Strompreis und Speicher. Amazon Affiliate (tag=ikune21-21).">
+  <meta name="keywords" content="Balkonkraftwerk Rechner, Solarrechner, Photovoltaik Rechner, Balkonsolar Berechnung, Stromersparnis, Amortisation, CO₂ Einsparung, Solarrechner 2026, ikune21-21">
+  <meta name="author" content="Licht und Schatten">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Balkonkraftwerk-Rechner 2026 – Kostenersparnis berechnen">
+  <meta property="og:description" content="Interaktiver Balkonkraftwerk-Rechner. Berechne deine Stromersparnis, Amortisation und CO₂-Einsparung mit individuellen Parametern.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/balkonkraftwerk-rechner.html">
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.7;min-height:100vh}
+    a{color:#A78BFA;text-decoration:none}
+    a:hover{color:#FFD700}
+    .container{max-width:900px;margin:0 auto;padding:30px 24px}
+    h1{font-size:2.4rem;font-weight:800;background:linear-gradient(135deg,#22C55E,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin:80px 0 10px}
+    .subtitle{text-align:center;color:#9CA3AF;margin-bottom:40px;font-size:1.1rem}
+    .card{background:#141414;border:1px solid #2A2A2A;border-radius:16px;padding:32px;margin:24px 0}
+    .card h2{color:#22C55E;font-size:1.4rem;margin-bottom:20px;text-align:center}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    @media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+    .form-group{margin-bottom:4px}
+    .form-group label{display:block;color:#9CA3AF;font-size:0.85rem;margin-bottom:6px;font-weight:500}
+    .form-group select,.form-group input{width:100%;padding:12px;background:#0A0A0A;border:1px solid #2A2A2A;color:#fff;border-radius:10px;font-size:1rem;outline:none;transition:border-color 0.3s}
+    .form-group select:focus,.form-group input:focus{border-color:#22C55E}
+    .form-group .hint{color:#6B7280;font-size:0.75rem;margin-top:4px}
+    .btn-calc{width:100%;padding:16px;background:linear-gradient(135deg,#22C55E,#16A34A);color:#fff;border:none;border-radius:12px;font-size:1.15rem;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;margin-top:20px}
+    .btn-calc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,197,94,0.3)}
+    .btn-calc:active{transform:translateY(0)}
+    .results{display:none;margin-top:24px}
+    .results-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:600px){.results-grid{grid-template-columns:1fr}}
+    .result-box{background:#0A0A0A;border:1px solid #2A2A2A;border-radius:12px;padding:20px;text-align:center;transition:border-color 0.3s}
+    .result-box:hover{border-color:#22C55E}
+    .result-box .label{color:#6B7280;font-size:0.8rem;margin-bottom:4px}
+    .result-box .value{color:#22C55E;font-size:1.8rem;font-weight:800}
+    .result-box .value.gold{color:#FFD700}
+    .result-box .unit{color:#6B7280;font-size:0.85rem;margin-top:2px}
+    .result-box.highlight{border-color:#22C55E;background:rgba(34,197,94,0.05)}
+    .badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;margin-top:8px}
+    .badge-green{background:rgba(34,197,94,0.15);color:#22C55E}
+    .badge-gold{background:rgba(255,215,0,0.15);color:#FFD700}
+    .scenario{margin-top:20px;padding:20px;background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;display:none}
+    .scenario h3{color:#22C55E;font-size:1.1rem;margin-bottom:12px}
+    .scenario p{color:#9CA3AF;font-size:0.9rem}
+    .scenario .rec{color:#FFD700;font-weight:600;margin-top:8px}
+    .detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1A1A1A}
+    .detail-row:last-child{border-bottom:none}
+    .detail-row .dl{color:#6B7280}
+    .detail-row .dr{color:#E5E5E5;font-weight:500}
+    .back-link{display:block;text-align:center;margin:20px 0;color:#6B7280;font-size:0.9rem}
+    .back-link:hover{color:#A78BFA}
+    .amz-btn{display:inline-block;background:#FF9900;color:#fff;padding:8px 16px;border-radius:8px;font-size:0.85rem;font-weight:600;transition:background 0.3s;margin:4px}
+    .amz-btn:hover{background:#E68A00;color:#fff}
+    .amz-links{text-align:center;margin:16px 0 8px}
+    .amz-links p{color:#9CA3AF;font-size:0.85rem;margin-bottom:8px}
+    footer{text-align:center;padding:30px 24px;color:#4B5563;font-size:0.8rem;border-top:1px solid rgba(34,197,94,0.1)}
+    footer a{color:#6B7280;text-decoration:underline}
+    footer a:hover{color:#22C55E}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <a href="../index.html" class="back-link">← Zurück zur Startseite</a>
+
+  <h1>☀️ Balkonkraftwerk-Rechner</h1>
+  <p class="subtitle">Berechne in 60 Sekunden, wie viel du mit einem Balkonkraftwerk sparen kannst</p>
+
+  <div class="card">
+    <h2>📐 Deine persönlichen Parameter</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Anlagengröße</label>
+        <select id="size">
+          <option value="300">300 Watt / 1 kleines Modul</option>
+          <option value="400">400 Watt / 1 Standardmodul</option>
+          <option value="600">600 Watt / 2 kleine Module</option>
+          <option value="800" selected>800 Watt / 2 Standardmodule 🏆</option>
+          <option value="1200">1.200 Watt / 3 Module</option>
+          <option value="1600">1.600 Watt / 4 Module</option>
+          <option value="2000">2.000 Watt / 4 große Module</option>
+        </select>
+        <div class="hint">800 Watt ist der aktuelle Standard für Balkonkraftwerke</div>
+      </div>
+      <div class="form-group">
+        <label>Standort (Sonneneinstrahlung)</label>
+        <select id="sun">
+          <option value="650">Norddeutschland (weniger sonnig ~650 kWh/kWp)</option>
+          <option value="800" selected>Mitteldeutschland (durchschnittlich ~800 kWh/kWp)</option>
+          <option value="950">Süddeutschland (sonnig ~950 kWh/kWp)</option>
+          <option value="1050">Sehr sonnig (Alpenvorland ~1.050 kWh/kWp)</option>
+        </select>
+        <div class="hint">Deutschland-Durchschnitt: ~800 kWh pro kWp</div>
+      </div>
+      <div class="form-group">
+        <label>Ausrichtung & Neigung</label>
+        <select id="orient">
+          <option value="0.70">Nord (schlecht)</option>
+          <option value="0.80">Ost / West (mittel)</option>
+          <option value="0.90" selected>Südost / Südwest (gut)</option>
+          <option value="1.00">Süd, 30° Neigung (optimal)</option>
+        </select>
+        <div class="hint">Die Ausrichtung hat großen Einfluss auf den Ertrag</div>
+      </div>
+      <div class="form-group">
+        <label>Strompreis pro kWh</label>
+        <select id="price">
+          <option value="0.25">25 Cent (Grundversorgung)</option>
+          <option value="0.30" selected>30 Cent (Durchschnitt 2026)</option>
+          <option value="0.35">35 Cent (Neukunden-Vertrag)</option>
+          <option value="0.40">40 Cent (teurer Tarif)</option>
+          <option value="0.45">45 Cent (sehr teuer)</option>
+        </select>
+        <div class="hint">Der durchschnittliche Strompreis 2026 liegt bei ~30 ct/kWh</div>
+      </div>
+      <div class="form-group">
+        <label>Stromverbrauch pro Jahr</label>
+        <select id="consumption">
+          <option value="1500">1.500 kWh (Single, sparsam)</option>
+          <option value="2500" selected>2.500 kWh (2-Personen-Haushalt)</option>
+          <option value="3500">3.500 kWh (Familie)</option>
+          <option value="4500">4.500 kWh (große Familie / Wärmepumpe)</option>
+        </select>
+        <div class="hint">Dein jährlicher Stromverbrauch (steht auf der Stromrechnung)</div>
+      </div>
+      <div class="form-group">
+        <label>Mit Solarspeicher?</label>
+        <select id="storage">
+          <option value="0" selected>Nein, ohne Speicher (Eigenverbrauch ~30%)</option>
+          <option value="1">Ja, 1 kWh Speicher (Eigenverbrauch ~55%)</option>
+          <option value="2">Ja, 2 kWh Speicher (Eigenverbrauch ~70%)</option>
+          <option value="3">Ja, ab 3 kWh Speicher (Eigenverbrauch ~80%)</option>
+        </select>
+        <div class="hint">Ein Speicher erhöht den Eigenverbrauch enorm</div>
+      </div>
+    </div>
+
+    <button class="btn-calc" onclick="berechne()">💰 Jetzt berechnen</button>
+
+    <div class="results" id="results">
+      <hr style="border-color:#2A2A2A;margin:24px 0">
+
+      <div class="results-grid">
+        <div class="result-box highlight">
+          <div class="label">☀️ Jährlicher Stromertrag</div>
+          <div class="value" id="r-ertrag">0</div>
+          <div class="unit">kWh pro Jahr</div>
+        </div>
+        <div class="result-box highlight">
+          <div class="label">🏠 Gedeckter Eigenverbrauch</div>
+          <div class="value gold" id="r-eigen">0</div>
+          <div class="unit">kWh (vom Gesamtverbrauch)</div>
+        </div>
+        <div class="result-box highlight">
+          <div class="label">💰 Jährliche Ersparnis</div>
+          <div class="value" id="r-ersparnis">0</div>
+          <div class="unit">Euro pro Jahr</div>
+        </div>
+        <div class="result-box highlight">
+          <div class="label">⏱️ Amortisationszeit</div>
+          <div class="value gold" id="r-amort">0</div>
+          <div class="unit">Jahre bei ~500 € Investition</div>
+        </div>
+        <div class="result-box">
+          <div class="label">🌱 CO₂-Einsparung pro Jahr</div>
+          <div class="value" id="r-co2">0</div>
+          <div class="unit">kg CO₂ (bei 400 g/kWh)</div>
+        </div>
+        <div class="result-box">
+          <div class="label">📈 Ersparnis über 20 Jahre</div>
+          <div class="value gold" id="r-20y">0</div>
+          <div class="unit">Euro in 20 Jahren (abzgl. Invest)</div>
+        </div>
+        <div class="result-box">
+          <div class="label">⚡ Anteil am Verbrauch</div>
+          <div class="value" id="r-anteil">0</div>
+          <div class="unit">% deines Stromverbrauchs</div>
+        </div>
+        <div class="result-box highlight">
+          <div class="label">🏆 Gesamtbewertung</div>
+          <div class="value" id="r-rating" style="font-size:1.5rem;">0</div>
+          <div class="unit" id="r-rating-text">Lohnt sich sehr!</div>
+        </div>
+      </div>
+
+      <div class="scenario" id="scenario-empfehlung">
+        <h3>💡 Persönliche Empfehlung</h3>
+        <p id="scenario-text">Deine Situation ist ideal für ein Balkonkraftwerk!</p>
+      </div>
+
+      <div class="amz-links">
+        <p>🏆 Empfohlene Balkonkraftwerke bei Amazon:</p>
+        <a class="amz-btn" href="https://amzn.to/3abc123?tag=ikune21-21" target="_blank" rel="nofollow">Anker Solix 800W (Bestseller)</a>
+        <a class="amz-btn" href="https://amzn.to/3def456?tag=ikune21-21" target="_blank" rel="nofollow">PriWatt 820W Premium</a>
+        <a class="amz-btn" href="https://amzn.to/3jkl012?tag=ikune21-21" target="_blank" rel="nofollow">GreenAkku 800W (Einsteiger)</a>
+      </div>
+
+      <div class="detail-row"><span class="dl">Empfohlene Anlage:</span><span class="dr" id="rec-anlage">800W Komplettset</span></div>
+      <div class="detail-row"><span class="dl">Geschätzte Kosten:</span><span class="dr" id="rec-kosten">~500 €</span></div>
+      <div class="detail-row"><span class="dl">Jährliche Rendite auf Investition:</span><span class="dr" id="rec-rendite">0 %</span></div>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>📋 So funktioniert ein Balkonkraftwerk</h2>
+    <div class="form-grid" style="text-align:left;">
+      <div style="background:#1A1A1A;border-radius:10px;padding:16px;">
+        <div style="color:#22C55E;font-weight:700;font-size:1.1rem;margin-bottom:8px;">🔌 1. Module montieren</div>
+        <p style="color:#9CA3AF;font-size:0.9rem;">Solarmodule am Balkon, auf der Terrasse oder im Garten installieren. Einfach per Halterung befestigen.</p>
+      </div>
+      <div style="background:#1A1A1A;border-radius:10px;padding:16px;">
+        <div style="color:#22C55E;font-weight:700;font-size:1.1rem;margin-bottom:8px;">⚡ 2. Wechselrichter anschließen</div>
+        <p style="color:#9CA3AF;font-size:0.9rem;">Der Mikro-Wechselrichter wandelt Gleichstrom in Haushaltsstrom um. Einstecken und loslegen.</p>
+      </div>
+      <div style="background:#1A1A1A;border-radius:10px;padding:16px;">
+        <div style="color:#22C55E;font-weight:700;font-size:1.1rem;margin-bottom:8px;">🏠 3. In Steckdose einstecken</div>
+        <p style="color:#9CA3AF;font-size:0.9rem;">Per Schukostecker in die Haushaltssteckdose. Der Strom fließt direkt in dein Hausnetz.</p>
+      </div>
+      <div style="background:#1A1A1A;border-radius:10px;padding:16px;">
+        <div style="color:#22C55E;font-weight:700;font-size:1.1rem;margin-bottom:8px;">📱 4. Mit App überwachen</div>
+        <p style="color:#9CA3AF;font-size:0.9rem;">Per App siehst du in Echtzeit, wie viel Strom dein Balkonkraftwerk produziert.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>📖 Ausführlicher Blog-Artikel</h2>
+    <p style="color:#9CA3AF;margin-bottom:16px;">Lies unseren ausführlichen Ratgeber mit allen Produkten, Vergleichstabellen und Startplan.</p>
+    <a href="../blog/balkonkraftwerk-solar-2026.html" style="display:inline-block;background:#22C55E;color:#fff;padding:12px 28px;border-radius:10px;font-weight:700;">📖 Zum Ratgeber →</a>
+  </div>
+</div>
+
+<footer>
+  <a href="../index.html">Startseite</a> • <a href="../blog/index.html">Blog</a> • <a href="../impressum/index.html">Impressum</a> • <a href="../datenschutz/index.html">Datenschutz</a><br>
+  <span style="color:#4B5563;">© 2026 Licht und Schatten – Als Amazon-Partner verdienen wir an qualifizierten Verkäufen (tag=ikune21-21)</span>
+</footer>
+
+<script>
+function berechne() {
+  const size = parseFloat(document.getElementById('size').value);
+  const sun = parseFloat(document.getElementById('sun').value);
+  const orient = parseFloat(document.getElementById('orient').value);
+  const price = parseFloat(document.getElementById('price').value);
+  const consumption = parseFloat(document.getElementById('consumption').value);
+  const storage = parseInt(document.getElementById('storage').value);
+
+  // Eigenverbrauchsanteil abhängig vom Speicher
+  const eigenAnteil = [0.30, 0.55, 0.70, 0.80][storage];
+
+  // Jahresertrag berechnen (kWh)
+  const jahresertrag = Math.round(size * (sun / 1000) * orient);
+
+  // Tatsächlich selbst genutzter Strom
+  const eigenStrom = Math.round(Math.min(jahresertrag * eigenAnteil, consumption));
+
+  // Ersparnis durch Eigenverbrauch
+  const ersparnis = Math.round(eigenStrom * price);
+
+  // Einspeisung (überschüssiger Strom) – aktuell wird Einspeisung nicht vergütet
+  // Ab 2026 ggf. kleine Einspeisevergütung, hier ignoriert
+
+  // Investitionskosten schätzen
+  let invest;
+  if (size <= 400) invest = 300 + (storage * 300);
+  else if (size <= 800) invest = 500 + (storage * 400);
+  else if (size <= 1200) invest = 800 + (storage * 500);
+  else invest = 1500 + (storage * 600);
+
+  // Amortisation
+  const amort = invest / (ersparnis || 1);
+
+  // CO₂ Einsparung (400g CO₂ pro kWh deutscher Strommix)
+  const co2 = Math.round(jahresertrag * 0.4);
+
+  // 20 Jahre Ersparnis (bei 2% Strompreissteigerung pro Jahr)
+  let gesamt = 0;
+  for (let y = 1; y <= 20; y++) {
+    gesamt += eigenStrom * price * Math.pow(1.02, y-1);
+  }
+  const gesamtErsparnis = Math.round(gesamt - invest);
+
+  // Anteil am Verbrauch
+  const anteil = Math.round((eigenStrom / consumption) * 100);
+
+  // Rendite
+  const rendite = Math.round((ersparnis / invest) * 100);
+
+  // Bewertung
+  let rating, ratingText;
+  if (amort <= 3) { rating = '⭐⭐⭐⭐⭐'; ratingText = 'Hervorragend! Amortisation in unter 3 Jahren.'; }
+  else if (amort <= 5) { rating = '⭐⭐⭐⭐'; ratingText = 'Sehr gut! Amortisation in 3-5 Jahren.'; }
+  else if (amort <= 8) { rating = '⭐⭐⭐'; ratingText = 'Gut. Amortisation in 5-8 Jahren.'; }
+  else { rating = '⭐⭐'; ratingText = 'Bedingt empfehlenswert. Prüfe günstigere Alternativen.'; }
+
+  // Anzeige
+  document.getElementById('r-ertrag').textContent = jahresertrag;
+  document.getElementById('r-eigen').textContent = eigenStrom;
+  document.getElementById('r-ersparnis').textContent = ersparnis.toLocaleString('de-DE');
+  document.getElementById('r-amort').textContent = amort.toFixed(1);
+  document.getElementById('r-co2').textContent = co2.toLocaleString('de-DE');
+  document.getElementById('r-20y').textContent = gesamtErsparnis.toLocaleString('de-DE');
+  document.getElementById('r-anteil').textContent = anteil;
+  document.getElementById('r-rating').textContent = rating;
+  document.getElementById('r-rating-text').textContent = ratingText;
+
+  // Empfehlung
+  const scenario = document.getElementById('scenario-empfehlung');
+  const scenarioText = document.getElementById('scenario-text');
+  scenario.style.display = 'block';
+
+  if (size >= 800 && storage >= 1) {
+    scenarioText.innerHTML = '🔥 <strong>Optimale Konfiguration!</strong> Mit ' + size + 'W und Speicher erreichst du einen Eigenverbrauch von bis zu 80%. Du sparst jährlich <strong>' + ersparnis + ' €</strong> und deine Anlage hat sich in nur <strong>' + amort.toFixed(1) + ' Jahren</strong> amortisiert. Unser Tipp: Das <a href="https://amzn.to/3abc123?tag=ikune21-21" target="_blank" rel="nofollow">Anker Solix 800W + Solarbank 2 Set</a> ist perfekt für dich.';
+  } else if (size >= 800) {
+    scenarioText.innerHTML = '✅ <strong>Solide Wahl!</strong> Ein ' + size + 'W Balkonkraftwerk ohne Speicher ist eine gute Einstiegslösung. Du sparst <strong>' + ersparnis + ' €</strong> pro Jahr bei einer Amortisation von <strong>' + amort.toFixed(1) + ' Jahren</strong>. Überlege später einen Speicher nachzurüsten!';
+  } else if (size >= 400) {
+    scenarioText.innerHTML = '👍 <strong>Guter Einstieg!</strong> Mit ' + size + 'W deckst du <strong>' + anteil + '%</strong> deines Verbrauchs. Du sparst <strong>' + ersparnis + ' €</strong> pro Jahr. Später kannst du auf 800W aufrüsten. Das <a href="https://amzn.to/3jkl012?tag=ikune21-21" target="_blank" rel="nofollow">GreenAkku 800W Basic</a> wäre auch schon eine Option.';
+  } else {
+    scenarioText.innerHTML = 'ℹ️ <strong>Zum Reinschnuppern.</strong> Mit einer kleinen Anlage kannst du erste Erfahrungen sammeln. Die Ersparnis ist begrenzt – ein <a href="https://amzn.to/3def456?tag=ikune21-21" target="_blank" rel="nofollow">günstiges 800W Komplettset</a> bringt deutlich mehr Ertrag.';
+  }
+
+  document.getElementById('rec-anlage').textContent = (size >= 800 ? '800W Komplettset mit Speicher' : size + 'W Standard');
+  document.getElementById('rec-kosten').textContent = '~' + invest + ' €';
+  document.getElementById('rec-rendite').textContent = rendite + ' %';
+  document.getElementById('results').style.display = 'block';
+  window.scrollTo({top: document.getElementById('results').offsetTop - 120, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
