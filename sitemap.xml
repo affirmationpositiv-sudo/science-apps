@@ -511,4 +511,19 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Tools: SEO Traffic Rechner (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/seo-traffic-rechner.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog Artikel #28: KI-Recht & Legal-Tech 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-recht-legal-tech-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
