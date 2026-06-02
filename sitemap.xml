@@ -526,4 +526,12 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Artikel #29: KI-Kochen & Ernährung 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-kochen-ernaehrung-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
 </urlset>
