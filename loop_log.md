@@ -11,19 +11,22 @@ Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/
 - Git working tree clean, Site HTTP 200 ✅
 
 ### Actions This Tick (R2.29):
-- [x] **Blog-Artikel #34 erstellt:** "KI für Sport & Wettkampf 2026: Smarte Trainingsassistenten, KI-Coaches & Wearables für Höchstleistungen" (28 KB HTML, ~5.000 Wörter, 12 Hauptsektionen: Lauf-KI, Kraft-KI, Golf-KI, Schwimm-KI, Teamsport-KI, Erholungs-KI, 6er-Vergleichstabelle Wearables, Home-Gym-Pläne für 3 Budget-Stufen, FAQ, 25+ Amazon-Affiliate-Links tag=ikune21-21)
-- [x] **KI-Sport-Analyzer Tool gebaut:** tools/ki-sport-analyzer.html (24 KB, interaktives 5-Fragen-Quiz: Sportart, Level, Budget, Ziel, Tech-Affinität → generiert 6 personalisierte Produktempfehlungen aus 20+ Produkt-Datenbank)
-- [x] **Blog-Index aktualisiert:** +Artikel-Karte #34 (KI-Sport & Wettkampf)
-- [x] **Tools-Index aktualisiert:** +KI-Sport-Analyzer Card (14. Tool im Grid)
-- [x] **Haupt-Index aktualisiert:** Blog-Stat 31→32, KI-Websites-Stat 13→14
-- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #34 + KI-Sport-Analyzer)
-- [x] **Git commit + push ✅** (28 Dateien, 6.841 Zeilen, Commit 6aa5649)
+- [x] **Blog-Artikel #34 erstellt:** "KI für Sport & Wettkampf 2026: Smarte Trainingsassistenten, KI-Coaches & Wearables für Höchstleistungen" (28 KB HTML, ~5.000 Wörter, 12 Hauptsektionen, 25+ Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **KI-Sport-Analyzer Tool gebaut:** tools/ki-sport-analyzer.html (24 KB, interaktives 5-Fragen-Quiz)
+- [x] **Blog-Artikel #35 erstellt:** "KI-Gaming & Entertainment 2026: KI-Spieleentwicklung, Cloud Gaming, Streaming & Gaming Tech" (34 KB HTML, ~5.000 Wörter, 8 Hauptsektionen, 25+ Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **KI-Gaming-Berater Tool gebaut:** tools/ki-gaming-berater.html (31 KB, interaktives 6-Fragen-Quiz → personalisiertes Gaming-Setup mit Amazon-Preisvergleich)
+- [x] **Fitness-Affiliate-Seiten erweitert:** affiliate/fitnesspro/ +2 Ratgeber (Hanteltraining, Kreatin-Guide)
+- [x] **Blog-Index aktualisiert:** Stats 30→34, +2 neue Artikel-Karten (Sport & Gaming)
+- [x] **Tools-Index aktualisiert:** +KI-Sport-Analyzer + KI-Gaming-Berater (15 Tools gesamt)
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 31→34, KI-Websites-Stat 13→14
+- [x] **Sitemap.xml aktualisiert:** +4 neue URLs
+- [x] **Git commit + push ✅** (28 Dateien ~6.800 Zeilen, Commits 6aa5649 + 080938f)
 
 ### Live Inventory (science-apps.github.io):
 | Kategorie | Anzahl | Status |
 |-----------|--------|--------|
-| Blog-Artikel | 32 | ✅ LIVE (1 NEU) |
-| Interaktive Tools | 14 | ✅ LIVE (1 NEU) |
+| Blog-Artikel | 35 | ✅ LIVE (2 NEU) |
+| Interaktive Tools | 15 | ✅ LIVE (2 NEU) |
 | Affiliate-Shops | 8 | ✅ LIVE |
 | KDP-Buch-Previews | 19+ | ✅ LIVE |
 | Apps & Spiele | 16+ | ✅ LIVE |
@@ -31,7 +34,7 @@ Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/
 ### Geld-Strategie-Ranking (0 EUR Kosten):
 | Rang | Strategie | Potenzial/Monat | Status |
 |------|-----------|----------------|--------|
-| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 31 Artikel + 13 Tools + 8 Shops |
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 35 Artikel + 15 Tools + 8 Shops |
 | 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
 | 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
 | 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
@@ -44,9 +47,10 @@ Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/
 4. 🟡 **Google Search Console** - Nicht eingerichtet
 
 ### Next Tick Priorities:
-1. 🔴 **Blog-Artikel #32**: KI-Nachhaltigkeit & Green Tech 2026 oder KI-Gaming & Entertainment 2026
-2. 🔴 **Neues interaktives Tool**: Energie-Spar-Rechner oder KI-Immobilien-Investment-Rechner
+1. 🔴 **Blog-Artikel #36**: KI-Nachhaltigkeit & Green Tech 2026 oder KI-Musikproduktion 2026
+2. 🔴 **Neues interaktives Tool**: Energie-Spar-Rechner oder KI-Content-Repurposer
 3. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Social Media)
+4. 🟡 **Sitemap-Refresh**: Aktuell 98 URLs – aufräumen, doppelte Einträge entfernen
 
 ---
 
