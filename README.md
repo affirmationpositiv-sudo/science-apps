@@ -1,2 +1,2 @@
 # science-apps
-Wissenschafts-Apps: BioLab, ChemBase, PhysData
+Science Apps, Games & Tools: BioLab, ChemBase, PhysData, MedCalc, MathsTool, WeaponEvo, Crossword, GalaxyMiner, GalaxyBlog, Sudoku, WordSearch, ResumeBuilder, PromptPacks
