@@ -1,0 +1,490 @@
+1|<!DOCTYPE html>
+2|<html lang="de">
+3|<head>
+4|<meta charset="UTF-8">
+5|<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+6|<title>BioLab – Biologie-Toolkit</title>
+7|<meta name="description" content="BioLab – Kostenlose Biologie-Rechner: Molare Masse, Verdünnungen, Puffer, DNA-Codon-Tabelle + Laborequipment-Empfehlungen">
+8|<meta name="theme-color" content="#0a192f">
+9|<link rel="manifest" href="manifest.json">
+10|<!-- Apple Touch Icon für PWA -->
+11|<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230a192f'/%3E%3Ctext x='50' y='70' font-size='55' text-anchor='middle' fill='%2364ffda'%3E🧬%3C/text%3E%3C/svg%3E">
+12|<style>
+13|/* ===== RESET & BASE ===== */
+14|*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+15|:root{
+16|  --bg:#0a192f;
+17|  --surface:#112240;
+18|  --card:#1a2d50;
+19|  --accent:#64ffda;
+20|  --accent2:#42a5f5;
+21|  --text:#ccd6f6;
+22|  --text2:#8892b0;
+23|  --success:#4ade80;
+24|  --border:#233554;
+25|  --font:'Segoe UI','SF Pro',system-ui,-apple-system,sans-serif;
+26|  --radius:12px;
+27|}
+28|body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+29|.container{max-width:1100px;margin:0 auto;padding:16px}
+30|
+31|/* ===== HEADER ===== */
+32|header{background:var(--surface);border-bottom:2px solid var(--accent);padding:16px 0;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+33|.header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+34|.logo{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:700;color:var(--accent);text-decoration:none}
+35|.logo span{background:var(--accent);color:var(--bg);padding:2px 10px;border-radius:6px;font-size:14px;margin-left:6px}
+36|nav{display:flex;gap:8px;flex-wrap:wrap}
+37|nav a{color:var(--text2);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:14px;transition:all .2s;border:1px solid transparent}
+38|nav a:hover,nav a.active{color:var(--accent);border-color:var(--accent);background:rgba(100,255,218,.08)}
+39|
+40|/* ===== HERO ===== */
+41|.hero{text-align:center;padding:48px 0 32px}
+42|.hero h1{font-size:clamp(28px,5vw,48px);background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+43|.hero p{color:var(--text2);font-size:18px;max-width:600px;margin:0 auto 24px}
+44|.hero-badge{display:inline-block;background:rgba(100,255,218,.1);border:1px solid var(--accent);border-radius:20px;padding:4px 16px;font-size:12px;color:var(--accent);margin-bottom:16px}
+45|
+46|/* ===== TOOLS GRID ===== */
+47|.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:32px 0}
+48|.tool-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .3s}
+49|.tool-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(100,255,218,.1)}
+50|.tool-card h3{color:var(--accent);margin-bottom:8px;font-size:18px}
+51|.tool-card p{color:var(--text2);font-size:14px;margin-bottom:16px}
+52|
+53|/* ===== INPUT STYLES ===== */
+54|.input-group{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+55|.input-group label{font-size:13px;color:var(--text2);font-weight:500}
+56|.input-group input,.input-group select{
+57|  background:var(--bg);border:1px solid var(--border);border-radius:8px;
+58|  padding:10px 14px;color:var(--text);font-size:15px;font-family:var(--font);
+59|  transition:border .2s;width:100%;
+60|}
+61|.input-group input:focus,.input-group select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(100,255,218,.15)}
+62|.input-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238892b0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+63|.btn{background:var(--accent);color:var(--bg);border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font)}
+64|.btn:hover{opacity:.9;transform:scale(1.02)}
+65|.btn:active{transform:scale(.98)}
+66|.btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+67|.btn-outline:hover{background:rgba(100,255,218,.1)}
+68|.result-box{background:var(--surface);border-radius:8px;padding:14px;margin-top:12px;font-size:15px;line-height:1.7;border-left:3px solid var(--accent);min-height:40px;word-break:break-word}
+69|.result-box .label{color:var(--text2);font-size:12px;display:block;margin-bottom:4px}
+70|.result-box .value{font-size:18px;font-weight:700;color:var(--accent)}
+71|
+72|/* ===== CODON TABLE ===== */
+73|.codon-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+74|.codon-table th{background:var(--surface);color:var(--accent);padding:8px 6px;text-align:center;border:1px solid var(--border);font-weight:600}
+75|.codon-table td{text-align:center;padding:6px;border:1px solid var(--border);color:var(--text)}
+76|.codon-table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+77|.codon-table td:first-child{font-weight:600;color:var(--accent2)}
+78|
+79|/* ===== AMAZON SHOP ===== */
+80|.shop-section{margin:40px 0}
+81|.shop-section h2{color:var(--accent);font-size:22px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+82|.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+83|.shop-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;transition:all .3s}
+84|.shop-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+85|.shop-card .emoji{font-size:48px;margin-bottom:8px}
+86|.shop-card h4{color:var(--text);font-size:15px;margin-bottom:4px}
+87|.shop-card p{color:var(--text2);font-size:12px;margin-bottom:10px}
+88|.shop-card .price{color:var(--accent);font-size:18px;font-weight:700;margin-bottom:10px}
+89|.shop-card .btn{width:100%;font-size:13px}
+90|
+91|/* ===== EQUIPMENT CALC ===== */
+92|.equip-calc{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+93|.equip-calc select{flex:1;min-width:140px}
+94|
+95|/* ===== FOOTER ===== */
+96|footer{text-align:center;padding:32px 0;color:var(--text2);font-size:13px;border-top:1px solid var(--border);margin-top:40px}
+97|footer a{color:var(--accent);text-decoration:none}
+98|
+99|/* ===== RESPONSIVE ===== */
+100|@media(max-width:600px){
+101|  .header-inner{flex-direction:column;text-align:center}
+102|  .tools-grid{grid-template-columns:1fr}
+103|  .shop-grid{grid-template-columns:1fr 1fr}
+104|}
+105|
+106|/* ===== AD PLACEHOLDER ===== */
+107|.ad-placeholder{background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius);padding:24px;text-align:center;color:var(--text2);font-size:13px;margin:24px 0}
+108|</style>
+109|</head>
+110|<body>
+111|
+112|<!-- ===== HEADER ===== -->
+113|<header>
+114|<div class="container header-inner">
+115|  <a href="/" class="logo">🧬 BioLab <span>β</span></a>
+116|  <nav>
+117|    <a href="#tools" class="active">Tools</a>
+118|    <a href="#shop">Shop</a>
+119|    <a href="#about">Info</a>
+120|  </nav>
+121|</div>
+122|</header>
+123|
+124|<div class="container">
+125|
+126|<!-- ===== HERO ===== -->
+127|<section class="hero">
+128|  <div class="hero-badge">🔬 Kostenlos • Keine Anmeldung • Open Source</div>
+129|  <h1>Dein BioLab-Werkzeugkasten</h1>
+130|  <p>Molare Massen berechnen, Verdünnungen planen, Puffer herstellen – alles in einem Tool. Für Studenten, Laboranten und Forscher.</p>
+131|</section>
+132|
+133|<!-- ===== AD PLACEHOLDER TOP ===== -->
+134|<div class="ad-placeholder" id="ad-top">
+135|  📢 <strong>Werbung</strong><br><span style="font-size:11px">Hier erscheint Google AdSense – sobald Konto aktiviert</span>
+136|</div>
+137|
+138|<!-- ===== TOOLS ===== -->
+139|<section id="tools">
+140|<h2 style="color:var(--accent);margin-bottom:8px">🔧 Bio-Tools</h2>
+141|<p style="color:var(--text2);margin-bottom:24px">Wähle einen Rechner – alle Ergebnisse sofort, kein Klick nötig.</p>
+142|
+143|<div class="tools-grid">
+144|
+145|  <!-- Tool 1: Molare Masse -->
+146|  <div class="tool-card">
+147|    <h3>🧪 Molare Masse</h3>
+148|    <p>Berechne die molare Masse einer Verbindung aus Summenformel.</p>
+149|    <div class="input-group">
+150|      <label>Summenformel (z.B. H2O, NaCl, C6H12O6, H2SO4)</label>
+151|      <input type="text" id="molFormel" placeholder="z.B. H2O" value="H2O">
+152|    </div>
+153|    <button class="btn" onclick="calcMolmasse()">Berechnen</button>
+154|    <div class="result-box" id="molResult"><span class="label">Molare Masse</span><span class="value">18,015 g/mol</span></div>
+155|  </div>
+156|
+157|  <!-- Tool 2: Verdünnung C1V1 = C2V2 -->
+158|  <div class="tool-card">
+159|    <h3>💧 Verdünnungsrechner</h3>
+160|    <p>Berechne benötigte Volumina nach C₁·V₁ = C₂·V₂.</p>
+161|    <div class="input-group">
+162|      <label>Stammlösung (C₁) [mol/L]</label>
+163|      <input type="number" id="c1" value="1" step="any">
+164|    </div>
+165|    <div class="input-group">
+166|      <label>Zielkonzentration (C₂) [mol/L]</label>
+167|      <input type="number" id="c2" value="0.1" step="any">
+168|    </div>
+169|    <div class="input-group">
+170|      <label>Zielvolumen (V₂) [mL]</label>
+171|      <input type="number" id="v2" value="100" step="any">
+172|    </div>
+173|    <button class="btn" onclick="calcVerduennung()">Berechnen</button>
+174|    <div class="result-box" id="verdResult"><span class="label">Benötigt</span><span class="value">10,0 mL Stammlösung + 90,0 mL Lösungsmittel</span></div>
+175|  </div>
+176|
+177|  <!-- Tool 3: pH-Puffer -->
+178|  <div class="tool-card">
+179|    <h3>⚗️ pH-Puffer (Henderson-Hasselbalch)</h3>
+180|    <p>Berechne den pH-Wert eines Puffers aus Säure/Base-Konzentration.</p>
+181|    <div class="input-group">
+182|      <label>pKₐ der schwachen Säure</label>
+183|      <input type="number" id="pka" value="4.76" step="any">
+184|    </div>
+185|    <div class="input-group">
+186|      <label>[A⁻] (Base) [mol/L]</label>
+187|      <input type="number" id="baseConc" value="0.1" step="any">
+188|    </div>
+189|    <div class="input-group">
+190|      <label>[HA] (Säure) [mol/L]</label>
+191|      <input type="number" id="acidConc" value="0.1" step="any">
+192|    </div>
+193|    <button class="btn" onclick="calcPuffer()">Berechnen</button>
+194|    <div class="result-box" id="pufferResult"><span class="label">pH-Wert</span><span class="value">4,76</span></div>
+195|  </div>
+196|
+197|  <!-- Tool 4: DNA Codon Tabelle -->
+198|  <div class="tool-card" style="grid-column:1/-1">
+199|    <h3>🧬 DNA-Codon-Tabelle</h3>
+200|    <p>Übersetze DNA-Codons in Aminosäuren – vollständige Tabelle.</p>
+201|    <div class="input-group" style="max-width:400px">
+202|      <label>Codon eingeben (z.B. ATG, TAA, CGT)</label>
+203|      <input type="text" id="codonInput" placeholder="3 Buchstaben (A,T,G,C)" maxlength="3" style="text-transform:uppercase">
+204|    </div>
+205|    <button class="btn" onclick="lookupCodon()">Übersetzen</button>
+206|    <div class="result-box" id="codonResult"><span class="label">ATG → Start (Methionin)</span><span class="value">Startcodon • Methionin (Met)</span></div>
+207|    <div style="max-height:400px;overflow-y:auto;border-radius:8px;margin-top:16px">
+208|      <table class="codon-table" id="codonTabelle"></table>
+209|    </div>
+210|  </div>
+211|
+212|  <!-- Tool 5: Mikroskop-Kaufberatung -->
+213|  <div class="tool-card">
+214|    <h3>🔬 Mikroskop-Berater</h3>
+215|    <p>Finde das richtige Mikroskop für deinen Anwendungsbereich.</p>
+216|    <div class="input-group">
+217|      <label>Wofür brauchst du es?</label>
+218|      <select id="microUse">
+219|        <option value="schule">Schule / Student (100–400x)</option>
+220|        <option value="labor">Labor / Forschung (400–1000x)</option>
+221|        <option value="prof">Professionell (1000x+ Fluoreszenz)</option>
+222|        <option value="hobby">Hobby / Natur (20–200x)</option>
+223|      </select>
+224|    </div>
+225|    <button class="btn" onclick="berateMikroskop()">Empfehlung</button>
+226|    <div class="result-box" id="microResult"><span class="label">Empfehlung</span><span class="value">Wähle deinen Einsatzzweck und klicke auf "Empfehlung"</span></div>
+227|  </div>
+228|
+229|  <!-- Tool 6: Einheiten-Umrechner -->
+230|  <div class="tool-card">
+231|    <h3>📏 Bio-Einheiten</h3>
+232|    <p>Typische Laboreinheiten umrechnen: g↔mg, L↔mL, M↔mM, °C↔°F</p>
+233|    <div class="input-group">
+234|      <label>Einheit</label>
+235|      <select id="unitType">
+236|        <option value="mass">Masse: g ↔ mg ↔ µg</option>
+237|        <option value="vol">Volumen: L ↔ mL ↔ µL</option>
+238|        <option value="conc">Konzentration: M ↔ mM ↔ µM</option>
+239|        <option value="temp">Temperatur: °C ↔ °F</option>
+240|      </select>
+241|    </div>
+242|    <div class="input-group">
+243|      <label>Wert</label>
+244|      <input type="number" id="unitValue" value="1" step="any">
+245|    </div>
+246|    <button class="btn" onclick="convertUnit()">Umrechnen</button>
+247|    <div class="result-box" id="unitResult"><span class="label">Ergebnis</span><span class="value">1 g = 1000 mg = 1.000.000 µg</span></div>
+248|  </div>
+249|
+250|</div>
+251|</section>
+252|
+253|<!-- ===== AD PLACEHOLDER MIDDLE ===== -->
+254|<div class="ad-placeholder" id="ad-mid">
+255|  📢 <strong>Werbung</strong><br><span style="font-size:11px">Hier erscheint Google AdSense – sobald Konto aktiviert</span>
+256|</div>
+257|
+258|<!-- ===== AMAZON SHOP ===== -->
+259|<section id="shop" class="shop-section">
+260|<h2>🛒 Empfohlenes Laborequipment</h2>
+261|<p style="color:var(--text2);margin-bottom:20px">Von Biologen getestet – über Amazon bestellbar. 💰 Kleine Provision hilft uns, die Seite kostenlos zu halten.</p>
+262|
+263|<div class="shop-grid" id="amazonGrid">
+264|  <!-- Wird per JS befüllt -->
+265|</div>
+266|</section>
+267|
+268|<!-- ===== INFO ===== -->
+269|<section id="about" style="margin:40px 0">
+270|<h2 style="color:var(--accent);margin-bottom:12px">📖 Über BioLab</h2>
+271|<div style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px">
+272|  <p style="color:var(--text2);margin-bottom:12px"><strong>BioLab</strong> ist ein kostenloser Bio-Toolkit für Studenten, Laboranten und Forscher. Alle Rechner laufen lokal im Browser – deine Daten verlassen nie dein Gerät.</p>
+273|  <p style="color:var(--text2);margin-bottom:12px">🔬 <strong>Features</strong>: Molare Masse, Verdünnungen, pH-Puffer, DNA-Codon-Tabelle, Einheitenumrechner, Mikroskop-Berater</p>
+274|  <p style="color:var(--text2)">🆕 <strong>In Planung:</strong> NGS-Readcounter, PCR-Primer-Tm-Rechner, Gel-Elektrophorese-Simulator, BLAST-ähnliche Sequenzsuche</p>
+275|</div>
+276|</section>
+277|
+278|<!-- ===== AD PLACEHOLDER BOTTOM ===== -->
+279|<div class="ad-placeholder" id="ad-bottom">
+280|  📢 <strong>Werbung</strong><br><span style="font-size:11px">Hier erscheint Google AdSense – sobald Konto aktiviert</span>
+281|</div>
+282|
+283|</div>
+284|
+285|<!-- ===== FOOTER ===== -->
+286|<footer>
+287|  <div class="container">
+288|    <p>🧬 BioLab v0.1 • Made with ❤️ für Wissenschaftler • <a href="#" onclick="return false;">Datenschutz</a> • <a href="#" onclick="return false;">Impressum</a></p>
+289|    <p style="margin-top:8px;font-size:11px;color:var(--text2)">Amazon-Links sind Affiliate-Links. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</p>
+290|  </div>
+291|</footer>
+292|
+293|<script>
+294|// ===== DATEN =====
+295|const ELEMENTE = {
+296|  H:1.008,He:4.003,Li:6.941,Be:9.012,B:10.81,C:12.011,N:14.007,O:15.999,F:18.998,Ne:20.180,
+297|  Na:22.990,Mg:24.305,Al:26.982,Si:28.086,P:30.974,S:32.065,Cl:35.453,Ar:39.948,
+298|  K:39.098,Ca:40.078,Sc:44.956,Ti:47.867,V:50.942,Cr:51.996,Mn:54.938,Fe:55.845,
+299|  Co:58.933,Ni:58.693,Cu:63.546,Zn:65.380,Ga:69.723,Ge:72.630,As:74.922,Se:78.971,
+300|  Br:79.904,Kr:83.798,Rb:85.468,Sr:87.620,Y:88.906,Zr:91.224,Nb:92.906,Mo:95.950,
+301|  Tc:98.0,Ru:101.07,Rh:102.91,Pd:106.42,Ag:107.87,Cd:112.41,In:114.82,Sn:118.71,
+302|  Sb:121.76,Te:127.60,I:126.90,Xe:131.29,Cs:132.91,Ba:137.33,La:138.91,Ce:140.12,
+303|  Pr:140.91,Nd:144.24,Pm:145.0,Sm:150.36,Eu:151.96,Gd:157.25,Tb:158.93,Dy:162.50,
+304|  Ho:164.93,Er:167.26,Tm:168.93,Yb:173.05,Lu:174.97,Hf:178.49,Ta:180.95,W:183.84,
+305|  Re:186.21,Os:190.23,Ir:192.22,Pt:195.08,Au:196.97,Hg:200.59,Tl:204.38,Pb:207.2,
+306|  Bi:208.98,Po:209.0,At:210.0,Rn:222.0,Fr:223.0,Ra:226.0,Ac:227.0,Th:232.04,Pa:231.04,
+307|  U:238.03,Np:237.0,Pu:244.0,Am:243.0,Cm:247.0,Bk:247.0,Cf:251.0,Es:252.0,Fm:257.0
+308|};
+309|
+310|const CODON_TABLE = {
+311|  'TTT':'Phe','TTC':'Phe','TTA':'Leu','TTG':'Leu',
+312|  'TCT':'Ser','TCC':'Ser','TCA':'Ser','TCG':'Ser',
+313|  'TAT':'Tyr','TAC':'Tyr','TAA':'Stop','TAG':'Stop',
+314|  'TGT':'Cys','TGC':'Cys','TGA':'Stop','TGG':'Trp',
+315|  'CTT':'Leu','CTC':'Leu','CTA':'Leu','CTG':'Leu',
+316|  'CCT':'Pro','CCC':'Pro','CCA':'Pro','CCG':'Pro',
+317|  'CAT':'His','CAC':'His','CAA':'Gln','CAG':'Gln',
+318|  'CGT':'Arg','CGC':'Arg','CGA':'Arg','CGG':'Arg',
+319|  'ATT':'Ile','ATC':'Ile','ATA':'Ile','ATG':'Met',
+320|  'ACT':'Thr','ACC':'Thr','ACA':'Thr','ACG':'Thr',
+321|  'AAT':'Asn','AAC':'Asn','AAA':'Lys','AAG':'Lys',
+322|  'AGT':'Ser','AGC':'Ser','AGA':'Arg','AGG':'Arg',
+323|  'GTT':'Val','GTC':'Val','GTA':'Val','GTG':'Val',
+324|  'GCT':'Ala','GCC':'Ala','GCA':'Ala','GCG':'Ala',
+325|  'GAT':'Asp','GAC':'Asp','GAA':'Glu','GAG':'Glu',
+326|  'GGT':'Gly','GGC':'Gly','GGA':'Gly','GGG':'Gly'
+327|};
+328|
+329|const AMINO_FULL = {
+330|  'Ala':'Alanin','Arg':'Arginin','Asn':'Asparagin','Asp':'Aspartat',
+331|  'Cys':'Cystein','Gln':'Glutamin','Glu':'Glutamat','Gly':'Glycin',
+332|  'His':'Histidin','Ile':'Isoleucin','Leu':'Leucin','Lys':'Lysin',
+333|  'Met':'Methionin','Phe':'Phenylalanin','Pro':'Prolin','Ser':'Serin',
+334|  'Thr':'Threonin','Trp':'Tryptophan','Tyr':'Tyrosin','Val':'Valin',
+335|  'Stop':'Stopcodon'
+336|};
+337|
+338|// Amazon Affiliate-Produkte (mit Platzhalter-Tag)
+339|const AMAZON_TAG = 'ikune21-21';
+340|const AMAZON_PRODUKTE = [
+341|  {emoji:'🔬',name:'Einsteiger-Mikroskop',desc:'400x, LED, komplett',price:'ca. €89',id:'B0DF2383V9'},
+342|  {emoji:'🔬',name:'Labor-Mikroskop',desc:'1000x, Ölimmersion',price:'ca. €249',id:'B0C9YQ8G4K'},
+343|  {emoji:'⚖️',name:'Analysenwaage',desc:'0,001g Genauigkeit',price:'ca. €59',id:'B0C1PFNLFV'},
+344|  {emoji:'🧪',name:'Pipettenset',desc:'0,5–10 µL, 4er-Set',price:'ca. €35',id:'B07PN6B1F1'},
+345|  {emoji:'🧫',name:'Petrischalen (100er)',desc:'steril, 90mm',price:'ca. €16',id:'B0C3XQ7T1K'},
+346|  {emoji:'🧴',name:'Reagenzgläser (50er)',desc:'Borosilikat, 15ml',price:'ca. €18',id:'B0C4XMFT9R'},
+347|  {emoji:'🧤',name:'Laborhandschuhe',desc:'Nitril, 200 Stück',price:'ca. €22',id:'B09N3FMN3Y'},
+348|  {emoji:'📊',name:'pH-Meter digital',desc:'±0,01 Genauigkeit',price:'ca. €45',id:'B0BZ7P7K1Q'},
+349|];
+350|
+351|// ===== MOLLARE MASSE =====
+352|function parseFormel(formel){
+353|  const matches = formel.match(/([A-Z][a-z]?)(\d*\.?\d*)/g);
+354|  if(!matches) return null;
+355|  const atome = {};
+356|  for(const m of matches){
+357|    const [,el,zahl] = m.match(/([A-Z][a-z]?)(\d*\.?\d*)/);
+358|    const cnt = zahl ? parseFloat(zahl) : 1;
+359|    atome[el] = (atome[el]||0)+cnt;
+360|  }
+361|  return atome;
+362|}
+363|
+364|function calcMolmasse(){
+365|  const input = document.getElementById('molFormel').value.trim();
+366|  const atome = parseFormel(input);
+367|  if(!atome){dok('molResult','❌ Ungültige Formel');return}
+368|  let sum = 0;
+369|  for(const [el,cnt] of Object.entries(atome)){
+370|    if(!ELEMENTE[el]){dok('molResult',`❌ Element ${el} nicht gefunden`);return}
+371|    sum += ELEMENTE[el] * cnt;
+372|  }
+373|  const details = Object.entries(atome).map(([el,c])=>`${el}: ${ELEMENTE[el].toFixed(3)} × ${c}`).join(' + ');
+374|  dok('molResult',`<span class="label">${input} = ${sum.toFixed(3)} g/mol</span><span class="value">${sum.toFixed(3)} g/mol</span><span style="font-size:12px;color:var(--text2);display:block;margin-top:6px">${details}</span>`);
+375|}
+376|
+377|// ===== VERDÜNNUNG =====
+378|function calcVerduennung(){
+379|  const c1 = parseFloat(document.getElementById('c1').value);
+380|  const c2 = parseFloat(document.getElementById('c2').value);
+381|  const v2 = parseFloat(document.getElementById('v2').value);
+382|  if(!c1||!c2||!v2||c1<=0||c2<=0||v2<=0){dok('verdResult','❌ Alle Werte müssen > 0 sein');return}
+383|  if(c2>c1){dok('verdResult','❌ Zielkonzentration C₂ kann nicht größer als C₁ sein (das wäre Eindampfen)');return}
+384|  const v1 = (c2 * v2) / c1;
+385|  const loes = v2 - v1;
+386|  dok('verdResult',`<span class="label">C₁·V₁ = C₂·V₂ → ${c1}·V₁ = ${c2}·${v2}</span><span class="value">V₁ = ${v1.toFixed(2)} mL Stammlösung</span><span style="font-size:14px;color:var(--text2);display:block;margin-top:6px">+ ${loes.toFixed(2)} mL Lösungsmittel → Gesamt: ${v2.toFixed(2)} mL</span>`);
+387|}
+388|
+389|// ===== PUFFER =====
+390|function calcPuffer(){
+391|  const pka = parseFloat(document.getElementById('pka').value);
+392|  const base = parseFloat(document.getElementById('baseConc').value);
+393|  const acid = parseFloat(document.getElementById('acidConc').value);
+394|  if(base<=0||acid<=0){dok('pufferResult','❌ Konzentrationen müssen > 0 sein');return}
+395|  const pH = pka + Math.log10(base/acid);
+396|  dok('pufferResult',`<span class="label">pH = pKₐ + log([A⁻]/[HA]) = ${pka} + log(${base}/${acid})</span><span class="value">pH = ${pH.toFixed(2)}</span>`);
+397|}
+398|
+399|// ===== CODON =====
+400|function lookupCodon(){
+401|  const input = document.getElementById('codonInput').value.trim().toUpperCase();
+402|  if(input.length!==3||!/^[ATGC]+$/.test(input)){dok('codonResult','❌ Bitte 3 Buchstaben (A, T, G, C) eingeben');return}
+403|  const aa = CODON_TABLE[input];
+404|  if(!aa){dok('codonResult','❌ Unbekanntes Codon');return}
+405|  const full = AMINO_FULL[aa]||aa;
+406|  const stern = aa==='Stop'?'⛔':'✅';
+407|  dok('codonResult',`<span class="label">${input} → ${aa} (${full})</span><span class="value">${stern} ${aa}${aa==='Stop'?' – Translation endet hier':aa==='Met'?' – Startcodon • Methionin':' – '+full}</span>`);
+408|}
+409|
+410|function buildCodonTable(){
+411|  const bases = ['T','C','A','G'];
+412|  const tbody = document.getElementById('codonTabelle');
+413|  let html = '<tr><th>1. Base</th><th>2. Base →</th>';
+414|  for(const b of bases) html += `<th>${b}</th>`;
+415|  html += '</tr>';
+416|  for(const b1 of bases){
+417|    html += `<tr><td><strong>${b1}</strong></td><td style="background:var(--surface);font-weight:600;color:var(--text2)"> </td>`;
+418|    for(const b2 of bases){
+419|      const codon = b1+b2+'?';
+420|      const vals = bases.map(b3=>{
+421|        const c = b1+b2+b3;
+422|        const aa = CODON_TABLE[c]||'?';
+423|        return `<span style="font-size:11px;color:${aa==='Stop'?'#ff6b6b':aa==='Met'?'#ffd93d':var(--text)}">${c}<br><strong>${aa}</strong></span>`;
+424|      }).join(' ');
+425|      html += `<td style="font-size:11px;padding:4px;line-height:1.2">${vals}</td>`;
+426|    }
+427|    html += '</tr>';
+428|  }
+429|  tbody.innerHTML = html;
+430|}
+431|
+432|// ===== MIKROSKOP-BERATER =====
+433|function berateMikroskop(){
+434|  const use = document.getElementById('microUse').value;
+435|  const empfehlungen = {
+436|    schule:{name:'Einsteiger-Mikroskop Bresser Biolux',desc:'Perfekt für Schule & Studium • 40–400x Vergrößerung • LED • Komplettset',preis:'ca. €79',id:'B0DF2383V9'},
+437|    labor:{name:'Labor-Mikroskop Swift SW350B',desc:'400–1000x • Ölimmersion • Mechanischer Tisch',preis:'ca. €249',id:'B0C9YQ8G4K'},
+438|    prof:{name:'Forschungs-Mikroskop AmScope T680',desc:'1000x+ • Fluoreszenz • Phasenkontrast',preis:'ca. €899',id:'B08C3K6M7L'},
+439|    hobby:{name:'Handmikroskop Carson MicroBrite',desc:'20–200x • Tragbar • Batteriebetrieben',preis:'ca. €25',id:'B003U9VFNQ'}
+440|  };
+441|  const e = empfehlungen[use];
+442|  const url = `https://www.amazon.de/dp/${e.id}?tag=${AMAZON_TAG}`;
+443|  dok('microResult',`<span class="label">🔬 Empfehlung für: ${use==='schule'?'Schule/Student':use==='labor'?'Labor':use==='prof'?'Professionell':'Hobby/Natur'}</span><span class="value"><a href="${url}" target="_blank" rel="sponsored" style="color:var(--accent);text-decoration:underline">${e.name}</a></span><span style="font-size:14px;color:var(--text2);display:block;margin-top:6px">${e.desc}<br><strong>${e.preis}</strong></span>`);
+444|}
+445|
+446|// ===== EINHEITEN =====
+447|function convertUnit(){
+448|  const typ = document.getElementById('unitType').value;
+449|  const val = parseFloat(document.getElementById('unitValue').value);
+450|  if(isNaN(val)){dok('unitResult','❌ Bitte eine gültige Zahl eingeben');return}
+451|  let html = '';
+452|  if(typ==='mass'){
+453|    html = `<span class="label">Masse</span><span class="value">${val} g = ${(val*1000).toLocaleString('de-DE')} mg = ${(val*1e6).toLocaleString('de-DE')} µg</span>`;
+454|  }else if(typ==='vol'){
+455|    html = `<span class="label">Volumen</span><span class="value">${val} L = ${(val*1000).toLocaleString('de-DE')} mL = ${(val*1e6).toLocaleString('de-DE')} µL</span>`;
+456|  }else if(typ==='conc'){
+457|    html = `<span class="label">Konzentration</span><span class="value">${val} M = ${(val*1000).toLocaleString('de-DE')} mM = ${(val*1e6).toLocaleString('de-DE')} µM</span>`;
+458|  }else if(typ==='temp'){
+459|    const f = val*9/5+32;
+460|    html = `<span class="label">Temperatur</span><span class="value">${val} °C = ${f.toFixed(1)} °F</span><span style="font-size:14px;color:var(--text2)">${val+273.15} K</span>`;
+461|  }
+462|  dok('unitResult',html);
+463|}
+464|
+465|// ===== AMAZON SHOP =====
+466|function buildAmazonShop(){
+467|  const grid = document.getElementById('amazonGrid');
+468|  grid.innerHTML = AMAZON_PRODUKTE.map(p=>`
+469|    <div class="shop-card">
+470|      <div class="emoji">${p.emoji}</div>
+471|      <h4>${p.name}</h4>
+472|      <p>${p.desc}</p>
+473|      <div class="price">${p.price}</div>
+474|      <a href="https://www.amazon.de/dp/${p.id}?tag=${AMAZON_TAG}" target="_blank" rel="sponsored" class="btn">🛒 Auf Amazon ansehen</a>
+475|    </div>
+476|  `).join('');
+477|}
+478|
+479|// ===== HELPER =====
+480|function dok(id,html){document.getElementById(id).innerHTML=html}
+481|
+482|// ===== INIT =====
+483|buildCodonTable();
+484|buildAmazonShop();
+485|// Standardwerte anzeigen
+486|calcMolmasse();
+487|</script>
+488|</body>
+489|</html>
+490|

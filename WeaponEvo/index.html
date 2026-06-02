@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+<title>⚔️ Waffen Evolution – Idle Clicker</title>
+<meta name="description" content="Evolviere deine Waffe von Stein bis Quanten-Zerstörer! Idle Clicker Spiel">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="512x512" href="/weaponevo/icons/icon_512x512.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/weaponevo/icons/icon_192x192.png">
+<script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/weaponevo/sw.js')}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
+body{background:#0a0a0a;color:#eee;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;touch-action:manipulation}
+#game{width:100%;max-width:480px;min-height:100vh;background:linear-gradient(180deg,#0a0a0a,#1a0a10);padding:12px 16px;display:flex;flex-direction:column;gap:8px}
+.weapon-area{text-align:center;padding:12px 0 8px;position:relative}
+.weapon-emoji{font-size:80px;display:block;line-height:1;filter:drop-shadow(0 0 20px rgba(255,200,50,.3));transition:all .1s}
+.weapon-emoji.hit{transform:scale(1.15);filter:drop-shadow(0 0 40px rgba(255,200,50,.8))}
+.weapon-name{font-size:18px;font-weight:700;color:#ffd700;margin:4px 0 2px}
+.weapon-level{font-size:12px;color:#888;margin-bottom:4px}
+.shake{animation:shake .15s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.hit-flash{animation:flash .2s ease}
+@keyframes flash{0%{background:rgba(255,200,50,.3)}100%{background:transparent}}
+
+.stats{display:flex;justify-content:space-around;text-align:center;padding:8px 0;background:rgba(255,255,255,.03);border-radius:12px;gap:4px}
+.stat-item{flex:1}
+.stat-value{font-size:20px;font-weight:700;color:#ffd700}
+.stat-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px}
+
+.progress-container{margin:6px 0}
+.progress-label{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:3px}
+.progress-bar{height:12px;background:#222;border-radius:10px;overflow:hidden;position:relative}
+.progress-fill{height:100%;background:linear-gradient(90deg,#ffd700,#ff6b00);border-radius:10px;transition:width .2s;position:relative}
+.progress-fill::after{content:'';position:absolute;top:0;left:0;right:0;height:50%;background:rgba(255,255,255,.15);border-radius:10px 10px 0 0}
+
+.click-btn{width:100%;padding:18px;font-size:22px;font-weight:700;background:linear-gradient(135deg,#ffd700,#ff6b00);border:none;border-radius:16px;color:#0a0a0a;cursor:pointer;transition:all .1s;margin:4px 0;box-shadow:0 4px 20px rgba(255,200,50,.2);touch-action:manipulation}
+.click-btn:active{transform:scale(.96);box-shadow:0 2px 10px rgba(255,200,50,.1)}
+
+.tabs{display:flex;gap:4px;margin:6px 0}
+.tab{flex:1;padding:10px 0;text-align:center;font-size:13px;font-weight:600;background:rgba(255,255,255,.05);border-radius:10px;cursor:pointer;transition:all .2s;border:1px solid transparent}
+.tab.active{background:rgba(255,215,0,.1);border-color:#ffd700;color:#ffd700}
+.tab:active{transform:scale(.95)}
+
+.panel{display:none;flex-direction:column;gap:8px;overflow-y:auto;max-height:320px;padding:4px 0}
+.panel.active{display:flex}
+
+.upgrade-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border:1px solid #222;border-radius:12px;padding:10px 14px;transition:all .2s;cursor:pointer;touch-action:manipulation}
+.upgrade-item:active{transform:scale(.97)}
+.upgrade-item.bought{opacity:.4;border-color:#444}
+.upgrade-item.locked{opacity:.3}
+.upgrade-info{flex:1}
+.upgrade-name{font-size:14px;font-weight:600;color:#eee}
+.upgrade-desc{font-size:11px;color:#666}
+.upgrade-cost{font-size:14px;font-weight:700;color:#ffd700;min-width:70px;text-align:right}
+
+.evo-item{display:flex;justify-content:space-between;align-items:center;background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.2);border-radius:12px;padding:10px 14px;transition:all .2s;cursor:pointer;touch-action:manipulation}
+.evo-item.available{background:rgba(255,215,0,.12);border-color:#ffd700}
+.evo-item.locked{opacity:.3;cursor:default}
+.evo-item:active{transform:scale(.97)}
+.evo-emoji{font-size:32px;margin-right:10px}
+.evo-info{flex:1}
+.evo-name{font-size:14px;font-weight:600;color:#ffd700}
+.evo-desc{font-size:11px;color:#888}
+.evo-cost{font-size:14px;font-weight:700;color:#ff6b00;min-width:70px;text-align:right}
+
+.achievement-popup{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ffd700,#ff6b00);padding:12px 24px;border-radius:16px;font-weight:700;color:#0a0a0a;font-size:16px;z-index:999;opacity:0;transition:all .5s;pointer-events:none;text-align:center}
+.achievement-popup.show{opacity:1;top:60px}
+
+.prestige-btn{width:100%;padding:14px;font-size:16px;font-weight:700;background:linear-gradient(135deg,#ff0055,#ff6b00);border:none;border-radius:12px;color:#fff;cursor:pointer;margin:8px 0;opacity:.6}
+.prestige-btn:active{transform:scale(.97)}
+.prestige-btn.available{opacity:1;box-shadow:0 4px 20px rgba(255,0,85,.3)}
+
+footer{text-align:center;padding:16px;font-size:10px;color:#333;max-width:480px}
+footer a{color:#555;text-decoration:none}
+
+@media(max-width:480px){.weapon-emoji{font-size:64px}#game{padding:8px 12px}.upgrade-item,.evo-item{padding:8px 12px}}
+
+/* Touch feedback */
+.tap-feedback{position:fixed;pointer-events:none;width:40px;height:40px;background:radial-gradient(circle,rgba(255,215,0,.4),transparent);border-radius:50%;z-index:100;animation:tapRipple .5s ease forwards}
+@keyframes tapRipple{0%{transform:scale(.5);opacity:1}100%{transform:scale(3);opacity:0}}
+
+/* Dark scrollbar */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#111;border-radius:2px}
+::-webkit-scrollbar-thumb{background:#333;border-radius:2px}
+</style>
+</head>
+<body>
+<div id="game">
+  <div class="weapon-area" id="weaponArea">
+    <span class="weapon-emoji" id="weaponEmoji">🔨</span>
+    <div class="weapon-name" id="weaponName">Steinhammer</div>
+    <div class="weapon-level" id="weaponLevel">Level 1</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-item"><div class="stat-value" id="displayGold">0</div><div class="stat-label">💰 Gold</div></div>
+    <div class="stat-item"><div class="stat-value" id="displayDamage">1</div><div class="stat-label">⚔️ Schaden</div></div>
+    <div class="stat-item"><div class="stat-value" id="displayDps">0</div><div class="stat-label">⏱️ DPS</div></div>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-label"><span id="xpLabel">XP 0 / 100</span><span id="xpPercent">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="xpFill" style="width:0%"></div></div>
+  </div>
+
+  <button class="click-btn" id="clickBtn">💥 ANGREIFEN</button>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="upgrades">🔧 Upgrades</div>
+    <div class="tab" data-tab="evolution">🌟 Evolution</div>
+    <div class="tab" data-tab="prestige">🔥 Prestige</div>
+  </div>
+
+  <div class="panel active" id="panel-upgrades"></div>
+  <div class="panel" id="panel-evolution"></div>
+  <div class="panel" id="panel-prestige"></div>
+</div>
+
+<footer><a href="https://friendly-silence-arabia-secret.trycloudflare.com" target="_blank">Science Apps • Amazon-Partner ikune21-21</a></footer>
+
+<div class="achievement-popup" id="achievementPopup"></div>
+
+<script>
+// ===== SPIEL-DATEN =====
+const WEAPONS = [
+  {id:0,name:'Steinhammer',emoji:'🔨',baseDmg:1,levelReq:1,evoGold:0},
+  {id:1,name:'Steinaxt',emoji:'🪓',baseDmg:3,levelReq:5,evoGold:100},
+  {id:2,name:'Bronze-Schwert',emoji:'⚔️',baseDmg:8,levelReq:12,evoGold:500},
+  {id:3,name:'Eisen-Schwert',emoji:'🗡️',baseDmg:20,levelReq:22,evoGold:2000},
+  {id:4,name:'Stahl-Langschwert',emoji:'⚔️',baseDmg:50,levelReq:35,evoGold:8000},
+  {id:5,name:'Muskete',emoji:'🔫',baseDmg:120,levelReq:50,evoGold:30000},
+  {id:6,name:'Gewehr',emoji:'🔫',baseDmg:300,levelReq:70,evoGold:100000},
+  {id:7,name:'Maschinenpistole',emoji:'🔫',baseDmg:800,levelReq:95,evoGold:350000},
+  {id:8,name:'Laser-Blaster',emoji:'💥',baseDmg:2500,levelReq:125,evoGold:1200000},
+  {id:9,name:'Plasma-Kanone',emoji:'🌌',baseDmg:8000,levelReq:160,evoGold:5000000},
+  {id:10,name:'Orbital-Strahler',emoji:'☄️',baseDmg:30000,levelReq:200,evoGold:25000000},
+  {id:11,name:'Quanten-Zerstörer',emoji:'💫',baseDmg:120000,levelReq:250,evoGold:150000000},
+];
+
+const UPGRADES = [
+  {id:'clickPower',name:'💪 Starker Schlag',desc:'+50% Klick-Schaden',baseCost:25,costMult:1.5,maxLvl:20,stat:'clickMult',value:0.5},
+  {id:'autoClicker',name:'🤖 Click-Bot',desc:'Automatische Klicks pro Sekunde',baseCost:50,costMult:1.6,maxLvl:30,stat:'autoRate',value:0.1},
+  {id:'critChance',name:'🎯 Kritischer Treffer',desc:'+2% Crit-Chance',baseCost:100,costMult:1.8,maxLvl:25,stat:'critRate',value:0.02},
+  {id:'critDamage',name:'💢 Crit-Schaden',desc:'+100% Crit-Schaden',baseCost:150,costMult:1.7,maxLvl:20,stat:'critMult',value:1.0},
+  {id:'multiHit',name:'🌀 Mehrfachschlag',desc:'+1 Treffer pro Klick',baseCost:300,costMult:2.0,maxLvl:15,stat:'multiHit',value:1},
+  {id:'xpBoost',name:'📈 XP-Schub',desc:'+25% XP-Gewinn',baseCost:80,costMult:1.5,maxLvl:20,stat:'xpMult',value:0.25},
+  {id:'goldBoost',name:'💰 Gold-Regen',desc:'+20% Gold-Gewinn',baseCost:120,costMult:1.6,maxLvl:20,stat:'goldMult',value:0.2},
+  {id:'dpsBoost',name:'⚡ DPS-Schub',desc:'+10% Gesamt-DPS',baseCost:200,costMult:1.8,maxLvl:25,stat:'dpsMult',value:0.1},
+];
+
+const ACHIEVEMENTS = [
+  {id:'firstGold',name:'Erstes Gold',desc:'1 Gold verdient',check:g=>g.totalGold>=1},
+  {id:'gold100',name:'Goldrausch',desc:'100 Gold gesamt',check:g=>g.totalGold>=100},
+  {id:'gold10k',name:'Reichtum',desc:'10.000 Gold gesamt',check:g=>g.totalGold>=10000},
+  {id:'gold1m',name:'Millionär',desc:'1.000.000 Gold gesamt',check:g=>g.totalGold>=1e6},
+  {id:'level10',name:'Lehrling',desc:'Waffen-Level 10 erreicht',check:g=>g.level>=10},
+  {id:'level50',name:'Krieger',desc:'Waffen-Level 50',check:g=>g.level>=50},
+  {id:'level100',name:'Elite',desc:'Waffen-Level 100',check:g=>g.level>=100},
+  {id:'level200',name:'Legende',desc:'Waffen-Level 200',check:g=>g.level>=200},
+  {id:'evo3',name:'Bronze-Zeit',desc:'3. Waffe freigeschaltet',check:g=>g.weapon>=3},
+  {id:'evo7',name:'Industrie-Zeit',desc:'7. Waffe freigeschaltet',check:g=>g.weapon>=7},
+  {id:'evo11',name:'Weltraum-Zeit',desc:'11. Waffe freigeschaltet',check:g=>g.weapon>=11},
+  {id:'evo12',name:'Gottgleiche Macht',desc:'12. Waffe (Quanten-Zerstörer)',check:g=>g.weapon>=12},
+  {id:'prestige1',name:'Wiedergeburt',desc:'1. Prestige',check:g=>g.prestige>=1},
+  {id:'prestige10',name:'Phönix',desc:'10 Prestige',check:g=>g.prestige>=10},
+  {id:'dps1k',name:'Kraftvoll',desc:'1.000 DPS',check:g=>g.getDps()>=1000},
+  {id:'dps1m',name:'Übermächtig',desc:'1.000.000 DPS',check:g=>g.getDps()>=1e6},
+];
+
+// ===== SPIEL-STORAGE =====
+function getDefaultGame(){return{
+  weapon:0,level:1,xp:0,gold:0,totalGold:0,prestige:0,
+  upgrades:{},achievements:[],totalClicks:0,totalDamage:0,
+  clickCombo:0,maxCombo:0,
+}}
+
+let game;
+let autoInterval;
+let saveTimer;
+
+function loadGame(){
+  try{
+    const d=localStorage.getItem('weaponEvo');
+    if(d){game=JSON.parse(d);return}
+  }catch(e){}
+  game=getDefaultGame();
+}
+
+function saveGame(){
+  try{localStorage.setItem('weaponEvo',JSON.stringify(game))}catch(e){}
+}
+
+// ===== SPIEL-LOGIK =====
+function getWeapon(){return WEAPONS[Math.min(game.weapon,WEAPONS.length-1)]}
+function getUpgrade(id){return game.upgrades[id]||0}
+
+function getMult(stat){
+  let m=1;
+  for(const u of UPGRADES){
+    if(u.stat===stat){
+      m+=getUpgrade(u.id)*u.value;
+    }
+  }
+  // Prestige-Bonus
+  m*=1+game.prestige*0.1;
+  return m;
+}
+
+function getClickDamage(){
+  const w=getWeapon();
+  const base=w.baseDmg*(1+game.level*0.1);
+  const mult=getMult('clickMult');
+  const critRate=Math.min(getMult('critRate')-1,0.5);
+  const critMult=getMult('critMult');
+  const multi=Math.floor(getMult('multiHit'));
+  let dmg=base*mult;
+  let isCrit=Math.random()<critRate;
+  if(isCrit)dmg*=critMult;
+  return{damage:dmg,crit:isCrit,hit:Math.max(1,Math.floor(multi))};
+}
+
+function getDps(){
+  const autoRate=getMult('autoRate')-1;
+  if(!autoRate||autoRate<=0)return 0;
+  const w=getWeapon();
+  const baseDmg=w.baseDmg*(1+game.level*0.1);
+  return baseDmg*autoRate*getMult('dpsMult');
+}
+
+function calcXpToNext(level){
+  return 50+level*12+Math.pow(level,1.4);
+}
+
+function addXp(amount){
+  const xpMult=getMult('xpMult');
+  let xp=amount*xpMult*2; // Jeder Treffer gibt XP
+  const needed=calcXpToNext(game.level);
+  game.xp+=xp;
+  while(game.xp>=needed&&game.level<999){
+    game.xp-=needed;
+    game.level++;
+    checkEvolution();
+    checkAchievements();
+  }
+  if(game.level>=999){
+    game.xp=0;
+    game.level=999;
+  }
+}
+
+function addGold(amount){
+  const goldMult=getMult('goldMult');
+  const g=Math.floor(amount*goldMult);
+  game.gold+=g;
+  game.totalGold+=g;
+}
+
+function checkEvolution(){
+  const idx=game.weapon;
+  if(idx+1>=WEAPONS.length)return;
+  const next=WEAPONS[idx+1];
+  if(game.level>=next.levelReq&&game.gold>=next.evoGold){
+    // Zeige Evo-Button
+  }
+}
+
+function doEvolve(){
+  const idx=game.weapon;
+  if(idx+1>=WEAPONS.length)return;
+  const next=WEAPONS[idx+1];
+  if(game.level>=next.levelReq&&game.gold>=next.evoGold){
+    game.gold-=next.evoGold;
+    game.weapon=idx+1;
+    showAchievement(`🌟 Evolution! ${next.name}`);
+    saveGame();updateUI();
+  }
+}
+
+function doPrestige(){
+  if(game.prestige>=99)return;
+  const req=1000000*Math.pow(2,game.prestige);
+  if(game.totalGold<req)return;
+  // Prestige-Bonus berechnen
+  game.prestige++;
+  // Reset
+  game.weapon=0;
+  game.level=1;
+  game.xp=0;
+  game.gold=0;
+  game.upgrades={};
+  showAchievement(`🔥 Prestige ${game.prestige}! +10% pro Prestige`);
+  saveGame();updateUI();
+}
+
+function buyUpgrade(id){
+  const u=UPGRADES.find(x=>x.id===id);
+  if(!u)return;
+  const lvl=getUpgrade(id);
+  if(lvl>=u.maxLvl)return;
+  const cost=Math.floor(u.baseCost*Math.pow(u.costMult,lvl));
+  if(game.gold<cost)return;
+  game.gold-=cost;
+  game.upgrades[id]=(game.upgrades[id]||0)+1;
+  saveGame();updateUI();
+}
+
+function clickAttack(){
+  const result=getClickDamage();
+  const totalHits=result.hit;
+  for(let i=0;i<totalHits;i++){
+    const dmg=result.damage;
+    const goldGain=Math.floor(dmg*(0.5+Math.random()*0.5));
+    addGold(goldGain);
+    addXp(goldGain);
+    game.totalDamage+=dmg;
+  }
+  game.totalClicks+=totalHits;
+  
+  // Animation
+  const emoji=document.getElementById('weaponEmoji');
+  emoji.classList.add('hit');
+  setTimeout(()=>emoji.classList.remove('hit'),150);
+  
+  const area=document.getElementById('weaponArea');
+  area.classList.add('shake');
+  setTimeout(()=>area.classList.remove('shake'),200);
+  
+  // Tap-Feedback
+  const fb=document.createElement('div');
+  fb.className='tap-feedback';
+  fb.style.left=(50+Math.random()*20-10)+'%';
+  fb.style.top=(40+Math.random()*20-10)+'%';
+  document.getElementById('game').appendChild(fb);
+  setTimeout(()=>fb.remove(),500);
+  
+  // Crit visuell
+  if(result.crit){
+    const critEl=document.createElement('div');
+    critEl.style.cssText='position:fixed;top:25%;left:50%;transform:translate(-50%,-50%);font-size:48px;font-weight:900;color:#ff0044;z-index:100;animation:flash .3s;pointer-events:none';
+    critEl.textContent='⚡CRIT!';
+    document.body.appendChild(critEl);
+    setTimeout(()=>critEl.remove(),400);
+  }
+  
+  checkEvolution();
+  checkAchievements();
+  saveGame();updateUI();
+}
+
+function checkAchievements(){
+  for(const a of ACHIEVEMENTS){
+    if(!game.achievements.includes(a.id)&&a.check(game)){
+      game.achievements.push(a.id);
+      showAchievement(`🏆 ${a.name}: ${a.desc}`);
+    }
+  }
+}
+
+function showAchievement(text){
+  const popup=document.getElementById('achievementPopup');
+  popup.textContent=text;
+  popup.classList.add('show');
+  setTimeout(()=>popup.classList.remove('show'),3000);
+}
+
+// ===== UI =====
+function formatN(n){
+  if(n>=1e12)return (n/1e12).toFixed(2)+'B';
+  if(n>=1e9)return (n/1e9).toFixed(2)+'B';
+  if(n>=1e6)return (n/1e6).toFixed(2)+'M';
+  if(n>=1000)return (n/1000).toFixed(1)+'K';
+  return Math.floor(n).toLocaleString('de-DE');
+}
+
+function updateUI(){
+  const w=getWeapon();
+  const gold=game.gold;
+  const xpNeeded=calcXpToNext(game.level);
+  const xpPct=Math.min(100,(game.xp/xpNeeded*100));
+  const dps=getDps();
+  const auto=getMult('autoRate')-1;
+  
+  document.getElementById('weaponEmoji').textContent=w.emoji;
+  document.getElementById('weaponName').textContent=w.name+(game.weapon>=WEAPONS.length-1?' ⭐MAX':'');
+  document.getElementById('weaponLevel').textContent='Level '+game.level;
+  const cd=getClickDamage();
+  document.getElementById('displayGold').textContent=formatN(gold);
+  document.getElementById('displayDamage').textContent=formatN(cd.damage)+(cd.hit>1?' ×'+cd.hit:'');
+  document.getElementById('displayDps').textContent=formatN(dps)+(game.prestige>0?' 🔥'+game.prestige:'');
+  document.getElementById('xpLabel').textContent='XP '+formatN(game.xp)+' / '+formatN(xpNeeded);
+  document.getElementById('xpPercent').textContent=xpPct.toFixed(0)+'%';
+  document.getElementById('xpFill').style.width=xpPct+'%';
+  
+  // Upgrades
+  const upPanel=document.getElementById('panel-upgrades');
+  upPanel.innerHTML=UPGRADES.map(u=>{
+    const lvl=getUpgrade(u.id);
+    const maxed=lvl>=u.maxLvl;
+    const cost=maxed?0:Math.floor(u.baseCost*Math.pow(u.costMult,lvl));
+    const locked=false;
+    const canBuy=!maxed&&gold>=cost;
+    return `<div class="upgrade-item${maxed?' bought':''}${locked?' locked':''}" onclick="buyUpgrade('${u.id}')">
+      <div class="upgrade-info">
+        <div class="upgrade-name">${u.name} ${lvl>0?'+'+lvl:''}${maxed?' MAX':''}</div>
+        <div class="upgrade-desc">${u.desc}</div>
+      </div>
+      <div class="upgrade-cost" style="opacity:${canBuy?1:.4}">💰 ${formatN(cost)}</div>
+    </div>`;
+  }).join('');
+  
+  // Evolution
+  const evPanel=document.getElementById('panel-evolution');
+  evPanel.innerHTML=WEAPONS.map((ew,i)=>{
+    const unlocked=i<=game.weapon;
+    const available=i===game.weapon+1&&game.level>=ew.levelReq&&gold>=ew.evoGold;
+    const cls=unlocked?'':available?'available':'locked';
+    return `<div class="evo-item ${cls}" onclick="${available?'doEvolve()':''}">
+      <span class="evo-emoji">${ew.emoji}</span>
+      <div class="evo-info">
+        <div class="evo-name">${ew.name}${unlocked?' ✅':''}${i===game.weapon?' ← AKTIV':''}</div>
+        <div class="evo-desc">Level ${ew.levelReq} • Basis Schaden: ${ew.baseDmg}</div>
+      </div>
+      <div class="evo-cost">${!unlocked&&i===game.weapon+1?'💰 '+formatN(ew.evoGold):''}</div>
+    </div>`;
+  }).join('');
+  
+  // Prestige
+  const preq=1000000*Math.pow(2,game.prestige);
+  const canPrestige=game.totalGold>=preq&&game.prestige<99;
+  const prPanel=document.getElementById('panel-prestige');
+  prPanel.innerHTML=`
+    <div style="text-align:center;padding:16px;background:rgba(255,0,85,.05);border-radius:12px;border:1px solid rgba(255,0,85,.2)">
+      <div style="font-size:40px">🔥</div>
+      <div style="font-size:16px;font-weight:700;margin:4px 0">Prestige Level: ${game.prestige}</div>
+      <div style="font-size:13px;color:#888">Bonus: +${(game.prestige*10).toFixed(0)}% auf alle Werte</div>
+      <div style="font-size:12px;color:#555;margin:8px 0">Nächstes Prestige: ${formatN(preq)} Gesamtgold benötigt<br>→ Setzt Waffe + Level + Upgrades zurück</div>
+      <button class="prestige-btn ${canPrestige?'available':''}" onclick="${canPrestige?'doPrestige()':''}" ${canPrestige?'':'disabled'}>
+        ${canPrestige?'🔥 PRESTIGE! +10% Bonus':'🔒 Noch nicht genug Gesamtgold'}
+      </button>
+    </div>
+    <div style="font-size:12px;color:#555;padding:8px;text-align:center">
+      🏆 Errungenschaften: ${game.achievements.length}/${ACHIEVEMENTS.length}
+    </div>
+  `;
+}
+
+// ===== TABS =====
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',function(){
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    this.classList.add('active');
+    document.getElementById('panel-'+this.dataset.tab).classList.add('active');
+  });
+});
+
+// ===== CLICK HANDLER =====
+document.getElementById('clickBtn').addEventListener('click',clickAttack);
+document.getElementById('clickBtn').addEventListener('touchstart',function(e){
+  e.preventDefault();
+  clickAttack();
+},false);
+
+// ===== AUTO-CLICKER =====
+function autoTick(){
+  const auto=getMult('autoRate')-1;
+  if(auto>0){
+    const w=getWeapon();
+    const baseDmg=w.baseDmg*(1+game.level*0.1);
+    const dps=baseDmg*auto*getMult('dpsMult');
+    const tickGold=Math.floor(dps*0.1*(0.8+Math.random()*0.4));
+    if(tickGold>0){
+      addGold(tickGold);
+      addXp(tickGold);
+      game.totalDamage+=tickGold*5;
+    }
+    checkEvolution();
+    checkAchievements();
+    saveGame();
+    updateUI();
+  }
+}
+
+// ===== OFFLINE PROGRESS =====
+function calcOffline(){
+  const last=game._lastSave||Date.now();
+  const seconds=Math.floor((Date.now()-last)/1000);
+  if(seconds<10)return;
+  const auto=getMult('autoRate')-1;
+  if(auto>0){
+    const w=getWeapon();
+    const baseDmg=w.baseDmg*(1+game.level*0.1);
+    const offlineGold=Math.floor(baseDmg*auto*seconds*0.3);
+    if(offlineGold>0){
+      addGold(offlineGold);
+      addXp(offlineGold);
+      showAchievement(`⏰ Offline-Einkommen: +${formatN(offlineGold)} Gold`);
+    }
+  }
+}
+
+// ===== INIT =====
+loadGame();
+// Migration von alten Spielen
+if(!game.upgrades)game.upgrades={};
+if(!game.achievements)game.achievements=[];
+if(!game.totalClicks)game.totalClicks=0;
+if(!game.totalDamage)game.totalDamage=0;
+if(!game.totalGold)game.totalGold=0;
+
+game._lastSave=Date.now();
+
+updateUI();
+
+// Auto-Save alle 5 Sek
+saveTimer=setInterval(()=>{
+  game._lastSave=Date.now();
+  saveGame();
+},5000);
+
+// Auto-Clicker alle 100ms
+autoInterval=setInterval(autoTick,100);
+
+// Offline-Progress beim Start
+calcOffline();
+
+// Cleanup bei Tab-Wechsel
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){
+    game._lastSave=Date.now();
+    saveGame();
+  }else{
+    calcOffline();
+  }
+});
+
+console.log('⚔️ Weapon Evolution v1.0 geladen!');
+</script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ChemBase – Chemie-Toolkit</title>
+<meta name="description" content="ChemBase – Kostenlose Chemie-Rechner: Molare Masse, Reaktionsgleichungen, Periodensystem, pH-Rechner + Laborequipment">
+<meta name="theme-color" content="#1a1a2e">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a2e;--surface:#16213e;--card:#0f3460;--accent:#e94560;--accent2:#533483;--text:#eee;--text2:#a8a8b8;--border:#233554;--font:'Segoe UI',system-ui,sans-serif;--radius:12px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.container{max-width:1100px;margin:0 auto;padding:16px}
+header{background:var(--surface);border-bottom:2px solid var(--accent);padding:16px 0;position:sticky;top:0;z-index:100}
+.header-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.logo{font-size:24px;font-weight:700;color:var(--accent);text-decoration:none}
+.logo span{background:var(--accent);color:var(--bg);padding:2px 10px;border-radius:6px;font-size:14px}
+nav a{color:var(--text2);text-decoration:none;padding:6px 14px;border-radius:8px;font-size:14px;transition:all .2s}
+nav a:hover{color:var(--accent);background:rgba(233,69,96,.08)}
+.hero{text-align:center;padding:40px 0 24px}
+.hero h1{font-size:clamp(28px,5vw,48px);background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.hero p{color:var(--text2);font-size:18px;max-width:600px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin:24px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .3s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card h3{color:var(--accent);margin-bottom:8px}
+.card p{color:var(--text2);font-size:14px;margin-bottom:16px}
+.input-group{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.input-group label{font-size:13px;color:var(--text2)}
+.input-group input,.input-group select{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-size:15px;width:100%;transition:border .2s}
+.input-group input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(233,69,96,.15)}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--font)}
+.btn:hover{opacity:.9;transform:scale(1.02)}
+.result-box{background:var(--surface);border-radius:8px;padding:14px;margin-top:12px;font-size:15px;line-height:1.7;border-left:3px solid var(--accent);min-height:40px}
+.result-box .label{color:var(--text2);font-size:12px;display:block;margin-bottom:4px}
+.result-box .value{font-size:18px;font-weight:700;color:var(--accent)}
+.ptable{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px}
+.ptable th,.ptable td{border:1px solid var(--border);padding:4px 2px;text-align:center}
+.ptable .nonmetal{background:rgba(233,69,96,.15)}
+.ptable .metal{background:rgba(83,52,131,.15)}
+.ptable .gas{color:#64ffda}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin:20px 0}
+.shop-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.shop-card .emoji{font-size:40px;margin-bottom:6px}
+.shop-card h4{font-size:14px;margin-bottom:4px}
+.shop-card .price{color:var(--accent);font-size:16px;font-weight:700;margin:6px 0}
+.shop-card .btn{width:100%;font-size:12px;padding:8px}
+.ad-placeholder{background:var(--surface);border:1px dashed var(--border);border-radius:var(--radius);padding:20px;text-align:center;color:var(--text2);font-size:13px;margin:24px 0}
+footer{text-align:center;padding:32px 0;color:var(--text2);font-size:13px;border-top:1px solid var(--border);margin-top:40px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.header-inner{flex-direction:column;text-align:center}}
+</style>
+</head>
+<body>
+<header><div class="container header-inner">
+<a href="/" class="logo">⚗️ ChemBase <span>β</span></a>
+<nav><a href="#tools">Tools</a><a href="#shop">Shop</a></nav>
+</div></header>
+<div class="container">
+<section class="hero">
+<h1>Dein Chemie-Werkzeugkasten</h1>
+<p>Molare Massen, Reaktionsgleichungen, Periodensystem, pH-Werte – alles in einem Tool. Für Studenten, Laboranten & Chemiker.</p>
+</section>
+<div class="ad-placeholder">📢 Werbung erscheint hier (Google AdSense)</div>
+<section id="tools">
+<div class="grid">
+<!-- Tool 1: Molare Masse -->
+<div class="card">
+<h3>⚖️ Molare Masse</h3>
+<p>Berechne die molare Masse einer Verbindung.</p>
+<div class="input-group"><label>Summenformel</label><input type="text" id="molFormel" value="H2SO4"></div>
+<button class="btn" onclick="calcMolare()">Berechnen</button>
+<div class="result-box" id="molResult"><span class="label">H₂SO₄</span><span class="value">98,079 g/mol</span></div>
+</div>
+<!-- Tool 2: Reaktionsgleichung -->
+<div class="card">
+<h3>🧪 Reaktionsgleichung</h3>
+<p>Wieviel Produkt entsteht aus X Gramm Edukt?</p>
+<div class="input-group"><label>Edukt (Masse in g)</label><input type="number" id="eduktMasse" value="10" step="any"></div>
+<div class="input-group"><label>Molare Masse Edukt [g/mol]</label><input type="number" id="eduktM" value="98.08" step="any"></div>
+<div class="input-group"><label>Molare Masse Produkt [g/mol]</label><input type="number" id="produktM" value="142.04" step="any"></div>
+<div class="input-group"><label>Stöchiometrischer Faktor (Produkt/Edukt)</label><input type="number" id="faktor" value="1" step="any"></div>
+<button class="btn" onclick="calcStoich()">Berechnen</button>
+<div class="result-box" id="stResult"><span class="label">Ausbeute</span><span class="value">14,48 g Produkt</span></div>
+</div>
+<!-- Tool 3: pH-Rechner -->
+<div class="card">
+<h3>💧 pH-Rechner</h3>
+<p>pH aus H⁺-Konzentration oder umgekehrt.</p>
+<div class="input-group"><label>Modus</label><select id="phMode"><option value="h2ph">[H⁺] → pH</option><option value="ph2h">pH → [H⁺]</option></select></div>
+<div class="input-group"><label>Wert</label><input type="number" id="phInput" value="0.01" step="any"></div>
+<button class="btn" onclick="calcPH()">Berechnen</button>
+<div class="result-box" id="phResult"><span class="label">pH-Wert</span><span class="value">2,00</span></div>
+</div>
+<!-- Tool 4: Periodensystem (Auszug) -->
+<div class="card" style="grid-column:1/-1">
+<h3>📊 Periodensystem (H–Kr)</h3>
+<p>Alle Elemente mit Ordnungszahl, Symbol, Masse.</p>
+<div id="periodicTable"></div>
+</div>
+</div>
+</section>
+<div class="ad-placeholder">📢 Werbung erscheint hier (Google AdSense)</div>
+<section id="shop" style="margin:32px 0">
+<h2 style="color:var(--accent);margin-bottom:16px">🛒 Empfohlenes Chemie-Equipment</h2>
+<div class="shop-grid" id="shopGrid"></div>
+</section>
+</div>
+<footer><div class="container">
+<p>⚗️ ChemBase v0.1 • <a href="#" style="color:var(--accent);text-decoration:none">Affiliate-Links: Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</a></p>
+</div></footer>
+<script>
+const ELEM=[{n:1,s:'H',m:1.008,t:'nm'},{n:2,s:'He',m:4.003,t:'ng'},{n:3,s:'Li',m:6.941,t:'m'},{n:4,s:'Be',m:9.012,t:'m'},{n:5,s:'B',m:10.81,t:'nm'},{n:6,s:'C',m:12.011,t:'nm'},{n:7,s:'N',m:14.007,t:'ng'},{n:8,s:'O',m:15.999,t:'ng'},{n:9,s:'F',m:18.998,t:'ng'},{n:10,s:'Ne',m:20.180,t:'ng'},{n:11,s:'Na',m:22.990,t:'m'},{n:12,s:'Mg',m:24.305,t:'m'},{n:13,s:'Al',m:26.982,t:'m'},{n:14,s:'Si',m:28.086,t:'nm'},{n:15,s:'P',m:30.974,t:'nm'},{n:16,s:'S',m:32.065,t:'nm'},{n:17,s:'Cl',m:35.453,t:'ng'},{n:18,s:'Ar',m:39.948,t:'ng'},{n:19,s:'K',m:39.098,t:'m'},{n:20,s:'Ca',m:40.078,t:'m'},{n:21,s:'Sc',m:44.956,t:'m'},{n:22,s:'Ti',m:47.867,t:'m'},{n:23,s:'V',m:50.942,t:'m'},{n:24,s:'Cr',m:51.996,t:'m'},{n:25,s:'Mn',m:54.938,t:'m'},{n:26,s:'Fe',m:55.845,t:'m'},{n:27,s:'Co',m:58.933,t:'m'},{n:28,s:'Ni',m:58.693,t:'m'},{n:29,s:'Cu',m:63.546,t:'m'},{n:30,s:'Zn',m:65.380,t:'m'},{n:31,s:'Ga',m:69.723,t:'m'},{n:32,s:'Ge',m:72.630,t:'nm'},{n:33,s:'As',m:74.922,t:'nm'},{n:34,s:'Se',m:78.971,t:'nm'},{n:35,s:'Br',m:79.904,t:'ng'},{n:36,s:'Kr',m:83.798,t:'ng'}];
+const TAG='ikune21-21';
+const SHOP=[
+{emoji:'⚗️',name:'Kolben-Set',desc:'Borosilikat 5-tlg',price:'€29',id:'B0C4XMFT9R'},
+{emoji:'🔥',name:'Bunsenbrenner',desc:'Gasbrenner + Schlauch',price:'€22',id:'B0BZ7P7K1Q'},
+{emoji:'⚖️',name:'Analysenwaage',desc:'0,001g Genauigkeit',price:'€59',id:'B0C1PFNLFV'},
+{emoji:'🧪',name:'Reagenzgläser 50er',desc:'Borosilikat 15ml',price:'€18',id:'B0C3XQ7T1K'},
+{emoji:'🧴',name:'pH-Meter',desc:'digital ±0,01',price:'€45',id:'B09N3FMN3Y'},
+{emoji:'📏',name:'Messzylinder-Set',desc:'10/50/100/250ml',price:'€25',id:'B07PN6B1F1'},
+];
+function calcMolare(){
+const f=document.getElementById('molFormel').value.trim();
+const m=f.match(/([A-Z][a-z]?)(\d*\.?\d*)/g);if(!m){dok('molResult','❌ Ungültig');return}
+let s=0;const d=[];
+for(const x of m){const[,el,z]=x.match(/([A-Z][a-z]?)(\d*\.?\d*)/);const c=z?parseFloat(z):1;const e=ELEM.find(e=>e.s===el);if(!e){dok('molResult',`❌ ${el} unbekannt`);return}s+=e.m*c;d.push(`${el}: ${e.m}×${c}`)}
+dok('molResult',`<span class="label">${f}</span><span class="value">${s.toFixed(3)} g/mol</span><span style="font-size:12px;color:var(--text2);display:block;margin-top:4px">${d.join(' + ')}</span>`)
+}
+function calcStoich(){
+const em=parseFloat(document.getElementById('eduktMasse').value);
+const eM=parseFloat(document.getElementById('eduktM').value);
+const pM=parseFloat(document.getElementById('produktM').value);
+const f=parseFloat(document.getElementById('faktor').value);
+if(!em||!eM||!pM||!f){dok('stResult','❌ Alle Felder ausfüllen');return}
+const mol=em/eM;const p=mol*f*pM;
+dok('stResult',`<span class="label">n = ${em}/${eM} = ${mol.toFixed(4)} mol<br>m(Produkt) = ${mol.toFixed(4)} × ${f} × ${pM}</span><span class="value">${p.toFixed(2)} g Produkt</span>`)
+}
+function calcPH(){
+const mode=document.getElementById('phMode').value;
+const v=parseFloat(document.getElementById('phInput').value);
+if(v<=0){dok('phResult','❌ Wert muss >0 sein');return}
+if(mode==='h2ph'){const ph=-Math.log10(v);dok('phResult',`<span class="label">[H⁺] = ${v} mol/L</span><span class="value">pH = ${ph.toFixed(2)}</span>`)}
+else{const h=Math.pow(10,-v);dok('phResult',`<span class="label">pH = ${v}</span><span class="value">[H⁺] = ${h.toExponential(3)} mol/L</span>`)}
+}
+function buildPT(){
+let html='<table class="ptable"><tr><th>#</th><th>Symbol</th><th>M (g/mol)</th><th>Typ</th></tr>';
+for(const e of ELEM){
+const cls=e.t==='ng'?'gas':e.t==='nm'?'nonmetal':'metal';
+html+=`<tr class="${cls}"><td>${e.n}</td><td><strong>${e.s}</strong></td><td>${e.m.toFixed(3)}</td><td>${e.t==='ng'?'Gas':e.t==='nm'?'Nichtmetall':'Metall'}</td></tr>`;
+}
+html+='</table>';document.getElementById('periodicTable').innerHTML=html;
+}
+function buildShop(){
+const g=document.getElementById('shopGrid');
+g.innerHTML=SHOP.map(p=>`<div class="shop-card"><div class="emoji">${p.emoji}</div><h4>${p.name}</h4><p>${p.desc}</p><div class="price">${p.price}</div><a href="https://www.amazon.de/dp/${p.id}?tag=${TAG}" target="_blank" rel="sponsored" class="btn">🛒 Auf Amazon</a></div>`).join('');
+}
+function dok(id,html){document.getElementById(id).innerHTML=html}
+buildPT();buildShop();calcMolare();
+</script>
+</body>
+</html>
