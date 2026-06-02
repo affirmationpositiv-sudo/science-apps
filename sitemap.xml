@@ -598,4 +598,18 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- KI-Gaming & Entertainment 2026 (Blog #34) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-gaming-entertainment-2026.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- KI-Gaming-Berater (Tool #14) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-gaming-berater.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
