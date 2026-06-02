@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bestellung – Licht & Schatten Verlag</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, sans-serif; background:#0a0a0a; color:#e0e0e0; padding:20px; }
+  .container { max-width:600px; margin:0 auto; }
+  h1 { color:#d4a843; font-size:1.8em; margin-bottom:20px; text-align:center; }
+  .product { background:#111; border:1px solid #222; border-radius:12px; padding:20px; margin-bottom:15px; }
+  .product h3 { color:#fff; margin-bottom:5px; }
+  .product .price { color:#d4a843; font-weight:700; }
+  .product .desc { color:#888; font-size:.9em; margin:8px 0; }
+  input,select,textarea { width:100%; padding:12px; border-radius:8px; border:1px solid #333; background:#1a1a1a; color:#fff; margin-bottom:15px; font-size:1em; }
+  button { width:100%; padding:14px; border-radius:8px; border:none; background:#d4a843; color:#0a0a0a; font-weight:600; font-size:1.1em; cursor:pointer; }
+  .paypal-info { background:#1a1a1a; border:1px solid #333; border-radius:12px; padding:20px; margin-top:20px; }
+  .paypal-info h3 { color:#d4a843; margin-bottom:10px; }
+  .paypal-info p { color:#888; font-size:.9em; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📚 Bestellung Licht & Schatten Verlag</h1>
+  
+  <div class="paypal-info">
+    <h3>💳 Zahlung via PayPal</h3>
+    <p>Sende den Betrag an: <strong>affirmation.positiv@gmail.com</strong></p>
+    <p>Nach Zahlungseingang erhältst du das PDF per E-Mail.</p>
+  </div>
+  
+  <form id="orderForm">
+    <label style="color:#888;margin-bottom:5px;display:block;">Buch auswählen:</label>
+    <select id="product" required>
+      <option value="">-- Bitte wählen --</option>
+      <option value="Passives Einkommen mit KI 2026 (9,99€)">Passives Einkommen mit KI 2026 – 9,99€</option>
+      <option value="KI-Tools für Anfänger 2026 (8,99€)">KI-Tools für Anfänger 2026 – 8,99€</option>
+      <option value="Duales Studium 2026 (9,99€)">Duales Studium 2026 – 9,99€</option>
+      <option value="Steuererklärung 2026 (9,99€)">Steuererklärung 2026 – 9,99€</option>
+      <option value="Notvorrat für Familien 2026 (7,99€)">Notvorrat für Familien 2026 – 7,99€</option>
+      <option value="Krypto für Anfänger 2026 (8,99€)">Krypto für Anfänger 2026 – 8,99€</option>
+      <option value="KI-Kunst 2026 (8,99€)">KI-Kunst 2026 – 8,99€</option>
+      <option value="ChatGPT für Handwerker 2026 (8,99€)">ChatGPT für Handwerker 2026 – 8,99€</option>
+    </select>
+    
+    <label style="color:#888;margin-bottom:5px;display:block;">Deine E-Mail (für den PDF-Versand):</label>
+    <input type="email" id="email" placeholder="deine@email.de" required>
+    
+    <label style="color:#888;margin-bottom:5px;display:block;">Dein Name:</label>
+    <input type="text" id="name" placeholder="Max Mustermann" required>
+    
+    <label style="color:#888;margin-bottom:5px;display:block;">Nachricht (optional):</label>
+    <textarea id="message" rows="3" placeholder="..."></textarea>
+    
+    <button type="submit">📧 Bestellung absenden</button>
+  </form>
+  
+  <p style="text-align:center;color:#555;font-size:.8em;margin-top:15px;">
+    Nach dem Absenden erhältst du die PayPal-Informationen per E-Mail.
+  </p>
+</div>
+
+<script>
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const product = document.getElementById('product').value;
+  const email = document.getElementById('email').value;
+  const name = document.getElementById('name').value;
+  const message = document.getElementById('message').value;
+  
+  const mailto = `mailto:affirmation.positiv@gmail.com?subject=Bestellung: ${encodeURIComponent(product)}&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AProdukt: ${encodeURIComponent(product)}%0ANachricht: ${encodeURIComponent(message)}%0A%0ABitte sende mir die PayPal-Zahlungsinformationen.`;
+  
+  window.location.href = mailto;
+});
+</script>
+</body>
+</html>
