@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Fitness-Trainer 2026 – Dein persönlicher Workout-Plan Generator</title>
+<meta name="description" content="Kostenloser KI-Fitness-Trainer: Beantworte 5 Fragen zu deinem Fitness-Level, Zielen & Ausrüstung. Erhalte einen personalisierten 7-Tage-Workout-Plan mit KI-Empfehlungen und Amazon-Produktlinks (tag=ikune21-21).">
+<meta name="keywords" content="KI-Fitness-Trainer, Workout-Plan Generator, Fitness-Level Test, Personal Training KI, Trainingsplan erstellen, kostenlos, Licht und Schatten">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="KI-Fitness-Trainer 2026 – Persönlicher Workout-Plan Generator">
+<meta property="og:description" content="Finde in 2 Minuten deinen perfekten Trainingsplan! KI-gestützter Fitness-Trainer mit personalisierten Workouts & Produktempfehlungen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-fitness-trainer.html">
+<meta property="og:site_name" content="Licht und Schatten Tools">
+<meta property="og:locale" content="de_DE">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.6;min-height:100vh}
+.header{background:linear-gradient(135deg,#f97316,#ef4444);padding:40px 20px;text-align:center;color:#fff}
+.header h1{font-size:2.5em;font-weight:800;margin-bottom:8px}
+.header p{font-size:1.1em;opacity:.9}
+.container{max-width:700px;margin:0 auto;padding:30px 20px}
+/* Steps */
+.steps{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+.step{width:40px;height:40px;border-radius:50%;background:#1a1a2e;color:#666;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9em;border:2px solid #2a2a3e;transition:all .3s}
+.step.active{background:#f97316;border-color:#f97316;color:#fff;transform:scale(1.1)}
+.step.done{background:#22c55e;border-color:#22c55e;color:#fff}
+.card{background:#111118;border:1px solid #1a1a2e;border-radius:16px;padding:30px;margin-bottom:20px}
+.card h2{color:#f97316;font-size:1.5em;margin-bottom:8px}
+.card .sub{color:#888;font-size:.95em;margin-bottom:20px}
+/* Options grid */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.option{background:#1a1a2e;border:2px solid #2a2a3e;border-radius:12px;padding:16px;text-align:center;cursor:pointer;transition:all .3s;color:#e0e0e0}
+.option:hover{border-color:#f97316;background:#1e1e32}
+.option.selected{border-color:#f97316;background:#1e1e32;box-shadow:0 0 15px rgba(249,115,22,.2)}
+.option .emoji{font-size:2em;margin-bottom:6px}
+.option .label{font-weight:600;font-size:1em}
+.option .desc{font-size:.85em;color:#888;margin-top:4px}
+.btn{display:block;width:100%;padding:16px;background:#f97316;color:#fff;border:none;border-radius:12px;font-size:1.1em;font-weight:700;cursor:pointer;transition:all .3s}
+.btn:hover{background:#ea580c;transform:translateY(-2px)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-back{background:#2a2a3e;margin-bottom:12px}
+.btn-back:hover{background:#3a3a4e}
+/* Results */
+.result-card{background:#111118;border:1px solid #1a1a2e;border-radius:16px;padding:30px;margin-bottom:20px}
+.result-card h2{color:#22c55e;font-size:1.6em;margin-bottom:15px;text-align:center}
+.result-card .summary{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:20px;border-left:4px solid #f97316}
+.result-card .summary p{margin-bottom:6px}
+.result-card .summary strong{color:#f97316}
+.day-card{background:#1a1a2e;border-radius:12px;padding:16px;margin-bottom:12px;border-left:4px solid #f97316}
+.day-card .day-title{color:#fb923c;font-weight:700;font-size:1.1em;margin-bottom:6px}
+.day-card .exercises{color:#ccc;font-size:.95em;line-height:1.8}
+.day-card .exercises strong{color:#22c55e}
+.affiliate-section{background:#0d1b2a;border:1px solid #0284c7;border-radius:12px;padding:20px;margin:20px 0;text-align:center}
+.affiliate-section h3{color:#0284c7;margin-bottom:12px}
+.affiliate-section a{display:inline-block;background:#0284c7;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin:4px}
+.affiliate-section a:hover{background:#0369a1}
+.tips{background:#1a1a2e;border-radius:12px;padding:20px;margin:20px 0}
+.tips h3{color:#22c55e;margin-bottom:10px}
+.tips li{margin-bottom:8px;color:#ccc}
+.share{text-align:center;margin:20px 0}
+.share a{color:#f97316;text-decoration:none;margin:0 10px}
+.hidden{display:none}
+footer{text-align:center;padding:30px;color:#555;font-size:.85em}
+footer a{color:#f97316;text-decoration:none}
+@media(max-width:600px){.header h1{font-size:1.8em}.options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏋️ KI-Fitness-Trainer 2026</h1>
+  <p>Beantworte 5 Fragen – erhalte deinen personalisierten 7-Tage-Workout-Plan</p>
+</div>
+
+<div class="container">
+
+  <!-- Steps indicator -->
+  <div class="steps" id="steps">
+    <div class="step active">1</div>
+    <div class="step">2</div>
+    <div class="step">3</div>
+    <div class="step">4</div>
+    <div class="step">5</div>
+  </div>
+
+  <!-- Question 1: Fitness Level -->
+  <div class="card" id="q1">
+    <h2>📊 Frage 1 von 5</h2>
+    <p class="sub">Was ist dein aktuelles Fitness-Level?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this,'q1')" data-value="beginner">
+        <div class="emoji">🌱</div>
+        <div class="label">Anfänger</div>
+        <div class="desc">Wenig bis keine Erfahrung</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q1')" data-value="intermediate">
+        <div class="emoji">💪</div>
+        <div class="label">Fortgeschritten</div>
+        <div class="desc">Regelmäßig, aber nicht perfekt</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q1')" data-value="advanced">
+        <div class="emoji">🏆</div>
+        <div class="label">Profi</div>
+        <div class="desc">Langjährige Erfahrung</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q1')" data-value="athlete">
+        <div class="emoji">🔥</div>
+        <div class="label">Athlet</div>
+        <div class="desc">Wettkampf-Niveau</div>
+      </div>
+    </div>
+    <button class="btn" onclick="nextQuestion('q1','q2')" disabled>Weiter →</button>
+  </div>
+
+  <!-- Question 2: Goal -->
+  <div class="card hidden" id="q2">
+    <h2>🎯 Frage 2 von 5</h2>
+    <p class="sub">Was ist dein Hauptziel?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this,'q2')" data-value="fat-loss">
+        <div class="emoji">🔥</div>
+        <div class="label">Fettabbau</div>
+        <div class="desc">Abnehmen & definieren</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q2')" data-value="muscle">
+        <div class="emoji">💪</div>
+        <div class="label">Muskelaufbau</div>
+        <div class="desc">Mehr Kraft & Masse</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q2')" data-value="endurance">
+        <div class="emoji">🏃</div>
+        <div class="label">Ausdauer</div>
+        <div class="desc">Bessere Kondition</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q2')" data-value="general">
+        <div class="emoji">🧘</div>
+        <div class="label">Allgemein</div>
+        <div class="desc">Gesünder leben</div>
+      </div>
+    </div>
+    <button class="btn btn-back" onclick="prevQuestion('q2','q1')">← Zurück</button>
+    <button class="btn" onclick="nextQuestion('q2','q3')" disabled>Weiter →</button>
+  </div>
+
+  <!-- Question 3: Equipment -->
+  <div class="card hidden" id="q3">
+    <h2>🏋️ Frage 3 von 5</h2>
+    <p class="sub">Welche Ausrüstung hast du verfügbar?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this,'q3')" data-value="none">
+        <div class="emoji">🪑</div>
+        <div class="label">Nur Körpergewicht</div>
+        <div class="desc">Keine Geräte</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q3')" data-value="minimal">
+        <div class="emoji">🏋️</div>
+        <div class="label">Minimal</div>
+        <div class="desc">Widerstandsbänder + Matte</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q3')" data-value="medium">
+        <div class="emoji">💪</div>
+        <div class="label">Gut ausgestattet</div>
+        <div class="desc">Hanteln + Bank</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q3')" data-value="full">
+        <div class="emoji">🏛️</div>
+        <div class="label">Fitnessstudio</div>
+        <div class="desc">Volles Gym</div>
+      </div>
+    </div>
+    <button class="btn btn-back" onclick="prevQuestion('q3','q2')">← Zurück</button>
+    <button class="btn" onclick="nextQuestion('q3','q4')" disabled>Weiter →</button>
+  </div>
+
+  <!-- Question 4: Time per session -->
+  <div class="card hidden" id="q4">
+    <h2>⏰ Frage 4 von 5</h2>
+    <p class="sub">Wie viel Zeit hast du pro Trainingseinheit?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this,'q4')" data-value="15">
+        <div class="emoji">⚡</div>
+        <div class="label">15-20 Minuten</div>
+        <div class="desc">Schnelle Einheiten</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q4')" data-value="30">
+        <div class="emoji">👍</div>
+        <div class="label">30 Minuten</div>
+        <div class="desc">Effizientes Training</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q4')" data-value="45">
+        <div class="emoji">💪</div>
+        <div class="label">45 Minuten</div>
+        <div class="desc">Normales Workout</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q4')" data-value="60">
+        <div class="emoji">🔥</div>
+        <div class="label">60+ Minuten</div>
+        <div class="desc">Lange Einheiten</div>
+      </div>
+    </div>
+    <button class="btn btn-back" onclick="prevQuestion('q4','q3')">← Zurück</button>
+    <button class="btn" onclick="nextQuestion('q4','q5')" disabled>Weiter →</button>
+  </div>
+
+  <!-- Question 5: Days per week -->
+  <div class="card hidden" id="q5">
+    <h2>📅 Frage 5 von 5</h2>
+    <p class="sub">Wie oft kannst du pro Woche trainieren?</p>
+    <div class="options">
+      <div class="option" onclick="selectOption(this,'q5')" data-value="2">
+        <div class="emoji">🌱</div>
+        <div class="label">2 Tage</div>
+        <div class="desc">Minimal-Aufwand</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q5')" data-value="3">
+        <div class="emoji">👍</div>
+        <div class="label">3 Tage</div>
+        <div class="desc">Guter Rhythmus</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q5')" data-value="4">
+        <div class="emoji">💪</div>
+        <div class="label">4 Tage</div>
+        <div class="desc">Regelmäßig</div>
+      </div>
+      <div class="option" onclick="selectOption(this,'q5')" data-value="5">
+        <div class="emoji">🔥</div>
+        <div class="label">5+ Tage</div>
+        <div class="desc">Intensiv</div>
+      </div>
+    </div>
+    <button class="btn btn-back" onclick="prevQuestion('q5','q4')">← Zurück</button>
+    <button class="btn" onclick="generatePlan()">🎯 KI-Plan erstellen!</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="hidden" id="results">
+    <div class="result-card" id="planContent">
+      <h2>🏋️ Dein persönlicher KI-Workout-Plan</h2>
+      <div class="summary" id="planSummary"></div>
+      <div id="planDays"></div>
+    </div>
+
+    <!-- Affiliate Section -->
+    <div class="affiliate-section">
+      <h3>🛒 Fitness-Produkte für dein Workout</h3>
+      <a href="https://www.amazon.de/s?k=fitness+matte+yoga+training&tag=ikune21-21" target="_blank">🧘 Fitness-Matte</a>
+      <a href="https://www.amazon.de/s?k=widerstandsbaender+fitness+set&tag=ikune21-21" target="_blank">🏋️ Widerstandsbänder</a>
+      <a href="https://www.amazon.de/s?k=kurzhantel+set+verstellbar&tag=ikune21-21" target="_blank">💪 Hantelset</a>
+      <a href="https://www.amazon.de/s?k=fitness+tracker+smartwatch&tag=ikune21-21" target="_blank">⌚ Fitness-Tracker</a>
+      <a href="https://www.amazon.de/s?k=sport+bekleidung+herren+damen&tag=ikune21-21" target="_blank">👕 Sportbekleidung</a>
+      <a href="https://www.amazon.de/s?k=trinkflasche+sport+isoliert&tag=ikune21-21" target="_blank">🧴 Trinkflasche</a>
+      <a href="https://www.amazon.de/s?k=protein+pulver+vegan&tag=ikune21-21" target="_blank">🥤 Protein-Pulver</a>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips">
+      <h3>💡 KI-Fitness-Tipps</h3>
+      <ul>
+        <li><strong>Progression:</strong> Erhöhe jede Woche das Gewicht um 2,5-5% oder die Wiederholungen um 1-2.</li>
+        <li><strong>Erholung:</strong> 7-9 Stunden Schlaf sind genauso wichtig wie das Training selbst.</li>
+        <li><strong>Ernährung:</strong> Zu jedem Workout gehört die passende Ernährung – tracke deine Makros mit einer KI-App wie MacroFactor.</li>
+        <li><strong>Wasser:</strong> Trinke 0,03 Liter pro kg Körpergewicht – bei Sport mehr.</li>
+        <li><strong>Dehnen:</strong> Integriere 5-10 Minuten Mobility am Ende jeder Einheit.</li>
+      </ul>
+    </div>
+
+    <div class="share">
+      <a href="ki-fitness-personal-training-2026.html" target="_blank">📝 Zum Blog-Artikel (KI-Fitness 2026)</a> · 
+      <a href="#" onclick="window.print()">🖨️ Plan drucken</a> · 
+      <a href="#" onclick="resetQuiz()">🔄 Neuen Plan erstellen</a>
+    </div>
+
+    <!-- Disclaimer -->
+    <p style="font-size:0.8em;color:#666;text-align:center;margin-top:20px">
+      <strong>Affiliate-Hinweis:</strong> Enthält Affiliate-Links (Amazon-Partner, tag=ikune21-21). 
+      Bei Kauf erhalten wir eine kleine Provision – für dich keine Mehrkosten.
+    </p>
+  </div>
+</div>
+
+<footer>
+  <a href="../index.html">🏪 Startseite</a> · 
+  <a href="../blog/">📝 Blog</a> · 
+  <a href="../store.html">🛒 Shop</a> · 
+  <a href="index.html">🧰 Tools</a><br>
+  <span style="font-size:0.85em">© 2026 <strong>Licht und Schatten</strong> Verlag. Amazon-Partner (tag=ikune21-21)</span>
+</footer>
+
+<script>
+// State
+let answers = {};
+
+function selectOption(el, questionId) {
+  const parent = document.getElementById(questionId);
+  parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  answers[questionId] = el.dataset.value;
+  parent.querySelector('.btn:not(.btn-back)').disabled = false;
+}
+
+function nextQuestion(current, next) {
+  document.getElementById(current).classList.add('hidden');
+  document.getElementById(next).classList.remove('hidden');
+  updateSteps(current, next);
+}
+
+function prevQuestion(current, prev) {
+  document.getElementById(current).classList.add('hidden');
+  document.getElementById(prev).classList.remove('hidden');
+  updateStepsBack(current, prev);
+}
+
+function updateSteps(from, to) {
+  const fromNum = parseInt(from[1]);
+  const toNum = parseInt(to[1]);
+  const steps = document.querySelectorAll('.step');
+  steps[fromNum-1].classList.remove('active');
+  steps[fromNum-1].classList.add('done');
+  steps[toNum-1].classList.add('active');
+}
+
+function updateStepsBack(from, to) {
+  const fromNum = parseInt(from[1]);
+  const toNum = parseInt(to[1]);
+  const steps = document.querySelectorAll('.step');
+  steps[fromNum-1].classList.remove('active');
+  steps[fromNum-1].classList.remove('done');
+  steps[toNum-1].classList.add('active');
+}
+
+function generatePlan() {
+  const level = answers['q1'];
+  const goal = answers['q2'];
+  const equipment = answers['q3'];
+  const minutes = parseInt(answers['q4']);
+  const days = parseInt(answers['q5']);
+
+  // Hide all questions
+  ['q1','q2','q3','q4','q5'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  // Mark all steps done
+  document.querySelectorAll('.step').forEach(s => { s.classList.remove('active'); s.classList.add('done'); });
+
+  // Generate summary
+  const levelNames = {beginner:'Anfänger', intermediate:'Fortgeschritten', advanced:'Profi', athlete:'Athlet'};
+  const goalNames = {'fat-loss':'Fettabbau', muscle:'Muskelaufbau', endurance:'Ausdauer', general:'Allgemein'};
+  const equipNames = {none:'Körpergewicht', minimal:'Minimal', medium:'Gut ausgestattet', full:'Fitnessstudio'};
+
+  document.getElementById('planSummary').innerHTML = `
+    <p><strong>📊 Dein Profil:</strong></p>
+    <p>Level: ${levelNames[level]} · Ziel: ${goalNames[goal]} · Ausrüstung: ${equipNames[equipment]} · Zeit: ${minutes} Min · Trainingstage: ${days}/Woche</p>
+  `;
+
+  // Generate workout plans
+  const planHTML = generateWorkoutPlan(level, goal, equipment, minutes, days);
+  document.getElementById('planDays').innerHTML = planHTML;
+
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+
+function generateWorkoutPlan(level, goal, equipment, minutes, days) {
+  const exercises = {
+    pushups: 'Liegestütze',
+    squat: 'Kniebeugen',
+    lunge: 'Ausfallschritte',
+    plank: 'Plank (Unterarmstütz)',
+    bridge: 'Brücke (Glute Bridge)',
+    dips: 'Dips (Stuhl/Bank)',
+    rows: 'Rudern (Tischkante/Band)',
+    burpees: 'Burpees',
+    jumping_jacks: 'Hampelmänner',
+    mountain_climbers: 'Mountain Climbers',
+    situps: 'Sit-Ups',
+    superman: 'Superman (Rücken)',
+    wall_sit: 'Wandsitzen',
+    calf_raises: 'Wadenheben',
+    bicycle_crunches: 'Bicycle Crunches',
+    leg_raises: 'Beinheben',
+    glute_kickbacks: 'Glute Kickbacks',
+    tricep_dips: 'Trizeps-Dips',
+    step_ups: 'Step-Ups',
+    reverse_lunge: 'Reverse Ausfallschritte',
+    // Equipment exercises
+    band_row: 'Bandrudern',
+    band_press: 'Banddrücken',
+    band_overhead: 'Band-Overhead-Press',
+    db_press: 'Kurzhantel-Bankdrücken',
+    db_row: 'Kurzhantel-Rudern',
+    db_ohp: 'Kurzhantel-Overhead-Press',
+    db_bicep: 'Kurzhantel-Curls',
+    db_tricep: 'Kurzhantel-Überzug',
+    goblet_squat: 'Goblet Squats',
+    db_lunge: 'Kurzhantel-Ausfallschritte',
+    db_deadlift: 'Kurzhantel-Kreuzheben',
+    db_swing: 'Kurzhantel-Swing',
+    // Gym exercises
+    bench_press: 'Bankdrücken (Langhantel)',
+    squat_bar: 'Kniebeuge (Langhantel)',
+    deadlift: 'Kreuzheben (Langhantel)',
+    ohp_bar: 'Schulterdrücken (Langhantel)',
+    pullups: 'Klimmzüge',
+    barbell_row: 'Langhantel-Rudern',
+    leg_press: 'Beinpresse',
+    cable_row: 'Kabelzug-Rudern',
+    lat_pulldown: 'Lat Pulldown',
+    tricep_pushdown: 'Trizeps Pushdown',
+    face_pull: 'Face Pull',
+    bulgarian_split: 'Bulgarian Split Squats',
+    romanian_deadlift: 'Rumänisches Kreuzheben',
+    hip_thrust: 'Hip Thrust',
+    farmers_walk: 'Farmers Walk',
+    box_jump: 'Box Jumps',
+    cardio_run: 'Laufen/Cardio 15 Min',
+    cardio_cycle: 'Fahrrad 15 Min',
+  };
+
+  // Build day plans
+  const dayNames = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'];
+  const intensityBase = level === 'beginner' ? 2 : level === 'intermediate' ? 3 : level === 'advanced' ? 4 : 5;
+  const repsBase = level === 'beginner' ? '8-12' : level === 'intermediate' ? '10-15' : '8-12 (schwer)';
+  const setsBase = level === 'beginner' ? '3' : '4';
+  const restBase = level === 'beginner' ? '60s' : level === 'intermediate' ? '45s' : '30-60s';
+
+  let html = '';
+  let activeDays = 0;
+
+  for (let d = 0; d < 7 && activeDays < days; d++) {
+    // Skip weekends if 2-3 days
+    if (days <= 2 && (d === 5 || d === 6)) continue;
+    if (days === 3 && d === 6) continue;
+    if (days === 3 && (d === 2 || d === 4)) continue;
+    if (days === 2 && d !== 0 && d !== 3) continue;
+
+    activeDays++;
+    let dayExercises = [];
+    let focus = '';
+
+    // Split by goal
+    if (goal === 'muscle') {
+      if (activeDays === 1 || activeDays === 4) focus = '💪 Oberkörper';
+      else focus = '🦵 Unterkörper';
+    } else if (goal === 'fat-loss') {
+      if (activeDays % 2 === 1) focus = '🔥 HIIT/Kraft';
+      else focus = '🏃 Cardio/Core';
+    } else if (goal === 'endurance') {
+      focus = '🏃 Ausdauer';
+    } else {
+      if (activeDays % 2 === 1) focus = '🏋️ Ganzkörper';
+      else focus = '🧘 Core/Mobility';
+    }
+
+    // Build exercise list based on equipment
+    if (equipment === 'full') {
+      // Gym exercises
+      if (focus.includes('Oberkörper')) {
+        dayExercises = [
+          `${exercises.bench_press} – ${setsBase}×${repsBase}`,
+          `${exercises.barbell_row} – ${setsBase}×${repsBase}`,
+          `${exercises.ohp_bar} – ${setsBase}×10-12`,
+          `${exercises.pullups} – ${setsBase}×max`,
+          `${exercises.tricep_pushdown} – 3×12-15`,
+          `${exercises.face_pull} – 3×15-20`,
+        ];
+      } else if (focus.includes('Unterkörper')) {
+        dayExercises = [
+          `${exercises.squat_bar} – ${setsBase}×${repsBase}`,
+          `${exercises.romanian_deadlift} – ${setsBase}×10-12`,
+          `${exercises.bulgarian_split} – 3×10-12 pro Bein`,
+          `${exercises.leg_press} – 3×12-15`,
+          `${exercises.hip_thrust} – 3×12-15`,
+          `${exercises.farmers_walk} – 3×30s`,
+        ];
+      } else if (focus.includes('HIIT')) {
+        dayExercises = [
+          `${exercises.box_jump} – 4×8`,
+          `${exercises.burpees} – 4×10`,
+          `${exercises.squat_bar} – 4×8-10 (leicht)`,
+          `${exercises.mountain_climbers} – 3×30s`,
+          `${exercises.cardio_cycle} – 15 Min Intervall`,
+        ];
+      } else if (focus.includes('Ausdauer')) {
+        dayExercises = [
+          `Laufband/Crosstrainer 20-30 Min (HIIT)`,
+          `${exercises.burpees} – 3×10`,
+          `${exercises.box_jump} – 3×8`,
+          `${exercises.mountain_climbers} – 3×30s`,
+          `${exercises.jumping_jacks} – 3×30s`,
+        ];
+      } else {
+        dayExercises = [
+          `${exercises.deadlift} – 3×8-10`,
+          `${exercises.ohp_bar} – 3×10-12`,
+          `${exercises.pullups} – 3×max`,
+          `${exercises.plank} – 3×45s`,
+          `${exercises.situps} – 3×15-20`,
+          `${exercises.cardio_run} – 15 Min`,
+        ];
+      }
+    } else if (equipment === 'medium') {
+      if (focus.includes('Oberkörper')) {
+        dayExercises = [
+          `${exercises.db_press} – ${setsBase}×${repsBase}`,
+          `${exercises.db_row} – ${setsBase}×${repsBase}`,
+          `${exercises.db_ohp} – ${setsBase}×10-12`,
+          `${exercises.pushups} – 3×15-20`,
+          `${exercises.db_bicep} – 3×12-15`,
+          `${exercises.tricep_dips} – 3×max`,
+        ];
+      } else if (focus.includes('Unterkörper')) {
+        dayExercises = [
+          `${exercises.goblet_squat} – ${setsBase}×${repsBase}`,
+          `${exercises.db_deadlift} – ${setsBase}×10-12`,
+          `${exercises.db_lunge} – 3×10-12 pro Bein`,
+          `${exercises.calf_raises} – 3×20-25`,
+          `${exercises.glute_kickbacks} – 3×15-20`,
+          `${exercises.wall_sit} – 3×30-45s`,
+        ];
+      } else {
+        dayExercises = [
+          `${exercises.db_swing} – ${setsBase}×12-15`,
+          `${exercises.goblet_squat} – 3×12-15`,
+          `${exercises.pushups} – 3×15-20`,
+          `${exercises.rows} – 3×12-15`,
+          `${exercises.plank} – 3×45s`,
+          `${exercises.lunge} – 3×12 pro Bein`,
+        ];
+      }
+    } else if (equipment === 'minimal') {
+      dayExercises = [
+        `${exercises.pushups} – ${setsBase}×15-20`,
+        `${exercises.band_row} – ${setsBase}×15`,
+        `${exercises.squat} – ${setsBase}×20-25`,
+        `${exercises.band_press} – ${setsBase}×15`,
+        `${exercises.plank} – 3×45s`,
+        `${exercises.reverse_lunge} – 3×12 pro Bein`,
+      ];
+    } else {
+      // Bodyweight only
+      if (focus.includes('HIIT') || focus.includes('Cardio')) {
+        dayExercises = [
+          `${exercises.burpees} – 3×10-15`,
+          `${exercises.jumping_jacks} – 3×30s`,
+          `${exercises.mountain_climbers} – 3×30s`,
+          `${exercises.squat} – 3×20`,
+          `${exercises.lunge} – 3×12 pro Bein`,
+          `${exercises.plank} – 3×30s`,
+        ];
+      } else if (focus.includes('Core')) {
+        dayExercises = [
+          `${exercises.plank} – 4×45s`,
+          `${exercises.bicycle_crunches} – 3×20`,
+          `${exercises.leg_raises} – 3×15`,
+          `${exercises.superman} – 3×15`,
+          `${exercises.burpees} – 3×10`,
+          `${exercises.pushups} – 3×15`,
+        ];
+      } else {
+        dayExercises = [
+          `${exercises.pushups} – ${setsBase}×15-25`,
+          `${exercises.squat} – ${setsBase}×20-30`,
+          `${exercises.lunge} – 3×12-15 pro Bein`,
+          `${exercises.glute_bridge} – ${setsBase}×15-20`,
+          `${exercises.dips} – 3×12-15`,
+          `${exercises.plank} – 3×30-45s`,
+        ];
+      }
+    }
+
+    // Adjust for beginner
+    if (level === 'beginner') {
+      dayExercises = dayExercises.slice(0, 4);
+      dayExercises.push(`<strong>Extra:</strong> 5-10 Min lockeres Auslaufen + Dehnen`);
+    }
+
+    // Add note about time
+    dayExercises.push(`<em>⏱️ Zielzeit: ca. ${minutes} Minuten (inkl. 5 Min Aufwärmen + Dehnen)</em>`);
+
+    html += `<div class="day-card">
+      <div class="day-title">📅 ${dayNames[d]} – ${focus}</div>
+      <div class="exercises">${dayExercises.join('<br>')}</div>
+    </div>`;
+  }
+
+  // Add warmup and cooldown notes
+  html += `<div class="info-box" style="background:#0d1b2a;border-radius:12px;padding:16px;margin-top:16px;border-left:4px solid #0284c7;">
+    <p style="color:#b0c4ff;font-size:.95rem;margin:0;">
+      <strong>🔥 Aufwärmen (vor jedem Workout):</strong> 5 Min leichte Cardio (Jumping Jacks, Hampelmann, auf der Stelle laufen) + dynamisches Dehnen.<br>
+      <strong>🧘 Cool-Down (nach jedem Workout):</strong> 5 Min statisches Dehnen + tiefe Atemzüge.
+    </p>
+  </div>`;
+
+  return html;
+}
+
+function resetQuiz() {
+  // Reset all
+  answers = {};
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('.btn:not(.btn-back)').forEach(b => b.disabled = true);
+  document.querySelectorAll('.step').forEach((s,i) => {
+    s.classList.remove('done');
+    s.classList.toggle('active', i === 0);
+  });
+  document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+  document.getElementById('q1').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>

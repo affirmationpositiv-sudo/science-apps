@@ -534,4 +534,20 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog Artikel #30: KI-Fitness & Personal Training 2026 (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/ki-fitness-personal-training-2026.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tools: KI-Fitness-Trainer (NEU) -->
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-fitness-trainer.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>
