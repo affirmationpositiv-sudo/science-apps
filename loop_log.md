@@ -615,3 +615,52 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 2. 🔴 **Neues interaktives Tool**: KI-Steuerrechner
 3. 🟡 **KDP Account erstellen** (User-Aktion nötig)
 4. 🟡 **Google Search Console einrichten**
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.22)
+
+### Previous State (R2.21):
+- 24 Blog-Artikel live, 9 interaktive Tools, 8 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #25 (KI-Bildbearbeitung) live, Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.22):
+- [x] **Survey:** Site live (200 OK), Git clean, 24 Blog-Artikel, 9 Tools, alles funktionsfähig
+- [x] **Blog-Artikel #26 erstellt:** "KI-Studium & KI-Ausbildung 2026: Die 10 besten Kurse, Studiengänge & Zertifikate" (24 KB HTML, ~3.800 Wörter, 10 Abschnitte, 90-Tage-Fahrplan, 20+ Amazon-Affiliate-Links tag=ikune21-21, 4× Hardware-Kategorien mit Amazon-Links, Vergleichstabellen, Cross-Links zu Artikeln #11, #14, #17, #24)
+- [x] **KI-Studienberater-Tool gebaut:** tools/ki-studienberater.html (25 KB, interaktives 5-Fragen-Quiz, 7+ personalisierte Bildungsweg-Ergebnisse, Affiliate-Product-Showcase mit Amazon-Links)
+- [x] **Blog-Index aktualisiert:** Stats 24→25, +Artikel-Karte #26 mit Studienberater-Link
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 24→25
+- [x] **Tools-Index aktualisiert:** +KI-Studienberater-Karte (10. Tool im Grid)
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #26 + KI-Studienberater)
+- [x] **Git commit + push ✅** (6 Dateien, +789 Zeilen, Commit 973fc93)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 25 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 10 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| Gesamt (Sitemap) | 84+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 25 Artikel + 10 Tools + 8 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #27**: KI-Recht & Legal-Tech 2026 oder KI-Marketing-Automation 2026
+2. 🔴 **Neues interaktives Tool**: SEO-Traffic-Rechner oder Legal-Tech-Checker
+3. 🟡 **KDP Account erstellen** (User-Aktion noetig)
+4. 🟡 **Google Search Console einrichten**
