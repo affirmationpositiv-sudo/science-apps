@@ -31,7 +31,7 @@ Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/
 ### Geld-Strategie-Ranking (0 EUR Kosten):
 | Rang | Strategie | Potenzial/Monat | Status |
 |------|-----------|----------------|--------|
-| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 36 Artikel + 16 Tools + 8 Shops |
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 37 Artikel + 17 Tools + 8 Shops |
 | 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
 | 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
 | 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
@@ -44,8 +44,59 @@ Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/
 4. 🟡 **Google Search Console** - Nicht eingerichtet
 
 ### Next Tick Priorities:
-1. 🔴 **Blog-Artikel #37**: KI-Musikproduktion 2026 oder KI-Nachhaltigkeit & Green Tech 2026
-2. 🔴 **Neues interaktives Tool**: KI-Content-Repurposer oder Energie-Spar-Rechner
+1. 🔴 **Blog-Artikel #38**: KI-Immobilien & Smart Home Invest 2026 oder KI-Datenschutz digitales Erbe 2026
+2. 🔴 **Neues interaktives Tool**: KI-Immobilienrechner oder Energieausweis-Rechner
+3. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Social Media)
+4. 🟡 **Sitemap-Refresh**: Aktuell ~100 URLs – aufräumen, doppelte Einträge entfernen
+
+---
+
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.31)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.30):
+- 36 Blog-Artikel, 16 interaktive Tools, 8 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #36 (KI-Video-Produktion 2026) ✅ LIVE
+- KI-Video-Bedarfsrechner (Tool #16) ✅ LIVE
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.31):
+- [x] **Survey:** Site live (HTTP 200), Git clean, 36 Blog-Artikel, 16 Tools, alles funktionsfähig
+- [x] **Blog-Artikel #37 erstellt:** "KI-Nachhaltigkeit & Green Tech 2026: Smarte Energie, Solar, E-Mobilität & grüne KI" (38 KB HTML, ~5.000 Wörter, 10 Hauptsektionen, 30+ Amazon-Affiliate-Links tag=ikune21-21, Vergleichstabelle mit 10 Produkten, Tool-Cards für tado°, Netatmo, Balkonkraftwerk 800W, Solar-Speicher, Wallbox, EcoFlow, Gardena, Tapo, Shelly, HomeWizard, Philips Hue, Sense, Lomi, Phyn, Solar-Powerbank, KI-Komposter, Luftreiniger, 7-Tage-Startplan)
+- [x] **Energie-Spar-Rechner-Tool gebaut:** tools/energie-spar-rechner.html (29 KB, interaktiver 6-Schritte-Assistent mit Progress-Bar, personalisierte Einsparanalyse mit 4 Kategorien (Strom, Heizung, Wasser, Solar), 8+ dynamische Produktempfehlungen, 30-Tage-Aktionsplan, Zufalls-Spartipp)
+- [x] **Blog-Index aktualisiert:** Stats 34→37 (nachgeholt, war 2 Ticks veraltet) + Artikel-Karte #37 als erster Eintrag
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 35→37, KI-Websites-Stat 15→16, Blog-Beschreibung aktualisiert
+- [x] **Tools-Index aktualisiert:** +Energie-Spar-Rechner Card (17. Tool im Grid)
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #37 + Energie-Spar-Rechner)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 37 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 17 | ✅ LIVE (1 NEU) |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Apps & Spiele | 16+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 37 Artikel + 17 Tools + 8 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #38**: KI-Immobilien & Smart Home Invest 2026 oder KI-Datenschutz digitales Erbe 2026
+2. 🔴 **Neues interaktives Tool**: KI-Immobilienrechner oder Energieausweis-Rechner
 3. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Social Media)
 4. 🟡 **Sitemap-Refresh**: Aktuell ~100 URLs – aufräumen, doppelte Einträge entfernen
 
