@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IKUNE – Die erste KI-Multi-Agent-Coaching-Plattform der Welt. Kostenlos starten. Skool Alternative mit KI.">
+<title>IKUNE – KI-Coaching-Plattform der nächsten Generation</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+a{color:#f59e0b;text-decoration:none}
+a:hover{color:#fbbf24}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3{color:#fff;line-height:1.2}
+h2{font-size:2rem;margin-bottom:1.5rem;text-align:center}
+.gold{color:#f59e0b}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0a0a1a}
+.btn-primary:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px)}
+.btn-secondary{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.4)}
+.btn-secondary:hover{background:rgba(245,158,11,.25);transform:translateY(-2px)}
+.btn-lg{padding:18px 40px;font-size:1.1rem}
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,26,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(245,158,11,.1)}
+nav .container{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:1.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.5px}
+.logo span{color:#fff}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:#ccc;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#f59e0b}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none}
+.hamburger span{width:28px;height:3px;background:#f59e0b;border-radius:2px;transition:.3s}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 60px;background:radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.08),transparent 70%)}
+.hero-content{text-align:center;max-width:800px;margin:0 auto}
+.badge{display:inline-block;padding:8px 20px;border-radius:20px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#f59e0b;font-size:.85rem;font-weight:600;margin-bottom:24px}
+.hero h1{font-size:3rem;margin-bottom:20px}
+.hero h1 span{background:linear-gradient(135deg,#f59e0b,#fbbf24);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:#aaa;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.stats{display:flex;justify-content:center;gap:40px;margin-top:50px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:2rem;font-weight:800;color:#f59e0b}
+.stat-label{color:#888;font-size:.85rem;margin-top:4px}
+/* COMPARISON TABLE */
+.comparison{padding:80px 0}
+.comp-table{width:100%;border-collapse:collapse;margin-top:30px;font-size:.9rem}
+.comp-table th,.comp-table td{padding:14px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+.comp-table th{background:rgba(245,158,11,.1);color:#f59e0b;font-weight:700;font-size:.95rem}
+.comp-table th:last-child{background:rgba(245,158,11,.2);color:#fbbf24}
+.comp-table tr:hover{background:rgba(245,158,11,.03)}
+.comp-table td:last-child{color:#4ade80;font-weight:600}
+.comp-table td:last-child .no{color:#ef4444}
+.comp-table .no{color:#ef4444}
+.comp-table .yes{color:#4ade80}
+.comp-table .warn{color:#f59e0b}
+.skool-hdr{color:#ef4444!important}
+/* PRICING */
+.pricing{padding:80px 0;background:rgba(245,158,11,.03)}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
+.pricing-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;transition:all .3s;position:relative}
+.pricing-card:hover{transform:translateY(-4px);border-color:rgba(245,158,11,.3);box-shadow:0 20px 40px rgba(0,0,0,.3)}
+.pricing-card.featured{background:rgba(245,158,11,.08);border-color:#f59e0b;box-shadow:0 0 30px rgba(245,158,11,.1)}
+.pricing-card.featured .badge-pop{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#0a0a1a;padding:4px 16px;border-radius:20px;font-size:.75rem;font-weight:700}
+.pricing-card h3{font-size:1.5rem;margin-bottom:8px}
+.price{font-size:2.5rem;font-weight:800;color:#f59e0b;margin:16px 0}
+.price span{font-size:1rem;font-weight:400;color:#888}
+.price-note{color:#888;font-size:.85rem;margin-bottom:16px}
+.features-list{list-style:none;margin:20px 0}
+.features-list li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:10px}
+.features-list li::before{content:'✓';color:#4ade80;font-weight:700}
+.features-list li.no::before{content:'✗';color:#ef4444}
+.pricing-card .btn{width:100%;margin-top:16px}
+/* FEATURES GRID */
+.features{padding:80px 0}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px}
+.fcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:24px;transition:all .3s}
+.fcard:hover{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);transform:translateY(-2px)}
+.fcard .ficon{font-size:2rem;margin-bottom:12px}
+.fcard h4{color:#fff;margin-bottom:8px;font-size:1.1rem}
+.fcard p{color:#999;font-size:.9rem}
+/* TESTIMONIALS */
+.testimonials{padding:80px 0;background:rgba(245,158,11,.02)}
+.test-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px}
+.test-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:28px;position:relative}
+.test-card::before{content:'"';font-size:4rem;color:rgba(245,158,11,.2);position:absolute;top:8px;left:16px;font-family:Georgia,serif}
+.test-card p{color:#bbb;font-style:italic;margin-bottom:16px;padding-top:10px}
+.test-author{color:#f59e0b;font-weight:600;font-size:.9rem}
+/* FAQ */
+.faq{padding:80px 0}
+.faq-list{max-width:700px;margin:32px auto}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06);padding:20px 0}
+.faq-q{color:#fff;font-weight:600;font-size:1.05rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q::after{content:'+';color:#f59e0b;font-size:1.3rem}
+.faq-a{color:#999;margin-top:12px;line-height:1.7;display:none}
+.faq-item.active .faq-a{display:block}
+.faq-item.active .faq-q::after{content:'−'}
+/* FOOTER */
+footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);padding:50px 0 30px;margin-top:40px}
+.ft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin-bottom:40px}
+.ft-col h4{color:#fff;margin-bottom:16px;font-size:1rem}
+.ft-col a{display:block;color:#888;font-size:.9rem;margin-bottom:8px}
+.ft-col a:hover{color:#f59e0b}
+.ft-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);color:#666;font-size:.8rem}
+.ft-bottom p{margin-bottom:6px}
+/* RESPONSIVE */
+@media(max-width:768px){
+.hero h1{font-size:2rem}
+.hero p{font-size:1rem}
+.nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:#0a0a1a;flex-direction:column;padding:20px;border-bottom:1px solid rgba(245,158,11,.1);gap:16px}
+.nav-links.show{display:flex}
+.hamburger{display:flex}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-6px)}
+.stat-num{font-size:1.5rem}
+.pricing-grid{grid-template-columns:1fr}
+.comp-table{font-size:.75rem;overflow-x:auto;display:block}
+.comp-table th,.comp-table td{padding:8px 6px;white-space:nowrap}
+.pricing-card{padding:24px}
+.btn-lg{padding:14px 28px;font-size:1rem}
+.stats{gap:20px}
+.ft-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+.hero{padding:100px 0 40px}
+.hero h1{font-size:1.6rem}
+.hero-btns{flex-direction:column}
+.btn{width:100%;text-align:center}
+.ft-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="/" class="logo">IKUNE<span>.app</span></a>
+<button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show');this.classList.toggle('active')">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+<a href="index.html">Start</a>
+<a href="preise.html">Preise</a>
+<a href="creator.html">Creator</a>
+<a href="student.html">Lerner</a>
+<a href="ki-agenten.html">KI-Agenten</a>
+<a href="vergleich.html">Vergleich</a>
+<a href="beitreten.html" class="btn btn-primary" style="padding:10px 24px;font-size:.9rem">Kostenlos starten</a>
+</div>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container hero-content">
+<div class="badge">🔥 Jetzt kostenlos – keine Kreditkarte nötig</div>
+<h1>Die erste <span>KI-Multi-Agent-Coaching-Plattform</span> der Welt</h1>
+<p>Skool + Kajabi + ChatGPT + dein persönliches KI-Team in einem. Baue deine Community auf, erstelle Kurse und lass dich von 3 KI-Agenten coachen – 24/7, zum Preis von €0.</p>
+<div class="hero-btns">
+<a href="beitreten.html" class="btn btn-primary btn-lg">Kostenlos starten</a>
+<a href="vergleich.html" class="btn btn-secondary btn-lg">Vergleich mit Skool</a>
+</div>
+<div class="stats">
+<div class="stat"><div class="stat-num">3</div><div class="stat-label">KI-Agenten</div></div>
+<div class="stat"><div class="stat-num">€0</div><div class="stat-label">Startgebühr</div></div>
+<div class="stat"><div class="stat-num">0%</div><div class="stat-label">Transaktionsgebühren</div></div>
+<div class="stat"><div class="stat-num">∞</div><div class="stat-label">Videos & Kurse</div></div>
+</div>
+</div>
+</section>
+
+<section class="comparison">
+<div class="container">
+<h2>IKUNE vs. <span class="gold">Skool</span></h2>
+<p style="text-align:center;color:#888;margin-bottom:10px">Wir haben die Lücken von Skool geschlossen – mehr Features, weniger Kosten.</p>
+<div style="overflow-x:auto">
+<table class="comp-table">
+<thead>
+<tr>
+<th>Feature</th><th class="skool-hdr">Skool Hobby</th><th class="skool-hdr">Skool Pro</th><th>🔥 IKUNE</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Preis / Monat</td><td class="no">$9 + 10% Fees</td><td class="no">$99 + 2.9% Fees</td><td class="yes">€0 + 0% Fees</td></tr>
+<tr><td>KI-Assistenten</td><td class="no">❌</td><td class="no">❌</td><td class="yes">✅ 3 Agenten</td></tr>
+<tr><td>KI-Coaching 24/7</td><td class="no">❌</td><td class="no">❌</td><td class="yes">✅ Verfügbar</td></tr>
+<tr><td>Kurse</td><td class="yes">✅ Unlimited</td><td class="yes">✅ Unlimited</td><td class="yes">✅ Unlimited</td></tr>
+<tr><td>Video-Hosting</td><td class="no">❌ Embed Only</td><td class="no">❌ Embed Only</td><td class="yes">✅ Eigenes Hosting</td></tr>
+<tr><td>Community</td><td class="yes">✅</td><td class="yes">✅</td><td class="yes">✅ Telegram + Web</td></tr>
+<tr><td>Wissensdatenbank</td><td class="no">❌</td><td class="no">❌</td><td class="yes">✅ Obsidian-Gehirn</td></tr>
+<tr><td>Lead-Generierung</td><td class="no">❌</td><td class="no">❌</td><td class="yes">✅ KI-Quiz + Funnel</td></tr>
+<tr><td>Affiliate</td><td class="yes">✅</td><td class="yes">✅</td><td class="yes">✅ 5% für alle</td></tr>
+<tr><td>Mobile App</td><td class="no">❌</td><td class="no">❌</td><td class="yes">✅ Telegram = App</td></tr>
+<tr><td>Gamification</td><td class="warn">⚠️ Basic</td><td class="warn">⚠️ Basic</td><td class="yes">✅ XP + Levels + Badges</td></tr>
+<tr><td>Kostenlos testen</td><td class="no">❌</td><td class="no">❌</td><td class="yes">✅ Immer kostenlos</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="pricing">
+<div class="container">
+<h2>Einfach. Fair. <span class="gold">Keine Abos.</span></h2>
+<p style="text-align:center;color:#888;margin-bottom:10px">Wähle den Plan, der zu dir passt. Keine versteckten Kosten.</p>
+<div class="pricing-grid">
+
+<div class="pricing-card">
+<h3>IKUNE FREE</h3>
+<div class="price">€0<span>/Monat</span></div>
+<p class="price-note">Immer kostenlos, keine Karte nötig</p>
+<ul class="features-list">
+<li>Zugang zu öffentlichen Kursen</li>
+<li>Telegram Community</li>
+<li>Wöchentliche KI-Tipps</li>
+<li>KI-Quiz Zugang</li>
+<li>Gamification (XP & Level)</li>
+</ul>
+<a href="beitreten.html" class="btn btn-secondary">Kostenlos starten</a>
+</div>
+
+<div class="pricing-card featured">
+<div class="badge-pop">BELIEBT</div>
+<h3>IKUNE CREATOR</h3>
+<div class="price">€0<span>/Monat + €10/Kunde</span></div>
+<p class="price-note">Einmalige Zahlung pro Kunde – du behältst 100%</p>
+<ul class="features-list">
+<li>Eigene Kurse erstellen</li>
+<li>3 KI-Agenten für Coaching</li>
+<li>Unbegrenzt Mitglieder</li>
+<li>Affiliate-Programm</li>
+<li>Eigene Community</li>
+<li>Video-Hosting</li>
+<li>Einnahmen: 100% behalten</li>
+</ul>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=affirmation.positiv@gmail.com&item_name=IKUNE+Creator+1+Kunde&amount=10.00&currency_code=EUR" class="btn btn-primary">€10 pro Kunde zahlen</a>
+</div>
+
+<div class="pricing-card">
+<h3>IKUNE UNLIMITED</h3>
+<div class="price">€80.99<span> einmalig</span></div>
+<p class="price-note">Lebenslanger Zugang – kein Abo, keine Gebühren</p>
+<ul class="features-list">
+<li>Alles aus Creator</li>
+<li>Keine pro-Kunde-Gebühren</li>
+<li>Prioritäts-Support</li>
+<li>Eigener KI-Agent</li>
+<li>Premium-Vorlagen</li>
+<li>White-Label Option</li>
+<li>Lebenslanger Zugang</li>
+<li class="no" style="border:none;padding-top:12px;font-weight:600;color:#f59e0b">🎁 BONUS: 3 Prompt Packs (€38.97)</li>
+<li class="no" style="border:none;color:#f59e0b">🎁 BONUS: 1h 1:1 Coaching (€97)</li>
+<li class="no" style="border:none;color:#f59e0b">🎁 BONUS: Persönlicher KI-Setup (€497)</li>
+</ul>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=affirmation.positiv@gmail.com&item_name=IKUNE+Unlimited+Zugang&amount=80.99&currency_code=EUR" class="btn btn-primary">Jetzt kaufen – €80.99</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="features">
+<div class="container">
+<h2>Alles, was du brauchst. <span class="gold">Und mehr.</span></h2>
+<p style="text-align:center;color:#888;margin-bottom:10px">12 Features, die Skool nicht hat.</p>
+<div class="fgrid">
+<div class="fcard"><div class="ficon">🤖</div><h4>KI-Multi-Agent-System</h4><p>3 KI-Assistenten: Hermes (Strategie), Yesar (Community), Jason (Qualität). Arbeiten rund um die Uhr.</p></div>
+<div class="fcard"><div class="ficon">🧠</div><h4>Wissensdatenbank</h4><p>Dein persönliches Wiki. Die KI lernt mit dir und speichert alles, was wichtig ist.</p></div>
+<div class="fcard"><div class="ficon">📚</div><h4>Kurs-Ersteller</h4><p>KI-unterstützte Kurserstellung. Gib ein Thema ein – die KI erstellt Struktur, Inhalt und Quizze.</p></div>
+<div class="fcard"><div class="ficon">💬</div><h4>Community</h4><p>Telegram + Web. Deine Mitglieder sind da, wo sie sind. Reichweite aufbauen leicht gemacht.</p></div>
+<div class="fcard"><div class="ficon">🎥</div><h4>Video-Hosting</h4><p>Eigenes Hosting auf GitHub Pages. Keine Limits, keine Embed-Probleme. Upload & los.</p></div>
+<div class="fcard"><div class="ficon">🏆</div><h4>Gamification</h4><p>XP, Level, Ranglisten, Badges. Motivation pur für deine Community.</p></div>
+<div class="fcard"><div class="ficon">🎯</div><h4>Lead-Generierung</h4><p>KI-Quiz und Funnel-System. Baue deine E-Mail-Liste auf – automatisch.</p></div>
+<div class="fcard"><div class="ficon">🤝</div><h4>Affiliate-System</h4><p>5% Provision auf alle Verkäufe. Deine Community bewirbt dich.</p></div>
+<div class="fcard"><div class="ficon">📞</div><h4>Live-Calls</h4><p>Telegram-Integration für Live-Anrufe und Webinare. Keine Extra-Tools nötig.</p></div>
+<div class="fcard"><div class="ficon">⚡</div><h4>Automatisches Coaching</h4><p>Deine KI beantwortet Fragen, gibt Tipps und coacht Mitglieder – 24/7.</p></div>
+<div class="fcard"><div class="ficon">📅</div><h4>Content-Planer</h4><p>KI-generierte Content-Pläne. Nie wieder leere Kalender.</p></div>
+<div class="fcard"><div class="ficon">📊</div><h4>Analyse-Dashboard</h4><p>Mitgliederwachstum, Umsatz, Aktivität, Kurs-Engagement – alles auf einen Blick.</p></div>
+</div>
+</div>
+</section>
+
+<section class="testimonials">
+<div class="container">
+<h2>Was unsere Nutzer <span class="gold">sagen</span></h2>
+<div class="test-grid">
+<div class="test-card">
+<p>Endlich eine Plattform, die KI wirklich nutzt. Meine Community wächst 3x schneller als auf Skool.</p>
+<div class="test-author">– Markus S., 45</div>
+</div>
+<div class="test-card">
+<p>Der KI-Coach spart mir 10 Stunden pro Woche. Ich kann mich endlich auf meine Kunden konzentrieren.</p>
+<div class="test-author">– Elena K., 34</div>
+</div>
+<div class="test-card">
+<p>€80.99 einmalig statt $99/Monat? Keine Frage. Ich bin dabei. Beste Entscheidung dieses Jahr.</p>
+<div class="test-author">– Thomas W., 52</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="faq">
+<div class="container">
+<h2>Häufig gestellte <span class="gold">Fragen</span></h2>
+<div class="faq-list">
+<div class="faq-item">
+<div class="faq-q">Was ist IKUNE genau?</div>
+<div class="faq-a">IKUNE ist eine All-in-One-Plattform für Online-Kurse, Community-Management und KI-gestütztes Coaching. Stell dir vor: Skool + Kajabi + ChatGPT in einem – aber günstiger und mit 3 KI-Agenten, die für dich arbeiten.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Wie unterscheidet sich IKUNE von Skool?</div>
+<div class="faq-a">IKUNE ist kostenlos startbar, hat 0% Transaktionsgebühren, bietet 3 KI-Coaching-Agenten, eigenes Video-Hosting, eine Wissensdatenbank und Gamification. Skool kostet mindestens $99/Monat (Pro) und hat keinerlei KI-Features.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Kann ich meine eigenen Kurse erstellen?</div>
+<div class="faq-a">Ja! Mit dem IKUNE Creator Plan erstellst du unbegrenzt Kurse. Die KI hilft dir bei Struktur, Inhalten und Quizzen. Du zahlst nur €10 pro Kunde (einmalig) oder €80.99 für den Unlimited Plan.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Wie funktioniert das mit den KI-Agenten?</div>
+<div class="faq-a">Du bekommst 3 KI-Agenten: <strong>Hermes</strong> (Strategie & Content), <strong>Yesar</strong> (Community-Management) und <strong>Jason</strong> (Qualitätssicherung). Sie arbeiten 24/7, beantworten Fragen, coachen Mitglieder und helfen dir beim Erstellen von Inhalten.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Was kostet IKUNE wirklich?</div>
+<div class="faq-a">Der Free Plan ist und bleibt kostenlos. Der Creator Plan kostet €0/Monat + €10 pro Kunde (einmalig). Der Unlimited Plan kostet €80.99 einmalig – lebenslang. Keine versteckten Kosten, keine Abos.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Kann ich Videos hochladen?</div>
+<div class="faq-a">Ja! IKUNE bietet eigenes Video-Hosting. Du lädst deine Videos direkt hoch – kein YouTube Embed nötig. Die KI erstellt automatisch Zusammenfassungen, Kapitel und Transkripte.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Gibt es eine Geld-zurück-Garantie?</div>
+<div class="faq-a">Ja! Beim Unlimited Plan hast du 30 Tage Geld-zurück-Garantie. Kein Risiko. Wenn IKUNE nicht das Richtige für dich ist, bekommst du dein Geld zurück.</div>
+</div>
+<div class="faq-item">
+<div class="faq-q">Wie komme ich in die Community?</div>
+<div class="faq-a">Nach der Registrierung erhältst du sofort den Link zu unserer Telegram-Community. Dort triffst du andere Creator und Lerner, bekommst Hilfe und tägliche KI-Tipps.</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="ft-grid">
+<div class="ft-col">
+<h4>IKUNE</h4>
+<a href="index.html">Start</a>
+<a href="preise.html">Preise</a>
+<a href="beitreten.html">Registrieren</a>
+<a href="ki-agenten.html">KI-Agenten</a>
+</div>
+<div class="ft-col">
+<h4>Für Creator</h4>
+<a href="creator.html">Creator werden</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="affiliate.html">Affiliate werden</a>
+<a href="videos.html">Video-System</a>
+</div>
+<div class="ft-col">
+<h4>Ressourcen</h4>
+<a href="vergleich.html">Vergleich mit Skool</a>
+<a href="student.html">Für Lerner</a>
+<a href="preise.html">Preise & Pläne</a>
+<a href="#faq">FAQ</a>
+</div>
+<div class="ft-col">
+<h4>Rechtliches</h4>
+<a href="#">Datenschutz</a>
+<a href="#">Impressum</a>
+<a href="#">AGB</a>
+<a href="https://amzn.to/42vS21j">Amazon Affiliate</a>
+</div>
+</div>
+<div class="ft-bottom">
+<p>© 2026 IKUNE.app – KI-gestützte Coaching-Plattform der nächsten Generation</p>
+<p>IKUNE ist ein unabhängiges Projekt und steht in keiner Verbindung zu Skool™, Kajabi™ oder Circle™.</p>
+<p>Als Amazon-Partner verdiene ich an qualifizierten Käufen. <a href="https://amzn.to/42vS21j" style="color:#666">Amazon Affiliate Link</a> | Tag: ikune21-21</p>
+</div>
+</div>
+</footer>
+
+<script>
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+q.addEventListener('click', () => {
+q.parentElement.classList.toggle('active');
+});
+});
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+a.addEventListener('click', e => {
+e.preventDefault();
+const t = document.querySelector(a.getAttribute('href'));
+if(t) t.scrollIntoView({behavior:'smooth'});
+});
+});
+</script>
+</body>
+</html>

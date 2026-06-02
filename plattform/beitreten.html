@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IKUNE beitreten – Kostenlos registrieren. Keine Kreditkarte nötig. Starte mit KI-Coaching.">
+<title>Registrieren – IKUNE Plattform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+a{color:#f59e0b;text-decoration:none}
+.container{max-width:500px;margin:0 auto;padding:0 20px}
+h1{color:#fff;font-size:2rem;text-align:center;margin-bottom:8px}
+.gold{color:#f59e0b}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-align:center;width:100%}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0a0a1a}
+.btn-primary:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px)}
+.btn-secondary{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.4)}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,26,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(245,158,11,.1)}
+nav .container{max-width:1200px;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:1.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.5px}
+.logo span{color:#fff}
+.page{padding-top:120px;padding-bottom:60px;flex:1}
+.signup-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:40px;margin-top:20px}
+.subtitle{text-align:center;color:#888;margin-bottom:24px;font-size:.95rem}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;color:#ccc;margin-bottom:6px;font-size:.9rem;font-weight:500}
+.form-group input,.form-group select{width:100%;padding:12px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:1rem;outline:none;transition:border .3s}
+.form-group input:focus,.form-group select:focus{border-color:#f59e0b}
+.form-group select option{background:#0a0a1a;color:#fff}
+.radio-group{display:flex;gap:12px;flex-wrap:wrap}
+.radio-group label{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;cursor:pointer;transition:all .3s;color:#ccc;font-size:.9rem}
+.radio-group label:hover,.radio-group input:checked+span{background:rgba(245,158,11,.1);border-color:#f59e0b;color:#f59e0b}
+.radio-group input[type="radio"]{display:none}
+.radio-group input[type="radio"]:checked ~ span{color:#f59e0b}
+.radio-group label:has(input:checked){background:rgba(245,158,11,.12);border-color:#f59e0b}
+.hint{color:#666;font-size:.8rem;margin-top:6px}
+.form-footer{text-align:center;margin-top:16px;color:#888;font-size:.85rem}
+.telegram-link{display:none;background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:32px;text-align:center;margin-top:20px}
+.telegram-link h3{color:#f59e0b;margin-bottom:12px;font-size:1.3rem}
+.telegram-link p{color:#aaa;margin-bottom:16px;font-size:.95rem}
+.telegram-link .tg-btn{display:inline-block;padding:14px 32px;background:#0088cc;color:#fff;border-radius:8px;font-weight:600}
+.telegram-link .tg-btn:hover{background:#0077b5}
+footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);padding:30px 0 20px;text-align:center}
+footer p{color:#666;font-size:.8rem;margin-bottom:4px}
+@media(max-width:480px){
+.signup-box{padding:24px}
+h1{font-size:1.5rem}
+.radio-group{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container" style="max-width:1200px">
+<a href="index.html" class="logo">IKUNE<span>.app</span></a>
+<div style="display:flex;gap:16px;align-items:center">
+<a href="index.html" style="color:#ccc;font-size:.9rem">Start</a>
+<a href="preise.html" style="color:#ccc;font-size:.9rem">Preise</a>
+</div>
+</div>
+</nav>
+
+<div class="page">
+<div class="container">
+<div class="badge" style="display:inline-block;padding:8px 20px;border-radius:20px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#f59e0b;font-size:.85rem;font-weight:600;margin:0 auto 20px;text-align:center;display:table">🚀 Völlig kostenlos</div>
+<h1>Werde Teil von <span class="gold">IKUNE</span></h1>
+<p class="subtitle">Keine Kreditkarte. Kein Abo. Kein Risiko.</p>
+
+<div class="signup-box" id="signupBox">
+<form id="signupForm" onsubmit="handleSubmit(event)">
+<div class="form-group">
+<label for="name">Dein Name</label>
+<input type="text" id="name" name="name" placeholder="Max Mustermann" required>
+</div>
+<div class="form-group">
+<label for="email">E-Mail-Adresse</label>
+<input type="email" id="email" name="email" placeholder="max@example.com" required>
+</div>
+<div class="form-group">
+<label for="password">Passwort</label>
+<input type="password" id="password" name="password" placeholder="Mindestens 8 Zeichen" minlength="8" required>
+</div>
+<div class="form-group">
+<label>Ich bin...</label>
+<div class="radio-group">
+<label>
+<input type="radio" name="role" value="creator" required>
+<span>🎬 Creator</span>
+</label>
+<label>
+<input type="radio" name="role" value="student">
+<span>🎓 Lerner</span>
+</label>
+<label>
+<input type="radio" name="role" value="both">
+<span>🤝 Beides</span>
+</label>
+</div>
+<div class="hint">Du kannst später jederzeit wechseln.</div>
+</div>
+<button type="submit" class="btn btn-primary">Kostenlos starten</button>
+</form>
+<div class="form-footer">
+Mit der Anmeldung akzeptierst du unsere <a href="#">AGB</a> und <a href="#">Datenschutz</a>.
+</div>
+</div>
+
+<div class="telegram-link" id="successBox">
+<h3>🎉 Willkommen bei IKUNE!</h3>
+<p>Deine Registrierung war erfolgreich. Tritt jetzt unserer Telegram-Community bei und starte durch.</p>
+<a href="https://t.me/+V6cTFJTQeZ0xYjFi" class="tg-btn" target="_blank">📱 Telegram beitreten</a>
+<p style="margin-top:16px;font-size:.85rem;color:#666">Du erhältst in Kürze eine Bestätigungs-E-Mail. Danach kannst du dich im <a href="dashboard.html">Dashboard</a> anmelden.</p>
+<button onclick="resetForm()" class="btn btn-secondary" style="margin-top:16px;display:inline-block;width:auto;padding:10px 24px;font-size:.85rem">Zurück zum Formular</button>
+</div>
+</div>
+</div>
+
+<footer>
+<div class="container">
+<p>© 2026 IKUNE.app – KI-gestützte Coaching-Plattform</p>
+<p><a href="https://amzn.to/42vS21j">Amazon Affiliate</a> | Tag: ikune21-21</p>
+</div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+e.preventDefault();
+const form = e.target;
+const data = {name:form.name.value, email:form.email.value, role:form.role.value};
+console.log('Signup:', data);
+localStorage.setItem('ikune_user', JSON.stringify(data));
+document.getElementById('signupBox').style.display = 'none';
+document.getElementById('successBox').style.display = 'block';
+}
+function resetForm() {
+document.getElementById('signupForm').reset();
+document.getElementById('signupBox').style.display = 'block';
+document.getElementById('successBox').style.display = 'none';
+}
+</script>
+</body>
+</html>

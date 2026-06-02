@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="IKUNE für Creator – Erstelle Kurse mit KI, baue deine Community auf und verdiene Geld. €0/Monat Start.">
+<title>Creator werden – IKUNE Plattform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6}
+a{color:#f59e0b;text-decoration:none}
+a:hover{color:#fbbf24}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+h1,h2,h3{color:#fff;line-height:1.2}
+h1{font-size:2.5rem;margin-bottom:1rem;text-align:center}
+h2{font-size:1.8rem;margin-bottom:1.5rem}
+.gold{color:#f59e0b}
+.btn{display:inline-block;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;text-align:center}
+.btn-primary{background:linear-gradient(135deg,#f59e0b,#d97706);color:#0a0a1a}
+.btn-primary:hover{background:linear-gradient(135deg,#fbbf24,#f59e0b);transform:translateY(-2px)}
+.btn-secondary{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.4)}
+.btn-secondary:hover{background:rgba(245,158,11,.25);transform:translateY(-2px)}
+.btn-lg{padding:18px 40px;font-size:1.1rem}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(10,10,26,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(245,158,11,.1)}
+nav .container{display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
+.logo{font-size:1.5rem;font-weight:800;color:#f59e0b;letter-spacing:-.5px}
+.logo span{color:#fff}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:#ccc;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#f59e0b}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;background:none;border:none}
+.hamburger span{width:28px;height:3px;background:#f59e0b;border-radius:2px;transition:.3s}
+.page{padding-top:100px;padding-bottom:60px}
+.hero-section{text-align:center;padding:40px 0;background:radial-gradient(ellipse at 50% 0%,rgba(245,158,11,.06),transparent 60%)}
+.hero-section p{color:#aaa;font-size:1.1rem;max-width:650px;margin:0 auto 30px}
+.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:40px 0}
+.benefit-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:28px;transition:all .3s}
+.benefit-card:hover{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2);transform:translateY(-2px)}
+.benefit-card .icon{font-size:2rem;margin-bottom:12px}
+.benefit-card h4{color:#fff;margin-bottom:8px;font-size:1.1rem}
+.benefit-card p{color:#999;font-size:.9rem}
+.steps{background:rgba(245,158,11,.03);padding:60px 0;margin:40px 0}
+.step-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-top:30px}
+.step{text-align:center;padding:24px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);position:relative}
+.step-num{width:40px;height:40px;background:#f59e0b;color:#0a0a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2rem;margin:0 auto 12px}
+.step h4{color:#fff;margin-bottom:8px}
+.step p{color:#999;font-size:.85rem}
+.pricing-box{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:32px;text-align:center;margin:40px 0}
+.pricing-box h3{color:#f59e0b;font-size:1.5rem;margin-bottom:8px}
+.pricing-box .price{font-size:2rem;font-weight:800;color:#fff;margin:12px 0}
+.pricing-box .price span{color:#f59e0b}
+.pricing-box p{color:#aaa;max-width:500px;margin:0 auto 20px}
+.testimonial-box{background:rgba(255,255,255,.03);border-left:3px solid #f59e0b;padding:20px 24px;border-radius:0 8px 8px 0;margin:20px 0}
+.testimonial-box p{color:#bbb;font-style:italic}
+.testimonial-box .author{color:#f59e0b;margin-top:8px;font-weight:600}
+footer{background:rgba(0,0,0,.3);border-top:1px solid rgba(255,255,255,.06);padding:40px 0 20px;margin-top:40px}
+.ft-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin-bottom:30px}
+.ft-col h4{color:#fff;margin-bottom:16px}
+.ft-col a{display:block;color:#888;font-size:.9rem;margin-bottom:8px}
+.ft-col a:hover{color:#f59e0b}
+.ft-bottom{text-align:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);color:#666;font-size:.8rem}
+@media(max-width:768px){
+h1{font-size:1.8rem}.nav-links{display:none;position:absolute;top:60px;left:0;width:100%;background:#0a0a1a;flex-direction:column;padding:20px;gap:16px}
+.nav-links.show{display:flex}.hamburger{display:flex}
+.hamburger.active span:nth-child(1){transform:rotate(45deg)translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg)translate(7px,-6px)}
+.step-grid{grid-template-columns:1fr 1fr}
+.btn-lg{padding:14px 28px;font-size:1rem}
+}
+@media(max-width:480px){.step-grid{grid-template-columns:1fr}.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="container">
+<a href="index.html" class="logo">IKUNE<span>.app</span></a>
+<button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('show');this.classList.toggle('active')">
+<span></span><span></span><span></span>
+</button>
+<div class="nav-links">
+<a href="index.html">Start</a>
+<a href="preise.html">Preise</a>
+<a href="creator.html">Creator</a>
+<a href="student.html">Lerner</a>
+<a href="ki-agenten.html">KI-Agenten</a>
+<a href="vergleich.html">Vergleich</a>
+<a href="beitreten.html" class="btn btn-primary" style="padding:10px 24px;font-size:.9rem">Kostenlos starten</a>
+</div>
+</div>
+</nav>
+
+<div class="page">
+<section class="hero-section">
+<div class="container">
+<div class="badge" style="display:inline-block;padding:8px 20px;border-radius:20px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#f59e0b;font-size:.85rem;font-weight:600;margin-bottom:24px">🚀 Für Creator</div>
+<h1>Baue deine Community auf.<br>Mit <span class="gold">KI-Power</span> im Rücken.</h1>
+<p>IKUNE gibt dir alles, was du brauchst – Kurse erstellen, Community managen, KI-Coaching anbieten. Und das alles zum Preis von €0 Startgebühr.</p>
+<a href="beitreten.html" class="btn btn-primary btn-lg">Kostenlos als Creator starten</a>
+</div>
+</section>
+
+<section class="container">
+<h2>Warum IKUNE für <span class="gold">Creator?</span></h2>
+<div class="benefits">
+<div class="benefit-card"><div class="icon">🤖</div><h4>KI-unterstützte Kurserstellung</h4><p>Gib ein Thema ein – die KI erstellt Struktur, Lektionen, Quizze und Übungen. In Minuten statt Tagen.</p></div>
+<div class="benefit-card"><div class="icon">💬</div><h4>Eigene Telegram-Community</h4><p>Deine Mitglieder sind da, wo sie sind. Telegram-Integration mit automatischen Begrüßungen, Regeln und KI-Moderation.</p></div>
+<div class="benefit-card"><div class="icon">🎯</div><h4>Built-in Lead-Generierung</h4><p>KI-Quiz, die Leads generieren. Baue deine E-Mail-Liste auf, während du schläfst.</p></div>
+<div class="benefit-card"><div class="icon">🤝</div><h4>Affiliate-Programm</h4><p>5% Provision für alle, die über deinen Link kommen. Deine Community bewirbt dich.</p></div>
+<div class="benefit-card"><div class="icon">📊</div><h4>Vollständiges Dashboard</h4><p>Mitgliederwachstum, Umsatz, Engagement, Kurs-Fortschritt – alles auf einen Blick.</p></div>
+<div class="benefit-card"><div class="icon">🎥</div><h4>Eigenes Video-Hosting</h4><p>Kein YouTube Embed. Lade deine Videos direkt hoch. KI erstellt Kapitel, Transkripte und Zusammenfassungen.</p></div>
+</div>
+</section>
+
+<section class="steps">
+<div class="container">
+<h2 style="text-align:center">So startest du in <span class="gold">5 Schritten</span></h2>
+<div class="step-grid">
+<div class="step"><div class="step-num">1</div><h4>Registrieren</h4><p>Kostenlos anmelden – kein Abo, keine Karte. Dauer: 2 Minuten.</p></div>
+<div class="step"><div class="step-num">2</div><h4>Kurs erstellen</h4><p>KI hilft dir bei Struktur, Inhalt und Quizzen. Einfach Thema eingeben.</p></div>
+<div class="step"><div class="step-num">3</div><h4>Community starten</h4><p>Telegram-Gruppe anlegen und mit der Community verbinden.</p></div>
+<div class="step"><div class="step-num">4</div><h4>Ersten Kunden gewinnen</h4><p>Teile deinen Link. KI-Quiz und Funnel helfen bei der Conversion.</p></div>
+<div class="step"><div class="step-num">5</div><h4>Verdienen</h4><p>Behalte 100% deiner Einnahmen. Nur €10 pro Kunde (einmalig) oder €80.99 Unlimited.</p></div>
+</div>
+</div>
+</section>
+
+<section class="container">
+<div class="pricing-box">
+<h3>💰 Creator Preise</h3>
+<div class="price">€0 <span>/ Monat</span></div>
+<p>Du zahlst nur, wenn du Kunden hast. €10 pro Kunde einmalig – oder <strong>€80.99 einmalig</strong> für lebenslangen Zugang ohne Gebühren.</p>
+<div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+<a href="beitreten.html" class="btn btn-secondary">Kostenlos registrieren</a>
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=affirmation.positiv@gmail.com&item_name=IKUNE+Unlimited+Zugang&amount=80.99&currency_code=EUR" class="btn btn-primary">€80.99 Unlimited</a>
+</div>
+</div>
+
+<div class="testimonial-box">
+<p>"Ich habe auf Skool angefangen und bin nach 3 Monaten zu IKUNE gewechselt. Die KI-Agenten allein sparen mir 15 Stunden pro Woche. Meine Community ist von 50 auf 300 Mitglieder gewachsen – und das in 6 Wochen."</p>
+<div class="author">– Sarah M., Online-Coach</div>
+</div>
+
+<div class="testimonial-box">
+<p>"Der Kurs-Ersteller mit KI ist verrückt gut. Ich habe einen 8-wöchigen Kurs in 2 Stunden erstellt statt 2 Wochen. Das allein ist den Umstieg wert."</p>
+<div class="author">– David K., Business-Trainer</div>
+</div>
+</section>
+</div>
+
+<footer>
+<div class="container">
+<div class="ft-grid">
+<div class="ft-col"><h4>IKUNE</h4><a href="index.html">Start</a><a href="preise.html">Preise</a><a href="beitreten.html">Registrieren</a></div>
+<div class="ft-col"><h4>Für Creator</h4><a href="creator.html">Creator werden</a><a href="dashboard.html">Dashboard</a><a href="affiliate.html">Affiliate</a></div>
+<div class="ft-col"><h4>Ressourcen</h4><a href="vergleich.html">Vergleich</a><a href="ki-agenten.html">KI-Agenten</a><a href="videos.html">Video-System</a></div>
+<div class="ft-col"><h4>Rechtliches</h4><a href="#">Datenschutz</a><a href="#">Impressum</a><a href="https://amzn.to/42vS21j">Amazon Affiliate</a></div>
+</div>
+<div class="ft-bottom"><p>© 2026 IKUNE.app | Amazon-Partner: Tag ikune21-21</p></div>
+</div>
+</footer>
+</body>
+</html>
