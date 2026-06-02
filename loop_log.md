@@ -10,30 +10,55 @@ Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/
 - Git working tree clean
 
 ### Actions This Tick (R2.54):
-- [x] **Blog-Artikel #71 erstellt:** "Geschenkideen 2026 – 30 perfekte Geschenke für jeden Anlass & jedes Budget" – 40+ Amazon-Affiliate-Links (tag=ikune21-21), 5 Budget-Stufen (0€ bis 500€), 4 Anlass-Kategorien (Vatertag, Abitur, Hochzeit, Geburtstag), 10-Produkt-Vergleichstabelle, 5 Sommer-Gadgets-Bonus, 4 FAQ
-- [x] **Blog-Index aktualisiert:** +Blog-Karte #71 (Geschenkideen 2026), Stats 52→71
-- [x] **Sitemap.xml aktualisiert:** +1 URL (Blog #71)
-- [x] **Git commit + push**
+- [x] **Blog-Artikel #71 erstellt:** "Gaming & Streaming Setup 2026: Die 50+ besten Produkte für Gamer & Streamer" – 12 Kategorien, 50+ Produkt-Cards (Gaming-Stühle, Monitore, Tastaturen, Mäuse, Headsets, Mikrofone, Webcams, Capture Cards, LED-Beleuchtung, Stream Decks, Gaming-Desks, Konsolen-Zubehör), 15-Produkt-Vergleichstabelle, 5 Budget-Stufen (100€ bis 5.000€+), 7-Tage-Startplan, 7 FAQ – 60+ Amazon-Affiliate-Links (tag=ikune21-21), 12 SEO-Kategorie-Suchlinks
+- [x] **Gaming-Setup-Konfigurator gebaut:** tools/gaming-setup-konfigurator.html (43 KB HTML, 6 Fragen interaktives Quiz: Gaming-Typ, Budget, Monitor-Präferenz, Streaming-Pläne, Arbeitsplatz, Konsolen – personalisierte Produktempfehlungen für 11 Kategorien mit 5 Budget-Stufen, 50+ Produkten, Amazon-Affiliate-Links, 11 Kategorie-Suchlinks)
+- [x] **Blog-Index aktualisiert:** +Blog-Karte #71 (Gaming & Streaming Setup), Stats 52→66
+- [x] **Tools-Index aktualisiert:** +Gaming-Setup-Konfigurator-Karte (28 Tools)
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 52→66, KI-Websites 29→30
+- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 176→178, Blog-Artikel 65→66, KI-Tools 15→16, Sitemap URLs 163→165
+- [x] **Sitemap.xml aktualisiert:** +2 URLs (Blog #71 + Gaming-Setup-Konfigurator)
+- [x] **Git commit + push ✅** (6 Dateien, +591 Zeilen, Commit fb5b2d4)
 
 ### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
 | Kategorie | Anzahl | Status |
 |-----------|--------|--------|
 | Blog-Artikel | 71 | ✅ LIVE (1 NEU: #71) |
-| Interaktive Tools | 15+ | ✅ LIVE |
+| Interaktive Tools | 16 | ✅ LIVE (1 NEU: Gaming-Konfigurator) |
 | Affiliate-Shops | 8 | ✅ LIVE |
 | KDP-Buch-Previews | 15 | ✅ LIVE |
 | Apps & Spiele | 12+ | ✅ LIVE |
-| HTML-Seiten | 177 | ✅ LIVE (1 NEU) |
-| Sitemap URLs | 164 | ✅ LIVE |
+| HTML-Seiten | 178 | ✅ LIVE (2 NEU) |
+| Sitemap URLs | 165 | ✅ LIVE |
 
 ### Geld-Strategie-Ranking (0 EUR Kosten):
 | Rang | Strategie | Potenzial/Monat | Status |
 |------|-----------|----------------|--------|
-| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500+ | ✅ 71 Artikel + 12 Tools + 8 Shops |
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500+ | ✅ 71 Artikel + 16 Tools + 8 Shops |
 | 2 | **Amazon KDP (15 Bücher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
 | 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
 | 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
 | 5 | **AI Persönlichkeits-Report Verkauf** | EUR 50-300 | ✅ Tool live, Prynth/Blook nötig |
+
+### Neue Chancen (Recherche):
+1. 🟢 **Prynth (seit Mai 2026)** – 0%-Kommissions-Plattform für digitale Produkte (PDFs, Vorlagen). Kein monatliches Abo. Perfekt für Premium-Report-Verkauf.
+2. 🟢 **Blook (Beta, Mai 2026)** – Free Platform für interaktive Web-Produkte. 2% Commission. Affiliate-Support, Stripe-Checkout.
+3. 🟢 **Kostenlose AI APIs** – OpenAI o4-mini (100 req/day free), Google Gemini 2.5 Flash (60 req/min free), Mistral Small 3 Free Tier. Für automatische Content-Generierung nutzbar.
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** - 15 Bücher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟢 **Prynth/Blook Account** - 0%-Kommissions-Plattformen für digitale Produkte
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #72**: Neue Nische (z.B. KI-Fotografie & Kamera-Zubehör 2026 oder Smart Gardening 2026)
+2. 🟢 **Improve existing tools**: Mehr Amazon-Affiliate-Links in bestehenden Tools
+3. 🟢 **Improve branchen-ki/ pages**: Mehr Affiliate-Inhalte je Branche
+4. 🟢 **Improve LeadGen AI**: Weitere Affiliate-Produktkategorien hinzufügen
+5. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Prynth, Blook)
+
+---
 
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.53)
 
