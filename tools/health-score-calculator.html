@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gesundheits-Score Rechner – Deine persönliche Gesundheitsbewertung</title>
+<meta name="description" content="Interaktiver Gesundheits-Score Rechner. Beantworte 10 Fragen zu Bewegung, Ernährung, Schlaf, mentaler Gesundheit und Vorsorge und erhalte deine persönliche Gesundheitsbewertung mit Produktempfehlungen.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0A;--card:#1A1A1A;--border:#2A2A2A;--accent:#8B5CF6;--gold:#FFD700;--text:#E5E5E5;--text-muted:#9CA3AF;--red:#EF4444;--orange:#F59E0B;--green:#10B981;--radius:12px;--transition:0.3s ease}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:820px;margin:0 auto;padding:0 20px}
+
+/* Navigation */
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:100}
+nav .container{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+nav .logo{font-size:1.25rem;font-weight:700;color:var(--gold);letter-spacing:-0.5px}
+nav .logo span{color:var(--accent)}
+nav .nav-links{display:flex;gap:20px;flex-wrap:wrap}
+nav .nav-links a{color:var(--text-muted);font-size:0.9rem;font-weight:500;transition:color var(--transition)}
+nav .nav-links a:hover{color:var(--gold);text-decoration:none}
+
+/* Header */
+header{text-align:center;padding:48px 0 32px}
+header h1{font-size:2.2rem;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:var(--text-muted);font-size:1.05rem;max-width:600px;margin:0 auto}
+header .badge{display:inline-block;background:rgba(139,92,246,0.15);color:var(--accent);padding:4px 14px;border-radius:20px;font-size:0.8rem;font-weight:600;margin-bottom:12px}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:20px}
+
+/* Questions */
+.question{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.question label{display:block;font-weight:600;font-size:1.05rem;margin-bottom:6px}
+.question .q-num{color:var(--accent);font-weight:700;font-size:0.85rem;display:inline-block;margin-bottom:2px}
+.question .category{color:var(--gold);font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;display:inline-block;margin-left:8px}
+.question .options{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.question .options button{background:var(--bg);border:1px solid var(--border);color:var(--text-muted);padding:10px 18px;border-radius:8px;cursor:pointer;font-size:0.9rem;transition:all var(--transition);font-family:inherit}
+.question .options button:hover{border-color:var(--accent);color:var(--text)}
+.question .options button.selected{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+
+/* Progress */
+.progress-wrap{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.progress-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width 0.5s ease;width:0%}
+.progress-text{color:var(--text-muted);font-size:0.85rem;font-weight:600;white-space:nowrap}
+
+/* Submit */
+.submit-wrap{text-align:center;margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:none;padding:14px 36px;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all var(--transition);font-family:inherit}
+.btn:hover{background:#7C3AED;transform:translateY(-1px);box-shadow:0 8px 25px rgba(139,92,246,0.3)}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-gold{background:var(--gold);color:#000}
+.btn-gold:hover{background:#E6C200;box-shadow:0 8px 25px rgba(255,215,0,0.3)}
+.btn-outline{background:transparent;border:2px solid var(--accent);color:var(--accent)}
+.btn-outline:hover{background:var(--accent);color:#fff;box-shadow:none}
+.btn-sm{padding:10px 20px;font-size:0.9rem}
+
+/* Results */
+.results{display:none;animation:fadeIn 0.5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.results.visible{display:block}
+.result-header{text-align:center;padding:24px 0 20px}
+.result-header .score-big{font-size:4rem;font-weight:900;line-height:1}
+.result-header .score-label{font-size:1.3rem;font-weight:700;margin:8px 0 4px}
+.result-header .score-sub{color:var(--text-muted);font-size:0.95rem}
+
+/* Score ring */
+.score-ring-wrap{width:200px;height:200px;margin:0 auto 20px;position:relative}
+.score-ring-wrap canvas{width:100%;height:100%}
+.score-ring-wrap .score-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.score-ring-wrap .score-center .num{font-size:3rem;font-weight:900;line-height:1}
+.score-ring-wrap .score-center .pct{font-size:0.85rem;color:var(--text-muted)}
+
+/* Score bar */
+.score-section{margin-bottom:24px}
+.score-section h3{font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)}
+.score-bar-outer{height:18px;background:var(--bg);border-radius:9px;overflow:hidden;position:relative}
+.score-bar-outer .bar-fill{height:100%;border-radius:9px;transition:width 1.2s cubic-bezier(0.22,1,0.36,1);width:0%}
+.score-bar-outer .bar-fill.kritisch{background:var(--red)}
+.score-bar-outer .bar-fill.verbesserungswuerdig{background:var(--orange)}
+.score-bar-outer .bar-fill.gut{background:var(--gold)}
+.score-bar-outer .bar-fill.exzellent{background:var(--green)}
+.score-bar-outer .bar-label{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:0.75rem;font-weight:700;color:var(--bg)}
+
+/* Category breakdown */
+.category-bars{margin-bottom:24px}
+.category-bars h3{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--gold)}
+.cat-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.cat-row .cat-name{min-width:90px;font-size:0.85rem;font-weight:600;color:var(--text-muted);text-align:right}
+.cat-row .cat-bar-wrap{flex:1;height:24px;background:var(--bg);border-radius:6px;overflow:hidden;position:relative}
+.cat-row .cat-bar-wrap .cat-fill{height:100%;border-radius:6px;transition:width 1s cubic-bezier(0.22,1,0.36,1);width:0%}
+.cat-row .cat-bar-wrap .cat-fill.bewegung{background:linear-gradient(90deg,#8B5CF6,#A78BFA)}
+.cat-row .cat-bar-wrap .cat-fill.ernaehrung{background:linear-gradient(90deg,#10B981,#34D399)}
+.cat-row .cat-bar-wrap .cat-fill.schlaf{background:linear-gradient(90deg,#3B82F6,#60A5FA)}
+.cat-row .cat-bar-wrap .cat-fill.mental{background:linear-gradient(90deg,#F59E0B,#FBBF24)}
+.cat-row .cat-bar-wrap .cat-fill.vorsorge{background:linear-gradient(90deg,#EC4899,#F472B6)}
+.cat-row .cat-bar-wrap .cat-pts{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:0.75rem;font-weight:700;color:var(--bg)}
+.cat-row .cat-max{min-width:32px;font-size:0.75rem;color:var(--text-muted);text-align:left}
+
+/* Message box */
+.msg-box{padding:20px;border-radius:var(--radius);margin-bottom:24px;text-align:center}
+.msg-box.kritisch{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25)}
+.msg-box.verbesserungswuerdig{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25)}
+.msg-box.gut{background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2)}
+.msg-box.exzellent{background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.25)}
+.msg-box .msg-icon{font-size:2.5rem;margin-bottom:6px}
+.msg-box .msg-title{font-size:1.3rem;font-weight:800;margin-bottom:4px}
+.msg-box .msg-text{color:var(--text-muted);font-size:0.95rem}
+
+/* Recommendations */
+.recs{margin-bottom:24px}
+.recs h3{font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--gold)}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.rec-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:18px;text-align:center;transition:all var(--transition)}
+.rec-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.rec-card .rec-icon{font-size:2rem;margin-bottom:8px}
+.rec-card h4{font-size:0.95rem;font-weight:700;margin-bottom:4px}
+.rec-card p{color:var(--text-muted);font-size:0.8rem;margin-bottom:10px}
+.rec-card .amz-link{display:inline-block;background:var(--accent);color:#fff;padding:7px 18px;border-radius:6px;font-size:0.8rem;font-weight:600;transition:all var(--transition)}
+.rec-card .amz-link:hover{background:#7C3AED;text-decoration:none;box-shadow:0 4px 15px rgba(139,92,246,0.3)}
+
+/* Actions */
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
+
+/* Ko-fi */
+.kofi{text-align:center;margin-bottom:24px}
+.kofi a{display:inline-flex;align-items:center;gap:10px;background:#FF5E5B;color:#fff;padding:10px 24px;border-radius:8px;font-weight:700;font-size:0.9rem;transition:all var(--transition)}
+.kofi a:hover{background:#E04E4B;text-decoration:none;transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,94,91,0.3)}
+
+/* Footer */
+footer{text-align:center;padding:32px 0;color:var(--text-muted);font-size:0.85rem;border-top:1px solid var(--border);margin-top:32px}
+footer a{color:var(--gold)}
+
+/* Toast */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card);border:1px solid var(--border);color:var(--text);padding:12px 28px;border-radius:8px;font-weight:600;opacity:0;transition:all 0.4s ease;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Mobile */
+@media(max-width:600px){
+  header h1{font-size:1.6rem}
+  header p{font-size:0.95rem}
+  .card{padding:18px}
+  .question .options button{padding:8px 14px;font-size:0.85rem;flex:1;text-align:center}
+  .cat-row .cat-name{min-width:60px;font-size:0.75rem}
+  .cat-row .cat-max{min-width:24px;font-size:0.7rem}
+  .rec-grid{grid-template-columns:1fr}
+  .score-ring-wrap{width:160px;height:160px}
+  .score-ring-wrap .score-center .num{font-size:2.4rem}
+  .result-header .score-big{font-size:3rem}
+  nav .nav-links{gap:12px}
+  nav .nav-links a{font-size:0.8rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/index.html" class="logo">Health<span>Score</span></a>
+    <div class="nav-links">
+      <a href="/index.html">Home</a>
+      <a href="/blog/">Blog</a>
+      <a href="/tools/index.html">Tools</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="container">
+    <span class="badge">🩺 Kostenlos · 5 Minuten</span>
+    <h1>Gesundheits-Score Rechner</h1>
+    <p>Beantworte 10 kurze Fragen zu Bewegung, Ernährung, Schlaf, mentaler Gesundheit und Vorsorge – erhalte deine persönliche Bewertung mit Tipps &amp; Empfehlungen.</p>
+  </div>
+</header>
+
+<main class="container">
+  <!-- Quiz Section -->
+  <div id="quiz" class="card">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+      <span class="progress-text" id="progressText">0 / 10</span>
+    </div>
+
+    <form id="quizForm" autocomplete="off">
+      <!-- CATEGORY 1: BEWEGUNG -->
+      <div class="question" data-cat="bewegung">
+        <div><span class="q-num">Frage 1</span><span class="category">Bewegung</span></div>
+        <label>Wie oft pro Woche treibst du Sport?</label>
+        <div class="options" data-q="0">
+          <button type="button" data-val="0" data-pts="0">Nie</button>
+          <button type="button" data-val="1" data-pts="2">1–2×</button>
+          <button type="button" data-val="2" data-pts="4">3–4×</button>
+          <button type="button" data-val="3" data-pts="6">5+</button>
+        </div>
+      </div>
+      <div class="question" data-cat="bewegung">
+        <div><span class="q-num">Frage 2</span><span class="category">Bewegung</span></div>
+        <label>Wie viele Schritte gehst du täglich?</label>
+        <div class="options" data-q="1">
+          <button type="button" data-val="0" data-pts="0">&lt; 3.000</button>
+          <button type="button" data-val="1" data-pts="2">3.000–7.000</button>
+          <button type="button" data-val="2" data-pts="4">7.000–10.000</button>
+          <button type="button" data-val="3" data-pts="6">10.000+</button>
+        </div>
+      </div>
+
+      <!-- CATEGORY 2: ERNÄHRUNG -->
+      <div class="question" data-cat="ernaehrung">
+        <div><span class="q-num">Frage 3</span><span class="category">Ernährung</span></div>
+        <label>Wie viele Portionen Obst/Gemüse isst du täglich?</label>
+        <div class="options" data-q="2">
+          <button type="button" data-val="0" data-pts="0">0</button>
+          <button type="button" data-val="1" data-pts="2">1–2</button>
+          <button type="button" data-val="2" data-pts="4">3–4</button>
+          <button type="button" data-val="3" data-pts="6">5+</button>
+        </div>
+      </div>
+      <div class="question" data-cat="ernaehrung">
+        <div><span class="q-num">Frage 4</span><span class="category">Ernährung</span></div>
+        <label>Wie oft isst du Fertiggerichte / Fast Food?</label>
+        <div class="options" data-q="3">
+          <button type="button" data-val="0" data-pts="0">Täglich</button>
+          <button type="button" data-val="1" data-pts="2">3–4× / Woche</button>
+          <button type="button" data-val="2" data-pts="4">1–2× / Woche</button>
+          <button type="button" data-val="3" data-pts="6">Selten / Nie</button>
+        </div>
+      </div>
+
+      <!-- CATEGORY 3: SCHLAF -->
+      <div class="question" data-cat="schlaf">
+        <div><span class="q-num">Frage 5</span><span class="category">Schlaf</span></div>
+        <label>Wie viele Stunden schläfst du pro Nacht?</label>
+        <div class="options" data-q="4">
+          <button type="button" data-val="0" data-pts="0">&lt; 5</button>
+          <button type="button" data-val="1" data-pts="2">5–6</button>
+          <button type="button" data-val="2" data-pts="4">7–8</button>
+          <button type="button" data-val="3" data-pts="2">8+</button>
+        </div>
+      </div>
+      <div class="question" data-cat="schlaf">
+        <div><span class="q-num">Frage 6</span><span class="category">Schlaf</span></div>
+        <label>Wie erholt wachst du auf?</label>
+        <div class="options" data-q="5">
+          <button type="button" data-val="0" data-pts="0">Nie</button>
+          <button type="button" data-val="1" data-pts="2">Selten</button>
+          <button type="button" data-val="2" data-pts="4">Oft</button>
+          <button type="button" data-val="3" data-pts="6">Immer</button>
+        </div>
+      </div>
+
+      <!-- CATEGORY 4: MENTALE GESUNDHEIT -->
+      <div class="question" data-cat="mental">
+        <div><span class="q-num">Frage 7</span><span class="category">Mentale Gesundheit</span></div>
+        <label>Wie oft fühlst du dich gestresst?</label>
+        <div class="options" data-q="6">
+          <button type="button" data-val="0" data-pts="0">Ständig</button>
+          <button type="button" data-val="1" data-pts="2">Oft</button>
+          <button type="button" data-val="2" data-pts="4">Gelegentlich</button>
+          <button type="button" data-val="3" data-pts="6">Selten</button>
+        </div>
+      </div>
+      <div class="question" data-cat="mental">
+        <div><span class="q-num">Frage 8</span><span class="category">Mentale Gesundheit</span></div>
+        <label>Wie oft machst du etwas nur für dich / entspannst bewusst?</label>
+        <div class="options" data-q="7">
+          <button type="button" data-val="0" data-pts="0">Nie</button>
+          <button type="button" data-val="1" data-pts="2">Selten</button>
+          <button type="button" data-val="2" data-pts="4">1–2× / Woche</button>
+          <button type="button" data-val="3" data-pts="6">Täglich</button>
+        </div>
+      </div>
+
+      <!-- CATEGORY 5: VORSORGE -->
+      <div class="question" data-cat="vorsorge">
+        <div><span class="q-num">Frage 9</span><span class="category">Vorsorge</span></div>
+        <label>Wann war dein letzter Gesundheits-Check?</label>
+        <div class="options" data-q="8">
+          <button type="button" data-val="0" data-pts="0">&gt; 3 Jahre</button>
+          <button type="button" data-val="1" data-pts="2">1–3 Jahre</button>
+          <button type="button" data-val="2" data-pts="4">&lt; 1 Jahr</button>
+          <button type="button" data-val="3" data-pts="6">Regelmäßig</button>
+        </div>
+      </div>
+      <div class="question" data-cat="vorsorge">
+        <div><span class="q-num">Frage 10</span><span class="category">Vorsorge</span></div>
+        <label>Wie gut kennst du deine Blutwerte?</label>
+        <div class="options" data-q="9">
+          <button type="button" data-val="0" data-pts="0">Gar nicht</button>
+          <button type="button" data-val="1" data-pts="2">Ungefähr</button>
+          <button type="button" data-val="2" data-pts="4">Gut</button>
+          <button type="button" data-val="3" data-pts="6">Sehr gut / regelmäßig checken</button>
+        </div>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit" class="btn" id="submitBtn" disabled>
+          <span>📊</span> Ergebnis berechnen
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Results Section -->
+  <div id="results" class="results">
+    <div class="card">
+      <div class="result-header">
+        <div class="score-ring-wrap">
+          <canvas id="scoreRing" width="200" height="200"></canvas>
+          <div class="score-center">
+            <div class="num" id="scoreNum">0</div>
+            <div class="pct">von 60</div>
+          </div>
+        </div>
+        <div class="score-label" id="resultLabel">–</div>
+        <div class="score-sub" id="resultSub">–</div>
+      </div>
+
+      <div class="score-section">
+        <h3>📈 Dein Gesamtscore</h3>
+        <div class="score-bar-outer">
+          <div class="bar-fill" id="scoreBarFill"></div>
+          <div class="bar-label" id="scoreBarLabel">0%</div>
+        </div>
+      </div>
+
+      <div class="msg-box" id="msgBox">
+        <div class="msg-icon" id="msgIcon">💪</div>
+        <div class="msg-title" id="msgTitle">–</div>
+        <div class="msg-text" id="msgText">–</div>
+      </div>
+
+      <div class="category-bars" id="categoryBars">
+        <h3>📊 Kategorie-Übersicht</h3>
+        <div id="catContainer"></div>
+      </div>
+
+      <div class="recs" id="recsSection">
+        <h3>🛒 Empfohlene Produkte für dich</h3>
+        <div class="rec-grid" id="recGrid"></div>
+      </div>
+
+      <div class="kofi">
+        <a href="https://ko-fi.com/YOUR_KOFI" target="_blank" rel="noopener">
+          ☕️ Unterstütze mich auf Ko-fi
+        </a>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-outline btn-sm" id="shareBtn">🔗 Ergebnis teilen</button>
+        <button class="btn btn-gold btn-sm" id="resetBtn">🔄 Zurücksetzen</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 <a href="/index.html">HealthScore</a> – Dein persönlicher Gesundheits-Score Rechner. <br class="mobile-only">Keine medizinische Beratung – konsultiere bei Beschwerden immer einen Arzt.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  'use strict';
+
+  // State
+  const answers = new Array(10).fill(null);
+  const MAX_SCORE = 60;
+
+  // DOM refs
+  const form = document.getElementById('quizForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const results = document.getElementById('results');
+  const scoreRing = document.getElementById('scoreRing');
+  const scoreNum = document.getElementById('scoreNum');
+  const resultLabel = document.getElementById('resultLabel');
+  const resultSub = document.getElementById('resultSub');
+  const scoreBarFill = document.getElementById('scoreBarFill');
+  const scoreBarLabel = document.getElementById('scoreBarLabel');
+  const msgBox = document.getElementById('msgBox');
+  const msgIcon = document.getElementById('msgIcon');
+  const msgTitle = document.getElementById('msgTitle');
+  const msgText = document.getElementById('msgText');
+  const catContainer = document.getElementById('catContainer');
+  const recGrid = document.getElementById('recGrid');
+  const resetBtn = document.getElementById('resetBtn');
+  const shareBtn = document.getElementById('shareBtn');
+  const toast = document.getElementById('toast');
+
+  // Categories map (question index -> category key)
+  const catMap = [
+    'bewegung','bewegung',
+    'ernaehrung','ernaehrung',
+    'schlaf','schlaf',
+    'mental','mental',
+    'vorsorge','vorsorge'
+  ];
+
+  const catLabels = {
+    bewegung: 'Bewegung',
+    ernaehrung: 'Ernährung',
+    schlaf: 'Schlaf',
+    mental: 'Mentale Gesundheit',
+    vorsorge: 'Vorsorge'
+  };
+
+  const catKeys = ['bewegung','ernaehrung','schlaf','mental','vorsorge'];
+
+  // Scoring configuration
+  const scoreConfig = [
+    {max:25, grade:'kritisch', label:'Kritisch', icon:'🚨', color:'#EF4444',
+     title:'Deine Gesundheit braucht Aufmerksamkeit!',
+     text:'Deine Werte zeigen deutliches Verbesserungspotenzial. Schon kleine Veränderungen in Bewegung, Ernährung oder Schlaf können einen großen Unterschied machen. Starte noch heute – dein Körper wird es dir danken.'},
+    {max:50, grade:'verbesserungswuerdig', label:'Verbesserungswürdig', icon:'⚠️', color:'#F59E0B',
+     title:'Auf dem richtigen Weg – aber es geht mehr!',
+     text:'Du hast bereits einige gute Gewohnheiten, aber es gibt noch Luft nach oben. Fokussiere dich auf die Kategorien mit niedrigen Werten und baue nachhaltige Routinen auf.'},
+    {max:75, grade:'gut', label:'Gut', icon:'✅', color:'#FFD700',
+     title:'Solide Basis – weiter so!',
+     text:'Du achtest schon gut auf deine Gesundheit. Mit ein paar gezielten Verbesserungen in den Schwachstellen kannst du dein volles Potenzial entfalten.'},
+    {max:100, grade:'exzellent', label:'Exzellent', icon:'🏆', color:'#10B981',
+     title:'Hervorragend – du lebst gesund!',
+     text:'Deine Gesundheitsgewohnheiten sind vorbildlich. Bleib dran und inspiriere andere! Mit den richtigen Tools kannst du dein Niveau halten.'}
+  ];
+
+  // Amazon product recommendations by level (tag=ikune21-21)
+  const products = {
+    low: [
+      {name:'Fitness Tracker', desc:'Aktivität & Schritte im Blick', search:'Fitness+Tracker', emoji:'⌚'},
+      {name:'Blutdruckmessgerät', desc:'Regelmäßige Kontrolle leicht gemacht', search:'Blutdruckmessgerät', emoji:'🩺'},
+      {name:'Schlaf-Tracker-Buch', desc:'Deinen Schlaf verstehen & verbessern', search:'Schlaf+Tracker+Buch', emoji:'📖'}
+    ],
+    medium: [
+      {name:'Smartwatch', desc:'Gesundheit & Fitness tracken', search:'Smartwatch+Gesundheit', emoji:'⌚'},
+      {name:'Health Journal Buch', desc:'Gewohnheiten & Fortschritte dokumentieren', search:'Health+Journal+Buch', emoji:'📓'},
+      {name:'Ergonomie-Kissen', desc:'Bessere Haltung & Schlaf', search:'Ergonomie+Kissen', emoji:'🛏️'}
+    ],
+    high: [
+      {name:'Premium-Smartwatch', desc:'Erweiterte Gesundheitsfunktionen', search:'Premium+Smartwatch+Gesundheit', emoji:'⌚'},
+      {name:'Luftreiniger', desc:'Für bessere Raumluft & Schlafqualität', search:'Luftreiniger+Schlaf', emoji:'💨'},
+      {name:'Health-Tracker-Ring', desc:'Diskret & präzise Gesundheit tracken', search:'Health+Tracker+Ring', emoji:'💍'}
+    ]
+  };
+
+  // --- Option selection ---
+  document.querySelectorAll('.options').forEach(optGroup => {
+    const qIdx = parseInt(optGroup.dataset.q);
+    optGroup.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function(){
+        // deselect siblings
+        optGroup.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+        answers[qIdx] = parseInt(this.dataset.pts);
+        updateProgress();
+        validateForm();
+      });
+    });
+  });
+
+  function updateProgress(){
+    const answered = answers.filter(a => a !== null).length;
+    const pct = (answered / 10) * 100;
+    progressFill.style.width = pct + '%';
+    progressText.textContent = answered + ' / 10';
+  }
+
+  function validateForm(){
+    const allAnswered = answers.every(a => a !== null);
+    submitBtn.disabled = !allAnswered;
+    if(allAnswered){
+      submitBtn.style.background = 'var(--gold)';
+      submitBtn.style.color = '#000';
+    } else {
+      submitBtn.style.background = '';
+      submitBtn.style.color = '';
+    }
+  }
+
+  // --- Submit ---
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(answers.includes(null)) return;
+    calculateAndShow();
+  });
+
+  function calculateAndShow(){
+    const total = answers.reduce((sum, v) => sum + v, 0);
+    const pct = Math.round((total / MAX_SCORE) * 100);
+
+    // Determine grade
+    let gradeObj = scoreConfig[0];
+    for(let i = 0; i < scoreConfig.length; i++){
+      if(pct <= scoreConfig[i].max){
+        gradeObj = scoreConfig[i];
+        break;
+      }
+    }
+
+    // Determine products based on pct
+    let prodSet;
+    if(pct <= 25) prodSet = products.low;
+    else if(pct <= 50) prodSet = products.medium;
+    else prodSet = products.high;
+
+    // Category scores
+    const catScores = {};
+    catKeys.forEach(k => catScores[k] = 0);
+    answers.forEach((v, i) => {
+      const cat = catMap[i];
+      catScores[cat] += v;
+    });
+
+    // Show results
+    document.getElementById('quiz').style.display = 'none';
+    results.classList.add('visible');
+    results.scrollIntoView({behavior:'smooth', block:'start'});
+
+    // Ring chart
+    drawScoreRing(pct, gradeObj.color);
+
+    // Big score
+    scoreNum.textContent = total;
+
+    // Label
+    resultLabel.textContent = gradeObj.icon + ' ' + gradeObj.label;
+    resultLabel.style.color = gradeObj.color;
+    resultSub.textContent = total + ' von ' + MAX_SCORE + ' Punkten (' + pct + '%)';
+
+    // Score bar
+    scoreBarFill.className = 'bar-fill ' + gradeObj.grade;
+    setTimeout(() => {
+      scoreBarFill.style.width = pct + '%';
+      scoreBarLabel.textContent = pct + '%';
+    }, 50);
+
+    // Message box
+    msgBox.className = 'msg-box ' + gradeObj.grade;
+    msgIcon.textContent = gradeObj.icon;
+    msgTitle.textContent = gradeObj.title;
+    msgTitle.style.color = gradeObj.color;
+    msgText.textContent = gradeObj.text;
+
+    // Category bars
+    renderCategoryBars(catScores, pct, gradeObj.grade);
+
+    // Recommendations
+    renderRecommendations(prodSet);
+
+    // Toast
+    showToast('✅ Ergebnis berechnet! Dein Score: ' + total + '/60 (' + pct + '%)');
+  }
+
+  function drawScoreRing(pct, color){
+    const ctx = scoreRing.getContext('2d');
+    const w = 200, h = 200;
+    ctx.clearRect(0,0,w,h);
+
+    const cx = w/2, cy = h/2, r = 82, lw = 14;
+
+    // Background ring
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI*2);
+    ctx.strokeStyle = '#2A2A2A';
+    ctx.lineWidth = lw;
+    ctx.stroke();
+
+    // Active ring
+    const endAngle = (pct / 100) * Math.PI * 2 - Math.PI/2;
+    const startAngle = -Math.PI/2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, startAngle, endAngle);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lw;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Glow dot at the end
+    const dotAngle = endAngle;
+    const dx = cx + r * Math.cos(dotAngle);
+    const dy = cy + r * Math.sin(dotAngle);
+    ctx.beginPath();
+    ctx.arc(dx, dy, lw/2 + 2, 0, Math.PI*2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  function renderCategoryBars(catScores, overallPct, overallGrade){
+    catContainer.innerHTML = '';
+    catKeys.forEach(key => {
+      const pts = catScores[key];
+      const max = 12; // 2 questions * 6 max each
+      const pct = Math.round((pts / max) * 100);
+
+      const row = document.createElement('div');
+      row.className = 'cat-row';
+
+      const nameEl = document.createElement('div');
+      nameEl.className = 'cat-name';
+      nameEl.textContent = catLabels[key];
+
+      const barWrap = document.createElement('div');
+      barWrap.className = 'cat-bar-wrap';
+
+      const fill = document.createElement('div');
+      fill.className = 'cat-fill ' + key;
+      fill.style.width = '0%';
+      barWrap.appendChild(fill);
+
+      const ptsLabel = document.createElement('div');
+      ptsLabel.className = 'cat-pts';
+      ptsLabel.textContent = pts + '/' + max;
+      barWrap.appendChild(ptsLabel);
+
+      const maxEl = document.createElement('div');
+      maxEl.className = 'cat-max';
+      maxEl.textContent = max;
+
+      row.appendChild(nameEl);
+      row.appendChild(barWrap);
+      row.appendChild(maxEl);
+      catContainer.appendChild(row);
+
+      // Animate
+      setTimeout(() => {
+        fill.style.width = pct + '%';
+      }, 100);
+    });
+  }
+
+  function renderRecommendations(prodSet){
+    recGrid.innerHTML = '';
+    prodSet.forEach(p => {
+      const url = 'https://www.amazon.de/s?k=' + encodeURIComponent(p.search) + '&tag=ikune21-21';
+      const card = document.createElement('div');
+      card.className = 'rec-card';
+      card.innerHTML = 
+        '<div class="rec-icon">' + p.emoji + '</div>' +
+        '<h4>' + p.name + '</h4>' +
+        '<p>' + p.desc + '</p>' +
+        '<a href="' + url + '" class="amz-link" target="_blank" rel="noopener">Auf Amazon ansehen</a>';
+      recGrid.appendChild(card);
+    });
+  }
+
+  // --- Reset ---
+  resetBtn.addEventListener('click', function(){
+    answers.fill(null);
+    document.querySelectorAll('.options button').forEach(b => b.classList.remove('selected'));
+    results.classList.remove('visible');
+    document.getElementById('quiz').style.display = 'block';
+    updateProgress();
+    validateForm();
+    document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+  });
+
+  // --- Share ---
+  shareBtn.addEventListener('click', function(){
+    const total = answers.reduce((sum, v) => sum + v, 0);
+    const pct = Math.round((total / MAX_SCORE) * 100);
+    let label = 'Kritisch';
+    if(pct <= 25) label = 'Kritisch';
+    else if(pct <= 50) label = 'Verbesserungswürdig';
+    else if(pct <= 75) label = 'Gut';
+    else label = 'Exzellent';
+
+    const text = '🩺 Mein Gesundheits-Score: ' + total + '/60 (' + pct + '%) – ' + label + '. Mach den Test auch!';
+    const url = window.location.href;
+
+    if(navigator.share){
+      navigator.share({title:'Mein Gesundheits-Score', text:text, url:url}).catch(() => {});
+    } else {
+      const full = text + '\n' + url;
+      navigator.clipboard.writeText(full).then(() => {
+        showToast('📋 Ergebnis in die Zwischenablage kopiert!');
+      }).catch(() => {
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = full;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast('📋 Ergebnis in die Zwischenablage kopiert!');
+      });
+    }
+  });
+
+  // --- Toast ---
+  let toastTimeout;
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  // Init
+  updateProgress();
+  validateForm();
+
+})();
+</script>
+</body>
+</html>

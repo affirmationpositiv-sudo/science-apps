@@ -442,3 +442,53 @@ Start: Survey existing state. Portal live at affirmationpositiv-sudo.github.io/s
 2. 🔴 **Neues interaktives Tool bauen**: z.B. Steuerrechner
 3. 🟡 **Obsidian Second Brain erweitern**
 4. 🟡 **KDP Account erstellen** (User-Aktion nötig)
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.18)
+
+
+### Previous State (R2.17):
+- 21 Blog-Artikel live (Artikel #1-21), 8 Affiliate-Shops
+- 19+ KDP-Bücher, 8 T-Shirt-Designs
+- Dropshipping-Profit-Rechner live
+- Git working tree clean
+- Site HTTP 200 ✅
+
+### Actions This Tick (R2.18):
+- [x] **Blog-Artikel #22 erstellt:** "KI-Gesundheit & Health-Tech 2026" (45 KB, ~3.960 Wörter, 10 Abschnitte, 29 Amazon-Affiliate-Links tag=ikune21-21)
+- [x] **Health Score Calculator gebaut:** tools/health-score-calculator.html (32 KB, 713 Zeilen, 10 Fragen/5 Kategorien)
+- [x] **Stats fix:** Hauptseite Blog 19 -> 21
+- [x] **Blog-Index aktualisiert:** +Artikel-Karte #22 mit Health-Score-Link
+- [x] **Tools-Index aktualisiert:** +Health Score Calculator Card
+- [x] **Sitemap.xml aktualisiert:** +2 neue URLs (Blog #22 + Health Score Calculator)
+- [x] **Cross-Links:** fitness-trends-2026 + smart-home-2026 -> neue Health-Artikel verlinkt
+- [x] **Obsidian aktualisiert:** Loop_Tick_R2.18.md erstellt
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 21 | ✅ LIVE (1 NEU) |
+| Apps & Spiele | 16+ | ✅ LIVE |
+| Affiliate-Shops | 8 | ✅ LIVE |
+| KDP-Buch-Previews | 19+ | ✅ LIVE |
+| Health Score Calculator | 1 | ✅ LIVE (NEU) |
+| Gesamt (Sitemap) | 58+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 21 Artikel + Quiz + 7 Tools + 8 Shops |
+| 2 | **Amazon KDP (19 Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 19 Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #23**: KI-Startups & Gruendung 2026 oder KI-Reisen 2026
+2. 🔴 **Neues Tool**: KI-Tool-Vergleichs-Tabelle oder interaktiver Steuerrechner
+3. 🟡 **KDP Account erstellen** (User-Aktion noetig)
+4. 🟡 **Google Search Console einrichten**
