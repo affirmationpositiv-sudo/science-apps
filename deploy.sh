@@ -3,7 +3,7 @@
 # SCIENCE-APPS DEPLOY-SKRIPT
 # Führt Commit + Push auf main & gh-pages aus
 # Autor: Licht und Schatten
-# Datum: 02.06.2026 - Loop R2.31
+# Datum: 02.06.2026 - Loop R2.38
 # ============================================================
 set -e
 
@@ -19,7 +19,7 @@ git status --short
 echo ""
 echo "📦 Commit erstellen..."
 git add -A
-git commit -m "Blog #37 + #38: KI für Autoren & Schriftsteller + Nachhaltige Geldanlage & ETFs | Sitemap + Blog-Index aktualisiert (36→38) | Autor: Licht und Schatten"
+git commit -m "R2.38: Blog #41: Geld verdienen ohne Startkapital 2026 (50+ Methoden, 0€ Start) + GalaxyBlog #12 + Admin-Statistiken aktualisiert (Blog 34→41) + Sitemap (148→155) | Autor: Licht und Schatten"
 
 # 3. Remote auf HTTPS setzen (für CI/cron ohne SSH)
 REMOTE=$(git remote get-url origin)
