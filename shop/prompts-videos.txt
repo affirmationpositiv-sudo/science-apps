@@ -1,0 +1,425 @@
+=== IKUNE Prompt Pack: KI-Videos & Content ===
+200 Premium Prompts für die Erstellung von Videos, Content und Social Media mit KI
+
+=== KATEGORIE 1: YOUTUBE HOOKS (30 Prompts) ===
+
+1. Erstelle einen 5-Sekunden-Hook für ein YouTube-Video über [THEMA], der mit einer schockierenden Statistik beginnt.
+
+2. Generiere einen Hook nach dem Muster „Die meisten Leute denken [FALSCHER GLAUBE], aber [WAHRHEIT]" für [THEMA].
+
+3. Schreibe einen kontroversen Hook für [THEMA], der Diskussionen in den Kommentaren auslösen wird.
+
+4. Entwickle einen Hook mit einer provokativen Frage zum Thema [THEMA], die im Video beantwortet wird.
+
+5. Erstelle einen „Was-passiert-wenn"-Hook für ein Experiment-Video zu [THEMA].
+
+6. Generiere einen persönlichen Hook, in dem du eine eigene Erfahrung mit [THEMA] teilst.
+
+7. Schreibe einen „Hier ist der Grund, warum"-Hook für [THEMA] mit einer überraschenden Enthüllung.
+
+8. Entwickle einen Hook mit einer starken visuellen Metapher für [THEMA].
+
+9. Erstelle einen nummerierten Hook wie „5 Dinge, die niemand dir über [THEMA] sagt".
+
+10. Generiere einen Hook, der eine häufige Frustration zu [THEMA] anspricht.
+
+11. Schreibe einen „Stell dir vor"-Hook, der eine ideale Szene zu [THEMA] beschreibt.
+
+12. Entwickle einen Hook mit einem Zitat einer berühmten Person, das auf [THEMA] angewendet wird.
+
+13. Erstelle einen Hook mit einem Vorher-Nachher-Vergleich zu [THEMA].
+
+14. Generiere einen Hook, der eine aktuelle Nachricht oder Trend zu [THEMA] aufgreift.
+
+15. Schreibe einen Hook mit einer dramatischen Pause – Text, der erst nach 2 Sekunden Stille kommt.
+
+16. Entwickle einen Hook mit einem Versprechen für das Video-Ende zu [THEMA].
+
+17. Erstelle einen Hook, der die Zuschauer direkt anspricht: „Wenn du [EIGENSCHAFT], dann ist das für dich."
+
+18. Generiere einen Hook mit einem einminütigen Challenge-Start zu [THEMA].
+
+19. Schreibe einen „Die Wahrheit über [THEMA]" - Hook, der Mythen entlarvt.
+
+20. Entwickle einen Hook mit einem spannenden „Was geschah als nächstes?"-Cliffhanger.
+
+21. Erstelle einen Hook, der die Aufmerksamkeit durch ungewöhnliche Geräusche oder Soundeffekte einfängt.
+
+22. Generiere einen Hook mit einer direkten Behauptung, die überrascht und neugierig macht.
+
+23. Schreibe einen Hook mit einer Gegenüberstellung von zwei extremen Positionen zu [THEMA].
+
+24. Entwickle einen Hook, der mit einer persönlichen Niederlage beginnt, gefolgt von der Erkenntnis.
+
+25. Erstelle einen Hook, der den Zuschauer direkt herausfordert: „Ich wette, du schaffst [AUFGABE] nicht."
+
+26. Generiere einen Hook mit einer unerwarteten Wendung zu [THEMA].
+
+27. Schreibe einen Hook mit einer drastischen Frage: „Was wäre, wenn [SCHOCKIERENDES SZENARIO]?"
+
+28. Entwickle einen Hook mit einem visuellen Trick oder Illusion, die Aufmerksamkeit erzeugt.
+
+29. Erstelle einen Hook, der ein populäres Meme oder Trend-Audio zu [THEMA] nutzt.
+
+30. Generiere einen kurzen, prägnanten Hook mit maximal 5 Wörtern für [THEMA].
+
+=== KATEGORIE 2: STORYTELLING SCRIPTS (30 Prompts) ===
+
+31. Schreibe ein 60-Sekunden-Storytelling-Skript für [THEMA] nach der 3-Akt-Struktur.
+
+32. Entwickle ein Skript für eine persönliche Geschichte über [THEMA] mit einem „Aha-Moment".
+
+33. Erstelle ein Storytelling-Skript mit einem Kunden, der [PROBLEM] hatte und [LÖSUNG] fand.
+
+34. Generiere ein „Hero's Journey"-Skript für [THEMA] in 90 Sekunden.
+
+35. Schreibe ein Storytelling-Skript, das mit einem Problem beginnt und in einer Lösung endet.
+
+36. Entwickle ein Skript für eine „Wie ich [ERFOLG] erreicht habe" - Geschichte.
+
+37. Erstelle ein Skript nach dem Muster „Damals vs. Heute" für [THEMA].
+
+38. Generiere ein emotionsgeladenes Skript für [THEMA], das Freude, Trauer und Hoffnung vereint.
+
+39. Schreibe ein Skript mit einer unerwarteten Wendung am Ende zu [THEMA].
+
+40. Entwickle ein Storytelling-Skript für ein Produktvideo von [PRODUKT].
+
+41. Erstelle ein Skript, das eine Metapher oder Analogie für [THEMA] durchgehend nutzt.
+
+42. Generiere ein 30-Sekunden-Kurzgeschichte-Skript für [THEMA] mit maximalem Impact.
+
+43. Schreibe ein Skript mit drei verschiedenen Perspektiven auf [THEMA].
+
+44. Entwickle ein Storytelling-Skript, das mit einer Frage endet, die zum Kommentieren anregt.
+
+45. Erstelle ein Skript für eine „Behind the Scenes"-Story zu [PROJEKT].
+
+46. Generiere ein Skript für eine „Lessons Learned"-Geschichte zu [THEMA].
+
+47. Schreibe ein Skript mit Rückblende-Elementen für [THEMA].
+
+48. Entwickle ein Skript für eine emotionale Kunden-Transformation durch [PRODUKT].
+
+49. Erstelle ein Skript mit einer überraschenden Fakten-Enthüllung zu [THEMA].
+
+50. Generiere ein Skript für eine humorvolle Geschichte zu [THEMA] mit einer Pointe.
+
+51. Schreibe ein Skript, das eine Reise oder einen Prozess in 6 Schritten darstellt.
+
+52. Entwickle ein Skript mit parallelen Handlungssträngen für [THEMA].
+
+53. Erstelle ein Skript nach der „Show, don't tell"-Methode für [THEMA].
+
+54. Generiere ein Skript, das eine kontroverse Meinung zu [THEMA] begründet.
+
+55. Schreibe ein Skript für eine Dankesbotschaft mit persönlicher Geschichte zu [THEMA].
+
+56. Entwickle ein Skript mit sokratischen Fragen für [THEMA].
+
+57. Erstelle ein Skript für ein „Day in the Life"-Video zu [THEMA/BERUF].
+
+58. Generiere ein Skript für eine Ankündigung mit Storytelling-Elementen.
+
+59. Schreibe ein Skript für eine Jahresrückblick-Geschichte zu [THEMA].
+
+60. Entwickle ein Skript mit Clustering-Technik – 5 Geschichten, die zu einer großen Idee führen.
+
+=== KATEGORIE 3: PRODUCT VIDEOS (20 Prompts) ===
+
+61. Schreibe ein 30-Sekunden-Produktvideo-Skript für [PRODUKT] mit Fokus auf das Hauptproblem.
+
+62. Entwickle ein Skript für ein „Unboxing-Video" von [PRODUKT] mit 5 Highlights.
+
+63. Erstelle ein Skript für eine Produktdemo von [SAAS-TOOL] in 60 Sekunden.
+
+64. Generiere ein Skript für ein Testimonial-Video eines fiktiven Kunden von [PRODUKT].
+
+65. Schreibe ein Skript für ein „Before and After"-Produktvideo für [TRANSFORMATIONSPRODUKT].
+
+66. Entwickle ein Skript für ein 15-Sekunden-Shorts/Reels zu [PRODUKT].
+
+67. Erstelle ein Skript für ein Vergleichsvideo: [PRODUKT] vs. [WETTBEWERBER].
+
+68. Generiere ein Skript für ein „How to use"-Produktvideo mit 5 Schritten.
+
+69. Schreibe ein Skript für ein Werbevideo mit emotionalem Storytelling für [PRODUKT].
+
+70. Entwickle ein Skript für ein „Warum [PRODUKT]?"-Erklärvideo mit USP-Hervorhebung.
+
+71. Erstelle ein Skript für ein Launch-Video eines neuen [PRODUKT] mit Countdown.
+
+72. Generiere ein Skript für ein „In 60 Sekunden erklärt"-Video zu [PRODUKT].
+
+73. Schreibe ein Skript für ein „Customer Success Story"-Video mit [PRODUKT].
+
+74. Entwickle ein Skript für ein humorvolles Produktvideo mit [PRODUKT] im Alltag.
+
+75. Erstelle ein Skript für ein Video, das den Produktionsprozess von [PRODUKT] zeigt.
+
+76. Generiere ein Skript für ein FAQ-Video, das 5 häufige Fragen zu [PRODUKT] beantwortet.
+
+77. Schreibe ein Skript für ein „Limited Edition"-Ankündigungsvideo für [PRODUKT].
+
+78. Entwickle ein Skript für ein Video-Testimonial mit Vorher-Nachher-Zahlen.
+
+79. Erstelle ein Skript für ein „Warum dieser Preis?"-Erklärvideo für [PRODUKT].
+
+80. Generiere ein Skript für ein Cross-Promotion-Video zwischen [PRODUKT A] und [PRODUKT B].
+
+=== KATEGORIE 4: SOCIAL MEDIA SHORTS (30 Prompts) ===
+
+81. Schreibe ein 15-Sekunden-TikTok-Skript für [THEMA] mit schnellen Schnitten.
+
+82. Entwickle ein Instagram-Reel-Skript für [THEMA] mit Text-overlay und Musik.
+
+83. Erstelle ein YouTube-Shorts-Skript für [THEMA] mit vertikalem Format.
+
+84. Generiere ein LinkedIn-Video-Skript für [THEMA] mit professionellem Ton.
+
+85. Schreibe ein Facebook-Video-Skript für [THEMA] mit Community-Gedanken.
+
+86. Entwickle ein Skript für einen „Quick Tip" in 30 Sekunden zu [THEMA].
+
+87. Erstelle ein Skript für einen „Myth vs. Fact"-Clip zu [THEMA].
+
+88. Generiere ein Skript für einen „Day in the Life"-Clip zu [THEMA/BERUF].
+
+89. Schreibe ein Skript für einen „Hack"-Clip zu [THEMA] mit überraschendem Trick.
+
+90. Entwickle ein Skript für einen „Behind the Scenes"-Clip zu [PROJEKT].
+
+91. Erstelle ein Skript für einen „What I Eat in a Day"-Clip für [THEMA/LIFESTYLE].
+
+92. Generiere ein Skript für einen Transformation-Clip (Zeitraffer) zu [THEMA].
+
+93. Schreibe ein Skript für einen Q&A-Clip mit 3 Fragen zu [THEMA].
+
+94. Entwickle ein Skript für einen „Try This at Home"-Challenge-Clip zu [THEMA].
+
+95. Erstelle ein Skript für einen Vergleichs-Clip: Früher vs. Heute.
+
+96. Generiere ein Skript für einen „React to"-Clip zu [AKTUELLES EREIGNIS/THEMA].
+
+97. Schreibe ein Skript für einen motivationalen Clip zu [THEMA] mit Hintergrundmusik.
+
+98. Entwickle ein Skript für einen „3 Things I Wish I Knew"-Clip zu [THEMA].
+
+99. Erstelle ein Skript für einen humorvollen Fail-Clip zu [THEMA].
+
+100. Generiere ein Skript für einen „Stop Doing This"-Clip zu [THEMA].
+
+101. Schreibe ein Skript für einen „If You [VERHALTEN], Watch This"-Clip.
+
+102. Entwickle ein Skript für einen „POV: Du [SITUATION]" - Clip zu [THEMA].
+
+103. Erstelle ein Skript für einen „Get Ready With Me"-Clip für [THEMA/EVENT].
+
+104. Generiere ein Skript für einen „How It's Made"-Clip zu [PRODUKT].
+
+105. Schreibe ein Skript für einen „Facts"-Clip mit 3 überraschenden Fakten zu [THEMA].
+
+106. Entwickle ein Skript für einen „Don't Do This"-Warntipp-Clip zu [THEMA].
+
+107. Erstelle ein Skript für einen „Story Time"-Clip mit persönlicher Anekdote.
+
+108. Generiere ein Skript für einen „Speed Run"-Clip (schnelle Durchführung von [AUFGABE]).
+
+109. Schreibe ein Skript für einen „Which One Are You?"-Persönlichkeitstest-Clip.
+
+110. Entwickle ein Skript für einen „This or That"-Entscheidungsclip zu [THEMA].
+
+=== KATEGORIE 5: EDUCATIONAL CONTENT (20 Prompts) ===
+
+111. Schreibe ein 5-Minuten-Erklärvideo-Skript zu [KOMPLEXES THEMA] für Anfänger.
+
+112. Entwickle ein Tutorial-Skript mit 3 Schritten für [SKILL/FÄHIGKEIT].
+
+113. Erstelle ein Skript für einen „Masterclass"-Kurs zu [THEMA] in 20 Minuten.
+
+114. Generiere ein Skript für einen „Deep Dive"-Video zu [THEMA] mit wissenschaftlicher Basis.
+
+115. Schreibe ein Skript für ein „Was ist [THEMA]?"-Erstkontakt-Video.
+
+116. Entwickle ein Skript für ein Video mit 5 häufigsten Fehlern bei [THEMA].
+
+117. Erstelle ein Skript für ein Video, das [KONZEPT] mit Alltagsbeispielen erklärt.
+
+118. Generiere ein Skript für ein Video mit Schritt-für-Schritt-Anleitung für [PROZESS].
+
+119. Schreibe ein Skript für ein Video, das [KOMPLEXES THEMA] in einfache Worte fasst.
+
+120. Entwickle ein Skript für ein Video mit Vorher-Nachher-Beispielen zu [THEMA].
+
+121. Erstelle ein Skript für ein Video, das Mythen über [THEMA] aufklärt und widerlegt.
+
+122. Generiere ein Skript für ein Video mit einem „Cheatsheet" oder Spickzettel zu [THEMA].
+
+123. Schreibe ein Skript für ein Video, das [BUCH/KONZEPT] zusammenfasst.
+
+124. Entwickle ein Skript für ein Video mit interaktiven Elementen (Quiz zu [THEMA]).
+
+125. Erstelle ein Skript für ein Video, das eine Studie oder Forschung zu [THEMA] erklärt.
+
+126. Generiere ein Skript für ein Video mit Experten-Interview zu [THEMA] (5 Fragen).
+
+127. Schreibe ein Skript für ein Video, das [TOOL/TECHNIK] im Detail vorstellt.
+
+128. Entwickle ein Skript für ein Video mit Case Study zu [THEMA/PROJEKT].
+
+129. Erstelle ein Skript für ein Video, das häufig gestellte Fragen zu [THEMA] beantwortet.
+
+130. Generiere ein Skript für ein Video mit einem Framework oder Modell zu [THEMA].
+
+=== KATEGORIE 6: VIRAL CHALLENGES (15 Prompts) ===
+
+131. Entwickle eine 7-Tage-Challenge-Idee für [THEMA] mit täglichen Aufgaben.
+
+132. Erstelle ein Challenge-Ankündigungsvideo für [THEMA]-Challenge mit Regeln.
+
+133. Generiere ein Skript für einen „Try Not to [LACHEN/WEINEN]"-Challenge zu [THEMA].
+
+134. Schreibe ein Skript für einen „30 Day Transformation"-Challenge-Startvideo.
+
+135. Entwickle ein Skript für einen „Before vs. After"-Challenge-Ergebnisvideo.
+
+136. Erstelle ein Skript für einen Wettbewerb oder Giveaway zu [THEMA].
+
+137. Generiere ein Skript für eine „Tag"-Challenge (z.B. „5 Things Tag") zu [THEMA].
+
+138. Schreibe ein Skript für einen „Duo"-Challenge mit einem Freund/Kollegen zu [THEMA].
+
+139. Entwickle ein Skript für einen „24 Hours"-Challenge zu [THEMA].
+
+140. Erstelle ein Skript für einen „Guess the [PRODUKT/TOOL]"-Challenge.
+
+141. Generiere ein Skript für eine „Voting"-Challenge (Community entscheidet über [THEMA]).
+
+142. Schreibe ein Skript für eine „Mini-Challenge" unter 1 Minute zu [THEMA].
+
+143. Entwickle ein Skript für einen „Blind Test"-Challenge zu [THEMA].
+
+144. Erstelle ein Skript für eine „Progress Tracking"-Challenge über [ZEITRAUM].
+
+145. Generiere ein Skript für eine „Community Challenge"-Einladung zu [THEMA].
+
+=== KATEGORIE 7: THUMBNAIL IDEAS (15 Prompts) ===
+
+146. Generiere eine YouTube-Thumbnail-Idee für [THEMA] mit emotionalem Gesichtsausdruck.
+
+147. Schreibe eine Thumbnail-Text-Idee mit maximal 5 Wörtern für [THEMA].
+
+148. Entwickle eine Thumbnail-Komposition für [THEMA] mit Vorher-Nachher-Bildern.
+
+149. Erstelle eine Thumbnail-Idee mit einem Pfeil oder Kreis, der auf [ELEMENT] zeigt.
+
+150. Generiere eine Thumbnail-Idee für ein Tutorial zu [THEMA] mit Ergebnisfoto.
+
+151. Schreibe eine kontroverse Thumbnail-Text-Idee für [THEMA].
+
+152. Entwickle eine Thumbnail-Idee mit einem Fragezeichen oder Schock-Ausdruck.
+
+153. Erstelle eine Thumbnail mit rotem Kreis oder Aufkleber für Dringlichkeit.
+
+154. Generiere eine „Clickbait"-Thumbnail-Beschreibung, die nicht täuscht für [THEMA].
+
+155. Schreibe eine Split-Screen-Thumbnail-Idee für einen Vergleich zu [THEMA].
+
+156. Entwickle eine minimalistischen Thumbnail für [THEMA] mit viel Negativraum.
+
+157. Erstelle eine Thumbnail-Idee mit Zahlen oder Statistiken zu [THEMA].
+
+158. Generiere eine Thumbnail mit einer Aufzählung (Listicle-Stil) für [THEMA].
+
+159. Schreibe eine Thumbnail-Idee mit einem Tier oder Objekt als Metapher für [THEMA].
+
+160. Entwickle eine Thumbnail-Farbpalette für [THEMA] basierend auf dem Video-Inhalt.
+
+=== KATEGORIE 8: SCRIPT STRUCTURES (20 Prompts) ===
+
+161. Schreibe eine Video-Struktur nach dem Muster: Problem → Agitation → Lösung für [THEMA].
+
+162. Entwickle eine Struktur: Hook → Story → Lehre → CTA für [THEMA].
+
+163. Erstelle eine Struktur: Frage → 3 Argumente → Zusammenfassung für [THEMA].
+
+164. Generiere eine Struktur: These → Antithese → Synthese für [THEMA].
+
+165. Schreibe eine Struktur: Intro → 5 Punkte → Outro für [THEMA].
+
+166. Entwickle eine 4-Akt-Struktur: Setup → Konflikt → Höhepunkt → Auflösung.
+
+167. Erstelle eine Struktur: Versprechen → Beweis → Beispiel → Handlungsaufforderung.
+
+168. Generiere eine Struktur: Was → Warum → Wie → Was-wäre-wenn für [THEMA].
+
+169. Schreibe eine Struktur: Frage → Fakten → Meinung → Diskussion für [THEMA].
+
+170. Entwickle eine Struktur: Problem → 3 Lösungen → Empfehlung für [THEMA].
+
+171. Erstelle eine Struktur: Intro → Build-Up → Drop → Reaktion für [THEMA].
+
+172. Generiere eine Struktur: Persönlich → Allgemein → Spezifisch → Handlungsorientiert.
+
+173. Schreibe eine Struktur: Neugier → Information → Überraschung → Handlung.
+
+174. Entwickle eine Struktur: Challenge → Prozess → Ergebnis → Learnings.
+
+175. Erstelle eine Struktur: Davor → Dazwischen → Danach für [TRANSFORMATION].
+
+176. Generiere eine Struktur: Einführung → Deep Dive → Praxis-Tipps → Zusammenfassung.
+
+177. Schreibe eine Struktur: Controversy → Faktencheck → Fazit → Einladung.
+
+178. Entwickle eine Struktur: Inspiration → Information → Implementierung → Impact.
+
+179. Erstelle eine Struktur: „Falsch" → „Richtig" → „Warum" → „Übung" für [THEMA].
+
+180. Generiere eine Struktur: Cold Open → Inhalt → Mid-Roll → Outro für [YOUTUBE].
+
+=== KATEGORIE 9: CTAs & END SCREENS (10 Prompts) ===
+
+181. Schreibe 3 verschiedene End-Screen-CTA-Texte für ein Video über [THEMA].
+
+182. Entwickle einen verbalen CTA für YouTube: „Abonniere für mehr [THEMA]-Content".
+
+183. Erstelle einen CTA, der zu einem Kommentar auffordert: „Was denkst du über [THEMA]?"
+
+184. Generiere einen CTA für eine Landing Page oder kostenloses Angebot zu [THEMA].
+
+185. Schreibe einen CTA für den nächsten Videovorschlag: „Schau dir dieses Video an".
+
+186. Entwickle einen CTA für einen Newsletter oder E-Mail-Kurs zu [THEMA].
+
+187. Erstelle einen CTA für eine Produktseite: „Hol dir [PRODUKT] jetzt".
+
+188. Generiere einen CTA für Social Media: „Folge mir für tägliche Tipps zu [THEMA]".
+
+189. Schreibe einen CTA mit Zeitdruck: „Nur noch 24 Stunden – [ANGEBOT] sichern".
+
+190. Entwickle einen CTA für Community-Aktionen: „Tagge einen Freund, der [THEMA] braucht".
+
+=== KATEGORIE 10: SERIES CONCEPTS (10 Prompts) ===
+
+191. Entwickle ein 10-teiliges YouTube-Serienkonzept zu [THEMA] mit Episodentiteln.
+
+192. Erstelle ein Konzept für eine wöchentliche Serie, die [THEMA] von A bis Z behandelt.
+
+193. Generiere ein Serienkonzept, das [THEMA] mit Gästen aus [BRANCHE] kombiniert.
+
+194. Schreibe ein Konzept für eine Miniserie (3 Teile) zu [THEMA].
+
+195. Entwickle ein Serienkonzept mit wöchentlichen Challenges für die Community.
+
+196. Erstelle ein Cross-Platform-Serienkonzept, das YouTube, TikTok und Podcast verbindet.
+
+197. Generiere ein Serienkonzept mit Fokus auf Case Studies zu [THEMA].
+
+198. Entwickle ein Serienkonzept, das [THEMA] durch verschiedene Perspektiven beleuchtet.
+
+199. Schreibe ein Serienkonzept für eine Workshop-Reihe zu [THEMA] in 5 Modulen.
+
+200. Erstelle ein Serienkonzept mit einem roten Faden, der in der letzten Folge enthüllt wird.
+
+=== ENDE DES PROMPT-PACKS ===
+www.ikune.de – IKUNE Coach. Dein Code. Dein Erfolg.

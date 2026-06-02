@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKUNE Premium Shop – KI-Tools & Prompt-Packs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        ::selection { background: #f59e0b; color: #0a0a1a; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(245,158,11,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f59e0b, #d97706, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .logo-sub {
+            font-size: 0.9rem;
+            color: #f59e0b;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-top: 20px;
+            font-weight: 700;
+        }
+        header p {
+            color: #aaa;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 60px 0;
+        }
+        .product-card {
+            background: linear-gradient(145deg, #12122a, #0d0d20);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-radius: 16px;
+            padding: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .product-card:hover::before { opacity: 1; }
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 20px 60px rgba(245, 158, 11, 0.1);
+        }
+        .product-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+        }
+        .product-image.websites { background: linear-gradient(135deg, #0a1628, #1a2a4a); }
+        .product-image.videos { background: linear-gradient(135deg, #1a0a28, #2a1a4a); }
+        .product-image.bilder { background: linear-gradient(135deg, #1a280a, #2a4a1a); }
+        .product-image.bundle { background: linear-gradient(135deg, #281a0a, #4a2a0a); }
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f59e0b;
+            color: #0a0a1a;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .badge.bundle-badge { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .product-body { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .product-card h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        .product-card .category {
+            font-size: 0.8rem;
+            color: #f59e0b;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .product-card .desc {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+        .product-card .features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        .product-card .features li {
+            color: #bbb;
+            font-size: 0.85rem;
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .product-card .features li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-size: 0.7rem;
+            top: 5px;
+        }
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f59e0b;
+        }
+        .price .old-price {
+            font-size: 1rem;
+            color: #666;
+            text-decoration: line-through;
+            font-weight: 400;
+            margin-left: 8px;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #0a0a1a;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #f59e0b;
+            color: #f59e0b;
+        }
+        .btn-outline:hover {
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+        .section-title span { color: #f59e0b; }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .testimonial-card {
+            background: linear-gradient(145deg, #12122a, #0d0d20);
+            border: 1px solid rgba(245, 158, 11, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+        }
+        .testimonial-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(245, 158, 11, 0.15);
+            position: absolute;
+            top: 5px;
+            left: 15px;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            color: #bbb;
+            margin-bottom: 15px;
+        }
+        .testimonial-author {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .testimonial-role {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .faq-item {
+            background: linear-gradient(145deg, #12122a, #0d0d20);
+            border: 1px solid rgba(245, 158, 11, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 18px 22px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        .faq-question:hover { background: rgba(245, 158, 11, 0.05); }
+        .faq-question .icon {
+            color: #f59e0b;
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-question .icon { transform: rotate(45deg); }
+        .faq-answer {
+            padding: 0 22px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            color: #999;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 22px 18px;
+            max-height: 300px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #0a0a1a, #050510);
+            border-top: 1px solid rgba(245, 158, 11, 0.1);
+            padding: 40px 0;
+            text-align: center;
+        }
+        footer .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: #f59e0b;
+            margin-bottom: 10px;
+        }
+        footer p {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        footer a { color: #f59e0b; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        .footer-links { margin: 15px 0; }
+        .footer-links a {
+            color: #888;
+            margin: 0 12px;
+            font-size: 0.85rem;
+        }
+        .footer-links a:hover { color: #f59e0b; }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            padding: 40px 0 0;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            color: #fff;
+        }
+        .section-header h2 span { color: #f59e0b; }
+        .section-header p {
+            color: #888;
+            max-width: 600px;
+            margin: 10px auto 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .logo { font-size: 2rem; letter-spacing: 3px; }
+            header h1 { font-size: 1.5rem; }
+            .products-grid { grid-template-columns: 1fr; }
+            .product-footer { flex-direction: column; gap: 12px; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">IKUNE</div>
+        <div class="logo-sub">Premium Shop</div>
+        <h1>KI-Tools &amp; Prompt-Packs für deinen Erfolg</h1>
+        <p>Professionelle Prompt-Packs für KI-gestützte Content-Erstellung – entwickelt vom IKUNE Coach.</p>
+    </div>
+</header>
+
+<section class="container">
+    <div class="products-grid">
+
+        <!-- Product 1: Websites -->
+        <div class="product-card">
+            <div class="product-image websites">🌐</div>
+            <div class="product-body">
+                <div class="category">Prompt Pack</div>
+                <h3>KI-Websites &amp; Landing Pages PRO</h3>
+                <p class="desc">200 Premium-Prompts für die Erstellung professioneller Websites, Landing Pages und Sales Pages mit KI.</p>
+                <ul class="features">
+                    <li>Hero Sections &amp; Sales Pages</li>
+                    <li>SaaS Landing Pages &amp; Pricing</li>
+                    <li>SEO Content Blöcke</li>
+                    <li>Mobile-optimierte Texte</li>
+                </ul>
+                <div class="product-footer">
+                    <div class="price">€12,99</div>
+                    <a href="prompt-pack-websites.html" class="btn">Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2: Videos -->
+        <div class="product-card">
+            <div class="product-image videos">🎬</div>
+            <div class="product-body">
+                <div class="category">Prompt Pack</div>
+                <h3>KI-Videos &amp; Content PRO</h3>
+                <p class="desc">200 Premium-Prompts für KI-gestützte Video- und Content-Erstellung – von Hooks bis Skripte.</p>
+                <ul class="features">
+                    <li>YouTube Hooks &amp; Storytelling</li>
+                    <li>Social Media Shorts &amp; Reels</li>
+                    <li>Produktvideos &amp; Tutorials</li>
+                    <li>Viral Challenges &amp; Serien</li>
+                </ul>
+                <div class="product-footer">
+                    <div class="price">€12,99</div>
+                    <a href="prompt-pack-videos.html" class="btn">Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3: Bilder -->
+        <div class="product-card">
+            <div class="product-image bilder">🎨</div>
+            <div class="product-body">
+                <div class="category">Prompt Pack</div>
+                <h3>KI-Bilder &amp; Design PRO</h3>
+                <p class="desc">200 Premium-Prompts für Midjourney, DALL-E &amp; Stable Diffusion – von Styles bis Product Photography.</p>
+                <ul class="features">
+                    <li>Midjourney Styles &amp; Techniken</li>
+                    <li>DALL-E &amp; Stable Diffusion</li>
+                    <li>Character Design &amp; Logos</li>
+                    <li>Fantasy &amp; UI/UX Mockups</li>
+                </ul>
+                <div class="product-footer">
+                    <div class="price">€12,99</div>
+                    <a href="prompt-pack-bilder.html" class="btn">Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4: Bundle -->
+        <div class="product-card">
+            <div class="product-image bundle">⚡</div>
+            <div class="product-body">
+                <div class="category">Bestseller</div>
+                <h3>IKUNE Premium Bundle</h3>
+                <p class="desc">Alle 3 Packs + 2 exklusive Boni: 800 Premium-Prompts für Websites, Videos &amp; Bilder in einem Bundle.</p>
+                <ul class="features">
+                    <li>600 Prompts aus allen 3 Packs</li>
+                    <li>+ 100 Bonus: VR/3D-Prompts</li>
+                    <li>+ 100 Bonus: Viral-Content-Prompts</li>
+                    <li>Spare €9 gegenüber Einzelkauf</li>
+                </ul>
+                <div class="product-footer">
+                    <div class="price">€29,99 <span class="old-price">€38,97</span></div>
+                    <a href="ikune-bundle.html" class="btn">Details</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        <h2 class="section-title">Was unsere Kunden <span>sagen</span></h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p>Die Prompt-Packs haben meine Arbeit mit KI komplett revolutioniert. Statt stundenlangem Rumprobieren habe ich jetzt sofort einsatzbereite Vorlagen. Absolut empfehlenswert!</p>
+                <div class="testimonial-author">Markus T.</div>
+                <div class="testimonial-role">Digitalunternehmer</div>
+            </div>
+            <div class="testimonial-card">
+                <p>Das Bundle ist ein Game-Changer. Die Struktur und Qualität der Prompts ist unglaublich – ich nutze sie täglich für meine Kundenprojekte. Der IKUNE Coach liefert hier Spitzenqualität.</p>
+                <div class="testimonial-author">Sarah K.</div>
+                <div class="testimonial-role">KI-Trainerin</div>
+            </div>
+            <div class="testimonial-card">
+                <p>Endlich jemand, der versteht, was gute Prompts ausmacht. Die Kategorien sind durchdacht, die Platzhalter sinnvoll gesetzt. Spart mir mindestens 10 Stunden pro Woche.</p>
+                <div class="testimonial-author">David M.</div>
+                <div class="testimonial-role">Content Creator</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+    <div class="container">
+        <h2 class="section-title">Häufige <span>Fragen</span></h2>
+        <div class="faq-grid">
+            <div class="faq-item active">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Was genau sind Prompt-Packs?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Prompt-Packs sind Sammlungen von fertig formulierten Befehlen (Prompts) für KI-Tools wie ChatGPT, Midjourney, DALL-E oder Stable Diffusion. Jeder Prompt ist ein Baukasten mit Platzhaltern wie [PRODUKT] oder [THEMA], die du durch deine eigenen Begriffe ersetzt. So erhältst du sofort professionelle Ergebnisse – ohne stundenlanges Tüfteln.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Für welche KI-Tools sind die Prompts geeignet?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Die Text-Prompts (Websites &amp; Videos) sind optimiert für ChatGPT, Claude, Gemini und andere Large Language Models. Die Bild-Prompts sind speziell für Midjourney, DALL-E 3 und Stable Diffusion entwickelt. Jeder Prompt enthält stilistische Angaben, die für diese Tools optimiert sind.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Wie erhalte ich meine Prompt-Packs nach dem Kauf?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Nach erfolgreicher Zahlung über PayPal wirst du zur Download-Seite weitergeleitet, wo du die Prompt-Packs als Textdatei (.txt) herunterladen kannst. Du erhältst außerdem eine Bestätigungs-E-Mail mit dem Download-Link.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Kann ich die Prompts kommerziell nutzen?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Ja! Du darfst alle Prompts für deine eigenen Projekte und Kundenarbeiten nutzen. Du darfst die Prompt-Sammlungen jedoch nicht weiterverkaufen oder kostenlos veröffentlichen. Die Nutzung ist persönlich und nicht übertragbar.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Gibt es eine Geld-zurück-Garantie?
+                    <span class="icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Ja, wir bieten eine 14-tägige Geld-zurück-Garantie. Solltest du mit dem Prompt-Pack nicht zufrieden sein, kontaktiere uns einfach per E-Mail und du erhältst dein Geld zurück. Keine Fragen gestellt.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-logo">IKUNE</div>
+        <div class="footer-links">
+            <a href="https://paypal.me/affirmationpositi">PayPal</a>
+            <a href="mailto:affirmation.positiv@gmail.com">Kontakt</a>
+            <a href="https://affirmationpositiv-sudo.github.io/science-apps/">Home</a>
+        </div>
+        <p>© 2025 IKUNE Coach. Alle Rechte vorbehalten.</p>
+        <p style="margin-top:6px; font-size:0.8rem;">Dein Code. Dein Erfolg.</p>
+    </div>
+</footer>
+
+<script>
+function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>

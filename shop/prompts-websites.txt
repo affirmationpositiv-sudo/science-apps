@@ -1,0 +1,427 @@
+=== IKUNE Prompt Pack: KI-Websites & Landing Pages ===
+200 Premium Prompts für die Erstellung von Websites, Landing Pages und Sales Pages mit KI
+
+=== KATEGORIE 1: HERO SECTIONS (30 Prompts) ===
+
+1. Erstelle eine Hero-Section für [PRODUKT], die sofort Aufmerksamkeit erregt. Verwende eine kühne Überschrift mit maximal 8 Wörtern, einen unterstützenden Subheadline und einen klaren CTA-Button in Gold.
+
+2. Schreibe einen Hero-Text für eine [BRANCHE]-Website, der eine emotionale Verbindung zum Besucher herstellt. Beginne mit einem Schmerzpunkt, gefolgt von der Lösung.
+
+3. Erstelle 3 verschiedene Hero-Varianten für [PRODUKT/DIENSTLEISTUNG] – eine minimalistische, eine feature-fokussierte und eine testimoniale Variante.
+
+4. Generiere eine Hero-Section mit Social-Proof-Elementen: Kundenanzahl, Sternebewertung und Logos bekannter Kunden für [PRODUKT].
+
+5. Entwickle eine Hero-Section mit animiertem Hintergrund, die die Kernfunktionen von [PRODUKT] visuell darstellt. Beschreibe die Animation in Klammern.
+
+6. Schreibe einen Hero-Text für [SAAS-TOOL], der mit einer provokativen Frage beginnt und die Neugier des Lesers weckt.
+
+7. Erstelle eine Split-Screen-Hero-Section: Links der Text mit USP, rechts ein Produktbild oder Mockup von [PRODUKT].
+
+8. Generiere Hero-Texte für eine [BRANCHE]-Webseite mit Fokus auf Zeitersparnis und Effizienzgewinne.
+
+9. Entwickle einen Hero-Bereich mit Countdown-Timer und限量 (zeitlich begrenztem) Angebot für [PRODUKT].
+
+10. Schreibe eine Hero-Section für ein [PRODUKT], das KI-Technologie nutzt. Betone Innovation und Zukunft.
+
+11. Erstelle eine Hero-Überschrift nach der Formel: [ZIELGRUPPE], wir helfen dir, [SCHMERZPUNKT] zu überwinden.
+
+12. Generiere eine Hero-Section mit drei Leistungsversprechen unter der Hauptüberschrift für [DIENSTLEISTUNG].
+
+13. Entwickle einen Hero-Bereich mit eingebettetem Video-Thumbnail, das zu einer Demo von [PRODUKT] führt.
+
+14. Schreibe Hero-Texte für eine [ONLINE-KURS]-Plattform mit Fokus auf Transformation und Erfolgsgeschichten.
+
+15. Erstelle eine Hero-Section mit rotierenden Testimonial-Zitaten für [PRODUKT].
+
+16. Generiere einen Hero-Text für ein [PHYSISCHES PRODUKT], der die Sinne anspricht und haptische Erlebnisse beschreibt.
+
+17. Entwickle eine Hero-Section mit interaktiven Elementen wie Hover-Effekten auf Produktmerkmalen für [PRODUKT].
+
+18. Schreibe einen Hero-Text für eine [EVENT]-Webseite mit Ticket-CTA und Speaker-Informationen.
+
+19. Erstelle eine Hero-Section für [NICHE]-Zielgruppe mit spezifischer, branchenbezogener Sprache.
+
+20. Generiere eine Hero-Variante mit Vorher-Nachher-Vergleich für [TRANSFORMATIONSDIENSTLEISTUNG].
+
+21. Entwickle einen Hero-Bereich, der mit einer Statistik oder beeindruckenden Zahl beginnt, für [PRODUKT].
+
+22. Schreibe einen kurzen, prägnanten Hero-Text für eine mobile Version von [PRODUKT]-Webseite.
+
+23. Erstelle eine Hero-Section mit Newsletter-Anmeldung als primärem CTA für [BLOG/MAGAZIN].
+
+24. Generiere einen Hero-Text, der die Einzigartigkeit von [PRODUKT] durch einen Vergleich mit traditionellen Lösungen hervorhebt.
+
+25. Entwickle eine Hero-Section mit 3 Schritten: Problem – Lösung – Ergebnis für [DIENSTLEISTUNG].
+
+26. Schreibe einen Hero-Text für [PRODUKT], der den Leser direkt mit „Du" anspricht und eine persönliche Ebene schafft.
+
+27. Erstelle eine Hero-Section für eine [NON-PROFIT]-Seite mit emotionalem Storytelling und Spenden-CTA.
+
+28. Generiere eine Hero-Überschrift, die einen bekannten Spruch oder Redewendung kreativ abwandelt für [PRODUKT].
+
+29. Entwickle eine Hero-Section mit parallax-scrollendem Hintergrund für [PRODUKT] in der Reisebranche.
+
+30. Schreibe 10 kurze Hero-Slogans für [PRODUKT], die jeweils maximal 5 Wörter haben.
+
+=== KATEGORIE 2: SALES PAGES (30 Prompts) ===
+
+31. Erstelle die Einleitung einer Sales Page für [PRODUKT] mit einem Storytelling-Ansatz, der das Problem des Kunden beschreibt.
+
+32. Schreibe 5 Pain-Point-Überschriften für eine Sales Page über [THEMA], die den Schmerz des Kunden verstärken.
+
+33. Entwickle einen „Warum jetzt?"-Abschnitt für [PRODUKT] mit Dringlichkeit und zeitlichen Vorteilen.
+
+34. Generiere eine Produkt-Description nach der PAS-Formel (Problem-Agitieren-Lösen) für [PRODUKT].
+
+35. Schreibe einen Abschnitt über die „Einzigartige Methodik" hinter [PRODUKT], die es von Wettbewerbern unterscheidet.
+
+36. Erstelle 10 überzeugende Bullet Points für die Sales Page von [PRODUKT], die jeweils einen konkreten Nutzen nennen.
+
+37. Entwickle einen „Was du bekommst"-Abschnitt mit 8 Modulen/Inhalten für [DIGITALES PRODUKT].
+
+38. Schreibe einen „Kundenstimmen"-Abschnitt mit 3 fiktiven, aber realistischen Testimonials für [PRODUKT].
+
+39. Generiere einen „Für wen ist das geeignet?"-Abschnitt mit 4 Zielgruppen für [PRODUKT].
+
+40. Erstelle einen „Für wen ist das NICHT geeignet?"-Abschnitt, um Fehlkäufe zu vermeiden für [PRODUKT].
+
+41. Schreibe einen Preisvergleichs-Abschnitt, der den Wert von [PRODUKT] im Vergleich zu Alternativen demonstriert.
+
+42. Entwickle eine FAQ-Sektion mit 8 häufigen Fragen zu [PRODUKT] und überzeugenden Antworten.
+
+43. Generiere einen Bonus-Abschnitt, der 3 exklusive Extras für den Kauf von [PRODUKT] beschreibt.
+
+44. Schreibe einen Garantie-Abschnitt mit einer 30-Tage-Geld-zurück-Garantie für [PRODUKT].
+
+45. Erstelle einen „Über den Autor/Coach"-Abschnitt, der Glaubwürdigkeit und Expertise für [PRODUKT] aufbaut.
+
+46. Generiere einen „Erfolgsgeschichten"-Abschnitt mit 2 detaillierten Case Studies für [PRODUKT].
+
+47. Entwickle einen Abschnitt, der die Technologie oder den Prozess hinter [PRODUKT] erklärt.
+
+48. Schreibe einen CTA-Button-Text mit Dringlichkeit für [PRODUKT], z.B. „Jetzt starten – nur heute!"
+
+49. Erstelle eine komplette Sales Page Gliederung für [PRODUKT] mit 12 Abschnitten.
+
+50. Generiere einen Abschnitt über die „versteckten Kosten des Aufschiebens" für [THEMA/PROBLEM].
+
+51. Schreibe einen „Was unsere Kunden sagen"-Slider mit 5 verschiedenen Testimonials für [PRODUKT].
+
+52. Entwickle einen Vergleich: „[PRODUKT] vs. [WETTBEWERBER]" mit 7 Vergleichskriterien.
+
+53. Generiere einen Abschnitt über „Die Wissenschaft hinter [PRODUKT]" mit Studien und Daten.
+
+54. Schreibe einen emotionalen Abschluss-Abschnitt, der zum Handeln motiviert für [PRODUKT].
+
+55. Erstelle 5 verschiedene E-Mail-Vorlagen für die Sales-Page-Vermarktung von [PRODUKT].
+
+56. Generiere einen „Risikominimierungs"-Abschnitt, der alle Risiken des Kaufs entkräftet.
+
+57. Schreibe einen Abschnitt, der die Community oder den Support rund um [PRODUKT] beschreibt.
+
+58. Entwickle einen „Starte noch heute"-Abschnitt mit einfachen 3 Schritten für den Kauf von [PRODUKT].
+
+59. Generiere eine Zusammenfassung der 10 wichtigsten Vorteile von [PRODUKT] in Bullet-Point-Form.
+
+60. Schreibe einen PS-Abschnitt am Ende der Sales Page, der den Hauptvorteil wiederholt und zum Handeln aufruft.
+
+=== KATEGORIE 3: SAAS LANDING PAGES (20 Prompts) ===
+
+61. Erstelle einen Feature-Bereich mit 6 Hauptfunktionen von [SAAS-TOOL], jede mit Icon und Kurzbeschreibung.
+
+62. Schreibe eine „Wie es funktioniert"-Sektion in 3 einfachen Schritten für [SAAS-TOOL].
+
+63. Generiere einen Integrations-Abschnitt mit Logos von 10 Tools, die mit [SAAS-TOOL] kompatibel sind.
+
+64. Entwickle einen Pricing-Tabellen-Text für [SAAS-TOOL] mit 3 Tarifen: Basic, Pro, Enterprise.
+
+65. Schreibe einen Onboarding-Text für neue Nutzer von [SAAS-TOOL] mit Willkommensnachricht.
+
+66. Erstelle einen Abschnitt über die API von [SAAS-TOOL] mit Entwickler-freundlicher Sprache.
+
+67. Generiere einen Sicherheits-Abschnitt für [SAAS-TOOL] mit Verschlüsselung, Backup und Compliance.
+
+68. Schreibe einen „Kunden-Erfolge"-Abschnitt mit konkreten Kennzahlen für [SAAS-TOOL].
+
+69. Entwickle einen Demo-CTA-Abschnitt, der zu einer Live-Demo von [SAAS-TOOL] einlädt.
+
+70. Erstelle einen „Awards & Anerkennungen"-Abschnitt für [SAAS-TOOL] mit Badges und Logos.
+
+71. Schreibe einen Feature-Deep-Dive für eine Hauptfunktion von [SAAS-TOOL] mit Screenshot-Beschreibung.
+
+72. Generiere einen Abschnitt, der die Benutzerfreundlichkeit von [SAAS-TOOL] hervorhebt.
+
+73. Entwickle einen Abschnitt über den Kundensupport von [SAAS-TOOL] (24/7, Chat, E-Mail).
+
+74. Schreibe einen Abschnitt für eine kostenlose Testversion von [SAAS-TOOL] mit klarem CTA.
+
+75. Erstelle einen „Für Teams"-Abschnitt, der Kollaborationsfunktionen von [SAAS-TOOL] beschreibt.
+
+76. Generiere einen Abschnitt über die mobile App von [SAAS-TOOL] mit QR-Code zum Download.
+
+77. Schreibe einen Automatisierungs-Abschnitt, der die Zeitersparnis durch [SAAS-TOOL] quantifiziert.
+
+78. Entwickle einen Workflow-Beispiel-Abschnitt für [SAAS-TOOL] aus der Praxis.
+
+79. Erstelle einen Analytics-Abschnitt, der die Reporting-Features von [SAAS-TOOL] beschreibt.
+
+80. Generiere einen Abschnitt über Karriere-/Wachstumsmöglichkeiten mit [SAAS-TOOL] für Nutzer.
+
+=== KATEGORIE 4: PRODUCT PAGES (20 Prompts) ===
+
+81. Erstelle eine detaillierte Produktbeschreibung für [PHYSISCHES PRODUKT] mit Material, Maßen und Pflegehinweisen.
+
+82. Schreibe einen „Was ist in der Box?"-Abschnitt für [PRODUKT] mit 5-10 Komponenten.
+
+83. Generiere 5 Lifestyle-Beschreibungen für [PRODUKT], die das Produkt in verschiedenen Nutzungsszenarien zeigen.
+
+84. Entwickle einen Größentabellen-Text für [BEKLEIDUNGSPRODUKT] mit präzisen Maßen.
+
+85. Schreibe einen Farbvergleich für [PRODUKT] in verschiedenen Farbvarianten.
+
+86. Erstelle einen Abschnitt über die Nachhaltigkeit von [PRODUKT] mit Materialherkunft und Produktion.
+
+87. Generiere einen „Kundenrezensionen"-Abschnitt mit Sternenbewertung und gefilterten Reviews für [PRODUKT].
+
+88. Schreibe einen Produktvergleich zwischen [PRODUKT A] und [PRODUKT B] mit 8 Kriterien.
+
+89. Entwickle einen Cross-Selling-Abschnitt, der 3 passende Produkte zu [PRODUKT] vorschlägt.
+
+90. Erstelle einen Abschnitt über die Herstellergarantie für [PRODUKT] mit Laufzeit und Bedingungen.
+
+91. Schreibe einen „Häufig zusammen gekauft"-Abschnitt für [PRODUKT] mit Bundle-Angebot.
+
+92. Generiere einen Video-Review-Abschnitt mit Platzhalter für ein Produktvideo von [PRODUKT].
+
+93. Entwickle einen Abschnitt über die Verpackung und Lieferung von [PRODUKT].
+
+94. Schreibe einen „Firmenkunden"-Abschnitt mit Mengenrabatten für [PRODUKT].
+
+95. Erstelle einen Abschnitt über die Herkunftsgeschichte von [PRODUKT] – Made in [LAND].
+
+96. Generiere einen Abschnitt über Zertifikate und Auszeichnungen für [PRODUKT].
+
+97. Schreibe einen Social-Proof-Abschnitt mit Anzahl der verkauften Einheiten von [PRODUKT].
+
+98. Entwickle einen Abschnitt, der die Haltbarkeit und Qualität von [PRODUKT] beweist.
+
+99. Erstelle einen Abschnitt mit Produkt-Hacks oder unerwarteten Nutzungsmöglichkeiten für [PRODUKT].
+
+100. Schreibe einen Abschnitt mit Pflege- und Wartungstipps für [PRODUKT].
+
+=== KATEGORIE 5: PRICING TABLES (15 Prompts) ===
+
+101. Entwickle einen 3-Spalten-Pricing-Table für [PRODUKT] mit Basis, Premium und Ultimate.
+
+102. Schreibe überzeugende Tarifnamen (nicht nur Basic/Pro) für [PRODUKT] in [BRANCHE].
+
+103. Generiere einen Pricing-Table, der den Mittel-Tarif als „Empfohlen" oder „Beliebtest" hervorhebt.
+
+104. Erstelle einen Jahres-/Monatsvergleich für Pricing von [SAAS-TOOL] mit Ersparnis-Hervorhebung.
+
+105. Schreibe einen Abschnitt, der erklärt, warum [PRODUKT] seinen Preis wert ist (Wert-Argumentation).
+
+106. Entwickle einen Pricing-Table mit Feature-Häkchen und Kreuzchen für [PRODUKT].
+
+107. Generiere einen „Enterprise"-Tarif-Text mit individuellen Angeboten für [PRODUKT].
+
+108. Schreibe einen zeitlich begrenzten Einführungspreis für [NEUES PRODUKT] mit Countdown.
+
+109. Erstelle einen Preispunkt-Vergleich: Einmalzahlung vs. Abo für [DIGITALES PRODUKT].
+
+110. Entwickle einen Abschnitt über Zahlungsmethoden und -sicherheit für [PRODUKT].
+
+111. Schreibe einen „Preis-Leistungs-Sieger"-Abschnitt mit Rechner für [PRODUKT].
+
+112. Generiere einen Abschnitt über Staffelpreise für [PRODUKT] ab bestimmten Mengen.
+
+113. Entwickle einen „Sparrechner" für [PRODUKT], der die Kostenersparnis visualisiert.
+
+114. Schreibe einen Abschnitt über Geld-zurück-Garantie als Risikoumkehrung im Pricing.
+
+115. Erstelle einen Abschnitt mit Kunden-Logos unter dem Pricing-Table für [PRODUKT].
+
+=== KATEGORIE 6: EMAIL CAPTURE (15 Prompts) ===
+
+116. Schreibe eine überzeugende Überschrift für ein Popup-Anmeldeformular für [NEWSLETTER].
+
+117. Generiere 5 verschiedene Opt-in-Anreize (Lead Magnets) für [THEMA/ZIELGRUPPE].
+
+118. Entwickle einen „Was du bekommst"-Abschnitt für einen E-Mail-Kurs über [THEMA].
+
+119. Schreibe kurze, prägnante Formularfeld-Beschriftungen für ein Anmeldeformular zu [PRODUKT].
+
+120. Erstelle einen Social-Proof-Text unter dem Anmeldeformular (z.B. „Schon 5.000+ Abonnenten").
+
+121. Generiere einen Text für ein Exit-Intent-Popup mit Rabattcode für [PRODUKT].
+
+122. Schreibe einen CTA-Text für einen „Kostenlosen Leitfaden" zu [THEMA].
+
+123. Entwickle einen Abschnitt, der den Wert des Newsletters für [ZIELGRUPPE] beschreibt.
+
+124. Erstelle einen Text für ein zweistufiges Anmeldeformular (E-Mail → Name) für [ANGEBOT].
+
+125. Generiere einen „Empfehlungsprogramm"-Text für die Newsletter-Weiterleitung.
+
+126. Schreibe einen Text für die Bestätigungsseite nach der Newsletter-Anmeldung für [THEMA].
+
+127. Entwickle einen Abschnitt mit Häufigkeit des Newsletters (z.B. „1x pro Woche, keine Spam").
+
+128. Erstelle eine kurze Datenschutz-Erklärung unter dem Anmeldeformular.
+
+129. Generiere 3 verschiedene Popup-Varianten für [ZIELGRUPPE] mit unterschiedlichen Angeboten.
+
+130. Schreibe einen Text für eine „Warteliste"-Anmeldung für ein kommendes [PRODUKT].
+
+=== KATEGORIE 7: ABOUT PAGES (15 Prompts) ===
+
+131. Erstelle eine „Unsere Geschichte"-Section für [UNTERNEHMEN] mit Gründungsstory.
+
+132. Schreibe ein Mission-Statement für [UNTERNEHMEN] in [BRANCHE] mit maximal 2 Sätzen.
+
+133. Generiere ein Team-Bereich mit 4 Teammitgliedern, Rolle und kurzer Bio für [UNTERNEHMEN].
+
+134. Entwickle einen Abschnitt über die Werte und Kultur von [UNTERNEHMEN].
+
+135. Schreibe einen Abschnitt über die Vision von [UNTERNEHMEN] für die nächsten 5 Jahre.
+
+136. Erstelle einen „Warum wir das tun"-Abschnitt mit emotionaler Motivation für [UNTERNEHMEN].
+
+137. Generiere einen Abschnitt über die Expertise und Qualifikationen des Gründers von [UNTERNEHMEN].
+
+138. Schreibe einen Meilenstein-Zeitstrahl mit 6 wichtigen Ereignissen für [UNTERNEHMEN].
+
+139. Entwickle einen Abschnitt über Partnerschaften und Kooperationen von [UNTERNEHMEN].
+
+140. Erstelle einen Abschnitt über die Kundenzentrierung von [UNTERNEHMEN] mit Zitaten.
+
+141. Schreibe einen „Unser Versprechen"-Abschnitt mit 5 konkreten Kundenversprechen.
+
+142. Generiere einen Abschnitt über die Technologie oder Methodik, die [UNTERNEHMEN] einsetzt.
+
+143. Entwickle einen Abschnitt über soziale Verantwortung und Nachhaltigkeit von [UNTERNEHMEN].
+
+144. Schreibe einen Abschnitt mit Pressezitaten und Erwähnungen für [UNTERNEHMEN].
+
+145. Erstelle einen „Kontaktiere uns"-Abschnitt mit mehreren Kontaktmöglichkeiten.
+
+=== KATEGORIE 8: FAQ SECTIONS (15 Prompts) ===
+
+146. Schreibe eine FAQ-Antwort auf die Frage „Wie lange dauert die Lieferung von [PRODUKT]?"
+
+147. Generiere eine FAQ-Frage und -Antwort zur Zahlungssicherheit bei [PRODUKT].
+
+148. Entwickle eine FAQ zur Rückgabe und zum Umtausch von [PRODUKT].
+
+149. Schreibe eine FAQ-Antwort zur Kompatibilität von [PRODUKT] mit anderen Systemen.
+
+150. Erstelle eine FAQ-Sektion mit 8 Fragen zur Nutzung von [DIGITALES PRODUKT].
+
+151. Generiere eine FAQ-Frage zu Systemvoraussetzungen für [SAAS-PRODUKT].
+
+152. Entwickle eine FAQ für internationale Kunden von [PRODUKT] (Versand, Zoll, Sprachen).
+
+153. Schreibe eine FAQ-Antwort zu Updates und Versionen von [PRODUKT].
+
+154. Erstelle eine FAQ-Seite mit Akkordeon-Layout für [PRODUKT] (Frage + Antwort-Paare).
+
+155. Generiere eine FAQ zu Mengenrabatten und Firmenkundenangeboten.
+
+156. Entwickle eine FAQ zur Installation und Einrichtung von [PRODUKT].
+
+157. Schreibe eine FAQ-Antwort zum Kundensupport und Reaktionszeiten.
+
+158. Erstelle eine FAQ zur Probe- oder Testphase von [PRODUKT].
+
+159. Generiere eine FAQ zu Datenschutz und Datenverarbeitung bei [PRODUKT].
+
+160. Entwickle eine FAQ mit Tipps zur optimalen Nutzung von [PRODUKT].
+
+=== KATEGORIE 9: FOOTER & NAVIGATION (10 Prompts) ===
+
+161. Erstelle einen Footer mit 4 Spalten: Produkte, Ressourcen, Unternehmen, Rechtliches für [SEITE].
+
+162. Schreibe einen Copyright-Text für den Footer von [UNTERNEHMEN].
+
+163. Generiere eine Navigationsstruktur mit 5 Hauptmenüpunkten für [WEBSITE].
+
+164. Entwickle eine Mobile-Menü-Struktur für [WEBSITE] mit Hamburger-Icon.
+
+165. Schreibe einen Footer mit Social-Media-Links für 4 Plattformen für [UNTERNEHMEN].
+
+166. Erstelle einen Footer mit Zahlungsmethoden-Logos für [ONLINE-SHOP].
+
+167. Generiere einen Sticky-Header mit CTA-Button für [PRODUKT]-Webseite.
+
+168. Entwickle eine Breadcrumb-Navigation-Struktur für [WEBSITE].
+
+169. Schreibe einen Footer mit Newsletter-Anmeldefeld für [BLOG/SEITE].
+
+170. Erstelle eine Sitemap-Struktur für [WEBSITE] mit 15 Haupt- und Unterseiten.
+
+=== KATEGORIE 10: MOBILE OPTIMIZATION (10 Prompts) ===
+
+171. Schreibe eine mobile Hero-Version für [PRODUKT] mit reduziertem Text und größeren Buttons.
+
+172. Generiere einen mobilen Pricing-Table als horizontale Swipe-Ansicht für [PRODUKT].
+
+173. Entwickle eine mobile Navigation mit Bottom-Navigation statt Top-Menü für [APP/SEITE].
+
+174. Schreibe Touch-optimierte Button-Texte (mindestens 48px Höhe) für [PRODUKT].
+
+175. Erstelle eine mobile Produktgalerie mit Swipe-Gesten für [PHYSISCHES PRODUKT].
+
+176. Generiere einen mobilen FAQ-Bereich als ausklappbare Accordion-Elemente.
+
+177. Entwickle eine mobile CTA-Strategie mit Fixed-Bottom-Button für [PRODUKT].
+
+178. Schreibe kurze, knackige mobile Texte für [PRODUKT] – maximal 50% des Desktop-Textes.
+
+179. Erstelle eine mobile Formular-Optimierung für [ANMELDEFORMULAR] mit großen Feldern.
+
+180. Generiere eine mobile Testimonial-Ansicht als horizontale Karten für [PRODUKT].
+
+=== KATEGORIE 11: SEO CONTENT BLOCKS (20 Prompts) ===
+
+181. Schreibe einen SEO-optimierten Blog-Beitrag zum Thema „[THEMA] Guide 2025" mit 1000+ Wörtern.
+
+182. Generiere eine Meta-Beschreibung für [PRODUKT] mit maximal 160 Zeichen und Haupt-Keyword.
+
+183. Entwickle einen FAQ-Schema-Content für [THEMA] mit 5 strukturierten Fragen und Antworten.
+
+184. Schreibe einen H1-Titel für [THEMA], der das Haupt-Keyword enthält und einprägsam ist.
+
+185. Erstelle eine Liste mit 10 Long-Tail-Keywords für [THEMA/BRAANCHE].
+
+186. Generiere einen 300-Wörter-Intro-Text für eine [THEMA]-Kategorieseite.
+
+187. Entwickle eine interne Verlinkungsstruktur für 5 Artikel über [THEMA].
+
+188. Schreibe einen SEO-Optimierten Alt-Text für 5 Produktbilder von [PRODUKT].
+
+189. Erstelle einen Abschnitt mit „Häufige Fragen" für [THEMA], der auf Featured Snippets abzielt.
+
+190. Generiere eine Optimierte URL-Struktur für [THEMA]-Seiten mit 5 Beispiel-URLs.
+
+191. Entwickle einen Content-Plan mit 12 Blog-Beiträgen für [THEMA] über ein Jahr.
+
+192. Schreibe einen Abschnitt für eine „Über uns"-Seite, der für [BRAND-NAME] rankt.
+
+193. Erstelle einen Listicle-Artikel: „10 [ADJEKTIV] [THEMA]-Tools, die du kennen musst".
+
+194. Generiere eine Pressemitteilung für die Einführung von [PRODUKT] mit SEO-Keywords.
+
+195. Entwickle einen Linkbuilding-Content: „Ultimativer Guide zu [THEMA]" mit 5000 Wörtern.
+
+196. Schreibe eine Keyword-Cluster-Strategie für [THEMA] mit 1 Haupt- und 10 Neben-Keywords.
+
+197. Erstelle einen optimierten Produktseiten-Text für [PRODUKT] mit Rich Snippets.
+
+198. Generiere einen Google My Business-Beschreibungstext für [UNTERNEHMEN].
+
+199. Entwickle einen Content-Pillar-Plan für [THEMA] mit 5 Cluster-Themen.
+
+200. Schreibe einen combinierten SEO-Text für eine Landing Page, der Conversion und Ranking optimiert.
+
+=== ENDE DES PROMPT-PACKS ===
+www.ikune.de – IKUNE Coach. Dein Code. Dein Erfolg.
