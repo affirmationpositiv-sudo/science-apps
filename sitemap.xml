@@ -637,4 +637,16 @@
     <ns0:priority>0.7</ns0:priority>
   </ns0:url>
 
+  <ns0:url>
+    <ns0:loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/schlaf-gadgets-2026.html</ns0:loc>
+    <ns0:changefreq>monthly</ns0:changefreq>
+    <ns0:priority>0.8</ns0:priority>
+  </ns0:url>
+
+  <ns0:url>
+    <ns0:loc>https://affirmationpositiv-sudo.github.io/science-apps/affiliate/schlaf/</ns0:loc>
+    <ns0:changefreq>weekly</ns0:changefreq>
+    <ns0:priority>0.7</ns0:priority>
+  </ns0:url>
+
 </ns0:urlset>
