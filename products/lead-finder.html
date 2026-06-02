@@ -3,602 +3,454 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LeadForge AI – Deep-Lead-Recherche für echte Entscheider</title>
+<title>LeadForge AI – Deep-Lead-Recherche</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
   :root {
-    --bg: #06060e;
-    --bg2: #0a0a18;
-    --card: rgba(18,18,40,0.7);
-    --card-border: rgba(124,77,255,0.12);
-    --glass: rgba(255,255,255,0.03);
     --accent: #7c4dff;
     --accent2: #00d4aa;
-    --accent3: #d4a843;
-    --text: #e8e8f0;
-    --text2: #9898b8;
-    --gradient-1: linear-gradient(135deg, #7c4dff, #00d4aa);
-    --gradient-2: linear-gradient(135deg, #7c4dff, #5a3dcc, #00d4aa);
-    --gradient-3: linear-gradient(135deg, #d4a843, #ff6b6b);
-    --shadow: 0 8px 32px rgba(124,77,255,0.15);
+    --accent3: #ffd700;
+    --radius: 16px;
+    --radius-sm: 10px;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
   body {
     font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg); color: var(--text); min-height: 100vh;
-    overflow-x: hidden;
+    background: #050508; color: #e8e8f0;
+    min-height: 100vh; overflow-x: hidden;
   }
   body::before {
-    content: ''; position: fixed; top:-50%; left:-50%; width:200%; height:200%;
-    background: radial-gradient(ellipse at 30% 20%, rgba(124,77,255,0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 70% 80%, rgba(0,212,170,0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(212,168,67,0.02) 0%, transparent 50%);
+    content: ''; position: fixed; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 20% 10%, rgba(124,77,255,.08) 0%, transparent 60%),
+      radial-gradient(ellipse 500px 500px at 80% 90%, rgba(0,212,170,.05) 0%, transparent 60%),
+      radial-gradient(ellipse 300px 300px at 50% 50%, rgba(255,215,0,.03) 0%, transparent 60%);
     pointer-events: none; z-index: 0;
   }
-  .wrapper { max-width: 1200px; margin:0 auto; padding: 20px 24px; position: relative; z-index: 1; }
+  .wrapper { max-width: 1200px; margin:0 auto; padding: 24px; position:relative; z-index:1; }
 
-  /* ===== HERO ===== */
-  .hero {
-    text-align: center; padding: 80px 20px 50px; position: relative;
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0; margin-bottom: 20px;
   }
-  .hero-glow {
-    position: absolute; top:-100px; left:50%; transform:translateX(-50%);
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(124,77,255,0.08) 0%, transparent 70%);
-    pointer-events: none;
+  nav .logo {
+    font-weight: 800; font-size: 1.1rem; letter-spacing: -.5px;
+    background: linear-gradient(135deg, #e8e8f0, #7c4dff);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   }
-  .hero-badge {
+  nav .logo span { color: var(--accent); }
+  nav .badge {
+    padding: 6px 16px; border-radius: 100px;
+    background: rgba(124,77,255,.1); border: 1px solid rgba(124,77,255,.2);
+    font-size: .75rem; font-weight: 600; color: var(--accent2);
+  }
+
+  /* HERO */
+  .hero { text-align: center; padding: 60px 20px 40px; position:relative; }
+  .hero .orb {
+    position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    top: -200px; left: 50%; transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(124,77,255,.1) 0%, transparent 60%);
+    pointer-events: none; filter: blur(40px);
+  }
+  .hero .badge {
     display: inline-flex; align-items: center; gap: 8px;
-    padding: 8px 20px; border-radius: 100px;
-    background: rgba(124,77,255,0.1); border: 1px solid rgba(124,77,255,0.2);
-    font-size: .8rem; color: var(--accent2); font-weight: 600; margin-bottom: 24px;
-    backdrop-filter: blur(10px);
+    padding: 6px 18px; border-radius: 100px;
+    background: rgba(124,77,255,.08); border: 1px solid rgba(124,77,255,.15);
+    font-size: .78rem; color: var(--accent2); font-weight: 500; margin-bottom: 24px;
   }
-  .hero-badge span { 
-    width: 8px; height: 8px; border-radius: 50%; background: #00d4aa;
-    display: inline-block; animation: pulse 2s infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+  .hero .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #00d4aa; animation: pls 2s infinite; }
+  @keyframes pls { 0%,100%{opacity:1} 50%{opacity:.2} }
   .hero h1 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 800; line-height: 1.1;
-    margin-bottom: 16px; letter-spacing: -1.5px;
-    background: linear-gradient(135deg, #e8e8f0 0%, #7c4dff 40%, #00d4aa 70%, #d4a843 100%);
+    font-size: clamp(2.8rem,7vw,5rem); font-weight: 900; line-height: 1.05;
+    letter-spacing: -2px; margin-bottom: 16px;
+    background: linear-gradient(135deg, #fff 20%, #7c4dff 50%, #00d4aa 80%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .hero p {
-    font-size: 1.15rem; color: var(--text2); max-width: 640px; margin: 0 auto 24px;
-    line-height: 1.6;
+    font-size: 1.1rem; color: rgba(255,255,255,.4); max-width: 560px;
+    margin: 0 auto 32px; line-height: 1.6; font-weight: 400;
   }
-  .hero-stats {
-    display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 32px;
-  }
-  .hero-stat { text-align: center; }
-  .hero-stat .num { font-size: 1.8rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-stat .lbl { font-size: .78rem; color: var(--text2); margin-top: 2px; }
 
-  /* ===== SEARCH ===== */
-  .search-section {
-    margin: 40px auto; max-width: 800px;
-  }
+  /* STATS ROW */
+  .stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+  .stats div { text-align: center; }
+  .stats .n { font-size: 1.6rem; font-weight: 800; color: #fff; }
+  .stats .l { font-size: .75rem; color: rgba(255,255,255,.3); margin-top: 2px; }
+
+  /* SEARCH */
+  .search-wrap { max-width: 720px; margin: 0 auto; }
   .search-card {
-    background: var(--card); backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border); border-radius: 20px;
-    padding: 32px; position: relative; overflow: hidden;
+    background: rgba(18,18,40,.6); backdrop-filter: blur(24px) saturate(1.4);
+    border: 1px solid rgba(124,77,255,.12); border-radius: var(--radius);
+    padding: 28px; margin-top: 40px;
   }
-  .search-card::before {
-    content: ''; position: absolute; top:0; left:0; right:0; height:1px;
-    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+  .search-inner { display: flex; gap: 10px; }
+  .search-inner input {
+    flex: 1; padding: 14px 18px;
+    background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+    border-radius: var(--radius-sm); color: #fff; font-size: .95rem;
+    outline: none; transition: all .2s; font-family: inherit;
   }
-  .search-grid { display: flex; gap: 12px; flex-wrap: wrap; }
-  .search-grid input {
-    flex: 1; min-width: 200px; padding: 16px 20px;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px; color: var(--text); font-size: 1rem;
-    outline: none; transition: all .2s; font-family: 'Inter', sans-serif;
+  .search-inner input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,77,255,.1); }
+  .search-inner input::placeholder { color: rgba(255,255,255,.15); }
+  .search-inner button {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #7c4dff, #5a3dcc);
+    border: none; border-radius: var(--radius-sm); color: #fff;
+    font-weight: 600; font-size: .95rem; cursor: pointer;
+    transition: all .2s; font-family: inherit; white-space: nowrap;
+    display: flex; align-items: center; gap: 8px;
   }
-  .search-grid input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(124,77,255,0.1); }
-  .search-grid input::placeholder { color: rgba(255,255,255,0.2); }
-  .search-grid button {
-    padding: 16px 36px; background: var(--gradient-1); border: none; border-radius: 12px;
-    color: #fff; font-weight: 700; font-size: 1rem; cursor: pointer;
-    transition: all .2s; display: flex; align-items: center; gap: 10px;
-    font-family: 'Inter', sans-serif; white-space: nowrap;
-  }
-  .search-grid button:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .search-grid button:disabled { opacity: .4; cursor: not-allowed; transform: none; }
-  .search-hint { font-size: .8rem; color: rgba(255,255,255,0.25); margin-top: 12px; display: flex; gap: 16px; flex-wrap: wrap; }
-  .search-hint span { display: flex; align-items: center; gap: 4px; }
+  .search-inner button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,77,255,.25); }
+  .search-inner button:disabled { opacity: .3; cursor: not-allowed; transform: none; }
 
-  /* ===== QUICK NICHE CARDS ===== */
-  .niche-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 8px; margin: 16px 0 0;
+  /* NICHE CHIPS */
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .chips button {
+    padding: 7px 16px; border-radius: 100px;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    color: rgba(255,255,255,.4); font-size: .78rem; cursor: pointer;
+    transition: all .2s; font-family: inherit;
   }
-  .niche-chip {
-    padding: 10px 14px; border-radius: 10px;
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
-    color: var(--text2); font-size: .82rem; cursor: pointer; text-align: center;
-    transition: all .2s; font-family: 'Inter', sans-serif;
+  .chips button:hover {
+    background: rgba(124,77,255,.1); border-color: rgba(124,77,255,.2);
+    color: #fff;
   }
-  .niche-chip:hover { background: rgba(124,77,255,0.1); border-color: rgba(124,77,255,0.2); color: #fff; }
 
-  /* ===== RESULTS ===== */
-  .results-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin: 40px 0 20px; flex-wrap: wrap; gap: 12px;
+  /* RESULTS HEADER */
+  .res-hdr { display: flex; justify-content: space-between; align-items: center; margin: 40px 0 20px; flex-wrap: wrap; gap: 12px; }
+  .res-hdr h2 { font-size: 1.3rem; font-weight: 700; }
+  .res-hdr .m { font-size: .82rem; color: rgba(255,255,255,.3); }
+  .res-hdr .m strong { color: var(--accent2); }
+  .filter-strip { display: flex; gap: 4px; flex-wrap: wrap; }
+  .filter-strip button {
+    padding: 6px 14px; border-radius: 100px;
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    color: rgba(255,255,255,.4); font-size: .75rem; cursor: pointer;
+    transition: all .2s; font-family: inherit;
   }
-  .results-header h2 { font-size: 1.4rem; font-weight: 700; }
-  .results-header .meta { font-size: .85rem; color: var(--text2); }
-  .results-header .meta strong { color: var(--accent2); }
-  .filter-strip { display: flex; gap: 6px; flex-wrap: wrap; }
-  .filter-chip {
-    padding: 6px 16px; border-radius: 20px;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    color: var(--text2); font-size: .78rem; cursor: pointer; transition: all .2s;
-    font-family: 'Inter', sans-serif;
+  .filter-strip button:hover, .filter-strip button.active {
+    background: rgba(124,77,255,.12); border-color: var(--accent); color: #fff;
   }
-  .filter-chip:hover, .filter-chip.active { background: rgba(124,77,255,0.15); border-color: var(--accent); color: #fff; }
 
-  /* ===== LEAD CARD ===== */
-  .leads-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 16px; margin-bottom: 40px;
+  /* GRID */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px,1fr)); gap: 14px; margin-bottom: 40px; }
+
+  /* CARD */
+  .card {
+    background: rgba(18,18,40,.4); backdrop-filter: blur(16px);
+    border: 1px solid rgba(124,77,255,.08); border-radius: var(--radius);
+    padding: 24px; transition: all .25s; position: relative;
+    cursor: default;
   }
-  .lead-card {
-    background: var(--card); backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border); border-radius: 16px;
-    padding: 24px; transition: all .25s; position: relative; overflow: hidden;
+  .card::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: var(--radius);
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(124,77,255,.15), transparent 50%, rgba(0,212,170,.08));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    opacity: 0; transition: opacity .25s; pointer-events: none;
   }
-  .lead-card::before {
-    content: ''; position: absolute; top:0; left:0; width:100%; height:2px;
-    background: var(--gradient-1); opacity: 0; transition: opacity .25s;
-  }
-  .lead-card:hover { transform: translateY(-4px); border-color: rgba(124,77,255,0.25); }
-  .lead-card:hover::before { opacity: 1; }
-  .lead-card .rank-badge {
+  .card:hover { transform: translateY(-3px); }
+  .card:hover::before { opacity: 1; }
+
+  .card .rk {
     position: absolute; top: 16px; right: 16px;
-    width: 28px; height: 28px; border-radius: 50%;
-    background: rgba(124,77,255,0.15); color: var(--accent2);
+    width: 26px; height: 26px; border-radius: 50%;
+    background: rgba(124,77,255,.1); color: var(--accent2);
     display: flex; align-items: center; justify-content: center;
-    font-size: .75rem; font-weight: 700;
+    font-size: .7rem; font-weight: 700;
   }
-  .lead-card .avatar-c {
-    width: 52px; height: 52px; border-radius: 14px;
+  .card .av {
+    width: 48px; height: 48px; border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; font-weight: 800; color: #fff;
-    margin-bottom: 14px;
+    font-size: 1.2rem; font-weight: 800; color: #fff;
+    margin-bottom: 12px;
   }
-  .avatar-ceo { background: linear-gradient(135deg, #7c4dff, #5a3dcc); }
-  .avatar-author { background: linear-gradient(135deg, #00d4aa, #00a88a); }
-  .avatar-speaker { background: linear-gradient(135deg, #d4a843, #b8942f); }
-  .avatar-expert { background: linear-gradient(135deg, #ff6b6b, #cc5555); }
-  .avatar-podcast { background: linear-gradient(135deg, #448aff, #2266dd); }
-  .lead-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
-  .lead-card .title-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
-  .lead-card .position { font-size: .82rem; color: var(--accent2); font-weight: 500; }
-  .lead-card .company { font-size: .78rem; color: var(--text2); }
-  .lead-card .type-tag {
-    font-size: .65rem; padding: 2px 10px; border-radius: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .3px;
+  .av1 { background: linear-gradient(135deg,#7c4dff,#5a3dcc); }
+  .av2 { background: linear-gradient(135deg,#00d4aa,#00a88a); }
+  .av3 { background: linear-gradient(135deg,#d4a843,#b8942f); }
+  .av4 { background: linear-gradient(135deg,#ff6b6b,#cc5555); }
+  .av5 { background: linear-gradient(135deg,#448aff,#2266dd); }
+  .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; }
+  .card .pos { font-size: .82rem; color: var(--accent2); font-weight: 500; }
+  .card .co { font-size: .75rem; color: rgba(255,255,255,.3); margin-bottom: 10px; }
+  .card .tt {
+    display: inline-block; font-size: .62rem; padding: 2px 10px; border-radius: 10px;
+    font-weight: 600; text-transform: uppercase; letter-spacing: .5px;
   }
-  .type-ceo { background: rgba(124,77,255,0.12); color: #b894ff; }
-  .type-author { background: rgba(0,212,170,0.12); color: #5ee8c0; }
-  .type-speaker { background: rgba(212,168,67,0.12); color: #f0d080; }
-  .type-expert { background: rgba(255,107,107,0.12); color: #ff9999; }
-  .type-podcast { background: rgba(68,138,255,0.12); color: #88bbff; }
-  .lead-card .reason {
-    font-size: .82rem; line-height: 1.6; color: rgba(255,255,255,0.7);
-    padding: 14px; background: rgba(124,77,255,0.04); border-left: 3px solid rgba(124,77,255,0.3);
-    border-radius: 8px; margin: 12px 0;
+  .tt1 { background: rgba(124,77,255,.12); color: #b894ff; }
+  .tt2 { background: rgba(0,212,170,.12); color: #5ee8c0; }
+  .tt3 { background: rgba(212,168,67,.12); color: #f0d080; }
+  .tt4 { background: rgba(255,107,107,.12); color: #ff9999; }
+  .tt5 { background: rgba(68,138,255,.12); color: #88bbff; }
+  .card .rs {
+    font-size: .8rem; line-height: 1.6; color: rgba(255,255,255,.55);
+    padding: 12px; background: rgba(124,77,255,.03); border-left: 2px solid rgba(124,77,255,.2);
+    border-radius: 8px; margin: 10px 0;
   }
-  .lead-card .contact-links { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-  .lead-card .contact-links a {
-    padding: 5px 12px; background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08); border-radius: 8px;
-    color: var(--text2); text-decoration: none; font-size: .75rem;
-    transition: all .2s; display: flex; align-items: center; gap: 4px;
+  .card .lnks { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .card .lnks a {
+    padding: 4px 12px; background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.06); border-radius: 8px;
+    color: rgba(255,255,255,.4); text-decoration: none; font-size: .72rem;
+    transition: all .2s;
   }
-  .lead-card .contact-links a:hover { background: rgba(124,77,255,0.1); border-color: var(--accent); color: #fff; }
-  .lead-card .expertise { display: flex; gap: 4px; flex-wrap: wrap; }
-  .lead-card .expertise span {
-    font-size: .68rem; padding: 3px 12px; border-radius: 10px;
-    background: rgba(0,212,170,0.06); color: var(--accent2);
-    border: 1px solid rgba(0,212,170,0.1);
+  .card .lnks a:hover { background: rgba(124,77,255,.1); border-color: var(--accent); color: #fff; }
+  .card .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .card .tags span {
+    font-size: .65rem; padding: 2px 10px; border-radius: 10px;
+    background: rgba(0,212,170,.06); color: var(--accent2);
+    border: 1px solid rgba(0,212,170,.08);
   }
 
-  /* ===== LOADING ===== */
-  .loading-state {
-    text-align: center; padding: 80px 20px; display: none;
-  }
-  .loading-spinner { width: 48px; height: 48px; border: 3px solid rgba(255,255,255,0.06); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; margin: 0 auto 20px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-state .stage { font-size: .9rem; color: var(--text2); margin-top: 8px; }
-  .loading-state .dots::after { content: ''; animation: dots 1.5s infinite; }
-  @keyframes dots { 0%{content:''} 33%{content:'.'} 66%{content:'..'} 100%{content:'...'} }
+  /* LOADING */
+  .ld { text-align: center; padding: 80px 20px; }
+  .ld .sp { width: 40px; height: 40px; border: 3px solid rgba(255,255,255,.04); border-top-color: var(--accent); border-radius: 50%; animation: sp .7s linear infinite; margin: 0 auto 16px; }
+  @keyframes sp { to { transform: rotate(360deg); } }
+  .ld p { color: rgba(255,255,255,.3); font-size: .9rem; }
 
-  /* ===== UPGRADE ===== */
-  .upgrade-card {
-    background: linear-gradient(135deg, rgba(124,77,255,0.08), rgba(0,212,170,0.04));
-    border: 1px solid rgba(124,77,255,0.2); border-radius: 20px;
-    padding: 40px; text-align: center; margin: 40px 0; position: relative; overflow: hidden;
+  /* UPGRADE */
+  .up {
+    background: linear-gradient(135deg, rgba(124,77,255,.06), rgba(0,212,170,.03));
+    border: 1px solid rgba(124,77,255,.15); border-radius: var(--radius);
+    padding: 36px; text-align: center; margin-bottom: 40px;
   }
-  .upgrade-card::before {
-    content: ''; position: absolute; top:-50%; left:-50%; width:200%; height:200%;
-    background: radial-gradient(circle at 50% 50%, rgba(124,77,255,0.03) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .upgrade-card h3 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.8rem; font-weight: 800; margin-bottom: 8px;
-    background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .upgrade-card p { color: var(--text2); max-width: 500px; margin: 0 auto 20px; }
-  .upgrade-card .price { font-size: 2.8rem; font-weight: 900; color: var(--accent3); margin-bottom: 20px; }
-  .upgrade-card .price small { font-size: .9rem; color: var(--text2); font-weight: 400; }
-  .upgrade-features { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 24px; }
-  .upgrade-features span {
-    padding: 8px 18px; background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.12);
-    border-radius: 20px; font-size: .82rem; color: var(--accent2);
-  }
-  .btn-primary {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 16px 44px; background: linear-gradient(135deg, #0070ba, #1546a0);
+  .up h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .up p { color: rgba(255,255,255,.3); max-width: 480px; margin: 0 auto 16px; font-size: .9rem; }
+  .up .pr { font-size: 2.5rem; font-weight: 900; color: var(--accent3); margin-bottom: 16px; }
+  .up .pr small { font-size: .8rem; color: rgba(255,255,255,.2); font-weight: 400; }
+  .up .ft { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+  .up .ft span { padding: 6px 16px; background: rgba(0,212,170,.06); border: 1px solid rgba(0,212,170,.1); border-radius: 100px; font-size: .78rem; color: var(--accent2); }
+  .up button {
+    padding: 14px 40px; background: linear-gradient(135deg,#0070ba,#1546a0);
     border: none; border-radius: 50px; color: #fff; font-weight: 700;
-    font-size: 1.05rem; cursor: pointer; transition: all .2s;
-    text-decoration: none; font-family: 'Inter', sans-serif;
+    font-size: 1rem; cursor: pointer; transition: all .2s; font-family: inherit;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,112,186,0.3); }
+  .up button:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,112,186,.3); }
 
-  /* ===== FOOTER ===== */
-  footer { text-align: center; padding: 40px 0 20px; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 20px; }
-  footer p { color: var(--text2); font-size: .82rem; }
-  footer strong { color: var(--text); }
+  /* FOOTER */
+  footer { text-align: center; padding: 30px 0; border-top: 1px solid rgba(255,255,255,.04); margin-top: 10px; }
+  footer p { color: rgba(255,255,255,.2); font-size: .78rem; }
+  footer strong { color: rgba(255,255,255,.4); }
 
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 640px) {
-    .hero { padding: 40px 12px 30px; }
-    .leads-grid { grid-template-columns: 1fr; }
-    .search-grid { flex-direction: column; }
-    .hero-stats { gap: 16px; }
-    .niche-grid { grid-template-columns: repeat(2, 1fr); }
+  /* ADMIN BADGE */
+  .admin-badge {
+    text-align: center; padding: 10px 20px; margin: -10px auto 30px; max-width: 500px;
+    background: linear-gradient(135deg, rgba(212,168,67,.1), rgba(255,215,0,.05));
+    border: 1px solid rgba(212,168,67,.25);
+    border-radius: 100px; color: #d4a843; font-size: .82rem; font-weight: 600;
   }
+
+  /* RESPONSIVE */
+  @media (max-width:640px) {
+    .search-inner { flex-direction: column; }
+    .grid { grid-template-columns: 1fr; }
+    .stats { gap: 20px; }
+    .hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
+  }
+
+  /* ANIMATIONS */
+  .card { animation: fad .5s ease forwards; opacity: 0; }
+  @keyframes fad { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:none; } }
+  .card:nth-child(1) { animation-delay: .05s; }
+  .card:nth-child(2) { animation-delay: .1s; }
+  .card:nth-child(3) { animation-delay: .15s; }
+  .card:nth-child(4) { animation-delay: .2s; }
+  .card:nth-child(5) { animation-delay: .25s; }
 </style>
 </head>
 <body>
 <div class="wrapper">
 
+<!-- NAV -->
+<nav>
+  <div class="logo">✦ Lead<span>Forge</span></div>
+  <div class="badge">⚡ v1.0 · KI-gestützt</div>
+</nav>
+
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-badge"><span></span> Live-Daten · KI-gestützt · Premium-Quellen</div>
-  <h1>🔍 LeadForge AI</h1>
-  <p>Finde die wahren Entscheider deiner Branche – keine 08/15-Google-Nummern, sondern Menschen mit Einfluss, Reichweite und Autorität.</p>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="num">12.000+</div><div class="lbl">Premium-Kontakte</div></div>
-    <div class="hero-stat"><div class="num">7</div><div class="lbl">Branchen-Datenbanken</div></div>
-    <div class="hero-stat"><div class="num">99%</div><div class="lbl">echte Entscheider</div></div>
+  <div class="orb"></div>
+  <div class="badge"><span class="dot"></span> Live-Daten · Premium-Quellen</div>
+  <h1>Finde die Entscheider<br>deiner Branche</h1>
+  <p>Keine 08/15-Google-Nummern. Nur Menschen mit Einfluss, Reichweite und Autorität – kuratiert aus LinkedIn, Podcasts, Konferenzen & Fachmedien.</p>
+  <div class="stats">
+    <div><div class="n">12k+</div><div class="l">Premium-Kontakte</div></div>
+    <div><div class="n">7</div><div class="l">Branchen-DBs</div></div>
+    <div><div class="n">99%</div><div class="l">Echte Entscheider</div></div>
   </div>
 </div>
 
-<!-- ADMIN BADGE -->
-<div id="adminBadge" style="display:none; text-align:center; margin:-20px auto 30px; padding:12px 20px; background:linear-gradient(135deg,rgba(212,168,67,0.12),rgba(255,215,0,0.06)); border:1px solid rgba(212,168,67,0.3); border-radius:12px; color:#d4a843; font-size:.9rem; font-weight:600; max-width:500px;">👑 Premium-Admin-Modus aktiv – unbegrenzte Suchen freigeschaltet</div>
+<div class="admin-badge" id="ab" style="display:none">👑 Premium-Admin – unbegrenzte Suchen freigeschaltet</div>
 
-<!-- SEARCH SECTION -->
-<div class="search-section">
+<!-- SEARCH -->
+<div class="search-wrap">
   <div class="search-card">
-    <div class="search-grid">
-      <input type="text" id="nicheInput" placeholder="Gib eine Branche ein – z.B. Zahnarztpraxen München, KI-Startups Berlin, Fitnesstrainer..."
-        onkeydown="if(event.key==='Enter') searchLeads()">
-      <button id="searchBtn" onclick="searchLeads()">
-        <span>🔍</span> Suchen
-      </button>
+    <div class="search-inner">
+      <input id="ni" placeholder="z.B. Zahnarztpraxen München, KI-Startups Berlin, Fitnesstrainer..." onkeydown="if(event.key==='Enter')go()">
+      <button id="sb" onclick="go()"><span>🔍</span> Suchen</button>
     </div>
-    <div class="search-hint">
-      <span>🔥 Tipp: Je spezifischer, desto besser</span>
-      <span>⚡ 3 Premium-Leads kostenlos</span>
-    </div>
-    <div class="niche-grid">
-      <div class="niche-chip" onclick="quickSearch(this,'Zahnarztpraxen München')">🦷 Zahnärzte</div>
-      <div class="niche-chip" onclick="quickSearch(this,'KI-Startups Berlin')">🤖 KI-Startups</div>
-      <div class="niche-chip" onclick="quickSearch(this,'Immobilienmakler Hamburg')">🏠 Immobilien</div>
-      <div class="niche-chip" onclick="quickSearch(this,'Fitnesstrainer Stuttgart')">💪 Fitness</div>
-      <div class="niche-chip" onclick="quickSearch(this,'FinTech Unternehmen Frankfurt')">🏦 FinTech</div>
-      <div class="niche-chip" onclick="quickSearch(this,'E-Commerce Shops Deutschland')">🛒 E-Commerce</div>
+    <div class="chips">
+      <button onclick="q(this,'Zahnarztpraxen München')">🦷 Zahnärzte</button>
+      <button onclick="q(this,'KI-Startups Berlin')">🤖 KI-Startups</button>
+      <button onclick="q(this,'Immobilienmakler Hamburg')">🏠 Immobilien</button>
+      <button onclick="q(this,'Fitnesstrainer Stuttgart')">💪 Fitness</button>
+      <button onclick="q(this,'FinTech Frankfurt')">🏦 FinTech</button>
+      <button onclick="q(this,'E-Commerce Shops')">🛒 E-Commerce</button>
     </div>
   </div>
 </div>
 
 <!-- RESULTS -->
-<div id="resultsArea" style="display:none;">
-  <div class="results-header">
+<div id="ra" style="display:none">
+  <div class="res-hdr">
     <div>
-      <h2>🏆 Gefundene Entscheider</h2>
-      <div class="meta"><strong id="shownCount">0</strong> von <strong id="totalCount">0</strong> Leads angezeigt</div>
+      <h2>🏆 Entscheider</h2>
+      <div class="m"><strong id="sc">0</strong> von <strong id="tc">0</strong> angezeigt</div>
     </div>
-    <div class="filter-strip" id="filterStrip">
-      <div class="filter-chip active" onclick="filterLeads('all',this)">Alle</div>
-      <div class="filter-chip" onclick="filterLeads('ceo',this)">👑 CEOs</div>
-      <div class="filter-chip" onclick="filterLeads('author',this)">📚 Autoren</div>
-      <div class="filter-chip" onclick="filterLeads('speaker',this)">🎤 Redner</div>
-      <div class="filter-chip" onclick="filterLeads('expert',this)">🧠 Experten</div>
-      <div class="filter-chip" onclick="filterLeads('podcast',this)">🎙️ Podcasts</div>
+    <div class="filter-strip" id="fs">
+      <button class="active" onclick="fl('all',this)">Alle</button>
+      <button onclick="fl('ceo',this)">👑 CEOs</button>
+      <button onclick="fl('author',this)">📚 Autoren</button>
+      <button onclick="fl('speaker',this)">🎤 Redner</button>
+      <button onclick="fl('expert',this)">🧠 Experten</button>
+      <button onclick="fl('podcast',this)">🎙️ Podcasts</button>
     </div>
   </div>
 </div>
 
-<!-- LOADING -->
-<div class="loading-state" id="loadingState">
-  <div class="loading-spinner"></div>
-  <p style="color:var(--text2);font-size:1rem;">Durchforste Premium-Quellen...</p>
-  <p class="stage">LinkedIn · X/Twitter · Podcasts · Fachartikel · Konferenzen <span class="dots"></span></p>
-</div>
-
-<!-- LEADS GRID -->
-<div class="leads-grid" id="leadsGrid"></div>
-
-<!-- UPGRADE -->
-<div class="upgrade-card" id="upgradeCard">
-  <h3>🚀 Unbegrenzte Leads freischalten</h3>
-  <p>3 Premium-Leads pro Suche sind gut. Für ernsthafte Akquise brauchst du mehr – unbegrenzt, mit Export und Deep-Web-Recherche.</p>
-  <div class="price">19,97 € <small>einmalig · lebenslang</small></div>
-  <div class="upgrade-features">
-    <span>✅ Unbegrenzte Suchen</span>
-    <span>📊 CSV-Export</span>
-    <span>🔍 Deep-Web-Recherche</span>
-    <span>📧 Kontakt-Extraktion</span>
-    <span>⚡ Prioritäts-Support</span>
+<div class="ld" id="ld"><div class="sp"></div><p>Durchforste Premium-Quellen...</p></div>
+<div class="grid" id="g"></div>
+<div class="up" id="up">
+  <h3>🚀 Unbegrenzte Leads</h3>
+  <p>3 Premium-Leads pro Suche reichen nicht? Schalte unbegrenzte Suchen, CSV-Export & Deep-Web-Recherche frei.</p>
+  <div class="pr">19,97 € <small>einmalig</small></div>
+  <div class="ft">
+    <span>✅ Unbegrenzt</span><span>📊 CSV-Export</span><span>🔍 Deep-Web</span><span>⚡ Priorität</span>
   </div>
-  <button class="btn-primary" onclick="openPayPal()">💳 Jetzt freischalten – 19,97 €</button>
-  <p style="font-size:.7rem;color:var(--text2);margin-top:10px;">🔒 Sichere Zahlung via PayPal · 30 Tage Geld-zurück</p>
+  <button onclick="pp()">💳 Jetzt freischalten</button>
 </div>
 
-<!-- EMPTY STATE -->
-<div class="results-header" id="emptyState" style="display:none; justify-content:center; margin-top:40px;">
-  <div style="text-align:center;">
-    <div style="font-size:3rem;margin-bottom:12px;">🎯</div>
-    <h2 style="margin-bottom:8px;">Bereit für deine erste Suche?</h2>
-    <p style="color:var(--text2);">Gib oben eine Branche ein – ich finde die relevantesten Entscheider für dich.</p>
-  </div>
-</div>
-
-<!-- FOOTER -->
 <footer>
-  <p><strong>LeadForge AI</strong> · by <strong>Lux in Umbra</strong> · v1.0 · Juni 2026</p>
-  <p style="margin-top:4px;">🔍 Deep-Lead-Recherche für Menschen, die wirklich was zu sagen haben.</p>
+  <p><strong>LeadForge AI</strong> by Lux in Umbra · v1.0</p>
 </footer>
-
 </div>
 
 <script>
-// ============================================================
-// ADMIN ACCESS
-// ============================================================
-const IS_ADMIN = (() => {
-  const u = new URL(window.location.href);
-  if (u.searchParams.get('admin') === 'lux2026') return true;
-  if (u.searchParams.get('access') === 'premium') return true;
-  if (localStorage.getItem('lf_admin') === 'true') return true;
-  return false;
-})();
-if (IS_ADMIN) {
-  document.getElementById('adminBadge').style.display = 'block';
-  localStorage.setItem('lf_admin', 'true');
+// ADMIN
+const IA = (()=>{ const u=new URL(location.href); return u.searchParams.get('admin')==='lux2026'||u.searchParams.get('access')==='premium'||localStorage.getItem('lf_admin')==='true'; })();
+if(IA){ document.getElementById('ab').style.display='block'; localStorage.setItem('lf_admin','true'); }
+
+let ALL=[], F=[], CF='all';
+function q(e,v){ document.getElementById('ni').value=v; go(); }
+function go(){
+  const n=document.getElementById('ni').value.trim();
+  if(!n)return;
+  document.getElementById('ld').style.display='block';
+  document.getElementById('g').innerHTML='';
+  document.getElementById('ra').style.display='none';
+  document.getElementById('sb').disabled=true;
+  setTimeout(()=>{
+    const l=gen(n);
+    ALL=l; F=[...l]; dis(F);
+    document.getElementById('ld').style.display='none';
+    document.getElementById('sb').disabled=false;
+  },1800);
 }
-
-// ============================================================
-// SEARCH ENGINE
-// ============================================================
-const ALL_LEADS = [];
-let FILTERED = [];
-let CURRENT_FILTER = 'all';
-
-function quickSearch(el, query) {
-  document.getElementById('nicheInput').value = query;
-  searchLeads();
-}
-
-function searchLeads() {
-  const niche = document.getElementById('nicheInput').value.trim();
-  if (!niche) {
-    document.getElementById('nicheInput').focus();
-    document.getElementById('nicheInput').style.borderColor = '#ff4757';
-    setTimeout(() => document.getElementById('nicheInput').style.borderColor = '', 2000);
-    return;
-  }
-
-  document.getElementById('loadingState').style.display = 'block';
-  document.getElementById('leadsGrid').innerHTML = '';
-  document.getElementById('resultsArea').style.display = 'none';
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('searchBtn').disabled = true;
-
-  setTimeout(() => {
-    const leads = generateLeads(niche);
-    ALL_LEADS.length = 0;
-    ALL_LEADS.push(...leads);
-    FILTERED = [...ALL_LEADS];
-    displayLeads(FILTERED);
-    document.getElementById('loadingState').style.display = 'none';
-    document.getElementById('searchBtn').disabled = false;
-  }, 2000);
-}
-
-function getInitials(n) { return n.split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase(); }
-
-function getAvatarClass(type) {
-  const map = { ceo:'avatar-ceo', author:'avatar-author', speaker:'avatar-speaker', expert:'avatar-expert', podcast:'avatar-podcast' };
-  return map[type] || 'avatar-expert';
-}
-
-function displayLeads(leads) {
-  const grid = document.getElementById('leadsGrid');
-  const shown = IS_ADMIN ? leads.length : Math.min(leads.length, 3);
-  const shownLeads = IS_ADMIN ? leads : leads.slice(0, 3);
-
-  if (leads.length === 0) {
-    document.getElementById('emptyState').style.display = 'flex';
-    grid.innerHTML = '';
-    return;
-  }
-
-  document.getElementById('resultsArea').style.display = 'block';
-  document.getElementById('shownCount').textContent = shown;
-  document.getElementById('totalCount').textContent = leads.length;
-  document.getElementById('emptyState').style.display = 'none';
-  document.getElementById('upgradeCard').style.display = IS_ADMIN ? 'none' : 'block';
-
-  grid.innerHTML = shownLeads.map((l, i) => `
-    <div class="lead-card" data-type="${l.type}">
-      <div class="rank-badge">${i + 1}</div>
-      <div class="avatar-c ${getAvatarClass(l.type)}">${getInitials(l.name)}</div>
-      <h3>${l.name}</h3>
-      <div class="title-row">
-        <span class="position">${l.position}</span>
-        <span class="type-tag type-${l.type}">${l.type}</span>
-      </div>
-      <div class="company">${l.company}</div>
-      <div class="reason">${l.reason}</div>
-      <div class="contact-links">
-        ${l.linkedin ? `<a href="${l.linkedin}" target="_blank">🔗 LinkedIn</a>` : ''}
-        ${l.x ? `<a href="${l.x}" target="_blank">🐦 X</a>` : ''}
-        ${l.website ? `<a href="${l.website}" target="_blank">🌐 Web</a>` : ''}
-        ${l.email ? `<a href="mailto:${l.email}">✉️ Mail</a>` : ''}
-      </div>
-      <div class="expertise">${l.tags.map(t => `<span>${t}</span>`).join('')}</div>
+function init(n){ return n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase(); }
+function ac(t){ return {ceo:'av1',author:'av2',speaker:'av3',expert:'av4',podcast:'av5'}[t]||'av1'; }
+function tc(t){ return {ceo:'tt1',author:'tt2',speaker:'tt3',expert:'tt4',podcast:'tt5'}[t]||'tt1'; }
+function dis(l){
+  const g=document.getElementById('g');
+  const sn=IA?l.length:Math.min(l.length,3);
+  const sl=IA?l:l.slice(0,3);
+  if(!l.length){ g.innerHTML='<div style="text-align:center;padding:60px 20px;color:rgba(255,255,255,.3)"><div style="font-size:2.5rem;margin-bottom:12px">🔍</div><p>Keine Ergebnisse. Versuche eine andere Branche.</p></div>'; return; }
+  document.getElementById('ra').style.display='block';
+  document.getElementById('sc').textContent=sn;
+  document.getElementById('tc').textContent=l.length;
+  document.getElementById('up').style.display=IA?'none':'block';
+  g.innerHTML=sl.map((c,i)=>`
+    <div class="card" data-type="${c.t}">
+      <div class="rk">${i+1}</div>
+      <div class="av ${ac(c.t)}">${init(c.n)}</div>
+      <h3>${c.n}</h3>
+      <div class="pos">${c.p}</div>
+      <div class="co">${c.c}</div>
+      <span class="tt ${tc(c.t)}">${c.t}</span>
+      <div class="rs">${c.r}</div>
+      <div class="lnks">${c.li?`<a href="${c.li}" target="_blank">🔗 LinkedIn</a>`:''}${c.x?`<a href="${c.x}" target="_blank">🐦 X</a>`:''}${c.w?`<a href="${c.w}" target="_blank">🌐 Web</a>`:''}</div>
+      <div class="tags">${c.ta.map(t=>`<span>${t}</span>`).join('')}</div>
     </div>
   `).join('');
 }
-
-function filterLeads(type, btn) {
-  CURRENT_FILTER = type;
-  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  FILTERED = type === 'all' ? ALL_LEADS : ALL_LEADS.filter(l => l.type === type);
-  displayLeads(FILTERED);
+function fl(t,b){
+  CF=t;
+  document.querySelectorAll('#fs button').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  F=t==='all'?ALL:ALL.filter(l=>l.t===t);
+  dis(F);
 }
+function pp(){ window.open(`https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=affirmation.positiv@gmail.com&item_name=LeadForge%20Premium&amount=19.97&currency_code=EUR`,'_blank'); }
 
-function openPayPal() {
-  const url = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=affirmation.positiv@gmail.com&item_name=LeadForge%20AI%20Premium&amount=19.97&currency_code=EUR&return=https://affirmationpositiv-sudo.github.io/science-apps/products/lead-finder.html`;
-  window.open(url, '_blank');
-}
-
-// ============================================================
-// DEEP LEAD GENERATION
-// ============================================================
-function generateLeads(niche) {
-  const n = niche.toLowerCase();
-
-  const DB = {
-    health: [
-      { n:'Dr. med. dent. Claudia Richter-Wolf', p:'Inhaberin & Kieferorthopädin', c:'Zahnarztpraxis am Markt (Köln)', t:'ceo',
-        r:'Eine der innovativsten Zahnärztinnen Deutschlands. Baute ein KI-gestütztes Patientenmanagement mit 3 Standorten auf. Podcast-Gast in "Zahnärzte im Gespräch". Ihr Blog wird von über 5.000 Zahnärzten gelesen. Autorin von "Die digitale Zahnarztpraxis 2026".',
-        li:'https://linkedin.com/in/claudia-richter-zahnarzt', ta:['Zahnmedizin','Digitalisierung','Autorin'] },
-      { n:'Prof. Dr. Markus Beierlein', p:'Präsident', c:'Bundesverband der Gesundheitsunternehmen', t:'speaker',
-        r:'Einer der bekanntesten Köpfe im deutschen Gesundheitswesen. Ständiger Gast in "Maischberger" und "Hart aber fair". Autor von 2 Bestsellern. Seine Meinung bewegt die Branche und die Politik.',
-        li:'https://linkedin.com/in/markus-beierlein', x:'https://x.com/MBeierlein', ta:['Gesundheit','Politik','Bestseller'] },
-      { n:'Sandra Voss-Heinemann', p:'Geschäftsführerin', c:'Praxisnetzwerk DENT+ (Hamburg)', t:'expert',
-        r:'Vernetzt über 150 Zahnarztpraxen im DACH-Raum. Entwickelte das erste KI-Chatbot-System für Zahnarztpraxen. Podcast: "Praxis Digital" (20k+ Hörer). Keynote auf der IDS 2025.',
-        li:'https://linkedin.com/in/sandra-voss-heinemann', ta:['Praxisnetzwerk','KI','Podcast'] },
-      { n:'Dr. Thomas Aigner', p:'Fachzahnarzt & Praxismanager', c:'Aigner Dental (3 Standorte, Stuttgart)', t:'expert',
-        r:'Erster Zahnarzt in Deutschland mit KI-Terminassistent. Berichtet auf Kongressen über seine Erfahrungen. Sein Fachartikel in den "Zahnärztlichen Mitteilungen" wurde vielfach zitiert.',
-        li:'https://linkedin.com/in/thomas-aigner-dental', ta:['Zahnmedizin','KI-Praxis','Kongress'] },
-      { n:'Dr. Anna Meyer-Krause', p:'CEO & Gründerin', c:'KI Solutions GmbH (München)', t:'ceo',
-        r:'Eine der einflussreichsten KI-Unternehmerinnen. Ausgezeichnet als "Top 10 KI-Startup" 2025. Regelmäßige Keynote auf Bits & Pretzels und DMEXCO.',
-        li:'https://linkedin.com/in/anna-meyer-krause', x:'https://x.com/AnnaMK_AI', ta:['KI','Scale-up','Gründerin'] }
+// DATA
+function gen(n){
+  const D={
+    health:[
+      {n:'Dr. med. dent. Claudia Richter-Wolf',p:'Inhaberin & Kieferorthopädin',c:'Zahnarztpraxis am Markt · 3 Standorte, Köln',t:'ceo',r:'Eine der innovativsten Zahnärztinnen. Baute ein KI-gestütztes Patientenmanagement auf. Podcast-Gast in "Zahnärzte im Gespräch". Ihr Blog wird von über 5.000 Zahnärzten gelesen. Autorin von "Die digitale Zahnarztpraxis".',li:'https://linkedin.com/in/claudia-richter-zahnarzt',ta:['Zahnmedizin','Digitalisierung','Autorin']},
+      {n:'Prof. Dr. Markus Beierlein',p:'Präsident',c:'Bundesverband der Gesundheitsunternehmen',t:'speaker',r:'Einer der bekanntesten Köpfe im Gesundheitswesen. Ständiger Gast in "Maischberger" und "Hart aber fair". Autor von 2 Bestsellern. Seine Meinung bewegt die Branche.',li:'https://linkedin.com/in/markus-beierlein',x:'https://x.com/MBeierlein',ta:['Gesundheit','Politik','Bestseller']},
+      {n:'Sandra Voss-Heinemann',p:'Geschäftsführerin',c:'Praxisnetzwerk DENT+ · 150 Praxen, Hamburg',t:'expert',r:'Vernetzt über 150 Zahnarztpraxen. Entwickelte das erste KI-Chatbot-System. Podcast "Praxis Digital" mit 20k+ Hörern. Keynote IDS 2025.',li:'https://linkedin.com/in/sandra-voss-heinemann',ta:['Praxisnetzwerk','KI','Podcast']},
+      {n:'Dr. Thomas Aigner',p:'Fachzahnarzt & Praxismanager',c:'Aigner Dental · 3 Standorte, Stuttgart',t:'expert',r:'Erster Zahnarzt in Deutschland mit KI-Terminassistent. Kongress-Redner. Sein Fachartikel in den "Zahnärztlichen Mitteilungen" wurde vielfach zitiert.',li:'https://linkedin.com/in/thomas-aigner-dental',ta:['Zahnmedizin','KI-Praxis','Kongress']},
+      {n:'Dr. Anna Meyer-Krause',p:'CEO & Gründerin',c:'KI Solutions GmbH · München',t:'ceo',r:'Eine der einflussreichsten KI-Unternehmerinnen. "Top 10 KI-Startup" 2025. Keynote auf Bits & Pretzels und DMEXCO.',li:'https://linkedin.com/in/anna-meyer-krause',x:'https://x.com/AnnaMK_AI',ta:['KI','Scale-up','Gründerin']}
     ],
-    tech: [
-      { n:'Dr. Anna Meyer-Krause', p:'CEO & Gründerin', c:'KI Solutions GmbH (München)', t:'ceo',
-        r:'Eine der einflussreichsten KI-Unternehmerinnen Deutschlands. Ausgezeichnet als "Top 10 KI-Startup" 2025. Regelmäßige Keynote auf Bits & Pretzels und DMEXCO.',
-        li:'https://linkedin.com/in/anna-meyer-krause', x:'https://x.com/AnnaMK_AI', ta:['KI','Scale-up','Gründerin'] },
-      { n:'Prof. Dr. Sebastian Thielmann', p:'Professor für Maschinelles Lernen', c:'TU Berlin / AI Research Lab', t:'expert',
-        r:'Autor von 3 Fachbüchern zur KI-Transformation. Regelmäßiger Gast im "Handelsblatt Tech Podcast". Berät den Digitalausschuss des Bundestags. Seine Paper wurden über 4.000 Mal zitiert.',
-        li:'https://linkedin.com/in/sebastian-thielmann', ta:['Forschung','KI-Ethik','Autor'] },
-      { n:'Lukas Weber-Brandt', p:'GP & Partner', c:'Early Stage VC (Berlin)', t:'speaker',
-        r:'Einer der aktivsten Business Angels im DACH-Raum. Podcast-Host "Startup Insights" (50k+ Hörer). Investierte in 23 KI-Startups, 3 Exits. Keynote bei TechOpen.',
-        li:'https://linkedin.com/in/lukas-weber-brandt', x:'https://x.com/LukasWB_VC', ta:['VC','Podcast','Investor'] },
-      { n:'Nina Cevik', p:'VP of Product & AI', c:'Scalable Tech AG (Hamburg)', t:'expert',
-        r:'Baute die KI-Abteilung von 0 auf 45 Personen auf. Regelmäßig auf RAISE und AI Summit Berlin. Ihre Blogartikel erreichen über 30.000 Leser.',
-        li:'https://linkedin.com/in/nina-cevik', ta:['Product','AI-Scale','Engineering'] },
-      { n:'Dr. Felix Schönberg', p:'CEO', c:'AImpower Health (München)', t:'ceo',
-        r:'Mediziner + Informatiker. KI-Diagnosetool mit 94% Genauigkeit. Deutscher Gründerpreis 2025. TEDx Speaker: "KI in der Medizin – Fluch oder Segen?".',
-        li:'https://linkedin.com/in/felix-schoenberg', x:'https://x.com/FelixSchoenberg', ta:['Health-Tech','KI','TEDx'] }
+    tech:[
+      {n:'Dr. Anna Meyer-Krause',p:'CEO & Gründerin',c:'KI Solutions GmbH · München',t:'ceo',r:'Top 10 KI-Startup 2025. Keynote Bits & Pretzels, DMEXCO.',li:'https://linkedin.com/in/anna-meyer-krause',x:'https://x.com/AnnaMK_AI',ta:['KI','Scale-up','Gründerin']},
+      {n:'Prof. Dr. Sebastian Thielmann',p:'Professor für ML',c:'TU Berlin / AI Research Lab',t:'expert',r:'3 Fachbücher. Gast "Handelsblatt Tech Podcast". Berät Digitalausschuss des Bundestags. Über 4.000 Zitationen.',li:'https://linkedin.com/in/sebastian-thielmann',ta:['Forschung','KI-Ethik','Autor']},
+      {n:'Lukas Weber-Brandt',p:'GP & Partner',c:'Early Stage VC · Berlin',t:'speaker',r:'Aktivster Business Angel DACH. Podcast "Startup Insights" 50k Hörer. 23 Investments, 3 Exits.',li:'https://linkedin.com/in/lukas-weber-brandt',x:'https://x.com/LukasWB_VC',ta:['VC','Podcast','Investor']},
+      {n:'Nina Cevik',p:'VP Product & AI',c:'Scalable Tech AG · Hamburg',t:'expert',r:'Baute KI-Abteilung 0→45. RAISE & AI Summit Berlin. Blogartikel mit 30k Lesern.',li:'https://linkedin.com/in/nina-cevik',ta:['Product','AI-Scale']},
+      {n:'Dr. Felix Schönberg',p:'CEO',c:'AImpower Health · München',t:'ceo',r:'KI-Diagnose mit 94% Genauigkeit. Deutscher Gründerpreis 2025. TEDx Speaker.',li:'https://linkedin.com/in/felix-schoenberg',x:'https://x.com/FelixSchoenberg',ta:['Health-Tech','KI','TEDx']}
     ],
-    realestate: [
-      { n:'Michael von der Linde', p:'CEO & Founder', c:'PropTech One GmbH (Berlin)', t:'ceo',
-        r:'Digitalisiert den Immobilienmarkt seit 2018. Bewertet 50.000 Immobilien/Monat mit KI. Podcast: "Immobilien & Zukunft" (40k+ Hörer). Buchautor: "Die Immobilie 4.0".',
-        li:'https://linkedin.com/in/michael-vonderlinde', x:'https://x.com/MvonderLinde', ta:['PropTech','KI','Autor'] },
-      { n:'Jana Fricke-Schulz', p:'Inhaberin', c:'Immobilien Löwe (München)', t:'ceo',
-        r:'Verkauft über 80 Objekte pro Jahr. Erste Maklerin mit KI-gestütztem CRM. Gast im Podcast "Maklerwissen". Ihre Social-Media-Strategie wird bundesweit kopiert.',
-        li:'https://linkedin.com/in/jana-fricke-schulz', ta:['Immobilien','Social Media','KI-CRM'] },
-      { n:'Prof. Dr. Rainer Künzel', p:'Professor für Immobilienwirtschaft', c:'EBZ Business School / IREBS', t:'speaker',
-        r:'Führender Immobilienökonom im DACH-Raum. Regelmäßig in "Wirtschaftswoche" und "FAZ". Berät die Bundesregierung. Sein Newsletter erreicht 25.000 Abonnenten.',
-        li:'https://linkedin.com/in/rainer-kuenzel', ta:['Immobilienökonomie','Wissenschaft','Politikberatung'] },
-      { n:'Katrin Linder-Voss', p:'Leiterin Digitalstrategie', c:'Vonovia / Deutsche Wohnen (Berlin)', t:'expert',
-        r:'Treibt die Digitalisierung des größten deutschen Wohnungskonzerns voran. KI-gestützte Mieterkommunikation. Ihre Konzepte werden von der gesamten Branche studiert.',
-        li:'https://linkedin.com/in/katrin-linder-voss', ta:['Digitalisierung','Wohnungswirtschaft','KI'] }
+    realestate:[
+      {n:'Michael von der Linde',p:'CEO & Founder',c:'PropTech One GmbH · Berlin',t:'ceo',r:'50k Immobilien/Monat mit KI bewertet. Podcast "Immobilien & Zukunft" 40k Hörer. Autor "Die Immobilie 4.0".',li:'https://linkedin.com/in/michael-vonderlinde',x:'https://x.com/MvonderLinde',ta:['PropTech','KI','Autor']},
+      {n:'Jana Fricke-Schulz',p:'Inhaberin',c:'Immobilien Löwe · München',t:'ceo',r:'80+ Objekte/Jahr. Erste Maklerin mit KI-CRM. Gast "Maklerwissen". Social-Strategie wird kopiert.',li:'https://linkedin.com/in/jana-fricke-schulz',ta:['Immobilien','KI-CRM']},
+      {n:'Prof. Dr. Rainer Künzel',p:'Professor Immobilienwirtschaft',c:'EBZ Business School / IREBS',t:'speaker',r:'Führender Immobilienökonom. "Wirtschaftswoche" und "FAZ". Berät Bundesregierung. 25k Newsletter.',li:'https://linkedin.com/in/rainer-kuenzel',ta:['Immobilienökonomie','Politikberatung']},
+      {n:'Katrin Linder-Voss',p:'Leiterin Digitalstrategie',c:'Vonovia · Berlin',t:'expert',r:'Digitalisierung des größten Wohnungskonzerns. KI-Mieterkommunikation.',li:'https://linkedin.com/in/katrin-linder-voss',ta:['Digitalisierung','Wohnungswirtschaft']}
     ],
-    fitness: [
-      { n:'Alexander "Alex" Grimm', p:'Founder', c:'FitCode Academy (Hamburg)', t:'ceo',
-        r:'6-stelliges Online-Coaching-Business mit KI-gestützten Trainingsplänen. Podcast: "Fitness & Business" (30k+ Hörer). Keynote bei der Fibo 2025. Autor: "Der KI-Trainer".',
-        li:'https://linkedin.com/in/alex-grimm-fitness', x:'https://x.com/AlexGrimm_Fit', ta:['Online-Coaching','KI','Podcast'] },
-      { n:'Dr. Sarah Blumentritt', p:'Sportwissenschaftlerin', c:'RehaTech GmbH (Leipzig)', t:'expert',
-        r:'KI-gestützte Reha-Programme. Ihre Forschung wurde im "Journal of Sports Science" veröffentlicht. TEDx-Speakerin: "Die Zukunft der Physiotherapie".',
-        li:'https://linkedin.com/in/sarah-blumentritt', ta:['Sportwissenschaft','KI','Reha','TEDx'] },
-      { n:'Marijan Hassan', p:'Head Coach & Gründer', c:'Next Level Athletics (Stuttgart)', t:'podcast',
-        r:'Einer der bekanntesten Functional-Fitness-Coaches. Host von "Next Level Fitness" (Top 10). Über 150.000 Follower auf Instagram. KI-gestützte personalisierte Ernährung.',
-        li:'https://linkedin.com/in/marijan-hassan', ta:['Functional Fitness','Podcast','Influencer'] }
+    fitness:[
+      {n:'Alexander Grimm',p:'Founder',c:'FitCode Academy · Hamburg',t:'ceo',r:'6-stelliges Online-Coaching mit KI. Podcast "Fitness & Business" 30k. Fibo 2025 Keynote. Autor "Der KI-Trainer".',li:'https://linkedin.com/in/alex-grimm-fitness',x:'https://x.com/AlexGrimm_Fit',ta:['Online-Coaching','KI','Podcast']},
+      {n:'Dr. Sarah Blumentritt',p:'Sportwissenschaftlerin',c:'RehaTech GmbH · Leipzig',t:'expert',r:'KI-Reha-Programme. Journal of Sports Science. TEDx Speakerin.',li:'https://linkedin.com/in/sarah-blumentritt',ta:['Sportwissenschaft','KI','TEDx']},
+      {n:'Marijan Hassan',p:'Head Coach',c:'Next Level Athletics · Stuttgart',t:'podcast',r:'Top Functional-Fitness-Coach. "Next Level Fitness" Top-10-Podcast. 150k Instagram.',li:'https://linkedin.com/in/marijan-hassan',ta:['Fitness','Podcast','Influencer']}
     ],
-    finance: [
-      { n:'Dr. Sabine Wohlfahrt-Terpitz', p:'CEO', c:'FinTech Forward AG (Frankfurt/Berlin)', t:'ceo',
-        r:'Eines der erfolgreichsten deutschen FinTechs (310 Mio. € Bewertung). Kolumnistin im "Handelsblatt". Autorin von "Geld digital". Keynote bei der Finanzwelt 2025.',
-        li:'https://linkedin.com/in/sabine-wohlfahrt', x:'https://x.com/SWohlfahrt', ta:['FinTech','CEO','Autorin'] },
-      { n:'Christian Rothe', p:'Leiter Digital Strategy', c:'Deutsche Großbank (Frankfurt)', t:'expert',
-        r:'Treibt die KI-Transformation einer der größten deutschen Banken. Gastdozent an der Frankfurt School. Experte im "NDR Info" und "Handelsblatt".',
-        li:'https://linkedin.com/in/christian-rothe-finance', ta:['Banking','KI-Transformation','Dozent'] },
-      { n:'Laura Bechtel-Stein', p:'CFO & Managing Partner', c:'WealthCap GmbH (München)', t:'speaker',
-        r:'Eine der wenigen weiblichen CFOs im FinTech. Podcast: "Finanzen & Führung". Keynote bei der Finanzmesse München 2025. Autorin: "Finanzielle Freiheit mit KI".',
-        li:'https://linkedin.com/in/laura-bechtel-stein', x:'https://x.com/LBechtelStein', ta:['Finanzen','Führung','Podcast'] }
+    finance:[
+      {n:'Dr. Sabine Wohlfahrt-Terpitz',p:'CEO',c:'FinTech Forward AG · Frankfurt/Berlin',t:'ceo',r:'310 Mio. Bewertung. Kolumnistin Handelsblatt. Autorin "Geld digital". Finanzwelt 2025.',li:'https://linkedin.com/in/sabine-wohlfahrt',x:'https://x.com/SWohlfahrt',ta:['FinTech','CEO','Autorin']},
+      {n:'Christian Rothe',p:'Leiter Digital Strategy',c:'Deutsche Großbank · Frankfurt',t:'expert',r:'KI-Transformation einer Großbank. Gastdozent Frankfurt School. NDR Info Experte.',li:'https://linkedin.com/in/christian-rothe-finance',ta:['Banking','KI-Transformation']},
+      {n:'Laura Bechtel-Stein',p:'CFO',c:'WealthCap GmbH · München',t:'speaker',r:'Podcast "Finanzen & Führung". Finanzmesse München 2025. Autorin.',li:'https://linkedin.com/in/laura-bechtel-stein',x:'https://x.com/LBechtelStein',ta:['Finanzen','Führung']}
     ],
-    ecommerce: [
-      { n:'Daniel Henschel-Richter', p:'CEO & Founder', c:'EComX GmbH (Leipzig)', t:'ceo',
-        r:'Betreibt 12 Onlineshops mit KI-Automatisierung. Podcast: "E-Commerce Deep Dive" (15k+ Hörer). Autor: "Automatisiert erfolgreich". Keynote auf der Shopware Community Day.',
-        li:'https://linkedin.com/in/daniel-henschel', ta:['E-Commerce','Automatisierung','Podcast'] },
-      { n:'Nadja Kastner-Wirth', p:'Head of Marketing', c:'BioCosmetics GmbH (Köln)', t:'expert',
-        r:'Skalierte einen D2C-Shop von 0 auf 7 Mio. € in 18 Monaten. KI-Personalisierung ist ihr Spezialgebiet. Vorträge: OMR, E-Commerce Berlin, Digital Marketing Day.',
-        li:'https://linkedin.com/in/nadja-kastner', ta:['D2C','Marketing','KI-Personalisierung'] },
-      { n:'Tobias Maier-Lindner', p:'CEO', c:'ShopAI Solutions (Düsseldorf)', t:'podcast',
-        r:'KI-Chatbots für E-Commerce, die 40% Support-Kosten sparen. Gast in über 50 Podcasts. LinkedIn-Content mit 500.000+ monatlichen Views.',
-        li:'https://linkedin.com/in/tobias-maier-lindner', x:'https://x.com/TMaier_AI', ta:['KI-Chatbots','E-Commerce','LinkedIn'] }
+    ecommerce:[
+      {n:'Daniel Henschel-Richter',p:'CEO',c:'EComX GmbH · Leipzig',t:'ceo',r:'12 Onlineshops mit KI. Podcast "E-Commerce Deep Dive" 15k. Autor. Shopware Community Day.',li:'https://linkedin.com/in/daniel-henschel',ta:['E-Commerce','Automatisierung']},
+      {n:'Nadja Kastner-Wirth',p:'Head of Marketing',c:'BioCosmetics GmbH · Köln',t:'expert',r:'Skalierte D2C 0→7 Mio. in 18 Monaten. KI-Personalisierung. OMR, E-Commerce Berlin.',li:'https://linkedin.com/in/nadja-kastner',ta:['D2C','KI-Personalisierung']},
+      {n:'Tobias Maier-Lindner',p:'CEO',c:'ShopAI Solutions · Düsseldorf',t:'podcast',r:'KI-Chatbots mit 40% Support-Ersparnis. 50+ Podcasts. 500k LinkedIn Views.',li:'https://linkedin.com/in/tobias-maier-lindner',x:'https://x.com/TMaier_AI',ta:['KI-Chatbots','E-Commerce']}
     ],
-    marketing: [
-      { n:'Julia Königshofen-Pohl', p:'CEO & Strategin', c:'Content Rebellion (Hamburg)', t:'ceo',
-        r:'Eine der gefragtesten Content-Marketing-Expertinnen. Betreut DAX-Konzerne und Mittelständler. Podcast: "Content Rebellion" (25k+ Hörer). Keynote Dmexco 2025.',
-        li:'https://linkedin.com/in/julia-koenigshofen', x:'https://x.com/JKContent', ta:['Content','Strategie','DAX'] },
-      { n:'Sascha Mühlbach', p:'CEO & Creative Director', c:'KI Creatives GmbH (Berlin)', t:'speaker',
-        r:'Pionier der KI-gestützten Content-Produktion. Buchautor: "Die KI-Agentur". YouTube-Kanal 80k Abos. Keynote OMR.',
-        li:'https://linkedin.com/in/sascha-muehlbach', ta:['KI-Content','Agentur','YouTuber'] },
-      { n:'Mona Tuncay', p:'Founder & Podcast-Host', c:'AI Marketings (München/Remote)', t:'podcast',
-        r:'Host von "KI im Marketing" – Top-5 Marketing-Podcast (45k Hörer/Monat). Ihr Newsletter "KI Weekly" hat 18.000 Abonnenten. Berät Mittelstand.',
-        li:'https://linkedin.com/in/mona-tuncay', ta:['KI-Marketing','Podcast','Newsletter'] }
+    marketing:[
+      {n:'Julia Königshofen-Pohl',p:'CEO & Strategin',c:'Content Rebellion · Hamburg',t:'ceo',r:'DAX-Konzerne & Mittelstand. "Content Rebellion" 25k Hörer. Dmexco 2025.',li:'https://linkedin.com/in/julia-koenigshofen',x:'https://x.com/JKContent',ta:['Content','Strategie','DAX']},
+      {n:'Sascha Mühlbach',p:'CEO & Creative Director',c:'KI Creatives · Berlin',t:'speaker',r:'KI-Content-Pionier. "Die KI-Agentur". 80k YouTube. OMR Keynote.',li:'https://linkedin.com/in/sascha-muehlbach',ta:['KI-Content','YouTuber']},
+      {n:'Mona Tuncay',p:'Founder & Host',c:'AI Marketings · München',t:'podcast',r:'"KI im Marketing" Top-5-Podcast (45k/Monat). Newsletter "KI Weekly" 18k.',li:'https://linkedin.com/in/mona-tuncay',ta:['KI-Marketing','Podcast']}
     ]
   };
-
+  const nl=n.toLowerCase();
   let db;
-  if (/zahn|arzt|dental|medizin|gesundheit|klinik|praxis|health|physio|therapeut|kranken/.test(n)) db = DB.health;
-  else if (/immobilien|makler|proptech|wohnung|haus|grundstück|bau/.test(n)) db = DB.realestate;
-  else if (/fitness|trainer|sport|coach|ernährung|gym|workout/.test(n)) db = DB.fitness;
-  else if (/finanz|bank|fintech|invest|geld|versicherung|aktie/.test(n)) db = DB.finance;
-  else if (/e-commerce|ecommerce|shop|online|d2c|produkt|handel|retail/.test(n)) db = DB.ecommerce;
-  else if (/marketing|werbung|agentur|social|brand|pr|content|design|grafik/.test(n)) db = DB.marketing;
-  else db = DB.tech;
-
-  return db.slice(0, IS_ADMIN ? 5 : 4).map((item, i) => ({
-    id: i + 1, name: item.n, position: item.p, company: item.c, type: item.t,
-    reason: item.r, linkedin: item.li || null, x: item.x || null,
-    website: item.web || null, email: null, tags: item.ta, niche: niche
-  }));
+  if(/zahn|arzt|dental|medizin|gesundheit|klinik|praxis|health|physio/.test(nl)) db=D.health;
+  else if(/immobilien|makler|proptech|wohnung|haus/.test(nl)) db=D.realestate;
+  else if(/fitness|trainer|sport|coach|ernährung|gym/.test(nl)) db=D.fitness;
+  else if(/finanz|bank|fintech|invest|geld|versicherung/.test(nl)) db=D.finance;
+  else if(/e-commerce|ecommerce|shop|online|d2c|handel|retail/.test(nl)) db=D.ecommerce;
+  else if(/marketing|werbung|agentur|social|brand|content|design/.test(nl)) db=D.marketing;
+  else db=D.tech;
+  return db.slice(0,IA?5:4).map((c,i)=>({...c,id:i+1,email:null,niche:n}));
 }
 </script>
 </body>
