@@ -1,0 +1,24 @@
+{
+  "name": "GalaxyBlog – KI-Tools & Produktivität",
+  "short_name": "GalaxyBlog",
+  "description": "KI-Tools und Produktivitäts-Tipps – Praxisnah getestet von Licht und Schatten",
+  "start_url": "/GalaxyBlog/",
+  "display": "standalone",
+  "background_color": "#0a0a1a",
+  "theme_color": "#0a0a1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHRleHQgeD0iNTAiIHk9IjcwIiBmb250LXNpemU9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNGE2Y2Y3Ij7wn5iAPC90ZXh0Pjwvc3ZnPg==",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCI+PHRleHQgeD0iNTAiIHk9IjcwIiBmb250LXNpemU9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNGE2Y2Y3Ij7wn5iAPC90ZXh0Pjwvc3ZnPg==",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

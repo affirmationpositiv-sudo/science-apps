@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="description" content="KI-Tools und Produktivität – Die besten KI-Anwendungen für deinen Alltag. Praxisnahe Tests, Vergleiche und Anleitungen.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>GalaxyBlog – KI-Tools & Produktivität</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a1a;
+  --panel:#12122a;
+  --panel-border:#2a2a5a;
+  --accent:#4a6cf7;
+  --accent-glow:#4a6cf740;
+  --gold:#ffd700;
+  --green:#4ade80;
+  --red:#ef4444;
+  --text:#e0e0f0;
+  --text-dim:#8080a0;
+  --text-muted:#5a5a7a;
+  --card:#1a1a3e;
+  --card-hover:#222252;
+  --radius:12px;
+  --radius-sm:8px;
+  --font:'Inter','Segoe UI',system-ui,-apple-ui,sans-serif;
+  --max-w:720px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+/* Header */
+.site-header{
+  background:linear-gradient(180deg,#0d0d25 0%,transparent 100%);
+  padding:24px 16px 16px;
+  text-align:center;
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--panel-border);
+}
+.site-header h1{
+  font-size:28px;font-weight:800;
+  background:linear-gradient(90deg,var(--accent),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:-0.5px;
+}
+.site-header p{
+  color:var(--text-dim);
+  font-size:14px;
+  margin-top:4px;
+}
+.site-header p span{color:var(--accent);font-weight:600}
+/* Container */
+.container{max-width:var(--max-w);margin:0 auto;padding:16px}
+/* Hero */
+.hero{
+  text-align:center;
+  padding:32px 16px;
+  background:linear-gradient(135deg,#0d0d25 0%,#12122a 50%,#0a0a1a 100%);
+  border-radius:var(--radius);
+  border:1px solid var(--panel-border);
+  margin-bottom:24px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:-50%;left:-50%;
+  width:200%;height:200%;
+  background:radial-gradient(circle at 50% 50%,var(--accent-glow),transparent 60%);
+  opacity:0.15;
+  pointer-events:none;
+}
+.hero h2{
+  font-size:22px;font-weight:700;
+  margin-bottom:8px;
+  position:relative;
+}
+.hero p{
+  color:var(--text-dim);
+  font-size:15px;
+  max-width:500px;
+  margin:0 auto;
+  position:relative;
+}
+/* Article grid */
+.article-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+  margin-bottom:32px;
+}
+.article-card{
+  background:var(--card);
+  border:1px solid var(--panel-border);
+  border-radius:var(--radius);
+  padding:20px;
+  cursor:pointer;
+  transition:all .25s ease;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  position:relative;
+  overflow:hidden;
+}
+.article-card:hover{
+  border-color:var(--accent);
+  background:var(--card-hover);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(74,108,247,0.1);
+}
+.article-card:active{transform:translateY(0)}
+.article-card .tag{
+  display:inline-block;
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  padding:3px 10px;
+  border-radius:20px;
+  background:var(--accent-glow);
+  color:var(--accent);
+  width:fit-content;
+  margin-bottom:4px;
+}
+.article-card h3{
+  font-size:18px;
+  font-weight:700;
+  line-height:1.3;
+}
+.article-card .meta{
+  font-size:12px;
+  color:var(--text-dim);
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+.article-card .meta span{display:flex;align-items:center;gap:4px}
+.article-card .excerpt{
+  font-size:14px;
+  color:var(--text-dim);
+  line-height:1.5;
+}
+.article-card .read-more{
+  font-size:13px;
+  font-weight:600;
+  color:var(--accent);
+  display:flex;
+  align-items:center;
+  gap:4px;
+  margin-top:4px;
+}
+.article-card .number{
+  position:absolute;
+  top:16px;right:16px;
+  font-size:32px;
+  font-weight:800;
+  color:var(--text-muted);
+  opacity:0.15;
+  line-height:1;
+}
+/* Footer */
+.site-footer{
+  text-align:center;
+  padding:32px 16px;
+  border-top:1px solid var(--panel-border);
+  color:var(--text-muted);
+  font-size:13px;
+}
+.site-footer a{color:var(--accent);text-decoration:none}
+.site-footer a:hover{text-decoration:underline}
+/* Links within content */
+.aff-link{
+  color:var(--gold);
+  font-weight:600;
+  text-decoration:none;
+  border-bottom:1px dashed var(--gold-dim);
+  transition:all .2s;
+}
+.aff-link:hover{color:#fff;border-bottom-color:var(--gold)}
+/* Responsive */
+@media(min-width:480px){
+  .site-header h1{font-size:32px}
+  .hero{padding:40px 24px}
+  .hero h2{font-size:26px}
+  .article-card{padding:24px}
+  .article-card h3{font-size:20px}
+}
+@media(min-width:640px){
+  .container{padding:24px}
+}
+/* Toast */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:var(--card);border:1px solid var(--green);
+  border-radius:8px;padding:12px 24px;
+  font-size:14px;font-weight:600;color:var(--green);
+  z-index:200;pointer-events:none;
+  animation:toastAnim 2.5s ease forwards;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+}
+@keyframes toastAnim{
+  0%{opacity:0;transform:translateX(-50%) translateY(20px)}
+  12%{opacity:1;transform:translateX(-50%) translateY(0)}
+  75%{opacity:1}
+  100%{opacity:0;transform:translateX(-50%) translateY(-10px)}
+}
+/* Loading shimmer */
+.shimmer{display:none}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <h1>🚀 GalaxyBlog</h1>
+  <p>KI-Tools & Produktivität · Praxisnah getestet von <span>Licht und Schatten</span></p>
+</header>
+<div class="container">
+  <section class="hero">
+    <h2>Künstliche Intelligenz für deinen Alltag</h2>
+    <p>Ehrliche Tests, Vergleiche und Schritt-für-Schritt-Anleitungen zu den besten KI-Tools – damit du produktiver arbeitest und mehr Zeit für das Wesentliche hast.</p>
+  </section>
+
+  <div class="article-grid">
+    <a href="artikel/ki-tools-produktivitaet-2026.html" class="article-card" data-num="1">
+      <div class="number">01</div>
+      <div class="tag">📊 Produktivität</div>
+      <h3>Die 10 besten KI-Tools für mehr Produktivität 2026</h3>
+      <div class="meta">
+        <span>👤 Licht und Schatten</span>
+        <span>📅 2. Juni 2026</span>
+        <span>⏱ 8 Min.</span>
+      </div>
+      <p class="excerpt">Von KI-gestützten Assistenten bis zu intelligenten Projektmanagement-Tools – wir stellen dir die zehn effektivsten KI-Lösungen vor, die deine Produktivität auf das nächste Level heben.</p>
+      <div class="read-more">Weiterlesen →</div>
+    </a>
+
+    <a href="artikel/chatgpt-vs-deepseek.html" class="article-card" data-num="2">
+      <div class="number">02</div>
+      <div class="tag">🤖 Vergleich</div>
+      <h3>ChatGPT vs DeepSeek – Welche KI ist besser für dich?</h3>
+      <div class="meta">
+        <span>👤 Licht und Schatten</span>
+        <span>📅 1. Juni 2026</span>
+        <span>⏱ 10 Min.</span>
+      </div>
+      <p class="excerpt">ChatGPT und DeepSeek sind die beiden führenden KI-Assistenten. Wir vergleichen ihre Stärken, Schwächen und zeigen dir, welches Modell für deine spezifischen Anforderungen am besten geeignet ist.</p>
+      <div class="read-more">Weiterlesen →</div>
+    </a>
+
+    <a href="artikel/ki-bildgeneratoren-vergleich.html" class="article-card" data-num="3">
+      <div class="number">03</div>
+      <div class="tag">🎨 Kreativität</div>
+      <h3>KI-Bildgeneratoren im Vergleich: Kostenlos Geld sparen</h3>
+      <div class="meta">
+        <span>👤 Licht und Schatten</span>
+        <span>📅 30. Mai 2026</span>
+        <span>⏱ 7 Min.</span>
+      </div>
+      <p class="excerpt">Midjourney, DALL·E 3, Adobe Firefly und Co. – wir vergleichen die besten KI-Bildgeneratoren, zeigen dir die Kosten, die Ergebnisse und wie du mit den richtigen Tools bares Geld sparst.</p>
+      <div class="read-more">Weiterlesen →</div>
+    </a>
+
+    <a href="artikel/ki-workflows-automatisierung.html" class="article-card" data-num="4">
+      <div class="number">04</div>
+      <div class="tag">⚡ Automatisierung</div>
+      <h3>Automatisiere dein Business mit diesen 5 KI-Workflows</h3>
+      <div class="meta">
+        <span>👤 Licht und Schatten</span>
+        <span>📅 28. Mai 2026</span>
+        <span>⏱ 9 Min.</span>
+      </div>
+      <p class="excerpt">Stundenlange manuelle Arbeit gehört der Vergangenheit an. Mit diesen fünf KI-gestützten Workflows automatisierst du wiederkehrende Aufgaben in deinem Business und gewinnst wertvolle Zeit zurück.</p>
+      <div class="read-more">Weiterlesen →</div>
+    </a>
+
+    <a href="artikel/ki-fuer-anfaenger.html" class="article-card" data-num="5">
+      <div class="number">05</div>
+      <div class="tag">🌟 Einstieg</div>
+      <h3>KI für Anfänger: Starte heute mit diesen kostenlosen Tools</h3>
+      <div class="meta">
+        <span>👤 Licht und Schatten</span>
+        <span>📅 26. Mai 2026</span>
+        <span>⏱ 6 Min.</span>
+      </div>
+      <p class="excerpt">Keine Vorkenntnisse nötig! Wir zeigen dir die besten kostenlosen KI-Tools für absolute Anfänger. So steigst du ohne Risiko in die Welt der künstlichen Intelligenz ein.</p>
+      <div class="read-more">Weiterlesen →</div>
+    </a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <p>GalaxyBlog · Betrieben von <strong>Licht und Schatten</strong></p>
+  <p style="margin-top:4px">Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</p>
+  <p style="margin-top:8px"><a href="#">Datenschutz</a> · <a href="#">Impressum</a></p>
+</footer>
+
+<script>
+// Register service worker
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').then(() => console.log('SW registered')).catch(() => {});
+}
+// Offline toast
+window.addEventListener('offline', () => {
+  const t = document.createElement('div');
+  t.className='toast';t.textContent='📡 Du bist offline – die Seite ist weiterhin verfügbar.';
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2800);
+});
+</script>
+</body>
+</html>
