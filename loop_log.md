@@ -1,13 +1,12 @@
 # Loop Log – Science Apps Deployment
 
-## R2.32 – 02.06.2026
-**Aktion:** Blog #39: KI für Lehrer & Bildung 2026 + Obsidian Update + Sitemap
+## R2.37 – 02.06.2026
+**Aktion:** Blog #40: KI-Freelancing 2026 + Tool #24: Content-Ideen-Generator + GalaxyBlog Artikel
 **Dateien geändert:**
-- `blog/ki-lehrer-bildung-2026.html` (NEU – ~47KB, 10 KI-Tools für Lehrer, Amazon-Links, Bildungsthemen)
-- `blog/index.html` (Stats 38→39, neue Karte #39)
-- `sitemap.xml` (+ki-lehrer-bildung-2026)
-- `_Money_Brain_Index.md` (Obsidian – Update R2.32)
-- `_Executive_Summary.md` (Obsidian – Status-Update)
+- `blog/ki-freelancing-2026.html` (NEU – ~21KB, 15 Wege zum KI-Freelancer, Preistabelle 40-300€/h, Amazon-Links, 6-Wochen-Fahrplan)
+- `blog/index.html` (Stats 39→40, neue Karte #40)
+- `content-ideen-generator.html` (NEU – interaktives Tool für Content-Ideen, 20+ Ideen pro Keyword, Filter nach Format)
+- `GalaxyBlog/artikel/ki-freelancing-2026.html` (NEU – GalaxyBlog Kurzversion)
+- `sitemap.xml` (+3 URLs: Blog #40, Tool #24, GalaxyBlog KI-Freelancing)
 - `loop_log.md` (aktueller Eintrag)
-**Blockiert:** SSH-Key/HTTPS nicht in GitHub autorisiert → Push unmöglich
-**Status:** Content bereit, muss deployed werden
+**Status:** Deployed ✅ (R2.37)

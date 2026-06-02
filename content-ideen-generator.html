@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Content-Ideen-Generator – Kostenloses KI-Tool | Licht und Schatten</title>
+<meta name="description" content="Kostenloser Content-Ideen-Generator: Gib ein Keyword ein und erhalte 20+ kreative Content-Ideen für Blog, Social Media, YouTube & Newsletter – mit Affiliate-Potenzial.">
+<meta name="keywords" content="Content Ideen Generator, Content-Ideen, Blog Ideen, Social Media Content, KI Tool, kostenlos, Licht und Schatten">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Content-Ideen-Generator – Finde deine nächste Content-Idee">
+<meta property="og:description" content="Kostenloses Tool: 20+ Content-Ideen pro Keyword. Perfekt für Blogger, YouTuber, Social Media Manager und KI-Freelancer.">
+<meta property="og:type" content="website">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+    background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh
+}
+a{color:#A78BFA;text-decoration:none}
+a:hover{color:#FFD700}
+
+/* NAV */
+.navbar{
+    position:fixed;top:0;left:0;right:0;z-index:1000;
+    background:rgba(10,10,10,.92);backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(139,92,246,.1)
+}
+.nav-inner{
+    max-width:800px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 24px;height:64px
+}
+.nav-logo{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:#9CA3AF;font-size:.9rem;font-weight:500}
+.nav-links a:hover{color:#FFD700}
+
+/* HERO */
+.hero{
+    padding:140px 24px 40px;text-align:center;
+    background:linear-gradient(135deg,#0A0A0A 0%,#1a0a2e 50%,#0A0A0A 100%)
+}
+.hero h1{
+    font-size:2.4rem;font-weight:800;line-height:1.2;
+    background:linear-gradient(135deg,#fff 0%,#A78BFA 50%,#FFD700 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin-bottom:16px
+}
+.hero p{color:#9CA3AF;font-size:1.1rem;max-width:600px;margin:0 auto 32px}
+
+/* TOOL */
+.tool-wrap{max-width:800px;margin:0 auto;padding:0 24px 60px}
+
+.generator{
+    background:#141414;border:1px solid #2A2A2A;border-radius:16px;
+    padding:32px;margin-bottom:24px
+}
+.generator label{display:block;font-weight:600;color:#fff;margin-bottom:8px;font-size:1.1rem}
+.generator .hint{color:#6B7280;font-size:.85rem;margin-bottom:16px}
+.input-row{display:flex;gap:12px;margin-bottom:16px}
+.input-row input{
+    flex:1;background:#0A0A0A;border:1px solid #2A2A2A;border-radius:8px;
+    padding:14px 18px;color:#fff;font-size:1rem;outline:none;transition:border-color .3s
+}
+.input-row input:focus{border-color:#8B5CF6}
+.input-row input::placeholder{color:#4B5563}
+.btn{
+    background:linear-gradient(135deg,#8B5CF6,#6D28D9);color:#fff;border:none;
+    padding:14px 28px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;
+    transition:all .3s;white-space:nowrap
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(139,92,246,.3)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* Filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-btn{
+    background:#1A1A1A;border:1px solid #2A2A2A;border-radius:20px;
+    padding:6px 16px;color:#9CA3AF;font-size:.85rem;cursor:pointer;transition:all .3s
+}
+.filter-btn:hover{border-color:#8B5CF6;color:#fff}
+.filter-btn.active{background:rgba(139,92,246,.2);border-color:#8B5CF6;color:#A78BFA}
+
+/* RESULTS */
+.results{display:none;margin-top:24px}
+.results.show{display:block}
+.result-count{color:#6B7280;font-size:.9rem;margin-bottom:16px}
+.result-grid{display:grid;gap:12px}
+.result-item{
+    background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;
+    padding:16px 20px;transition:all .3s;cursor:pointer
+}
+.result-item:hover{border-color:#8B5CF6;background:#1a1a2e}
+.result-item .type-badge{
+    display:inline-block;background:rgba(139,92,246,.12);color:#A78BFA;
+    padding:2px 10px;border-radius:10px;font-size:.75rem;font-weight:600;margin-bottom:6px
+}
+.result-item h4{color:#fff;font-size:1rem;margin-bottom:4px}
+.result-item p{color:#9CA3AF;font-size:.85rem;line-height:1.4}
+.result-item .affiliate-link{
+    display:none;margin-top:8px;font-size:.8rem;color:#6B7280
+}
+.result-item.expanded .affiliate-link{display:block}
+
+/* examples */
+.examples{margin-top:16px}
+.examples p{color:#6B7280;font-size:.85rem;margin-bottom:8px}
+.examples .tags{display:flex;gap:8px;flex-wrap:wrap}
+.example-tag{
+    background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;
+    padding:4px 14px;color:#9CA3AF;font-size:.85rem;cursor:pointer;transition:all .3s
+}
+.example-tag:hover{border-color:#FFD700;color:#FFD700}
+
+/* LOADING */
+.loading{display:none;text-align:center;padding:40px}
+.loading.show{display:block}
+.spinner{width:40px;height:40px;border:3px solid #2A2A2A;border-top-color:#8B5CF6;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{color:#6B7280}
+
+/* AFFILIATE NOTE */
+.affiliate-note{
+    background:#141414;border:1px solid #2A2A2A;border-radius:8px;
+    padding:16px;margin:24px 0;font-size:.85rem;color:#6B7280
+}
+
+/* FOOTER */
+footer{border-top:1px solid #2A2A2A;padding:40px 24px;text-align:center}
+.footer-inner{max-width:800px;margin:0 auto}
+.footer-brand{font-size:1.2rem;font-weight:700;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.footer-links{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:#6B7280;font-size:.9rem}
+.footer-links a:hover{color:#A78BFA}
+.footer-disclaimer{color:#4B5563;font-size:.8rem;max-width:600px;margin:0 auto}
+
+@media(max-width:640px){
+    .hero h1{font-size:1.8rem}
+    .input-row{flex-direction:column}
+    .btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+<div class="nav-inner">
+    <a href="../index.html" class="nav-logo">✦ Licht & Schatten</a>
+    <ul class="nav-links">
+        <li><a href="../blog/">📝 Blog</a></li>
+        <li><a href="../store.html">🛒 Shop</a></li>
+    </ul>
+</div>
+</nav>
+
+<div class="hero">
+    <h1>🎯 Content-Ideen-Generator</h1>
+    <p>Gib ein Keyword oder Thema ein – und erhalte 20+ kreative Content-Ideen für Blog, Social Media, YouTube & Newsletter. Perfekt für KI-Freelancer, Blogger und Content Creator.</p>
+</div>
+
+<div class="tool-wrap">
+
+<div class="generator">
+    <label for="keyword">Dein Keyword oder Thema</label>
+    <p class="hint">Je spezifischer, desto besser. Z.B. "KI-Tools für Handwerker" statt nur "KI"</p>
+    <div class="input-row">
+        <input type="text" id="keyword" placeholder="z.B. KI-Freelancing, Passives Einkommen, ChatGPT für Unternehmen..." autocomplete="off">
+        <button class="btn" id="generateBtn">🎲 Ideen generieren</button>
+    </div>
+
+    <div class="examples">
+        <p>📌 Beispiele zum Ausprobieren:</p>
+        <div class="tags">
+            <span class="example-tag" data-keyword="KI-Freelancing">KI-Freelancing</span>
+            <span class="example-tag" data-keyword="Passives Einkommen">Passives Einkommen</span>
+            <span class="example-tag" data-keyword="ChatGPT für Unternehmen">ChatGPT für Unternehmen</span>
+            <span class="example-tag" data-keyword="Minimalismus für Männer">Minimalismus für Männer</span>
+            <span class="example-tag" data-keyword="Steuererklärung 2026">Steuererklärung 2026</span>
+        </div>
+    </div>
+</div>
+
+<div class="filters" id="filters" style="display:none">
+    <button class="filter-btn active" data-type="all">Alle</button>
+    <button class="filter-btn" data-type="Blog">📝 Blog</button>
+    <button class="filter-btn" data-type="YouTube">🎬 YouTube</button>
+    <button class="filter-btn" data-type="Social Media">📱 Social Media</button>
+    <button class="filter-btn" data-type="Newsletter">📧 Newsletter</button>
+    <button class="filter-btn" data-type="Produkt">💰 Produkt</button>
+</div>
+
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Generiere Content-Ideen...</p>
+</div>
+
+<div class="results" id="results">
+    <div class="result-count" id="resultCount"></div>
+    <div class="result-grid" id="resultGrid"></div>
+</div>
+
+<div class="affiliate-note">
+<strong>📢 Affiliate-Hinweis:</strong> Dieses Tool enthält Affiliate-Links (Amazon-Partnerprogramm, tag=ikune21-21). Klicke auf eine Idee für passende Produktempfehlungen.
+</div>
+
+</div>
+
+<footer>
+<div class="footer-inner">
+    <div class="footer-brand">✦ Licht & Schatten</div>
+    <div class="footer-links">
+        <a href="../index.html">🏪 Startseite</a>
+        <a href="../store.html">🛒 Shop</a>
+        <a href="../blog/">📝 Blog</a>
+        <a href="../buecher/">📚 Bücher</a>
+    </div>
+    <div class="footer-disclaimer">
+        Amazon-Partnerwerbung. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. © 2026 Licht und Schatten
+    </div>
+</div>
+</footer>
+
+<script>
+const keywordInput = document.getElementById('keyword');
+const generateBtn = document.getElementById('generateBtn');
+const loading = document.getElementById('loading');
+const results = document.getElementById('results');
+const resultGrid = document.getElementById('resultGrid');
+const resultCount = document.getElementById('resultCount');
+const filters = document.getElementById('filters');
+let currentIdeas = [];
+let currentFilter = 'all';
+const affiliateTag = 'ikune21-21';
+
+const ideaTemplates = {
+    blog: [
+        (kw) => ({ title: `${kw}: Der ultimative Leitfaden für Einsteiger`, desc: `Alles, was du zu ${kw} wissen musst – von den Grundlagen bis zu fortgeschrittenen Techniken.`, type: 'Blog', af: `${kw}+leitfaden+2026` }),
+        (kw) => ({ title: `10 ${kw}-Tools, die du 2026 kennen musst`, desc: `Die 10 wichtigsten Tools und Ressourcen zum Thema ${kw} – inklusive Preisvergleich und Bewertung.`, type: 'Blog', af: `${kw}+tools+2026` }),
+        (kw) => ({ title: `${kw} vs. Alternativen: Ein ehrlicher Vergleich`, desc: `Wir vergleichen die besten Ansätze für ${kw} – Vor- und Nachteile, Kosten und für wen sich was lohnt.`, type: 'Blog', af: `${kw}+vergleich+2026` }),
+        (kw) => ({ title: `${kw} für Anfänger: Schritt-für-Schritt-Anleitung`, desc: `Eine detaillierte Anleitung, wie du mit ${kw} startest. Kein Vorwissen nötig.`, type: 'Blog', af: `${kw}+anleitung+2026` }),
+        (kw) => ({ title: `Die 5 größten Fehler bei ${kw} (und wie du sie vermeidest)`, desc: `Aus Fehlern lernen: Die häufigsten Fallstricke bei ${kw} und wie du sie umgehst.`, type: 'Blog', af: `${kw}+fehler+vermeiden` }),
+        (kw) => ({ title: `${kw} im Jahr 2026: Trends, Prognosen & Entwicklungen`, desc: `Wohin entwickelt sich ${kw}? Die wichtigsten Trends und Prognosen für 2026 und darüber hinaus.`, type: 'Blog', af: `${kw}+trends+2026` }),
+        (kw) => ({ title: `So viel kostet ${kw} wirklich – eine transparente Aufstellung`, desc: `Kostenanalyse für ${kw}: Versteckte Kosten, laufende Ausgaben und Sparmöglichkeiten.`, type: 'Blog', af: `${kw}+kosten+vergleich` }),
+        (kw) => ({ title: `${kw} im Test: Meine Erfahrungen nach 30 Tagen`, desc: `Ein Selbstversuch: 30 Tage ${kw} – was hat funktioniert, was nicht?`, type: 'Blog', af: `${kw}+test+erfahrung` }),
+    ],
+    youtube: [
+        (kw) => ({ title: `${kw} erklärt in 10 Minuten`, desc: `Schnelle, verständliche Einführung in ${kw}. Perfekt für Einsteiger.`, type: 'YouTube', af: `${kw}+erklärt+buch` }),
+        (kw) => ({ title: `${kw} – Tutorial für absolute Anfänger`, desc: `Komplettes Schritt-für-Schritt-Tutorial zu ${kw}. Starte noch heute.`, type: 'YouTube', af: `${kw}+tutorial+buch` }),
+        (kw) => ({ title: `Ich habe 30 Tage ${kw} ausprobiert – das ist passiert`, desc: `30-Tage-Challenge zu ${kw}: Ergebnisse, Learnings und Überraschungen.`, type: 'YouTube', af: `${kw}+challenge+buch` }),
+        (kw) => ({ title: `${kw} im Alltag: 5 praktische Anwendungen`, desc: `Wie du ${kw} ganz praktisch in deinem Alltag einsetzt – konkrete Beispiele.`, type: 'YouTube', af: `${kw}+alltag+2026` }),
+        (kw) => ({ title: `Die Wahrheit über ${kw} (Was dir keiner sagt)`, desc: `Eine ehrliche Analyse von ${kw}: Vorteile, Nachteile und versteckte Risiken.`, type: 'YouTube', af: `${kw}+wahrheit+buch` }),
+    ],
+    social: [
+        (kw) => ({ title: `3 ${kw}-Hacks, die dein Leben verändern`, desc: `Drei simple, aber effektive Hacks zu ${kw}, die sofort wirken.`, type: 'Social Media', af: `${kw}+hacks+buch` }),
+        (kw) => ({ title: `${kw} für Anfänger vs. Profi`, desc: `Der Unterschied zwischen Anfänger und Profi bei ${kw} – in 5 Punkten erklärt.`, type: 'Social Media', af: `${kw}+anfaenger+profi` }),
+        (kw) => ({ title: `${kw} – Schon gewusst? 🤯`, desc: `Eine überraschende Tatsache zu ${kw}, die die wenigsten kennen.`, type: 'Social Media', af: `${kw}+wissen+buch` }),
+        (kw) => ({ title: `${kw}: 4 Irrtümer, die dich Geld kosten`, desc: `Verbreitete Missverständnisse zu ${kw}, die teuer werden können.`, type: 'Social Media', af: `${kw}+irrtuemer` }),
+        (kw) => ({ title: `10 ${kw}-Produkte, die ich liebe`, desc: `Meine persönlichen Top-10-Empfehlungen zum Thema ${kw} – inklusive.`, type: 'Social Media', af: `${kw}+produkte+2026` }),
+    ],
+    newsletter: [
+        (kw) => ({ title: `${kw} Update Monat: Die wichtigsten Neuigkeiten`, desc: `Monatliche Zusammenfassung der wichtigsten Entwicklungen im Bereich ${kw}.`, type: 'Newsletter', af: `${kw}+news+2026` }),
+        (kw) => ({ title: `${kw} – Deep Dive: Was du wirklich wissen musst`, desc: `Tiefergehende Analyse eines spezifischen Aspekts von ${kw}.`, type: 'Newsletter', af: `${kw}+deep+dive+buch` }),
+        (kw) => ({ title: `5 ${kw}-Ressourcen, die ich diesen Monat entdeckt habe`, desc: `Handverlesene Ressourcen, Tools und Artikel zu ${kw} – exklusiv für Abonnenten.`, type: 'Newsletter', af: `${kw}+ressourcen+2026` }),
+        (kw) => ({ title: `${kw}: Deine Fragen, meine Antworten`, desc: `Ich beantworte die häufigsten Fragen meiner Leser zum Thema ${kw}.`, type: 'Newsletter', af: `${kw}+fragen+antworten` }),
+    ],
+    product: [
+        (kw) => ({ title: `📘 E-Book: Der komplette Guide zu ${kw}`, desc: `Ein umfassendes E-Book mit 50+ Seiten geballtem Wissen zu ${kw}.`, type: 'Produkt', af: `${kw}+ebook+guide` }),
+        (kw) => ({ title: `🎯 ${kw} – Prompt-Paket mit 50 Vorlagen`, desc: `50 sofort einsatzbereite Prompt-Vorlagen für ChatGPT & Co. zum Thema ${kw}.`, type: 'Produkt', af: `${kw}+prompts+vorlagen` }),
+        (kw) => ({ title: `📋 Checkliste: ${kw} in 7 Tagen meistern`, desc: `Praktische 7-Tage-Checkliste für den schnellen Einstieg in ${kw}.`, type: 'Produkt', af: `${kw}+checkliste+buch` }),
+    ]
+};
+
+function generateIdeas(keyword) {
+    const ideas = [];
+    for (const category in ideaTemplates) {
+        ideaTemplates[category].forEach(fn => {
+            ideas.push(fn(keyword));
+        });
+    }
+    // Shuffle for variety
+    for (let i = ideas.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ideas[i], ideas[j]] = [ideas[j], ideas[i]];
+    }
+    return ideas;
+}
+
+function renderIdeas(ideas, filter) {
+    const filtered = filter === 'all' ? ideas : ideas.filter(i => i.type === filter);
+    resultGrid.innerHTML = '';
+    filtered.forEach((idea, idx) => {
+        const div = document.createElement('div');
+        div.className = 'result-item';
+        div.innerHTML = `
+            <span class="type-badge">${idea.type === 'Blog' ? '📝' : idea.type === 'YouTube' ? '🎬' : idea.type === 'Social Media' ? '📱' : idea.type === 'Newsletter' ? '📧' : '💰'} ${idea.type}</span>
+            <h4>${idea.title}</h4>
+            <p>${idea.desc}</p>
+            <div class="affiliate-link">🔗 <a href="https://www.amazon.de/s?k=${encodeURIComponent(idea.af)}&tag=${affiliateTag}" target="_blank">Passende Produkte bei Amazon entdecken</a></div>
+        `;
+        div.addEventListener('click', () => div.classList.toggle('expanded'));
+        resultGrid.appendChild(div);
+    });
+    resultCount.textContent = `✨ ${filtered.length} ${filter === 'all' ? 'Content-Ideen' : filter + '-Ideen'} gefunden`;
+}
+
+// Event listeners
+generateBtn.addEventListener('click', () => {
+    const kw = keywordInput.value.trim();
+    if (!kw) { keywordInput.focus(); return; }
+    
+    loading.classList.add('show');
+    results.classList.remove('show');
+    filters.style.display = 'none';
+    
+    setTimeout(() => {
+        currentIdeas = generateIdeas(kw);
+        currentFilter = 'all';
+        renderIdeas(currentIdeas, currentFilter);
+        loading.classList.remove('show');
+        results.classList.add('show');
+        filters.style.display = 'flex';
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.type === 'all'));
+    }, 800);
+});
+
+keywordInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') generateBtn.click();
+});
+
+// Example tags
+document.querySelectorAll('.example-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+        keywordInput.value = tag.dataset.keyword;
+        generateBtn.click();
+    });
+});
+
+// Filters
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.type;
+        renderIdeas(currentIdeas, currentFilter);
+    });
+});
+
+// Focus input on load
+keywordInput.focus();
+</script>
+
+</body>
+</html>
