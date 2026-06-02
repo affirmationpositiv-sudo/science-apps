@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Zahlenraten – KI gibt Hinweise | Licht und Schatten</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px}
+.container{max-width:450px;width:100%;text-align:center}
+h1{font-size:clamp(24px,5vw,36px);margin:8px 0 2px;background:linear-gradient(135deg,#42a5f5,#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#667;font-size:11px;margin-bottom:12px}
+.game-box{background:#12122a;border:1px solid #2a2a3a;border-radius:14px;padding:20px;margin:10px 0}
+.range-info{color:#8892b0;font-size:13px;margin-bottom:12px;padding:8px;background:#0d0d1a;border-radius:8px;border:1px solid #1a1a2e}
+.range-info .range-num{color:#ffd93d;font-weight:700;font-size:18px}
+.hint-box{background:#0d0d1a;border:1px solid #1a1a2e;border-radius:10px;padding:16px;margin:12px 0;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hint-box .hint-emoji{font-size:36px;margin-bottom:6px}
+.hint-box .hint-text{color:#e0e0e0;font-size:16px;line-height:1.5}
+.hint-box .hint-detail{color:#667;font-size:12px;margin-top:6px}
+.input-group{display:flex;gap:8px;margin:12px 0}
+.input-group input{flex:1;background:#0d0d1a;color:#e0e0e0;border:1px solid #2a2a3a;border-radius:8px;padding:14px;font-size:20px;text-align:center;outline:none;transition:border-color .3s}
+.input-group input:focus{border-color:#42a5f5}
+.input-group button{background:linear-gradient(135deg,#42a5f5,#7c4dff);color:#fff;border:none;border-radius:8px;padding:14px 24px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+.input-group button:hover{box-shadow:0 4px 20px rgba(66,165,245,.4)}
+.input-group button:disabled{opacity:.4;cursor:not-allowed}
+.stats{display:flex;justify-content:space-around;background:#0d0d1a;border:1px solid #1a1a2e;border-radius:8px;padding:10px;margin:10px 0}
+.stats div{text-align:center}
+.stats .num{font-size:28px;font-weight:700;color:#ffd93d}
+.stats .label{font-size:11px;color:#667}
+.history-box{background:#0d0d1a;border:1px solid #1a1a2e;border-radius:8px;padding:12px;margin:10px 0;max-height:200px;overflow-y:auto;text-align:left}
+.history-box::-webkit-scrollbar{width:4px}
+.history-box::-webkit-scrollbar-track{background:#0d0d1a}
+.history-box::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:2px}
+.history-item{padding:6px 8px;border-bottom:1px solid #1a1a2e;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+.history-item:last-child{border-bottom:none}
+.history-item .guess-num{font-weight:700;color:#42a5f5;font-size:16px;min-width:36px}
+.history-item .guess-hint{color:#e0e0e0;flex:1;text-align:right;margin-left:8px}
+.history-item .guess-hint.low{color:#ff9800}
+.history-item .guess-hint.high{color:#42a5f5}
+.history-item .guess-hint.cold{color:#667}
+.history-item .guess-hint.warm{color:#ffd93d}
+.history-item .guess-hint.hot{color:#ff6b6b}
+.history-item .guess-hint.winner{color:#4caf50;font-weight:700}
+.new-game-btn{background:#12122a;color:#ffd93d;border:1px solid #2a2a3a;border-radius:8px;padding:8px 20px;font-size:13px;cursor:pointer;transition:all .2s;margin-top:6px}
+.new-game-btn:hover{border-color:#ffd93d}
+.difficulty{display:flex;gap:6px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.difficulty button{background:#12122a;color:#e0e0e0;border:1px solid #2a2a3a;border-radius:8px;padding:6px 14px;font-size:12px;cursor:pointer;transition:all .2s}
+.difficulty button.active{border-color:#42a5f5;background:rgba(66,165,245,.1);color:#42a5f5}
+.difficulty button:hover{border-color:#42a5f5}
+.celebration{animation:celebrate .6s ease}
+@keyframes celebrate{0%{transform:scale(1)}30%{transform:scale(1.2)}60%{transform:scale(.95)}100%{transform:scale(1)}}
+footer{margin-top:12px;color:#495670;font-size:11px;text-align:center}
+footer a{color:#ffd93d;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔢 Zahlenraten</h1>
+<p class="sub">Rate die Zahl • KI gibt dir Hinweise • Wärmer/Kälter</p>
+
+<div class="game-box">
+<div class="range-info" id="rangeInfo">
+<span>Die Zahl liegt zwischen </span>
+<span class="range-num" id="minRange">1</span>
+<span> und </span>
+<span class="range-num" id="maxRange">100</span>
+</div>
+
+<div class="hint-box" id="hintBox">
+<div class="hint-emoji" id="hintEmoji">🤔</div>
+<div class="hint-text" id="hintText">Gib deinen ersten Tipp ab!</div>
+<div class="hint-detail" id="hintDetail"></div>
+</div>
+
+<div class="difficulty" id="difficulty">
+<button data-range="50">Leicht (1-50)</button>
+<button data-range="100" class="active">Mittel (1-100)</button>
+<button data-range="200">Schwer (1-200)</button>
+<button data-range="500">Profi (1-500)</button>
+</div>
+
+<div class="input-group">
+<input type="number" id="guessInput" placeholder="Deine Zahl..." min="1" max="100" inputmode="numeric">
+<button id="guessBtn">🔍 Raten</button>
+</div>
+
+<div class="stats">
+<div><div class="num" id="attemptsCount">0</div><div class="label">Versuche</div></div>
+<div><div class="num" id="bestCount">—</div><div class="label">Beste Serie</div></div>
+<div><div class="num" id="gamesWon">0</div><div class="label">Gewonnen</div></div>
+</div>
+
+<div class="history-box" id="historyBox">
+<div style="color:#667;font-size:13px;text-align:center;padding:20px 0">Noch keine Versuche. Starte zu raten!</div>
+</div>
+</div>
+
+<button class="new-game-btn" id="newGameBtn">🔄 Neues Spiel</button>
+
+<footer>
+<p><strong>Licht und Schatten</strong> 🌘 • <a href="../games/">Alle Spiele</a></p>
+</footer>
+</div>
+
+<script>
+const state = {secretNumber:0,min:1,max:100,attempts:0,bestScore:null,gamesWon:0,history:[],isWon:false};
+
+const guessInput = document.getElementById('guessInput');
+const guessBtn = document.getElementById('guessBtn');
+const newGameBtn = document.getElementById('newGameBtn');
+const hintBox = document.getElementById('hintBox');
+const hintEmoji = document.getElementById('hintEmoji');
+const hintText = document.getElementById('hintText');
+const hintDetail = document.getElementById('hintDetail');
+const minRange = document.getElementById('minRange');
+const maxRange = document.getElementById('maxRange');
+const rangeInfo = document.getElementById('rangeInfo');
+const attemptsCount = document.getElementById('attemptsCount');
+const bestCount = document.getElementById('bestCount');
+const gamesWon = document.getElementById('gamesWon');
+const historyBox = document.getElementById('historyBox');
+const difficultyBtns = document.querySelectorAll('.difficulty button');
+
+difficultyBtns.forEach(btn => {
+btn.addEventListener('click',()=>{
+difficultyBtns.forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+state.max=parseInt(btn.dataset.range);
+state.min=1;
+startNewGame();
+});
+});
+
+function startNewGame(){
+state.secretNumber=Math.floor(Math.random()*(state.max-state.min+1))+state.min;
+state.attempts=0;
+state.history=[];
+state.isWon=false;
+minRange.textContent=state.min;
+maxRange.textContent=state.max;
+guessInput.min=state.min;
+guessInput.max=state.max;
+guessInput.placeholder='1-'+state.max;
+guessInput.value='';
+guessInput.disabled=false;
+guessBtn.disabled=false;
+guessBtn.textContent='🔍 Raten';
+guessBtn.style.background='linear-gradient(135deg,#42a5f5,#7c4dff)';
+hintEmoji.textContent='🤔';
+hintText.textContent='Neue Zahl! Gib deinen ersten Tipp ab!';
+hintDetail.textContent='Zwischen '+state.min+' und '+state.max;
+attemptsCount.textContent='0';
+updateHistory();
+updateBest();
+guessInput.focus();
+}
+
+function updateBest(){
+bestCount.textContent=state.bestScore!==null?state.bestScore:'—';
+gamesWon.textContent=state.gamesWon;
+}
+
+function getHint(guess,secret){
+const diff=Math.abs(guess-secret);
+if(diff===0)return{emoji:'🎉',text:'🏆 GENAU GETROFFEN! Gratuliere!',detail:'Du hast die Zahl gefunden!',cls:'winner'};
+if(diff<=3)return{emoji:'🔥',text:'BRENNHEISS! Ganz nah dran!',detail:'Differenz: '+diff+' — fast perfekt!',cls:'hot'};
+if(diff<=10)return{emoji:'🌡️',text:'Heiß! Du kommst näher!',detail:'Differenz: '+diff+' — weiter so!',cls:'hot'};
+if(diff<=25)return{emoji:'☀️',text:'Warm. Schon in der Nähe.',detail:'Differenz: '+diff+' — nicht aufgeben!',cls:'warm'};
+if(diff<=50)return{emoji:'🌤️',text:'Lauwarm. Noch etwas entfernt.',detail:'Differenz: '+diff+' — es wird besser.',cls:'cold'};
+if(diff<=100)return{emoji:'🌧️',text:'Kalt. Weit weg.',detail:'Differenz: '+diff+' — versuch was anderes!',cls:'cold'};
+return{emoji:'🥶',text:'Eiskalt! Total daneben!',detail:'Differenz: '+diff+' — ganz anderer Bereich!',cls:'cold'};
+}
+
+function getDirectionHint(guess,secret){
+if(guess<secret)return'📈 Die gesuchte Zahl ist GRÖSSER!';
+if(guess>secret)return'📉 Die gesuchte Zahl ist KLEINER!';
+return'';
+}
+
+function guess(){
+if(state.isWon)return;
+const val=parseInt(guessInput.value);
+if(isNaN(val)||val<state.min||val>state.max){
+hintEmoji.textContent='⚠️';
+hintText.textContent='Ungültige Eingabe!';
+hintDetail.textContent='Bitte eine Zahl zwischen '+state.min+' und '+state.max+' eingeben.';
+guessInput.value='';
+guessInput.focus();
+return;
+}
+state.attempts++;
+const secret=state.secretNumber;
+const hint=getHint(val,secret);
+const direction=getDirectionHint(val,secret);
+const wasCorrect=val===secret;
+
+hintEmoji.textContent=hint.emoji;
+hintText.textContent=hint.text;
+hintDetail.textContent=hint.cls==='winner'?direction:direction+' ('+hint.detail+')';
+hintBox.className='hint-box'+(wasCorrect?' celebration':'');
+
+state.history.push({guess:val,direction:direction,emoji:hint.emoji,cls:hint.cls,wasCorrect});
+attemptsCount.textContent=state.attempts;
+
+if(wasCorrect){
+state.isWon=true;
+state.gamesWon++;
+if(state.bestScore===null||state.attempts<state.bestScore)state.bestScore=state.attempts;
+updateBest();
+guessBtn.disabled=true;
+guessBtn.textContent='🏆 Gewonnen!';
+guessBtn.style.background='linear-gradient(135deg,#4caf50,#2e7d32)';
+guessInput.disabled=true;
+}
+
+updateHistory();
+guessInput.value='';
+guessInput.focus();
+}
+
+function updateHistory(){
+historyBox.innerHTML='';
+if(state.history.length===0){
+historyBox.innerHTML='<div style="color:#667;font-size:13px;text-align:center;padding:20px 0">Noch keine Versuche. Starte zu raten!</div>';
+return;
+}
+state.history.forEach((item,i)=>{
+const div=document.createElement('div');
+div.className='history-item';
+const numSpan=document.createElement('span');
+numSpan.className='guess-num';
+numSpan.textContent='#'+(i+1)+' '+item.guess;
+const hintSpan=document.createElement('span');
+hintSpan.className='guess-hint';
+if(item.wasCorrect)hintSpan.classList.add('winner');
+else hintSpan.classList.add(item.cls);
+hintSpan.textContent=item.wasCorrect?'🏆 Richtig!':item.emoji+' '+item.direction;
+div.appendChild(numSpan);
+div.appendChild(hintSpan);
+historyBox.appendChild(div);
+});
+historyBox.scrollTop=historyBox.scrollHeight;
+}
+
+guessBtn.addEventListener('click',guess);
+newGameBtn.addEventListener('click',startNewGame);
+guessInput.addEventListener('keydown',e=>{if(e.key==='Enter')guess()});
+
+// Allow quick number input
+guessInput.addEventListener('input',function(){const v=parseInt(this.value);if(!isNaN(v)&&v>=state.min&&v<=state.max){guessBtn.style.background='linear-gradient(135deg,#4caf50,#2e7d32)';guessBtn.textContent='⚡ Raten!'}else{guessBtn.style.background='linear-gradient(135deg,#42a5f5,#7c4dff)';guessBtn.textContent='🔍 Raten'}});
+
+startNewGame();
+</script>
+</body>
+</html>

@@ -18,6 +18,11 @@ author: 'Licht und Schatten'
 | Die 100 besten KI-Prompts | €9.99 | ✅ DOCX ready |
 | Kryptowährungen und KI | €11.99 | ✅ DOCX ready |
 | KI-Freundschaften | €9.99 | ✅ DOCX ready |
+| KI-gestützte Bewerbung 2026 | €9.99 | ✅ DOCX ready |
+| Crypto für Anfänger 2026 | €11.99 | ✅ DOCX ready |
+| KI-Kunst erstellen und verkaufen | €12.99 | ✅ DOCX ready |
+
+> 📥 Alle Bücher als DOCX: [KDP_Books/](KDP_Books/)
 
 ## 👕 T-Shirt Designs
 
@@ -28,6 +33,9 @@ author: 'Licht und Schatten'
 | Money-Vibe (Grün/Gold) | ![Design](tshirt_designs/design3_money.png) |
 | Gamer (Dunkel/Neon) | ![Design](tshirt_designs/design4_gamer.png) |
 | Geometrisch (Cremefarben) | ![Design](tshirt_designs/design5_geometric.png) |
+| Haustiere (Katze + Hund) | ![Design](tshirt_designs/design6_pets.png) |
+| Berglandschaft (Minimal) | ![Design](tshirt_designs/design7_mountain.png) |
+| Weltraum/Kosmos | ![Design](tshirt_designs/design8_cosmos.png) |
 
 ## 💼 Prompt Packs (€5 via Ko-fi)
 
@@ -46,14 +54,10 @@ Alle Spiele kostenlos spielbar:
 - [Sudoku](Sudoku/) - Zahlenrätsel
 - [WordSearch](WordSearch/) - Wortsuche
 - [Memory](Memory/) - Kartenspiel
-- [TicTacToe](TicTacToe/) - Gegen KI
-
-## 🔗 Affiliate
-
-Amazon Partnerprogramm (Tag: ikune21-21):
-- [Spieleportal mit Hardware-Empfehlungen](games/)
-- [Geld verdienen mit KI](money/)
+- [TicTacToe](tictactoe/) - Gegen KI
+- [Penalty Kick](PenaltyKick/) - ⚽ Elfmeterschießen 🆕
+- [Zahlenraten](Zahlenraten/) - 🔢 Number Guessing 🆕
 
 ---
 
-*Autor: Licht und Schatten | Alle Rechte vorbehalten*
+*Erstellt von **Licht und Schatten** 🌘*

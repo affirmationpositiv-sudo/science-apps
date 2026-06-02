@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Penalty Kick – Elfmeterschießen | Licht und Schatten</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a1a;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:16px}
+.container{max-width:450px;width:100%;text-align:center}
+h1{font-size:clamp(22px,5vw,34px);margin:8px 0 2px;background:linear-gradient(135deg,#4caf50,#8bc34a);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#667;font-size:11px;margin-bottom:8px}
+.field{position:relative;width:100%;aspect-ratio:3/2;background:linear-gradient(180deg,#2e7d32 0%,#388e3c 40%,#4caf50 60%,#2e7d32 100%);border-radius:14px;overflow:hidden;border:2px solid #1b5e20;margin:12px 0;touch-action:none}
+.field .goal{position:absolute;top:5%;left:15%;width:70%;height:35%;border:3px solid #fff;border-top:none;border-radius:0 0 60px 60px;background:rgba(0,0,0,.15)}
+.field .goal-left,.field .goal-center,.field .goal-right{position:absolute;height:100%;top:0}
+.field .goal-left{left:0;width:33.33%}
+.field .goal-center{left:33.33%;width:33.34%}
+.field .goal-right{left:66.66%;width:33.33%}
+.field .goal-left::after,.field .goal-center::after,.field .goal-right::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:2px;height:70%;background:rgba(255,255,255,.12)}
+.field .goalkeeper{position:absolute;width:60px;height:80px;left:50%;top:12%;transform:translateX(-50%);transition:all .3s cubic-bezier(.4,.0,.2,1);z-index:5}
+.field .goalkeeper .body{width:40px;height:50px;background:#ff6b6b;border-radius:20px 20px 8px 8px;margin:0 auto;position:relative}
+.field .goalkeeper .head{width:24px;height:24px;background:#ffd9b3;border-radius:50%;margin:0 auto 2px;position:relative}
+.field .goalkeeper .arms{position:absolute;width:60px;height:14px;top:18px;left:-10px;display:flex;justify-content:space-between}
+.field .goalkeeper .arm{width:14px;height:30px;background:#ff6b6b;border-radius:8px;transform-origin:50% 0}
+.field .goalkeeper .arm.left{transform:rotate(-20deg)}
+.field .goalkeeper .arm.right{transform:rotate(20deg)}
+.field .goalkeeper.dive-left{transform:translateX(-80%) rotate(-8deg)}
+.field .goalkeeper.dive-right{transform:translateX(80%) rotate(8deg)}
+.field .goalkeeper.dive-center{transform:translateX(-50%)}
+.field .ball{position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;left:50%;bottom:15%;transform:translateX(-50%);z-index:10;transition:all .4s cubic-bezier(.2,.8,.4,1);display:none;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.field .ball.shoot-left{left:20%;bottom:85%;transform:translateX(-50%) scale(.6)}
+.field .ball.shoot-right{left:80%;bottom:85%;transform:translateX(-50%) scale(.6)}
+.field .ball.shoot-center{left:50%;bottom:85%;transform:translateX(-50%) scale(.6)}
+.field .ball.shoot-top-left{left:20%;bottom:65%;transform:translateX(-50%) scale(.4)}
+.field .ball.shoot-top-right{left:80%;bottom:65%;transform:translateX(-50%) scale(.4)}
+.field .ball.goal{animation:goalFlash .5s ease}
+@keyframes goalFlash{0%{box-shadow:0 0 0 0 rgba(76,175,80,.6)}50%{box-shadow:0 0 30px 15px rgba(76,175,80,.4)}100%{box-shadow:0 0 0 0 rgba(76,175,80,0)}}
+.field .ball.saved{animation:savedFlash .5s ease}
+@keyframes savedFlash{0%{box-shadow:0 0 0 0 rgba(255,107,107,.6)}50%{box-shadow:0 0 30px 15px rgba(255,107,107,.4)}100%{box-shadow:0 0 0 0 rgba(255,107,107,0)}}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.controls button{background:#12122a;color:#e0e0e0;border:1px solid #2a2a3a;border-radius:10px;padding:14px 8px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;touch-action:manipulation}
+.controls button:hover{border-color:#4caf50;background:rgba(76,175,80,.08)}
+.controls button:active{transform:scale(.95)}
+.controls button.shoot-btn{background:linear-gradient(135deg,#4caf50,#2e7d32);color:#fff;border:none;font-size:18px;padding:16px;grid-column:1/-1;border-radius:12px}
+.controls button.shoot-btn:disabled{opacity:.4;cursor:not-allowed}
+.controls button.shoot-btn:hover:not(:disabled){box-shadow:0 4px 20px rgba(76,175,80,.4)}
+.direction-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 8px}
+.direction-btns button{background:#12122a;color:#e0e0e0;border:2px solid #2a2a3a;border-radius:10px;padding:12px 8px;font-size:16px;font-weight:600;cursor:pointer;transition:all .2s;touch-action:manipulation;position:relative}
+.direction-btns button.selected{border-color:#4caf50;background:rgba(76,175,50,.1);color:#4caf50}
+.direction-btns button .dir-label{font-size:10px;color:#667;display:block;margin-top:2px}
+.scoreboard{display:flex;justify-content:space-between;background:#12122a;border:1px solid #2a2a3a;border-radius:10px;padding:12px 20px;margin:8px 0}
+.score-item{text-align:center}
+.score-item .label{font-size:11px;color:#667}
+.score-item .score{font-size:28px;font-weight:700;color:#ffd93d}
+.result-msg{min-height:32px;font-size:16px;font-weight:600;margin:8px 0;padding:8px;border-radius:8px}
+.result-msg.goal{color:#4caf50}
+.result-msg.saved{color:#ff6b6b}
+.result-msg.miss{color:#ff9800}
+.result-msg.info{color:#8892b0;font-weight:400;font-size:14px}
+.shot-history{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin:6px 0;min-height:24px}
+.shot-badge{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:12px;font-weight:700}
+.shot-badge.goal-badge{background:rgba(76,175,80,.2);color:#4caf50;border:1px solid #4caf50}
+.shot-badge.saved-badge{background:rgba(255,107,107,.2);color:#ff6b6b;border:1px solid #ff6b6b}
+.shot-badge.miss-badge{background:rgba(255,152,0,.2);color:#ff9800;border:1px solid #ff9800}
+.btn-reset{background:#12122a;color:#ffd93d;border:1px solid #2a2a3a;border-radius:8px;padding:8px 20px;font-size:13px;cursor:pointer;transition:all .2s;margin-top:6px}
+.btn-reset:hover{border-color:#ffd93d}
+.round-info{color:#8892b0;font-size:13px;margin:4px 0}
+.aim-indicator{position:absolute;width:20px;height:20px;border:2px dashed rgba(255,255,255,.3);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%);display:none;z-index:15;animation:pulse 1s infinite}
+@keyframes pulse{0%{transform:translate(-50%,-50%) scale(1);opacity:.5}50%{transform:translate(-50%,-50%) scale(1.3);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:.5}}
+footer{margin-top:12px;color:#495670;font-size:11px;text-align:center}
+footer a{color:#ffd93d;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>⚽ Penalty Kick</h1>
+<p class="sub">Elfmeterschießen • Wähle Richtung • Triff gegen den Keeper</p>
+
+<div class="field" id="field">
+<div class="goal"></div>
+<div class="goal-left"></div><div class="goal-center"></div><div class="goal-right"></div>
+<div class="goalkeeper" id="keeper">
+<div class="head"></div>
+<div class="body"></div>
+<div class="arms"><div class="arm left"></div><div class="arm right"></div></div>
+</div>
+<div class="ball" id="ball"></div>
+<div class="aim-indicator" id="aimIndicator"></div>
+</div>
+
+<div class="scoreboard">
+<div class="score-item"><div class="label">Du</div><div class="score" id="playerScore">0</div></div>
+<div class="score-item"><div class="label">Runde</div><div class="score" id="roundDisplay">1/5</div></div>
+<div class="score-item"><div class="label">Keeper</div><div class="score" id="keeperScore">0</div></div>
+</div>
+
+<div class="result-msg info" id="resultMsg">⬇️ Wähle eine Schussrichtung ⬇️</div>
+
+<div class="direction-btns" id="directionBtns">
+<button data-dir="left">⬅️<span class="dir-label">Links</span></button>
+<button data-dir="center" class="selected">⬆️<span class="dir-label">Mitte</span></button>
+<button data-dir="right">➡️<span class="dir-label">Rechts</span></button>
+</div>
+
+<div class="controls">
+<button class="shoot-btn" id="shootBtn">⚡ SCHIESSEN</button>
+</div>
+
+<div class="shot-history" id="shotHistory"></div>
+
+<div class="round-info" id="roundInfo">Runde 1 von 5</div>
+
+<button class="btn-reset" id="resetBtn">🔄 Neues Spiel</button>
+
+<footer>
+<p><strong>Licht und Schatten</strong> 🌘 • <a href="../games/">Alle Spiele</a></p>
+</footer>
+</div>
+
+<script>
+const state = {round:1,maxRounds:5,playerScore:0,keeperScore:0,selectedDir:'center',isShooting:false,history:[]};
+const directions = ['left','center','right'];
+const dirLabels = {left:'Links',center:'Mitte',right:'Rechts'};
+const field = document.getElementById('field');
+const keeper = document.getElementById('keeper');
+const ball = document.getElementById('ball');
+const aimIndicator = document.getElementById('aimIndicator');
+const playerScoreEl = document.getElementById('playerScore');
+const keeperScoreEl = document.getElementById('keeperScore');
+const roundDisplay = document.getElementById('roundDisplay');
+const resultMsg = document.getElementById('resultMsg');
+const shotHistory = document.getElementById('shotHistory');
+const roundInfo = document.getElementById('roundInfo');
+const shootBtn = document.getElementById('shootBtn');
+const resetBtn = document.getElementById('resetBtn');
+const dirBtns = document.querySelectorAll('.direction-btns button');
+
+dirBtns.forEach(btn => {
+btn.addEventListener('click',()=>{if(state.isShooting)return;
+dirBtns.forEach(b=>b.classList.remove('selected'));
+btn.classList.add('selected');
+state.selectedDir=btn.dataset.dir;
+resultMsg.className='result-msg info';
+resultMsg.textContent='⬆️ Bereit! Schuss: '+dirLabels[state.selectedDir];
+const fieldRect=field.getBoundingClientRect();
+let l=50;if(state.selectedDir==='left')l=20;else if(state.selectedDir==='right')l=80;
+aimIndicator.style.display='block';aimIndicator.style.left=l+'%';aimIndicator.style.top='50%';
+});
+el.addEventListener('touchend',e=>{e.preventDefault();el.click()})));
+
+shootBtn.addEventListener('click',shoot);
+resetBtn.addEventListener('click',resetGame);
+document.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();shoot()}});
+
+function getKeeperDir(){const r=Math.random();if(r<.33)return'left';if(r<.66)return'center';return'right'}
+
+function shoot(){
+if(state.isShooting||state.round>state.maxRounds)return;
+state.isShooting=true;
+shootBtn.disabled=true;
+shootBtn.textContent='⏳ ...';
+const playerDir=state.selectedDir;
+const keeperDir=getKeeperDir();
+const fieldRect=field.getBoundingClientRect();
+const isGoal=playerDir!==keeperDir;
+
+// Animate keeper
+keeper.className='goalkeeper';
+void keeper.offsetWidth;
+keeper.classList.add('dive-'+keeperDir);
+
+// Show ball
+ball.style.display='block';
+ball.className='ball';
+void ball.offsetWidth;
+ball.classList.add('shoot-'+playerDir);
+
+setTimeout(()=>{
+if(isGoal){
+ball.classList.add('goal');
+resultMsg.className='result-msg goal';
+resultMsg.textContent='✅ TOR! '+dirLabels[playerDir].toUpperCase()+' getroffen! 🎉';
+state.playerScore++;
+state.history.push('goal');
+}else{
+ball.classList.add('saved');
+resultMsg.className='result-msg saved';
+resultMsg.textContent='❌ GEHALTEN! Keeper sprang '+dirLabels[keeperDir].toLowerCase()+'!';
+state.keeperScore++;
+state.history.push('saved');
+}
+updateScoreboard();
+updateHistory();
+
+setTimeout(()=>{
+ball.style.display='none';
+ball.className='ball';
+keeper.className='goalkeeper';
+aimIndicator.style.display='none';
+state.isShooting=false;
+shootBtn.disabled=false;
+shootBtn.textContent='⚡ SCHIESSEN';
+
+if(state.round>=state.maxRounds){
+showFinalResult();
+}else{
+state.round++;
+roundDisplay.textContent=state.round+'/'+state.maxRounds;
+roundInfo.textContent='Runde '+state.round+' von '+state.maxRounds;
+resultMsg.className='result-msg info';
+resultMsg.textContent='⬇️ Nächster Schuss! Wähle Richtung ⬇️';
+}
+},1200);
+},400);
+}
+
+function showFinalResult(){
+let msg,cls;
+if(state.playerScore>state.keeperScore){msg='🏆 GEWONNEN! '+state.playerScore+':'+state.keeperScore;cls='goal';}
+else if(state.playerScore<state.keeperScore){msg='😔 VERLOREN! '+state.playerScore+':'+state.keeperScore;cls='saved';}
+else{msg='🤝 UNENTSCHIEDEN! '+state.playerScore+':'+state.keeperScore;cls='info';}
+resultMsg.className='result-msg '+cls;
+resultMsg.textContent=msg;
+shootBtn.disabled=true;
+shootBtn.textContent='⛔ Spiel beendet';
+state.round=state.maxRounds+1;
+}
+
+function updateScoreboard(){
+playerScoreEl.textContent=state.playerScore;
+keeperScoreEl.textContent=state.keeperScore;
+roundDisplay.textContent=Math.min(state.round,state.maxRounds)+'/'+state.maxRounds;
+}
+
+function updateHistory(){
+shotHistory.innerHTML='';
+state.history.forEach((result,i)=>{
+const badge=document.createElement('span');
+badge.className='shot-badge';
+if(result==='goal'){badge.classList.add('goal-badge');badge.textContent='⚽'+(i+1);}
+else{badge.classList.add('saved-badge');badge.textContent='🧤'+(i+1);}
+shotHistory.appendChild(badge);
+});
+}
+
+function resetGame(){
+state.round=1;state.playerScore=0;state.keeperScore=0;state.selectedDir='center';state.isShooting=false;state.history=[];
+ball.style.display='none';ball.className='ball';keeper.className='goalkeeper';aimIndicator.style.display='none';
+shootBtn.disabled=false;shootBtn.textContent='⚡ SCHIESSEN';
+dirBtns.forEach(b=>b.classList.remove('selected'));
+dirBtns[1].classList.add('selected');
+updateScoreboard();updateHistory();roundDisplay.textContent='1/'+state.maxRounds;
+roundInfo.textContent='Runde 1 von '+state.maxRounds;
+resultMsg.className='result-msg info';
+resultMsg.textContent='⬇️ Wähle eine Schussrichtung ⬇️';
+}
+
+resetGame();
+</script>
+</body>
+</html>
