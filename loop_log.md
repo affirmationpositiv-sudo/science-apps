@@ -1,6 +1,63 @@
 # Loop Log – Infinite Money Loop
 
 
+## Tick: 2026-06-02 AUTOMATISCH (RUN 2.36)
+
+Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
+
+### Previous State (R2.35):
+- 45 Blog-Artikel, 23 interaktive Tools, 9 Affiliate-Shops, 19+ KDP-Bücher
+- Blog #45 (KI-Heimwerken & Garten 2026) ✅ LIVE
+- Heimwerker-Bedarfsrechner (Tool #22) ✅ LIVE
+- Persönlichkeitsanalyse (Tool #23) ✅ LIVE
+- Git working tree clean, Site HTTP 200 ✅
+
+### Actions This Tick (R2.36):
+- [x] **Survey:** Site live (HTTP 200), Git clean, 45 Blog-Artikel, 23 Tools, alles funktionsfähig
+- [x] **Blog-Artikel #46 erstellt:** "KI-Büro & Homeoffice 2026: Die 10 besten ergonomischen Gadgets, smarten Geräte & KI-Tools für dein Arbeitszimmer" (42 KB HTML, ~4.000 Wörter, 12 Sektionen: Ergonomische Bürostühle (Steelcase Gesture, Herman Miller Aeron, Secretlab Titan Evo, Sihoo M57, IKEA Markus), Höhenverstellbare Schreibtische (Flexispot E7 Pro, IKEA BEKANT, Autonomous SmartDesk Pro, IKEA IDÅSEN), KI-Monitore & Bildschirme (Dell U4025QW, LG 32UN880, Samsung ViewFinity S9), Mechanische Tastaturen (Keychron Q3 Pro, Logitech MX Keys S, Logitech MX Master 3S), KI-Webcams (Insta360 Link 2, Logitech Brio 4K, Dell Pro, Anker PowerConf C200), Noise-Cancelling-Headsets (Sony WH-1000XM6, Apple AirPods Pro 3, Bose QC Ultra, Jabra Evolve2, Soundcore Space Q45), Smarte Bürobeleuchtung (BenQ ScreenBar Pro, Philips Hue Play, Xiaomi Mi Desk Lamp Pro, Govee Glide), Monitorarme (Ergotron LX, WALI Doppelarm, North Bayou F80, Lamicall), Sitz-Steh-Zubehör, KI-Produktivitäts-Tools & Smart Gadgets – 35+ Amazon-Affiliate-Links tag=ikune21-21, 5 Vergleichstabellen, 5 Budget-Stufen (0€ bis 5.500€), 7-Tage-Aufbauplan, FAQ)
+- [x] **Blog-Index aktualisiert:** Stats 45→46, +Artikel-Karte #46 (KI-Büro & Homeoffice) mit Affiliate-Link
+- [x] **Haupt-Index aktualisiert:** Blog-Stat 45→46, Blog-Card-Beschreibung aktualisiert (37→46, Nachhaltigkeit→Homeoffice)
+- [x] **Sitemap.xml aktualisiert:** +1 neue URL (Blog #46)
+- [x] **Git commit + push ✅** (4 Dateien, +737 Zeilen, Commit e8c70f0)
+
+### Live Inventory (science-apps.github.io):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 46 | ✅ LIVE (1 NEU) |
+| Interaktive Tools | 23 | ✅ LIVE |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 46 Artikel + 23 Tools + 9 Shops |
+| 2 | **Amazon KDP (15 Bücher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 3 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 5 | **AI Persönlichkeits-Report Verkauf** | EUR 50-300 | 🆕 NEU: Tool gebaut, Prynth/Blook empfohlen |
+
+### Neue Chancen (Recherche):
+1. 🟢 **Prynth (seit Mai 2026)** – 0%-Kommissions-Plattform für digitale Produkte (PDFs, Vorlagen). Kein monatliches Abo. Perfekt für Premium-Report-Verkauf.
+2. 🟢 **Blook (Beta, Mai 2026)** – Free Platform für interaktive Web-Produkte. 2% Commission. Affiliate-Support, Stripe-Checkout.
+3. 🟢 **Kostenlose AI APIs** – OpenAI o4-mini (100 req/day free), Google Gemini 2.5 Flash (60 req/min free), Mistral Small 3 Free Tier. Für automatische Content-Generierung nutzbar.
+
+### Blocked Items (User-Aktion nötig):
+1. 🔴 **Amazon KDP Account** - 15 Bücher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - 8 T-Shirt-Designs
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟢 **Prynth/Blook Account** - NEU: 0%-Kommissions-Plattformen für digitale Produkte
+
+### Next Tick Priorities:
+1. 🔴 **Blog-Artikel #47**: KI-Musikproduktion 2026 oder KI-Hochzeit & Events 2026
+2. 🟢 **Prynth Store aufsetzen**: Premium-Persönlichkeitsreport als €1,99-Download
+3. 🟡 **Blog-Artikel-AI-Content-Factory**: Nutze kostenlose AI APIs für SEO-Content-Generierung
+4. 🟡 **User-Konto-Aktionen erinnern** (KDP, Spreadshirt, Prynth)
+
+---
+
 ## Tick: 2026-06-02 AUTOMATISCH (RUN 2.35)
 
 Start: Automatischer Cron-Job. Portal live at affirmationpositiv-sudo.github.io/science-apps/
