@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔧 Werkzeug-Finder 2026 – Finde das perfekte Werkzeug für dein Projekt | Licht und Schatten</title>
+<meta name="description" content="Interaktiver Werkzeug-Finder: Beantworte 5 Fragen und erhalte personalisierte Werkzeug-Empfehlungen für dein Heimwerker-Projekt. Mit Amazon Affiliate Links (tag=ikune21-21).">
+<meta name="keywords" content="Werkzeug-Finder, Werkzeug-Empfehlung, Heimwerker-Tool, welches Werkzeug, Werkzeugberater, interaktiv, tag=ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<meta name="language" content="de">
+
+<!-- Open Graph -->
+<meta property="og:title" content="🔧 Werkzeug-Finder 2026 – Finde das perfekte Werkzeug">
+<meta property="og:description" content="Welches Werkzeug brauchst du wirklich? Unser interaktiver Werkzeug-Finder analysiert dein Projekt und empfiehlt die passenden Werkzeuge – inklusive Amazon-Links mit tag=ikune21-21.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/werkzeug-finder.html">
+<meta property="og:site_name" content="Licht und Schatten Tools">
+<meta property="og:locale" content="de_DE">
+
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/werkzeug-finder.html">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0A0A0A;color:#e0e0e0;line-height:1.6;min-height:100vh}
+.container{max-width:720px;margin:0 auto;padding:30px 20px}
+.top-bar{background:#1a1a2e;padding:16px 0;text-align:center;border-bottom:1px solid #2a2a3a}
+.top-bar a{color:#8B5CF6;text-decoration:none;font-size:0.9em}
+.top-bar a:hover{text-decoration:underline}
+
+/* Step Indicators */
+.steps{display:flex;justify-content:space-between;margin-bottom:30px;gap:4px}
+.step{flex:1;text-align:center;padding:10px 4px;background:#1a1a1a;border-radius:8px;font-size:.8em;color:#555;transition:all .3s}
+.step.active{background:#1a1a2e;border:1px solid #8B5CF6;color:#8B5CF6;font-weight:700}
+.step.done{background:#0d3d0d;color:#4ade80}
+
+/* Section */
+.section{display:none}
+.section.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+h1{font-size:2em;font-weight:800;margin-bottom:8px;background:linear-gradient(135deg,#8B5CF6,#6D28D9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center}
+.sub{color:#888;text-align:center;margin-bottom:30px;font-size:1em}
+
+h2{font-size:1.4em;font-weight:700;color:#fff;margin-bottom:20px;text-align:center}
+.question-text{font-size:1.2em;font-weight:600;color:#FFD700;margin-bottom:20px;text-align:center;min-height:60px;display:flex;align-items:center;justify-content:center}
+
+/* Options */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{background:#1a1a1a;border:2px solid #2a2a2a;border-radius:12px;padding:16px;cursor:pointer;transition:all .3s;text-align:center}
+.option:hover{border-color:#8B5CF6;transform:translateY(-2px)}
+.option.selected{border-color:#8B5CF6;background:#1a1a2e;box-shadow:0 0 20px rgba(139,92,246,.2)}
+.option .icon{font-size:2em;margin-bottom:8px}
+.option .label{font-weight:600;color:#fff;margin-bottom:4px}
+.option .desc{font-size:.8em;color:#888}
+
+/* Buttons */
+.btn-row{display:flex;gap:12px;justify-content:center;margin-top:25px}
+.btn{background:#2a2a2a;border:none;color:#fff;padding:12px 30px;border-radius:10px;font-size:1em;font-weight:600;cursor:pointer;transition:all .3s;min-width:120px}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:linear-gradient(135deg,#8B5CF6,#6D28D9)}
+.btn.primary:hover{box-shadow:0 4px 20px rgba(139,92,246,.4)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* Result */
+.results{display:none}
+.results.active{display:block;animation:fadeIn .5s ease}
+.result-card{background:#1a1a2e;border:1px solid #2a2a3a;border-radius:12px;padding:18px;margin:12px 0;transition:all .3s}
+.result-card:hover{border-color:#8B5CF6;transform:translateY(-2px)}
+.result-card h4{color:#FFD700;font-size:1.05em;margin-bottom:6px}
+.result-card .cat{color:#8B5CF6;font-size:.85em;font-weight:600;margin-bottom:4px}
+.result-card .desc{color:#999;font-size:.9em;margin-bottom:8px}
+.result-card .price{color:#4ade80;font-size:.9em;font-weight:600}
+.amz-btn{display:inline-block;background:linear-gradient(135deg,#232f3e,#FF9900);color:#fff;padding:6px 16px;border-radius:6px;font-size:.85em;font-weight:600;margin-top:8px;text-decoration:none;transition:all .3s}
+.amz-btn:hover{transform:translateY(-1px);box-shadow:0 2px 12px rgba(255,153,0,.3)}
+
+.budget-box{background:#1a1a1a;border-radius:10px;padding:14px;margin:8px 0;border-left:4px solid}
+.budget-box.einstieg{border-color:#666}
+.budget-box.mittel{border-color:#8B5CF6}
+.budget-box.profi{border-color:#FFD700}
+.budget-box .range{color:#4ade80;font-size:.9em;font-weight:600}
+
+.disclaimer{text-align:center;color:#666;font-size:.85em;margin-top:30px;padding-top:20px;border-top:1px solid #1a1a1a}
+.disclaimer a{color:#8B5CF6}
+@media(max-width:600px){.options{grid-template-columns:1fr}h1{font-size:1.5em}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="../blog/heimwerken-werkzeug-2026.html">📖 Zum Blog-Artikel</a> &nbsp;|&nbsp; <a href="../">🏠 Startseite</a>
+</div>
+
+<div class="container">
+
+<h1>🔧 Werkzeug-Finder</h1>
+<p class="sub">Beantworte 5 Fragen und erhalte personalisierte Werkzeug-Empfehlungen für dein Projekt.</p>
+
+<!-- Step Indicators -->
+<div class="steps">
+    <div class="step active" id="step1">1. Projekt</div>
+    <div class="step" id="step2">2. Budget</div>
+    <div class="step" id="step3">3. Erfahrung</div>
+    <div class="step" id="step4">4. Ort</div>
+    <div class="step" id="step5">5. Material</div>
+</div>
+
+<!-- QUESTION 1: PROJECT TYPE -->
+<div class="section active" id="q1">
+    <h2>📋 Frage 1 von 5</h2>
+    <div class="question-text">Was möchtest du machen?</div>
+    <div class="options">
+        <div class="option" data-value="moebel" onclick="selectOption(this,'q1')">
+            <div class="icon">🪑</div>
+            <div class="label">Möbel aufbauen</div>
+            <div class="desc">IKEA, Möbelmontage, Regale</div>
+        </div>
+        <div class="option" data-value="renovieren" onclick="selectOption(this,'q1')">
+            <div class="icon">🏠</div>
+            <div class="label">Renovieren</div>
+            <div class="desc">Wände, Böden, Fliesen, Sanierung</div>
+        </div>
+        <div class="option" data-value="garten" onclick="selectOption(this,'q1')">
+            <div class="icon">🌿</div>
+            <div class="label">Gartenarbeit</div>
+            <div class="desc">Hecke, Rasen, Bäume, Terrasse</div>
+        </div>
+        <div class="option" data-value="werkstatt" onclick="selectOption(this,'q1')">
+            <div class="icon">⚡</div>
+            <div class="label">Werkstatt/DIY</div>
+            <div class="desc">Holzarbeiten, Basteln, Reparaturen</div>
+        </div>
+    </div>
+</div>
+
+<!-- QUESTION 2: BUDGET -->
+<div class="section" id="q2">
+    <h2>💰 Frage 2 von 5</h2>
+    <div class="question-text">Wie viel möchtest du ausgeben?</div>
+    <div class="options">
+        <div class="option" data-value="einstieg" onclick="selectOption(this,'q2')">
+            <div class="icon">🟢</div>
+            <div class="label">Einstieg</div>
+            <div class="desc">50 – 150 € fürs erste Werkzeug</div>
+        </div>
+        <div class="option" data-value="mittel" onclick="selectOption(this,'q2')">
+            <div class="icon">🔵</div>
+            <div class="label">Mittelklasse</div>
+            <div class="desc">150 – 500 € für regelmäßige Projekte</div>
+        </div>
+        <div class="option" data-value="fortgeschritten" onclick="selectOption(this,'q2')">
+            <div class="icon">🟡</div>
+            <div class="label">Fortgeschritten</div>
+            <div class="desc">500 – 1.500 € für ambitionierte Arbeiten</div>
+        </div>
+        <div class="option" data-value="profi" onclick="selectOption(this,'q2')">
+            <div class="icon">🔴</div>
+            <div class="label">Profi</div>
+            <div class="desc">Über 1.500 € – keine Kompromisse</div>
+        </div>
+    </div>
+</div>
+
+<!-- QUESTION 3: EXPERIENCE -->
+<div class="section" id="q3">
+    <h2>🎯 Frage 3 von 5</h2>
+    <div class="question-text">Wie erfahren bist du beim Heimwerken?</div>
+    <div class="options">
+        <div class="option" data-value="anfaenger" onclick="selectOption(this,'q3')">
+            <div class="icon">🌟</div>
+            <div class="label">Anfänger</div>
+            <div class="desc">Erstes eigenes Projekt / wenig Erfahrung</div>
+        </div>
+        <div class="option" data-value="geuebt" onclick="selectOption(this,'q3')">
+            <div class="icon">👍</div>
+            <div class="label">Geübt</div>
+            <div class="desc">Regelmäßig am Werkeln</div>
+        </div>
+        <div class="option" data-value="fortgeschritten" onclick="selectOption(this,'q3')">
+            <div class="icon">💪</div>
+            <div class="label">Fortgeschritten</div>
+            <div class="desc">Komplexe Projekte, eigene Techniken</div>
+        </div>
+        <div class="option" data-value="profi" onclick="selectOption(this,'q3')">
+            <div class="icon">🔧</div>
+            <div class="label">Profi/Handwerker</div>
+            <div class="desc">Berufliche Erfahrung</div>
+        </div>
+    </div>
+</div>
+
+<!-- QUESTION 4: LOCATION -->
+<div class="section" id="q4">
+    <h2>📍 Frage 4 von 5</h2>
+    <div class="question-text">Wo wirst du hauptsächlich arbeiten?</div>
+    <div class="options">
+        <div class="option" data-value="innen" onclick="selectOption(this,'q4')">
+            <div class="icon">🏠</div>
+            <div class="label">Innenbereich</div>
+            <div class="desc">Wohnung, Keller, Wohnzimmer</div>
+        </div>
+        <div class="option" data-value="aussen" onclick="selectOption(this,'q4')">
+            <div class="icon">🌳</div>
+            <div class="label">Außenbereich</div>
+            <div class="desc">Garten, Balkon, Terrasse</div>
+        </div>
+        <div class="option" data-value="werkstatt" onclick="selectOption(this,'q4')">
+            <div class="icon">🔩</div>
+            <div class="label">Werkstatt</div>
+            <div class="desc">Feste Werkstatt/Garage</div>
+        </div>
+        <div class="option" data-value="mobil" onclick="selectOption(this,'q4')">
+            <div class="icon">🚐</div>
+            <div class="label">Mobil / Unterwegs</div>
+            <div class="desc">Baustelle, Montage, unterwegs</div>
+        </div>
+    </div>
+</div>
+
+<!-- QUESTION 5: MATERIAL -->
+<div class="section" id="q5">
+    <h2>🧱 Frage 5 von 5</h2>
+    <div class="question-text">Mit welchem Material arbeitest du hauptsächlich?</div>
+    <div class="options">
+        <div class="option" data-value="holz" onclick="selectOption(this,'q5')">
+            <div class="icon">🪵</div>
+            <div class="label">Holz</div>
+            <div class="desc">Möbel, Bauholz, Platten</div>
+        </div>
+        <div class="option" data-value="stein" onclick="selectOption(this,'q5')">
+            <div class="icon">🧱</div>
+            <div class="label">Stein/Beton</div>
+            <div class="desc">Mauerwerk, Bohren, Sanierung</div>
+        </div>
+        <div class="option" data-value="metall" onclick="selectOption(this,'q5')">
+            <div class="icon">⚙️</div>
+            <div class="label">Metall</div>
+            <div class="desc">Eisen, Stahl, Aluminium</div>
+        </div>
+        <div class="option" data-value="universal" onclick="selectOption(this,'q5')">
+            <div class="icon">🔄</div>
+            <div class="label">Alles / Universal</div>
+            <div class="desc">Verschiedene Materialien</div>
+        </div>
+    </div>
+</div>
+
+<!-- NAVIGATION -->
+<div class="btn-row">
+    <button class="btn" id="prevBtn" onclick="prevQ()" style="display:none">← Zurück</button>
+    <button class="btn primary" id="nextBtn" onclick="nextQ()" disabled>Weiter →</button>
+</div>
+
+<!-- RESULTS -->
+<div class="results" id="results">
+    <h2>🔧 Deine persönlichen Werkzeug-Empfehlungen</h2>
+    <p class="sub" id="resultSummary"></p>
+
+    <div id="resultCards"></div>
+
+    <div class="budget-box einstieg" style="margin-top:20px" id="budgetTip">
+        <div class="range">💡 Spartipp</div>
+        <div class="desc" id="sparTip">Starte mit einem guten Akkuschrauber und einem Handwerkzeug-Set – damit erledigst du 80% aller Heimwerker-Aufgaben.</div>
+    </div>
+
+    <div class="btn-row" style="flex-wrap:wrap">
+        <button class="btn primary" onclick="location.reload()">🔄 Neu starten</button>
+        <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" rel="noopener" class="btn" style="text-decoration:none;background:linear-gradient(135deg,#232f3e,#FF9900);display:inline-flex;align-items:center;justify-content:center">🛒 Alle Angebote bei Amazon</a>
+        <a href="../blog/heimwerken-werkzeug-2026.html" class="btn" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">📖 Zum Blog-Artikel</a>
+    </div>
+
+    <div class="disclaimer">
+        <strong>📢 Affiliate-Hinweis:</strong> Die Links in diesem Tool sind Affiliate-Links (Amazon-Partnerprogramm, tag=ikune21-21).<br>
+        Wenn du über einen dieser Links ein Produkt kaufst, erhalten wir eine kleine Provision – für dich entstehen keine zusätzlichen Kosten.
+    </div>
+</div>
+
+<script>
+// State
+let currentQ = 1;
+const answers = {};
+
+function selectOption(el, qId) {
+    const parent = document.getElementById(qId);
+    parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    
+    const qNum = parseInt(qId.replace('q',''));
+    answers[qNum] = el.dataset.value;
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQ() {
+    if (currentQ < 5) {
+        // Mark current step done
+        document.getElementById('step'+currentQ).classList.remove('active');
+        document.getElementById('step'+currentQ).classList.add('done');
+        
+        // Hide current section
+        document.getElementById('q'+currentQ).classList.remove('active');
+        
+        currentQ++;
+        
+        // Show next section
+        document.getElementById('q'+currentQ).classList.add('active');
+        document.getElementById('step'+currentQ).classList.add('active');
+        
+        document.getElementById('prevBtn').style.display = 'inline-block';
+        document.getElementById('nextBtn').disabled = true;
+        
+        // Unselect if revisiting
+        const nextDiv = document.getElementById('q'+currentQ);
+        nextDiv.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        
+        // If answers for this question exist, restore selection
+        if (answers[currentQ]) {
+            nextDiv.querySelector(`.option[data-value="${answers[currentQ]}"]`).classList.add('selected');
+            document.getElementById('nextBtn').disabled = false;
+        }
+    } else {
+        // Show results
+        showResults();
+    }
+}
+
+function prevQ() {
+    document.getElementById('q'+currentQ).classList.remove('active');
+    document.getElementById('step'+currentQ).classList.remove('active');
+    
+    currentQ--;
+    
+    document.getElementById('q'+currentQ).classList.add('active');
+    document.getElementById('step'+currentQ).classList.add('active');
+    document.getElementById('step'+currentQ).classList.remove('done');
+    
+    document.getElementById('nextBtn').disabled = false;
+    
+    if (currentQ === 1) {
+        document.getElementById('prevBtn').style.display = 'none';
+    }
+    
+    // Restore selection
+    const prevDiv = document.getElementById('q'+currentQ);
+    prevDiv.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    if (answers[currentQ]) {
+        prevDiv.querySelector(`.option[data-value="${answers[currentQ]}"]`).classList.add('selected');
+    }
+}
+
+// Product database
+const products = {
+    akkuschrauber: [
+        {name:'Bosch Professional GSR 12V-35',price:'ca. 110 €',desc:'Der Benchmark-Akkuschrauber: 35 Nm, 860g, bürstenloser Motor. Perfekt für Möbel und Alltag.',url:'https://www.amazon.de/dp/B0B5XNX8RY?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Einhell TE-CD 18/60 Li-i',price:'ca. 75 €',desc:'Preis-Leistungs-Sieger: 60 Nm, 18V, bürstenlos. Mit Power-X-Change-Akkusystem.',url:'https://www.amazon.de/dp/B07QK2TSS1?tag=ikune21-21',rating:'⭐⭐⭐⭐'},
+        {name:'Makita DF457DWE 18V',price:'ca. 180 €',desc:'Robust: 50 Nm, 2x 3,0 Ah Akkus im Set. Für intensive Heimwerker-Arbeiten.',url:'https://www.amazon.de/dp/B00U86ZLKM?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Bosch GSB 18V-110 C',price:'ca. 320 €',desc:'Profiklasse: 110 Nm, Schlagbohrfunktion, Bluetooth. Bohrt durch Beton.',url:'https://www.amazon.de/dp/B09YDNPN8C?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'}
+    ],
+    bohrmaschine: [
+        {name:'Bosch GBH 2-28 F SDS-plus',price:'ca. 150 €',desc:'Schlagbohrmaschine für Beton/Mauerwerk. 2,9 Joule, SDS-plus.',url:'https://www.amazon.de/dp/B00B7QXVM8?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'}
+    ],
+    saegen: [
+        {name:'Bosch PST 8000 Stichsäge',price:'ca. 90 €',desc:'Beste Stichsäge: 800W, Schnellwechsel, CutControl. Für Kurven und gerade Schnitte.',url:'https://www.amazon.de/dp/B00X5L6L4E?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Bosch GKS 185 Akku-Kreissäge',price:'ca. 160 €',desc:'Akku-Kreissäge 165 mm, 57 mm Schnitttiefe. Staubfrei durch Absaugung.',url:'https://www.amazon.de/dp/B09HT93LNP?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Einhell TE-MS 216 Kappsäge',price:'ca. 110 €',desc:'Kapp-Zuggehäusesäge: 1600W, 45° Gehrung, Zugfunktion. Für Leisten und Dielen.',url:'https://www.amazon.de/dp/B00HTWY73U?tag=ikune21-21',rating:'⭐⭐⭐⭐'}
+    ],
+    schleifer: [
+        {name:'Bosch GEX 125-150 Schwingschleifer',price:'ca. 130 €',desc:'Exzenterschleifer 400W, Microfilter, nahezu staubfrei.',url:'https://www.amazon.de/dp/B0B5GJM7F8?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Dremel 3000 Multitool',price:'ca. 60 €',desc:'30 Zubehörteile, 5.000-32.000/min. Gravieren, Fräsen, Schleifen.',url:'https://www.amazon.de/dp/B00P7UKR5C?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'}
+    ],
+    handwerkzeug: [
+        {name:'Wera 36-tlg. Tools Set',price:'ca. 65 €',desc:'Schraubendreher, Bits, Halter in Tasche. Made in Germany.',url:'https://www.amazon.de/dp/B00ZXC3BCU?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Knipex Wasserpumpenzange',price:'ca. 35 €',desc:'Die beste Zange der Welt. 300 mm, 28-fach verstellbar.',url:'https://www.amazon.de/dp/B01N4AXC3J?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Toolcraft 168-tlg. Werkzeugkoffer',price:'ca. 70 €',desc:'All-in-One: Zangen, Schraubendreher, Bits, Nüsse, Hammer.',url:'https://www.amazon.de/dp/B07D31FW15?tag=ikune21-21',rating:'⭐⭐⭐⭐'},
+        {name:'Wera Bit-Check 30 Magnetic',price:'ca. 25 €',desc:'30 Bits + Magnet-Halter in kompakter Tasche.',url:'https://www.amazon.de/dp/B004S8646G?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'}
+    ],
+    messen: [
+        {name:'Stabila 70 Wasserwaage 120 cm',price:'ca. 45 €',desc:'Die Referenz-Wasserwaage. ±0,5 mm/m. Made in Germany.',url:'https://www.amazon.de/dp/B0041OSQBK?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Bosch GLL 30 Kreuzlinienlaser',price:'ca. 65 €',desc:'Selbstnivellierend, 30 m Reichweite. Für Fliesen, Regale, Renovierung.',url:'https://www.amazon.de/dp/B07T3PYP7V?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'}
+    ],
+    aufbewahrung: [
+        {name:'Sortimo L-BOXX 136',price:'ca. 50 €',desc:'Modulares Aufbewahrungssystem, stapelbar, kompatibel.',url:'https://www.amazon.de/dp/B005C1KMXG?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'},
+        {name:'Projahn Werkbank 1200 mm',price:'ca. 180 €',desc:'Massives Buchenholz + Stahl, 300 kg Belastbarkeit.',url:'https://www.amazon.de/dp/B08LQMNZBS?tag=ikune21-21',rating:'⭐⭐⭐⭐'}
+    ],
+    garten: [
+        {name:'Wolf-Garten Astsäge Multi-Star',price:'ca. 25 €',desc:'Klappbare Gartensäge, japanischer Zahnschliff.',url:'https://www.amazon.de/dp/B001B8RPBC?tag=ikune21-21',rating:'⭐⭐⭐⭐'},
+        {name:'Fiskars Spalthammer X28',price:'ca. 60 €',desc:'3 kg Kopf, Fiberglasstiel. Für Kaminholz.',url:'https://www.amazon.de/dp/B0012UOWSC?tag=ikune21-21',rating:'⭐⭐⭐⭐⭐'}
+    ]
+};
+
+function showResults() {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('step5').classList.remove('active');
+    document.getElementById('step5').classList.add('done');
+    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('prevBtn').style.display = 'none';
+    
+    const project = answers[1];
+    const budget = answers[2];
+    const experience = answers[3];
+    const location = answers[4];
+    const material = answers[5];
+    
+    // Build recommendations
+    let recs = [];
+    let summary = '';
+    
+    // Always include akkuschrauber based on budget/exp
+    if (budget === 'einstieg' || experience === 'anfaenger') {
+        recs.push(products.akkuschrauber[1]); // Einhell
+        summary = 'Perfekt für Einsteiger! ';
+    } else if (budget === 'mittel' || experience === 'geuebt') {
+        recs.push(products.akkuschrauber[0]); // Bosch 12V
+        summary = 'Eine solide Mittelklasse-Ausrüstung für dich! ';
+    } else {
+        recs.push(products.akkuschrauber[3]); // Bosch Profi
+        recs.push(products.akkuschrauber[2]); // Makita
+        summary = 'Profi-Ausrüstung – keine Kompromisse! ';
+    }
+    
+    // Add handwerkzeug for all
+    if (budget === 'einstieg') {
+        recs.push(products.handwerkzeug[2]); // Toolcraft
+    } else {
+        recs.push(products.handwerkzeug[0]); // Wera
+        recs.push(products.handwerkzeug[3]); // Bit-Check
+    }
+    
+    // Project-specific
+    if (project === 'moebel') {
+        summary += 'Für Möbelaufbau brauchst du vor allem einen guten Akkuschrauber, Bits und eine Wasserwaage.';
+        recs.push(products.messen[1]); // Laser
+        recs.push(products.handwerkzeug[3]); // Bit-Check
+    } else if (project === 'renovieren') {
+        summary += 'Renovieren erfordert Bohrmaschine, Säge, Schleifer und Messwerkzeuge.';
+        recs.push(products.bohrmaschine[0]); // Schlagbohrmaschine
+        recs.push(products.saegen[0]); // Stichsäge
+        recs.push(products.schleifer[0]); // Exzenterschleifer
+        recs.push(products.messen[1]); // Laser
+    } else if (project === 'garten') {
+        summary += 'Gartenarbeit braucht robuste Geräte und gute Handwerkzeuge.';
+        recs.push(products.garten[1]); // Spalthammer
+        recs.push(products.garten[0]); // Astsäge
+        recs.push(products.saegen[2]); // Kappsäge
+    } else if (project === 'werkstatt') {
+        summary += 'Für die Werkstatt: Kreissäge, Schleifer und Aufbewahrung sind essenziell.';
+        recs.push(products.saegen[1]); // Kreissäge
+        recs.push(products.schleifer[0]); // Exzenterschleifer
+        recs.push(products.schleifer[1]); // Dremel
+        recs.push(products.aufbewahrung[0]); // L-BOXX
+        recs.push(products.aufbewahrung[1]); // Werkbank
+    }
+    
+    // Add messen based on experience
+    if (experience !== 'anfaenger') {
+        recs.push(products.messen[0]); // Stabila
+    }
+    
+    // Deduplicate
+    recs = recs.filter((r, i, a) => a.findIndex(x => x.name === r.name) === i);
+    
+    // Limit to top 7
+    recs = recs.slice(0, 7);
+    
+    // Set summary
+    document.getElementById('resultSummary').textContent = summary;
+    
+    // Budget tip
+    const tips = {
+        einstieg: 'Starte mit einem Akkuschrauber (z.B. Einhell TE-CD 18/60, ca. 75 €) und einem Werkzeugkoffer (Toolcraft 168-tlg., ca. 70 €). Damit erledigst du 80% aller Heimwerker-Aufgaben für unter 150 €!',
+        mittel: 'Investiere in Bosch Professional oder Makita. Das Akkusystem (18V) ist der Schlüssel – später kaufst du nur noch Geräte ohne Akku dazu.',
+        fortgeschritten: 'Setze auf ein durchgängiges Akkusystem (Bosch 18V oder Makita LXT) und ergänze mit Spezialwerkzeugen (Kappsäge, Bandschleifer, Oszillierer).',
+        profi: 'Keine Kompromisse: Festool, Fein, Bosch Professional und Sortimo-System für maximale Organisation. Deine Werkzeuge sind dein Kapital.'
+    };
+    document.getElementById('sparTip').textContent = tips[budget] || tips.einstieg;
+    
+    // Render cards
+    const container = document.getElementById('resultCards');
+    container.innerHTML = '';
+    recs.forEach((p, i) => {
+        container.innerHTML += `
+            <div class="result-card">
+                <div class="cat">Empfehlung #${i+1}</div>
+                <h4>${p.name}</h4>
+                <div class="desc">${p.desc}</div>
+                <div class="price">💰 ${p.price} ${p.rating ? '· ' + p.rating : ''}</div>
+                <a href="${p.url}" target="_blank" rel="noopener" class="amz-btn">🛒 Bei Amazon ansehen</a>
+            </div>
+        `;
+    });
+    
+    // Show results
+    document.getElementById('results').classList.add('active');
+}
+</script>
+
+</div>
+
+<div class="top-bar" style="margin-top:40px;">
+    <a href="../blog/heimwerken-werkzeug-2026.html">📖 Zum Blog-Artikel</a> &nbsp;|&nbsp; <a href="../">🏠 Startseite</a> &nbsp;|&nbsp; <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank" rel="noopener">🛒 Amazon-Angebote (tag=ikune21-21)</a>
+</div>
+
+</body>
+</html>
