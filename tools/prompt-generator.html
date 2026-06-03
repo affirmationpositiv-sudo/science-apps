@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI Prompt Generator – Kostenlos + Online</title>
+<meta name="description" content="Kostenloser KI Prompt Generator. Erstelle perfekte Prompts für ChatGPT, Midjourney und Co. Einfach Thema wählen, Prompt erhalten.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6;min-height:100vh}
+.container{max-width:700px;margin:0 auto;padding:20px}
+header{text-align:center;padding:40px 0}
+header h1{color:#d4a843;font-size:2.2em}
+header p{color:#888;margin-top:10px}
+.generator{background:#111;border:1px solid #222;border-radius:12px;padding:30px;margin:20px 0}
+.generator label{color:#d4a843;font-weight:600;display:block;margin:15px 0 8px}
+.generator select,.generator input,.generator textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#1a1a1a;color:#fff;font-size:1em}
+.generator textarea{min-height:120px;resize:vertical}
+.generator button{width:100%;padding:15px;border-radius:8px;border:none;background:#d4a843;color:#0a0a0a;font-size:1.1em;font-weight:600;cursor:pointer;margin-top:15px}
+.generator button:hover{background:#e0b84f}
+.result{background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:15px;margin-top:15px;white-space:pre-wrap;font-family:monospace;color:#d4a843;display:none}
+.copy-btn{display:none;width:100%;padding:10px;border-radius:8px;border:1px solid #d4a843;background:transparent;color:#d4a843;cursor:pointer;margin-top:10px}
+.cta{background:#111;border:1px solid #d4a843;border-radius:12px;padding:30px;margin:40px 0;text-align:center}
+.cta h3{color:#d4a843;margin-bottom:10px}
+.btn{display:inline-block;padding:12px 30px;border-radius:8px;background:#d4a843;color:#0a0a0a;text-decoration:none;font-weight:600;margin:10px}
+.btn-sec{display:inline-block;padding:12px 30px;border-radius:8px;background:#222;color:#e0e0e0;text-decoration:none;border:1px solid #333;margin:10px}
+.tips{background:#111;border:1px solid #222;border-radius:12px;padding:25px;margin:20px 0}
+.tips h2{color:#d4a843;margin-bottom:15px}
+.tips li{color:#888;padding:5px 0}
+footer{text-align:center;color:#555;padding:40px 0;border-top:1px solid #1a1a1a;margin-top:40px}
+footer a{color:#888;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>🤖 KI Prompt Generator</h1>
+<p>Kostenlos. Keine Anmeldung. Sofort nutzbar.</p>
+</header>
+
+<div class="generator">
+<h2 style="color:#d4a843;margin-bottom:20px;">Dein Prompt</h2>
+<label>Kategorie</label>
+<select id="category">
+<option value="business">Business & Marketing</option>
+<option value="content">Content Creation</option>
+<option value="coding">Programmierung</option>
+<option value="creative">Kreativ & Design</option>
+<option value="productivity">Produktivität</option>
+<option value="social">Social Media</option>
+</select>
+
+<label>Thema / Stichwort</label>
+<input id="topic" placeholder="z.B. Instagram Post, E-Mail, Blogartikel..." value="Verkaufs-E-Mail">
+
+<label>Stil (optional)</label>
+<select id="style">
+<option value="professional">Professionell</option>
+<option value="casual">Locker</option>
+<option value="persuasive">Überzeugend</option>
+<option value="creative">Kreativ</option>
+</select>
+
+<button onclick="generate()">✨ Prompt generieren</button>
+
+<div class="result" id="result"></div>
+<button class="copy-btn" id="copyBtn" onclick="copyPrompt()">📋 Kopieren</button>
+</div>
+
+<div class="tips">
+<h2>💡 Profi-Tipps für bessere Prompts</h2>
+<ol>
+<li>Sei spezifisch – "Schreibe eine Verkaufs-E-Mail" ist besser als "Hilf mir"</li>
+<li>Gib Kontext – Wer ist die Zielgruppe? Was ist das Ziel?</li>
+<li>Definiere das Format – Länge, Stil, Ton</li>
+<li>Nutze Beispiele – "Schreibe wie Apple"</li>
+<li>Wiederhole + verfeinere – Der erste Prompt ist selten perfekt</li>
+</ol>
+</div>
+
+<div class="cta">
+<h3>🚀 Bereit für die nächste Stufe?</h3>
+<p>50+ fertige KI-Prompts für Business, Marketing und Automatisierung.</p>
+<a class="btn" href="https://t.me/Yesaryour_bot">🤖 Hol dir die Prompt-Packs</a>
+<a class="btn-sec" href="https://affirmationpositiv-sudo.github.io/science-apps/40projekte/">🛒 Shop</a>
+<p style="margin-top:10px;color:#666;">💳 PayPal: affirmation.positiv@gmail.com</p>
+</div>
+
+<footer>
+<a href="../impressum/">Impressum</a> • <a href="../datenschutz/">Datenschutz</a><br>
+IKUNE – © 2026
+</footer>
+</div>
+
+<script>
+const prompts = {
+  business: [
+    "Schreibe eine professionelle Verkaufs-E-Mail an {topic}. Zielgruppe: Geschäftskunden. Ton: {style}. Inklusive Call-to-Action.",
+    "Erstelle einen 5-Punkte-Plan für {topic}. Ziel: Mehr Umsatz. Format: Kurz und prägnant.",
+    "Formuliere 3 überzeugende Argumente für {topic}. Zielgruppe: Entscheider. Sprache: {style}.",
+  ],
+  content: [
+    "Schreibe einen Blogartikel über {topic}. Länge: 500 Wörter. Stil: {style}. Ziel: Leser informieren und zum Handeln bewegen.",
+    "Erstelle eine Gliederung für einen Ratgeber zu {topic}. 10 Kapitel. Inklusive Einleitung und Fazit.",
+    "Formuliere 5 Überschriften für einen Artikel über {topic}. Stil: {style}. Ziel: Maximale Klickrate.",
+  ],
+  coding: [
+    "Erkläre {topic} für Anfänger. Schritt-für-Schritt. Inklusive Code-Beispiel. Stil: {style}.",
+    "Schreibe eine README-Dokumentation für ein {topic}-Projekt. Strukturiert. Vollständig.",
+    "Debugge folgenden Code für {topic}. Finde den Fehler. Erkläre die Lösung.",
+  ],
+  creative: [
+    "Schreibe eine kreative Geschichte über {topic}. Stil: {style}. Länge: 300 Wörter.",
+    "Entwickle ein Konzept für {topic}. Vision, Zielgruppe, Umsetzung. Kreativ und innovativ.",
+    "Erstelle 10 Bild-Prompts für Midjourney zum Thema {topic}. Detailliert. Künstlerisch.",
+  ],
+  productivity: [
+    "Erstelle eine Tagesroutine für {topic}. Optimiert für maximale Produktivität. Stil: {style}.",
+    "Entwickle ein System für {topic}. Schritt-für-Schritt. Wiederholbar. Automatisierbar.",
+    "Liste 10 Tools für {topic}. Kurzbeschreibung. Vor- und Nachteile. Preis.",
+  ],
+  social: [
+    "Schreibe einen Instagram-Post über {topic}. Stil: {style}. Inklusive Hashtags. Länge: max 150 Wörter.",
+    "Erstelle eine LinkedIn-Post-Serie (3 Posts) über {topic}. Professionell. Wertvoll.",
+    "Formuliere 10 Twitter/X-Posts zum Thema {topic}. Kurz. Prägnant. Teilbar.",
+  ],
+};
+
+function generate() {
+  const cat = document.getElementById('category').value;
+  const topic = document.getElementById('topic').value || 'dein Thema';
+  const style = document.getElementById('style').value;
+  const catPrompts = prompts[cat] || prompts.business;
+  const prompt = catPrompts[Math.floor(Math.random() * catPrompts.length)];
+  const result = prompt.replace('{topic}', topic).replace('{style}', style);
+  
+  const el = document.getElementById('result');
+  el.textContent = result;
+  el.style.display = 'block';
+  document.getElementById('copyBtn').style.display = 'block';
+}
+
+function copyPrompt() {
+  const text = document.getElementById('result').textContent;
+  navigator.clipboard.writeText(text);
+  document.getElementById('copyBtn').textContent = '✅ Kopiert!';
+  setTimeout(() => { document.getElementById('copyBtn').textContent = '📋 Kopieren'; }, 2000);
+}
+</script>
+</body>
+</html>
