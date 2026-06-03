@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haustier-Produkt-Finder 2026 – Finde das perfekte Zubehör für dein Tier</title>
+<meta name="description" content="Interaktiver Haustier-Produkt-Finder 2026. Beantworte 3 Fragen und erhalte personalisierte Empfehlungen für Hunde, Katzen, Kleintiere, Vögel, Aquarium oder Terrarium – mit Amazon-Preisen und Bewertungen.">
+<meta name="keywords" content="Haustier Produkt Finder, Tierzubehör, Hund, Katze, Kleintier, Vogel, Aquarium, Terrarium, Produktempfehlung, ikune21-21">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh;line-height:1.6;display:flex;flex-direction:column;align-items:center}
+a{color:#8B5CF6;text-decoration:none;transition:color .2s}
+a:hover{color:#A78BFA}
+::selection{background:#8B5CF6;color:#fff}
+.header{width:100%;padding:2rem 1rem 1rem;text-align:center;border-bottom:1px solid #2A2A2A}
+.header h1{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:#9CA3AF;margin-top:.25rem;font-size:clamp(.85rem,2vw,1.05rem)}
+.container{width:100%;max-width:860px;padding:1.5rem 1rem 3rem}
+.wizard-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:2rem 1.5rem;margin-bottom:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.progress-wrap{margin-bottom:1.75rem}
+.progress-header{display:flex;justify-content:space-between;font-size:.85rem;color:#9CA3AF;margin-bottom:.5rem}
+.progress-step{color:#8B5CF6;font-weight:600}
+.progress-bar-wrap{height:6px;background:#2A2A2A;border-radius:3px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);border-radius:3px;transition:width .5s ease;width:0%}
+.question{display:none;animation:fadeIn .35s ease}
+.question.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question h2{font-size:1.3rem;font-weight:700;margin-bottom:.3rem}
+.question .q-desc{color:#9CA3AF;font-size:.9rem;margin-bottom:1.25rem}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.options.single-col{grid-template-columns:1fr}
+.options.three-col{grid-template-columns:1fr 1fr 1fr}
+.option-btn{display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.8rem .6rem;border:2px solid #2A2A2A;border-radius:12px;background:transparent;color:#E5E5E5;font-size:.92rem;font-weight:500;cursor:pointer;transition:all .25s ease;text-align:center;line-height:1.3;min-height:3.2rem}
+.option-btn:hover{border-color:#8B5CF6;background:rgba(139,92,246,.1)}
+.option-btn.selected{border-color:#8B5CF6;background:rgba(139,92,246,.2);color:#fff;box-shadow:0 0 20px rgba(139,92,246,.15)}
+.option-btn .emoji{font-size:1.35rem}
+.nav-buttons{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.btn{padding:.7rem 1.5rem;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .25s ease;border:none}
+.btn-primary{background:#8B5CF6;color:#fff}
+.btn-primary:hover{background:#7C3AED;transform:translateY(-1px);box-shadow:0 4px 15px rgba(139,92,246,.3)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:#2A2A2A;color:#E5E5E5}
+.btn-secondary:hover{background:#3A3A3A}
+.btn-gold{background:#FFD700;color:#0A0A0A}
+.btn-gold:hover{background:#E6C200;transform:translateY(-1px)}
+.results{display:none;animation:fadeIn .5s ease}
+.results.active{display:block}
+.results-header{text-align:center;margin-bottom:1.5rem}
+.results-header h2{font-size:1.6rem;font-weight:800}
+.results-header .summary{color:#9CA3AF;margin-top:.25rem;font-size:.95rem}
+.budget-summary{background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(255,215,0,.08));border:1px solid #8B5CF6;border-radius:12px;padding:1rem 1.25rem;text-align:center;margin-bottom:1.5rem}
+.budget-summary .total{font-size:1.6rem;font-weight:800;color:#FFD700}
+.budget-summary .label{font-size:.85rem;color:#9CA3AF}
+.product-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:600px){.product-grid{grid-template-columns:1fr 1fr}}
+.product-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;padding:1rem;display:flex;gap:.85rem;transition:all .25s ease;align-items:flex-start}
+.product-card:hover{border-color:#8B5CF6;transform:translateY(-2px);box-shadow:0 4px 20px rgba(139,92,246,.12)}
+.product-placeholder{width:72px;height:72px;border-radius:10px;background:linear-gradient(135deg,#2A2A2A,#3A3A3A);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;border:1px solid #2A2A2A}
+.product-info{flex:1;min-width:0}
+.product-name{font-weight:700;font-size:.95rem;color:#fff;margin-bottom:.15rem}
+.product-brand{font-size:.78rem;color:#8B5CF6;margin-bottom:.2rem}
+.product-meta{font-size:.78rem;color:#9CA3AF;display:flex;flex-wrap:wrap;gap:.35rem .65rem;margin-bottom:.35rem}
+.product-meta span{display:inline-flex;align-items:center;gap:.2rem}
+.product-meta .tag{background:rgba(139,92,246,.15);color:#8B5CF6;padding:0 .45rem;border-radius:4px;font-size:.72rem;font-weight:500}
+.product-meta .rating{color:#FFD700}
+.product-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.82rem;font-weight:600;color:#8B5CF6}
+.product-link:hover{color:#A78BFA}
+.reset-area{text-align:center;margin-top:1.5rem}
+.btn-reset{background:transparent;border:1px solid #2A2A2A;color:#9CA3AF;padding:.6rem 1.5rem;border-radius:10px;cursor:pointer;font-size:.88rem;transition:all .25s}
+.btn-reset:hover{background:#2A2A2A;color:#E5E5E5}
+@media(max-width:480px){
+.wizard-card{padding:1.25rem 1rem}
+.options{gap:.5rem}
+.options.three-col{grid-template-columns:1fr 1fr}
+.option-btn{padding:.65rem .5rem;font-size:.85rem;min-height:2.8rem}
+.product-card{padding:.75rem;gap:.6rem}
+.product-placeholder{width:56px;height:56px;font-size:1.5rem}
+}
+.hidden{display:none!important}
+.mt-1{margin-top:1rem}
+.text-center{text-align:center}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>🐾 Haustier-Produkt-Finder 2026</h1>
+  <p>3 Fragen – maßgeschneiderte Empfehlungen für dein Haustier</p>
+</header>
+
+<div class="container" id="app">
+
+  <div class="wizard-card" id="wizardCard">
+
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span class="progress-step" id="progressStep">Frage 1 von 3</span>
+        <span id="progressPct">0 %</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div id="questionContainer">
+
+      <!-- Q1: Pet Type -->
+      <div class="question active" data-q="0">
+        <h2>🐾 Welches Haustier hast du?</h2>
+        <p class="q-desc">Wähle die Tierart aus</p>
+        <div class="options">
+          <button class="option-btn" data-value="hund"><span class="emoji">🐕</span> Hund</button>
+          <button class="option-btn" data-value="katze"><span class="emoji">🐱</span> Katze</button>
+          <button class="option-btn" data-value="kleintier"><span class="emoji">🐹</span> Kleintier & Nager</button>
+          <button class="option-btn" data-value="vogel"><span class="emoji">🐦</span> Vogel</button>
+          <button class="option-btn" data-value="aquarium"><span class="emoji">🐟</span> Aquarium</button>
+          <button class="option-btn" data-value="terrarium"><span class="emoji">🦎</span> Terrarium</button>
+        </div>
+      </div>
+
+      <!-- Q2: Budget -->
+      <div class="question" data-q="1">
+        <h2>💰 Dein Budget?</h2>
+        <p class="q-desc">Wie viel möchtest du ausgeben?</p>
+        <div class="options">
+          <button class="option-btn" data-value="<20"><span class="emoji">💶</span> Bis 20 €</button>
+          <button class="option-btn" data-value="20-50"><span class="emoji">💵</span> 20–50 €</button>
+          <button class="option-btn" data-value="50-100"><span class="emoji">💴</span> 50–100 €</button>
+          <button class="option-btn" data-value="100-200"><span class="emoji">💎</span> 100–200 €</button>
+          <button class="option-btn" data-value="200+"><span class="emoji">👑</span> 200 €+</button>
+        </div>
+      </div>
+
+      <!-- Q3: Need -->
+      <div class="question" data-q="2">
+        <h2>🎯 Was brauchst du?</h2>
+        <p class="q-desc">Wofür suchst du Zubehör?</p>
+        <div class="options">
+          <button class="option-btn" data-value="schlafen"><span class="emoji">🛏️</span> Schlafplatz & Bett</button>
+          <button class="option-btn" data-value="fressen"><span class="emoji">🍖</span> Futter & Ernährung</button>
+          <button class="option-btn" data-value="spielen"><span class="emoji">🎾</span> Spielzeug & Beschäftigung</button>
+          <button class="option-btn" data-value="pflege"><span class="emoji">🧴</span> Pflege & Hygiene</button>
+          <button class="option-btn" data-value="technik"><span class="emoji">📱</span> Smarte Technik</button>
+          <button class="option-btn" data-value="reisen"><span class="emoji">🧳</span> Reise & Unterwegs</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="nav-buttons" id="navButtons">
+      <button class="btn btn-secondary" id="btnBack" style="display:none">← Zurück</button>
+      <button class="btn btn-primary" id="btnNext" disabled>Weiter →</button>
+    </div>
+
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results">
+    <div class="results-header">
+      <h2>🎉 Deine personalisierten Empfehlungen</h2>
+      <p class="summary" id="resultsSummary"></p>
+    </div>
+    <div class="budget-summary">
+      <div class="total" id="budgetTotal">0 €</div>
+      <div class="label">Geschätzte Gesamtkosten</div>
+    </div>
+    <div class="product-grid" id="resultsGrid"></div>
+    <p style="text-align:center;color:#666;font-size:.75rem;margin-top:1rem">* Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. Preise können abweichen.</p>
+    <div class="reset-area">
+      <button class="btn btn-reset" id="btnReset">🔄 Neu starten</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const PRODUCTS = {
+  hund: {
+    schlafen: [
+      {name:"Orthopädisches Hundebett XXL",brand:"MIDWEST HOMES",price:"€ 89,99",rating:5,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZBETT1?tag=ikune21-21",tags:["Bestseller"]},
+      {name:"Donut-Hundebett mit Rand",brand:"MIDWEST HOMES",price:"€ 44,99",rating:4,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZBETT4?tag=ikune21-21",tags:["Kuschelig"]},
+      {name:"Stylisches Hundesofa Samt",brand:"PATIQUE",price:"€ 79,99",rating:5,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZBETT3?tag=ikune21-21",tags:["Design"]}
+    ],
+    fressen: [
+      {name:"Hundetrockenfutter 15kg",brand:"WOLFSBLUT",price:"€ 64,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER1?tag=ikune21-21",tags:["70% Fleisch"]},
+      {name:"Automatischer Futterspender",brand:"SUREFEED",price:"€ 69,99",rating:5,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZHUNDE4?tag=ikune21-21",tags:["Mikrochip","Timer"]},
+      {name:"Anti-Schling-Napf",brand:"TRIXIE",price:"€ 19,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER6?tag=ikune21-21",tags:["Gesundheit"]},
+      {name:"Natürliche Leckerlis 500g",brand:"ANiFORTE",price:"€ 18,99",rating:5,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER3?tag=ikune21-21",tags:["Training"]},
+      {name:"Diät-Trockenfutter 12kg",brand:"HILL'S",price:"€ 59,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER4?tag=ikune21-21",tags:["Gewichtsmanagement"]}
+    ],
+    spielen: [
+      {name:"Kauspielzeug-Set 5er",brand:"TRIXIE",price:"€ 24,99",rating:5,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZSPIEL1?tag=ikune21-21",tags:["Zahnpflege"]},
+      {name:"Intelligenzspielzeug Level 2",brand:"TRIXIE",price:"€ 28,99",rating:5,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZSPIEL3?tag=ikune21-21",tags:["Gehirntraining"]},
+      {name:"Schwimmender Apportierball 2er",brand:"CHUCKIT",price:"€ 18,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZSPIEL4?tag=ikune21-21",tags:["Wasserfest"]},
+      {name:"Automatischer Ballwerfer",brand:"PETSTORE",price:"€ 74,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZTECH7?tag=ikune21-21",tags:["Automatisch"]},
+      {name:"Bungee-Zerrseil",brand:"TRIXIE",price:"€ 15,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZSPIEL6?tag=ikune21-21",tags:["Gelenkschonend"]}
+    ],
+    pflege: [
+      {name:"Fellbürsten-Set 3-teilig",brand:"ANiFORTE",price:"€ 19,99",rating:5,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE1?tag=ikune21-21",tags:["Reduziert Haarausfall"]},
+      {name:"Krallenschneider mit Feile",brand:"TRIXIE",price:"€ 15,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE2?tag=ikune21-21",tags:["Sicherheit"]},
+      {name:"Zeckenhalsband 8 Monate",brand:"SERESTO",price:"€ 39,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE5?tag=ikune21-21",tags:["Langzeitschutz"]},
+      {name:"Pflegetücher 100 Stk.",brand:"ANiFORTE",price:"€ 12,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE6?tag=ikune21-21",tags:["Aloe Vera"]},
+      {name:"Hypoallergenes Shampoo",brand:"ANiFORTE",price:"€ 15,99",rating:5,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE3?tag=ikune21-21",tags:["Empfindlich"]}
+    ],
+    technik: [
+      {name:"GPS-Hundeortungsgerät",brand:"TILE",price:"€ 64,99",rating:4,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTECH1?tag=ikune21-21",tags:["Echtzeit-Tracking"]},
+      {name:"WiFi-Tierkamera mit Leckerli",brand:"PETKIT",price:"€ 119,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTECH2?tag=ikune21-21",tags:["Nachtsicht","App"]},
+      {name:"App-Futterautomat 6L",brand:"SUREFEED",price:"€ 99,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTECH3?tag=ikune21-21",tags:["App-Steuerung"]},
+      {name:"Digitale Haustierwaage",brand:"PETKIT",price:"€ 44,99",rating:4,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTECH6?tag=ikune21-21",tags:["Gesundheits-App"]}
+    ],
+    reisen: [
+      {name:"IATA-Flugtransportbox",brand:"SPORT PET",price:"€ 69,99",rating:5,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE1?tag=ikune21-21",tags:["Flugtauglich"]},
+      {name:"Auto-Rückbankschutz",brand:"PATIQUE",price:"€ 39,99",rating:4,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE4?tag=ikune21-21",tags:["Wasserdicht"]},
+      {name:"Faltbares Reisebett",brand:"MIDWEST HOMES",price:"€ 44,99",rating:4,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE5?tag=ikune21-21",tags:["Camping"]},
+      {name:"Trinkflasche mit Napf",brand:"TRIXIE",price:"€ 15,99",rating:4,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE6?tag=ikune21-21",tags:["2-in-1"]}
+    ]
+  },
+  katze: {
+    schlafen: [
+      {name:"Katzenhöhle aus Filz",brand:"MEOWFIA",price:"€ 32,99",rating:5,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZBETT2?tag=ikune21-21",tags:["Handgefertigt"]},
+      {name:"Katzen-Hängematte",brand:"K&H PET",price:"€ 27,99",rating:4,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZBETT6?tag=ikune21-21",tags:["Heizkörper"]},
+      {name:"Fensterliege Saugnapf",brand:"K&H PET",price:"€ 32,99",rating:5,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZKATZE5?tag=ikune21-21",tags:["Sonnenspot"]}
+    ],
+    fressen: [
+      {name:"Premium-Nassfutter 12x85g",brand:"ANiFORTE",price:"€ 23,99",rating:5,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER2?tag=ikune21-21",tags:["6 Sorten"]},
+      {name:"Erhöhter Keramik-Napf",brand:"BECO PETS",price:"€ 32,99",rating:5,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZKATZE3?tag=ikune21-21",tags:["Gesunde Verdauung"]},
+      {name:"Keramik-Trinkbrunnen 2L",brand:"CATIT",price:"€ 34,99",rating:5,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZKATZE4?tag=ikune21-21",tags:["3 Modi","Filter"]}
+    ],
+    spielen: [
+      {name:"Katzenangel mit Federn",brand:"TRIXIE",price:"€ 13,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZSPIEL2?tag=ikune21-21",tags:["Teleskop"]},
+      {name:"Falt-Katzentunnel",brand:"TRIXIE",price:"€ 27,99",rating:5,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZKATZE6?tag=ikune21-21",tags:["Raschelfolie"]},
+      {name:"Wellpappe-Kratzmatte",brand:"MEOWFIA",price:"€ 18,99",rating:5,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZKATZE8?tag=ikune21-21",tags:["2-in-1 Liege"]},
+      {name:"Bällebad mit Katzenminze",brand:"MEOWFIA",price:"€ 24,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZSPIEL5?tag=ikune21-21",tags:["20 Bälle"]}
+    ],
+    pflege: [
+      {name:"Fellbürsten-Set 3-teilig",brand:"ANiFORTE",price:"€ 19,99",rating:5,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE1?tag=ikune21-21",tags:["Reduziert Haarausfall"]},
+      {name:"Krallenschneider mit Feile",brand:"TRIXIE",price:"€ 15,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE2?tag=ikune21-21",tags:["Sicherheit"]},
+      {name:"Pflegetücher 100 Stk.",brand:"ANiFORTE",price:"€ 12,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZPFLEGE6?tag=ikune21-21",tags:["Aloe Vera"]}
+    ],
+    technik: [
+      {name:"Mikrochip-Katzenklappe",brand:"SUREFLAP",price:"€ 139,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTECH5?tag=ikune21-21",tags:["App","Mikrochip"]},
+      {name:"App-Trinkbrunnen",brand:"PETKIT",price:"€ 49,99",rating:4,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTECH4?tag=ikune21-21",tags:["WLAN","Filter"]},
+      {name:"Selbstreinigende Toilette",brand:"LITTLECAT",price:"€ 249,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZKATZE2?tag=ikune21-21",tags:["Automatisch"]}
+    ],
+    reisen: [
+      {name:"IATA-Flugtransportbox",brand:"SPORT PET",price:"€ 69,99",rating:5,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE1?tag=ikune21-21",tags:["Flugtauglich"]},
+      {name:"Haustier-Rucksack mit Fenster",brand:"KURGO",price:"€ 54,99",rating:4,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE2?tag=ikune21-21",tags:["Belüftet"]},
+      {name:"Falt-Reisenapf Silikon",brand:"TRIXIE",price:"€ 11,99",rating:4,emoji:"🧳",url:"https://www.amazon.de/dp/B08XYZREISE3?tag=ikune21-21",tags:["Platzsparend"]}
+    ]
+  },
+  kleintier: {
+    schlafen: [
+      {name:"Schlafhaus mit Wärmekissen",brand:"TRIXIE",price:"€ 24,99",rating:5,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZBETT5?tag=ikune21-21",tags:["Mikrowelle"]},
+      {name:"Keramik-Versteckhöhle",brand:"NATURTREU",price:"€ 18,99",rating:4,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZNAGER7?tag=ikune21-21",tags:["Kühlend"]},
+      {name:"Holzhaus mit Rutsche",brand:"TRIXIE",price:"€ 42,99",rating:5,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZNAGER4?tag=ikune21-21",tags:["2 Etagen"]}
+    ],
+    fressen: [
+      {name:"Edelstahl-Trinkflasche 250ml",brand:"TRIXIE",price:"€ 11,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZNAGER3?tag=ikune21-21",tags:["Auslaufsicher"]},
+      {name:"Heuraufe mit Saugnapf",brand:"CHICHI",price:"€ 12,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZNAGER6?tag=ikune21-21",tags:["Praktisch"]}
+    ],
+    spielen: [
+      {name:"Leises Hamster-Laufrad Holz",brand:"TRIXIE",price:"€ 24,99",rating:5,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZNAGER5?tag=ikune21-21",tags:["Kugellager"]},
+      {name:"Auslaufgehege 8 Paneele",brand:"FERPLAST",price:"€ 39,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZNAGER2?tag=ikune21-21",tags:["Sicher"]}
+    ],
+    pflege: [],
+    technik: [],
+    reisen: []
+  },
+  vogel: {
+    schlafen: [],
+    fressen: [
+      {name:"Automatische Futterstation",brand:"VITAKRAFT",price:"€ 24,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZVOGEL4?tag=ikune21-21",tags:["400g"]},
+      {name:"Premium-Wellensittichfutter 2kg",brand:"VITAKRAFT",price:"€ 15,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER7?tag=ikune21-21",tags:["Vitaminreich"]},
+      {name:"Mineral-Kalkstein",brand:"AVIS",price:"€ 7,99",rating:5,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZVOGEL6?tag=ikune21-21",tags:["Schnabelpflege"]}
+    ],
+    spielen: [
+      {name:"Naturholz-Sitzstangen 5er",brand:"VITAKRAFT",price:"€ 16,99",rating:5,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZVOGEL2?tag=ikune21-21",tags:["Fußpflege"]},
+      {name:"Vogel-Schaukel mit Glöckchen",brand:"TRIXIE",price:"€ 11,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZVOGEL5?tag=ikune21-21",tags:["Holz"]},
+      {name:"Vogel-Badewanne mit Spiegel",brand:"TRIXIE",price:"€ 18,99",rating:4,emoji:"🎾",url:"https://www.amazon.de/dp/B08XYZVOGEL3?tag=ikune21-21",tags:["Badespaß"]}
+    ],
+    pflege: [],
+    technik: [],
+    reisen: []
+  },
+  aquarium: {
+    schlafen: [],
+    fressen: [
+      {name:"Flockenfutter 250ml",brand:"JBL",price:"€ 12,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZFUTTER8?tag=ikune21-21",tags:["Hauptfutter"]}
+    ],
+    spielen: [],
+    pflege: [
+      {name:"Wasser-Testset 7 Parameter",brand:"JBL",price:"€ 29,99",rating:5,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZAQUA6?tag=ikune21-21",tags:["50 Tests"]},
+      {name:"Kescher-Set 3 Größen",brand:"NICREW",price:"€ 16,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZAQUA7?tag=ikune21-21",tags:["Aluminium"]}
+    ],
+    technik: [
+      {name:"Komplett-Aquarium 60L Set",brand:"JBL",price:"€ 129,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZAQUA1?tag=ikune21-21",tags:["LED","Filter"]},
+      {name:"EHEIM Außenfilter 250L",brand:"EHEIM",price:"€ 79,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZAQUA2?tag=ikune21-21",tags:["600 L/h","Leise"]},
+      {name:"LED-Tageslichtleiste",brand:"NICREW",price:"€ 47,99",rating:4,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZAQUA3?tag=ikune21-21",tags:["6500K"]},
+      {name:"Titan-Heizstab 100W",brand:"EHEIM",price:"€ 37,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZAQUA4?tag=ikune21-21",tags:["Thermostat"]},
+      {name:"CO2-Düngeanlage",brand:"JBL",price:"€ 59,99",rating:4,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZAQUA5?tag=ikune21-21",tags:["Pflanzenwachstum"]}
+    ],
+    reisen: []
+  },
+  terrarium: {
+    schlafen: [
+      {name:"3D-Kork-Rückwand",brand:"NATUR",price:"€ 32,99",rating:4,emoji:"🛏️",url:"https://www.amazon.de/dp/B08XYZTERRA5?tag=ikune21-21",tags:["Klettern"]}
+    ],
+    fressen: [
+      {name:"Futterpinzette 30cm + Näpfe",brand:"EXO TERRA",price:"€ 19,99",rating:4,emoji:"🍖",url:"https://www.amazon.de/dp/B08XYZTERRA6?tag=ikune21-21",tags:["Edelstahl"]}
+    ],
+    spielen: [],
+    pflege: [
+      {name:"Ultraschall-Vernebler",brand:"EXO TERRA",price:"€ 57,99",rating:5,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZTERRA4?tag=ikune21-21",tags:["2,5L Tank"]},
+      {name:"Infrarot-Wärmelampe 50W",brand:"LUCKY REPTILE",price:"€ 27,99",rating:4,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZTERRA2?tag=ikune21-21",tags:["Reflektor"]},
+      {name:"UVB-Lichtleiste 10.0",brand:"LUCKY REPTILE",price:"€ 49,99",rating:5,emoji:"🧴",url:"https://www.amazon.de/dp/B08XYZTERRA3?tag=ikune21-21",tags:["Vitamin D"]}
+    ],
+    technik: [
+      {name:"Glass-Terrarium 80cm",brand:"EXO TERRA",price:"€ 159,99",rating:5,emoji:"📱",url:"https://www.amazon.de/dp/B08XYZTERRA1?tag=ikune21-21",tags:["Fronttüren"]}
+    ],
+    reisen: []
+  }
+};
+
+const PET_NAMES = {hund:"🐕 Hund",katze:"🐱 Katze",kleintier:"🐹 Kleintier/Nager",vogel:"🐦 Vogel",aquarium:"🐟 Aquarium",terrarium:"🦎 Terrarium"};
+const NEED_NAMES = {schlafen:"🛏️ Schlafplatz",fressen:"🍖 Futter/Ernährung",spielen:"🎾 Spielzeug",pflege:"🧴 Pflege",technik:"📱 Smarte Technik",reisen:"🧳 Reise"};
+const BUDGET_LABELS = {"<20":"bis 20€","20-50":"20–50€","50-100":"50–100€","100-200":"100–200€","200+":"200€+"};
+
+const state = {answers:[null,null,null],step:0};
+
+function renderStars(n){
+  return '★'.repeat(n)+'☆'.repeat(5-n);
+}
+
+function parsePrice(s){
+  const m=s.match(/([\d.,]+)/);
+  if(!m)return 0;
+  return parseFloat(m[1].replace(',','.'));
+}
+
+const qCont=document.getElementById('questionContainer');
+const qs=qCont.querySelectorAll('.question');
+const btnNext=document.getElementById('btnNext');
+const btnBack=document.getElementById('btnBack');
+const progressStep=document.getElementById('progressStep');
+const progressPct=document.getElementById('progressPct');
+const progressFill=document.getElementById('progressFill');
+
+function updateUI(){
+  qs.forEach((q,i)=>q.classList.toggle('active',i===state.step));
+  const total=qs.length;
+  const pct=Math.round(((state.step+1)/total)*100);
+  progressStep.textContent=`Frage ${state.step+1} von ${total}`;
+  progressPct.textContent=`${pct} %`;
+  progressFill.style.width=`${pct}%`;
+  btnBack.style.display=state.step===0?'none':'inline-block';
+  btnNext.disabled=state.answers[state.step]===null;
+  btnNext.textContent=state.step===total-1?'🎉 Empfehlungen anzeigen':'Weiter →';
+}
+
+qCont.addEventListener('click',e=>{
+  const btn=e.target.closest('.option-btn');
+  if(!btn)return;
+  const parent=btn.closest('.question');
+  if(!parent)return;
+  const idx=parseInt(parent.dataset.q);
+  parent.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.answers[idx]=btn.dataset.value;
+  btnNext.disabled=false;
+});
+
+btnNext.addEventListener('click',()=>{
+  if(state.step<qs.length-1){
+    state.step++;
+    updateUI();
+  }else{
+    showResults();
+  }
+});
+
+btnBack.addEventListener('click',()=>{
+  if(state.step>0){
+    state.step--;
+    updateUI();
+  }
+});
+
+function showResults(){
+  document.getElementById('wizardCard').style.display='none';
+  const results=document.getElementById('results');
+  results.classList.add('active');
+  const [pet,budget,need]=state.answers;
+  document.getElementById('resultsSummary').textContent=`${PET_NAMES[pet]} · Budget: ${BUDGET_LABELS[budget]} · Bedarf: ${NEED_NAMES[need]}`;
+  const items=PRODUCTS[pet]?.[need]||[];
+  const grid=document.getElementById('resultsGrid');
+  grid.innerHTML='';
+  let total=0;
+  items.forEach(p=>{
+    total+=parsePrice(p.price);
+    const tags=p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.innerHTML=`
+      <div class="product-placeholder">${p.emoji}</div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-meta"><span>💰 ${p.price}</span><span class="rating">${renderStars(p.rating)}</span>${tags}</div>
+        <a href="${p.url}" target="_blank" class="product-link">🔗 Bei Amazon ansehen →</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+  if(items.length===0){
+    grid.innerHTML='<div style="text-align:center;padding:2rem;color:#9CA3AF">Für diese Kombination haben wir leider keine Produkte in unserer Datenbank. Probiere eine andere Kategorie aus! 🐾</div>';
+    document.querySelector('.budget-summary').style.display='none';
+  }else{
+    document.querySelector('.budget-summary').style.display='block';
+    document.getElementById('budgetTotal').textContent=`~ ${total.toFixed(2).replace('.',',')} €`;
+  }
+  results.scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('btnReset').addEventListener('click',()=>{
+  state.answers=[null,null,null];
+  state.step=0;
+  qs.forEach(q=>q.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected')));
+  document.getElementById('wizardCard').style.display='block';
+  document.getElementById('results').classList.remove('active');
+  document.querySelector('.budget-summary').style.display='block';
+  updateUI();
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+updateUI();
+</script>
+</body>
+</html>
