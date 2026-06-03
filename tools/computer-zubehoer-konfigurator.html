@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Computer-Zubehör-Konfigurator 2026 – Finde dein perfektes Tech-Setup</title>
+<meta name="description" content="Interaktiver Computer-Zubehör-Konfigurator 2026. Beantworte 5 Fragen und erhalte personalisierte Empfehlungen für Monitore, Tastaturen, Mäuse, Headsets, Docks & mehr – mit Amazon-Preisen und Bewertungen (tag=ikune21-21).">
+<meta name="keywords" content="Computer Zubehör Konfigurator, Tech Setup, Monitor Empfehlung, Tastatur, Maus, Headset, Docking Station, Home Office, Gaming Setup, ikune21-21">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh;line-height:1.6;display:flex;flex-direction:column;align-items:center}
+a{color:#8B5CF6;text-decoration:none;transition:color .2s}
+a:hover{color:#A78BFA}
+::selection{background:#8B5CF6;color:#fff}
+.header{width:100%;padding:2rem 1rem 1rem;text-align:center;border-bottom:1px solid #2A2A2A}
+.header h1{font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header p{color:#9CA3AF;margin-top:.25rem;font-size:clamp(.85rem,2vw,1.05rem)}
+.container{width:100%;max-width:860px;padding:1.5rem 1rem 3rem}
+.wizard-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;padding:2rem 1.5rem;margin-bottom:1.5rem;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+.wizard-card .q{font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:1.2rem;display:flex;align-items:center;gap:8px}
+.wizard-card .q .num{background:#8B5CF6;color:#fff;border-radius:50%;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;flex-shrink:0}
+.wizard-card .progress{height:4px;background:#2A2A2A;border-radius:2px;margin-bottom:1.5rem;overflow:hidden}
+.wizard-card .progress .bar{height:100%;background:linear-gradient(90deg,#8B5CF6,#FFD700);border-radius:2px;transition:width .5s}
+.options{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:1rem}
+.option-btn{background:#12121a;border:2px solid #2A2A2A;border-radius:12px;padding:16px 14px;text-align:center;cursor:pointer;transition:all .2s;color:#ccc;font-size:.9rem}
+.option-btn:hover{border-color:#8B5CF6;background:rgba(139,92,246,.08);color:#fff}
+.option-btn.selected{border-color:#8B5CF6;background:rgba(139,92,246,.15);color:#8B5CF6;font-weight:600}
+.option-btn .emoji{font-size:1.6rem;display:block;margin-bottom:6px}
+.option-btn .label{font-weight:600;font-size:.85rem;display:block}
+.option-btn .sub{font-size:.75rem;color:#777;display:block;margin-top:2px}
+.nav-buttons{display:flex;gap:10px;justify-content:space-between;margin-top:1rem}
+.btn{background:#8B5CF6;color:#fff;border:none;padding:10px 24px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:#7c4fe0;transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-secondary{background:#2A2A2A;color:#ccc}
+.btn-secondary:hover{background:#3A3A3A;color:#fff}
+.results{display:none;animation:fadeIn .4s}
+.results.show{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.result-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:14px;padding:20px;margin-bottom:14px;transition:all .2s}
+.result-card:hover{border-color:#8B5CF6;transform:translateY(-2px)}
+.result-card .cat{color:#FFD700;font-size:.75rem;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.result-card h3{color:#fff;font-size:1.05rem;font-weight:600;margin-bottom:4px}
+.result-card .desc{color:#999;font-size:.85rem;margin-bottom:8px}
+.result-card .price{color:#FFD700;font-weight:600;font-size:.9rem;margin-bottom:8px}
+.result-card .link{display:inline-block;background:#8B5CF6;color:#fff;padding:6px 14px;border-radius:8px;font-size:.8rem;font-weight:600;transition:background .2s}
+.result-card .link:hover{background:#6d3fd6;color:#fff}
+.result-summary{background:linear-gradient(135deg,#12121a,#0a1a2e);border:1px solid #8B5CF6;border-radius:16px;padding:24px;margin-bottom:24px}
+.result-summary h2{color:#fff;font-size:1.4rem;margin-bottom:8px}
+.result-summary p{color:#999;font-size:.9rem}
+.result-summary .budget-info{color:#FFD700;font-weight:600;margin-top:8px}
+.filters{margin:20px 0;display:flex;flex-wrap:wrap;gap:8px}
+.filter-tag{padding:5px 12px;border-radius:20px;font-size:.8rem;background:#0a1a2e;border:1px solid #2A2A2A;color:#aaa;cursor:pointer;transition:all .2s}
+.filter-tag.active{background:#8B5CF6;border-color:#8B5CF6;color:#fff}
+.filter-tag:hover{border-color:#8B5CF6;color:#fff}
+.reset-link{color:#8B5CF6;font-size:.85rem;cursor:pointer;margin-top:16px;display:inline-block}
+.reset-link:hover{color:#FFD700}
+footer{width:100%;text-align:center;padding:2rem 1rem;color:#555;font-size:.8rem;border-top:1px solid #2A2A2A;margin-top:auto}
+footer a{color:#8B5CF6;text-decoration:none}
+@media(max-width:600px){
+.options{grid-template-columns:1fr 1fr}
+.wizard-card{padding:1.5rem 1rem}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+<h1>💻 Computer-Zubehör-Konfigurator 2026</h1>
+<p>Beantworte 5 Fragen und erhalte personalisierte Produkt-Empfehlungen mit Amazon-Preisen</p>
+</header>
+
+<div class="container">
+<div class="wizard-card" id="wizard">
+<div class="progress"><div class="bar" id="progressBar" style="width:0%"></div></div>
+
+<div id="step1" class="step">
+<div class="q"><span class="num">1</span> Wofür brauchst du das Setup?</div>
+<div class="options" id="q1">
+<div class="option-btn" data-val="homeoffice" onclick="selectQ(this,'q1')"><span class="emoji">🏢</span><span class="label">Home Office</span><span class="sub">Produktivität & Komfort</span></div>
+<div class="option-btn" data-val="gaming" onclick="selectQ(this,'q1')"><span class="emoji">🎮</span><span class="label">Gaming</span><span class="sub">High-Performance</span></div>
+<div class="option-btn" data-val="creative" onclick="selectQ(this,'q1')"><span class="emoji">🎨</span><span class="label">Kreativ / Design</span><span class="sub">Farbgenauigkeit</span></div>
+<div class="option-btn" data-val="student" onclick="selectQ(this,'q1')"><span class="emoji">🎓</span><span class="label">Student / Uni</span><span class="sub">Mobil & günstig</span></div>
+<div class="option-btn" data-val="travel" onclick="selectQ(this,'q1')"><span class="emoji">✈️</span><span class="label">Reise / Unterwegs</span><span class="sub">Ultraleicht</span></div>
+</div>
+</div>
+
+<div id="step2" class="step" style="display:none">
+<div class="q"><span class="num">2</span> Wie hoch ist dein Budget?</div>
+<div class="options" id="q2">
+<div class="option-btn" data-val="minimal" onclick="selectQ(this,'q2')"><span class="emoji">💰</span><span class="label">Minimal (bis 200€)</span><span class="sub">Nur das Nötigste</span></div>
+<div class="option-btn" data-val="basic" onclick="selectQ(this,'q2')"><span class="emoji">💵</span><span class="label">Basic (€200-500)</span><span class="sub">Gute Basis</span></div>
+<div class="option-btn" data-val="standard" onclick="selectQ(this,'q2')"><span class="emoji">💎</span><span class="label">Standard (€500-1k)</span><span class="sub">Rundum-Sorglos</span></div>
+<div class="option-btn" data-val="premium" onclick="selectQ(this,'q2')"><span class="emoji">👑</span><span class="label">Premium (€1k-2k)</span><span class="sub">High-End</span></div>
+<div class="option-btn" data-val="pro" onclick="selectQ(this,'q2')"><span class="emoji">🚀</span><span class="label">Profi (€2k+)</span><span class="sub">Keine Kompromisse</span></div>
+</div>
+</div>
+
+<div id="step3" class="step" style="display:none">
+<div class="q"><span class="num">3</span> Welche Geräte brauchst du?</div>
+<div class="options" id="q3" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+<div class="option-btn" data-val="monitor" onclick="selectQ(this,'q3')"><span class="emoji">🖥️</span><span class="label">Monitor</span></div>
+<div class="option-btn" data-val="tastatur" onclick="selectQ(this,'q3')"><span class="emoji">⌨️</span><span class="label">Tastatur</span></div>
+<div class="option-btn" data-val="maus" onclick="selectQ(this,'q3')"><span class="emoji">🖱️</span><span class="label">Maus</span></div>
+<div class="option-btn" data-val="headset" onclick="selectQ(this,'q3')"><span class="emoji">🎧</span><span class="label">Headset</span></div>
+<div class="option-btn" data-val="webcam" onclick="selectQ(this,'q3')"><span class="emoji">📷</span><span class="label">Webcam</span></div>
+<div class="option-btn" data-val="dock" onclick="selectQ(this,'q3')"><span class="emoji">🔌</span><span class="label">Dock / Hub</span></div>
+<div class="option-btn" data-val="speicher" onclick="selectQ(this,'q3')"><span class="emoji">💾</span><span class="label">SSD/Speicher</span></div>
+<div class="option-btn" data-val="alles" onclick="selectQ(this,'q3')"><span class="emoji">📦</span><span class="label">Komplett-Setup</span></div>
+</div>
+</div>
+
+<div id="step4" class="step" style="display:none">
+<div class="q"><span class="num">4</span> Desktop oder Laptop?</div>
+<div class="options" id="q4">
+<div class="option-btn" data-val="desktop" onclick="selectQ(this,'q4')"><span class="emoji">🖥️</span><span class="label">Desktop-PC</span><span class="sub">Fester Arbeitsplatz</span></div>
+<div class="option-btn" data-val="laptop" onclick="selectQ(this,'q4')"><span class="emoji">💻</span><span class="label">Laptop</span><span class="sub">Mobil & flexibel</span></div>
+<div class="option-btn" data-val="both" onclick="selectQ(this,'q4')"><span class="emoji">🔗</span><span class="label">Beides</span><span class="sub">Laptop + Docking</span></div>
+</div>
+</div>
+
+<div id="step5" class="step" style="display:none">
+<div class="q"><span class="num">5</span> Besondere Wünsche?</div>
+<div class="options" id="q5" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+<div class="option-btn" data-val="ergonomie" onclick="selectQ(this,'q5')"><span class="emoji">🪑</span><span class="label">Ergonomie</span><span class="sub">Gesundheit</span></div>
+<div class="option-btn" data-val="mechanical" onclick="selectQ(this,'q5')"><span class="emoji">⌨️</span><span class="label">Mechanisch</span><span class="sub">Besseres Gefühl</span></div>
+<div class="option-btn" data-val="noise" onclick="selectQ(this,'q5')"><span class="emoji">🔇</span><span class="label">Noise-Cancelling</span><span class="sub">Ruhe & Fokus</span></div>
+<div class="option-btn" data-val="multidevice" onclick="selectQ(this,'q5')"><span class="emoji">📱</span><span class="label">Multi-Device</span><span class="sub">PC+Tablet+Phone</span></div>
+<div class="option-btn" data-val="portable" onclick="selectQ(this,'q5')"><span class="emoji">🎒</span><span class="label">Portabel</span><span class="sub">Leicht & klein</span></div>
+<div class="option-btn" data-val="none" onclick="selectQ(this,'q5')"><span class="emoji">✅</span><span class="label">Keine</span><span class="sub">Standard-Setup</span></div>
+</div>
+</div>
+
+<div class="nav-buttons">
+<button class="btn btn-secondary" id="prevBtn" onclick="prevStep()" style="visibility:hidden">← Zurück</button>
+<button class="btn" id="nextBtn" onclick="nextStep()" disabled>Weiter →</button>
+</div>
+</div>
+
+<div class="results" id="results">
+<div class="result-summary" id="resultSummary">
+<h2>🎯 Dein personalisiertes Tech-Setup</h2>
+<p>Basierend auf deinen Angaben haben wir die besten Produkte für dich zusammengestellt.</p>
+<div class="budget-info" id="budgetInfo"></div>
+</div>
+<div class="filters" id="resultFilters">
+<span class="filter-tag active" onclick="filterResults('all',this)">Alle</span>
+<span class="filter-tag" onclick="filterResults('monitor',this)">🖥️ Monitor</span>
+<span class="filter-tag" onclick="filterResults('tastatur',this)">⌨️ Tastatur</span>
+<span class="filter-tag" onclick="filterResults('maus',this)">🖱️ Maus</span>
+<span class="filter-tag" onclick="filterResults('audio',this)">🎧 Audio</span>
+<span class="filter-tag" onclick="filterResults('dock',this)">🔌 Dock</span>
+<span class="filter-tag" onclick="filterResults('speicher',this)">💾 Speicher</span>
+<span class="filter-tag" onclick="filterResults('webcam',this)">📷 Webcam</span>
+</div>
+<div id="productList"></div>
+<a class="reset-link" onclick="resetWizard()">🔄 Neue Konfiguration starten</a>
+</div>
+
+</div>
+
+<footer>
+<p>🔗 Amazon Affiliate (tag=ikune21-21) | <a href="../blog/index.html">Blog</a> | <a href="../tools/index.html">Alle Tools</a> | <a href="../impressum/">Impressum</a></p>
+<p style="margin-top:4px;color:#444">Als Amazon-Partner verdienen wir an qualifizierten Verkäufen.</p>
+</footer>
+
+<script>
+// ===== DATA =====
+const PRODUCTS = {
+monitor: [
+{name:'Dell UltraSharp U2724D 27" QHD',brand:'DELL',price:'€429',cat:'monitor',desc:'27" QHD (2560x1440), USB-C Hub, 120Hz, 98% DCI-P3. Der beste Home-Office Monitor.',url:'https://www.amazon.de/dp/B0CP6J8KRL?tag=ikune21-21',budget:'standard'},
+{name:'BenQ EW2880U 28" 4K',brand:'BENQ',price:'€429',cat:'monitor',desc:'28" 4K IPS, USB-C PD 60W, Eye-Care. Perfekt für lange Arbeitstage.',url:'https://www.amazon.de/dp/B09VSZM4LZ?tag=ikune21-21',budget:'standard'},
+{name:'LG 27GP850-B 27" QHD Nano IPS',brand:'LG',price:'€399',cat:'monitor',desc:'27" QHD (165Hz, 1ms) G-Sync/FreeSync. Gaming-Profi.',url:'https://www.amazon.de/dp/B09R2N6MFD?tag=ikune21-21',budget:'standard'},
+{name:'Samsung Odyssey G5 34" UWQHD',brand:'SAMSUNG',price:'€499',cat:'monitor',desc:'34" Curved Ultra-Wide (3440x1440), 165Hz. Immersives Gaming.',url:'https://www.amazon.de/dp/B0BNT1GZNG?tag=ikune21-21',budget:'premium'},
+{name:'ASUS ProArt PA279CRV 27" 4K',brand:'ASUS',price:'€649',cat:'monitor',desc:'27" 4K IPS, 99% AdobeRGB, USB-C 96W PD. Für Profi-Designer.',url:'https://www.amazon.de/dp/B0BX2Z4J3R?tag=ikune21-21',budget:'premium'},
+{name:'Portable ASUS MB16ACV 15,6"',brand:'ASUS',price:'€199',cat:'monitor',desc:'Tragbarer USB-C Monitor, Full-HD. Perfekt für unterwegs.',url:'https://www.amazon.de/dp/B0997ZJ6B6?tag=ikune21-21',budget:'basic'},
+{name:'Gigabyte M28U 28" 4K 144Hz',brand:'GIGABYTE',price:'€549',cat:'monitor',desc:'4K 144Hz, HDMI 2.1, KVM-Switch. Gaming & Produktivität.',url:'https://www.amazon.de/dp/B096Y6TGT5?tag=ikune21-21',budget:'premium'},
+{name:'Apple Studio Display 27" 5K',brand:'APPLE',price:'€1.599',cat:'monitor',desc:'27" 5K Retina, A13 Chip, 6-Lautsprecher. Für Mac-Profis.',url:'https://www.amazon.de/dp/B0B4YD2K5T?tag=ikune21-21',budget:'pro'},
+],
+tastatur: [
+{name:'Logitech MX Mechanical Mini',brand:'LOGITECH',price:'€149',cat:'tastatur',desc:'Kabellos, Low-Profile Mechanisch, Multi-Device, USB-C.',url:'https://www.amazon.de/dp/B09YMZ4MK6?tag=ikune21-21',budget:'standard'},
+{name:'Keychron Q3 Pro (ISO-DE)',brand:'KEYCHRON',price:'€189',cat:'tastatur',desc:'75% Mechanisch, QMK/VIA, Bluetooth, Alu-Gehäuse. Enthusiasten-Wahl.',url:'https://www.amazon.de/dp/B0C4FP3QRK?tag=ikune21-21',budget:'standard'},
+{name:'Corsair K70 RGB Pro',brand:'CORSAIR',price:'€179',cat:'tastatur',desc:'Vollgröße, Cherry MX, 8.000Hz, PBT-Keycaps. Gaming-König.',url:'https://www.amazon.de/dp/B09Y7QZ5TX?tag=ikune21-21',budget:'standard'},
+{name:'Logitech K860 Ergonomic Split',brand:'LOGITECH',price:'€109',cat:'tastatur',desc:'Ergonomische Split-Tastatur mit Handballenauflage.',url:'https://www.amazon.de/dp/B07W5GT8DN?tag=ikune21-21',budget:'standard'},
+{name:'Logitech K380 Multi-Device',brand:'LOGITECH',price:'€40',cat:'tastatur',desc:'Kompakte Bluetooth-Tastatur für 3 Geräte. Günstig & gut.',url:'https://www.amazon.de/dp/B0148NPH3I?tag=ikune21-21',budget:'minimal'},
+{name:'Apple Magic Keyboard mit Touch ID',brand:'APPLE',price:'€199',cat:'tastatur',desc:'Offizielles Apple-Keyboard mit Touch ID & USB-C.',url:'https://www.amazon.de/dp/B0BJL6BVLM?tag=ikune21-21',budget:'premium'},
+{name:'Razer Huntsman V3 Pro',brand:'RAZER',price:'€229',cat:'tastatur',desc:'Analog Optical Switches, einstellbarer Auslösepunkt (0.1-4mm).',url:'https://www.amazon.de/dp/B0CH1T8DLT?tag=ikune21-21',budget:'premium'},
+{name:'Logitech G915 LIGHTSPEED',brand:'LOGITECH',price:'€199',cat:'tastatur',desc:'Kabellos, Low-Profile, GL Switches, RGB. Schön & schnell.',url:'https://www.amazon.de/dp/B08K7B3H5P?tag=ikune21-21',budget:'premium'},
+],
+maus: [
+{name:'Logitech MX Master 3S',brand:'LOGITECH',price:'€99',cat:'maus',desc:'Die beste Produktivitätsmaus. 8K DPI, leise, MagSpeed-Rad, 70 Tage Akku.',url:'https://www.amazon.de/dp/B09HM94VDS?tag=ikune21-21',budget:'standard'},
+{name:'Logitech G Pro X Superlight 2',brand:'LOGITECH',price:'€159',cat:'maus',desc:'Nur 60g! Hero 2 Sensor (44K DPI), 95h Akku. E-Sport Nr.1.',url:'https://www.amazon.de/dp/B0C7R5SX5Y?tag=ikune21-21',budget:'standard'},
+{name:'Razer DeathAdder V3 Pro',brand:'RAZER',price:'€149',cat:'maus',desc:'63g, Focus Pro 30K, 90h. Ergonomisch für Rechtshänder.',url:'https://www.amazon.de/dp/B0B7GF65B3?tag=ikune21-21',budget:'standard'},
+{name:'Logitech MX Vertical',brand:'LOGITECH',price:'€80',cat:'maus',desc:'57°-Neigung, reduziert Unterarmbelastung um 20%.',url:'https://www.amazon.de/dp/B07FN2CJM4?tag=ikune21-21',budget:'basic'},
+{name:'Logitech M185 Funkmaus',brand:'LOGITECH',price:'€15',cat:'maus',desc:'Günstige & zuverlässige Funkmaus, 12 Monate Batterie.',url:'https://www.amazon.de/dp/B005M1Q6K6?tag=ikune21-21',budget:'minimal'},
+{name:'Apple Magic Mouse USB-C',brand:'APPLE',price:'€89',cat:'maus',desc:'Multi-Touch Oberfläche, wiederaufladbar. Für Mac-User.',url:'https://www.amazon.de/dp/B0BJL5YY6Z?tag=ikune21-21',budget:'standard'},
+{name:'Kensington Expert Mouse Trackball',brand:'KENSINGTON',price:'€99',cat:'maus',desc:'55mm Trackball, 4 Tasten. Keine Handbewegung nötig.',url:'https://www.amazon.de/dp/B002DP1F9U?tag=ikune21-21',budget:'standard'},
+],
+headset: [
+{name:'Sony WH-1000XM5',brand:'SONY',price:'€349',cat:'audio',desc:'Branchenführendes ANC, 30h Akku, LDAC, Hi-Res-Audio.',url:'https://www.amazon.de/dp/B09Y2DZQZ6?tag=ikune21-21',budget:'premium'},
+{name:'Bose QC Ultra Headphones',brand:'BOSE',price:'€429',cat:'audio',desc:'CustomTune ANC, Immersive Audio, 24h. Bestes ANC.',url:'https://www.amazon.de/dp/B0CJXJLVPW?tag=ikune21-21',budget:'pro'},
+{name:'Logitech G Pro X Wireless',brand:'LOGITECH',price:'€129',cat:'audio',desc:'Kabellos, Blue Voice Mikrofon, DTS:X 2.0, 20h. Gaming.',url:'https://www.amazon.de/dp/B07T7SPCCQ?tag=ikune21-21',budget:'standard'},
+{name:'Jabra Evolve2 65',brand:'JABRA',price:'€199',cat:'audio',desc:'Business-Headset, 37h, 8-Mikrofon, Teams-zertifiziert.',url:'https://www.amazon.de/dp/B09YSPLMSZ?tag=ikune21-21',budget:'standard'},
+{name:'Apple AirPods Pro 2 USB-C',brand:'APPLE',price:'€249',cat:'audio',desc:'ANC, Adaptive Transparency, MagSafe, Find My.',url:'https://www.amazon.de/dp/B0BDHWDR12?tag=ikune21-21',budget:'premium'},
+{name:'JBL Tune 510BT',brand:'JBL',price:'€40',cat:'audio',desc:'On-Ear Bluetooth, Pure Bass, 40h. Günstiger Allrounder.',url:'https://www.amazon.de/dp/B08ZW8WS2T?tag=ikune21-21',budget:'minimal'},
+{name:'Bose QC Earbuds II',brand:'BOSE',price:'€249',cat:'audio',desc:'CustomTune ANC (passt sich Ohr an), 6h+Case.',url:'https://www.amazon.de/dp/B0B4MY4LQP?tag=ikune21-21',budget:'premium'},
+],
+dock: [
+{name:'CalDigit TS4 Thunderbolt 4 Dock',brand:'CALDIGIT',price:'€379',cat:'dock',desc:'18 Anschlüsse, 2.5GbE, UHS-II SD, 98W PD. Die beste Dock.',url:'https://www.amazon.de/dp/B09KYG8P7K?tag=ikune21-21',budget:'premium'},
+{name:'Anker PowerExpand 13-in-1',brand:'ANKER',price:'€80',cat:'dock',desc:'13-in-1 USB-C: HDMI 4K60, 100W PD, Ethernet, SD.',url:'https://www.amazon.de/dp/B08DW3GH3P?tag=ikune21-21',budget:'basic'},
+{name:'Dell WD19S 130W Dock',brand:'DELL',price:'€199',cat:'dock',desc:'USB-C 130W PD, HDMI/DP 4K, Ethernet. Offiziell von Dell.',url:'https://www.amazon.de/dp/B0863HMF5L?tag=ikune21-21',budget:'standard'},
+{name:'UGREEN USB-C Hub 9-in-1',brand:'UGREEN',price:'€30',cat:'dock',desc:'HDMI 4K60, 100W PD, 3xUSB-A, SD, Ethernet. Top P/L!',url:'https://www.amazon.de/dp/B0BSPBHQ5Q?tag=ikune21-21',budget:'minimal'},
+{name:'Anker 575 USB-C Hub 11-in-1',brand:'ANKER',price:'€55',cat:'dock',desc:'Dual-HDMI (4K60+4K30), 100W PD, Ethernet, SD.',url:'https://www.amazon.de/dp/B09V1X1VP7?tag=ikune21-21',budget:'basic'},
+],
+speicher: [
+{name:'Samsung T7 Portable SSD 1TB',brand:'SAMSUNG',price:'€104',cat:'speicher',desc:'USB 3.2 (1.050 MB/s), AES 256-Bit Verschlüsselung. Top-SSD!',url:'https://www.amazon.de/dp/B0874XN4D9?tag=ikune21-21',budget:'standard'},
+{name:'Samsung T7 Shield 2TB',brand:'SAMSUNG',price:'€199',cat:'speicher',desc:'IP65, 3m Sturzsicher, 1.050 MB/s. Robust für unterwegs.',url:'https://www.amazon.de/dp/B097YMN7PJ?tag=ikune21-21',budget:'standard'},
+{name:'SanDisk Extreme Pro 2TB',brand:'SANDISK',price:'€219',cat:'speicher',desc:'2.000 MB/s! IP65, 4K-Videobearbeitung. Extrem schnell.',url:'https://www.amazon.de/dp/B0B8W5DM65?tag=ikune21-21',budget:'premium'},
+{name:'WD My Passport 5TB HDD',brand:'WD',price:'€129',cat:'speicher',desc:'5TB für Backups. Hardware-Verschlüsselung. Günstiger Speicher.',url:'https://www.amazon.de/dp/B07VLN7Q34?tag=ikune21-21',budget:'basic'},
+{name:'SanDisk Ultra USB-C 512GB',brand:'SANDISK',price:'€60',cat:'speicher',desc:'Dual USB-C + USB-A, 400 MB/s.',url:'https://www.amazon.de/dp/B07G2X3T9R?tag=ikune21-21',budget:'minimal'},
+],
+webcam: [
+{name:'Logitech Brio 505',brand:'LOGITECH',price:'€129',cat:'webcam',desc:'4K/1080p 60fps, Auto-Light, Show-Mode. Beste Webcam.',url:'https://www.amazon.de/dp/B09B29Z9FN?tag=ikune21-21',budget:'standard'},
+{name:'Logitech C920s HD Pro',brand:'LOGITECH',price:'€70',cat:'webcam',desc:'Full-HD, Carl-Zeiss, Dual-Mikrofon. Der Klassiker.',url:'https://www.amazon.de/dp/B089V5P6S8?tag=ikune21-21',budget:'basic'},
+{name:'Logitech StreamCam',brand:'LOGITECH',price:'€90',cat:'webcam',desc:'1080p 60fps, USB-C, vertikal nutzbar. Für Streamer.',url:'https://www.amazon.de/dp/B07Z8QQNWX?tag=ikune21-21',budget:'basic'},
+{name:'Elgato Facecam Pro',brand:'ELGATO',price:'€299',cat:'webcam',desc:'4K60fps, Sony STARVIS, manueller Fokus. Für Profis.',url:'https://www.amazon.de/dp/B09YDMFYG1?tag=ikune21-21',budget:'pro'},
+],
+};
+
+// ===== STATE =====
+let answers = {q1:'',q2:'',q3:'',q4:'',q5:''};
+let currentStep = 1;
+const totalSteps = 5;
+
+function selectQ(el,qId) {
+const parent = document.getElementById(qId);
+parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+el.classList.add('selected');
+answers[qId] = el.dataset.val;
+document.getElementById('nextBtn').disabled = false;
+}
+
+function nextStep() {
+if (currentStep < totalSteps) {
+document.getElementById('step'+currentStep).style.display = 'none';
+currentStep++;
+document.getElementById('step'+currentStep).style.display = 'block';
+document.getElementById('prevBtn').style.visibility = 'visible';
+document.getElementById('progressBar').style.width = ((currentStep-1)/totalSteps*100)+'%';
+document.getElementById('nextBtn').disabled = true;
+if (currentStep === totalSteps) {
+document.getElementById('nextBtn').textContent = '🎯 Ergebnisse anzeigen';
+}
+if (answers['q'+currentStep]) {
+document.getElementById('nextBtn').disabled = false;
+}
+window.scrollTo({top:0,behavior:'smooth'});
+} else {
+showResults();
+}
+}
+
+function prevStep() {
+if (currentStep > 1) {
+document.getElementById('step'+currentStep).style.display = 'none';
+currentStep--;
+document.getElementById('step'+currentStep).style.display = 'block';
+document.getElementById('nextBtn').textContent = 'Weiter →';
+document.getElementById('nextBtn').disabled = false;
+document.getElementById('progressBar').style.width = ((currentStep-1)/totalSteps*100)+'%';
+if (currentStep === 1) document.getElementById('prevBtn').style.visibility = 'hidden';
+window.scrollTo({top:0,behavior:'smooth'});
+}
+}
+
+function showResults() {
+document.getElementById('wizard').style.display = 'none';
+document.getElementById('results').classList.add('show');
+
+const budgetLabels = {minimal:'Minimal (bis 200€)',basic:'Basic (€200-500)',standard:'Standard (€500-1k)',premium:'Premium (€1k-2k)',pro:'Profi (€2k+)'};
+const useLabels = {homeoffice:'Home Office 🏢',gaming:'Gaming 🎮',creative:'Kreativ/Design 🎨',student:'Student 🎓',travel:'Reise/Unterwegs ✈️'};
+
+document.getElementById('budgetInfo').innerHTML = `📋 ${useLabels[answers.q1] || answers.q1} | 💰 ${budgetLabels[answers.q2] || answers.q2}`;
+
+let filtered = getFilteredProducts();
+renderProducts(filtered);
+}
+
+function getFilteredProducts() {
+let products = [];
+const useCase = answers.q1;
+const budget = answers.q2;
+const needs = answers.q3;
+const device = answers.q4;
+const wants = answers.q5;
+
+// Determine categories to show
+let cats = [];
+if (needs === 'alles') {
+cats = ['monitor','tastatur','maus','headset','dock','speicher','webcam'];
+} else if (needs) {
+cats = [needs];
+} else {
+cats = Object.keys(PRODUCTS);
+}
+
+// Budget mapping
+const budgetMap = {minimal:['minimal','basic'],basic:['minimal','basic'],standard:['minimal','basic','standard'],premium:['basic','standard','premium'],pro:['standard','premium','pro']};
+const allowedBudgets = budgetMap[budget] || ['basic','standard'];
+
+cats.forEach(cat => {
+if (PRODUCTS[cat]) {
+PRODUCTS[cat].forEach(p => {
+if (allowedBudgets.includes(p.budget)) {
+products.push({...p,priority:0});
+}
+});
+}
+});
+
+// Boost products based on use case & wishes
+products.forEach(p => {
+if (useCase === 'homeoffice' && ['tastatur','maus'].includes(p.cat)) p.priority += 2;
+if (useCase === 'gaming' && p.brand === 'CORSAIR' || p.brand === 'RAZER') p.priority += 2;
+if (useCase === 'creative' && p.cat === 'monitor' && p.price >= 400) p.priority += 2;
+if (useCase === 'travel' && p.budget === 'minimal') p.priority += 1;
+if (useCase === 'student' && p.budget === 'basic') p.priority += 1;
+if (wants === 'ergonomie' && (p.name.includes('Ergonom') || p.name.includes('Vertical') || p.name.includes('K860'))) p.priority += 3;
+if (wants === 'mechanical' && p.name.toLowerCase().includes('mechanic')) p.priority += 3;
+if (wants === 'noise' && (p.name.includes('WH-1000XM5') || p.name.includes('QC') || p.name.includes('AirPods'))) p.priority += 3;
+if (wants === 'multidevice' && (p.name.includes('Multi') || p.name.includes('MX'))) p.priority += 2;
+if (wants === 'portable' && (p.name.includes('Portable') || p.name.includes('K380'))) p.priority += 2;
+if (wants === 'none') p.priority += 0;
+if (p.cat === 'audio') p.priority += 0;
+});
+
+// Sort by priority desc
+products.sort((a,b) => b.priority - a.priority);
+
+// Return limited set (max 4 per category, max 20 total)
+let result = [];
+let catCount = {};
+products.forEach(p => {
+if (!catCount[p.cat]) catCount[p.cat] = 0;
+if (catCount[p.cat] < 4 && result.length < 20) {
+result.push(p);
+catCount[p.cat]++;
+}
+});
+return result;
+}
+
+function renderProducts(products) {
+const list = document.getElementById('productList');
+list.innerHTML = '';
+if (products.length === 0) {
+list.innerHTML = '<p style="color:#999;text-align:center;padding:40px">Keine passenden Produkte gefunden. Starte eine <a onclick="resetWizard()" style="cursor:pointer;color:#8B5CF6">neue Konfiguration</a>.</p>';
+return;
+}
+products.forEach(p => {
+list.innerHTML += `
+<div class="result-card" data-cat="${p.cat}">
+<div class="cat">${p.cat.toUpperCase()} | ${p.brand}</div>
+<h3>${p.name}</h3>
+<div class="desc">${p.desc}</div>
+<div class="price">💰 €${p.price.replace('€','')}</div>
+<a class="link" href="${p.url}" target="_blank" rel="noopener">→ Preis bei Amazon prüfen</a>
+</div>
+`;
+});
+}
+
+function filterResults(cat, el) {
+document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+el.classList.add('active');
+document.querySelectorAll('.result-card').forEach(card => {
+if (cat === 'all' || card.dataset.cat === cat) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+}
+
+function resetWizard() {
+answers = {q1:'',q2:'',q3:'',q4:'',q5:''};
+currentStep = 1;
+document.getElementById('results').classList.remove('show');
+document.getElementById('results').style.display = 'none';
+document.getElementById('wizard').style.display = 'block';
+document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+document.getElementById('step1').style.display = 'block';
+document.getElementById('prevBtn').style.visibility = 'hidden';
+document.getElementById('nextBtn').textContent = 'Weiter →';
+document.getElementById('nextBtn').disabled = true;
+document.getElementById('progressBar').style.width = '0%';
+document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+}
+</script>
+
+</body>
+</html>
