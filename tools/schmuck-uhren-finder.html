@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schmuck- & Uhren-Finder 2026 – Finde dein perfektes Accessoire</title>
+    <meta name="description" content="Finde den perfekten Schmuck oder die passende Uhr mit unserem interaktiven Finder. 5 Fragen – personalisierte Top-10-Empfehlungen mit Amazon Affiliate Links (tag=ikune21-21).">
+    <meta name="keywords" content="Schmuck-Finder, Uhren-Finder, Geschenk-Finder, Schmuck Ratgeber, Uhren Ratgeber, Amazon Affiliate">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Schmuck- & Uhren-Finder 2026">
+    <meta property="og:description" content="5 Fragen – personalisierte Top-10-Empfehlungen. Finde dein perfektes Accessoire!">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/schmuck-uhren-finder.html">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0b0d12;color:#e8edf5;line-height:1.6;padding:20px;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+        .container{max-width:800px;width:100%}
+        h1{font-size:1.8rem;background:linear-gradient(135deg,#f9d976,#f39c12);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:20px 0 8px;text-align:center}
+        .subtitle{color:#8892b0;text-align:center;margin-bottom:24px}
+        .step-indicator{display:flex;justify-content:center;gap:8px;margin:20px 0}
+        .step-dot{width:32px;height:32px;border-radius:50%;background:#2a2d3a;display:flex;align-items:center;justify-content:center;font-size:0.8rem;color:#8892b0;transition:all .3s}
+        .step-dot.active{background:#f39c12;color:#000;font-weight:700;transform:scale(1.15)}
+        .step-dot.done{background:#27ae60;color:#fff}
+        .card{background:#151821;border-radius:16px;padding:28px;border:1px solid #2a2d3a;margin:20px 0}
+        .question{font-size:1.2rem;font-weight:600;margin-bottom:16px;color:#f1c40f}
+        .options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+        .option-btn{background:#1a1d28;border:2px solid #2a2d3a;border-radius:12px;padding:14px;cursor:pointer;text-align:center;transition:all .2s;color:#e8edf5;font-size:0.95rem}
+        .option-btn:hover{border-color:#f39c12;background:#1f2230;transform:translateY(-2px)}
+        .option-btn.selected{border-color:#f39c12;background:linear-gradient(135deg,#f39c12,#e67e22);color:#000;font-weight:600}
+        .option-btn .icon{font-size:1.5rem;display:block;margin-bottom:4px}
+        .nav-buttons{display:flex;justify-content:space-between;margin:20px 0}
+        .nav-btn{padding:10px 24px;border-radius:8px;border:none;cursor:pointer;font-weight:600;transition:all .2s}
+        .nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+        .nav-btn.prev{background:#2a2d3a;color:#e8edf5}
+        .nav-btn.next{background:linear-gradient(135deg,#f39c12,#e67e22);color:#000}
+        .nav-btn.next:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(243,156,18,0.3)}
+        .result-card{background:#1a1d28;border-radius:12px;padding:16px;margin:10px 0;border:1px solid #2a2d3a;transition:border-color .2s}
+        .result-card:hover{border-color:#f39c12}
+        .result-card .name{font-size:1.1rem;font-weight:600;color:#f1c40f}
+        .result-card .desc{font-size:0.85rem;color:#8892b0;margin:4px 0}
+        .result-card .price{color:#27ae60;font-weight:600;margin:4px 0}
+        .amazon-link{display:inline-block;background:linear-gradient(135deg,#f39c12,#e67e22);color:#000;padding:4px 14px;border-radius:20px;font-size:0.82rem;font-weight:600;text-decoration:none;margin:4px 0;transition:transform .2s}
+        .amazon-link:hover{transform:translateY(-2px);text-decoration:none}
+        .result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin:20px 0}
+        .reset-btn{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:600;margin-top:16px;transition:all .2s}
+        .reset-btn:hover{transform:translateY(-2px)}
+        .stats{text-align:center;margin:16px 0;color:#8892b0;font-size:0.85rem}
+        @media(max-width:600px){.options{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>💍 Schmuck- & Uhren-Finder 2026</h1>
+    <p class="subtitle">5 Fragen – finde dein perfektes Accessoire mit personalisierten Empfehlungen</p>
+
+    <div class="step-indicator" id="stepIndicator">
+        <div class="step-dot active">1</div>
+        <div class="step-dot">2</div>
+        <div class="step-dot">3</div>
+        <div class="step-dot">4</div>
+        <div class="step-dot">5</div>
+    </div>
+
+    <div class="card" id="questionCard">
+        <div class="question" id="questionText">Für wen ist das Accessoire?</div>
+        <div class="options" id="optionsContainer"></div>
+        <div class="nav-buttons">
+            <button class="nav-btn prev" id="prevBtn" disabled>← Zurück</button>
+            <button class="nav-btn next" id="nextBtn" disabled>Weiter →</button>
+        </div>
+    </div>
+
+    <div class="card" id="resultCard" style="display:none;">
+        <h2 style="color:#f1c40f;margin-bottom:12px;">✨ Deine personalisierten Empfehlungen</h2>
+        <p style="margin-bottom:16px;color:#8892b0;">Basierend auf deinen Angaben haben wir die besten Produkte für dich ausgewählt.</p>
+        <div class="result-grid" id="resultGrid"></div>
+        <div style="text-align:center;">
+            <a class="amazon-link" href="https://www.amazon.de/s?k=schmuck+uhren+2026&tag=ikune21-21" target="_blank" style="font-size:1rem;padding:10px 28px;">🛒 Alle Produkte bei Amazon entdecken</a>
+            <br><br>
+            <button class="reset-btn" onclick="resetQuiz()">↻ Noch einmal starten</button>
+        </div>
+    </div>
+
+    <div class="stats">Mit ❤️ erstellt · <a href="https://www.amazon.de/s?k=schmuck+uhren+2026&tag=ikune21-21" target="_blank" style="color:#f39c12;">Alle Amazon-Links mit Partner-Tag ikune21-21</a> · <a href="../blog/schmuck-uhren-2026.html" style="color:#64b5f6;">Zum Ratgeber</a></div>
+</div>
+
+<script>
+const questions = [
+    {
+        q: "Für wen ist das Accessoire?",
+        key: "ziel",
+        options: [
+            { text: "👩 Für Frauen", val: "damen" },
+            { text: "👨 Für Männer", val: "herren" },
+            { text: "🎁 Als Geschenk", val: "geschenk" },
+            { text: "👫 Für Paare", val: "paare" }
+        ]
+    },
+    {
+        q: "Was suchst du genau?",
+        key: "art",
+        options: [
+            { text: "⌚ Uhr", val: "uhr" },
+            { text: "💍 Ring", val: "ring" },
+            { text: "📿 Halskette / Anhänger", val: "halskette" },
+            { text: "💎 Ohrringe / Armband", val: "sonstiges" }
+        ]
+    },
+    {
+        q: "Dein Budget?",
+        key: "budget",
+        options: [
+            { text: "💰 Unter 50 €", val: "niedrig" },
+            { text: "💰💰 50-200 €", val: "mittel" },
+            { text: "💰💰💰 200-500 €", val: "gehoben" },
+            { text: "💰💰💰💰 500+ €", val: "luxus" }
+        ]
+    },
+    {
+        q: "Welcher Stil gefällt dir?",
+        key: "stil",
+        options: [
+            { text: "✨ Klassisch & elegant", val: "klassisch" },
+            { text: "🔥 Modern & trendig", val: "modern" },
+            { text: "🏔️ Sportlich & robust", val: "sportlich" },
+            { text: "🎨 Vintage & individuell", val: "vintage" }
+        ]
+    },
+    {
+        q: "Wofür soll es hauptsächlich sein?",
+        key: "anlass",
+        options: [
+            { text: "🏢 Alltag / Business", val: "alltag" },
+            { text: "🎉 Besondere Anlässe", val: "festlich" },
+            { text: "🏋️ Sport / Fitness", val: "sport" },
+            { text: "🎁 Verlobung / Hochzeit", val: "hochzeit" }
+        ]
+    }
+];
+
+const products = [
+    // === Damenuhren ===
+    { name: "Fossil Jacqueline", desc: "Minimalistische Damenuhr, 28 mm, Lederarmband, 3-Zeiger-Quarz. Stilvoll & vielseitig.", price: "~140 €", cat: "uhr", ziel: "damen", budget: "mittel", stil: "klassisch", anlass: "alltag", url: "Fossil+Jacqueline+Damenuhr" },
+    { name: "Citizen Eco-Drive EM0873", desc: "Solarladende Damenuhr, Saphirglas, 100m wasserdicht. Nie Batterie wechseln!", price: "~250 €", cat: "uhr", ziel: "damen", budget: "gehoben", stil: "klassisch", anlass: "alltag", url: "Citizen+Eco-Drive+EM0873" },
+    { name: "Michael Kors Lexington", desc: "Elegante Edelstahluhr, goldfarben, Kristall-Lünette. Business-Look.", price: "~280 €", cat: "uhr", ziel: "damen", budget: "gehoben", stil: "modern", anlass: "festlich", url: "Michael+Kors+Lexington+Damenuhr" },
+    { name: "Skagen Signatur Lilibeth", desc: "Ultradünne Meshuhr (6 mm), Mesh-Armband, skandinavisches Design.", price: "~130 €", cat: "uhr", ziel: "damen", budget: "mittel", stil: "modern", anlass: "alltag", url: "Skagen+Lilibeth+Damenuhr" },
+    { name: "Seiko Presage Cocktail Time", desc: "Automatikuhr mit offenem Herz, Saphirglas, Leder. Japanische Handwerkskunst.", price: "~450 €", cat: "uhr", ziel: "damen", budget: "luxus", stil: "klassisch", anlass: "festlich", url: "Seiko+Presage+Cocktail+Time" },
+    // === Herrenuhren ===
+    { name: "Seiko 5 Sports", desc: "Automatik-Einsteigeruhr, 42 mm, Hardlex-Glas, 100m wasserdicht.", price: "~180 €", cat: "uhr", ziel: "herren", budget: "mittel", stil: "sportlich", anlass: "alltag", url: "Seiko+5+Sports+SNXS79" },
+    { name: "Citizen Promaster Diver", desc: "Taucheruhr mit Eco-Drive, 200m wasserdicht, Leuchtzeiger.", price: "~350 €", cat: "uhr", ziel: "herren", budget: "gehoben", stil: "sportlich", anlass: "sport", url: "Citizen+Promaster+Diver" },
+    { name: "Tissot PRX Powermatic 80", desc: "Integriertes Edelstahlband, Automatik, 80h Gangreserve. Der Trendsetter.", price: "~650 €", cat: "uhr", ziel: "herren", budget: "luxus", stil: "modern", anlass: "alltag", url: "Tissot+PRX+Powermatic+80" },
+    { name: "Casio G-Shock GA-2100", desc: "Die 'CasiOak' – Carbon, 200m wasserdicht, 5-Jahres-Batterie. Unkaputtbar.", price: "~110 €", cat: "uhr", ziel: "herren", budget: "mittel", stil: "sportlich", anlass: "sport", url: "Casio+G-Shock+GA-2100" },
+    { name: "Hamilton Khaki Field Mechanical", desc: "Feldzeitmesser, Handaufzug, 38 mm, Nato-Armband. Für Puristen.", price: "~495 €", cat: "uhr", ziel: "herren", budget: "gehoben", stil: "klassisch", anlass: "alltag", url: "Hamilton+Khaki+Field+Mechanical" },
+    { name: "Orient Bambino", desc: "Vintage-Automatikuhr, 40,5 mm, Lederarmband, Sichtboden. Eleganz pur.", price: "~150 €", cat: "uhr", ziel: "herren", budget: "mittel", stil: "vintage", anlass: "festlich", url: "Orient+Bambino+RA-AC0M03S" },
+    // === Smartwatches ===
+    { name: "Apple Watch Ultra 3", desc: "49 mm Titan, Aktionstaste, Sirene, 36h Akku. Für Extrem-Sportler.", price: "~850 €", cat: "uhr", ziel: "herren", budget: "luxus", stil: "modern", anlass: "sport", url: "Apple+Watch+Ultra+3" },
+    { name: "Samsung Galaxy Watch 7", desc: "KI-Gesundheitssensor, BioActive 2, Wear OS 5. Beste Android-Smartwatch.", price: "~400 €", cat: "uhr", ziel: "herren", budget: "gehoben", stil: "modern", anlass: "alltag", url: "Samsung+Galaxy+Watch+7" },
+    { name: "Garmin Fenix 8", desc: "Multisport-GPS mit Solar, Topo-Karten, KI-Trainingscoach.", price: "~800 €", cat: "uhr", ziel: "herren", budget: "luxus", stil: "sportlich", anlass: "sport", url: "Garmin+Fenix+8" },
+    { name: "Fitbit Charge 7", desc: "Fitness-Tracker mit EKG, Hauttemperatur, 7-Tage-Akku. Schlank & günstig.", price: "~120 €", cat: "uhr", ziel: "damen", budget: "mittel", stil: "modern", anlass: "sport", url: "Fitbit+Charge+7" },
+    { name: "Withings ScanWatch Nova", desc: "Hybrid-Smartwatch, EKG, SpO2, 30 Tage Akku. Medizinisch & diskret.", price: "~350 €", cat: "uhr", ziel: "damen", budget: "gehoben", stil: "klassisch", anlass: "alltag", url: "Withings+ScanWatch+Nova" },
+    { name: "Huawei Watch GT 5", desc: "14 Tage Akku, KI-Laufanalyse, TruSeen 5.5. Perfekt für Vielreisende.", price: "~280 €", cat: "uhr", ziel: "herren", budget: "gehoben", stil: "modern", anlass: "alltag", url: "Huawei+Watch+GT+5" },
+    // === Ringe ===
+    { name: "Diamant-Solitärring 0,5 ct", desc: "Verlobungsring mit 0,5 ct Diamant, 750er Gold, Krappenfassung.", price: "~1.800 €", cat: "ring", ziel: "damen", budget: "luxus", stil: "klassisch", anlass: "hochzeit", url: "Diamant+Solit%C3%A4rring+0.5+ct" },
+    { name: "Moissanit-Verlobungsring", desc: "Moissanit in 925er Silber, ethisch, funkelt stärker als Diamant.", price: "~180 €", cat: "ring", ziel: "damen", budget: "mittel", stil: "modern", anlass: "hochzeit", url: "Moissanit+Verlobungsring" },
+    { name: "Vintage-Verlobungsring", desc: "Roségold mit Diamant, filigran, 0,3 ct. Romantisch & einzigartig.", price: "~650 €", cat: "ring", ziel: "damen", budget: "gehoben", stil: "vintage", anlass: "hochzeit", url: "Vintage+Verlobungsring+Ros%C3%A9gold" },
+    { name: "Trauringe Titan Paar-Set", desc: "Leichte, kratzfeste Titan-Trauringe mit Carbon-Einlage. Modern & unverwüstlich.", price: "~280 €", cat: "ring", ziel: "paare", budget: "gehoben", stil: "modern", anlass: "hochzeit", url: "Titan+Trauringe+Paar" },
+    { name: "Ehering 750er Gelbgold", desc: "Klassischer Gold-Ehering, 4 mm, poliert. Zeitlose Schönheit.", price: "~800 €", cat: "ring", ziel: "paare", budget: "luxus", stil: "klassisch", anlass: "hochzeit", url: "750er+Gelbgold+Ehering" },
+    // === Halsketten ===
+    { name: "925 Silber Layer-Kette Set", desc: "Zwei feine Silberketten (42+45 cm). Perfekt für den Everyday-Look.", price: "~45 €", cat: "halskette", ziel: "damen", budget: "niedrig", stil: "modern", anlass: "alltag", url: "925+Silber+Layer+Kette+Damen" },
+    { name: "Goldene Panzerkette", desc: "Vergoldet, 50 cm, 6 mm. Markantes Accessoire für besondere Anlässe.", price: "~65 €", cat: "halskette", ziel: "damen", budget: "mittel", stil: "modern", anlass: "festlich", url: "goldene+Panzerkette+Damen" },
+    { name: "Initialen-Anhänger mit Kette", desc: "Personalisierbar, 925er Silber. Das persönliche Geschenk!", price: "~35 €", cat: "halskette", ziel: "geschenk", budget: "niedrig", stil: "modern", anlass: "alltag", url: "Initialen+Anh%C3%A4nger+Silber" },
+    { name: "Perlenkette Süßwasserperlen", desc: "Echte Süßwasserperlen, 45 cm, 7-8 mm. Eleganz für jeden Anlass.", price: "~80 €", cat: "halskette", ziel: "damen", budget: "mittel", stil: "klassisch", anlass: "festlich", url: "S%C3%BC%C3%9Fwasserperlenkette+echt" },
+    { name: "Herz-Anhänger 14k Gold", desc: "14-karätiger Goldherz-Anhänger, 15 mm, poliert. Romantisches Geschenk.", price: "~180 €", cat: "halskette", ziel: "damen", budget: "mittel", stil: "klassisch", anlass: "festlich", url: "Gold+Herz+Anh%C3%A4nger+14k" },
+    // === Sonstiges (Armbänder, Ohrringe) ===
+    { name: "Pandora Moments Armband", desc: "Silberarmband mit Gewinde. Sammle deine Erinnerungen mit Charms.", price: "~75 €", cat: "sonstiges", ziel: "damen", budget: "mittel", stil: "modern", anlass: "alltag", url: "Pandora+Moments+Armband" },
+    { name: "Lederarmband Herren Magnet", desc: "Geflochtenes Leder, Edelstahl-Magnetverschluss. Maskulin & lässig.", price: "~25 €", cat: "sonstiges", ziel: "herren", budget: "niedrig", stil: "sportlich", anlass: "alltag", url: "Lederarmband+Herren+Magnet" },
+    { name: "Gold-Creolen 14k", desc: "14k Gold, 20 mm Durchmesser, poliert. Der zeitlose Klassiker.", price: "~280 €", cat: "sonstiges", ziel: "damen", budget: "gehoben", stil: "klassisch", anlass: "festlich", url: "14k+Gold+Creolen+20mm" },
+    { name: "Zirkonia-Ohrstecker Silber", desc: "Funkelnde Zirkonia, 925er Silber, 6 mm. Perfekt fürs Büro.", price: "~35 €", cat: "sonstiges", ziel: "damen", budget: "niedrig", stil: "klassisch", anlass: "alltag", url: "Zirkonia+Ohrstecker+Silber" },
+    { name: "Karma-Armband Edelstein", desc: "Geflochten mit Aventurin, Rosenquarz, Tigerauge. Positive Energie.", price: "~15 €", cat: "sonstiges", ziel: "geschenk", budget: "niedrig", stil: "modern", anlass: "alltag", url: "Karma+Armband+Edelstein" },
+    { name: "Mutter-Tochter-Armbänder", desc: "Zwei Halbherz-Armbänder, die zusammen ein Herz ergeben. Liebevoll!", price: "~30 €", cat: "sonstiges", ziel: "geschenk", budget: "niedrig", stil: "modern", anlass: "festlich", url: "Mutter+Tochter+Armb%C3%A4nder+Zusammenpassend" },
+    { name: "Tennisarmband Zirkonia", desc: "Funkelnd, 2,5 ct Zirkonia, rhodiniert. Luxuslook zum kleinen Preis.", price: "~55 €", cat: "sonstiges", ziel: "damen", budget: "mittel", stil: "klassisch", anlass: "festlich", url: "Tennisarmband+Zirkonia" },
+    // === Geschenk-Sets ===
+    { name: "Geschenkset Uhr + Armband", desc: "Harmonisches Set aus Damenuhr + Armband in Geschenkbox.", price: "~90 €", cat: "uhr", ziel: "geschenk", budget: "mittel", stil: "klassisch", anlass: "festlich", url: "Uhr+Armband+Geschenkset+Damen" },
+    { name: "Männer-Geschenkbox", desc: "Uhr + Manschettenknöpfe + Krawattennadel in Holzbox. Für den Bräutigam.", price: "~120 €", cat: "sonstiges", ziel: "geschenk", budget: "mittel", stil: "klassisch", anlass: "festlich", url: "Herren+Geschenkbox+Uhr+Manschettenkn%C3%B6pfe" }
+];
+
+let currentStep = 0;
+let answers = {};
+
+function renderStep() {
+    const question = questions[currentStep];
+    document.getElementById("questionText").textContent = question.q;
+    const container = document.getElementById("optionsContainer");
+    container.innerHTML = "";
+    question.options.forEach(opt => {
+        const btn = document.createElement("div");
+        btn.className = "option-btn" + (answers[question.key] === opt.val ? " selected" : "");
+        btn.innerHTML = opt.text;
+        btn.onclick = () => selectOption(question.key, opt.val);
+        container.appendChild(btn);
+    });
+    updateDots();
+    document.getElementById("prevBtn").disabled = currentStep === 0;
+    document.getElementById("nextBtn").disabled = !answers[question.key];
+}
+
+function selectOption(key, val) {
+    answers[key] = val;
+    document.querySelectorAll(".option-btn").forEach((btn, i) => {
+        btn.classList.toggle("selected", questions[currentStep].options[i].val === val);
+    });
+    document.getElementById("nextBtn").disabled = false;
+}
+
+function nextStep() {
+    if (currentStep < questions.length - 1) {
+        currentStep++;
+        renderStep();
+    } else {
+        showResults();
+    }
+}
+
+function prevStep() {
+    if (currentStep > 0) {
+        currentStep--;
+        renderStep();
+    }
+}
+
+function updateDots() {
+    document.querySelectorAll(".step-dot").forEach((dot, i) => {
+        dot.className = "step-dot";
+        if (i < currentStep) dot.classList.add("done");
+        else if (i === currentStep) dot.classList.add("active");
+    });
+}
+
+function showResults() {
+    document.getElementById("questionCard").style.display = "none";
+    document.getElementById("resultCard").style.display = "block";
+    document.getElementById("stepIndicator").style.display = "none";
+
+    let scored = products.map(p => {
+        let score = 0;
+        if (p.cat === answers.art) score += 3;
+        if (p.ziel === answers.ziel || (answers.ziel === "geschenk" && (p.ziel === "geschenk" || p.ziel === "damen" || p.ziel === "herren"))) score += 2;
+        if (p.ziel === "paare" && answers.ziel === "paare") score += 3;
+        if (p.budget === answers.budget) score += 2;
+        if (Math.abs(["niedrig","mittel","gehoben","luxus"].indexOf(p.budget) - ["niedrig","mittel","gehoben","luxus"].indexOf(answers.budget)) <= 1) score += 1;
+        if (p.stil === answers.stil) score += 2;
+        if (p.anlass === answers.anlass) score += 2;
+        if (answers.anlass === "hochzeit" && p.anlass === "hochzeit") score += 3;
+        else if (answers.anlass === "festlich" && (p.anlass === "festlich" || p.anlass === "hochzeit")) score += 1;
+        return { ...p, score };
+    });
+
+    scored.sort((a, b) => b.score - a.score);
+    const top = scored.slice(0, 10);
+
+    const grid = document.getElementById("resultGrid");
+    grid.innerHTML = "";
+    top.forEach(p => {
+        const div = document.createElement("div");
+        div.className = "result-card";
+        div.innerHTML = `
+            <div class="name">${p.name}</div>
+            <div class="desc">${p.desc}</div>
+            <div class="price">💰 ${p.price}</div>
+            <a class="amazon-link" href="https://www.amazon.de/s?k=${p.url}&tag=ikune21-21" target="_blank">🛒 Bei Amazon ansehen</a>
+        `;
+        grid.appendChild(div);
+    });
+}
+
+function resetQuiz() {
+    currentStep = 0;
+    answers = {};
+    document.getElementById("questionCard").style.display = "block";
+    document.getElementById("resultCard").style.display = "none";
+    document.getElementById("stepIndicator").style.display = "flex";
+    renderStep();
+}
+
+renderStep();
+</script>
+</body>
+</html>
