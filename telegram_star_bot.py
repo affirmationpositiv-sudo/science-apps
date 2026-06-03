@@ -34,9 +34,9 @@ if os.path.exists(OFFSET_FILE):
 # Get updates
 updates = requests.get(f"{API}/getUpdates", params={
     "offset": offset,
-    "timeout": 30,
+    "timeout": 5,
     "limit": 100
-}, timeout=35).json()
+}, timeout=10).json()
 
 new_offset = offset
 payments_found = []
