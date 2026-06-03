@@ -1,0 +1,249 @@
+{
+  "bot": "Yesaryour_bot",
+  "products": [
+    {
+      "title": "KI Texte-Service",
+      "stars": 50,
+      "link": "https://t.me/$ejDHeGF6-Ei7HAAAgsp7cyNp5ko",
+      "payload": "prod_001"
+    },
+    {
+      "title": "KI Bilder-Service",
+      "stars": 30,
+      "link": "https://t.me/$bq4JZGF6-Ei8HAAAJ1nq18mqsOY",
+      "payload": "prod_002"
+    },
+    {
+      "title": "KI Bot-Bau",
+      "stars": 80,
+      "link": "https://t.me/$WzMqGWF6-Ei9HAAAo3HY99oDNhk",
+      "payload": "prod_003"
+    },
+    {
+      "title": "KI Automation Starter",
+      "stars": 50,
+      "link": "https://t.me/$GVyNe2F6-Ei-HAAAQF18Rr16fIY",
+      "payload": "prod_004"
+    },
+    {
+      "title": "KI Automation Pro",
+      "stars": 200,
+      "link": "https://t.me/$KSDdnmF6-Ei_HAAAUQ2JzKq0FCA",
+      "payload": "prod_005"
+    },
+    {
+      "title": "KI Automation Enterprise",
+      "stars": 500,
+      "link": "https://t.me/$UFDqp2F6-EjAHAAAivYESdV0QVU",
+      "payload": "prod_006"
+    },
+    {
+      "title": "Prompt-Pack Vol.1",
+      "stars": 10,
+      "link": "https://t.me/$cJORd2F6-EjBHAAATdgNNKIaYdc",
+      "payload": "prod_007"
+    },
+    {
+      "title": "Prompt-Pack Vol.2",
+      "stars": 10,
+      "link": "https://t.me/$2aemqmF6-EjCHAAAfXlfelUBXIA",
+      "payload": "prod_008"
+    },
+    {
+      "title": "Prompt-Pack Vol.3",
+      "stars": 10,
+      "link": "https://t.me/$16E1vWF6-EjDHAAAnB7PjJkUgU4",
+      "payload": "prod_009"
+    },
+    {
+      "title": "30-Min-KI-Coaching",
+      "stars": 30,
+      "link": "https://t.me/$yO4fm2F6-EjEHAAAN3bOwOOmPdE",
+      "payload": "prod_010"
+    },
+    {
+      "title": "60-Min-KI-Coaching",
+      "stars": 50,
+      "link": "https://t.me/$4A3ya2F6-EjFHAAAlHU3l_yWTmA",
+      "payload": "prod_011"
+    },
+    {
+      "title": "Business Booster 3h",
+      "stars": 100,
+      "link": "https://t.me/$ZYqucWF6-EjGHAAA2kT5ai6JBPs",
+      "payload": "prod_012"
+    },
+    {
+      "title": "VIP-KI-Tag 8h",
+      "stars": 200,
+      "link": "https://t.me/$9zcjq2F6-EjHHAAAaIDzYbPhuBU",
+      "payload": "prod_013"
+    },
+    {
+      "title": "KI-Strategie-Call",
+      "stars": 80,
+      "link": "https://t.me/$_Pg81WF6-EjIHAAA1x9dJQZ3d_Q",
+      "payload": "prod_014"
+    },
+    {
+      "title": "Notion Business Planner",
+      "stars": 7,
+      "link": "https://t.me/$EteB12F6-EjJHAAAM5CKjQGARUI",
+      "payload": "prod_015"
+    },
+    {
+      "title": "Excel Gewinn-Rechner",
+      "stars": 5,
+      "link": "https://t.me/$-dHTYmF6-EjKHAAAgrADsw28R5Q",
+      "payload": "prod_016"
+    },
+    {
+      "title": "Social Media Content Plan",
+      "stars": 10,
+      "link": "https://t.me/$TZC_bGF6-EjLHAAAIo9GzudC5zU",
+      "payload": "prod_017"
+    },
+    {
+      "title": "Newsletter-Vorlagen",
+      "stars": 10,
+      "link": "https://t.me/$1GbiZ2F6-EjMHAAAmLX5eLilQJc",
+      "payload": "prod_018"
+    },
+    {
+      "title": "E-Mail-Sequenzen Paket",
+      "stars": 12,
+      "link": "https://t.me/$eFI9b2F6-EjNHAAALw0Hqnu5SBY",
+      "payload": "prod_019"
+    },
+    {
+      "title": "Business Plan Vorlage",
+      "stars": 8,
+      "link": "https://t.me/$aVyED2F6-EjOHAAA1jlLaxtX8BU",
+      "payload": "prod_020"
+    },
+    {
+      "title": "Marketing Strategie",
+      "stars": 10,
+      "link": "https://t.me/$Z-E2B2F6-EjPHAAA5wI6enW0ETk",
+      "payload": "prod_021"
+    },
+    {
+      "title": "Produktivitaets-System",
+      "stars": 7,
+      "link": "https://t.me/$dZVNN2F6-EjQHAAAiDOlOMQ6r28",
+      "payload": "prod_022"
+    },
+    {
+      "title": "Kundenakquise Playbook",
+      "stars": 15,
+      "link": "https://t.me/$uyvcsGF6-EjRHAAAkTL47gMrL2Q",
+      "payload": "prod_023"
+    },
+    {
+      "title": "Lead-Magnet Vorlagen",
+      "stars": 5,
+      "link": "https://t.me/$_c-XtmF6-EjSHAAAs-QsEYyEXO8",
+      "payload": "prod_024"
+    },
+    {
+      "title": "CV Optimierung",
+      "stars": 20,
+      "link": "https://t.me/$wiYEvGF6-EjTHAAAPmiMN0Q7rU4",
+      "payload": "prod_025"
+    },
+    {
+      "title": "LinkedIn Profil Optimierung",
+      "stars": 30,
+      "link": "https://t.me/$M_Xn4mF6-EjUHAAAO3E2Yo1JELA",
+      "payload": "prod_026"
+    },
+    {
+      "title": "SEO Quick-Check",
+      "stars": 30,
+      "link": "https://t.me/$eLJIZmF6-EjVHAAAtuZqR5tKfZQ",
+      "payload": "prod_027"
+    },
+    {
+      "title": "Website Texte Service",
+      "stars": 50,
+      "link": "https://t.me/$4SyKB2F6-EjWHAAAqnoTc34Pc9E",
+      "payload": "prod_028"
+    },
+    {
+      "title": "Social Media Management",
+      "stars": 100,
+      "link": "https://t.me/$Fo3t4mF6-EjXHAAA5ZKqc5dyfRg",
+      "payload": "prod_029"
+    },
+    {
+      "title": "Newsletter Service",
+      "stars": 50,
+      "link": "https://t.me/$zghrd2F6-EjYHAAA2s_1i8GWAPI",
+      "payload": "prod_030"
+    },
+    {
+      "title": "KI Grundlagen Kurs",
+      "stars": 20,
+      "link": "https://t.me/$rioTAGF6-EjZHAAAH1C4Kc-GrOE",
+      "payload": "prod_031"
+    },
+    {
+      "title": "Passive Income Guide",
+      "stars": 15,
+      "link": "https://t.me/$rBqor2F6-EjaHAAAzjiWxqfL888",
+      "payload": "prod_032"
+    },
+    {
+      "title": "Sales Copy Guide",
+      "stars": 12,
+      "link": "https://t.me/$B_dY8mF6-EjbHAAA-3dJtm7_XtM",
+      "payload": "prod_033"
+    },
+    {
+      "title": "ChatGPT Mastery Guide",
+      "stars": 10,
+      "link": "https://t.me/$aUX_EGF6-EjcHAAAvHakgAMft-k",
+      "payload": "prod_034"
+    },
+    {
+      "title": "KI Tools Uebersicht 2026",
+      "stars": 7,
+      "link": "https://t.me/$dx9fLGF6-EjdHAAAQebyX6Ips4I",
+      "payload": "prod_035"
+    },
+    {
+      "title": "Telegram Premium Gruppe",
+      "stars": 10,
+      "link": "https://t.me/$4vz3E2F6-EjeHAAAOgY2MIx4nkI",
+      "payload": "prod_036"
+    },
+    {
+      "title": "Premium Newsletter",
+      "stars": 7,
+      "link": "https://t.me/$lMswjWF6-EjfHAAAz7H1Lefay4M",
+      "payload": "prod_037"
+    },
+    {
+      "title": "KI Tipps WhatsApp",
+      "stars": 5,
+      "link": "https://t.me/$kjrxbmF6-EjgHAAAa49I8S8OdAk",
+      "payload": "prod_038"
+    },
+    {
+      "title": "KI News Weekly",
+      "stars": 3,
+      "link": "https://t.me/$UzxRTWF6-EjhHAAA0mC5PWH6NOA",
+      "payload": "prod_039"
+    },
+    {
+      "title": "Business Tools Zugang",
+      "stars": 20,
+      "link": "https://t.me/$oWpHpmF6-EjiHAAAJ07xGrLlcic",
+      "payload": "prod_040"
+    }
+  ],
+  "total_products": 40,
+  "min_stars": 3,
+  "max_stars": 500,
+  "total_stars_value": 1878
+}
