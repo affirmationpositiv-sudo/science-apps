@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty‑Produkt‑Finder</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh}
+.header{background:linear-gradient(135deg,#0A0A0A 0%,#1a0a2e 50%,#0A0A0A 100%);border-bottom:1px solid rgba(139,92,246,0.2);padding:2rem 1rem;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,0.08) 0%,transparent 60%);pointer-events:none}
+.header h1{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px}
+.header p{color:#888;margin-top:.5rem;font-size:1rem;max-width:500px;margin-left:auto;margin-right:auto}
+.container{max-width:800px;margin:0 auto;padding:2rem 1rem}
+.question-card{background:linear-gradient(145deg,#121212,#1a1a1a);border:1px solid rgba(139,92,246,0.15);border-radius:16px;padding:2rem;margin-bottom:1.5rem;transition:all .3s ease;display:none}
+.question-card.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:2rem}
+.step-dot{width:12px;height:12px;border-radius:50%;background:#333;border:2px solid transparent;transition:all .3s ease;cursor:pointer}
+.step-dot.active{background:#8B5CF6;border-color:#8B5CF6;box-shadow:0 0 12px rgba(139,92,246,0.4)}
+.step-dot.done{background:#FFD700;border-color:#FFD700}
+.question-number{font-size:.8rem;color:#8B5CF6;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:.75rem}
+.question-text{font-size:1.4rem;font-weight:700;margin-bottom:1.5rem;line-height:1.4}
+.options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;text-align:left;color:#D0D0D0;cursor:pointer;transition:all .2s ease;font-size:.95rem;font-weight:500;width:100%;position:relative;overflow:hidden}
+.option-btn:hover{background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);transform:translateY(-2px)}
+.option-btn.selected{background:rgba(139,92,246,0.15);border-color:#8B5CF6;color:#fff;box-shadow:0 0 20px rgba(139,92,246,0.2)}
+.option-btn.selected::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#8B5CF6;font-weight:700}
+.option-btn .sub{display:block;font-size:.75rem;color:#666;margin-top:4px;font-weight:400}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:2rem;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s ease;border:none;text-decoration:none}
+.btn-back{background:rgba(255,255,255,0.06);color:#aaa;border:1px solid rgba(255,255,255,0.08)}
+.btn-back:hover{background:rgba(255,255,255,0.1);color:#fff}
+.btn-next{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:#fff;box-shadow:0 4px 15px rgba(139,92,246,0.3)}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(139,92,246,0.4)}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-gold{background:linear-gradient(135deg,#FFD700,#F59E0B);color:#0A0A0A;font-weight:700}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(255,215,0,0.3)}
+.btn-sm{padding:10px 20px;font-size:.85rem}
+.results-section{display:none}
+.results-section.active{display:block;animation:fadeIn .5s ease}
+.results-header{text-align:center;margin-bottom:2rem}
+.results-header h2{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.results-header p{color:#888;margin-top:.5rem}
+.budget-summary{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(139,92,246,0.08));border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:1rem 1.5rem;margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.budget-summary .label{color:#888;font-size:.9rem}
+.budget-summary .amount{font-size:1.5rem;font-weight:800;color:#FFD700}
+.budget-summary .count{color:#8B5CF6;font-weight:600}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.product-card{background:linear-gradient(145deg,#121212,#1a1a1a);border:1px solid rgba(139,92,246,0.12);border-radius:14px;padding:1.25rem;transition:all .3s ease;position:relative;overflow:hidden}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#8B5CF6,#FFD700);opacity:0;transition:opacity .3s ease}
+.product-card:hover::before{opacity:1}
+.product-card:hover{border-color:rgba(139,92,246,0.3);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.product-card .badge{display:inline-block;background:rgba(139,92,246,0.15);color:#8B5CF6;font-size:.7rem;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.product-card h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:4px}
+.product-card .desc{font-size:.85rem;color:#aaa;line-height:1.5;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(139,92,246,0.3);margin-bottom:12px;margin-top:8px}
+.product-card .price{font-size:1.3rem;font-weight:800;color:#FFD700;margin-bottom:10px}
+.product-card .amazon-btn{display:inline-flex;align-items:center;gap:6px;background:#FFD700;color:#0A0A0A;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s ease}
+.product-card .amazon-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(255,215,0,0.3)}
+.product-card .reason{font-size:.85rem;color:#aaa;line-height:1.5;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(139,92,246,0.3);margin-bottom:12px;margin-top:8px}
+.view-all-wrap{text-align:center;margin-top:2rem}
+.reset-wrap{text-align:center;margin-top:1.5rem}
+.reset-link{color:#666;cursor:pointer;font-size:.9rem;text-decoration:underline;transition:color .2s}
+.reset-link:hover{color:#8B5CF6}
+.disclaimer{text-align:center;color:#555;font-size:.75rem;padding:2rem 1rem;max-width:600px;margin:0 auto;line-height:1.5}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#0A0A0A}
+::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#555}
+@media(max-width:600px){
+  .header h1{font-size:1.6rem}
+  .question-text{font-size:1.15rem}
+  .options-grid{grid-template-columns:1fr 1fr}
+  .product-grid{grid-template-columns:1fr}
+  .container{padding:1rem .75rem}
+  .question-card{padding:1.25rem}
+  .nav-buttons{flex-direction:column}
+  .btn{justify-content:center;padding:12px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>✨ Beauty‑Produkt‑Finder</h1>
+  <p>Finde die perfekten Beauty‑Produkte für deinen Hauttyp, dein Budget und deine Bedürfnisse</p>
+</div>
+
+<div class="container">
+  <div class="step-indicator" id="stepDots"></div>
+  <div id="questionsContainer"></div>
+
+  <div class="results-section" id="resultsSection">
+    <div class="results-header">
+      <h2>Deine persönlichen Empfehlungen</h2>
+      <p>Basierend auf deinen Antworten – die besten Beauty‑Produkte für dich</p>
+    </div>
+    <div class="budget-summary" id="budgetSummary">
+      <span><span class="label">Bereich:</span> <span class="count" id="resultBereich">–</span></span>
+      <span><span class="label">Empfehlungen:</span> <span class="count" id="resultCount">0</span></span>
+      <span><span class="label">Ø Preis:</span> <span class="amount" id="avgPrice">0 €</span></span>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+    <div class="view-all-wrap">
+      <a class="btn btn-gold" id="amazonAllLink" href="https://www.amazon.de/s?k=Beauty+Produkte&tag=ikune21-21" target="_blank">🛒 Alle bei Amazon ansehen</a>
+    </div>
+    <div class="reset-wrap">
+      <span class="reset-link" onclick="resetFinder()">↺ Von vorne beginnen</span>
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer">Diese Website nutzt Amazon‑Partnerlinks (tag=ikune21‑21).</div>
+
+<script>
+// ========== PRODUKT-DATENBANK ==========
+const products = [
+  // --- GESICHTSPFLEGE ---
+  {name:"CeraVe Feuchtigkeitscreme", asin:"B07PNB9Z8C", preis:14, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","trocken","empfindlich","normal","feuchtigkeit","normalepflege"], desc:"Reichhaltige Gesichtscreme mit Ceramiden – spendet 48h Feuchtigkeit und stärkt die Hautbarriere."},
+  {name:"The Ordinary Niacinamide 10% + Zink 1%", asin:"B07MFCRBMG", preis:11, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","fettig","mischhaut","reinigung","budget"], desc:"Hochkonzentriertes Serum – verfeinert Poren, reguliert Talg und mindert Rötungen."},
+  {name:"La Roche-Posay Cicaplast Baume B5", asin:"B07KD2D6GF", preis:15, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","empfindlich","trocken","pflege","normalepflege"], desc:"Beruhigender Repair-Balsam für gestresste und gereizte Haut – mit Panthenol und Sheabutter."},
+  {name:"L'Oréal Hyaluron Expert", asin:"B07YNL3QM6", preis:20, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","normal","trocken","anti-aging","feuchtigkeit","mittelklasse"], desc:"Feuchtigkeitsspendende Tagespflege mit Hyaluronsäure – polstert Falten auf und strafft die Haut."},
+  {name:"Neutrogena Hydro Boost", asin:"B07HGS3NRD", preis:16, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","normal","trocken","mischhaut","feuchtigkeit","mittelklasse"], desc:"Wasser-Gel-Creme mit Hyaluronsäure – erfrischt und hydratisiert die Haut ohne zu fetten."},
+  {name:"Eucerin UltraSensitive", asin:"B09YC6BFBR", preis:22, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","empfindlich","trocken","normal","feuchtigkeit","mittelklasse"], desc:"Beruhigende Gesichtspflege für hochsensible Haut – reduziert Rötungen und Spannungsgefühl."},
+  {name:"Paula's Choice BHA Liquid Exfoliant", asin:"B00AP23N5W", preis:36, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","fettig","mischhaut","reinigung","anti-aging","mittelklasse"], desc:"Chemisches Peeling mit Salicylsäure – befreit verstopfte Poren und verfeinert das Hautbild."},
+  {name:"The Ordinary Retinol 0,5%", asin:"B07MYXXJW8", preis:8, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","anti-aging","normal","mischhaut","budget"], desc:"Wirksames Retinol-Serum – mildert feine Linien und verbessert die Hautstruktur."},
+  {name:"L'Oréal Revitalift Laser X3", asin:"B07H3KSNNP", preis:24, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","anti-aging","normal","trocken","mittelklasse"], desc:"Anti-Aging-Tagescreme mit Pro-Xylane – strafft die Haut und reduziert Falten sichtbar."},
+  {name:"Olay Regenerist Micro-Sculpting", asin:"B001E0R4RG", preis:32, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","anti-aging","normal","trocken","mittelklasse"], desc:"Anti-Aging-Creme mit Aminopeptiden – strafft und verjüngt die Gesichtskonturen."},
+  {name:"Vichy LiftActiv Vitamin C", asin:"B01N1HZ6ZD", preis:38, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","anti-aging","normal","trocken","mittelklasse"], desc:"Aufpolsterndes Vitamin-C-Serum – hellt den Teint auf und mildert Falten."},
+
+  // --- HAARPFLEGE ---
+  {name:"Olaplex Nr.3 Hair Perfector", asin:"B07BF3HZJ2", preis:28, kategorie:"Haarpflege", tags:["haarpflege","weiblich","maennlich","unisex","pflege","mittelklasse","styling"], desc:"Haar-Repair-Kur – repariert geschädigte Haarstruktur und sorgt für gesünderes, kräftigeres Haar."},
+  {name:"Schwarzkopf Gliss Kur", asin:"B07J2QHZ3P", preis:6, kategorie:"Haarpflege", tags:["haarpflege","weiblich","unisex","pflege","budget","normalepflege"], desc:"Spülung mit flüssigem Keratin – repariert strapaziertes Haar und glättet die Schuppenschicht."},
+  {name:"Wella Fusion Intense Repair", asin:"B07D87TWLD", preis:35, kategorie:"Haarpflege", tags:["haarpflege","weiblich","unisex","pflege","mittelklasse","styling"], desc:"Professionelle Reparaturkur mit Micro-Peptiden – regeneriert stark geschädigtes Haar."},
+  {name:"Redken Extreme Shampoo", asin:"B001O0PXY8", preis:32, kategorie:"Haarpflege", tags:["haarpflege","weiblich","maennlich","unisex","pflege","mittelklasse"], desc:"Kräftigendes Shampoo mit Protein-Komplex – stärkt brüchiges Haar und beugt Haarbruch vor."},
+  {name:"Kérastase Nutritive Bain Satin 1", asin:"B07DJ5XTVF", preis:42, kategorie:"Haarpflege", tags:["haarpflege","weiblich","unisex","pflege","premium","trocken"], desc:"Nährstoffreiches Shampoo für trockenes Haar – pflegt geschmeidig und verleiht Glanz."},
+  {name:"Bumble and Bumble Hairdresser's Oil", asin:"B004EY8X0C", preis:38, kategorie:"Haarpflege", tags:["haarpflege","weiblich","unisex","pflege","styling","premium"], desc:"Multifunktionales Haaröl – macht das Haar geschmeidig, glänzend und schützt vor Hitze."},
+
+  // --- MAKE-UP ---
+  {name:"MAC Studio Fix Foundation", asin:"B001CEO9QE", preis:38, kategorie:"Make-up", tags:["make-up","weiblich","unisex","normal","mischhaut","styling","mittelklasse"], desc:"Langanhaltende Foundation mit mittlerer bis hoher Deckkraft – mattiert und glättet."},
+  {name:"Maybelline Fit Me Foundation", asin:"B0151700VI", preis:10, kategorie:"Make-up", tags:["make-up","weiblich","unisex","normal","mischhaut","fettig","styling","budget"], desc:"Leichte Foundation mit natürlichem Finish – passt sich dem Hautton an und verfeinert die Poren."},
+  {name:"NYX Professional Makeup", asin:"B00NHYVO04", preis:8, kategorie:"Make-up", tags:["make-up","weiblich","unisex","styling","budget"], desc:"Professionelle Make-up-Produkte von NYX – vielseitig, pigmentiert und erschwinglich."},
+  {name:"Charlotte Tilbury Hollywood Flawless Filter", asin:"B07P1SKHKV", preis:34, kategorie:"Make-up", tags:["make-up","weiblich","unisex","styling","mittelklasse","normal"], desc:"Leuchtender Puder-Filter für einen Hollywood-Glow – allein oder als Highlighter einsetzbar."},
+  {name:"Estée Lauder Double Wear", asin:"B000R8YHYY", preis:46, kategorie:"Make-up", tags:["make-up","weiblich","unisex","styling","premium","fettig","normal"], desc:"Legendäre langanhaltende Foundation – 24h Halt mit natürlichem, mattem Finish."},
+
+  // --- KÖRPERPFLEGE ---
+  {name:"NIVEA Duschgel", asin:"B003M8FZ22", preis:4, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","maennlich","unisex","normal","budget","normalepflege"], desc:"Sanftes Pflegeduschgel mit Mandelöl – reinigt schonend und pflegt die Haut geschmeidig."},
+  {name:"Dove Bod Love Body Wash", asin:"B08R6G9XTK", preis:8, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","unisex","trocken","normal","feuchtigkeit","budget"], desc:"Feuchtigkeitsspendendes Duschgel mit Pflegeöl – verwöhnt die Haut mit reichhaltiger Feuchtigkeit."},
+  {name:"L'Occitane Shea Butter", asin:"B00121UWGW", preis:28, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","unisex","trocken","empfindlich","normal","pflege","mittelklasse"], desc:"Reichhaltige Sheabutter-Pflege – nährt und schützt trockene Haut intensiv."},
+  {name:"Weleda Citrus Körperöl", asin:"B000VK78AY", preis:12, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","unisex","normal","trocken","pflege","naturkosmetik","budget"], desc:"Erfrischendes Körperöl mit Bio-Zitrusölen – belebt die Haut und duftet herrlich."},
+
+  // --- SONNENSCHUTZ ---
+  {name:"Ladival Sonnenschutz LSF50", asin:"B00IWHK74U", preis:18, kategorie:"Sonnenschutz", tags:["sonnenschutz","weiblich","maennlich","unisex","empfindlich","normal","trocken","sonnenschutz","mittelklasse"], desc:"Medizinischer Sonnenschutz LSF50 – schützt zuverlässig bei Sonnenallergie und empfindlicher Haut."},
+  {name:"Eucerin Sun LSF 50+", asin:"B07THS6BN6", preis:24, kategorie:"Sonnenschutz", tags:["sonnenschutz","weiblich","maennlich","unisex","empfindlich","normal","trocken","sonnenschutz","mittelklasse"], desc:"Advanced Sun-Creme mit LSF50+ und UVA-Schutz – speziell für sonnenempfindliche Haut."},
+  {name:"Nivea Sun LSF 50+", asin:"B00BO1Y7XI", preis:12, kategorie:"Sonnenschutz", tags:["sonnenschutz","weiblich","maennlich","unisex","normal","sonnenschutz","budget"], desc:"Zuverlässiger Sonnenschutz LSF50+ – zieht schnell ein und pflegt die Haut."},
+  {name:"Garnier Solar Bräunungsspray", asin:"B07J979HW3", preis:16, kategorie:"Sonnenschutz", tags:["sonnenschutz","weiblich","unisex","normal","sonnenschutz","mittelklasse"], desc:"Sprü himmilch mit LSF30 – einfaches Auftragen, unsichtbarer Schutz und natürliches Bräunungsgefühl."},
+
+  // --- NAGELPFLEGE ---
+  {name:"Essie Nagellack", asin:"B001C6J6UM", preis:10, kategorie:"Nagelpflege", tags:["nagelpflege","weiblich","unisex","styling","budget"], desc:"Hochwertiger Nagellack mit seidigem Finish – splitterfest und farbintensiv."},
+  {name:"OPI Infinite Shine", asin:"B01G6CJBYA", preis:16, kategorie:"Nagelpflege", tags:["nagelpflege","weiblich","unisex","styling","mittelklasse"], desc:"Langhaftender Nagellack-System – glänzend splitterfest bis zu 11 Tage."},
+  {name:"Sally Hansen Hard As Nails", asin:"B00HXC7KG6", preis:12, kategorie:"Nagelpflege", tags:["nagelpflege","weiblich","unisex","pflege","budget"], desc:"Härtender Nagellack mit Vitamin E – stärkt die Nägel und verhindert Splittern."},
+
+  // --- MÄNNLICHE PFLEGE ---
+  {name:"King C. Gillette Bartpflege Set", asin:"B07HLBQC1J", preis:20, kategorie:"Männliche Pflege", tags:["maennlichepflege","maennlich","pflege","styling","mittelklasse"], desc:"Bartpflege-Set mit Scherkamm, Kamm und Pflegeöl – für einen perfekt gepflegten Bart."},
+  {name:"Bulldog Original Gesichtscreme", asin:"B07P2JWNY9", preis:12, kategorie:"Männliche Pflege", tags:["maennlichepflege","maennlich","unisex","normal","trocken","feuchtigkeit","budget"], desc:"Leichte Gesichtscreme für Männer mit Aloe Vera – spendet Feuchtigkeit ohne zu fetten."},
+  {name:"NIVEA Men Creme", asin:"B001B5FJPE", preis:8, kategorie:"Männliche Pflege", tags:["maennlichepflege","maennlich","unisex","normal","trocken","pflege","budget"], desc:"Klassische NIVEA Men Creme – schützt und pflegt die Haut vor Umwelteinflüssen."},
+  {name:"Proraso Rasierschaum", asin:"B005MLF5D2", preis:14, kategorie:"Männliche Pflege", tags:["maennlichepflege","maennlich","unisex","styling","pflege","budget"], desc:"Klassischer italienischer Rasierschaum mit Eukalyptus und Menthol – erfrischt die Haut."},
+
+  // --- PARFÜM ---
+  {name:"Dior Sauvage Eau de Toilette", asin:"B013WF3TGM", preis:85, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","premium","styling"], desc:"Markantes EdT mit Bergamotte und Ambroxan – frisch, würzig und unwiderstehlich maskulin."},
+  {name:"Chanel Bleu de Chanel", asin:"B00GM3GTSG", preis:92, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","premium","styling"], desc:"Holzig-aromatischer Duft mit Grapefruit und Ingwer – zeitlos und elegant."},
+  {name:"Hugo Boss Bottled EdT", asin:"B000R8ZD4Y", preis:54, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","mittelklasse","styling"], desc:"Klassischer Duft mit Apfel, Zimt und Sandelholz – maskulin und zugänglich."},
+  {name:"JPG Le Male EdT", asin:"B000VK8P4Q", preis:72, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","premium","styling"], desc:"Ikonischer Duft mit Vanille, Minze und Lavendel – sinnlich und verführerisch."},
+  {name:"Paco Rabanne Invictus EdT", asin:"B00B2KKCVI", preis:68, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","premium","styling"], desc:"Frischer Sportduft mit Grapefruit, Lorbeer und Amber – dynamisch und energiegeladen."},
+  {name:"YSL La Nuit de L'Homme", asin:"B001E0QPJE", preis:80, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","premium","styling"], desc:"Verführerischer Duft mit Kardamom, Lavendel und Zedernholz – perfekt für besondere Abende."},
+  {name:"Armani Acqua di Giò", asin:"B000VK7K4Y", preis:78, kategorie:"Parfüm", tags:["parfuem","maennlich","unisex","premium","styling"], desc:"Frischer Meeresduft mit Bergamotte, Jasmin und Patchouli – zeitloser Klassiker."},
+
+  // --- BEAUTY TOOLS ---
+  {name:"Foreo Luna Mini 3", asin:"B07WRWBGNV", preis:129, kategorie:"Beauty Tools", tags:["beautytools","weiblich","unisex","reinigung","normal","fettig","luxus"], desc:"Schonendes Reinigungsgerät mit T-Sonic-Pulsationen – reinigt porentief und verbessert die Hautstruktur."},
+  {name:"Dyson Airwrap Multi-Styler", asin:"B07WLM6SNK", preis:549, kategorie:"Beauty Tools", tags:["beautytools","weiblich","unisex","styling","haarpflege","luxus"], desc:"Revolutionäres Haar-Styling-Tool – formt Locken, Wellen und glättet ohne extreme Hitze."},
+  {name:"Braun Silk-Expert Pro 5", asin:"B07MZWB36N", preis:379, kategorie:"Beauty Tools", tags:["beautytools","weiblich","unisex","koerperpflege","luxus","normalepflege"], desc:"Professionelles IPL-Haarentfernungsgerät – langanhaltende Glätte für zuhause."},
+  {name:"ghd Platinum+ Styler", asin:"B07VDW6F6K", preis:229, kategorie:"Beauty Tools", tags:["beautytools","weiblich","unisex","styling","haarpflege","luxus"], desc:"Premium-Glätteisen mit Ultra-Zone-Technologie – schonend stylen bei optimaler 185°C-Temperatur."},
+  {name:"Remington Glätteisen S5505", asin:"B07QK8NN9Y", preis:45, kategorie:"Beauty Tools", tags:["beautytools","weiblich","unisex","styling","haarpflege","mittelklasse"], desc:"Haarstyler mit Keramik-Heizplatten und variabler Temperatur – für glattes, glänzendes Haar."},
+  {name:"BaByliss Curling Stab", asin:"B01MYWG0FS", preis:55, kategorie:"Beauty Tools", tags:["beautytools","weiblich","unisex","styling","haarpflege","mittelklasse"], desc:"Lockenstab mit Keramik-Turmalin-Beschichtung – definierte Locken ohne Frizz."},
+
+  // --- BIO / NATURKOSMETIK ---
+  {name:"Dr. Hauschka Rosencreme", asin:"B001E0OZ9O", preis:28, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","naturkosmetik","trocken","empfindlich","normal","feuchtigkeit","mittelklasse"], desc:"Reichhaltige Bio-Gesichtscreme mit Rosenblütenextrakt – pflegt trockene Haut und unterstützt die Hautregeneration."},
+  {name:"Weleda Iris Gesichtscreme", asin:"B000VK7LK2", preis:20, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","naturkosmetik","normal","mischhaut","feuchtigkeit","mittelklasse"], desc:"Leichte Bio-Gesichtscreme mit Iris-Extrakt – hydratisiert und vitalisiert normale und Mischhaut."},
+  {name:"Lavera Sensitiv Gesichtscreme", asin:"B001E0Q8P8", preis:16, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","naturkosmetik","empfindlich","normal","feuchtigkeit","mittelklasse"], desc:"Zertifizierte Naturkosmetik-Gesichtscreme – beruhigt empfindliche Haut mit Bio-Malve und Aloe Vera."},
+  {name:"Alverde Feuchtigkeitscreme", asin:"B07B7DHZ7D", preis:5, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","naturkosmetik","normal","feuchtigkeit","budget"], desc:"Günstige Bio-Gesichtscreme mit Bio-Aloe Vera – ideal für den täglichen Feuchtigkeitsboost."},
+
+  // --- LIPPEN & AUGEN ---
+  {name:"Kiehl's Avocado Eye Cream", asin:"B001E0OSCS", preis:32, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","unisex","trocken","anti-aging","feuchtigkeit","mittelklasse"], desc:"Reichhaltige Augencreme mit Avocado-Öl – pflegt die zarte Augenpartie und mildert Trockenheitsfältchen."},
+  {name:"Laneige Lip Sleeping Mask", asin:"B0763WP7KR", preis:20, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","unisex","trocken","pflege","feuchtigkeit","mittelklasse"], desc:"Nächtliche Lippenmaske mit Berry-Komplex – verwöhnt spröde Lippen und schenkt Geschmeidigkeit."},
+  {name:"Aquaphor Lippenpflege", asin:"B001E0P362", preis:6, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","maennlich","unisex","trocken","pflege","budget"], desc:"Intensive Lippenpflege mit Panthenol und Sheabutter – schützt und regeneriert rissige Lippen."},
+  {name:"La Roche-Posay Cicaplast Lippen", asin:"B07KD2QCS7", preis:10, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","maennlich","unisex","trocken","empfindlich","pflege","budget"], desc:"Beruhigender Lippenbalsam mit Sheabutter und Panthenol – repariert trockene und rissige Lippen."},
+
+  // --- WEITERE PRODUKTE für Vielfalt ---
+  {name:"Garnier Hautklar Reinigungsgel", asin:"B07FLX8H3D", preis:7, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","fettig","mischhaut","reinigung","budget"], desc:"Tiefenreinigendes Gel mit Salicylsäure und Zink – befreit die Poren und verhindert Unreinheiten."},
+  {name:"Balea MED Ultra Sensitiv Gesichtscreme", asin:"B07F9KM6BK", preis:4, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","empfindlich","normal","feuchtigkeit","budget"], desc:"Sanfte Pflegecreme ohne Parfüm – ideal für allergieanfällige Haut."},
+  {name:"Batiste Trockenshampoo", asin:"B004DZ7Y2G", preis:5, kategorie:"Haarpflege", tags:["haarpflege","weiblich","unisex","styling","budget"], desc:"Erfrischendes Trockenshampoo – absorbiert überschüssiges Fett und sorgt für Volumen."},
+  {name:"Sebamed Reinigungsschaum", asin:"B00K2GPE2M", preis:8, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","empfindlich","normal","reinigung","budget"], desc:"pH-hautneutraler Reinigungsschaum – reinigt mild und schützt die Hautbarriere."},
+  {name:"Catrice Liquid Camouflage", asin:"B079NRFD3P", preis:6, kategorie:"Make-up", tags:["make-up","weiblich","unisex","styling","budget"], desc:"Hochdeckender Concealer für ein makelloses Hautbild – kaschiert Augenringe und Unreinheiten."},
+  {name:"Maybelline Lash Sensational Mascara", asin:"B01LX977XL", preis:9, kategorie:"Make-up", tags:["make-up","weiblich","unisex","styling","budget"], desc:"Volumengebende Wimperntusche mit gebogter Bürste – für fächerartig geschwungene Wimpern."},
+  {name:"L'Oréal Paris True Match Puder", asin:"B00515YYP4", preis:12, kategorie:"Make-up", tags:["make-up","weiblich","unisex","normal","mischhaut","styling","budget"], desc:"Feiner Puder für ein natürliches Finish – mattierte die Haut und kaschiert kleine Unebenheiten."},
+  {name:"Kérastase Elixir Ultime Öl", asin:"B019C17TDO", preis:48, kategorie:"Haarpflege", tags:["haarpflege","weiblich","unisex","pflege","styling","premium"], desc:"Luxuriöses Haaröl mit 4 Ölen – nährt, glättet und verleiht intensiven Glanz."},
+  {name:"Nuxe Huile Prodigieuse Or", asin:"B00LWHH8MG", preis:30, kategorie:"Körperpflege", tags:["koerperpflege","weiblich","unisex","trocken","normal","pflege","mittelklasse","naturkosmetik"], desc:"Multifunktionales Trockenöl mit goldenem Schimmer – für Gesicht, Körper und Haar."},
+  {name:"Bioderma Sensibio H2O", asin:"B001B1X3HG", preis:14, kategorie:"Gesichtspflege", tags:["gesichtspflege","weiblich","maennlich","unisex","empfindlich","normal","reinigung","budget"], desc:"Sanftes Mizellenwasser für empfindliche Haut – reinigt und entfernt Make-up ohne Reizung."},
+  {name:"SVR Sun Secure LSF 50+", asin:"B07Q28377C", preis:20, kategorie:"Sonnenschutz", tags:["sonnenschutz","weiblich","maennlich","unisex","empfindlich","normal","sonnenschutz","mittelklasse"], desc:"Ölfreier Sonnenschutz LSF50+ – unsichtbar, extra wasserfest und für empfindliche Haut geeignet."},
+  {name:"NARS Radiant Creamy Concealer", asin:"B00K2JQ5H6", preis:31, kategorie:"Make-up", tags:["make-up","weiblich","unisex","normal","trocken","styling","mittelklasse"], desc:"Feuchtigkeitsspendender Concealer mit mittlerer Deckkraft – kaschiert und pflegt zugleich."}
+];
+
+// ========== FRAGEN ==========
+const questions = [
+  {
+    id: "bereich",
+    text: "Welcher Beauty-Bereich interessiert dich?",
+    type: "single",
+    options: [
+      {value:"gesichtspflege", label:"Gesichtspflege", sub:"Cremes, Seren, Reinigung"},
+      {value:"haarpflege", label:"Haarpflege", sub:"Shampoo, Kuren, Styling"},
+      {value:"make-up", label:"Make-up", sub:"Foundation, Mascara, Concealer"},
+      {value:"koerperpflege", label:"Körperpflege", sub:"Duschgel, Bodylotion, Öle"},
+      {value:"sonnenschutz", label:"Sonnenschutz", sub:"Lotion, Spray, After Sun"},
+      {value:"nagelpflege", label:"Nagelpflege", sub:"Lacke, Pflege, Härter"},
+      {value:"maennlichepflege", label:"Männliche Pflege", sub:"Bartpflege, Rasur, Cremes"},
+      {value:"parfuem", label:"Parfüm", sub:"Düfte, Eau de Toilette"},
+      {value:"beautytools", label:"Beauty Tools", sub:"Geräte, Styler, Accessoires"}
+    ]
+  },
+  {
+    id: "geschlecht",
+    text: "Was ist dein Geschlecht?",
+    type: "single",
+    options: [
+      {value:"weiblich", label:"Weiblich", sub:"Produkte für Frauen"},
+      {value:"maennlich", label:"Männlich", sub:"Produkte für Männer"},
+      {value:"unisex", label:"Unisex", sub:"Für alle geeignet"}
+    ]
+  },
+  {
+    id: "budget",
+    text: "Dein Budget?",
+    type: "single",
+    options: [
+      {value:"budget", label:"Budget (€5–€15)", sub:"Günstig & effektiv"},
+      {value:"mittelklasse", label:"Mittelklasse (€15–€60)", sub:"Gutes Preis-Leistungs-Verhältnis"},
+      {value:"premium", label:"Premium (€60–€150)", sub:"Qualität & Wirkung"},
+      {value:"luxus", label:"Luxus (€150+)", sub:"Exklusiv & hochwertig"}
+    ]
+  },
+  {
+    id: "hauttyp",
+    text: "Dein Hauttyp?",
+    type: "single",
+    options: [
+      {value:"trocken", label:"Trocken", sub:"Spannt, schuppt, rau"},
+      {value:"fettig", label:"Fettig", sub:"Glänzt, große Poren"},
+      {value:"mischhaut", label:"Mischhaut", sub:"Fettige T-Zone, trockene Wangen"},
+      {value:"empfindlich", label:"Empfindlich", sub:"Rötungen, Juckreiz, Allergien"},
+      {value:"normal", label:"Normal", sub:"Ausgeglichen, unkompliziert"}
+    ]
+  },
+  {
+    id: "anliegen",
+    text: "Dein Hauptanliegen?",
+    type: "single",
+    options: [
+      {value:"anti-aging", label:"Anti-Aging", sub:"Falten, Straffheit, Jugend"},
+      {value:"feuchtigkeit", label:"Feuchtigkeit", sub:"Hydratation, Frische, Glow"},
+      {value:"reinigung", label:"Reinigung", sub:"Poren, Unreinheiten, Klärung"},
+      {value:"sonnenschutz", label:"Sonnenschutz", sub:"UV-Schutz, Prävention"},
+      {value:"pflege", label:"Pflege & Reparatur", sub:"Regeneration, Stärkung"},
+      {value:"styling", label:"Styling & Make-up", sub:"Farbe, Glanz, Definition"}
+    ]
+  },
+  {
+    id: "naturkosmetik",
+    text: "Bevorzugst du Naturkosmetik?",
+    type: "single",
+    options: [
+      {value:"ja", label:"Ja, zertifiziert", sub:"Bio, nachhaltig, clean"},
+      {value:"egal", label:"Egal", sub:"Kommt auf die Wirkung an"},
+      {value:"nein", label:"Nein", sub:"Konventionelle Produkte bevorzugt"}
+    ]
+  }
+];
+
+// ========== STATE ==========
+let currentStep = 0;
+let answers = {};
+
+// ========== INIT ==========
+function init() {
+  renderStepDots();
+  renderAllQuestions();
+  showStep(0);
+}
+
+function renderStepDots() {
+  const container = document.getElementById('stepDots');
+  container.innerHTML = questions.map((q,i) =>
+    `<div class="step-dot ${i === 0 ? 'active' : ''}" data-step="${i}" onclick="goToStep(${i})"></div>`
+  ).join('');
+}
+
+function renderAllQuestions() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = questions.map((q, qi) => {
+    const isLast = qi === questions.length - 1;
+    const btnText = isLast ? '🎯 Empfehlungen zeigen' : 'Weiter →';
+    let optionsHtml = `<div class="options-grid">${q.options.map(o =>
+      `<button class="option-btn" data-question="${qi}" data-value="${o.value}" onclick="selectOption(${qi}, '${o.value}')">
+        ${o.label}
+        <span class="sub">${o.sub}</span>
+      </button>`
+    ).join('')}</div>`;
+    const isFirst = qi === 0;
+    return `<div class="question-card" data-step="${qi}">
+      <div class="question-number">Frage ${qi+1} von ${questions.length}</div>
+      <div class="question-text">${q.text}</div>
+      ${optionsHtml}
+      <div class="nav-buttons">
+        <button class="btn btn-back" onclick="prevStep()" ${isFirst ? 'style="visibility:hidden"' : ''}>← Zurück</button>
+        <button class="btn btn-next" id="nextBtn${qi}" onclick="${isLast ? 'showResults()' : 'nextStep()'}" disabled>${btnText}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========== NAVIGATION ==========
+function showStep(index) {
+  currentStep = index;
+  document.querySelectorAll('.question-card').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.step-dot').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+    el.classList.toggle('done', i < index);
+  });
+  updateNextBtn();
+}
+
+function nextStep() {
+  if (currentStep < questions.length - 1) {
+    showStep(currentStep + 1);
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    showStep(currentStep - 1);
+  }
+}
+
+function goToStep(index) {
+  if (index <= currentStep || document.querySelectorAll('.step-dot')[index].classList.contains('done')) {
+    showStep(index);
+  }
+}
+
+function updateNextBtn() {
+  const q = questions[currentStep];
+  const btn = document.getElementById(`nextBtn${currentStep}`);
+  if (!btn) return;
+  btn.disabled = !answers[q.id];
+}
+
+// ========== SELECTION ==========
+function selectOption(qi, value) {
+  const q = questions[qi];
+  answers[q.id] = value;
+  document.querySelectorAll(`.option-btn[data-question="${qi}"]`).forEach(el => {
+    el.classList.toggle('selected', el.dataset.value === value);
+  });
+  updateNextBtn();
+}
+
+// ========== MATCHING ==========
+function getScore(product, answers) {
+  let score = 0;
+
+  // 1. Bereich (max 25)
+  const bereich = answers["bereich"];
+  if (bereich) {
+    if (product.tags.includes(bereich)) score += 25;
+    // Fallbacks
+    if (bereich === "gesichtspflege" && product.kategorie === "Gesichtspflege") score += 5;
+    if (bereich === "haarpflege" && product.kategorie === "Haarpflege") score += 5;
+    if (bereich === "make-up" && product.kategorie === "Make-up") score += 5;
+    if (bereich === "koerperpflege" && product.kategorie === "Körperpflege") score += 5;
+    if (bereich === "sonnenschutz" && product.kategorie === "Sonnenschutz") score += 5;
+    if (bereich === "nagelpflege" && product.kategorie === "Nagelpflege") score += 5;
+    if (bereich === "maennlichepflege" && product.kategorie === "Männliche Pflege") score += 5;
+    if (bereich === "parfuem" && product.kategorie === "Parfüm") score += 5;
+    if (bereich === "beautytools" && product.kategorie === "Beauty Tools") score += 5;
+  }
+
+  // 2. Geschlecht (max 15)
+  const geschlecht = answers["geschlecht"];
+  if (geschlecht) {
+    if (geschlecht === "unisex" && product.tags.includes("unisex")) score += 15;
+    else if (product.tags.includes(geschlecht)) score += 15;
+    else if (geschlecht === "unisex" && (product.tags.includes("weiblich") || product.tags.includes("maennlich"))) score += 5;
+  }
+
+  // 3. Budget (max 20)
+  const budget = answers["budget"];
+  if (budget) {
+    const p = product.preis;
+    if (budget === "budget" && p <= 15) score += 20;
+    else if (budget === "mittelklasse" && p > 15 && p <= 60) score += 20;
+    else if (budget === "premium" && p > 60 && p <= 150) score += 20;
+    else if (budget === "luxus" && p > 150) score += 20;
+    // Near-miss
+    else if (budget === "budget" && p <= 20) score += 10;
+    else if (budget === "mittelklasse" && p >= 10 && p <= 80) score += 10;
+    else if (budget === "premium" && p >= 45 && p <= 200) score += 10;
+    else if (budget === "luxus" && p >= 100) score += 10;
+  }
+
+  // 4. Hauttyp (max 15)
+  const hauttyp = answers["hauttyp"];
+  if (hauttyp) {
+    if (product.tags.includes(hauttyp)) score += 15;
+    if (hauttyp === "mischhaut" && (product.tags.includes("fettig") || product.tags.includes("normal"))) score += 8;
+    if (hauttyp === "normal" && (product.tags.includes("trocken") || product.tags.includes("fettig") || product.tags.includes("mischhaut") || product.tags.includes("empfindlich"))) score += 5;
+  }
+
+  // 5. Anliegen (max 15)
+  const anliegen = answers["anliegen"];
+  if (anliegen) {
+    if (product.tags.includes(anliegen)) score += 15;
+    // Anliegen-spezifische Extras
+    if (anliegen === "anti-aging" && product.tags.includes("feuchtigkeit")) score += 5;
+    if (anliegen === "feuchtigkeit" && (product.tags.includes("normal") || product.tags.includes("trocken"))) score += 5;
+    if (anliegen === "reinigung" && product.tags.includes("fettig")) score += 5;
+    if (anliegen === "pflege" && (product.tags.includes("trocken") || product.tags.includes("empfindlich"))) score += 5;
+    if (anliegen === "styling" && (product.tags.includes("make-up") || product.tags.includes("haarpflege"))) score += 5;
+  }
+
+  // 6. Naturkosmetik (max 10)
+  const naturkosmetik = answers["naturkosmetik"];
+  if (naturkosmetik) {
+    if (naturkosmetik === "ja" && product.tags.includes("naturkosmetik")) score += 10;
+    else if (naturkosmetik === "nein" && !product.tags.includes("naturkosmetik")) score += 10;
+    else if (naturkosmetik === "egal") score += 5;
+    else if (naturkosmetik === "ja" && !product.tags.includes("naturkosmetik")) score -= 5;
+  }
+
+  return score;
+}
+
+function getReason(product, answers) {
+  const bereich = answers["bereich"];
+  const hauttyp = answers["hauttyp"];
+  const anliegen = answers["anliegen"];
+  const reasons = [];
+
+  if (bereich && product.tags.includes(bereich)) {
+    const labels = {"gesichtspflege":"Gesichtspflege","haarpflege":"Haarpflege","make-up":"Make-up","koerperpflege":"Körperpflege","sonnenschutz":"Sonnenschutz","nagelpflege":"Nagelpflege","maennlichepflege":"Männerpflege","parfuem":"Parfüm","beautytools":"Beauty-Tools"};
+    reasons.push(`perfekt für ${labels[bereich]||bereich}`);
+  }
+  if (hauttyp && product.tags.includes(hauttyp)) reasons.push(`ideal für ${hauttyp}e Haut`);
+  if (anliegen && product.tags.includes(anliegen)) {
+    const alabels = {"anti-aging":"Anti-Aging","feuchtigkeit":"Feuchtigkeitspflege","reinigung":"Reinigung","sonnenschutz":"Sonnenschutz","pflege":"Pflege & Reparatur","styling":"Styling"};
+    reasons.push(`deckt dein Anliegen «${alabels[anliegen]||anliegen}» ab`);
+  }
+  if (product.tags.includes("naturkosmetik") && answers["naturkosmetik"] === "ja") reasons.push("zertifizierte Naturkosmetik");
+  if (product.preis <= 15 && reasons.length === 0) reasons.push("besonders günstig & effektiv");
+
+  return reasons.length > 0
+    ? `✅ ${reasons.slice(0,3).join(' • ')}.`
+    : "✅ Passt zu deinen Angaben.";
+}
+
+function showResults() {
+  document.querySelectorAll('.question-card').forEach(el => el.style.display = 'none');
+  document.getElementById('stepDots').style.display = 'none';
+  document.getElementById('resultsSection').classList.add('active');
+
+  // Score all products
+  const scored = products.map(p => ({
+    ...p,
+    score: getScore(p, answers)
+  }))
+  .filter(p => p.score > 0)
+  .sort((a, b) => b.score - a.score);
+
+  // Top 10
+  const top10 = scored.slice(0, 10);
+
+  // Bereich text
+  const bereich = answers["bereich"];
+  const bereichLabels = {"gesichtspflege":"Gesichtspflege","haarpflege":"Haarpflege","make-up":"Make-up","koerperpflege":"Körperpflege","sonnenschutz":"Sonnenschutz","nagelpflege":"Nagelpflege","maennlichepflege":"Männliche Pflege","parfuem":"Parfüm","beautytools":"Beauty Tools"};
+  document.getElementById('resultBereich').textContent = bereichLabels[bereich] || "Alle Bereiche";
+  document.getElementById('resultCount').textContent = top10.length;
+
+  const avgPrice = top10.length > 0 ? Math.round(top10.reduce((s,p) => s + p.preis, 0) / top10.length) : 0;
+  document.getElementById('avgPrice').textContent = avgPrice + ' €';
+
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = top10.map((p, i) => {
+    const amazonUrl = p.asin
+      ? `https://www.amazon.de/dp/${p.asin}/?tag=ikune21-21`
+      : `https://www.amazon.de/s?k=${encodeURIComponent(p.name)}&tag=ikune21-21`;
+    return `<div class="product-card">
+      <span class="badge">#${i+1} · ${p.kategorie}</span>
+      <h3>${p.name}</h3>
+      <div class="price">€${p.preis.toFixed(2).replace('.',',')}</div>
+      <div class="desc">${p.desc}</div>
+      <div class="reason">${getReason(p, answers)}</div>
+      <a class="amazon-btn" href="${amazonUrl}" target="_blank" rel="noopener">🛒 Bei Amazon ansehen</a>
+    </div>`;
+  }).join('');
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function resetFinder() {
+  answers = {};
+  currentStep = 0;
+  document.getElementById('resultsSection').classList.remove('active');
+  document.querySelectorAll('.question-card').forEach(el => el.style.display = '');
+  document.getElementById('stepDots').style.display = '';
+  document.querySelectorAll('.option-btn.selected').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.checkbox-label.checked').forEach(el => el.classList.remove('checked'));
+  document.querySelectorAll('.checkbox-label input').forEach(el => el.checked = false);
+  showStep(0);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+});
+</script>
+</body>
+</html>
