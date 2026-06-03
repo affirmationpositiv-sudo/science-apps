@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reinigungs- & Organisations-Finder 2026 – Finde deine Putz- & Ordnungshelfer</title>
+<meta name="description" content="Finde mit dem Reinigungs- & Organisations-Finder 2026 deine perfekten Haushaltshelfer. Beantworte 6 Fragen und erhalte personalisierte Produktempfehlungen für Reinigung & Organisation.">
+<meta name="keywords" content="Reinigung, Organisation, Haushalt, Putzmittel, Aufbewahrung, Ordnung, Produktfinder, Haushaltsreiniger, Putzutensilien">
+<meta name="author" content="Reinigungs- & Organisations-Finder 2026">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Reinigungs- & Organisations-Finder 2026 – Finde deine Putz- & Ordnungshelfer">
+<meta property="og:description" content="Personalisierte Reinigungs- & Ordnungsprodukte in 6 Fragen.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ikune.de/tools/reinigung-organisation-finder.html">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0A;--surface:#1A1A1A;--surface2:#252525;--text:#E5E5E5;--text2:#999;--accent:#8B5CF6;--gold:#FFD700;--gold-dim:#B8960F;--error:#EF4444;--success:#22C55E;--radius:12px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,.4);--font:'Segoe UI',system-ui,-apple-system,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.container{max-width:900px;width:100%;margin:0 auto;padding:20px}
+header{text-align:center;padding:30px 20px 10px}
+header h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:var(--text2);font-size:clamp(.85rem,2vw,1.05rem);margin-top:6px}
+.progress-wrap{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.progress-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width .5s ease}
+.progress-text{font-size:.8rem;color:var(--text2);white-space:nowrap;min-width:40px;text-align:right}
+.card{background:var(--surface);border-radius:var(--radius);padding:clamp(20px,4vw,40px);box-shadow:var(--shadow);border:1px solid rgba(139,92,246,.15);margin-bottom:20px}
+.card h2{font-size:clamp(1.1rem,3vw,1.4rem);margin-bottom:20px;color:var(--gold)}
+.step{display:none}
+.step.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.options{display:grid;gap:10px}
+.options label{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface2);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;font-size:clamp(.9rem,2vw,1rem)}
+.options label:hover{border-color:var(--accent);background:rgba(139,92,246,.08)}
+.options input[type="radio"]{appearance:none;width:18px;height:18px;border:2px solid var(--text2);border-radius:50%;flex-shrink:0;position:relative;transition:all .2s}
+.options input[type="radio"]:checked{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 4px var(--surface2)}
+.options input[type="radio"]:checked+span{color:#fff}
+.nav{display:flex;justify-content:space-between;margin-top:24px;gap:12px}
+.btn{padding:12px 28px;border:none;border-radius:var(--radius-sm);font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#7C3AED);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(139,92,246,.35)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid #333}
+.btn-secondary:hover{background:#333}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#0A0A0A}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,215,0,.3)}
+.result-card{background:var(--surface2);border-radius:var(--radius-sm);padding:16px;border:1px solid rgba(139,92,246,.1);transition:all .2s}
+.result-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.result-card h3{font-size:1rem;margin-bottom:4px;color:var(--text)}
+.result-card .cat-tag{font-size:.75rem;color:var(--accent);margin-bottom:6px;display:block}
+.result-card .brand{font-size:.8rem;color:var(--text2);margin-bottom:4px}
+.result-card .price-range{color:var(--gold);font-weight:600;font-size:.9rem}
+.result-card .rating{color:var(--gold);font-size:.85rem;margin:4px 0}
+.result-card .desc{font-size:.82rem;color:var(--text2);margin:6px 0 10px;line-height:1.4}
+.result-card .aff-btn{display:inline-block;padding:8px 16px;background:linear-gradient(135deg,var(--accent),#7C3AED);color:#fff;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s}
+.result-card .aff-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(139,92,246,.3)}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px}
+.summary-badge{display:inline-flex;gap:16px;flex-wrap:wrap;padding:12px 20px;background:var(--surface2);border-radius:var(--radius-sm);margin-bottom:16px;font-size:.9rem}
+.summary-badge span{display:flex;align-items:center;gap:6px}
+.summary-badge .label{color:var(--text2)}
+.summary-badge .value{color:var(--gold);font-weight:600}
+.tips{background:var(--surface2);border-radius:var(--radius-sm);padding:20px;margin-top:20px;border-left:4px solid var(--gold)}
+.tips h3{color:var(--gold);margin-bottom:10px;font-size:1rem}
+.tips ul{list-style:none;padding:0}
+.tips ul li{padding:6px 0;font-size:.9rem;color:var(--text2);position:relative;padding-left:20px}
+.tips ul li::before{content:"💡";position:absolute;left:0}
+.reset-area{text-align:center;margin-top:20px}
+footer{text-align:center;padding:30px 20px;color:var(--text2);font-size:.8rem;margin-top:auto}
+footer a{color:var(--accent);text-decoration:none}
+.hidden{display:none!important}
+.stars{color:var(--gold);letter-spacing:1px}
+.budget-overview{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(255,215,0,.08));border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;border:1px solid rgba(139,92,246,.2)}
+.budget-overview .budget-total{font-size:1.2rem;font-weight:700;color:var(--gold)}
+.budget-overview .budget-detail{font-size:.85rem;color:var(--text2);margin-top:4px}
+.no-results{text-align:center;padding:40px 20px;color:var(--text2)}
+@media(max-width:600px){.container{padding:12px}.card{padding:16px}.results-grid{grid-template-columns:1fr}.nav{flex-direction:column}.nav .btn{width:100%;justify-content:center}.summary-badge{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>🧹 Reinigungs- & Organisations-Finder 2026</h1>
+<p>Finde die perfekten Putz- & Ordnungshelfer für deinen Haushalt – beantworte 6 Fragen</p>
+</div>
+</header>
+
+<main class="container">
+<div class="progress-wrap">
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-text" id="progressText">0/6</span>
+</div>
+
+<div class="card" id="wizard">
+<form id="quizForm">
+
+<div class="step active" data-step="1">
+<h2>🏠 Welche Räume willst du reinigen/organisieren?</h2>
+<div class="options">
+<label><input type="radio" name="q1" value="bad"><span>🛁 Bad – Fliesen, Armaturen & Spiegel</span></label>
+<label><input type="radio" name="q1" value="kueche"><span>🍳 Küche – Fett, Herd & Arbeitsflächen</span></label>
+<label><input type="radio" name="q1" value="wohnzimmer"><span>🛋️ Wohnzimmer – Möbel, Böden & Deko</span></label>
+<label><input type="radio" name="q1" value="schlafzimmer"><span>🛏️ Schlafzimmer – Staub, Wäsche & Ordnung</span></label>
+<label><input type="radio" name="q1" value="keller"><span>📦 Keller – Lager, Werkzeug & Altlasten</span></label>
+<label><input type="radio" name="q1" value="garage"><span>🚗 Garage – Werkzeug, Auto & Gerümpel</span></label>
+<label><input type="radio" name="q1" value="buero"><span>💼 Büro – Schreibtisch, Ordner & Technik</span></label>
+<label><input type="radio" name="q1" value="ganze-wohnung"><span>🏡 Ganze Wohnung – Rundumschlag</span></label>
+</div>
+</div>
+
+<div class="step" data-step="2">
+<h2>🎯 Was ist dein Hauptziel?</h2>
+<div class="options">
+<label><input type="radio" name="q2" value="tiefenreinigung"><span>🔬 Tiefenreinigung – Gründlicher Frühlingsputz</span></label>
+<label><input type="radio" name="q2" value="taegliche-sauberkeit"><span>🧽 Tägliche Sauberkeit – Schnell & effektiv</span></label>
+<label><input type="radio" name="q2" value="aufraeumen-entruempeln"><span>📦 Aufräumen & Entrümpeln – Weniger ist mehr</span></label>
+<label><input type="radio" name="q2" value="organisation-ordnung"><span>🗂️ Organisation & Ordnung – Alles am Platz</span></label>
+<label><input type="radio" name="q2" value="nachhaltig-putzen"><span>🌿 Nachhaltig putzen – Natürlich & umweltfreundlich</span></label>
+</div>
+</div>
+
+<div class="step" data-step="3">
+<h2>💰 Welches Budget hast du gesamt?</h2>
+<div class="options">
+<label><input type="radio" name="q3" value="unter25"><span>Unter 25 € – Nur das Nötigste</span></label>
+<label><input type="radio" name="q3" value="25-50"><span>25–50 € – Gute Basis</span></label>
+<label><input type="radio" name="q3" value="50-100"><span>50–100 € – Ordentliche Ausstattung</span></label>
+<label><input type="radio" name="q3" value="100-200"><span>100–200 € – Komplette Ausrüstung</span></label>
+<label><input type="radio" name="q3" value="ueber200"><span>Über 200 € – Keine Kompromisse</span></label>
+</div>
+</div>
+
+<div class="step" data-step="4">
+<h2>👥 Wie groß ist dein Haushalt?</h2>
+<div class="options">
+<label><input type="radio" name="q4" value="1"><span>1 Person – Single-Haushalt</span></label>
+<label><input type="radio" name="q4" value="2"><span>2 Personen – Paar</span></label>
+<label><input type="radio" name="q4" value="3-4"><span>3–4 Personen – Familie</span></label>
+<label><input type="radio" name="q4" value="5plus"><span>5+ Personen – Große Familie</span></label>
+<label><input type="radio" name="q4" value="wg"><span>WG – Wohngemeinschaft</span></label>
+</div>
+</div>
+
+<div class="step" data-step="5">
+<h2>🌱 Wie wichtig ist dir Nachhaltigkeit?</h2>
+<div class="options">
+<label><input type="radio" name="q5" value="sehr-wichtig"><span>🌿 Sehr wichtig – Nur eco & nachhaltig</span></label>
+<label><input type="radio" name="q5" value="wichtig"><span>♻️ Wichtig – Wo möglich, gerne nachhaltig</span></label>
+<label><input type="radio" name="q5" value="egal"><span>💪 Egal – Hauptsache Wirkung</span></label>
+</div>
+</div>
+
+<div class="step" data-step="6">
+<h2>🐾 Hast du Haustiere oder Kleinkinder?</h2>
+<div class="options">
+<label><input type="radio" name="q6" value="beides"><span>🐕👶 Ja, beides – Haustiere & Kleinkinder</span></label>
+<label><input type="radio" name="q6" value="haustiere"><span>🐕 Ja – Haustiere (Hunde, Katzen & Co.)</span></label>
+<label><input type="radio" name="q6" value="kleinkinder"><span>👶 Ja – Kleinkinder (Baby- & kindersicher)</span></label>
+<label><input type="radio" name="q6" value="nein"><span>🚫 Nein – Keine Haustiere/Kleinkinder</span></label>
+</div>
+</div>
+
+<div class="nav">
+<button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()">← Zurück</button>
+<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">Weiter →</button>
+</div>
+
+</form>
+</div>
+
+<div class="card hidden" id="resultsCard">
+<div id="resultsContent"></div>
+<div class="reset-area">
+<button class="btn btn-gold" onclick="resetQuiz()">🔄 Neu starten</button>
+</div>
+</div>
+
+</main>
+
+<footer>
+<div class="container">
+<p>🔗 Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. <a href="/impressum">Impressum</a> | <a href="/datenschutz">Datenschutz</a></p>
+<p>© 2026 Reinigungs- & Organisations-Finder</p>
+</div>
+</footer>
+
+<script>
+const AFF_TAG = 'tag=ikune21-21';
+const AMZ_BASE = 'https://www.amazon.de/s?k=';
+
+function amzLink(name) {
+  return AMZ_BASE + encodeURIComponent(name + ' Haushalt') + '&' + AFF_TAG;
+}
+
+const CATALOG = [
+  // ===== ALLZWECKREINIGER & SPRAYS =====
+  {id:1,name:'Frosch Allzweckreiniger Zitrone 1L',kategorie:'Allzweckreiniger & Sprays',preis:'3-5€',raum:['kueche','bad','wohnzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit','nachhaltig-putzen'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein'],marke:'Frosch',bewertung:4.5,desc:'Pflanzlicher Allzweckreiniger mit angenehmem Zitrusduft – biologisch abbaubar.'},
+  {id:2,name:'Ajax Allzweckreiniger Power Lemon 750ml',kategorie:'Allzweckreiniger & Sprays',preis:'2-4€',raum:['kueche','bad','wohnzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder'],marke:'Ajax',bewertung:4.3,desc:'Fettlösender Allzweckreiniger für Küche & Bad – kraftvoll & günstig.'},
+  {id:3,name:'Ecover Allzweckreiniger Bio 1L',kategorie:'Allzweckreiniger & Sprays',preis:'4-7€',raum:['kueche','bad','wohnzimmer','schlafzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit','nachhaltig-putzen'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Ecover',bewertung:4.6,desc:'Pflanzlicher Allzweckreiniger mit Mineralsalzen – umweltfreundlich & hautschonend.'},
+  {id:4,name:'Sagrotan Allzweckreiniger 1L',kategorie:'Allzweckreiniger & Sprays',preis:'4-6€',raum:['kueche','bad','ganze-wohnung'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein'],marke:'Sagrotan',bewertung:4.4,desc:'Desinfizierender Allzweckreiniger – tötet 99,9% der Bakterien & Viren.'},
+  {id:5,name:'Dr. Beckmann Allzweckreiniger 1L',kategorie:'Allzweckreiniger & Sprays',preis:'3-5€',raum:['kueche','bad','wohnzimmer','buero','ganze-wohnung'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder'],marke:'Dr. Beckmann',bewertung:4.2,desc:'Vielseitiger Reiniger für alle Oberflächen – fettlösend & frischer Duft.'},
+  {id:6,name:'Mellerud Allzweckreiniger 1L',kategorie:'Allzweckreiniger & Sprays',preis:'5-8€',raum:['kueche','bad','keller','garage','ganze-wohnung'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein'],marke:'Mellerud',bewertung:4.5,desc:'Stark alkalischer Reiniger für hartnäckigen Schmutz – auch für Außenbereiche.'},
+  {id:7,name:'Sodasan Allzweckreiniger Konzentrat 500ml',kategorie:'Allzweckreiniger & Sprays',preis:'6-10€',raum:['kueche','bad','wohnzimmer','ganze-wohnung'],ziel:['nachhaltig-putzen','taegliche-sauberkeit'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Sodasan',bewertung:4.7,desc:'Zertifiziert ökologischer Reiniger – vegan, tierversuchsfrei & kompostierbar.'},
+
+  // ===== SCHWÄMME, TÜCHER & BÜRSTEN =====
+  {id:8,name:'Vileda Schwammtuch 5er Pack',kategorie:'Schwämme, Tücher & Bürsten',preis:'4-7€',raum:['kueche','bad','wohnzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Vileda',bewertung:4.4,desc:'Saustarke Schwammtücher – saugen viel auf & sind wiederverwendbar.'},
+  {id:9,name:'Scotch-Brite Topfschwamm 6er',kategorie:'Schwämme, Tücher & Bürsten',preis:'3-5€',raum:['kueche'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Scotch-Brite',bewertung:4.3,desc:'Kratzfeste Topfschwämme für hartnäckige Verschmutzungen in der Küche.'},
+  {id:10,name:'Vileda Microfaser-Tuch 10er Set',kategorie:'Schwämme, Tücher & Bürsten',preis:'8-14€',raum:['bad','kueche','wohnzimmer','schlafzimmer','buero','ganze-wohnung'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','sehr-wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Vileda',bewertung:4.7,desc:'Microfaser-Tücher in 4 Farben – streifenfrei für Glas, Edelstahl & Co.'},
+  {id:11,name:'Fackelmann Spülbürste mit Saugnapf',kategorie:'Schwämme, Tücher & Bürsten',preis:'3-6€',raum:['kueche'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Fackelmann',bewertung:4.2,desc:'Praktische Spülbürste mit Saugnapfhalterung – immer griffbereit.'},
+  {id:12,name:'Mikasa Mikrofaser-Wischtuch 50x50cm 6er',kategorie:'Schwämme, Tücher & Bürsten',preis:'10-16€',raum:['bad','kueche','wohnzimmer','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['25-50','unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','sehr-wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Mikasa',bewertung:4.6,desc:'Große Mikrofasertücher – ideal für Böden, Fenster & Auto – waschbar bis 60°C.'},
+  {id:13,name:'Vileda Wischbezug für Bodenwischer 2er',kategorie:'Schwämme, Tücher & Bürsten',preis:'5-9€',raum:['kueche','bad','wohnzimmer','schlafzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Vileda',bewertung:4.3,desc:'Wechselbezüge für Bodenwischer – waschbar & wiederverwendbar.'},
+  {id:14,name:'OCedar Spülschwamm 5er Pack',kategorie:'Schwämme, Tücher & Bürsten',preis:'2-4€',raum:['kueche','bad'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'OCedar',bewertung:4.1,desc:'Doppelseitige Schwämme – weich für Gläser, rau für Töpfe.'},
+
+  // ===== BADEZIMMER-REINIGUNG =====
+  {id:15,name:'Frosch Badreiniger Anti-Kalk 500ml',kategorie:'Badezimmer-Reinigung',preis:'3-5€',raum:['bad'],ziel:['taegliche-sauberkeit','nachhaltig-putzen'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein','kleinkinder','haustiere','beides'],marke:'Frosch',bewertung:4.5,desc:'Pflanzlicher Badreiniger gegen Kalk & Seifenreste – biologisch abbaubar.'},
+  {id:16,name:'Cif Badreiniger Power & Shine 750ml',kategorie:'Badezimmer-Reinigung',preis:'3-5€',raum:['bad'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein'],marke:'Cif',bewertung:4.4,desc:'Entfernt mühelos Kalk, Seifenreste & Schmutz – glänzende Oberflächen.'},
+  {id:17,name:'WC-Duck WC-Kraftaktiv Gel 500ml',kategorie:'Badezimmer-Reinigung',preis:'3-5€',raum:['bad'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein'],marke:'WC-Duck',bewertung:4.3,desc:'WC-Reiniger mit Kraft-Gel – entfernt Kalk & Urinstein hygienisch.'},
+  {id:18,name:'Sagrotan Bad-Reiniger 750ml',kategorie:'Badezimmer-Reinigung',preis:'4-7€',raum:['bad'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere'],marke:'Sagrotan',bewertung:4.5,desc:'Desinfizierender Badreiniger – antibakteriell für hygienische Sauberkeit.'},
+  {id:19,name:'Biff Badreiniger Lime&Shine 750ml',kategorie:'Badezimmer-Reinigung',preis:'2-4€',raum:['bad'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder'],marke:'Biff',bewertung:4.2,desc:'Schneller Kalkentferner für Dusche, Waschbecken & Armaturen.'},
+  {id:20,name:'Ecover Badreiniger 750ml',kategorie:'Badezimmer-Reinigung',preis:'4-7€',raum:['bad'],ziel:['nachhaltig-putzen','taegliche-sauberkeit'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein','kleinkinder','haustiere','beides'],marke:'Ecover',bewertung:4.6,desc:'Pflanzlicher Kalklöser ohne Chemie – sicher für Kläranlagen & Haut.'},
+  {id:21,name:'Denkmit Duschreiniger 500ml',kategorie:'Badezimmer-Reinigung',preis:'2-3€',raum:['bad'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder'],marke:'Denkmit',bewertung:4.0,desc:'Günstiger Duschreiniger für den täglichen Gebrauch – anti-kalk.'},
+  {id:22,name:'Dr. Beckmann Dusch-Kalkentferner 500ml',kategorie:'Badezimmer-Reinigung',preis:'4-6€',raum:['bad'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Dr. Beckmann',bewertung:4.4,desc:'Intensiver Kalkentferner für Duschkabinen – streifenfrei & frischer Duft.'},
+
+  // ===== WASCHMITTEL & WÄSCHEPFLEGE =====
+  {id:23,name:'Persil Universal Waschmittel 1,46kg',kategorie:'Waschmittel & Wäschepflege',preis:'8-13€',raum:['schlafzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','kleinkinder','haustiere','beides'],marke:'Persil',bewertung:4.7,desc:'Hocheffizientes Universal-Waschmittel – entfernt selbst hartnäckige Flecken.'},
+  {id:24,name:'Frosch Waschmittel Sensitiv 1,5L',kategorie:'Waschmittel & Wäschepflege',preis:'6-10€',raum:['schlafzimmer','ganze-wohnung'],ziel:['nachhaltig-putzen','taegliche-sauberkeit'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein','kleinkinder','haustiere','beides'],marke:'Frosch',bewertung:4.5,desc:'Ökologisches Waschmittel ohne Duft- & Farbstoffe – ideal für empfindliche Haut.'},
+  {id:25,name:'Lenor Weichspüler 1,44L',kategorie:'Waschmittel & Wäschepflege',preis:'5-8€',raum:['schlafzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Lenor',bewertung:4.3,desc:'Weichspüler für geschmeidige, duftende Wäsche – langanhaltender Frischeduft.'},
+  {id:26,name:'Dr. Beckmann Fleckenteufel 3in1',kategorie:'Waschmittel & Wäschepflege',preis:'5-8€',raum:['ganze-wohnung'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Dr. Beckmann',bewertung:4.6,desc:'Fleckenentferner für 120 Fleckenarten – für alle waschbaren Textilien.'},
+  {id:27,name:'Sodasan Waschmittel Universal 1,5L',kategorie:'Waschmittel & Wäschepflege',preis:'10-16€',raum:['schlafzimmer','ganze-wohnung'],ziel:['nachhaltig-putzen'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig'],tiereKinder:['nein','kleinkinder','haustiere','beides'],marke:'Sodasan',bewertung:4.7,desc:'Zertifiziert ökologisches Waschmittel – vegan, ohne Palmöl & Mikroplastik.'},
+  {id:28,name:'Vernel Weichspüler Nature 1L',kategorie:'Waschmittel & Wäschepflege',preis:'4-6€',raum:['schlafzimmer','ganze-wohnung'],ziel:['nachhaltig-putzen','taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','sehr-wichtig'],tiereKinder:['nein','kleinkinder','haustiere','beides'],marke:'Vernel',bewertung:4.2,desc:'Pflanzlicher Weichspüler mit natürlichen Ölen – dermatologisch getestet.'},
+  {id:29,name:'Spee Color Waschmittel 1,35kg',kategorie:'Waschmittel & Wäschepflege',preis:'5-8€',raum:['schlafzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Spee',bewertung:4.1,desc:'Günstiges Color-Waschmittel – schützt die Farben bei jedem Waschgang.'},
+
+  // ===== BODENREINIGUNG (Staubsauger, Wischer) =====
+  {id:30,name:'Vileda Ultramax Bodenwischer 2in1',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'18-28€',raum:['kueche','bad','wohnzimmer','schlafzimmer','buero','ganze-wohnung'],ziel:['taegliche-sauberkeit','tiefenreinigung'],budget:['25-50','unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Vileda',bewertung:4.5,desc:'2-in-1-Spray-Wischer mit Sprühfunktion – trocken & feucht wischen.'},
+  {id:31,name:'Leifheit Wischmop Profi 5in1',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'25-40€',raum:['kueche','bad','wohnzimmer','schlafzimmer','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Leifheit',bewertung:4.6,desc:'Profi-Bodenwischsystem mit auswringbarem Mikrofaser-Bezug.'},
+  {id:32,name:'Swiffer Staubmagnet Starter-Set',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'6-11€',raum:['wohnzimmer','schlafzimmer','buero','ganze-wohnung'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Swiffer',bewertung:4.3,desc:'Staubmagnet-Set – zieht Staub & Tierhaare elektrostatisch an.'},
+  {id:33,name:'Kärcher Fenstersauger WV 2',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'44-59€',raum:['bad','kueche','wohnzimmer','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Kärcher',bewertung:4.7,desc:'Fenstersauger für streifenfreie Fenster, Duschen & Spiegel.'},
+  {id:34,name:'AEG Staubsauger VX9-2-ECO',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'99-149€',raum:['wohnzimmer','schlafzimmer','buero','keller','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['50-100','100-200','ueber200'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'AEG',bewertung:4.5,desc:'Beutelloser Staubsauger mit Zyklon-Technologie – starke Saugleistung.'},
+  {id:35,name:'Dyson V15 Detect Staubsauger',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'499-699€',raum:['wohnzimmer','schlafzimmer','buero','keller','garage','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['ueber200','100-200'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Dyson',bewertung:4.8,desc:'Akku-Staubsauger mit Laserdetektion – sieht jedes Staubkorn.'},
+  {id:36,name:'Swiffer Bodenwischer Tuch 24er',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'8-13€',raum:['kueche','bad','wohnzimmer','schlafzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Swiffer',bewertung:4.2,desc:'Nachfüllpack für Swiffer Bodenwischer – trocken & feucht verwendbar.'},
+  {id:37,name:'Bissell CrossWave Floor & Carpet',kategorie:'Bodenreinigung (Staubsauger, Wischer)',preis:'169-249€',raum:['wohnzimmer','kueche','bad','ganze-wohnung'],ziel:['tiefenreinigung'],budget:['100-200','ueber200'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Bissell',bewertung:4.6,desc:'2-in-1: Saugt & wischt gleichzeitig – für Hartböden & Teppiche.'},
+
+  // ===== AUFBEWAHRUNG & BOXEN =====
+  {id:38,name:'Really Useful Box 11L',kategorie:'Aufbewahrung & Boxen',preis:'8-13€',raum:['keller','garage','buero','schlafzimmer'],ziel:['aufraeumen-entruempeln','organisation-ordnung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Really Useful Box',bewertung:4.5,desc:'Stapelbare Aufbewahrungsbox mit Deckel – transparent & robust.'},
+  {id:39,name:'IKEA SAMLA Aufbewahrungsbox 45L',kategorie:'Aufbewahrung & Boxen',preis:'5-9€',raum:['keller','garage','schlafzimmer','wohnzimmer'],ziel:['aufraeumen-entruempeln','organisation-ordnung'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'IKEA',bewertung:4.3,desc:'Günstige Box mit Deckel & Griffen – ideal für Lager & Kleidung.'},
+  {id:40,name:'Sistema Aufbewahrungsbox 2,1L',kategorie:'Aufbewahrung & Boxen',preis:'4-7€',raum:['kueche','buero','schlafzimmer'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Sistema',bewertung:4.4,desc:'Luftdichte Microsafe-Box – für Lebensmittel & Kleinteile.'},
+  {id:41,name:'Rotho Aufbewahrungsbox Cube 35L',kategorie:'Aufbewahrung & Boxen',preis:'14-22€',raum:['schlafzimmer','keller','wohnzimmer','buero'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['25-50','unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Rotho',bewertung:4.3,desc:'Cube-Box mit farbigen Deckeln – modular & stapelbar.'},
+  {id:42,name,'mDesign Schuhbox Set 6er',kategorie:'Aufbewahrung & Boxen',preis:'24-35€',raum:['schlafzimmer','keller'],ziel:['organisation-ordnung'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'mDesign',bewertung:4.5,desc:'Stabile Schuhboxen mit Sichtfenster – schützt vor Staub.'},
+  {id:43,name:'Sterilite Aufbewahrungsbox 27L',kategorie:'Aufbewahrung & Boxen',preis:'9-15€',raum:['keller','garage','schlafzimmer','ganze-wohnung'],ziel:['aufraeumen-entruempeln','organisation-ordnung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Sterilite',bewertung:4.2,desc:'Robuste Stapelbox mit Schnappdeckel – für Werkzeug, Deko & Co.'},
+  {id:44,name:'mPack Kabelbox 2er Set',kategorie:'Aufbewahrung & Boxen',preis:'12-18€',raum:['buero','wohnzimmer'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'mPack',bewertung:4.4,desc:'Kabelmanagement-Box – versteckt Kabel & Steckdosenleisten elegant.'},
+
+  // ===== REGALE & ORDNUNGSSYSTEME =====
+  {id:45,name:'IKEA KALLAX Regal 4x4',kategorie:'Regale & Ordnungssysteme',preis:'59-79€',raum:['wohnzimmer','schlafzimmer','buero','keller'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['50-100','100-200','ueber200'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'IKEA',bewertung:4.6,desc:'Universelles Würfelregal – als Raumteiler, Bücherregal oder Deko-Element.'},
+  {id:46,name:'Amazon Basics Regal 5 Fachböden',kategorie:'Regale & Ordnungssysteme',preis:'38-55€',raum:['keller','garage','buero','schlafzimmer'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Amazon Basics',bewertung:4.3,desc:'Stahlregal mit 5 verstellbaren Böden – bis 220 kg belastbar.'},
+  {id:47,name:'mDesign Korb-Regal 6er Set',kategorie:'Regale & Ordnungssysteme',preis:'34-48€',raum:['bad','kueche','buero','schlafzimmer'],ziel:['organisation-ordnung'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'mDesign',bewertung:4.4,desc:'Korbeinsatz-Set für Würfelregale – stilvolle Ordnung.'},
+  {id:48,name:'IKEA TROFAST Aufbewahrungssystem',kategorie:'Regale & Ordnungssysteme',preis:'35-55€',raum:['kinderzimmer','schlafzimmer','wohnzimmer'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['25-50','50-100'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','egal'],tiereKinder:['nein','kleinkinder','beides','haustiere'],marke:'IKEA',bewertung:4.5,desc:'Steckbares Aufbewahrungssystem mit herausnehmbaren Boxen.'},
+  {id:49,name:'VASAGLE Regal Küche 4 Ebenen',kategorie:'Regale & Ordnungssysteme',preis:'29-42€',raum:['kueche','bad','keller','garage'],ziel:['organisation-ordnung'],budget:['25-50','unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'VASAGLE',bewertung:4.4,desc:'Schmales Standregal für Küche & Bad – platzsparend & stabil.'},
+  {id:50,name:'mDesign Kleiderstange 120cm',kategorie:'Regale & Ordnungssysteme',preis:'23-35€',raum:['schlafzimmer','keller'],ziel:['organisation-ordnung','aufraeumen-entruempeln'],budget:['25-50','unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'mDesign',bewertung:4.2,desc:'Freistehende Kleiderstange – für zusätzlichen Stauraum.'},
+  {id:51,name:'Hänge-Organizer für Kleidung 12er',kategorie:'Regale & Ordnungssysteme',preis:'14-22€',raum:['schlafzimmer','keller'],ziel:['organisation-ordnung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Homest',bewertung:4.3,desc:'Hängender Schrank-Organizer mit 12 Fächern – für Accessoires & Kleidung.'},
+
+  // ===== SPEZIALREINIGER & ZUBEHÖR =====
+  {id:52,name:'Dr. Beckmann Teppich-Schaumreiniger',kategorie:'Spezialreiniger & Zubehör',preis:'7-11€',raum:['wohnzimmer','schlafzimmer','ganze-wohnung'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Dr. Beckmann',bewertung:4.3,desc:'Schaumreiniger für Teppiche & Polster – entfernt Flecken & Gerüche.'},
+  {id:53,name:'Frosch Glasreiniger 500ml',kategorie:'Spezialreiniger & Zubehör',preis:'3-5€',raum:['bad','wohnzimmer','ganze-wohnung'],ziel:['taegliche-sauberkeit','nachhaltig-putzen'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Frosch',bewertung:4.4,desc:'Pflanzlicher Glasreiniger – streifenfrei für Fenster & Spiegel.'},
+  {id:54,name:'Kärcher Dampfreiniger SC 2',kategorie:'Spezialreiniger & Zubehör',preis:'79-109€',raum:['kueche','bad','wohnzimmer','ganze-wohnung'],ziel:['tiefenreinigung'],budget:['50-100','100-200'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['wichtig','sehr-wichtig','egal'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Kärcher',bewertung:4.6,desc:'Dampfreiniger für hygienische Reinigung ohne Chemie – für alle Flächen.'},
+  {id:55,name:'Mellerud Backofenreiniger 500ml',kategorie:'Spezialreiniger & Zubehör',preis:'5-8€',raum:['kueche'],ziel:['tiefenreinigung'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal'],tiereKinder:['nein'],marke:'Mellerud',bewertung:4.5,desc:'Starker Backofenreiniger – löst selbst eingebrannte Rückstände.'},
+  {id:56,name:'Frosch WC-Reiniger Urinstein-Entferner 500ml',kategorie:'Spezialreiniger & Zubehör',preis:'3-5€',raum:['bad'],ziel:['tiefenreinigung','nachhaltig-putzen'],budget:['unter25'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['sehr-wichtig','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Frosch',bewertung:4.3,desc:'Pflanzlicher WC-Reiniger – entfernt Urinstein & Kalk.'},
+  {id:57,name:'Sagrotan Desinfektionsspray 500ml',kategorie:'Spezialreiniger & Zubehör',preis:'5-8€',raum:['bad','kueche','wohnzimmer','buero','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere'],marke:'Sagrotan',bewertung:4.5,desc:'Desinfektionsspray – tötet 99,9% Keime – ideal für Türgriffe & Oberflächen.'},
+  {id:58,name:'Vileda Fensterwischset Profi',kategorie:'Spezialreiniger & Zubehör',preis:'14-22€',raum:['bad','wohnzimmer','ganze-wohnung'],ziel:['tiefenreinigung','taegliche-sauberkeit'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Vileda',bewertung:4.4,desc:'Fensterwischer-Set mit Teleskopstange – streifenfrei & waschbar.'},
+  {id:59,name:'Woolite Teppichreiniger 750ml',kategorie:'Spezialreiniger & Zubehör',preis:'9-14€',raum:['wohnzimmer','schlafzimmer','ganze-wohnung'],ziel:['tiefenreinigung'],budget:['unter25','25-50'],haushalt:['1','2','3-4','5plus','wg'],nachhaltigkeit:['egal','wichtig'],tiereKinder:['nein','haustiere','kleinkinder','beides'],marke:'Woolite',bewertung:4.4,desc:'Schaum-Teppichreiniger mit Bürstenkopf – für frische Teppiche.'}
+];
+
+// Map answer values to tags
+const RAUM_LABELS = {
+  'bad':'Bad','kueche':'Küche','wohnzimmer':'Wohnzimmer',
+  'schlafzimmer':'Schlafzimmer','keller':'Keller','garage':'Garage',
+  'buero':'Büro','ganze-wohnung':'Ganze Wohnung'
+};
+const ZIEL_LABELS = {
+  'tiefenreinigung':'Tiefenreinigung','taegliche-sauberkeit':'Tägliche Sauberkeit',
+  'aufraeumen-entruempeln':'Aufräumen & Entrümpeln','organisation-ordnung':'Organisation & Ordnung',
+  'nachhaltig-putzen':'Nachhaltig putzen'
+};
+const BUDGET_LABELS = {
+  'unter25':'Unter 25 €','25-50':'25–50 €','50-100':'50–100 €',
+  '100-200':'100–200 €','ueber200':'Über 200 €'
+};
+const HAUSHALT_LABELS = {
+  '1':'1 Person','2':'2 Personen','3-4':'3–4 Personen','5plus':'5+ Personen','wg':'WG'
+};
+const NACHHALTIGKEIT_LABELS = {
+  'sehr-wichtig':'Sehr wichtig – nur eco','wichtig':'Wichtig – wo möglich','egal':'Egal – Hauptsache Wirkung'
+};
+const TIERE_LABELS = {
+  'beides':'Ja, beides','haustiere':'Ja – Haustiere','kleinkinder':'Ja – Kleinkinder','nein':'Nein'
+};
+
+const BUDGET_RANGES = {
+  'unter25':{label:'Unter 25 €',max:25},
+  '25-50':{label:'25–50 €',max:50},
+  '50-100':{label:'50–100 €',max:100},
+  '100-200':{label:'100–200 €',max:200},
+  'ueber200':{label:'Über 200 €',max:Infinity}
+};
+
+let currentStep = 1;
+const totalSteps = 6;
+
+function nextStep(){
+  const radios = document.querySelectorAll(`.step[data-step="${currentStep}"] input[type="radio"]`);
+  let checked = false;
+  radios.forEach(r=>{if(r.checked)checked=true});
+  if(!checked) return;
+  if(currentStep<totalSteps){currentStep++;renderStep()}
+  else if(currentStep===totalSteps){showResults()}
+}
+
+function prevStep(){
+  if(currentStep>1){currentStep--;renderStep()}
+}
+
+function renderStep(){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+  document.getElementById('progressFill').style.width=((currentStep-1)/totalSteps*100)+'%';
+  document.getElementById('progressText').textContent=(currentStep-1)+'/6';
+  document.getElementById('prevBtn').style.display=currentStep===1?'none':'inline-flex';
+  const nextBtn=document.getElementById('nextBtn');
+  if(currentStep===totalSteps){nextBtn.textContent='🔍 Ergebnisse anzeigen'}else{nextBtn.textContent='Weiter →'}
+}
+
+function getAnswers(){
+  return{
+    q1:document.querySelector('input[name="q1"]:checked')?.value||'',
+    q2:document.querySelector('input[name="q2"]:checked')?.value||'',
+    q3:document.querySelector('input[name="q3"]:checked')?.value||'',
+    q4:document.querySelector('input[name="q4"]:checked')?.value||'',
+    q5:document.querySelector('input[name="q5"]:checked')?.value||'',
+    q6:document.querySelector('input[name="q6"]:checked')?.value||''
+  };
+}
+
+function showResults(){
+  const a=getAnswers();
+  if(!a.q1||!a.q2||!a.q3||!a.q4||!a.q5||!a.q6) return;
+
+  document.getElementById('wizard').classList.add('hidden');
+  document.getElementById('resultsCard').classList.remove('hidden');
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('progressText').textContent='6/6';
+
+  // Score each product
+  const scored = CATALOG.map(p=>{
+    let score = 0;
+
+    // Raum match (+4)
+    if(p.raum.includes(a.q1)) score += 4;
+    else if(a.q1==='ganze-wohnung') score += 2; // partial for products that cover specific rooms
+
+    // Ziel match (+4)
+    if(p.ziel.includes(a.q2)) score += 4;
+
+    // Budget match: prefer products whose price fits the budget
+    const budgetInfo = BUDGET_RANGES[a.q3];
+    // Extract numeric min price from preis string
+    const priceStr = p.preis;
+    const priceMatch = priceStr.match(/(\d+)/);
+    const minPrice = priceMatch ? parseInt(priceMatch[1]) : 50;
+    if(budgetInfo) {
+      if(minPrice <= budgetInfo.max) score += 3;
+      else if(budgetInfo.max >= 50) score += 1;
+    }
+
+    // Haushalt match (+2)
+    if(p.haushalt.includes(a.q4)) score += 2;
+
+    // Nachhaltigkeit match (+3)
+    if(p.nachhaltigkeit.includes(a.q5)) score += 3;
+
+    // Tiere/Kinder match (+3)
+    if(p.tiereKinder.includes(a.q6)) score += 3;
+    // Special: if the user has both, products tagged for either also score
+    if(a.q6==='beides' && (p.tiereKinder.includes('haustiere') || p.tiereKinder.includes('kleinkinder'))) score += 1;
+
+    // Ziel bonuses
+    if(a.q2==='nachhaltig-putzen' && p.nachhaltigkeit.includes('sehr-wichtig')) score += 2;
+    if(a.q2==='organisation-ordnung' && (p.kategorie==='Aufbewahrung & Boxen'||p.kategorie==='Regale & Ordnungssysteme')) score += 2;
+    if(a.q2==='aufraeumen-entruempeln' && (p.kategorie==='Aufbewahrung & Boxen'||p.kategorie==='Regale & Ordnungssysteme')) score += 2;
+    if(a.q2==='tiefenreinigung' && p.ziel.includes('tiefenreinigung')) score += 1;
+
+    return {...p, score};
+  });
+
+  // Filter: only products with at least some relevance
+  const filtered = scored.filter(p=>p.score>0);
+  // Sort by score descending, then rating descending
+  filtered.sort((a,b)=>b.score-a.score||b.bewertung-a.bewertung);
+  const top12 = filtered.slice(0,12);
+
+  const budgetInfo = BUDGET_RANGES[a.q3]||{label:'Unbekannt',max:Infinity};
+
+  // Calculate total cost range
+  let totalMin = 0, totalMax = 0;
+  top12.forEach(p=>{
+    const parts = p.preis.split('-');
+    totalMin += parseInt(parts[0])||0;
+    totalMax += parseInt(parts[1])||(parseInt(parts[0])||0);
+  });
+
+  const raumLabel = RAUM_LABELS[a.q1]||a.q1;
+  const zielLabel = ZIEL_LABELS[a.q2]||a.q2;
+  const haushaltLabel = HAUSHALT_LABELS[a.q4]||a.q4;
+  const nachhaltigkeitLabel = NACHHALTIGKEIT_LABELS[a.q5]||a.q5;
+  const tiereLabel = TIERE_LABELS[a.q6]||a.q6;
+
+  let html = '';
+  html+='<h2>🎯 Deine personalisierten Empfehlungen</h2>';
+  html+=`<div class="summary-badge">
+    <span><span class="label">Raum:</span> <span class="value">${raumLabel}</span></span>
+    <span><span class="label">Ziel:</span> <span class="value">${zielLabel}</span></span>
+    <span><span class="label">Budget:</span> <span class="value">${budgetInfo.label}</span></span>
+    <span><span class="label">Haushalt:</span> <span class="value">${haushaltLabel}</span></span>
+    <span><span class="label">Nachhaltigkeit:</span> <span class="value">${nachhaltigkeitLabel}</span></span>
+    <span><span class="label">Tiere/Kinder:</span> <span class="value">${tiereLabel}</span></span>
+  </div>`;
+
+  if(top12.length===0){
+    html+=`<div class="no-results"><p>😕 Leider keine passenden Produkte gefunden. Versuche andere Antworten.</p></div>`;
+  }else{
+    const avgPrice = top12.length>0 ? Math.round((totalMin+totalMax)/(2*top12.length)) : 0;
+    html+=`<div class="budget-overview">
+      <div class="budget-total">💰 Budget-Gesamtsumme: ${totalMin}€ – ${totalMax}€ (ø ${avgPrice}€ pro Produkt)</div>
+      <div class="budget-detail">${top12.length} empfohlene Produkte für ${raumLabel} mit Fokus auf ${zielLabel.toLowerCase()}</div>
+    </div>`;
+    html+=`<div class="results-grid">`;
+    top12.forEach(p=>{
+      const stars = getStars(p.bewertung);
+      const link = amzLink(p.name);
+      html+=`<div class="result-card">
+        <span class="cat-tag">${p.kategorie}</span>
+        <h3>${p.name}</h3>
+        <div class="brand">${p.marke}</div>
+        <div class="price-range">💰 ${p.preis}</div>
+        <div class="rating">${stars} ${p.bewertung.toFixed(1)}</div>
+        <div class="desc">${p.desc}</div>
+        <a class="aff-btn" href="${link}" target="_blank" rel="noopener sponsored">🔗 Bei Amazon ansehen</a>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  html+=`<div class="tips">
+    <h3>💡 Putz- & Ordnungs-Tipps</h3>
+    <ul>
+      <li>Microfasertücher sind Allrounder – sie reinigen streifenfrei und sind waschbar.</li>
+      <li>Setze auf Nachhaltigkeit: Essig, Zitronensäure & Natron ersetzen viele Chemieprodukte.</li>
+      <li>Ordnung schaffen: Gleiche Dinge zusammenfassen – "One in, one out" Regel.</li>
+      <li>Für Allergiker: Bodenwischen statt Staubsaugen reduziert Feinstaub in der Luft.</li>
+      <li>Stapelbare Boxen und Körbe sind die günstigste Methode für mehr Ordnung.</li>
+      <li>Investiere in einen guten Dampfreiniger – er ersetzt viele chemische Reiniger.</li>
+    </ul>
+  </div>`;
+
+  document.getElementById('resultsContent').innerHTML = html;
+}
+
+function getStars(rating){
+  const full = Math.floor(rating);
+  const half = rating-full>=0.5?1:0;
+  let s='';
+  for(let i=0;i<full;i++) s+='⭐';
+  if(half) s+='½';
+  const empty = 5-full-half;
+  for(let i=0;i<empty;i++) s+='☆';
+  return s;
+}
+
+function resetQuiz(){
+  document.getElementById('quizForm').reset();
+  document.getElementById('resultsCard').classList.add('hidden');
+  document.getElementById('wizard').classList.remove('hidden');
+  currentStep=1;
+  renderStep();
+}
+
+renderStep();
+</script>
+</body>
+</html>
