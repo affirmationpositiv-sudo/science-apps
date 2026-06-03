@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spielzeug-Finder & Alters-Checker 2026</title>
+<style>
+/* === RESET & BASE === */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+  background:#0A0A0A;color:#E5E5E5;min-height:100vh;line-height:1.6;
+  display:flex;flex-direction:column;align-items:center;
+}
+a{color:#8B5CF6;text-decoration:none;transition:color .2s}
+a:hover{color:#A78BFA}
+::selection{background:#8B5CF6;color:#fff}
+
+/* === HEADER === */
+.header{
+  width:100%;padding:2rem 1rem 1rem;text-align:center;
+  border-bottom:1px solid #2A2A2A;
+}
+.header h1{
+  font-size:clamp(1.5rem,4vw,2.5rem);font-weight:800;
+  background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+}
+.header p{color:#9CA3AF;margin-top:.25rem;font-size:clamp(.85rem,2vw,1.05rem)}
+
+/* === CONTAINER === */
+.container{width:100%;max-width:860px;padding:1.5rem 1rem 3rem}
+
+/* === WIZARD CARD === */
+.wizard-card{
+  background:#1A1A1A;border:1px solid #2A2A2A;border-radius:16px;
+  padding:2rem 1.5rem;margin-bottom:1.5rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.5);
+}
+
+/* === PROGRESS === */
+.progress-wrap{margin-bottom:1.75rem}
+.progress-header{display:flex;justify-content:space-between;font-size:.85rem;color:#9CA3AF;margin-bottom:.5rem}
+.progress-step{color:#8B5CF6;font-weight:600}
+.progress-bar-wrap{height:6px;background:#2A2A2A;border-radius:3px;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#8B5CF6,#A78BFA);border-radius:3px;transition:width .5s ease;width:0%}
+
+/* === QUESTIONS === */
+.question{display:none;animation:fadeIn .35s ease}
+.question.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question h2{font-size:1.3rem;font-weight:700;margin-bottom:.3rem}
+.question .q-desc{color:#9CA3AF;font-size:.9rem;margin-bottom:1.25rem}
+
+/* === OPTIONS (Buttons) === */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:.65rem}
+.options.single-col{grid-template-columns:1fr}
+.option-btn{
+  display:flex;align-items:center;justify-content:center;gap:.4rem;
+  padding:.8rem .6rem;border:2px solid #2A2A2A;border-radius:12px;
+  background:transparent;color:#E5E5E5;font-size:.92rem;font-weight:500;
+  cursor:pointer;transition:all .25s ease;text-align:center;line-height:1.3;
+  min-height:3.2rem;
+}
+.option-btn:hover{border-color:#8B5CF6;background:rgba(139,92,246,.1)}
+.option-btn.selected{border-color:#8B5CF6;background:rgba(139,92,246,.2);color:#fff;box-shadow:0 0 20px rgba(139,92,246,.15)}
+.option-btn .emoji{font-size:1.35rem}
+
+/* === NAV BUTTONS === */
+.nav-buttons{display:flex;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap}
+.btn{
+  padding:.7rem 1.5rem;border-radius:10px;font-size:.95rem;font-weight:600;
+  cursor:pointer;transition:all .25s ease;border:none;
+}
+.btn-primary{background:#8B5CF6;color:#fff}
+.btn-primary:hover{background:#7C3AED;transform:translateY(-1px);box-shadow:0 4px 15px rgba(139,92,246,.3)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:#2A2A2A;color:#E5E5E5}
+.btn-secondary:hover{background:#3A3A3A}
+.btn-gold{background:#FFD700;color:#0A0A0A}
+.btn-gold:hover{background:#E6C200;transform:translateY(-1px)}
+
+/* === RESULTS === */
+.results{display:none;animation:fadeIn .5s ease}
+.results.active{display:block}
+.results-header{text-align:center;margin-bottom:1.5rem}
+.results-header h2{font-size:1.6rem;font-weight:800}
+.results-header .summary{color:#9CA3AF;margin-top:.25rem;font-size:.95rem}
+.budget-summary{
+  background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(255,215,0,.08));
+  border:1px solid #8B5CF6;border-radius:12px;padding:1rem 1.25rem;
+  text-align:center;margin-bottom:1.5rem;
+}
+.budget-summary .total{font-size:1.6rem;font-weight:800;color:#FFD700}
+.budget-summary .label{font-size:.85rem;color:#9CA3AF}
+
+/* === PRODUCT GRID === */
+.product-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:600px){.product-grid{grid-template-columns:1fr 1fr}}
+.product-card{
+  background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;
+  padding:1rem;display:flex;gap:.85rem;transition:all .25s ease;
+  align-items:flex-start;
+}
+.product-card:hover{border-color:#8B5CF6;transform:translateY(-2px);box-shadow:0 4px 20px rgba(139,92,246,.12)}
+.product-placeholder{
+  width:72px;height:72px;border-radius:10px;background:linear-gradient(135deg,#2A2A2A,#3A3A3A);
+  display:flex;align-items:center;justify-content:center;font-size:2rem;
+  flex-shrink:0;border:1px solid #2A2A2A;
+}
+.product-info{flex:1;min-width:0}
+.product-name{font-weight:700;font-size:.95rem;color:#fff;margin-bottom:.15rem}
+.product-brand{font-size:.78rem;color:#8B5CF6;margin-bottom:.2rem}
+.product-meta{font-size:.78rem;color:#9CA3AF;display:flex;flex-wrap:wrap;gap:.35rem .65rem;margin-bottom:.35rem}
+.product-meta span{display:inline-flex;align-items:center;gap:.2rem}
+.product-meta .tag{
+  background:rgba(139,92,246,.15);color:#8B5CF6;padding:0 .45rem;
+  border-radius:4px;font-size:.72rem;font-weight:500;
+}
+.product-meta .rating{color:#FFD700}
+.product-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.82rem;font-weight:600;color:#8B5CF6}
+.product-link:hover{color:#A78BFA}
+
+/* === RESET BUTTON === */
+.reset-area{text-align:center;margin-top:1.5rem}
+.btn-reset{background:transparent;border:1px solid #2A2A2A;color:#9CA3AF;padding:.6rem 1.5rem;border-radius:10px;cursor:pointer;font-size:.88rem;transition:all .25s}
+.btn-reset:hover{background:#2A2A2A;color:#E5E5E5}
+
+/* === RESPONSIVE === */
+@media(max-width:480px){
+  .wizard-card{padding:1.25rem 1rem}
+  .options{gap:.5rem}
+  .option-btn{padding:.65rem .5rem;font-size:.85rem;min-height:2.8rem}
+  .product-card{padding:.75rem;gap:.6rem}
+  .product-placeholder{width:56px;height:56px;font-size:1.5rem}
+}
+
+/* === UTILITY === */
+.hidden{display:none!important}
+.mt-1{margin-top:1rem}
+.text-center{text-align:center}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1>🧸 Spielzeug-Finder & Alters-Checker 2026</h1>
+  <p>Finde das perfekte Geschenk – personalisiert, geprüft, altersgerecht</p>
+</header>
+
+<div class="container" id="app">
+
+  <!-- WIZARD CARD -->
+  <div class="wizard-card" id="wizardCard">
+
+    <!-- PROGRESS -->
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span class="progress-step" id="progressStep">Frage 1 von 6</span>
+        <span id="progressPct">0 %</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div id="questionContainer">
+
+      <!-- Q1: Alter -->
+      <div class="question active" data-q="0">
+        <h2>👶 Alter des Kindes?</h2>
+        <p class="q-desc">Wähle die Altersgruppe</p>
+        <div class="options">
+          <button class="option-btn" data-value="0-2"><span class="emoji">👶</span> 0–2 Jahre</button>
+          <button class="option-btn" data-value="3-5"><span class="emoji">🧒</span> 3–5 Jahre</button>
+          <button class="option-btn" data-value="6-8"><span class="emoji">👦</span> 6–8 Jahre</button>
+          <button class="option-btn" data-value="9-12"><span class="emoji">🧑</span> 9–12 Jahre</button>
+          <button class="option-btn" data-value="12+"><span class="emoji">🧑‍🎓</span> 12+ Jahre</button>
+        </div>
+      </div>
+
+      <!-- Q2: Budget -->
+      <div class="question" data-q="1">
+        <h2>💰 Budget?</h2>
+        <p class="q-desc">Wie viel möchtest du ausgeben?</p>
+        <div class="options">
+          <button class="option-btn" data-value="<20"><span class="emoji">💶</span> Unter 20 €</button>
+          <button class="option-btn" data-value="20-50"><span class="emoji">💵</span> 20–50 €</button>
+          <button class="option-btn" data-value="50-100"><span class="emoji">💴</span> 50–100 €</button>
+          <button class="option-btn" data-value="100-200"><span class="emoji">💎</span> 100–200 €</button>
+          <button class="option-btn" data-value="200+"><span class="emoji">👑</span> 200 €+</button>
+        </div>
+      </div>
+
+      <!-- Q3: Interesse -->
+      <div class="question" data-q="2">
+        <h2>🎯 Interesse / Kategorie?</h2>
+        <p class="q-desc">Was begeistert das Kind am meisten?</p>
+        <div class="options">
+          <button class="option-btn" data-value="bauen"><span class="emoji">🧱</span> Bauen & Konstruktion</button>
+          <button class="option-btn" data-value="lernen"><span class="emoji">📚</span> Lernen & Bildung</button>
+          <button class="option-btn" data-value="kreativ"><span class="emoji">🎨</span> Kreativität & Basteln</button>
+          <button class="option-btn" data-value="bewegung"><span class="emoji">⚽</span> Bewegung & Draußen</button>
+          <button class="option-btn" data-value="elektronik"><span class="emoji">🔬</span> Elektronik & Technik</button>
+          <button class="option-btn" data-value="rollenspiel"><span class="emoji">🎭</span> Rollenspiel & Verkleidung</button>
+          <button class="option-btn" data-value="musik"><span class="emoji">🎵</span> Musik</button>
+          <button class="option-btn" data-value="brettspiele"><span class="emoji">🎲</span> Brettspiele & Puzzles</button>
+          <button class="option-btn" data-value="kuscheltiere"><span class="emoji">🧸</span> Kuscheltiere</button>
+        </div>
+      </div>
+
+      <!-- Q4: Anlass -->
+      <div class="question" data-q="3">
+        <h2>🎉 Anlass?</h2>
+        <p class="q-desc">Für welchen Anlass suchst du?</p>
+        <div class="options">
+          <button class="option-btn" data-value="geburtstag"><span class="emoji">🎂</span> Geburtstag</button>
+          <button class="option-btn" data-value="weihnachten"><span class="emoji">🎄</span> Weihnachten</button>
+          <button class="option-btn" data-value="einschulung"><span class="emoji">📏</span> Einschulung</button>
+          <button class="option-btn" data-value="einfach so"><span class="emoji">💝</span> Einfach so</button>
+          <button class="option-btn" data-value="ostern"><span class="emoji">🐣</span> Ostern</button>
+        </div>
+      </div>
+
+      <!-- Q5: Förderung -->
+      <div class="question" data-q="4">
+        <h2>🧠 Besondere Förderung?</h2>
+        <p class="q-desc">Soll das Spielzeug bestimmte Fähigkeiten fördern?</p>
+        <div class="options">
+          <button class="option-btn" data-value="motorik"><span class="emoji">✋</span> Motorik</button>
+          <button class="option-btn" data-value="sprache"><span class="emoji">💬</span> Sprache</button>
+          <button class="option-btn" data-value="logik"><span class="emoji">🧩</span> Logik</button>
+          <button class="option-btn" data-value="kreativitaet"><span class="emoji">🎨</span> Kreativität</button>
+          <button class="option-btn" data-value="sozialkompetenz"><span class="emoji">🤝</span> Sozialkompetenz</button>
+          <button class="option-btn" data-value="keine"><span class="emoji">⭐</span> Keine besondere</button>
+        </div>
+      </div>
+
+      <!-- Q6: Geschlecht -->
+      <div class="question" data-q="5">
+        <h2>⚧️ Geschlecht?</h2>
+        <p class="q-desc">Wir empfehlen geschlechtsneutral – alle Produkte ohne Stereotype!</p>
+        <div class="options single-col">
+          <button class="option-btn selected" data-value="unisex"><span class="emoji">🌈</span> Unisex – geschlechtsneutrale Empfehlungen</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="nav-buttons" id="navButtons">
+      <button class="btn btn-secondary" id="prevBtn" disabled>← Zurück</button>
+      <button class="btn btn-primary" id="nextBtn" disabled>Weiter →</button>
+      <button class="btn btn-gold hidden" id="submitBtn">🎯 Empfehlungen finden!</button>
+    </div>
+
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="resultsContainer">
+
+    <div class="results-header">
+      <h2>🎯 Deine personalisierten Empfehlungen</h2>
+      <p class="summary" id="resultsSummary"></p>
+    </div>
+
+    <div class="budget-summary" id="budgetSummary">
+      <div class="label">💰 Gesamtsumme aller Empfehlungen</div>
+      <div class="total" id="budgetTotal">0,00 €</div>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="reset-area">
+      <button class="btn-reset" onclick="resetWizard()">🔄 Neue Suche starten</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+// ===================== PRODUKT-DATENBANK =====================
+const PRODUCTS = [
+  // === LEGO ===
+  {name:"LEGO Classic Steinebox",marke:"LEGO",kategorie:"bauen",preis:35,alter_von:4,alter_bis:99,interesse:"bauen",foerderung:"motorik",rating:4.8,bild:"🧱"},
+  {name:"LEGO City Feuerwehrstation",marke:"LEGO",kategorie:"bauen",preis:75,alter_von:5,alter_bis:12,interesse:"bauen",foerderung:"logik",rating:4.7,bild:"🚒"},
+  {name:"LEGO Technic Rennwagen",marke:"LEGO",kategorie:"bauen",preis:120,alter_von:9,alter_bis:16,interesse:"bauen",foerderung:"logik",rating:4.6,bild:"🏎️"},
+  {name:"LEGO Friends Heartlake City",marke:"LEGO",kategorie:"bauen",preis:60,alter_von:6,alter_bis:12,interesse:"bauen",foerderung:"kreativitaet",rating:4.7,bild:"🏘️"},
+  {name:"LEGO Duplo Bauernhof",marke:"LEGO",kategorie:"bauen",preis:40,alter_von:1.5,alter_bis:5,interesse:"bauen",foerderung:"motorik",rating:4.8,bild:"🐄"},
+  {name:"LEGO Duplo Eisenbahn",marke:"LEGO",kategorie:"bauen",preis:55,alter_von:2,alter_bis:5,interesse:"bauen",foerderung:"motorik",rating:4.7,bild:"🚂"},
+  {name:"LEGO City Polizeistation",marke:"LEGO",kategorie:"bauen",preis:90,alter_von:5,alter_bis:12,interesse:"bauen",foerderung:"logik",rating:4.6,bild:"🚔"},
+  {name:"LEGO Technic Kran",marke:"LEGO",kategorie:"bauen",preis:150,alter_von:10,alter_bis:16,interesse:"bauen",foerderung:"motorik",rating:4.8,bild:"🏗️"},
+  {name:"LEGO Classic Kreativbox",marke:"LEGO",kategorie:"bauen",preis:25,alter_von:4,alter_bis:10,interesse:"bauen",foerderung:"kreativitaet",rating:4.5,bild:"📦"},
+  {name:"LEGO Speed Champions",marke:"LEGO",kategorie:"bauen",preis:22,alter_von:7,alter_bis:14,interesse:"bauen",foerderung:"logik",rating:4.6,bild:"🏁"},
+  // === Magna-Tiles / K'NEX / Geomag ===
+  {name:"Magna-Tiles 100er Set",marke:"Magna-Tiles",kategorie:"bauen",preis:120,alter_von:3,alter_bis:10,interesse:"bauen",foerderung:"motorik",rating:4.9,bild:"🔷"},
+  {name:"Magna-Tiles 32er Set",marke:"Magna-Tiles",kategorie:"bauen",preis:50,alter_von:3,alter_bis:8,interesse:"bauen",foerderung:"motorik",rating:4.8,bild:"🔶"},
+  {name:"K'NEX 100 Modelle Set",marke:"K'NEX",kategorie:"bauen",preis:65,alter_von:7,alter_bis:14,interesse:"bauen",foerderung:"logik",rating:4.5,bild:"⚙️"},
+  {name:"Geomag Mechanics Magnetic",marke:"Geomag",kategorie:"bauen",preis:45,alter_von:5,alter_bis:12,interesse:"bauen",foerderung:"motorik",rating:4.4,bild:"🧲"},
+  // === Playmobil ===
+  {name:"Playmobil 1.2.3. Tierpark",marke:"Playmobil",kategorie:"rollenspiel",preis:35,alter_von:1.5,alter_bis:4,interesse:"rollenspiel",foerderung:"motorik",rating:4.5,bild:"🐘"},
+  {name:"Playmobil Ritterburg",marke:"Playmobil",kategorie:"rollenspiel",preis:80,alter_von:4,alter_bis:10,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.6,bild:"🏰"},
+  {name:"Playmobil Polizei-Streife",marke:"Playmobil",kategorie:"rollenspiel",preis:45,alter_von:4,alter_bis:10,interesse:"rollenspiel",foerderung:"rollenspiel",rating:4.4,bild:"🚓"},
+  {name:"Playmobil Drachenburg",marke:"Playmobil",kategorie:"rollenspiel",preis:100,alter_von:5,alter_bis:12,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.7,bild:"🐉"},
+  // === Ravensburger Puzzles ===
+  {name:"Ravensburger Puzzle 100 Teile",marke:"Ravensburger",kategorie:"brettspiele",preis:12,alter_von:4,alter_bis:8,interesse:"brettspiele",foerderung:"logik",rating:4.7,bild:"🧩"},
+  {name:"Ravensburger Puzzle 500 Teile",marke:"Ravensburger",kategorie:"brettspiele",preis:18,alter_von:8,alter_bis:14,interesse:"brettspiele",foerderung:"logik",rating:4.8,bild:"🧩"},
+  {name:"Ravensburger Puzzle 1000 Teile",marke:"Ravensburger",kategorie:"brettspiele",preis:22,alter_von:10,alter_bis:99,interesse:"brettspiele",foerderung:"logik",rating:4.8,bild:"🧩"},
+  // === KOSMOS Experimentierkästen ===
+  {name:"Kosmos Chemie Labor",marke:"KOSMOS",kategorie:"lernen",preis:45,alter_von:10,alter_bis:16,interesse:"lernen",foerderung:"logik",rating:4.5,bild:"🧪"},
+  {name:"Kosmos Kristalle züchten",marke:"KOSMOS",kategorie:"lernen",preis:28,alter_von:8,alter_bis:14,interesse:"lernen",foerderung:"kreativitaet",rating:4.4,bild:"💎"},
+  {name:"Kosmos Elektro Start",marke:"KOSMOS",kategorie:"elektronik",preis:35,alter_von:8,alter_bis:14,interesse:"elektronik",foerderung:"logik",rating:4.6,bild:"⚡"},
+  {name:"Kosmos Die drei ??? Detektiv-Set",marke:"KOSMOS",kategorie:"lernen",preis:30,alter_von:8,alter_bis:14,interesse:"lernen",foerderung:"logik",rating:4.7,bild:"🔍"},
+  // === Toniebox & Figuren ===
+  {name:"Toniebox Starter-Set",marke:"Toniebox",kategorie:"musik",preis:80,alter_von:3,alter_bis:10,interesse:"musik",foerderung:"sprache",rating:4.8,bild:"🎵"},
+  {name:"Tonie-Figur Bibi Blocksberg",marke:"Toniebox",kategorie:"musik",preis:15,alter_von:3,alter_bis:10,interesse:"musik",foerderung:"sprache",rating:4.6,bild:"🧙"},
+  {name:"Tonie-Figur Paw Patrol",marke:"Toniebox",kategorie:"musik",preis:15,alter_von:3,alter_bis:8,interesse:"musik",foerderung:"sprache",rating:4.7,bild:"🐾"},
+  {name:"Tonie-Figur Benjamin Blümchen",marke:"Toniebox",kategorie:"musik",preis:15,alter_von:3,alter_bis:8,interesse:"musik",foerderung:"sprache",rating:4.5,bild:"🐘"},
+  // === Nintendo Switch ===
+  {name:"Nintendo Switch OLED",marke:"Nintendo",kategorie:"elektronik",preis:320,alter_von:6,alter_bis:99,interesse:"elektronik",foerderung:"logik",rating:4.9,bild:"🎮"},
+  {name:"Nintendo Switch Spiel Mario Kart",marke:"Nintendo",kategorie:"elektronik",preis:50,alter_von:6,alter_bis:99,interesse:"elektronik",foerderung:"logik",rating:4.8,bild:"🏎️"},
+  {name:"Nintendo Switch Spiel Animal Crossing",marke:"Nintendo",kategorie:"elektronik",preis:50,alter_von:6,alter_bis:99,interesse:"elektronik",foerderung:"kreativitaet",rating:4.7,bild:"🏝️"},
+  // === VTech / Fisher-Price ===
+  {name:"VTech Baby Activity-Lauflernwagen",marke:"VTech",kategorie:"lernen",preis:45,alter_von:1,alter_bis:3,interesse:"lernen",foerderung:"motorik",rating:4.5,bild:"🚶"},
+  {name:"VTech Storio Edu-Tablet",marke:"VTech",kategorie:"elektronik",preis:65,alter_von:4,alter_bis:9,interesse:"elektronik",foerderung:"lernen",rating:4.3,bild:"📱"},
+  {name:"Fisher-Price Deluxe Kugelbahn",marke:"Fisher-Price",kategorie:"lernen",preis:40,alter_von:1,alter_bis:4,interesse:"lernen",foerderung:"motorik",rating:4.6,bild:"🔴"},
+  {name:"Fisher-Price Little People Bauernhof",marke:"Fisher-Price",kategorie:"rollenspiel",preis:30,alter_von:1,alter_bis:5,interesse:"rollenspiel",foerderung:"sozialkompetenz",rating:4.5,bild:"🚜"},
+  // === Hot Wheels / Matchbox / Carrera ===
+  {name:"Hot Wheels 10er Set",marke:"Hot Wheels",kategorie:"bewegung",preis:22,alter_von:3,alter_bis:10,interesse:"bewegung",foerderung:"motorik",rating:4.5,bild:"🚗"},
+  {name:"Hot Wheels Rennbahn Loop",marke:"Hot Wheels",kategorie:"bewegung",preis:55,alter_von:4,alter_bis:10,interesse:"bewegung",foerderung:"motorik",rating:4.4,bild:"🎢"},
+  {name:"Matchbox 5er Set",marke:"Matchbox",kategorie:"bewegung",preis:15,alter_von:3,alter_bis:9,interesse:"bewegung",foerderung:"motorik",rating:4.3,bild:"🚙"},
+  {name:"Carrera Digital 132 Rennbahn",marke:"Carrera",kategorie:"bewegung",preis:130,alter_von:6,alter_bis:16,interesse:"bewegung",foerderung:"motorik",rating:4.6,bild:"🏁"},
+  {name:"Carrera Go!!! Startset",marke:"Carrera",kategorie:"bewegung",preis:55,alter_von:4,alter_bis:10,interesse:"bewegung",foerderung:"motorik",rating:4.5,bild:"🚦"},
+  // === Bruder Fahrzeuge ===
+  {name:"Bruder Traktor mit Anhänger",marke:"Bruder",kategorie:"bewegung",preis:45,alter_von:3,alter_bis:10,interesse:"bewegung",foerderung:"motorik",rating:4.7,bild:"🚜"},
+  {name:"Bruder Feuerwehrfahrzeug",marke:"Bruder",kategorie:"bewegung",preis:55,alter_von:3,alter_bis:10,interesse:"bewegung",foerderung:"motorik",rating:4.6,bild:"🚒"},
+  {name:"Bruder Müllwagen",marke:"Bruder",kategorie:"bewegung",preis:50,alter_von:3,alter_bis:10,interesse:"bewegung",foerderung:"motorik",rating:4.5,bild:"🗑️"},
+  // === Schleich Tiere ===
+  {name:"Schleich Pferdebox",marke:"Schleich",kategorie:"rollenspiel",preis:35,alter_von:4,alter_bis:12,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.6,bild:"🐴"},
+  {name:"Schleich Dinosaurier Set",marke:"Schleich",kategorie:"rollenspiel",preis:28,alter_von:4,alter_bis:12,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.7,bild:"🦖"},
+  {name:"Schleich Farm Life Set",marke:"Schleich",kategorie:"rollenspiel",preis:25,alter_von:3,alter_bis:10,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.5,bild:"🐑"},
+  // === HABA / Selecta / Grimms / Eichhorn ===
+  {name:"HABA Stapelspiel Fuchs",marke:"HABA",kategorie:"bauen",preis:28,alter_von:1,alter_bis:4,interesse:"bauen",foerderung:"motorik",rating:4.7,bild:"🦊"},
+  {name:"HABA Meine erste Spielwelt",marke:"HABA",kategorie:"brettspiele",preis:30,alter_von:2,alter_bis:5,interesse:"brettspiele",foerderung:"logik",rating:4.6,bild:"🎲"},
+  {name:"Selecta Motorikspielzeug",marke:"Selecta",kategorie:"lernen",preis:25,alter_von:1,alter_bis:4,interesse:"lernen",foerderung:"motorik",rating:4.5,bild:"🪀"},
+  {name:"Grimms Regenbogen groß",marke:"Grimms",kategorie:"bauen",preis:65,alter_von:1,alter_bis:8,interesse:"bauen",foerderung:"kreativitaet",rating:4.9,bild:"🌈"},
+  {name:"Eichhorn Holz-Eisenbahn",marke:"Eichhorn",kategorie:"bauen",preis:35,alter_von:2,alter_bis:6,interesse:"bauen",foerderung:"motorik",rating:4.5,bild:"🚂"},
+  {name:"Eichhorn Holz Steckpuzzle",marke:"Eichhorn",kategorie:"lernen",preis:12,alter_von:1,alter_bis:4,interesse:"lernen",foerderung:"motorik",rating:4.4,bild:"🧩"},
+  // === Brio ===
+  {name:"Brio Holzeisenbahn Starter Set",marke:"Brio",kategorie:"bauen",preis:75,alter_von:2,alter_bis:6,interesse:"bauen",foerderung:"motorik",rating:4.8,bild:"🚂"},
+  {name:"Brio Erweiterung Brücke",marke:"Brio",kategorie:"bauen",preis:25,alter_von:2,alter_bis:7,interesse:"bauen",foerderung:"motorik",rating:4.5,bild:"🌉"},
+  // === TipToi / Tigerbox / Osmo ===
+  {name:"Ravensburger tiptoi Stift",marke:"Ravensburger",kategorie:"lernen",preis:55,alter_von:4,alter_bis:10,interesse:"lernen",foerderung:"sprache",rating:4.7,bild:"🖊️"},
+  {name:"tiptoi Buch Suchen und Entdecken",marke:"Ravensburger",kategorie:"lernen",preis:18,alter_von:4,alter_bis:8,interesse:"lernen",foerderung:"sprache",rating:4.6,bild:"📖"},
+  {name:"Tigerbox Touch Plus",marke:"Tigerbox",kategorie:"musik",preis:100,alter_von:3,alter_bis:12,interesse:"musik",foerderung:"sprache",rating:4.6,bild:"🎶"},
+  {name:"Osmo Genius Kit für iPad",marke:"Osmo",kategorie:"lernen",preis:75,alter_von:5,alter_bis:12,interesse:"lernen",foerderung:"logik",rating:4.5,bild:"📐"},
+  // === Makeblock / Sphero / Roboter ===
+  {name:"Makeblock mBot Roboter",marke:"Makeblock",kategorie:"elektronik",preis:85,alter_von:8,alter_bis:16,interesse:"elektronik",foerderung:"logik",rating:4.6,bild:"🤖"},
+  {name:"Sphero Mini Roboter",marke:"Sphero",kategorie:"elektronik",preis:55,alter_von:6,alter_bis:14,interesse:"elektronik",foerderung:"logik",rating:4.5,bild:"⚪"},
+  {name:"Lego Mindstorms Robot Inventor",marke:"LEGO",kategorie:"elektronik",preis:350,alter_von:10,alter_bis:16,interesse:"elektronik",foerderung:"logik",rating:4.7,bild:"🤖"},
+  // === Hape / Small Foot / Green Toys ===
+  {name:"Hape Kugelbahn",marke:"Hape",kategorie:"bauen",preis:45,alter_von:2,alter_bis:6,interesse:"bauen",foerderung:"motorik",rating:4.7,bild:"🔵"},
+  {name:"Hape Holzküche",marke:"Hape",kategorie:"rollenspiel",preis:80,alter_von:3,alter_bis:8,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.6,bild:"🍳"},
+  {name:"Small Foot Regenbogen-Stapelturm",marke:"Small Foot",kategorie:"bauen",preis:22,alter_von:1,alter_bis:4,interesse:"bauen",foerderung:"motorik",rating:4.5,bild:"🔴"},
+  {name:"Green Toys Dump Truck",marke:"Green Toys",kategorie:"bewegung",preis:25,alter_von:1,alter_bis:5,interesse:"bewegung",foerderung:"motorik",rating:4.6,bild:"🚛"},
+  {name:"Green Toys Teeservice",marke:"Green Toys",kategorie:"rollenspiel",preis:20,alter_von:2,alter_bis:6,interesse:"rollenspiel",foerderung:"sozialkompetenz",rating:4.4,bild:"🫖"},
+  // === Crayola / Molotow / Basteln ===
+  {name:"Crayola Kreativ-Set 150er",marke:"Crayola",kategorie:"kreativ",preis:35,alter_von:4,alter_bis:12,interesse:"kreativ",foerderung:"kreativitaet",rating:4.6,bild:"🖍️"},
+  {name:"Crayola Wasserfarben Set",marke:"Crayola",kategorie:"kreativ",preis:18,alter_von:4,alter_bis:10,interesse:"kreativ",foerderung:"kreativitaet",rating:4.4,bild:"🎨"},
+  {name:"Loops! Freundschaftsbänder Set",marke:"Loops!",kategorie:"kreativ",preis:22,alter_von:6,alter_bis:14,interesse:"kreativ",foerderung:"kreativitaet",rating:4.5,bild:"🎀"},
+  {name:"Molotow Graffiti Set",marke:"Molotow",kategorie:"kreativ",preis:45,alter_von:10,alter_bis:99,interesse:"kreativ",foerderung:"kreativitaet",rating:4.3,bild:"🖌️"},
+  // === Brettspiele (zusätzlich) ===
+  {name:"Clementoni Spielend Lernen",marke:"Clementoni",kategorie:"lernen",preis:20,alter_von:3,alter_bis:7,interesse:"lernen",foerderung:"logik",rating:4.4,bild:"🧠"},
+  {name:"Hasbro Monopoly Junior",marke:"Hasbro",kategorie:"brettspiele",preis:25,alter_von:5,alter_bis:10,interesse:"brettspiele",foerderung:"sozialkompetenz",rating:4.5,bild:"🎲"},
+  {name:"Ravensburger Lotti Karotti",marke:"Ravensburger",kategorie:"brettspiele",preis:28,alter_von:4,alter_bis:8,interesse:"brettspiele",foerderung:"motorik",rating:4.6,bild:"🐰"},
+  {name:"Mattel Uno Card Game",marke:"Mattel",kategorie:"brettspiele",preis:10,alter_von:7,alter_bis:99,interesse:"brettspiele",foerderung:"sozialkompetenz",rating:4.7,bild:"🃏"},
+  // === Paw Patrol / Marvel / Barbie ===
+  {name:"Paw Patrol Headquarters",marke:"Spin Master",kategorie:"rollenspiel",preis:55,alter_von:3,alter_bis:7,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.5,bild:"🐶"},
+  {name:"Paw Patrol Figuren Set",marke:"Spin Master",kategorie:"rollenspiel",preis:25,alter_von:3,alter_bis:7,interesse:"rollenspiel",foerderung:"sozialkompetenz",rating:4.4,bild:"🐾"},
+  {name:"Marvel Legends Actionfigur",marke:"Hasbro",kategorie:"rollenspiel",preis:35,alter_von:6,alter_bis:16,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.5,bild:"🦸"},
+  {name:"Barbie Traumhaus",marke:"Mattel",kategorie:"rollenspiel",preis:120,alter_von:3,alter_bis:10,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.6,bild:"🏠"},
+  {name:"Barbie Modepuppe",marke:"Mattel",kategorie:"rollenspiel",preis:25,alter_von:3,alter_bis:10,interesse:"rollenspiel",foerderung:"kreativitaet",rating:4.4,bild:"👗"},
+  // === Kuscheltiere / Trixie ===
+  {name:"Trixie Schnuffeltuch Hase",marke:"Trixie",kategorie:"kuscheltiere",preis:22,alter_von:0,alter_bis:4,interesse:"kuscheltiere",foerderung:"keine",rating:4.7,bild:"🐰"},
+  {name:"Trixie Knuddeltier Elefant",marke:"Trixie",kategorie:"kuscheltiere",preis:28,alter_von:0,alter_bis:5,interesse:"kuscheltiere",foerderung:"keine",rating:4.6,bild:"🐘"},
+  {name:"Steiff Teddybär 25cm",marke:"Steiff",kategorie:"kuscheltiere",preis:55,alter_von:0,alter_bis:99,interesse:"kuscheltiere",foerderung:"keine",rating:4.9,bild:"🧸"},
+  // === Weitere ===
+  {name:"Baby Born Puppe",marke:"Zapf Creation",kategorie:"rollenspiel",preis:45,alter_von:3,alter_bis:8,interesse:"rollenspiel",foerderung:"sozialkompetenz",rating:4.5,bild:"👶"},
+  {name:"Zapf Creation Baby Born Pflegeset",marke:"Zapf Creation",kategorie:"rollenspiel",preis:20,alter_von:3,alter_bis:8,interesse:"rollenspiel",foerderung:"sozialkompetenz",rating:4.3,bild:"🛁"},
+  {name:"Simba Rutsche Kinderzimmer",marke:"Simba",kategorie:"bewegung",preis:65,alter_von:1,alter_bis:5,interesse:"bewegung",foerderung:"motorik",rating:4.4,bild:"🛝"},
+  {name:"EverEarth Holz-Laufrad",marke:"EverEarth",kategorie:"bewegung",preis:45,alter_von:1,alter_bis:4,interesse:"bewegung",foerderung:"motorik",rating:4.6,bild:"🚲"},
+  {name:"Spin Master Kinetic Sand 1kg",marke:"Spin Master",kategorie:"kreativ",preis:18,alter_von:3,alter_bis:10,interesse:"kreativ",foerderung:"motorik",rating:4.4,bild:"🏖️"},
+  {name:"Haba Kindermusikinstrumente Set",marke:"HABA",kategorie:"musik",preis:35,alter_von:2,alter_bis:6,interesse:"musik",foerderung:"motorik",rating:4.5,bild:"🎵"},
+];
+
+// ===================== APP STATE =====================
+const state = {
+  answers: [null,null,null,null,null,null],
+  currentQuestion: 0,
+  totalQuestions: 6
+};
+
+const dom = {
+  progressStep: document.getElementById('progressStep'),
+  progressFill: document.getElementById('progressFill'),
+  progressPct: document.getElementById('progressPct'),
+  questionContainer: document.getElementById('questionContainer'),
+  prevBtn: document.getElementById('prevBtn'),
+  nextBtn: document.getElementById('nextBtn'),
+  submitBtn: document.getElementById('submitBtn'),
+  wizardCard: document.getElementById('wizardCard'),
+  resultsContainer: document.getElementById('resultsContainer'),
+  resultsSummary: document.getElementById('resultsSummary'),
+  budgetTotal: document.getElementById('budgetTotal'),
+  productGrid: document.getElementById('productGrid')
+};
+
+// ===================== WIZARD LOGIC =====================
+function updateProgress(){
+  const answered = state.answers.filter(a=>a!==null).length;
+  const pct = Math.round((answered/state.totalQuestions)*100);
+  dom.progressFill.style.width = pct+'%';
+  dom.progressPct.textContent = pct+' %';
+  dom.progressStep.textContent = 'Frage '+(state.currentQuestion+1)+' von '+state.totalQuestions;
+}
+
+function showQuestion(idx){
+  document.querySelectorAll('.question').forEach((q,i)=>{
+    q.classList.toggle('active',i===idx);
+  });
+  updateProgress();
+  dom.prevBtn.disabled = idx===0;
+  const isLast = idx===state.totalQuestions-1;
+  dom.nextBtn.classList.toggle('hidden',isLast);
+  dom.submitBtn.classList.toggle('hidden',!isLast);
+  dom.submitBtn.disabled = !state.answers[idx];
+  dom.nextBtn.disabled = !state.answers[idx];
+}
+
+function goNext(){
+  if(state.currentQuestion<state.totalQuestions-1){
+    state.currentQuestion++;
+    showQuestion(state.currentQuestion);
+  }
+}
+
+function goPrev(){
+  if(state.currentQuestion>0){
+    state.currentQuestion--;
+    showQuestion(state.currentQuestion);
+  }
+}
+
+function selectOption(btn){
+  const parent = btn.parentElement;
+  const qIdx = parseInt(btn.closest('.question').dataset.q);
+  parent.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  state.answers[qIdx] = btn.dataset.value;
+  // enable next/submit
+  dom.nextBtn.disabled = false;
+  if(dom.submitBtn) dom.submitBtn.disabled = false;
+  updateProgress();
+}
+
+// Click handler on all option buttons
+document.querySelectorAll('.option-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>selectOption(btn));
+});
+
+dom.prevBtn.addEventListener('click',goPrev);
+dom.nextBtn.addEventListener('click',goNext);
+dom.submitBtn.addEventListener('click',showResults);
+
+// Keyboard support
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='Enter'){
+    if(e.key==='Enter' && e.target.closest('.option-btn')) return;
+    if(!dom.submitBtn.classList.contains('hidden') && !dom.submitBtn.disabled){
+      showResults();
+    } else if(!dom.nextBtn.disabled && !dom.nextBtn.classList.contains('hidden')){
+      goNext();
+    }
+  }
+  if(e.key==='ArrowLeft'&&!dom.prevBtn.disabled) goPrev();
+});
+
+// ===================== SEARCH & RANK =====================
+function getAgeRangeValue(val){
+  const map={'0-2':[0,2.5],'3-5':[3,5.5],'6-8':[6,8.5],'9-12':[9,12.5],'12+':[12,99]};
+  return map[val]||[0,99];
+}
+
+function getBudgetRange(val){
+  const map={'<20':[0,20],'20-50':[20,50],'50-100':[50,100],'100-200':[100,200],'200+':[200,9999]};
+  return map[val]||[0,9999];
+}
+
+function matchesAge(product,ageKey){
+  const [min,max]=getAgeRangeValue(ageKey);
+  return product.alter_von<=max && product.alter_bis>=min;
+}
+
+function matchesBudget(product,budgetKey){
+  // check if product price fits in selected budget
+  const [bMin,bMax]=getBudgetRange(budgetKey);
+  return product.preis>=bMin && product.preis<bMax;
+}
+
+function matchesInteresse(product,interestKey){
+  if(!interestKey) return true;
+  // direct match, or if interest is 'bauen' and product kategorie is 'bauen'
+  return product.interesse===interestKey || product.kategorie===interestKey;
+}
+
+function matchesFoerderung(product,foerKey){
+  if(!foerKey||foerKey==='keine') return true;
+  return product.foerderung===foerKey;
+}
+
+function getAmazonUrl(productName){
+  return 'https://www.amazon.de/s?k='+encodeURIComponent(productName)+'&tag=ikune21-21';
+}
+
+function findRecommendations(){
+  const [age,budget,interest,occasion,foerderung,gender] = state.answers;
+  const [bMin,bMax]=getBudgetRange(budget);
+
+  // Filter candidates
+  let candidates = PRODUCTS.filter(p=>{
+    if(!matchesAge(p,age)) return false;
+    if(!matchesInteresse(p,interest)) return false;
+    if(!matchesFoerderung(p,foerderung)) return false;
+    return true;
+  });
+
+  // If too few, relax: remove interesse filter
+  if(candidates.length<12){
+    candidates = PRODUCTS.filter(p=>{
+      if(!matchesAge(p,age)) return false;
+      if(!matchesFoerderung(p,foerderung)) return false;
+      return true;
+    });
+  }
+
+  // If still too few, only age filter
+  if(candidates.length<12){
+    candidates = PRODUCTS.filter(p=>matchesAge(p,age));
+  }
+
+  // Score & rank
+  const scored = candidates.map(p=>{
+    let score = p.rating * 10;
+
+    // Bonus for exact interest match
+    if(p.interesse===interest) score += 20;
+    if(p.kategorie===interest) score += 15;
+
+    // Bonus for exact foerderung match
+    if(p.foerderung===foerderung) score += 10;
+
+    // Budget fit bonus: prefer products within budget
+    if(p.preis>=bMin && p.preis<bMax) score += 15;
+
+    // Rating bonus
+    score += p.rating * 5;
+
+    // Age precision bonus: product age range closer to child's age
+    const [cMin,cMax]=getAgeRangeValue(age);
+    const ageMid = (cMin+cMax)/2;
+    const prodMid = (p.alter_von+p.alter_bis)/2;
+    const ageDiff = Math.abs(prodMid-ageMid);
+    if(ageDiff<2) score += 10;
+    else if(ageDiff<4) score += 5;
+
+    return {...p,score};
+  });
+
+  scored.sort((a,b)=>b.score-a.score);
+
+  // Pick top 12, staying within budget where possible
+  const top = [];
+  let total = 0;
+
+  for(const p of scored){
+    // Try to keep total reasonable but don't hard-limit
+    top.push(p);
+    total += p.preis;
+    if(top.length>=12) break;
+  }
+
+  // Ensure we always return at least some results
+  if(top.length===0 && PRODUCTS.length>0){
+    // fallback: just return first 12
+    const fallback = PRODUCTS.slice(0,12);
+    total = fallback.reduce((s,p)=>s+p.preis,0);
+    return {products:fallback,total};
+  }
+
+  return {products:top,total};
+}
+
+// ===================== RESULTS DISPLAY =====================
+function showResults(){
+  const {products,total} = findRecommendations();
+  const [age,budget,interest,occasion,foerderung] = state.answers;
+
+  // Hide wizard, show results
+  dom.wizardCard.style.display = 'none';
+  dom.resultsContainer.classList.add('active');
+
+  // Summary text
+  const occasionNames = {
+    'geburtstag':'Geburtstag','weihnachten':'Weihnachten','einschulung':'Einschulung',
+    'einfach so':'Einfach so','ostern':'Ostern'
+  };
+  const ageNames = {
+    '0-2':'0–2 Jahre','3-5':'3–5 Jahre','6-8':'6–8 Jahre','9-12':'9–12 Jahre','12+':'12+ Jahre'
+  };
+  dom.resultsSummary.textContent =
+    '👶 '+ageNames[age]+' | 🎯 passende Spielzeuge | 🎉 '+(occasionNames[occasion]||occasion);
+
+  // Budget total
+  dom.budgetTotal.textContent = total.toFixed(2).replace('.',',')+' €';
+
+  // Render products
+  dom.productGrid.innerHTML = '';
+  const shown = products.slice(0,12);
+  shown.forEach((p,i)=>{
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.style.animationDelay = (i*0.05)+'s';
+    card.innerHTML = `
+      <div class="product-placeholder">${p.bild||'🧸'}</div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-brand">${p.marke}</div>
+        <div class="product-meta">
+          <span>💰 ${p.preis.toFixed(2).replace('.',',')} €</span>
+          <span class="rating">⭐ ${p.rating.toFixed(1)}</span>
+          <span class="tag">${p.kategorie}</span>
+          ${p.foerderung!=='keine'?`<span class="tag">🧠 ${p.foerderung}</span>`:''}
+          <span>👶 ${p.alter_von}–${p.alter_bis} J.</span>
+        </div>
+        <a class="product-link" href="${getAmazonUrl(p.name)}" target="_blank" rel="noopener">
+          🛒 Bei Amazon ansehen →
+        </a>
+      </div>
+    `;
+    dom.productGrid.appendChild(card);
+  });
+}
+
+// ===================== RESET =====================
+function resetWizard(){
+  state.answers = [null,null,null,null,null,null];
+  state.currentQuestion = 0;
+
+  // Reset button selections
+  document.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  // Preselect unisex
+  document.querySelector('.question[data-q="5"] .option-btn')?.classList.add('selected');
+  state.answers[5] = 'unisex';
+
+  dom.wizardCard.style.display = 'block';
+  dom.resultsContainer.classList.remove('active');
+  showQuestion(0);
+}
+
+// Init: preselect unisex
+document.querySelector('.question[data-q="5"] .option-btn')?.classList.add('selected');
+state.answers[5] = 'unisex';
+showQuestion(0);
+</script>
+</body>
+</html>
