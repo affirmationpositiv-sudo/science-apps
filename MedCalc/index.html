@@ -34,6 +34,11 @@ header{background:var(--surface);border-bottom:2px solid var(--accent);padding:1
 .shop-card .price{color:var(--accent);font-size:16px;font-weight:700;margin:6px 0}
 .shop-card .btn{width:100%;font-size:12px;padding:8px}
 footer{text-align:center;padding:32px 0;color:var(--text2);font-size:13px;border-top:1px solid var(--border);margin-top:40px}
+
+.related{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:25px;margin:30px 0}
+.related h3{color:#d4a843;font-size:1.1em;margin-bottom:15px}
+.related a{display:block;color:#aaa;text-decoration:none;padding:8px 12px;border-radius:6px;margin:5px 0;transition:all .2s}
+.related a:hover{background:#1a1a1a;color:#d4a843;padding-left:18px}
 </style></head>
 <body>
 <header><div class="container header-inner"><a href="./" class="logo">🏥 MedCalc <span>β</span></a></div></header>
@@ -63,7 +68,16 @@ footer{text-align:center;padding:32px 0;color:var(--text2);font-size:13px;border
 <button class="btn" onclick="calcBP()">Bewerten</button>
 <div class="result-box" id="bpResult"><span class="label">130/85 mmHg</span><span class="value">⚠️ Hochnormal</span></div></div></div>
 </div>
-<footer><div class="container"><p>🏥 MedCalc v0.1 • Store-ID: ikune21-21</p></div></footer>
+<footer><div class="container"><p>🏥 MedCalc v0.1 • Store-ID: ikune21-21</p></div>
+<div class="related">
+<h3>📚 Ähnliche Artikel</h3>
+<a href="../games/index.html">📄 Index</a>
+<a href="../tools/ziele/index.html">📄 Zielsetzungs-Worksheet</a>
+<a href="../tools/wochenplan/index.html">📄 Wochenplaner-Vorlage</a>
+
+<p class="tag">Mehr zum Thema – von IKUNE Verlag</p>
+</div>
+</footer>
 <script>
 const TAG='ikune21-21';
 function calcBMI(){const h=parseFloat(document.getElementById('bmiH').value)/100;const w=parseFloat(document.getElementById('bmiW').value);const b=(w/(h*h));let s='';if(b<18.5)s='Untergewicht';else if(b<25)s='Normalgewicht';else if(b<30)s='Übergewicht';else if(b<35)s='Adipositas Grad I';else if(b<40)s='Adipositas Grad II';else s='Adipositas Grad III';dok('bmiResult',`<span class="label">BMI = ${w} / (${h.toFixed(2)})²</span><span class="value">${b.toFixed(1)} – ${s}</span>`)}
