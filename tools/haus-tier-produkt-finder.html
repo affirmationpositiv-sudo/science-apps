@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🐾 Haustier-Produkt-Finder 2026 – Finde das perfekte Zubehör für dein Haustier</title>
+<meta name="description" content="Finde in 2 Minuten das perfekte Haustier-Produkt-Setup! Beantworte 5 Fragen zu Tierart, Budget, Wohnsituation & Bedürfnissen. Personalisierte Empfehlungen für Hunde, Katzen & Kleintiere mit Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Haustier-Produkt-Finder, Haustier-Bedarf, Hunde Zubehör, Katzen Zubehör, Tierprodukte Empfehlung, Amazon Haustier, ikune21-21">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; min-height: 100vh; }
+.container { max-width: 820px; margin: 0 auto; padding: 20px; }
+
+h1 { font-size: 2.4em; font-weight: 800; background: linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 8px; }
+.subtitle { text-align: center; color: #888; font-size: 1.05em; margin-bottom: 32px; }
+
+/* Wizard */
+.wizard { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 20px; padding: 28px; margin-bottom: 24px; }
+.wizard-step { display: none; }
+.wizard-step.active { display: block; }
+
+.wizard h2 { font-size: 1.3em; color: #8B5CF6; margin-bottom: 6px; }
+.wizard .question { font-size: 1.1em; margin-bottom: 16px; color: #E5E5E5; }
+.wizard .progress { display: flex; gap: 6px; margin-bottom: 20px; justify-content: center; }
+.wizard .dot { width: 12px; height: 12px; border-radius: 50%; background: #2A2A2A; }
+.wizard .dot.active { background: #8B5CF6; }
+.wizard .dot.done { background: #22C55E; }
+
+.options { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.option-btn { background: #151515; border: 2px solid #2A2A2A; border-radius: 12px; padding: 14px 12px; text-align: center; cursor: pointer; color: #E5E5E5; font-size: .95em; transition: all .3s; }
+.option-btn:hover { border-color: #A78BFA; background: #1a1a2a; }
+.option-btn.selected { border-color: #8B5CF6; background: #1a1a2a; box-shadow: 0 0 15px rgba(139,92,246,.3); }
+
+.wizard-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.btn-prev, .btn-next { padding: 12px 28px; border-radius: 30px; font-weight: 600; border: none; cursor: pointer; font-size: 1em; transition: all .3s; }
+.btn-prev { background: #2A2A2A; color: #888; }
+.btn-prev:hover { background: #333; color: #fff; }
+.btn-next { background: linear-gradient(135deg,#8B5CF6,#FFD700); color: #000; margin-left: auto; }
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(139,92,246,.4); }
+.btn-next:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Results */
+.result-section { display: none; }
+.result-section.active { display: block; }
+
+.result-header { text-align: center; margin-bottom: 24px; }
+.result-header h2 { font-size: 1.8em; color: #22C55E; margin-bottom: 4px; }
+.result-header p { color: #888; }
+
+.result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.result-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 14px; padding: 18px; transition: all .3s; }
+.result-card:hover { border-color: #8B5CF6; transform: translateY(-2px); }
+.result-card h4 { color: #FFD700; font-size: .95em; margin-bottom: 4px; }
+.result-card .preis { color: #22C55E; font-weight: 600; font-size: .85em; }
+.result-card .desc { color: #999; font-size: .82em; margin: 6px 0; }
+.result-card .amz { display: inline-block; background: #FFD700; color: #000 !important; font-weight: 600; padding: 4px 12px; border-radius: 20px; font-size: .78em; text-decoration: none; }
+.result-card .amz:hover { background: #E6C200; }
+.result-card .icon { font-size: 2em; margin-bottom: 4px; }
+
+.why-box { background: #0d1d0d; border: 1px solid #22C55E; border-radius: 14px; padding: 20px; margin: 20px 0; }
+.why-box h3 { color: #22C55E; margin-bottom: 8px; }
+.why-box ul { margin-left: 20px; color: #ccc; }
+
+.spartipps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 20px 0; }
+.spartipp { background: #151515; border: 1px solid #2A2A2A; border-radius: 12px; padding: 16px; }
+.spartipp .icon { font-size: 1.5em; }
+.spartipp h4 { color: #FFD700; font-size: .95em; margin: 4px 0; }
+.spartipp p { color: #999; font-size: .85em; }
+
+.budget-chart { background: #151515; border: 1px solid #2A2A2A; border-radius: 14px; padding: 20px; margin: 20px 0; text-align: center; }
+.budget-chart h3 { color: #8B5CF6; margin-bottom: 12px; }
+.chart-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.chart-bar .label { width: 120px; text-align: right; font-size: .85em; color: #888; }
+.chart-bar .bar-bg { flex: 1; height: 24px; background: #2A2A2A; border-radius: 12px; overflow: hidden; }
+.chart-bar .bar-fill { height: 100%; border-radius: 12px; transition: width 1s ease; display: flex; align-items: center; padding-left: 8px; font-size: .78em; font-weight: 600; color: #000; }
+.bar-yes { background: linear-gradient(90deg,#22C55E,#4ADE80); }
+.bar-reco { background: linear-gradient(90deg,#8B5CF6,#A78BFA); }
+.bar-nice { background: linear-gradient(90deg,#F59E0B,#FBBF24); }
+
+.reset-btn { display: block; width: 100%; padding: 14px; background: #2A2A2A; color: #fff; border: none; border-radius: 30px; font-size: 1em; font-weight: 600; cursor: pointer; transition: all .3s; margin: 20px 0; }
+.reset-btn:hover { background: #3A3A3A; transform: translateY(-2px); }
+
+.affiliate-link { display: block; text-align: center; background: #1a1a0d; border: 1px solid #3d3d0d; border-radius: 12px; padding: 14px; margin: 16px 0; color: #FFD700; text-decoration: none; font-weight: 600; }
+.affiliate-link:hover { background: #2a2a0d; }
+
+footer { text-align: center; padding: 30px 20px; color: #555; font-size: .82em; border-top: 1px solid #1a1a1a; margin-top: 32px; }
+footer a { color: #8B5CF6; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🐾 Haustier-Produkt-Finder 2026</h1>
+<p class="subtitle">Finde in 2 Minuten das perfekte Produkt-Setup für dein Haustier · <strong>Alle Links mit tag=ikune21-21 (Amazon)</strong></p>
+
+<!-- WIZARD -->
+<div class="wizard" id="wizard">
+  <div class="progress" id="progress"></div>
+
+  <!-- Step 1: Tierart -->
+  <div class="wizard-step active" data-step="0">
+    <h2>Schritt 1 von 5</h2>
+    <p class="question">🐕 Welche Tierart hast du?</p>
+    <div class="options">
+      <div class="option-btn" data-value="hund">🐕 Hund</div>
+      <div class="option-btn" data-value="katze">🐱 Katze</div>
+      <div class="option-btn" data-value="kleintier">🐹 Kleintier (Kaninchen, Hamster, Meerschweinchen)</div>
+      <div class="option-btn" data-value="mehrere">🐾 Mehrere Tiere (Hund + Katze)</div>
+    </div>
+  </div>
+
+  <!-- Step 2: Budget -->
+  <div class="wizard-step" data-step="1">
+    <h2>Schritt 2 von 5</h2>
+    <p class="question">💰 Welches Budget hast du für das Haustier-Setup?</p>
+    <div class="options">
+      <div class="option-btn" data-value="low">💶 Bis 50€ – Basis-Ausstattung</div>
+      <div class="option-btn" data-value="mid">💶 50-150€ – Gute Komfort-Stufe</div>
+      <div class="option-btn" data-value="high">💶 150-300€ – Richtig gute Ausstattung</div>
+      <div class="option-btn" data-value="premium">💶 300€+ – Premium-Komplett-Setup</div>
+    </div>
+  </div>
+
+  <!-- Step 3: Wohnsituation -->
+  <div class="wizard-step" data-step="2">
+    <h2>Schritt 3 von 5</h2>
+    <p class="question">🏠 Wo wohnst du / wie ist die Wohnsituation?</p>
+    <div class="options">
+      <div class="option-btn" data-value="wohnung">🏢 Wohnung (Balkon möglich)</div>
+      <div class="option-btn" data-value="haus">🏡 Haus mit Garten</div>
+      <div class="option-btn" data-value="reise">🚗 Viel unterwegs / Reisen mit Tier</div>
+      <div class="option-btn" data-value="land">🌳 Ländlich / viel Auslauf</div>
+    </div>
+  </div>
+
+  <!-- Step 4: Bedürfnisse -->
+  <div class="wizard-step" data-step="3">
+    <h2>Schritt 4 von 5</h2>
+    <p class="question">🎯 Was ist dir am wichtigsten?</p>
+    <div class="options">
+      <div class="option-btn" data-value="gesundheit">💚 Gesundheit & Pflege (Fell, Zähne, Krallen, Wasser)</div>
+      <div class="option-btn" data-value="sicherheit">🔒 Sicherheit & Ortung (GPS-Tracker, Halsband, Auto)</div>
+      <div class="option-btn" data-value="beschaeftigung">🎾 Beschäftigung & Spielzeug (Intelligenzspiele, Spaß)</div>
+      <div class="option-btn" data-value="komfort">🛏️ Komfort & Schlaf (Körbchen, Höhlen, Transport)</div>
+      <div class="option-btn" data-value="smart">📱 Smarte Gadgets (Kamera, Automaten, Roboter)</div>
+    </div>
+  </div>
+
+  <!-- Step 5: Alter/Größe -->
+  <div class="wizard-step" data-step="4">
+    <h2>Schritt 5 von 5</h2>
+    <p class="question">📏 Welche Größe / welches Alter hat dein Tier?</p>
+    <div class="options">
+      <div class="option-btn" data-value="welpe">🐶 Welpe / Jungtier (0-2 Jahre)</div>
+      <div class="option-btn" data-value="erwachsen">🐕 Erwachsen (2-7 Jahre) – Mittelgroß</div>
+      <div class="option-btn" data-value="senior">🧓 Senior (7+ Jahre) – Groß oder alt</div>
+      <div class="option-btn" data-value="klein">🐩 Klein (Chihuahua, Dackel, Kitten, Zwerghamster)</div>
+    </div>
+  </div>
+
+  <div class="wizard-nav">
+    <button class="btn-prev" id="btnPrev" onclick="prevStep()">← Zurück</button>
+    <button class="btn-next" id="btnNext" onclick="nextStep()">Weiter →</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="result-section" id="results">
+  <div class="result-header">
+    <h2>✅ Dein personalisiertes Haustier-Setup</h2>
+    <p id="resultSummary">Basierend auf deinen Angaben haben wir die perfekten Produkte für dich zusammengestellt.</p>
+  </div>
+
+  <div class="budget-chart">
+    <h3>📊 Budget-Verteilung</h3>
+    <div id="budgetChart"></div>
+  </div>
+
+  <div class="result-grid" id="resultGrid"></div>
+
+  <div class="why-box">
+    <h3>💡 Warum diese Produkte?</h3>
+    <p id="whyText">Alle Produkte wurden nach Kundenbewertungen, Preis-Leistung und Qualität ausgewählt. Wir priorisieren Testsieger und Amazon-Bestseller mit dem besten Preis-Leistungs-Verhältnis.</p>
+  </div>
+
+  <div class="spartipps" id="spartipps"></div>
+
+  <a class="affiliate-link" href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">🔗 Alle Haustierprodukte bei Amazon entdecken (tag=ikune21-21)</a>
+
+  <button class="reset-btn" onclick="resetWizard()">🔄 Nochmal von vorne</button>
+</div>
+
+<footer>
+  <p><a href="../blog/haus-tier-produkte-2026.html">📝 Zum Blog-Artikel: Haustierprodukte 2026</a> · <a href="../blog/index.html">📰 Blog</a> · <a href="../index.html">🏪 Startseite</a></p>
+  <p>Amazon-Partnerwerbung. Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. © 2026 Licht und Schatten</p>
+</footer>
+
+<script>
+const answers = {};
+
+// Product database
+const products = {
+  all: [
+    { id: 1, icon: '🥣', name: 'SureFeed Microchip Futterautomat', preis: 'ca. 169€', tier: ['hund','katze','mehrere'], budget: ['mid','high','premium'], ort: [], bedarf: ['smart','gesundheit'], groesse: [], desc: 'Erkennt Microchip des Tieres, verhindert Futterdiebstahl. Ideal für Mehrkatzen-Haushalte.', kategorie: 'must', amz: 'SureFeed+Microchip+Futterautomat' },
+    { id: 2, icon: '💧', name: 'Catit Flower Trinkbrunnen', preis: 'ca. 39€', tier: ['katze','mehrere'], budget: ['low','mid'], ort: [], bedarf: ['gesundheit'], groesse: [], desc: '3 Wasserfluss-Stufen, Aktivkohlefilter, 3L. Fördert die Trinkmenge.', kategorie: 'must', amz: 'Catit+Flower+Trinkbrunnen' },
+    { id: 3, icon: '🛏️', name: 'Trixie Ortho Premium Hundebett', preis: 'ca. 59-99€', tier: ['hund','mehrere'], budget: ['mid','high'], ort: [], bedarf: ['komfort','gesundheit'], groesse: ['senior','erwachsen','klein'], desc: 'Orthopädische Kaltschaummatratze, waschbar.', kategorie: 'must', amz: 'Trixie+Ortho+Premium+Hundebett' },
+    { id: 4, icon: '🛰️', name: 'Tractive GPS Tracker LTE', preis: 'ca. 49€ + Abo', tier: ['hund','katze','mehrere'], budget: ['high','premium'], ort: ['haus','land','reise'], bedarf: ['sicherheit'], groesse: [], desc: 'Echtzeit-GPS, KI-Grenzerkennung, Aktivitätstracking.', kategorie: 'reco', amz: 'Tractive+GPS+Tracker+Hund' },
+    { id: 5, icon: '🤖', name: 'CatLink Selbstreinigend Katzenklo', preis: 'ca. 499€', tier: ['katze','mehrere'], budget: ['premium'], ort: ['wohnung','haus'], bedarf: ['smart','komfort'], groesse: [], desc: 'Automatische Reinigung, App-Steuerung, geruchsversiegelt.', kategorie: 'nice', amz: 'CatLink+Selbstreinigendes+Katzenklo' },
+    { id: 6, icon: '🧩', name: 'Nina Ottosson Dog Puzzle', preis: 'ca. 25-35€', tier: ['hund','mehrere'], budget: ['low','mid'], ort: [], bedarf: ['beschaeftigung'], groesse: ['welpe','erwachsen'], desc: 'Intelligenzspielzeug mit Futterverstecken und Drehscheiben.', kategorie: 'must', amz: 'Nina+Ottosson+Dog+Puzzle+Intelligenzspielzeug' },
+    { id: 7, icon: '🪮', name: 'Furminator Fellpflegebürste', preis: 'ca. 25-35€', tier: ['hund','katze','mehrere'], budget: ['low','mid'], ort: [], bedarf: ['gesundheit'], groesse: [], desc: 'Reduziert Haarausfall um bis zu 90%. Für Lang- & Kurzhaar.', kategorie: 'must', amz: 'Furminator+Fellpflegeb%C3%BCrste+Hund' },
+    { id: 8, icon: '🎯', name: 'Chuckit! Ballwurfschleuder', preis: 'ca. 12€', tier: ['hund','mehrere'], budget: ['low'], ort: ['haus','land'], bedarf: ['beschaeftigung'], groesse: ['welpe','erwachsen','klein'], desc: 'Mehr Reichweite beim Apportieren. Inklusive 2 Bälle.', kategorie: 'reco', amz: 'Chuckit+Ballwurfschleuder+Hund' },
+    { id: 9, icon: '📹', name: 'Furbo Dog Camera 360', preis: 'ca. 169€', tier: ['hund','mehrere'], budget: ['high','premium'], ort: ['wohnung','haus'], bedarf: ['smart','sicherheit'], groesse: [], desc: '360°-Kamera mit Leckerli-Werfer, KI-Bell-Erkennung.', kategorie: 'reco', amz: 'Furbo+Dog+Camera+360+Leckerli' },
+    { id: 10, icon: '🐱', name: 'Catit Pixi Smart Futterautomat', preis: 'ca. 79€', tier: ['katze','mehrere'], budget: ['mid','high'], ort: [], bedarf: ['smart','gesundheit'], groesse: [], desc: 'App-gesteuert, portioniert Trockenfutter, Edelstahlschale.', kategorie: 'must', amz: 'Catit+Pixi+Smart+Futterautomat' },
+    { id: 11, icon: '🐾', name: 'Fi GPS Halsband', preis: 'ca. 99€ + Abo', tier: ['hund','mehrere'], budget: ['high','premium'], ort: ['haus','land'], bedarf: ['sicherheit'], groesse: ['erwachsen','senior'], desc: 'GPS + LTE-M + WLAN, Fluchtalarm, Akku bis 3 Monate.', kategorie: 'reco', amz: 'Fi+GPS+Halsband+Hund' },
+    { id: 12, icon: '🚙', name: 'Rückbankschutz Hund Auto', preis: 'ca. 25-45€', tier: ['hund','mehrere'], budget: ['low','mid'], ort: ['reise','land','haus'], bedarf: ['sicherheit'], groesse: [], desc: 'Wasserfest, perfekte Passform, inkl. Seitenschutz.', kategorie: 'reco', amz: 'R%C3%BCckbankschutz+Hund+wasserfest+Auto' },
+    { id: 13, icon: '🎀', name: 'Trixie Lederhalsband', preis: 'ca. 19-29€', tier: ['hund','mehrere'], budget: ['low','mid'], ort: [], bedarf: ['sicherheit'], groesse: [], desc: 'Hochwertig, weich gepolstert, Edelstahl-Beschläge.', kategorie: 'must', amz: 'Trixie+Lederhalsband+Hund' },
+    { id: 14, icon: '✨', name: 'Flexi Giant Premium Rollleine', preis: 'ca. 35-49€', tier: ['hund','mehrere'], budget: ['mid'], ort: ['haus','land','wohnung'], bedarf: ['sicherheit'], groesse: ['erwachsen','senior'], desc: 'Bis 50kg, 8m Auslauf, ergonomischer Griff.', kategorie: 'reco', amz: 'Flexi+Giant+Premium+Rollleine' },
+    { id: 15, icon: '🧴', name: 'Trixie Waschhandschuh Hund', preis: 'ca. 10€', tier: ['hund','mehrere'], budget: ['low'], ort: [], bedarf: ['gesundheit'], groesse: [], desc: 'Trockenshampoo-Handschuh, pflegt ohne Wasser.', kategorie: 'nice', amz: 'Trixie+Waschhandschuh+Hund+Trockenshampoo' },
+    { id: 16, icon: '✂️', name: 'Krallenschneider Hund Katze', preis: 'ca. 13€', tier: ['hund','katze','mehrere','kleintier'], budget: ['low'], ort: [], bedarf: ['gesundheit'], groesse: [], desc: 'Sicherheits-Schneider, Edelstahl-Klingen.', kategorie: 'must', amz: 'Krallenschneider+Hund+Katze+Sicherheit' },
+    { id: 17, icon: '🪥', name: 'Trixie Zahnpflege-Set Hund', preis: 'ca. 12€', tier: ['hund','katze','mehrere'], budget: ['low'], ort: [], bedarf: ['gesundheit'], groesse: [], desc: 'Doppel-Zahnbürste + Zahnpasta (Fleischgeschmack).', kategorie: 'reco', amz: 'Trixie+Zahnpflege+Set+Hund' },
+    { id: 18, icon: '🏠', name: 'Katzenhöhle Filz Kuschelbett', preis: 'ca. 25€', tier: ['katze','mehrere'], budget: ['low','mid'], ort: ['wohnung','haus'], bedarf: ['komfort'], groesse: [], desc: 'Handgefertigte Filzhöhle, Naturmaterial.', kategorie: 'must', amz: 'Katzenh%C3%B6hle+Filz+Kuschelbett' },
+    { id: 19, icon: '✈️', name: 'PetPort IATA Flugbox', preis: 'ca. 89-149€', tier: ['hund','katze','mehrere'], budget: ['mid','high','premium'], ort: ['reise'], bedarf: ['sicherheit','komfort'], groesse: [], desc: 'IATA-zertifiziert, stabiler Kunststoff, 5 Größen.', kategorie: 'reco', amz: 'PetPort+IATA+Flugbox+Hund+Katze' },
+    { id: 20, icon: '🎣', name: 'Katzen-Angelrute Plüsch Fisch', preis: 'ca. 9€', tier: ['katze','mehrere'], budget: ['low'], ort: [], bedarf: ['beschaeftigung'], groesse: [], desc: 'Naturfedern, Glöckchen, fördert Jagdinstinkt.', kategorie: 'reco', amz: 'Katzen+Angelrute+Pl%C3%BCsch+Fisch' },
+    { id: 21, icon: '🐭', name: 'Laserpointer Katze USB', preis: 'ca. 12€', tier: ['katze','mehrere'], budget: ['low'], ort: [], bedarf: ['beschaeftigung'], groesse: [], desc: 'USB-C aufladbar, verstellbarer Lichtkegel.', kategorie: 'nice', amz: 'USB+Laserpointer+Katze+aufladbar' },
+    { id: 22, icon: '🏐', name: 'Hundespielzeug-Set (6-tlg)', preis: 'ca. 15€', tier: ['hund','mehrere'], budget: ['low'], ort: [], bedarf: ['beschaeftigung'], groesse: ['welpe','erwachsen','klein'], desc: '6 Spielzeuge: Quietschball, Tau, Ring, Fußball, Beißring, Plüsch.', kategorie: 'must', amz: 'Hundespielzeug+Set+6+tlg' },
+    { id: 23, icon: '🏠', name: 'Trixie Kleintiergehege XLS', preis: 'ca. 89€', tier: ['kleintier'], budget: ['mid','high','premium'], ort: ['haus','wohnung','land'], bedarf: ['komfort','sicherheit'], groesse: [], desc: '120x120x45cm, Gitterstäbe, Kunststoffwanne.', kategorie: 'must', amz: 'Trixie+Kleintiergehege+XL+Kaninchen' },
+    { id: 24, icon: '🍶', name: 'Trixie Nager Trinkflasche', preis: 'ca. 8€', tier: ['kleintier'], budget: ['low'], ort: [], bedarf: ['gesundheit'], groesse: [], desc: 'Edelstahl, Kugelventil, tropffrei.', kategorie: 'must', amz: 'Trixie+Nager+Trinkflasche+Edelstahl' },
+    { id: 25, icon: '🌾', name: 'Allspan Hanf Einstreu', preis: 'ca. 19€ (20L)', tier: ['kleintier'], budget: ['low','mid'], ort: [], bedarf: ['gesundheit','komfort'], groesse: [], desc: '100% Natur, staubfrei, biologisch abbaubar.', kategorie: 'must', amz: 'Allspan+Hanf+Einstreu+Nager' },
+    { id: 26, icon: '🧊', name: 'Kühlbett für Hunde Sommer', preis: 'ca. 29-49€', tier: ['hund','mehrere'], budget: ['mid'], ort: ['haus','land'], bedarf: ['komfort','gesundheit'], groesse: ['erwachsen','senior'], desc: 'Selbstkühlendes Gel-Bett ohne Strom, waschbar.', kategorie: 'reco', amz: 'K%C3%BChlbett+Hund+Sommer' },
+    { id: 27, icon: '🎒', name: 'Trixie Transportrucksack', preis: 'ca. 35€', tier: ['katze','kleintier','mehrere'], budget: ['mid'], ort: ['reise','wohnung'], bedarf: ['sicherheit','komfort'], groesse: ['klein'], desc: 'Rucksack-Transportbox bis 6kg, Netzfenster.', kategorie: 'reco', amz: 'Trixie+Transportrucksack+Katze' },
+    { id: 28, icon: '🛰️', name: 'Petoneer Smart Feeder', preis: 'ca. 59€', tier: ['hund','katze','mehrere'], budget: ['mid','high'], ort: [], bedarf: ['smart','gesundheit'], groesse: [], desc: 'WLAN-Futterautomat mit Kamera, Mikrofon.', kategorie: 'reco', amz: 'Petoneer+Smart+Feeder' },
+    { id: 29, icon: '📡', name: 'Petcube Bites 2', preis: 'ca. 199€', tier: ['hund','katze','mehrere'], budget: ['high','premium'], ort: ['wohnung','haus'], bedarf: ['smart'], groesse: [], desc: 'Haustierkamera mit Leckerli-Kanone, 1080p.', kategorie: 'nice', amz: 'Petcube+Bites+2+Kamera' },
+    { id: 30, icon: '🌟', name: 'Trixie Hundegeschirr Sicherheit', preis: 'ca. 22€', tier: ['hund','mehrere'], budget: ['low','mid'], ort: [], bedarf: ['sicherheit'], groesse: ['welpe','erwachsen','klein'], desc: 'Step-in-Geschirr, reflektierende Nähte, Polsterung.', kategorie: 'must', amz: 'Trixie+Step+in+Hundegeschirr+reflektierend' },
+    { id: 31, icon: '🏠', name: 'Kratzbaum mit Höhle Katze', preis: 'ca. 69€', tier: ['katze','mehrere'], budget: ['mid','high'], ort: ['wohnung','haus'], bedarf: ['beschaeftigung','komfort'], groesse: [], desc: 'Sisal-Stämme, Hängematte, Spielzeug, 150cm.', kategorie: 'must', amz: 'Kratzbaum+mit+H%C3%B6hle+Katze' },
+    { id: 32, icon: '🦴', name: 'Kauknochen Rinderhaut (5 Stk)', preis: 'ca. 12€', tier: ['hund','mehrere'], budget: ['low'], ort: [], bedarf: ['beschaeftigung','gesundheit'], groesse: ['welpe','erwachsen'], desc: 'Naturbelassen, fettarm, fördert Zahnreinigung.', kategorie: 'reco', amz: 'Rinderhaut+Kauknochen+Hund+15cm' },
+    { id: 33, icon: '🏓', name: 'Trixie Nager-Haus Holz', preis: 'ca. 15€', tier: ['kleintier'], budget: ['low'], ort: [], bedarf: ['komfort','beschaeftigung'], groesse: [], desc: 'Massivholz, unbehandelt, mit Dachterrasse.', kategorie: 'reco', amz: 'Trixie+Nager+Haus+Holz+unbehandelt' },
+    { id: 34, icon: '🎞️', name: 'TP-Link Tapo C200 Kamera', preis: 'ca. 29€', tier: ['hund','katze','mehrere','kleintier'], budget: ['mid'], ort: ['wohnung','haus'], bedarf: ['smart','sicherheit'], groesse: [], desc: '1080p, Schwenk/Neigen, Nachtsicht, günstig.', kategorie: 'reco', amz: 'TP+Link+Tapo+C200+Innenkamera' },
+    { id: 35, icon: '🎯', name: 'Tigerino Premium Katzenstreu', preis: 'ca. 19€ (10L)', tier: ['katze','mehrere'], budget: ['low','mid'], ort: [], bedarf: ['gesundheit','komfort'], groesse: [], desc: '99% staubfrei, Geruchsbindung, Testsieger.', kategorie: 'must', amz: 'Tigerino+Premium+Katzenstreu+staubfrei' },
+  ]
+};
+
+let currentStep = 0;
+const totalSteps = 5;
+
+function initProgress() {
+  const p = document.getElementById('progress');
+  p.innerHTML = '';
+  for (let i = 0; i < totalSteps; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.id = 'dot-' + i;
+    p.appendChild(dot);
+  }
+}
+
+function updateProgress() {
+  for (let i = 0; i < totalSteps; i++) {
+    const dot = document.getElementById('dot-' + i);
+    dot.className = 'dot';
+    if (i === currentStep) dot.classList.add('active');
+    else if (i < currentStep) dot.classList.add('done');
+  }
+}
+
+function showStep(n) {
+  document.querySelectorAll('.wizard-step').forEach(el => el.classList.remove('active'));
+  document.querySelector(`.wizard-step[data-step="${n}"]`).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  document.getElementById('btnPrev').style.display = n === 0 ? 'none' : 'inline-block';
+  const nextBtn = document.getElementById('btnNext');
+  if (n === totalSteps - 1) {
+    nextBtn.textContent = '✅ Ergebnis anzeigen';
+    const stepOpts = document.querySelector(`.wizard-step[data-step="${n}"]`)?.querySelectorAll('.option-btn');
+    const stepAns = answers[n];
+    nextBtn.disabled = !stepAns;
+  } else {
+    nextBtn.textContent = 'Weiter →';
+    const stepOpts = document.querySelector(`.wizard-step[data-step="${n}"]`)?.querySelectorAll('.option-btn');
+    const stepAns = answers[n];
+    nextBtn.disabled = !stepAns;
+  }
+}
+
+function nextStep() {
+  const stepAns = answers[currentStep];
+  if (!stepAns) return;
+  if (currentStep >= totalSteps - 1) {
+    calculateResults();
+    return;
+  }
+  showStep(currentStep + 1);
+}
+
+function prevStep() {
+  if (currentStep > 0) showStep(currentStep - 1);
+}
+
+document.querySelectorAll('.option-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const stepIdx = parseInt(this.closest('.wizard-step').dataset.step);
+    const parent = this.closest('.options');
+    parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    answers[stepIdx] = this.dataset.value;
+    const nextBtn = document.getElementById('btnNext');
+    nextBtn.disabled = false;
+  });
+});
+
+function calculateResults() {
+  const tier = answers[0];
+  const budget = answers[1];
+  const ort = answers[2];
+  const bedarf = answers[3];
+  const groesse = answers[4];
+
+  let matches = products.all.filter(p => {
+    if (!p.tier.includes(tier)) return false;
+    if (!p.budget.includes(budget)) return false;
+    if (p.ort.length > 0 && !p.ort.includes(ort)) return false;
+    if (!p.bedarf.includes(bedarf)) return false;
+    if (p.groesse.length > 0 && !p.groesse.includes(groesse)) return false;
+    return true;
+  });
+
+  // Show wizard, hide results
+  document.getElementById('wizard').style.display = 'none';
+  document.getElementById('results').classList.add('active');
+
+  const grid = document.getElementById('resultGrid');
+  grid.innerHTML = '';
+
+  if (matches.length === 0) {
+    // Fallback: show general recommendations
+    matches = products.all.filter(p => p.tier.includes(tier) && p.budget.includes(budget));
+  }
+
+  // Sort: must-have first, then recommended, then nice-to-have
+  const sorted = [...matches].sort((a, b) => {
+    const order = { must: 0, reco: 1, nice: 2 };
+    return (order[a.kategorie] || 99) - (order[b.kategorie] || 99);
+  });
+
+  // Max 12 products
+  const display = sorted.slice(0, 12);
+
+  display.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="icon">${p.icon}</div>
+      <h4>${p.name}</h4>
+      <div class="preis">${p.preis}</div>
+      <div class="desc">${p.desc}</div>
+      <a class="amz" href="https://www.amazon.de/s?k=${p.amz}&tag=ikune21-21" target="_blank">🛒 Bei Amazon</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  // Budget chart
+  const chart = document.getElementById('budgetChart');
+  chart.innerHTML = '';
+  const budgetData = [
+    { label: 'Must-Have', pct: Math.min(100, display.filter(d => d.kategorie === 'must').length * 18), color: 'bar-yes' },
+    { label: 'Empfohlen', pct: Math.min(100, display.filter(d => d.kategorie === 'reco').length * 14), color: 'bar-reco' },
+    { label: 'Nice-to-Have', pct: Math.min(100, display.filter(d => d.kategorie === 'nice').length * 10), color: 'bar-nice' }
+  ];
+  budgetData.forEach(d => {
+    const row = document.createElement('div');
+    row.className = 'chart-bar';
+    row.innerHTML = `<div class="label">${d.label}</div><div class="bar-bg"><div class="bar-fill ${d.color}" style="width:${d.pct}%">${d.pct}%</div></div>`;
+    chart.appendChild(row);
+  });
+
+  // Summary text
+  document.getElementById('resultSummary').textContent =
+    `Für dein Profil (${tierLabel(tier)}, ${budgetLabel(budget)}, ${ortLabel(ort)}, Fokus: ${bedarfLabel(bedarf)}) empfehlen wir dir diese ${display.length} Produkte.`;
+
+  // Why text
+  const whyTexts = {
+    gesundheit: 'Gesundheit geht vor! Diese Produkte fördern die körperliche Fitness deines Tieres – vom Fell über die Zähne bis zur Wasseraufnahme.',
+    sicherheit: 'Sicherheit ist das A und O. Mit GPS-Tracker, sicherem Halsband und Autoschutz bist du auf der sicheren Seite.',
+    beschaeftigung: 'Geistig ausgelastete Tiere sind glücklicher. Diese Spielzeuge fördern die Intelligenz und stärken die Bindung.',
+    komfort: 'Komfort ist kein Luxus – erholsame Schlafplätze und gemütliche Transportmöglichkeiten sind essenziell für Wohlbefinden.',
+    smart: 'Smarte Gadgets geben dir Kontrolle und Sicherheit – auch wenn du nicht zuhause bist. Perfekt für moderne Tierhalter.'
+  };
+  document.getElementById('whyText').textContent = whyTexts[bedarf] || 'Alle Produkte wurden nach Kundenbewertungen und Qualität ausgewählt.';
+
+  // Spartipps
+  const spartipps = document.getElementById('spartipps');
+  const tips = [
+    { icon: '💡', title: 'Kombi-Kaufen', desc: 'Kaufe Futterautomat + Trinkbrunnen als Set – oft günstiger als einzeln.' },
+    { icon: '🔔', title: 'Preisalarm', desc: 'Setze auf camelcamelcamel einen Preisalarm für größere Anschaffungen.' },
+    { icon: '📦', title: 'Amazon Prime', desc: 'Mit Prime sparst du Versandkosten bei mehreren Bestellungen.' },
+    { icon: '⭐', title: 'B-Ware', desc: 'Viele Haustierprodukte gibts als Amazon Warehouse-Deals (B-Ware) günstiger.' },
+    { icon: '📅', title: 'Black Friday', desc: 'Haustier-Produkte sind im November oft 30-50% reduziert.' }
+  ];
+  spartipps.innerHTML = tips.map(t => `
+    <div class="spartipp">
+      <div class="icon">${t.icon}</div>
+      <h4>${t.title}</h4>
+      <p>${t.desc}</p>
+    </div>
+  `).join('');
+}
+
+function tierLabel(v) {
+  return { hund: '🐕 Hund', katze: '🐱 Katze', kleintier: '🐹 Kleintier', mehrere: '🐾 Mehrere Tiere' }[v] || v;
+}
+function budgetLabel(v) {
+  return { low: 'Bis 50€', mid: '50-150€', high: '150-300€', premium: '300€+' }[v] || v;
+}
+function ortLabel(v) {
+  return { wohnung: '🏢 Wohnung', haus: '🏡 Haus', reise: '🚗 Reise', land: '🌳 Ländlich' }[v] || v;
+}
+function bedarfLabel(v) {
+  return { gesundheit: '💚 Gesundheit', sicherheit: '🔒 Sicherheit', beschaeftigung: '🎾 Beschäftigung', komfort: '🛏️ Komfort', smart: '📱 Smart' }[v] || v;
+}
+
+function resetWizard() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('wizard').style.display = 'block';
+  document.getElementById('results').classList.remove('active');
+  currentStep = 0;
+  document.getElementById('btnNext').textContent = 'Weiter →';
+  document.getElementById('btnNext').disabled = true;
+  showStep(0);
+}
+
+initProgress();
+showStep(0);
+</script>
+
+</body>
+</html>
