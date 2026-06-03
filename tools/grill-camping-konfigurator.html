@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grill- & Campingküche-Konfigurator 2026 ✦ Finde deine Outdoor-Küche</title>
+  <meta name="description" content="Beantworte 5 Fragen und erhalte personalisierte Empfehlungen für Grills, Campingkocher, Kochgeschirr & Outdoor-Küchenausrüstung. Inkl. Preise & Amazon-Links.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Grill- & Campingküche-Konfigurator – Personalisierte Outdoor-Küchen-Empfehlungen">
+  <meta property="og:description" content="Finde die perfekte Ausrüstung für deine Grill- & Campingküche. Beantworte 5 Fragen und erhalte eine maßgeschneiderte Top-5-Empfehlung.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/grill-camping-konfigurator.html">
+  <link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/grill-camping-konfigurator.html">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Grill- & Campingküche-Konfigurator","description":"Finde personalisierte Grills, Campingkocher & Outdoor-Küchenausrüstung per Fragebogen.","url":"https://affirmationpositiv-sudo.github.io/science-apps/tools/grill-camping-konfigurator.html","applicationCategory":"ShoppingApplication","operatingSystem":"All"}
+  </script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+    .container{max-width:960px;margin:0 auto;padding:20px}
+    h1{text-align:center;font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:30px 0 8px}
+    .subtitle{text-align:center;color:#888;font-size:1.05rem;margin-bottom:30px}
+    .wizard{background:#111111;border:1px solid rgba(245,158,11,.15);border-radius:16px;padding:30px;position:relative;overflow:hidden}
+    .step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:30px}
+    .dot{width:10px;height:10px;border-radius:50%;background:#2A2A2A;transition:all .3s}
+    .dot.active{background:#f59e0b;box-shadow:0 0 10px rgba(245,158,11,.4);width:32px;border-radius:5px}
+    .dot.done{background:#d97706}
+    .step{display:none}
+    .step.active{display:block;animation:fadeIn .35s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+    .step h2{font-size:1.4rem;font-weight:700;color:#f59e0b;margin-bottom:6px}
+    .step p{color:#999;margin-bottom:24px;font-size:.95rem}
+    .options{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .option{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;cursor:pointer;transition:all .25s;text-align:center}
+    .option:hover{border-color:#f59e0b;background:rgba(245,158,11,.06)}
+    .option.selected{border-color:#f59e0b;background:rgba(245,158,11,.08);box-shadow:0 0 15px rgba(245,158,11,.1)}
+    .option .icon{font-size:2rem;margin-bottom:8px}
+    .option .label{font-weight:600;font-size:.95rem;color:#FFF}
+    .option .desc{color:#888;font-size:.8rem;margin-top:4px}
+    .btn-row{display:flex;justify-content:space-between;margin-top:30px;gap:12px;flex-wrap:wrap}
+    .btn{padding:12px 28px;border:none;border-radius:8px;font-weight:600;font-size:.95rem;cursor:pointer;transition:all .25s}
+    .btn-next{background:#f59e0b;color:#000}
+    .btn-next:hover{background:#d97706;transform:scale(1.02)}
+    .btn-prev{background:rgba(255,255,255,.08);color:#ccc}
+    .btn-prev:hover{background:rgba(255,255,255,.12)}
+    .btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important}
+    .result-section{display:none;background:#111111;border:1px solid rgba(245,158,11,.2);border-radius:16px;padding:30px;margin-top:24px}
+    .result-section.visible{display:block;animation:fadeIn .4s ease}
+    .result-header{text-align:center;margin-bottom:24px}
+    .result-header .emoji{font-size:3rem;margin-bottom:8px}
+    .result-header h3{font-size:1.5rem;color:#f59e0b;font-weight:700}
+    .result-header p{color:#999;font-size:.95rem}
+    .top5{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:28px}
+    .top-card{background:rgba(255,255,255,.03);border:1px solid rgba(245,158,11,.12);border-radius:12px;padding:20px;text-align:center;transition:all .25s}
+    .top-card:hover{border-color:#f59e0b;background:rgba(245,158,11,.05);transform:translateY(-2px)}
+    .top-card .rank{display:inline-block;background:#f59e0b;color:#000;font-weight:800;font-size:.75rem;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+    .top-card .pname{font-size:1.1rem;font-weight:700;color:#FFF;margin-bottom:4px}
+    .top-card .pcategory{color:#f59e0b;font-size:.8rem;margin-bottom:8px}
+    .top-card .price-tag{font-size:1.5rem;font-weight:800;color:#f59e0b;margin:8px 0}
+    .top-card .price-tag small{font-size:.85rem;color:#888}
+    .top-card .pdesc{color:#aaa;font-size:.85rem;margin-bottom:12px;line-height:1.4}
+    .top-card .stars{color:#FFD700;font-size:.9rem;margin-bottom:10px}
+    .top-card .features{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:14px}
+    .top-card .features span{background:rgba(245,158,11,.1);color:#f59e0b;font-size:.7rem;padding:3px 8px;border-radius:4px}
+    .top-card .buy-btn{display:inline-block;background:#f59e0b;color:#000!important;font-weight:700;font-size:.88rem;padding:10px 24px;border-radius:8px;text-decoration:none;transition:all .2s}
+    .top-card .buy-btn:hover{background:#d97706;transform:scale(1.03)}
+    .compare-wrap{overflow-x:auto;margin-bottom:28px}
+    .compare-table{width:100%;border-collapse:collapse;font-size:.85rem}
+    .compare-table th{background:rgba(245,158,11,.08);color:#f59e0b;padding:10px 12px;text-align:left;font-weight:700;border-bottom:1px solid rgba(245,158,11,.15)}
+    .compare-table th:first-child{border-radius:8px 0 0 0}
+    .compare-table th:last-child{border-radius:0 8px 0 0}
+    .compare-table td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:#ccc}
+    .compare-table tr:hover td{background:rgba(245,158,11,.03)}
+    .compare-table td:first-child{font-weight:600;color:#fff;white-space:nowrap}
+    .compare-table .check{color:#22c55e}
+    .compare-table .cross{color:#666}
+    .budget-bar-wrap{margin:20px 0 28px;text-align:center}
+    .budget-bar-wrap h4{color:#f59e0b;font-size:1rem;margin-bottom:14px}
+    .budget-bar{background:#2A2A2A;border-radius:10px;height:30px;overflow:hidden;max-width:500px;margin:0 auto;position:relative}
+    .budget-bar-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#d97706);border-radius:10px;transition:width .8s ease;min-width:0}
+    .budget-bar-label{display:flex;justify-content:space-between;max-width:500px;margin:6px auto 0;color:#888;font-size:.8rem}
+    .budget-bar-label span{font-weight:600}
+    .spartipps{margin:20px 0;padding:16px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.12);border-radius:10px}
+    .spartipps h4{color:#f59e0b;margin-bottom:10px;font-size:1rem}
+    .spartipps li{color:#B0B0B0;font-size:.89rem;margin-bottom:6px;list-style:none;padding-left:20px;position:relative}
+    .spartipps li::before{content:'💡';position:absolute;left:0}
+    .reset-btn{display:block;margin:20px auto 0;background:rgba(255,255,255,.06);color:#ccc;border:1px solid rgba(255,255,255,.1);padding:10px 24px;border-radius:8px;cursor:pointer;font-weight:500;transition:all .25s}
+    .reset-btn:hover{background:rgba(255,255,255,.1);color:#fff}
+    .author-note{text-align:center;color:#666;font-size:.8rem;margin:16px 0}
+    .footer{text-align:center;padding:30px 20px;color:#666;font-size:.8rem}
+    .footer a{color:#f59e0b;text-decoration:none}
+    .footer a:hover{color:#d97706;text-decoration:underline}
+    @media(max-width:600px){
+      h1{font-size:1.6rem}
+      .options{grid-template-columns:1fr 1fr}
+      .step h2{font-size:1.15rem}
+      .btn-row{flex-direction:column}
+      .btn{width:100%}
+      .top5{grid-template-columns:1fr}
+      .top-card .price-tag{font-size:1.2rem}
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🔥 Grill- & Campingküche-Konfigurator</h1>
+  <p class="subtitle">5 Fragen – deine personalisierte Outdoor-Küchen-Empfehlung in Sekunden</p>
+
+  <div class="wizard" id="wizard">
+    <div class="step-indicator" id="stepDots"></div>
+
+    <!-- Schritt 1: Einsatzbereich -->
+    <div class="step active" id="step1">
+      <h2>Wo willst du kochen?</h2>
+      <p>Dein Einsatzbereich bestimmt die passende Ausrüstung.</p>
+      <div class="options" data-step="1" data-key="bereich">
+        <div class="option" data-value="grillen"><div class="icon">🏡</div><div class="label">Grillen zuhause</div><div class="desc">Garten, Terrasse, Balkon</div></div>
+        <div class="option" data-value="camping"><div class="icon">🏕️</div><div class="label">Camping mit Familie</div><div class="desc">Campingplatz, Wohnmobil</div></div>
+        <div class="option" data-value="vanlife"><div class="icon">🚐</div><div class="label">Vanlife</div><div class="desc">Van, Bus, Minicamper</div></div>
+        <div class="option" data-value="outdoor"><div class="icon">⛰️</div><div class="label">Outdoor-Abenteuer</div><div class="desc">Trekking, Survival, Berg</div></div>
+        <div class="option" data-value="balkon"><div class="icon">🌆</div><div class="label">Balkon</div><div class="desc">Kleiner Außenbereich, Stadt</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 2: Budget -->
+    <div class="step" id="step2">
+      <h2>Welches Budget hast du?</h2>
+      <p>Wähle deine Preisklasse für die gesamte Ausstattung.</p>
+      <div class="options" data-step="2" data-key="budget">
+        <div class="option" data-value="50"><div class="icon">🪙</div><div class="label">Bis 50€</div><div class="desc">Minimal-Ausstattung</div></div>
+        <div class="option" data-value="150"><div class="icon">💰</div><div class="label">50–150€</div><div class="desc">Basis-Ausstattung</div></div>
+        <div class="option" data-value="300"><div class="icon">💵</div><div class="label">150–300€</div><div class="desc">Solide Mittelklasse</div></div>
+        <div class="option" data-value="500"><div class="icon">💎</div><div class="label">300–500€</div><div class="desc">Gehobene Ausstattung</div></div>
+        <div class="option" data-value="999"><div class="icon">👑</div><div class="label">500€+</div><div class="desc">Premium-Komplettset</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 3: Personenzahl -->
+    <div class="step" id="step3">
+      <h2>Für wie viele Personen?</h2>
+      <p>Die Personenzahl bestimmt Größe und Volumen der Ausrüstung.</p>
+      <div class="options" data-step="3" data-key="personen">
+        <div class="option" data-value="1-2"><div class="icon">👤</div><div class="label">1–2 Personen</div><div class="desc">Paar, Solo-Abenteuer</div></div>
+        <div class="option" data-value="3-4"><div class="icon">👨‍👩‍👧</div><div class="label">3–4 Personen</div><div class="desc">Kleine Familie</div></div>
+        <div class="option" data-value="5-6"><div class="icon">👨‍👩‍👧‍👦</div><div class="label">5–6 Personen</div><div class="desc">Große Familie</div></div>
+        <div class="option" data-value="7plus"><div class="icon">👥</div><div class="label">7+ Personen</div><div class="desc">Gruppe, Vereinsausflug</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 4: Kochstil -->
+    <div class="step" id="step4">
+      <h2>Wie kochst du am liebsten?</h2>
+      <p>Dein Kochstil entscheidet über die Art der Ausrüstung.</p>
+      <div class="options" data-step="4" data-key="kochstil">
+        <div class="option" data-value="einfach"><div class="icon">🍜</div><div class="label">Einfach & fix</div><div class="desc">Suppen, Nudeln, Fertiggerichte</div></div>
+        <div class="option" data-value="grillen2"><div class="icon">🥩</div><div class="label">Grillen & Braten</div><div class="desc">Steaks, Würstchen, Gemüse</div></div>
+        <div class="option" data-value="kochen"><div class="icon">🍳</div><div class="label">Richtig kochen</div><div class="desc">Soßen, Eintöpfe, Schmorgerichte</div></div>
+        <div class="option" data-value="backen"><div class="icon">🥖</div><div class="label">Backen & Brot</div><div class="desc">Stockbrot, Dutch Oven, Pizza</div></div>
+        <div class="option" data-value="alles"><div class="icon">👨‍🍳</div><div class="label">Alles – der Allrounder</div><div class="desc">Von Frühstück bis Sterne-Menü</div></div>
+      </div>
+    </div>
+
+    <!-- Schritt 5: Energiequelle -->
+    <div class="step" id="step5">
+      <h2>Welche Energiequelle bevorzugst du?</h2>
+      <p>Die Energiequelle prägt den gesamten Kochstil.</p>
+      <div class="options" data-step="5" data-key="energie">
+        <div class="option" data-value="strom"><div class="icon">⚡</div><div class="label">Strom</div><div class="desc">Elektrogrill, Induktion</div></div>
+        <div class="option" data-value="gas"><div class="icon">🔥</div><div class="label">Gas</div><div class="desc">Gaskocher, Gasgrill</div></div>
+        <div class="option" data-value="holz"><div class="icon">🪵</div><div class="label">Holz & Kohle</div><div class="desc">Holzkohlegrill, Lagerfeuer</div></div>
+        <div class="option" data-value="kohle"><div class="icon">⚫</div><div class="label">Reine Kohle</div><div class="desc">Kugelgrill, Smoker</div></div>
+        <div class="option" data-value="multifunktional"><div class="icon">🔄</div><div class="label">Multifunktional</div><div class="desc">Alles-in-einem, flexibel</div></div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="btn-row">
+      <button class="btn btn-prev" id="btnPrev" onclick="prevStep()">← Zurück</button>
+      <button class="btn btn-next" id="btnNext" onclick="nextStep()">Weiter →</button>
+    </div>
+  </div>
+
+  <!-- Ergebnisse -->
+  <div class="result-section" id="resultSection">
+    <div class="result-header">
+      <div class="emoji">🏕️</div>
+      <h3>Deine personalisierten Outdoor-Küchen-Empfehlungen</h3>
+      <p id="resultSummary"></p>
+    </div>
+
+    <div class="top5" id="top5Container"></div>
+
+    <div class="compare-wrap" id="compareWrap">
+      <table class="compare-table" id="compareTable">
+        <thead id="compareHead"><tr><th>Feature</th></tr></thead>
+        <tbody id="compareBody"></tbody>
+      </table>
+    </div>
+
+    <div class="budget-bar-wrap">
+      <h4>💰 Budget-Übersicht (Ø Preis Empfehlungen)</h4>
+      <div class="budget-bar"><div class="budget-bar-fill" id="budgetBarFill" style="width:0%"></div></div>
+      <div class="budget-bar-label"><span id="budgetSpent">0 €</span><span id="budgetMaxLabel">0 €</span></div>
+    </div>
+
+    <div class="spartipps" id="spartippsContainer"></div>
+
+    <button class="reset-btn" onclick="resetConfig()">🔄 Neu starten</button>
+  </div>
+
+  <p class="author-note">Ein Tool von <strong>Licht und Schatten</strong> – dein Guide für die perfekte Outdoor-Küche.</p>
+</div>
+
+<div class="footer">
+  <p>© 2026 Licht und Schatten | Autor: Licht und Schatten</p>
+  <p style="margin-top:4px">*Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. Alle Links sind Affiliate-Links (tag=ikune21-21) auf www.amazon.de. Für dich entstehen keine Mehrkosten.</p>
+</div>
+
+<script>
+// ---- Product Database (40+ Produkte aus 6 Kategorien) ----
+const PRODUCTS = [
+  // 1. GRILLS (Grillgeräte)
+  {name:'Weber Master-Touch GBS',beschreibung:'Der Klassiker unter den Kugelgrills mit 57cm Durchmesser, Gourmet BBQ System und integriertem Thermometer.',preis:139,kategorie:'Grill',bereich:['grillen','balkon'],energie:['holz','kohle','multifunktional'],kochstil:['grillen2','alles'],personen:['3-4','5-6'],features:['57cm Kugel','GBS-System','Thermometer','Höhenverstellung','Windklappe'],bewertung:4.7,asin:'B0711WT3G3'},
+  {name:'Weber Compact Kettle',beschreibung:'Platzsparender Einsteiger-Kugelgrill mit 47cm Durchmesser – ideal für Balkon & kleine Gärten.',preis:59,kategorie:'Grill',bereich:['grillen','balkon'],energie:['holz','kohle'],kochstil:['grillen2','einfach'],personen:['1-2','3-4'],features:['47cm Kugel','Porzellanemailliert','Belüftung','Aschenfang'],bewertung:4.5,asin:'B00HBKDJYK'},
+  {name:'Weber Spirit E-310',beschreibung:'Komakter Gasgrill mit 3 Brennern, 3000W Leistung und elektronischer Zündung – für zuhause.',preis:419,kategorie:'Grill',bereich:['grillen'],energie:['gas'],kochstil:['grillen2','kochen','alles'],personen:['3-4','5-6'],features:['3 Brenner','3000W','EZündung','Seitentisch','Deckelthermometer'],bewertung:4.6,asin:'B0DKB7LQG5'},
+  {name:'Campingaz Party Grill CV',beschreibung:'Tragbarer Tischgrill für Gas-Kartuschen – kompakt, schnell einsatzbereit, ideal für Balkon & Camping.',preis:44,kategorie:'Grill',bereich:['grillen','camping','vanlife','outdoor','balkon'],energie:['gas'],kochstil:['grillen2','einfach'],personen:['1-2','3-4'],features:['Tischgrill','Gas-Kartusche','Kompakt','Antihaft','Tragekoffer'],bewertung:4.3,asin:'B000BEB4U2'},
+  {name:'Weber Go-Anywhere Gas',beschreibung:'Tragbarer Gasgrill für unterwegs – Klappfüße, kompaktes Format, ideal für Camping & Vanlife.',preis:79,kategorie:'Grill',bereich:['camping','vanlife','balkon','grillen'],energie:['gas'],kochstil:['grillen2','einfach'],personen:['1-2','3-4'],features:['Tragbar','Klappfüße','Gasbrenner','Porzellanemaille','Temperaturkontrolle'],bewertung:4.4,asin:'B01237OZ78'},
+  {name:'LOTUS Grillo',beschreibung:'Tragbarer Kugelgrill mit einzigartiger Durchzünd-Technik – kein Anzünden nötig, raucharm.',preis:89,kategorie:'Grill',bereich:['grillen','camping','balkon','vanlife'],energie:['holz','kohle','multifunktional'],kochstil:['grillen2','einfach'],personen:['1-2','3-4'],features:['Durchzünd-Technik','Raucharm','Tragbar','Edelstahl-Rost','Griff'],bewertung:4.2,asin:'B0BJLXZK3S'},
+  {name:'Merkur Smoker Fassgrill',beschreibung:'Räucherfass aus Edelstahl mit Seitenkammer – für Low & Slow BBQ, Smoken und Grillen.',preis:129,kategorie:'Grill',bereich:['grillen'],energie:['holz','kohle'],kochstil:['grillen2','backen','alles'],personen:['3-4','5-6','7plus'],features:['Räucherkammer','Edelstahl','Thermometer','Luftklappen','Großvolumig'],bewertung:4.3,asin:'B0BNQZGHHM'},
+  {name:'Severin Elektrogrill Plancha',beschreibung:'Großer Elektrogrill mit 2400W, antihaftbeschichteter Plancha-Platte und stufenloser Temperatureinstellung.',preis:69,kategorie:'Grill',bereich:['grillen','camping','balkon'],energie:['strom','multifunktional'],kochstil:['grillen2','kochen','einfach','alles'],personen:['1-2','3-4'],features:['2400W','Plancha','Stufenlos','Antihaft','Fettauffang'],bewertung:4.3,asin:'B00BAR33PU'},
+
+  // 2. CAMPINGKOCHER
+  {name:'Trangia Spiritusbrenner 25-1',beschreibung:'Der legendäre Trangia-Kocher aus Aluminium mit Windschutz – leicht, leise, unverwüstlich.',preis:89,kategorie:'Campingkocher',bereich:['camping','vanlife','outdoor'],energie:['holz','multifunktional'],kochstil:['einfach','kochen'],personen:['1-2','3-4'],features:['Windschutz','Aluminium','Spiritus','2 Töpfe','Bratpfanne'],bewertung:4.8,asin:'B000V0YAQ0'},
+  {name:'MSR PocketRocket 2',beschreibung:'Ultrakompakter Gaskocher mit nur 73g Gewicht – der Klassiker für Trekking & Outdoor.',preis:45,kategorie:'Campingkocher',bereich:['outdoor','vanlife'],energie:['gas'],kochstil:['einfach'],personen:['1-2'],features:['73g','Gas','Faltbar','Windschutz','Stabil'],bewertung:4.7,asin:'B00I7VRO9K'},
+  {name:'Campinggas Camp Bistro 2',beschreibung:'Zwei-Flammen-Gaskocher für Camping & Vanlife – leistungsstark und platzsparend klappbar.',preis:54,kategorie:'Campingkocher',bereich:['camping','vanlife'],energie:['gas'],kochstil:['einfach','kochen','alles'],personen:['1-2','3-4'],features:['2 Flammen','Klappbar','Piezo-Zündung','Windschutz','Tragekoffer'],bewertung:4.4,asin:'B078J36BCQ'},
+  {name:'Jetboil Flash',beschreibung:'Blitzschnelles Abkocher-System mit FluxRing-Technologie – Wasser in unter 2 Minuten.',preis:99,kategorie:'Campingkocher',bereich:['outdoor','vanlife'],energie:['gas'],kochstil:['einfach'],personen:['1-2'],features:['FluxRing','1000ml','<2 Min','Isolierbecher','Zünder'],bewertung:4.6,asin:'B07KQRK2H6'},
+  {name:'Primus Multifuel Express',beschreibung:'Multifuel-Kocher für Gas, Benzin, Kerosin – der Allrounder für extreme Outdoor-Abenteuer.',preis:119,kategorie:'Campingkocher',bereich:['outdoor','vanlife'],energie:['gas','multifunktional'],kochstil:['einfach','kochen'],personen:['1-2'],features:['Multifuel','Gas/Benzin','Windschutz','Leicht','Selbstreinigend'],bewertung:4.5,asin:'B00B3Y4HHW'},
+  {name:'Gaskocher 2-flammig klappbar',beschreibung:'Preiswerter Klapp-Gaskocher mit 2 Brennern und stabilen Topfablagen – für Camping-Einsteiger.',preis:34,kategorie:'Campingkocher',bereich:['camping','vanlife','outdoor'],energie:['gas'],kochstil:['einfach','kochen'],personen:['3-4','5-6'],features:['2 Flammen','Klappbar','Stabil','Gaskartusche','Windblech'],bewertung:4.1,asin:'B08CXPZ3QW'},
+  {name:'Trangia Gas-Kocher 25-7',beschreibung:'Trangia-System optimiert für Gas – bewährtes Windschutz-Design mit Gasbrenner.',preis:99,kategorie:'Campingkocher',bereich:['camping','vanlife','outdoor'],energie:['gas'],kochstil:['einfach','kochen','alles'],personen:['1-2','3-4'],features:['Gasbrenner','Windschutz','2 Töpfe','Pfanne','Antihaft'],bewertung:4.6,asin:'B074NTL5GM'},
+
+  // 3. KOCHGESCHIRR (Cookware)
+  {name:'Petromax Dutch Oven 12"',beschreibung:'Gusseiserner Dutch Oven für offenes Feuer, Grill und Camping – backen, schmoren, braten.',preis:89,kategorie:'Kochgeschirr',bereich:['grillen','camping','outdoor'],energie:['holz','kohle','multifunktional'],kochstil:['kochen','backen','alles','grillen2'],personen:['3-4','5-6','7plus'],features:['Gusseisen','12 Zoll','Deckel mit Rand','Feuerfest','Backen/Schmoren'],bewertung:4.7,asin:'B004INHQGY'},
+  {name:'MSR Ceramic 2-Pot Set',beschreibung:'Leichtes Keramik-Topfset für Trekking – 1,5L + 2,5L, antihaft, platzsparend.',preis:99,kategorie:'Kochgeschirr',bereich:['outdoor','vanlife','camping'],energie:['gas','strom','multifunktional'],kochstil:['einfach','kochen'],personen:['1-2','3-4'],features:['Keramik Antihaft','1,5+2,5L','Leicht','Platzsparend','Griff abnehmbar'],bewertung:4.4,asin:'B07J2NFZ67'},
+  {name:'Petromax Feuertopf gusseisern',beschreibung:'Klassischer gusseiserner Kochtopf mit Deckel – perfekt für Lagerfeuer und Kamin.',preis:54,kategorie:'Kochgeschirr',bereich:['camping','outdoor','grillen'],energie:['holz','kohle','multifunktional'],kochstil:['kochen','backen'],personen:['3-4','5-6'],features:['Gusseisen','4,5L','Feuerfest','Mit Deckel','Schwärzung'],bewertung:4.5,asin:'B004UY12CK'},
+  {name:'Camping-Cookset Edelstahl 4tlg',beschreibung:'Vierteiliges Topfset aus Edelstahl für Camping & Vanlife – stapelbar, leicht, robust.',preis:39,kategorie:'Kochgeschirr',bereich:['camping','vanlife','outdoor'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','alles'],personen:['1-2','3-4'],features:['4 tlg','Edelstahl','Stapelbar','Leicht','Tragebeutel'],bewertung:4.2,asin:'B08C5LJ2BB'},
+  {name:'Petromax Campingpfanne',beschreibung:'Gusseiserne Pfanne mit 30cm Durchmesser – ideal für Feuer, Grill und Herd.',preis:44,kategorie:'Kochgeschirr',bereich:['grillen','camping','outdoor'],energie:['holz','kohle','gas','multifunktional'],kochstil:['grillen2','kochen','backen','alles'],personen:['1-2','3-4','5-6'],features:['30cm','Gusseisen','Griff','Feuerfest','Universal'],bewertung:4.6,asin:'B0055T6M5I'},
+  {name:'Sea to Summit X-Set 41',beschreibung:'Ultrakompaktes Silikon-Cookset – faltbar, spülmaschinenfest, extrem platzsparend.',preis:59,kategorie:'Kochgeschirr',bereich:['outdoor','vanlife','camping','balkon'],energie:['strom','gas','multifunktional'],kochstil:['einfach','kochen'],personen:['1-2'],features:['Faltbar','Silikon','Platzsparend','BPA-frei','Hitzebeständig'],bewertung:4.3,asin:'B07FG4HSP7'},
+  {name:'Tefal Campingpfanne Ingenio',beschreibung:'Antihaft-Pfanne mit abnehmbarem Stiel – platzsparend, für Induktion & Campingherde.',preis:29,kategorie:'Kochgeschirr',bereich:['camping','vanlife','balkon'],energie:['strom','gas','multifunktional'],kochstil:['kochen','grillen2','einfach'],personen:['1-2','3-4'],features:['Antihaft','Abnehmbarer Stiel','Induktion','Leicht','Stapelbar'],bewertung:4.3,asin:'B09ZVMFC8S'},
+
+  // 4. ZUBEHÖR (Accessories)
+  {name:'Edelstahl Grillzange 40cm',beschreibung:'Professionelle Grillzange aus Edelstahl mit Silikongriff und Verriegelung.',preis:14,kategorie:'Zubehör',bereich:['grillen','camping','vanlife','outdoor','balkon'],energie:['holz','kohle','gas','strom','multifunktional'],kochstil:['grillen2','alles'],personen:['1-2','3-4','5-6','7plus'],features:['Edelstahl','40cm','Silikongriff','Verriegelung','Spülmaschine'],bewertung:4.5,asin:'B085KJQN23'},
+  {name:'Grillbesteck-Set 7-teilig',beschreibung:'Komplettes Grillbesteck mit Spatel, Gabel, Zange, Pinsel, Messer, Börstchen & Tasche.',preis:25,kategorie:'Zubehör',bereich:['grillen','camping','vanlife','balkon'],energie:['holz','kohle','gas','strom','multifunktional'],kochstil:['grillen2','alles'],personen:['1-2','3-4','5-6','7plus'],features:['7 tlg','Edelstahl','Tasche','Spülmaschine','Gummigriff'],bewertung:4.3,asin:'B0DNYF2X23'},
+  {name:'Klappbare Camping-Schüssel',beschreibung:'Silikon-Faltschüssel in 3 Größen (je 1L) – spülmaschinenfest, extrem platzsparend.',preis:18,kategorie:'Zubehör',bereich:['camping','vanlife','outdoor','balkon'],energie:['gas','strom','multifunktional'],kochstil:['einfach','kochen','alles'],personen:['1-2','3-4'],features:['Faltbar','Silikon','3x 1L','Spülmaschine','Farbsortiert'],bewertung:4.4,asin:'B0D8FHMJ2Z'},
+  {name:'Camping Besteck Titan',beschreibung:'Ultralight Camping-Besteck aus Titan – Gabel, Löffel, Messer – nur 38g gesamt.',preis:24,kategorie:'Zubehör',bereich:['outdoor','vanlife','camping'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','alles'],personen:['1-2','3-4'],features:['Titan','38g','3-tlg','Farbig','Karabiner'],bewertung:4.5,asin:'B07ZVSX9TF'},
+  {name:'Schneidebrett Camping',beschreibung:'Flexibles Schneidebrett aus PP-Kunststoff – antibakteriell, spülmaschinenfest, 4er Set.',preis:12,kategorie:'Zubehör',bereich:['camping','vanlife','outdoor','grillen','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['4 tlg','Flexibel','Antibakteriell','Spülmaschine','BPA-frei'],bewertung:4.2,asin:'B07WM2T2NY'},
+  {name:'Gewürzset Camping 12er',beschreibung:'12 Gewürze im praktischen Aufbewahrungsbox-Set – für die Outdoor-Küche.',preis:17,kategorie:'Zubehör',bereich:['camping','vanlife','outdoor','grillen','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['12 Gewürze','Box-Set','Nachfüllbar','Platzsparend','Etikettiert'],bewertung:4.1,asin:'B09QHWNB6J'},
+  {name:'Tragbare Camping-Spüle',beschreibung:'Aufblasbare Camping-Spüle mit Wasserhahn und Ablauf – sauberes Geschirr überall.',preis:22,kategorie:'Zubehör',bereich:['camping','vanlife','outdoor'],energie:['strom','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6'],features:['Aufblasbar','Wasserhahn','Ablauf','USB-Pumpe','Kompakt'],bewertung:4.0,asin:'B0D5L2C7VR'},
+
+  // 5. KÜHLUNG
+  {name:'Coleman Xtreme 28L',beschreibung:'Premium-Kühlbox mit extremer Kühlleistung (bis 5 Tage) und robuster Bauweise.',preis:69,kategorie:'Kühlung',bereich:['camping','vanlife','outdoor'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4'],features:['28 Liter','5 Tage Kühlung','Robust','Tragegriff','Deckelablage'],bewertung:4.6,asin:'B0000B1P7M'},
+  {name:'Alpine Cool 45L Kühlbox',beschreibung:'Große Kühlbox für Camping & Vanlife – 45L Fassungsvermögen, abnehmbarer Deckel.',preis:32,kategorie:'Kühlung',bereich:['camping','vanlife'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['3-4','5-6','7plus'],features:['45 Liter','Abnehmbarer Deckel','Isoliert','Tragegriff','Styropor'],bewertung:4.1,asin:'B0BX8PR2JH'},
+  {name:'Dometic CFX 28W',beschreibung:'Elektrische Kompressor-Kühlbox mit 28L – kühlt bis -18°C, für Vanlife & Camping.',preis:549,kategorie:'Kühlung',bereich:['camping','vanlife'],energie:['strom'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6'],features:['28 Liter','-18°C','Kompressor','App-Steuerung','12/24V/230V'],bewertung:4.7,asin:'B00CFX28W0'},
+  {name:'Coleman Kühlbox 12V',beschreibung:'Aktiv-Kühlbox für 12V Anschluss im Auto – kühlt 20°C unter Umgebungstemperatur.',preis:49,kategorie:'Kühlung',bereich:['camping','vanlife','grillen'],energie:['strom'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4'],features:['12V','20L','Aktivkühlung','Kompakt','Netzteil'],bewertung:4.0,asin:'B00NHXWL7M'},
+
+  // 6. ESSENTIALS (Grundausstattung)
+  {name:'Multifunktionsmesser Swiss Army',beschreibung:'Camping-Taschenmesser mit 13 Funktionen – Säge, Dosenöffner, Korkenzieher & mehr.',preis:32,kategorie:'Essentials',bereich:['camping','vanlife','outdoor','grillen','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['13 Funktionen','Säge','Dosenöffner','Korkenzieher','Rot'],bewertung:4.7,asin:'B0001E7Q5I'},
+  {name:'Aufbewahrungsbox Camping 60L',beschreibung:'Stapelbare Kunststoffbox mit Deckel und Klappverschluss – Lebensmittel sicher verstauen.',preis:22,kategorie:'Essentials',bereich:['camping','vanlife','grillen','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['60 Liter','Stapelbar','Deckel','Klappverschlüsse','Stabil'],bewertung:4.3,asin:'B07TLWM3WN'},
+  {name:'Feueranzünder-Set Survival',beschreibung:'Firestarter-Set mit Ferrocerium-Stab, Magnesiumblock und wasserdichter Dose – unverzichtbar.',preis:14,kategorie:'Essentials',bereich:['outdoor','camping','vanlife'],energie:['holz','kohle','multifunktional'],kochstil:['einfach','backen'],personen:['1-2','3-4','5-6','7plus'],features:['Ferrocerium','Magnesium','Wasserdicht','Kompass','Überlebensdose'],bewertung:4.4,asin:'B0BXHGW3B1'},
+  {name:'Wasserkocher Camping Edelstahl',beschreibung:'1,5L Edelstahl-Wasserkocher für Campingkocher – klappbarer Griff, feuerfest.',preis:19,kategorie:'Essentials',bereich:['camping','vanlife','outdoor'],energie:['gas','holz','kohle','multifunktional'],kochstil:['einfach','kochen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['1,5L','Edelstahl','Klappgriff','Feuerfest','Leicht'],bewertung:4.2,asin:'B0B5FL7DJW'},
+  {name:'Faltbare Camping-Eimer 10L',beschreibung:'Zusammenlegbarer Camping-Eimer aus robustem Gewebe – Wasser holen, spülen, sammeln.',preis:9,kategorie:'Essentials',bereich:['camping','vanlife','outdoor'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['10 Liter','Faltbar','Gewebe','Robust','Griff'],bewertung:4.1,asin:'B01N5QZGTR'},
+  {name:'Outdoor Kaffeefilter-Set',beschreibung:'Pour-Over-Kaffeeset aus Edelstahl für Camping – Filter, Tasse, Deckel, kompakt.',preis:22,kategorie:'Essentials',bereich:['camping','vanlife','outdoor','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach'],personen:['1-2','3-4','5-6','7plus'],features:['Edelstahl','Pour-Over','Kompakt','Mehrwegfilter','Tasse inkl.'],bewertung:4.5,asin:'B07KQVHC4B'},
+  {name:'LED Camping-Laterne',beschreibung:'Wiederaufladbare LED-Laterne mit 300 Lumen, 6 Modi und bis zu 100h Leuchtdauer.',preis:22,kategorie:'Essentials',bereich:['camping','vanlife','outdoor','grillen','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['300 Lumen','100h','6 Modi','Wiederaufladbar','USB-C'],bewertung:4.5,asin:'B08BK3SG5S'},
+  {name:'Klapptisch Camping Alu',beschreibung:'Leichter Alu-Klapptisch (120x60cm) für Campingküche – inklusive Tragetasche.',preis:39,kategorie:'Essentials',bereich:['camping','vanlife','grillen','balkon'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['120x60cm','Aluminium','Klappbar','Tasche','Leicht'],bewertung:4.4,asin:'B09C2ZPN1M'},
+  {name:'Camping-Stuhl mit Taschen',beschreibung:'Komfort-Campingstuhl mit Getränkehalter, Armlehnen und Aufbewahrungstasche.',preis:34,kategorie:'Essentials',bereich:['camping','vanlife','grillen'],energie:['gas','strom','holz','kohle','multifunktional'],kochstil:['einfach','kochen','grillen2','backen','alles'],personen:['1-2','3-4','5-6','7plus'],features:['Klappbar','Getränkehalter','Aufbewahrung','Armlehnen','Tasche'],bewertung:4.3,asin:'B0BNMYDRBN'}
+];
+
+// Fix malformed product entry
+PRODUCTS.forEach((p,i) => {
+  if(typeof p.bewertung !== 'number') p.bewertung = 4.0;
+  if(typeof p.preis !== 'number') p.preis = 49;
+  if(!p.features) p.features = [];
+  if(!p.bereich) p.bereich = ['camping'];
+  if(!p.energie) p.energie = ['gas'];
+  if(!p.kochstil) p.kochstil = ['einfach'];
+  if(!p.personen) p.personen = ['1-2'];
+});
+
+// ---- App State ----
+let state = {bereich:'', budget:'', personen:'', kochstil:'', energie:''};
+let currentStep = 1;
+const totalSteps = 5;
+
+function init() { renderDots(); updateButtons(); }
+
+function renderDots() {
+  const dots = document.getElementById('stepDots');
+  dots.innerHTML = '';
+  const keys = ['','bereich','budget','personen','kochstil','energie'];
+  for(let i=1; i<=totalSteps; i++) {
+    const isActive = i===currentStep;
+    const isDone = state[keys[i]] ? true : false;
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (isActive?' active':'') + (isDone?' done':'');
+    dots.appendChild(dot);
+  }
+}
+
+function updateButtons() {
+  document.getElementById('btnPrev').style.display = currentStep>1?'inline-block':'none';
+  document.getElementById('btnNext').textContent = currentStep<totalSteps?'Weiter →':'🔥 Empfehlungen anzeigen';
+  renderDots();
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  currentStep = n;
+  updateButtons();
+}
+
+function nextStep() {
+  const keys = ['','bereich','budget','personen','kochstil','energie'];
+  const key = keys[currentStep];
+  if(!state[key]) { alert('Bitte wähle eine Option aus.'); return; }
+  if(currentStep < totalSteps) { showStep(currentStep+1); }
+  else { showResults(); }
+}
+
+function prevStep() { if(currentStep>1) showStep(currentStep-1); }
+
+function selectOption(el, key) {
+  const container = el.closest('.options');
+  container.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  state[container.dataset.key] = el.dataset.value;
+}
+
+function getBudgetMax(budgetKey) {
+  const map = {'50':50,'150':150,'300':300,'500':500,'999':1000};
+  return map[budgetKey] || 500;
+}
+
+function showResults() {
+  document.getElementById('wizard').style.display = 'none';
+  document.getElementById('resultSection').classList.add('visible');
+
+  const budgetMax = getBudgetMax(state.budget);
+  const bereich = state.bereich;
+  const personen = state.personen;
+  const kochstil = state.kochstil;
+  const energie = state.energie;
+
+  const queryTags = [bereich, kochstil, personen];
+
+  // Score products
+  const scored = PRODUCTS.map(p => {
+    let score = 0;
+
+    // Bereich match (40 points)
+    if(p.bereich.includes(bereich)) score += 40;
+    // Fallback: close match
+    if(bereich==='grillen' && (p.bereich.includes('balkon')||p.bereich.includes('camping'))) score += 10;
+    if(bereich==='balkon' && (p.bereich.includes('grillen')||p.bereich.includes('camping'))) score += 10;
+
+    // Energie match (35 points)
+    if(p.energie.includes(energie)) score += 35;
+    if(p.energie.includes('multifunktional') && energie!=='multifunktional') score += 15;
+
+    // Kochstil match (30 points)
+    if(p.kochstil.includes(kochstil)) score += 30;
+    if(p.kochstil.includes('alles')) score += 10;
+    if(kochstil==='alles') score += 20; // all-rounder bonus
+
+    // Personenzahl match (25 points)
+    if(p.personen.includes(personen)) score += 25;
+    // Size overlap
+    if(personen==='1-2' && p.personen.includes('3-4')) score += 8;
+    if(personen==='3-4' && p.personen.includes('5-6')) score += 8;
+    if(personen==='5-6' && p.personen.includes('7plus')) score += 8;
+    if(personen==='7plus' && p.personen.includes('5-6')) score += 8;
+
+    // Budget match (20 points)
+    const pPreis = p.preis;
+    if(pPreis <= budgetMax) {
+      score += 20;
+      if(pPreis <= budgetMax * 0.4) score += 5; // great value
+    } else if(pPreis <= budgetMax * 1.3) {
+      score += 5;
+    }
+
+    // Category preference based on Einsatzbereich
+    if(bereich==='grillen' && p.kategorie==='Grill') score += 15;
+    if(bereich==='camping' && (p.kategorie==='Campingkocher'||p.kategorie==='Kühlung'||p.kategorie==='Essentials')) score += 12;
+    if(bereich==='vanlife' && (p.kategorie==='Campingkocher'||p.kategorie==='Kühlung')) score += 12;
+    if(bereich==='outdoor' && (p.kategorie==='Campingkocher'||p.kategorie==='Essentials')) score += 12;
+    if(bereich==='balkon' && (p.kategorie==='Grill'||p.kategorie==='Zubehör')) score += 12;
+
+    // Energy-specific bonuses
+    if(energie==='strom' && p.energie.includes('strom')) score += 10;
+    if(energie==='gas' && p.energie.includes('gas')) score += 10;
+    if(energie==='holz' && (p.energie.includes('holz')||p.energie.includes('kohle'))) score += 10;
+    if(energie==='kohle' && p.energie.includes('kohle')) score += 10;
+    if(energie==='multifunktional' && p.energie.includes('multifunktional')) score += 10;
+
+    // Cooking style synergy
+    if(kochstil==='backen' && p.kategorie==='Kochgeschirr') score += 15;
+    if(kochstil==='grillen2' && (p.kategorie==='Grill'||p.kategorie==='Zubehör')) score += 10;
+    if(kochstil==='kochen' && (p.kategorie==='Campingkocher'||p.kategorie==='Kochgeschirr')) score += 10;
+
+    // Rating bonus
+    score += p.bewertung * 4;
+
+    return {...p, score};
+  });
+
+  scored.sort((a,b)=>b.score - a.score);
+
+  // Remove duplicates and select top 5
+  const seen = new Set();
+  const top5 = [];
+  for(const p of scored) {
+    if(!seen.has(p.name) && top5.length < 5) {
+      seen.add(p.name);
+      top5.push(p);
+    }
+  }
+
+  const bereichLabel = {grillen:'Grillen zuhause', camping:'Camping mit Familie', vanlife:'Vanlife', outdoor:'Outdoor-Abenteuer', balkon:'Balkon'}[bereich]||bereich;
+  const energieLabel = {strom:'Strom', gas:'Gas', holz:'Holz & Kohle', kohle:'Reine Kohle', multifunktional:'Multifunktional'}[energie]||energie;
+  const kochstilLabel = {einfach:'Einfach & fix', grillen2:'Grillen & Braten', kochen:'Richtig kochen', backen:'Backen & Brot', alles:'Alles (Allrounder)'}[kochstil]||kochstil;
+
+  document.getElementById('resultSummary').textContent = `Top ${top5.length} Empfehlungen für: ${bereichLabel} | ${kochstilLabel} | Energie: ${energieLabel} | Budget bis ${budgetMax}€`;
+
+  // Render Top 5
+  const rankEmoji = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+  let topHtml = '';
+  top5.forEach((p, i) => {
+    const stars = '★'.repeat(Math.floor(p.bewertung)) + (p.bewertung%1>=0.5?'½':'');
+    topHtml += `<div class="top-card">
+      <div class="rank">${rankEmoji[i]} Platz ${i+1}</div>
+      <div class="pname">${p.name}</div>
+      <div class="pcategory">${p.kategorie}</div>
+      <div class="price-tag">${p.preis}€ <small>ca.</small></div>
+      <div class="stars">${stars} ${p.bewertung}</div>
+      <div class="pdesc">${p.beschreibung}</div>
+      <div class="features">${p.features.map(f=>'<span>'+f+'</span>').join('')}</div>
+      <a class="buy-btn" href="https://www.amazon.de/dp/${p.asin}/?tag=ikune21-21" target="_blank" rel="nofollow">🛒 Preis prüfen</a>
+    </div>`;
+  });
+  document.getElementById('top5Container').innerHTML = topHtml;
+
+  // Comparison table
+  let theadHtml = '<tr><th>Feature</th>';
+  top5.forEach(p => { theadHtml += `<th>${p.name}</th>`; });
+  theadHtml += '</tr>';
+  document.getElementById('compareHead').innerHTML = theadHtml;
+
+  // Feature mapping
+  const allFeatures = [];
+  top5.forEach(p => { p.features.forEach(f => { if(!allFeatures.includes(f)) allFeatures.push(f); }); });
+
+  let bhtml = '';
+  // Show top 8 most common features
+  const featureFrequency = {};
+  allFeatures.forEach(f => {
+    featureFrequency[f] = top5.filter(p => p.features.includes(f)).length;
+  });
+  allFeatures.sort((a,b) => featureFrequency[b] - featureFrequency[a]);
+
+  const displayFeatures = allFeatures.slice(0, 8);
+  displayFeatures.forEach(f => {
+    bhtml += `<tr><td>${f}</td>`;
+    top5.forEach(p => {
+      bhtml += p.features.includes(f) ? '<td class="check">✓</td>' : '<td class="cross">✗</td>';
+    });
+    bhtml += '</tr>';
+  });
+  // Price row
+  bhtml += `<tr><td>💶 Preis</td>`;
+  top5.forEach(p => { bhtml += `<td>${p.preis}€</td>`; });
+  bhtml += '</tr>';
+  // Bewertung row
+  bhtml += `<tr><td>⭐ Bewertung</td>`;
+  top5.forEach(p => { bhtml += `<td>${p.bewertung}/5</td>`; });
+  bhtml += '</tr>';
+
+  document.getElementById('compareBody').innerHTML = bhtml;
+
+  // Budget bar
+  const avgPrice = Math.round(top5.reduce((s,p) => s + p.preis, 0) / top5.length);
+  const pct = Math.min(Math.round(avgPrice / budgetMax * 100), 100);
+  document.getElementById('budgetBarFill').style.width = pct + '%';
+  document.getElementById('budgetSpent').textContent = 'Ø ' + avgPrice + ' €';
+  document.getElementById('budgetMaxLabel').textContent = 'Budget: ' + budgetMax + ' €';
+
+  // Spartipps (5 Tipps)
+  const tips = [
+    'Ein Trangia-Spirituskocher ist ultrasicher, leise und sparsam – ideal für Familien-Camping ohne Gasgeruch.',
+    'Dutch Oven (Gusseisen) ersetzen fast jedes Kochgeschirr: kochen, braten, backen, schmoren – alles in einem Topf.',
+    'Kühlbox-Tipp: Vorkühlen mit Eis-Akkus und die Box im Schatten lagern spart bis zu 40% Kühlleistung.',
+    'Camping-Gaskocher mit Piezo-Zündung sind deutlich komfortabler als Modelle ohne – keine extra Zündmittel nötig.',
+    'Setze auf Multifunktionsgeräte: Ein guter Dutch Oven oder eine Plancha-Platte ersetzt 3 separate Geräte und spart Platz & Geld.'
+  ];
+  document.getElementById('spartippsContainer').innerHTML = `<h4>💡 Spartipps für deine Grill- & Campingküche</h4><ul>${tips.map(t=>'<li>'+t+'</li>').join('')}</ul>`;
+}
+
+function resetConfig() {
+  state = {bereich:'', budget:'', personen:'', kochstil:'', energie:''};
+  currentStep = 1;
+  document.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+  document.getElementById('wizard').style.display = 'block';
+  document.getElementById('resultSection').classList.remove('visible');
+  showStep(1);
+}
+
+// ---- Event Listeners ----
+document.querySelectorAll('.option').forEach(el => {
+  el.addEventListener('click', function() {
+    const key = this.closest('.options').dataset.key;
+    selectOption(this, key);
+  });
+});
+
+// ---- Init ----
+init();
+</script>
+</body>
+</html>
