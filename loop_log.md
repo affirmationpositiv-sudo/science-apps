@@ -1,106 +1,156 @@
-1|# Loop Log – science-apps Auto-Pilot
-2|
-3|## Tick: 2026-06-03 AUTOMATISCH (RUN 2.73)
-4|
-5|### Previous State (R2.72):
-6|- 93 Blog-Artikel, 45 interaktive Tools, 7 LeadGen AI Seiten, 330 Sitemap URLs
-7|- Smartphone Zubehör Nische fehlt
-8|
-9|### Actions This Tick (R2.73):
-10|- [x] **Survey:** Site live (HTTP 200), Branch main, 330 Sitemap URLs
-11|- [x] **Blog-Artikel #96 erstellt:** "Smartphone Zubehör 2026: Die 80+ besten Handy-Accessoires (Hülle, Ladegerät, Powerbank, Kopfhörer)" (~33 KB HTML, 560 Zeilen, 10+ Kategorien, 80+ Produktkarten, 80+ Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 15, 5 Budget-Stufen, 10 FAQ, 7-Tage-Startplan)
-12|- [x] **Smartphone Zubehör Finder Tool gebaut:** tools/smartphone-zubehoer-finder.html (~16 KB, 6-Fragen-Wizard: Gerät, Bedarf, Budget, Stil, Nutzungsprofil, Extras; 20+ Produkte aus 6 Kategorien, personalisierte Top-10-Empfehlungen, 20+ Amazon-Affiliate-Links)
-13|- [x] **Blog-Index aktualisiert:** +Blog-Karte #96 (Smartphone Zubehör) vor Artikel #95
-14|- [x] **Tools-Index aktualisiert:** +Smartphone Zubehör Finder (45→46 Tools), Subtitle aktualisiert
-15|- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 340→342, Blog-Artikel 93→94, KI-Tools 46→47, Sitemap URLs 330→332
-16|- [x] **Sitemap.xml aktualisiert:** +2 URLs (Blog #96 + Tool) → 332 URLs
-17|
-18|### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
-19|| Kategorie | Anzahl | Status |
-20||-----------|--------|--------|
-21|| Blog-Artikel | 94 | ✅ LIVE (1 NEU: #96 Smartphone Zubehör) |
-22|| Interaktive Tools | 46 | ✅ LIVE (1 NEU: Smartphone Zubehör Finder) |
-23|| LeadGen AI Seiten | 7 | ✅ LIVE |
-24|| Affiliate-Shops | 9 | ✅ LIVE |
-25|| KDP-Buch-Previews | 15+ | ✅ LIVE |
-26|| Apps & Spiele | 12+ | ✅ LIVE |
-27|| Sitemap URLs | 332 | ✅ LIVE (2 NEU) |
-28|
-29|### Geld-Strategie-Ranking (0 EUR Kosten):
-30|| Rang | Strategie | Potenzial/Monat | Status |
-31||------|-----------|----------------|--------|
-32|| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 94 Artikel + 46 Tools + 9 Shops + 7 LeadGen |
-33|| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
-34|| 3 | **Amazon KDP (Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
-35|| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
-36|| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
-37|| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
-38|
-39|### Blocked Items (User-Aktion noetig):
-40|1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
-41|2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
-42|3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
-43|4. 🟡 **Google Search Console** - Nicht eingerichtet
-44|5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
-45|
-46|### Next Tick Priorities:
-47|1. 🔴 Next blog article (topic: Bürobedarf & Organisation 2026 oder Haushaltsreinigung & Organisation)
-48|2. 🔴 Next interactive tool idea
-49|3. 🟡 KDP Account erstellen (User-Aktion noetig)
-50|4. 🟡 Google Search Console einrichten
-51|
-52|## Tick: 2026-06-03 AUTOMATISCH (RUN 2.72)
-4|
-5|### Previous State (R2.71):
-6|- 92 Blog-Artikel, 44 interaktive Tools, 4 LeadGen AI Seiten, 325 Sitemap URLs
-7|- Sport & Fitness Nische fehlt
-8|
-9|### Actions This Tick (R2.72):
-10|- [x] **Survey:** Site live (HTTP 200), Branch main, 325 Sitemap URLs
-11|- [x] **Blog-Artikel #95 erstellt:** "Sportausrüstung & Fitnessgeräte für Zuhause 2026: Die 70+ besten Produkte für dein Heim-Fitnessstudio" (~68 KB HTML, 929 Zeilen, 12 Kategorien, 70+ Produktkarten, 123 Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 15, 6 Budget-Stufen (10€ bis 2.000€+), 10 FAQ, 7-Tage-Startplan)
-12|- [x] **Heim-Fitnessstudio-Konfigurator Tool gebaut:** tools/sport-fitness-konfigurator.html (~48 KB, 48 KB, 6-Fragen-Wizard: Ziel, Budget, Platz, Erfahrung, Trainingsart, Zusatzwünsche; 77 Produkte aus 14 Kategorien, personalisierte Top-12-Empfehlungen, Budget-Gesamtsumme, 60+ Amazon-Affiliate-Links)
-13|- [x] **LeadGen AI erweitert:** +3 Branchen-Spezialseiten (Bildung, Handel, Finanzen) → jetzt 7 Branchen gesamt
-14|- [x] **Blog-Index aktualisiert:** +Blog-Karte #95 (Sport & Fitness) vor Artikel #94
-15|- [x] **Tools-Index aktualisiert:** +Heim-Fitnessstudio-Konfigurator (44→45 Tools), Subtitle aktualisiert
-16|- [x] **LeadGen-Index aktualisiert:** +3 Branchen-Links (Bildung, Handel, Finanzen)
-17|- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 337→340, Blog-Artikel 92→93, KI-Tools 45→46, +LeadGen AI Seiten (7), Sitemap URLs 327→330
-18|- [x] **Sitemap.xml aktualisiert:** +5 URLs (Blog #95 + Tool + 3 LeadGen Seiten) → 330 URLs
-19|
-20|### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
-21|| Kategorie | Anzahl | Status |
-22||-----------|--------|--------|
-23|| Blog-Artikel | 93 | ✅ LIVE (1 NEU: #95 Sport & Fitness) |
-24|| Interaktive Tools | 45 | ✅ LIVE (1 NEU: Heim-Fitnessstudio-Konfigurator) |
-25|| LeadGen AI Seiten | 7 | ✅ LIVE (3 NEU: Bildung, Handel, Finanzen) |
-26|| Affiliate-Shops | 9 | ✅ LIVE |
-27|| KDP-Buch-Previews | 15+ | ✅ LIVE |
-28|| Apps & Spiele | 12+ | ✅ LIVE |
-29|| Sitemap URLs | 330 | ✅ LIVE (5 NEU) |
-30|
-31|### Geld-Strategie-Ranking (0 EUR Kosten):
-32|| Rang | Strategie | Potenzial/Monat | Status |
-33||------|-----------|----------------|--------|
-34|| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 93 Artikel + 45 Tools + 9 Shops + 7 LeadGen |
-35|| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
-36|| 3 | **Amazon KDP (Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
-37|| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
-38|| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
-39|| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
-40|
-41|### Blocked Items (User-Aktion noetig):
-42|1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
-43|2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
-44|3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
-45|4. 🟡 **Google Search Console** - Nicht eingerichtet
-46|5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
-47|
-48|### Next Tick Priorities:
-49|1. 🔴 Next blog article (topic: Outdoor-Camping-Ausrüstung oder Wintersport 2026/27)
-50|2. 🔴 Next interactive tool idea
-51|3. 🟡 KDP Account erstellen (User-Aktion noetig)
-52|4. 🟡 Google Search Console einrichten
-53|
-54|## Tick: 2026-06-03 AUTOMATISCH (RUN 2.71)
+# Loop Log – science-apps Auto-Pilot
+
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.74)
+
+### Previous State (R2.73):
+- 94 Blog-Artikel, 46 interaktive Tools, 7 LeadGen AI Seiten, 332 Sitemap URLs
+- Küchenausstattung & Kochgeschirr Nische fehlt
+
+### Actions This Tick (R2.74):
+- [x] **Survey:** Site live (HTTP 200), Branch main, 332 Sitemap URLs
+- [x] **Blog-Artikel #97 erstellt:** "Küchenausstattung & Kochgeschirr 2026: Die 80+ besten Produkte für deine Küche (Messer, Töpfe, Pfannen, Küchenmaschinen, Kaffeemaschinen)" (~81 KB HTML, 10 Kategorien, 80+ Produktkarten, 140+ Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 15, 5 Budget-Stufen (10€ bis 1.000€+), 10 FAQ, 7-Tage-Startplan, JS-Kategorie-Filter)
+- [x] **Küchenhelfer-Finder Tool gebaut:** tools/kuechenhelfer-finder.html (~34 KB, 6-Fragen-Wizard: Erfahrung, Budget, Bedarf, Personen, Küchengröße, Material; 54+ Produkte aus 10 Kategorien, personalisierte Top-12-Empfehlungen, Budget-Gesamtsumme, 50+ Amazon-Affiliate-Links)
+- [x] **Blog-Index aktualisiert:** +Blog-Karte #97 (Küchenausstattung) vor Artikel #96
+- [x] **Tools-Index aktualisiert:** +Küchenhelfer-Finder (46→47 Tools), Subtitle aktualisiert
+- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 342→344, Blog-Artikel 94→95, KI-Tools 47→48, Sitemap URLs 332→334
+- [x] **Sitemap.xml aktualisiert:** +2 URLs (Blog #97 + Tool) → 334 URLs
+- [x] **Deployment:** git commit + push, HTTP 200 auf allen 3 neuen/geänderten Seiten
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 95 | ✅ LIVE (1 NEU: #97 Küchenausstattung & Kochgeschirr) |
+| Interaktive Tools | 47 | ✅ LIVE (1 NEU: Küchenhelfer-Finder) |
+| LeadGen AI Seiten | 7 | ✅ LIVE |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| Sitemap URLs | 334 | ✅ LIVE (2 NEU) |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 95 Artikel + 47 Tools + 9 Shops + 7 LeadGen |
+| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
+| 3 | **Amazon KDP (Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
+
+### Next Tick Priorities:
+1. 🔴 Next blog article (topic: Haushaltsreinigung & Organisation 2026 oder Kinder- & Spielzeug 2026)
+2. 🔴 Next interactive tool idea
+3. 🟡 KDP Account erstellen (User-Aktion noetig)
+4. 🟡 Google Search Console einrichten
+
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.73)
+
+### Previous State (R2.72):
+- 93 Blog-Artikel, 45 interaktive Tools, 7 LeadGen AI Seiten, 330 Sitemap URLs
+- Smartphone Zubehör Nische fehlt
+
+### Actions This Tick (R2.73):
+- [x] **Survey:** Site live (HTTP 200), Branch main, 330 Sitemap URLs
+- [x] **Blog-Artikel #96 erstellt:** "Smartphone Zubehör 2026: Die 80+ besten Handy-Accessoires (Hülle, Ladegerät, Powerbank, Kopfhörer)" (~33 KB HTML, 560 Zeilen, 10+ Kategorien, 80+ Produktkarten, 80+ Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 15, 5 Budget-Stufen, 10 FAQ, 7-Tage-Startplan)
+- [x] **Smartphone Zubehör Finder Tool gebaut:** tools/smartphone-zubehoer-finder.html (~16 KB, 6-Fragen-Wizard: Gerät, Bedarf, Budget, Stil, Nutzungsprofil, Extras; 20+ Produkte aus 6 Kategorien, personalisierte Top-10-Empfehlungen, 20+ Amazon-Affiliate-Links)
+- [x] **Blog-Index aktualisiert:** +Blog-Karte #96 (Smartphone Zubehör) vor Artikel #95
+- [x] **Tools-Index aktualisiert:** +Smartphone Zubehör Finder (45→46 Tools), Subtitle aktualisiert
+- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 340→342, Blog-Artikel 93→94, KI-Tools 46→47, Sitemap URLs 330→332
+- [x] **Sitemap.xml aktualisiert:** +2 URLs (Blog #96 + Tool) → 332 URLs
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 94 | ✅ LIVE (1 NEU: #96 Smartphone Zubehör) |
+| Interaktive Tools | 46 | ✅ LIVE (1 NEU: Smartphone Zubehör Finder) |
+| LeadGen AI Seiten | 7 | ✅ LIVE |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| Sitemap URLs | 332 | ✅ LIVE (2 NEU) |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 94 Artikel + 46 Tools + 9 Shops + 7 LeadGen |
+| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
+| 3 | **Amazon KDP (Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
+
+### Next Tick Priorities:
+1. 🔴 Next blog article (topic: Küchenausstattung & Kochgeschirr 2026)
+2. 🔴 Next interactive tool idea
+3. 🟡 KDP Account erstellen (User-Aktion noetig)
+4. 🟡 Google Search Console einrichten
+
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.72)
+
+### Previous State (R2.71):
+- 92 Blog-Artikel, 44 interaktive Tools, 4 LeadGen AI Seiten, 325 Sitemap URLs
+- Sport & Fitness Nische fehlt
+
+### Actions This Tick (R2.72):
+- [x] **Survey:** Site live (HTTP 200), Branch main, 325 Sitemap URLs
+- [x] **Blog-Artikel #95 erstellt:** "Sportausrüstung & Fitnessgeräte für Zuhause 2026: Die 70+ besten Produkte für dein Heim-Fitnessstudio" (~68 KB HTML, 929 Zeilen, 12 Kategorien, 70+ Produktkarten, 123 Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 15, 6 Budget-Stufen (10€ bis 2.000€+), 10 FAQ, 7-Tage-Startplan)
+- [x] **Heim-Fitnessstudio-Konfigurator Tool gebaut:** tools/sport-fitness-konfigurator.html (~48 KB, 48 KB, 6-Fragen-Wizard: Ziel, Budget, Platz, Erfahrung, Trainingsart, Zusatzwünsche; 77 Produkte aus 14 Kategorien, personalisierte Top-12-Empfehlungen, Budget-Gesamtsumme, 60+ Amazon-Affiliate-Links)
+- [x] **LeadGen AI erweitert:** +3 Branchen-Spezialseiten (Bildung, Handel, Finanzen) → jetzt 7 Branchen gesamt
+- [x] **Blog-Index aktualisiert:** +Blog-Karte #95 (Sport & Fitness) vor Artikel #94
+- [x] **Tools-Index aktualisiert:** +Heim-Fitnessstudio-Konfigurator (44→45 Tools), Subtitle aktualisiert
+- [x] **LeadGen-Index aktualisiert:** +3 Branchen-Links (Bildung, Handel, Finanzen)
+- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 337→340, Blog-Artikel 92→93, KI-Tools 45→46, +LeadGen AI Seiten (7), Sitemap URLs 327→330
+- [x] **Sitemap.xml aktualisiert:** +5 URLs (Blog #95 + Tool + 3 LeadGen Seiten) → 330 URLs
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 93 | ✅ LIVE (1 NEU: #95 Sport & Fitness) |
+| Interaktive Tools | 45 | ✅ LIVE (1 NEU: Heim-Fitnessstudio-Konfigurator) |
+| LeadGen AI Seiten | 7 | ✅ LIVE (3 NEU: Bildung, Handel, Finanzen) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| Sitemap URLs | 330 | ✅ LIVE (5 NEU) |
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 93 Artikel + 45 Tools + 9 Shops + 7 LeadGen |
+| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
+| 3 | **Amazon KDP (Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
+
+### Next Tick Priorities:
+1. 🔴 Next blog article (topic: Outdoor-Camping-Ausrüstung oder Wintersport 2026/27)
+2. 🔴 Next interactive tool idea
+3. 🟡 KDP Account erstellen (User-Aktion noetig)
+4. 🟡 Google Search Console einrichten
+
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.71)
 
 ### Previous State (R2.70):
 - 91 Blog-Artikel, 43 interaktive Tools, 5 LeadGen AI Seiten, 323 Sitemap URLs
@@ -190,6 +240,12 @@
 2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
 3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
 4. 🟡 **Google Search Console** - Nicht eingerichtet (Sitemap nicht eingereicht)
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
+
+### Next Tick Priorities:
+1. 🔴 Next blog article (topic: Reisezubehör 2026)
+2. 🔴 Next interactive tool idea
+3. 🟡 KDP Account erstellen (User-Aktion noetig)
 4. 🟡 Google Search Console einrichten
 
 ## Tick: 2026-06-03 AUTOMATISCH (RUN 2.70)
@@ -266,39 +322,10 @@
 2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
 3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
 4. 🟡 **Google Search Console** - Nicht eingerichtet (Sitemap nicht eingereicht)
-4. 🟡 Google Search Console einrichten
-
-## Tick: 2026-06-03 AUTOMATISCH (RUN 2.70)
-
-### Previous State (R2.69):
-- 91 Blog-Artikel, 42 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Buecher, 320 Sitemap URLs
-- 3 LeadGen Branchenseiten fehlen, Schmuck & Uhren Nische fehlt
-
-### Actions This Tick (R2.70):
-- [x] **Survey:** Site live (HTTP 200), Branch main, 320 Sitemap URLs
-- [x] **Blog-Artikel #93 erstellt:** "Schmuck & Uhren 2026: Die 80+ besten Produkte für Männer & Frauen" (~43 KB HTML, 12 Kategorien, 80+ Produktkarten, 80+ Amazon-Affiliate-Links, Vergleichstabelle Top 15, 7 Budget-Stufen, 10 FAQ, 7-Tage-Startplan)
-- [x] **Schmuck- & Uhren-Finder Tool gebaut:** 5-Fragen-Wizard, 40+ Produkte, personalisierte Top-10
-- [x] **LeadGen AI erweitert:** +3 Branchen-Spezialseiten (IT, Handwerk, Gesundheit)
-- [x] **Blog-Index, Tools-Index, Admin, Sitemap aktualisiert**
-- [x] **Deployment:** git push + force, HTTP 200 auf allen 5 neuen Seiten
-
-### Live Inventory:
-| Kategorie | Anzahl | Status |
-|-----------|--------|--------|
-| Blog-Artikel | 91 | ✅ LIVE (1 NEU: #93) |
-| Interaktive Tools | 43 | ✅ LIVE (1 NEU) |
-| LeadGen AI Seiten | 4 | ✅ LIVE (3 NEU) |
-| Sitemap URLs | 323 | ✅ LIVE (5 NEU) |
-
-### Blocked Items (User-Aktion noetig):
-1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
-2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
-3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
-4. 🟡 **Google Search Console** - Nicht eingerichtet
 5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
 
 ### Next Tick Priorities:
-1. 🔴 Next blog article (topic tbd)
+1. 🔴 Next blog article (topic: Home-Fitnessgeräte oder Küchenausstattung)
 2. 🔴 Next interactive tool idea
 3. 🟡 KDP Account erstellen (User-Aktion noetig)
 4. 🟡 Google Search Console einrichten
