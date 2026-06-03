@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👶 Baby-Produkt-Finder 2026 – Finde die perfekte Baby-Erstausstattung</title>
+<meta name="description" content="Finde in 2 Minuten die perfekte Baby-Erstausstattung! Beantworte 5 Fragen zu Lebensphase, Budget, Wohnsituation & Bedürfnissen. Personalisierte Produktempfehlungen mit Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Baby-Produkt-Finder, Baby-Erstausstattung, Babyausstattung, Kinderwagen, Babyschale, Babyprodukte, Amazon Baby, ikune21-21">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; min-height: 100vh; }
+.container { max-width: 820px; margin: 0 auto; padding: 20px; }
+
+h1 { font-size: 2.4em; font-weight: 800; background: linear-gradient(135deg,#8B5CF6,#FFD700); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; margin-bottom: 8px; }
+.subtitle { text-align: center; color: #888; font-size: 1.05em; margin-bottom: 32px; }
+
+/* Wizard */
+.wizard { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 20px; padding: 28px; margin-bottom: 24px; }
+.wizard-step { display: none; }
+.wizard-step.active { display: block; }
+
+.wizard h2 { font-size: 1.3em; color: #8B5CF6; margin-bottom: 6px; }
+.wizard .question { font-size: 1.1em; margin-bottom: 16px; color: #E5E5E5; }
+.wizard .progress { display: flex; gap: 6px; margin-bottom: 20px; justify-content: center; }
+.wizard .dot { width: 12px; height: 12px; border-radius: 50%; background: #2A2A2A; }
+.wizard .dot.active { background: #8B5CF6; }
+.wizard .dot.done { background: #22C55E; }
+
+.options { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.option-btn { background: #151515; border: 2px solid #2A2A2A; border-radius: 12px; padding: 14px 12px; text-align: center; cursor: pointer; color: #E5E5E5; font-size: .95em; transition: all .3s; }
+.option-btn:hover { border-color: #A78BFA; background: #1a1a2a; }
+.option-btn.selected { border-color: #8B5CF6; background: #1a1a2a; box-shadow: 0 0 15px rgba(139,92,246,.3); }
+
+.wizard-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; }
+.btn-prev, .btn-next { padding: 12px 28px; border-radius: 30px; font-weight: 600; border: none; cursor: pointer; font-size: 1em; transition: all .3s; }
+.btn-prev { background: #2A2A2A; color: #888; }
+.btn-prev:hover { background: #333; color: #fff; }
+.btn-next { background: linear-gradient(135deg,#8B5CF6,#FFD700); color: #000; margin-left: auto; }
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(139,92,246,.4); }
+.btn-next:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Results */
+.result-section { display: none; }
+.result-section.active { display: block; }
+
+.result-header { text-align: center; margin-bottom: 24px; }
+.result-header h2 { font-size: 1.8em; color: #22C55E; margin-bottom: 4px; }
+.result-header p { color: #888; }
+
+.result-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.result-card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 14px; padding: 18px; transition: all .3s; }
+.result-card:hover { border-color: #8B5CF6; transform: translateY(-2px); }
+.result-card h4 { color: #FFD700; font-size: .95em; margin-bottom: 4px; }
+.result-card .preis { color: #22C55E; font-weight: 600; font-size: .85em; }
+.result-card .desc { color: #999; font-size: .82em; margin: 6px 0; }
+.result-card .amz { display: inline-block; background: #FFD700; color: #000 !important; font-weight: 600; padding: 4px 12px; border-radius: 20px; font-size: .78em; text-decoration: none; }
+.result-card .amz:hover { background: #E6C200; }
+.result-card .icon { font-size: 2em; margin-bottom: 4px; }
+
+.why-box { background: #0d1d0d; border: 1px solid #22C55E; border-radius: 14px; padding: 20px; margin: 20px 0; }
+.why-box h3 { color: #22C55E; margin-bottom: 6px; }
+.why-box p, .why-box li { color: #B0D0B0; font-size: .9em; }
+.why-box ul { margin: 8px 0 0 18px; }
+
+.spartipp-box { background: #1a1a0d; border: 1px solid #FFD700; border-radius: 14px; padding: 20px; margin: 20px 0; }
+.spartipp-box h3 { color: #FFD700; margin-bottom: 6px; }
+.spartipp-box p { color: #D0D0A0; font-size: .9em; }
+
+.budget-vergleich { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin: 20px 0; }
+.budget-card { background: #151515; border: 1px solid #2A2A2A; border-radius: 12px; padding: 14px; text-align: center; }
+.budget-card .stufe { font-size: 1.3em; font-weight: 800; color: #8B5CF6; }
+.budget-card .label { color: #888; font-size: .8em; }
+.budget-card .preis-s { color: #22C55E; font-size: .85em; margin-top: 6px; }
+
+.reset-btn { display: block; margin: 20px auto 0; background: #2A2A2A; border: 1px solid #444; border-radius: 30px; padding: 12px 30px; color: #888; font-size: .95em; cursor: pointer; transition: all .3s; }
+.reset-btn:hover { background: #333; color: #fff; border-color: #8B5CF6; }
+
+.disclaimer { background: #1a1a0d; border: 1px solid #3d3d0d; border-radius: 12px; padding: 16px; margin: 32px 0; font-size: .85em; color: #aaa; text-align: center; }
+
+footer { text-align: center; padding: 30px 20px; color: #555; font-size: .85em; border-top: 1px solid #1a1a1a; margin-top: 40px; }
+footer a { color: #A78BFA; text-decoration: none; }
+footer a:hover { color: #FFD700; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>👶 Baby-Produkt-Finder 2026</h1>
+<p class="subtitle">Finde in 2 Minuten die perfekte Baby-Erstausstattung für deine Familie! Amazon Affiliate (tag=ikune21-21)</p>
+
+<!-- WIZARD -->
+<div class="wizard" id="wizard">
+  <div class="progress" id="progress"></div>
+
+  <!-- Step 1: Phase -->
+  <div class="wizard-step active" data-step="1">
+    <h2>Frage 1 von 5</h2>
+    <p class="question">In welcher Lebensphase befindet ihr euch? 🍼</p>
+    <div class="options" data-question="phase">
+      <div class="option-btn" data-value="schwangerschaft">🤰 Schwangerschaft<br><small style="color:#666">Noch unterm Herzen</small></div>
+      <div class="option-btn" data-value="neugeboren">👶 Neugeboren<br><small style="color:#666">0-6 Monate</small></div>
+      <div class="option-btn" data-value="baby">🧒 Baby<br><small style="color:#666">6-18 Monate</small></div>
+      <div class="option-btn" data-value="kleinkind">👦 Kleinkind<br><small style="color:#666">18 Monate+</small></div>
+    </div>
+  </div>
+
+  <!-- Step 2: Budget -->
+  <div class="wizard-step" data-step="2">
+    <h2>Frage 2 von 5</h2>
+    <p class="question">Welches Budget habt ihr für die Erstausstattung? 💰</p>
+    <div class="options" data-question="budget">
+      <div class="option-btn" data-value="sparsam">💵 Sparsam<br><small style="color:#666">Bis 300€</small></div>
+      <div class="option-btn" data-value="mittel">💶 Mittel<br><small style="color:#666">300-800€</small></div>
+      <div class="option-btn" data-value="gut">💷 Gut<br><small style="color:#666">800-1.500€</small></div>
+      <div class="option-btn" data-value="luxus">💎 Luxus<br><small style="color:#666">1.500€+</small></div>
+    </div>
+  </div>
+
+  <!-- Step 3: Wohnsituation -->
+  <div class="wizard-step" data-step="3">
+    <h2>Frage 3 von 5</h2>
+    <p class="question">Wie wohnt ihr? 🏠</p>
+    <div class="options" data-question="wohnen">
+      <div class="option-btn" data-value="wohnung">🏢 Wohnung<br><small style="color:#666">Aufzug/Treppe</small></div>
+      <div class="option-btn" data-value="haus">🏡 Haus<br><small style="color:#666">Garten/Stufe</small></div>
+      <div class="option-btn" data-value="land">🌳 Ländlich<br><small style="color:#666">Unwegsam/Steigungen</small></div>
+      <div class="option-btn" data-value="reisen">✈️ Viel unterwegs<br><small style="color:#666">Reisen & Auto</small></div>
+    </div>
+  </div>
+
+  <!-- Step 4: Prioritäten -->
+  <div class="wizard-step" data-step="4">
+    <h2>Frage 4 von 5</h2>
+    <p class="question">Was ist euch am wichtigsten? ⭐</p>
+    <div class="options" data-question="prioritaet">
+      <div class="option-btn" data-value="sicherheit">🛡️ Sicherheit<br><small style="color:#666">Testsieger & Zertifikate</small></div>
+      <div class="option-btn" data-value="komfort">😌 Komfort<br><small style="color:#666">Bequem & durchdacht</small></div>
+      <div class="option-btn" data-value="design">✨ Design<br><small style="color:#666">Schön & modern</small></div>
+      <div class="option-btn" data-value="nachhaltig">🌱 Nachhaltigkeit<br><small style="color:#666">Bio & langlebig</small></div>
+    </div>
+  </div>
+
+  <!-- Step 5: Besondere Bedürfnisse -->
+  <div class="wizard-step" data-step="5">
+    <h2>Frage 5 von 5</h2>
+    <p class="question">Habt ihr besondere Bedürfnisse? 🎯</p>
+    <div class="options" data-question="besonders">
+      <div class="option-btn" data-value="standard">✅ Keine besonderen<br><small style="color:#666">Standard-Ausstattung</small></div>
+      <div class="option-btn" data-value="zwillinge">👯 Zwillinge<br><small style="color:#666">Doppelte Ausstattung</small></div>
+      <div class="option-btn" data-value="fruehchen">🍼 Frühchen<br><small style="color:#666">Spezielle Bedürfnisse</small></div>
+      <div class="option-btn" data-value="allergien">🤧 Allergien<br><small style="color:#666">Allergiker-freundlich</small></div>
+    </div>
+  </div>
+
+  <div class="wizard-nav">
+    <button class="btn-prev" id="btnPrev" onclick="prevStep()">← Zurück</button>
+    <button class="btn-next" id="btnNext" onclick="nextStep()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="result-section" id="results">
+  <div class="result-header">
+    <h2>🎉 Deine persönliche Baby-Erstausstattung</h2>
+    <p id="resultSummary">Basierend auf deinen Angaben haben wir die perfekten Produkte für dich zusammengestellt.</p>
+  </div>
+  <div id="resultGrid" class="result-grid"></div>
+
+  <div id="whyBox" class="why-box"></div>
+  <div id="sparBox" class="spartipp-box"></div>
+  <div id="budgetVergleich" class="budget-vergleich"></div>
+
+  <div class="disclaimer">
+    <strong>📢 Affiliate-Hinweis:</strong> Dieser Produkt-Finder enthält Affiliate-Links (Amazon-Partnerprogramm, tag=ikune21-21). Wir erhalten eine Provision bei Kauf – für dich entstehen keine Mehrkosten. Alle Preise sind ca.-Angaben.
+  </div>
+
+  <button class="reset-btn" onclick="resetFinder()">🔄 Neu starten</button>
+</div>
+
+<footer>
+    <p><a href="../blog/baby-kleinkind-produkte-2026.html">📖 Zum Baby-Ratgeber</a> | <a href="../blog/index.html">📚 Blog</a> | <a href="../index.html">🏪 Startseite</a></p>
+    <p>© 2026 Licht und Schatten · Amazon-Partnerwerbung</p>
+</footer>
+
+</div>
+
+<script>
+// ===== PRODUCT DATABASE =====
+const products = {
+  // -- Kinderwagen --
+  wagen_alltag: { name: "ABC Design Salsa 4 Air Kombi-Kinderwagen", preis: "ca. 549€", icon: "🚀", desc: "Testsieger! Luftbereifte Räder, Babywanne & Sportsitz inklusive. Perfekt für Stadt & Land.", link: "https://www.amazon.de/s?k=ABC+Design+Salsa+4+Air+Kinderwagen&tag=ikune21-21" },
+  wagen_kompakt: { name: "Babyzen Yoyo2 Reisebuggy", preis: "ca. 399€", icon: "🏙️", desc: "Handgepäck-geeignet, extrem kompakt (52x44x18cm), nur 6,2kg.", link: "https://www.amazon.de/s?k=Babyzen+Yoyo2+Buggy&tag=ikune21-21" },
+  wagen_budget: { name: "Hauck Reisebuggy Shopper Plus", preis: "ca. 89€", icon: "🛒", desc: "Preis-Leistungs-Sieger! Großer Korb, Liegeposition, Sonnendach.", link: "https://www.amazon.de/s?k=Hauck+Shopper+Plus+Reisebuggy&tag=ikune21-21" },
+  wagen_gelaende: { name: "Thule Urban Glide 2 Geländewagen", preis: "ca. 599€", icon: "🌿", desc: "3-Rad-Jogger, Luftreifen, Handbremse, XXL-Sonnendach, UPF50+.", link: "https://www.amazon.de/s?k=Thule+Urban+Glide+2+Jogger&tag=ikune21-21" },
+  wagen_city: { name: "Cybex Balios S Lux Kinderwagen", preis: "ca. 449€", icon: "🌟", desc: "Leicht, kompakt faltbar, höhenverstellbar, Federung an allen Rädern.", link: "https://www.amazon.de/s?k=Cybex+Balios+S+Lux+Kinderwagen&tag=ikune21-21" },
+  wagen_leicht: { name: "Quinny Zapp Flex Leichtbuggy", preis: "ca. 249€", icon: "🏋️", desc: "Ultraleicht, 7,8kg, Einhand-Falttechnik, ab 6 Monaten.", link: "https://www.amazon.de/s?k=Quinny+Zapp+Flex+Buggy&tag=ikune21-21" },
+
+  // -- Autositze --
+  autositz_pro: { name: "Cybex Aton M i-Size Babyschale", preis: "ca. 179€", icon: "🥇", desc: "ADAC-Testsieger! L.S.P.-Seitenaufprallschutz, XXL-Sonnenverdeck.", link: "https://www.amazon.de/s?k=Cybex+Aton+M+i-Size+Babyschale&tag=ikune21-21" },
+  autositz_360: { name: "Joie i-Spin 360 i-Size Drehsitz", preis: "ca. 349€", icon: "🔄", desc: "360°-Drehsitz, 3-12 Jahre, mitwachsend, ISOFIX, Seitenaufprallschutz.", link: "https://www.amazon.de/s?k=Joie+i+Spin+360+i+Size&tag=ikune21-21" },
+  autositz_dreh: { name: "Maxi-Cosi Coral 360 Babyschale", preis: "ca. 229€", icon: "🥈", desc: "360°-Drehfunktion + herausnehmbarer Innenkorb. ClimaFlow-Belüftung.", link: "https://www.amazon.de/s?k=Maxi+Cosi+Coral+360+Babyschale&tag=ikune21-21" },
+  autositz_budget: { name: "Hauck Zero i-Size Babyschale", preis: "ca. 79€", icon: "💰", desc: "Budget-Tipp! Geprüft nach i-Size-Norm, ISOFIX, Sonnendach.", link: "https://www.amazon.de/s?k=Hauck+Zero+i+Size+Babyschale&tag=ikune21-21" },
+  autositz_premium: { name: "Britax Römer Dualfix 3 i-Size", preis: "ca. 449€", icon: "🧩", desc: "Premium-Drehsitz 360°, 61-105cm, SICT-Seitenaufprall-Schutz.", link: "https://www.amazon.de/s?k=Britax+Römer+Dualfix+3+i+Size&tag=ikune21-21" },
+
+  // -- Babyphone --
+  phone_pro: { name: "Philips Avent SCD923 Babyphone", preis: "ca. 199€", icon: "📱", desc: "7\"-Farbdisplay, KI-Schlafanalyse, Temperatursensor, Eco-Modus.", link: "https://www.amazon.de/s?k=Philips+Avent+SCD923+Babyphone&tag=ikune21-21" },
+  phone_mid: { name: "Eufy SpaceView Pro Babyphone", preis: "ca. 149€", icon: "🌟", desc: "5\"-Display, 360° Pan/Tilt, Nachtsicht, Zwei-Wege-Audio, 300m.", link: "https://www.amazon.de/s?k=Eufy+SpaceView+Pro+Babyphone&tag=ikune21-21" },
+  phone_ai: { name: "Cubo AI Plus Babyphone", preis: "ca. 229€", icon: "🤖", desc: "KI-Erkennung: Mund-/Nasenbedeckung, Schlafphasen, Weinen.", link: "https://www.amazon.de/s?k=Cubo+AI+Plus+Babyphone&tag=ikune21-21" },
+  phone_budget: { name: "TP-Link Tapo C200 WLAN-Kamera", preis: "ca. 29€", icon: "🔄", desc: "Budget-Wunder! 1080p, Schwenk/Neige, Zwei-Wege-Audio per App.", link: "https://www.amazon.de/s?k=TP+Link+Tapo+C200+WLAN+Kamera&tag=ikune21-21" },
+  phone_vtech: { name: "VTech RM5769HD Babyphone", preis: "ca. 129€", icon: "🌡️", desc: "5\"-HD-IPS, 360°-Kamera, Temperatursensor, Schlaflieder, DECT.", link: "https://www.amazon.de/s?k=VTech+RM5769HD+Babyphone&tag=ikune21-21" },
+
+  // -- Wickelausstattung --
+  wickel_pro: { name: "Skip Hop Forma Wickelrucksack", preis: "ca. 89€", icon: "🎒", desc: "11 Fächer, isolierte Flaschenhalter, Wickelauflage, wasserdicht.", link: "https://www.amazon.de/s?k=Skip+Hop+Forma+Wickelrucksack&tag=ikune21-21" },
+  wickel_eimer: { name: "Ubbi Windeleimer Stahl", preis: "ca. 69€", icon: "🗑️", desc: "Testsieger! Geruchsdicht, normale Müllbeutel, fasst 50 Windeln.", link: "https://www.amazon.de/s?k=Ubbi+Windeleimer+Stahl&tag=ikune21-21" },
+  wickel_eimer2: { name: "Tommee Tippee Sangenic Twist & Click", preis: "ca. 39€", icon: "♻️", desc: "Selbstreinigend, einzeln eingeschweißte Windeln, 7-Lagen-Folie.", link: "https://www.amazon.de/s?k=Tommee+Tippee+Sangenic+Windeleimer&tag=ikune21-21" },
+  wickel_bag: { name: "Skip Hop Pronto Wickel-Organizer", preis: "ca. 29€", icon: "🧳", desc: "Komparter Wickelorganizer für unterwegs + Wickelunterlage.", link: "https://www.amazon.de/s?k=Skip+Hop+Pronto+Wickel+Organizer&tag=ikune21-21" },
+  wickel_aufl: { name: "Skip Hop Prüde Wickelauflage", preis: "ca. 34€", icon: "🧼", desc: "Wasserdicht, erhöhte Kanten, Sicherheitsgurt, abwaschbar.", link: "https://www.amazon.de/s?k=Skip+Hop+Wickelauflage+Prüde&tag=ikune21-21" },
+  wickel_premium: { name: "Ortlieb Commuter Daypack Family", preis: "ca. 149€", icon: "👛", desc: "Wasserdicht (IP64), Made in Germany, isolierte Flaschenfächer.", link: "https://www.amazon.de/s?k=Ortlieb+Commuter+Daypack+Family+Wickeltasche&tag=ikune21-21" },
+
+  // -- Stillen & Füttern --
+  still_pumpe1: { name: "Medela Harmony Handmilchpumpe", preis: "ca. 39€", icon: "⚡", desc: "Beste Handpumpe! 2-Phasen-Technologie, ergonomischer Griff.", link: "https://www.amazon.de/s?k=Medela+Harmony+Handmilchpumpe&tag=ikune21-21" },
+  still_pumpe2: { name: "Medela Swing Maxi Doppelmilchpumpe", preis: "ca. 229€", icon: "🔋", desc: "Elektrisch, 2-Phasen, Timer, Display – doppelseitig für Effizienz.", link: "https://www.amazon.de/s?k=Medela+Swing+Maxi+Elektrische+Doppelmilchpumpe&tag=ikune21-21" },
+  still_elvie: { name: "Elvie Pump kabellose Milchpumpe", preis: "ca. 349€", icon: "🤱", desc: "Kabellos, leise im BH, App-Steuerung, 8 Saugstufen. Diskret!", link: "https://www.amazon.de/s?k=Elvie+Pump+kabellose+Milchpumpe&tag=ikune21-21" },
+  still_waermer: { name: "Philips Avent Flaschenwärmer SCF355", preis: "ca. 44€", icon: "🧴", desc: "Erwärmt Milch in 3-5 Min, gleichmäßig, automatische Abschaltung.", link: "https://www.amazon.de/s?k=Philips+Avent+SCF355+Flaschenwärmer&tag=ikune21-21" },
+  still_flaschen: { name: "MAM Anti-Colic Flaschen Set", preis: "ca. 22€", icon: "♻️", desc: "2er-Set, Anti-Kolik-Ventil, BPA-frei, mikrowellengeeignet.", link: "https://www.amazon.de/s?k=MAM+Anti+Colic+Flaschen+Set&tag=ikune21-21" },
+  still_dosier: { name: "Baby Brezza Einhand-Dosierer", preis: "ca. 19€", icon: "✨", desc: "Perfekt portioniertes Milchpulver per Knopfdruck. 3 Fächer.", link: "https://www.amazon.de/s?k=Baby+Brezza+Milchpulver+Dosierer&tag=ikune21-21" },
+
+  // -- Tragen --
+  trage_pro: { name: "Ergobaby Omni 360 Babytrage", preis: "ca. 149€", icon: "👶", desc: "4 Tragepositionen, ab Geburt bis 20kg, ergonomisch & langlebig.", link: "https://www.amazon.de/s?k=Ergobaby+Omni+360+Babytrage&tag=ikune21-21" },
+  trage_mid: { name: "Manduca Babytrage Premium", preis: "ca. 89€", icon: "🧣", desc: "Made in EU, Bio-Baumwolle, 3 Größen (0-36 Monate), gute Polsterung.", link: "https://www.amazon.de/s?k=Manduca+Babytrage+Premium&tag=ikune21-21" },
+  trage_reise: { name: "Boba Air kompakte Reisetrage", preis: "ca. 49€", icon: "🦘", desc: "Ultraleicht (200g), passt in jede Tasche, ab 3,5 bis 18kg.", link: "https://www.amazon.de/s?k=Boba+Air+Reisetrage&tag=ikune21-21" },
+  trage_air: { name: "Lillebaby Complete Airflow", preis: "ca. 139€", icon: "🔆", desc: "Atmungsaktives 3D-Mesh, 6 Positionen, Lendenstütze. Für heiße Tage.", link: "https://www.amazon.de/s?k=Lillebaby+Complete+Airflow+Trage&tag=ikune21-21" },
+
+  // -- Möbel --
+  moebel_stuhl: { name: "Stokke Tripp Trapp Hochstuhl", preis: "ca. 239€", icon: "🪑", desc: "Der Klassiker! Mitwachsend (0-Jugendlich), 350kg Tragkraft, Buchenholz.", link: "https://www.amazon.de/s?k=Stokke+Tripp+Trapp+Hochstuhl&tag=ikune21-21" },
+  moebel_hauck: { name: "Hauck Alpha+ Hochstuhl", preis: "ca. 99€", icon: "🔄", desc: "Mitwachsend! Ab Geburt bis 90kg, 5-fach höhenverstellbar.", link: "https://www.amazon.de/s?k=Hauck+Alpha+Plus+Hochstuhl&tag=ikune21-21" },
+  moebel_bett: { name: "IKEA Sniglar Babybett", preis: "ca. 89€", icon: "🛌", desc: "Massives Buchenholz, umbaubar zum Juniorbett. Preislich unschlagbar.", link: "https://www.amazon.de/s?k=IKEA+Sniglar+Babybett&tag=ikune21-21" },
+  moebel_set: { name: "Roba Komplett-Set Babyzimmer", preis: "ca. 399€", icon: "🛏️", desc: "3-teilig: Babybett + Wickelkommode + Regal. Made in EU.", link: "https://www.amazon.de/s?k=Roba+Babyzimmer+Komplett+Set&tag=ikune21-21" },
+  moebel_bouncer: { name: "Babybjörn Bouncer Balance Soft", preis: "ca. 149€", icon: "🌀", desc: "Wippe mit 3 Schaukelpositionen, ergonomisch, klappbar.", link: "https://www.amazon.de/s?k=Babybjörn+Bouncer+Balance+Soft&tag=ikune21-21" },
+
+  // -- Pflege --
+  pflege_bad: { name: "Stokke Flexi Bath Babybadewanne", preis: "ca. 39€", icon: "🛁", desc: "Faltbar (8,5cm), ergonomisch, 3 Phasen (Neugeb.-Kleinkind).", link: "https://www.amazon.de/s?k=Stokke+Flexi+Bath+Babybadewanne&tag=ikune21-21" },
+  pflege_thermo: { name: "Braun ThermoScan 7 Ohrthermometer", preis: "ca. 59€", icon: "🌡️", desc: "Präzise, Alter-optimiert, farbcodiertes Fieber-Display.", link: "https://www.amazon.de/s?k=Braun+ThermoScan+7+Ohrthermometer&tag=ikune21-21" },
+  pflege_weleda: { name: "Weleda Baby Calendula Pflege-Set", preis: "ca. 24€", icon: "🌿", desc: "3-teilig: Windelschutz, Babycrème & Öl – 100% Naturkosmetik.", link: "https://www.amazon.de/s?k=Weleda+Calendula+Baby+Set&tag=ikune21-21" },
+  pflege_schere: { name: "Pigeon Nagelschere & Feile Baby", preis: "ca. 9€", icon: "✂️", desc: "Abgerundete Spitze, Edelstahl, mit Feile. Sicher & präzise.", link: "https://www.amazon.de/s?k=Pigeon+Baby+Nagelschere&tag=ikune21-21" },
+  pflege_beiss: { name: "NUK Kühlbeißring Zahnungshilfe", preis: "ca. 9€", icon: "🦷", desc: "Kühlbar, lindert Zahnungsschmerzen, ergonomische Griffe.", link: "https://www.amazon.de/s?k=NUK+Kühlbeißring+Zahnung&tag=ikune21-21" },
+  pflege_luft: { name: "Baby-Luftbefeuchter mit Nachtlicht", preis: "ca. 34€", icon: "🌬️", desc: "Ultraschall, 4L Tank, leise, antibakteriell. Hilft bei Schnupfen.", link: "https://www.amazon.de/s?k=Baby+Luftbefeuchter+Ultraschall+Nachtlicht&tag=ikune21-21" },
+
+  // -- Spielzeug --
+  spiel_klavier: { name: "Fisher-Price Kick 'n Play Klavier", preis: "ca. 44€", icon: "🎶", desc: "Tritt-Klavier! Musik & Lichter bei Tritten. 3 Spielmodi.", link: "https://www.amazon.de/s?k=Fisher+Price+Kick+n+Play+Klavier&tag=ikune21-21" },
+  spiel_wuerfel: { name: "HABA Greifling Regenbogenwürfel", preis: "ca. 19€", icon: "🧩", desc: "Motorikwürfel mit 5 Aktivitäten – Fördert Feinmotorik & Logik.", link: "https://www.amazon.de/s?k=HABA+Greifling+Motorikwürfel&tag=ikune21-21" },
+  spiel_regen: { name: "Grimms Regenbogen-Steckpuzzle", preis: "ca. 49€", icon: "🌈", desc: "Montessori aus Ahornholz, 6-teilig. Handgefertigt, nachhaltig.", link: "https://www.amazon.de/s?k=Grimms+Regenbogen+Steckpuzzle&tag=ikune21-21" },
+  spiel_krabbel: { name: "VTech Baby Krabbelkäfer", preis: "ca. 24€", icon: "🐛", desc: "Fährt vor dir her! Lichter, Geräusche, fördert Krabbeln & Laufen.", link: "https://www.amazon.de/s?k=VTech+Krabbelkäfer+Baby&tag=ikune21-21" },
+  spiel_duplo: { name: "Lego Duplo Eisenbahn-Set", preis: "ca. 49€", icon: "🏗️", desc: "105 Teile, Schienen, Zug, Figuren. Fördert Feinmotorik & Fantasie.", link: "https://www.amazon.de/s?k=Lego+Duplo+Eisenbahn+Set&tag=ikune21-21" },
+
+  // -- Reise --
+  reise_bett: { name: "Babybjörn Travel Cot Light", preis: "ca. 199€", icon: "🛏️", desc: "Ultraleicht (5kg), sekundenschneller Aufbau, atmungsaktives Mesh.", link: "https://www.amazon.de/s?k=Babybjörn+Travel+Cot+Light+Reisebett&tag=ikune21-21" },
+  reise_sonne: { name: "Römer Auto-Sonnenschutz 2er", preis: "ca. 24€", icon: "☀️", desc: "Blockiert 99% UV, Saugnapf-Montage, 53x78cm.", link: "https://www.amazon.de/s?k=Römer+Auto+Sonnenschutz+Baby&tag=ikune21-21" },
+  reise_orga: { name: "Joolz Organizer Kinderwagen-Tasche", preis: "ca. 34€", icon: "🎒", desc: "3 Fächer, Clip-On, wasserdicht. Passt auf fast alle Kinderwagen.", link: "https://www.amazon.de/s?k=Joolz+Kinderwagen+Organizer&tag=ikune21-21" },
+  reise_kuehl: { name: "Emsa Rucksack-Kühlbox 12L", preis: "ca. 29€", icon: "🌂", desc: "Hält Fläschchen 6h kühl, Rucksack-Format. Perfekt für Ausflüge.", link: "https://www.amazon.de/s?k=Emsa+Kühlbox+Rucksack+Isolier&tag=ikune21-21" },
+};
+
+// ===== RECOMMENDATION ENGINE =====
+function getRecommendations(answers) {
+  const recs = [];
+  const p = answers;
+
+  // --- Kinderwagen ---
+  if (p.wohnen === "land" || p.prioritaet === "sicherheit") {
+    if (p.budget === "luxus" || p.budget === "gut") recs.push({ ...products.wagen_gelaende, kategorie: "Kinderwagen" });
+    else recs.push({ ...products.wagen_alltag, kategorie: "Kinderwagen" });
+  } else if (p.phase === "kleinkind" || p.budget === "sparsam") {
+    recs.push({ ...products.wagen_budget, kategorie: "Kinderwagen" });
+  } else if (p.reisen || p.wohnen === "reisen") {
+    recs.push({ ...products.wagen_kompakt, kategorie: "Kinderwagen" });
+    recs.push({ ...products.wagen_leicht, kategorie: "Kinderwagen" });
+  } else if (p.wohnen === "wohnung") {
+    recs.push({ ...products.wagen_city, kategorie: "Kinderwagen" });
+    recs.push({ ...products.wagen_kompakt, kategorie: "Kinderwagen" });
+  } else {
+    recs.push({ ...products.wagen_alltag, kategorie: "Kinderwagen" });
+  }
+
+  // --- Autositz ---
+  if (p.phase === "schwangerschaft" || p.phase === "neugeboren") {
+    if (p.budget === "sparsam") recs.push({ ...products.autositz_budget, kategorie: "Autositz" });
+    else recs.push({ ...products.autositz_pro, kategorie: "Autositz" });
+    if (p.budget === "gut" || p.budget === "luxus") recs.push({ ...products.autositz_dreh, kategorie: "Autositz" });
+  } else {
+    recs.push({ ...products.autositz_360, kategorie: "Autositz" });
+    if (p.budget === "luxus") recs.push({ ...products.autositz_premium, kategorie: "Autositz" });
+  }
+
+  // --- Babyphone ---
+  if (p.prioritaet === "sicherheit") {
+    recs.push({ ...products.phone_ai, kategorie: "Babyphone" });
+    recs.push({ ...products.phone_pro, kategorie: "Babyphone" });
+  } else if (p.budget === "sparsam") {
+    recs.push({ ...products.phone_budget, kategorie: "Babyphone" });
+  } else if (p.budget === "luxus") {
+    recs.push({ ...products.phone_ai, kategorie: "Babyphone" });
+    recs.push({ ...products.phone_pro, kategorie: "Babyphone" });
+  } else if (p.wohnen === "haus" || p.wohnen === "land") {
+    recs.push({ ...products.phone_mid, kategorie: "Babyphone" });
+    recs.push({ ...products.phone_pro, kategorie: "Babyphone" });
+  } else {
+    recs.push({ ...products.phone_mid, kategorie: "Babyphone" });
+    recs.push({ ...products.phone_vtech, kategorie: "Babyphone" });
+  }
+
+  // --- Wickelausstattung ---
+  if (p.budget === "sparsam") {
+    recs.push({ ...products.wickel_eimer2, kategorie: "Wickelausstattung" });
+    recs.push({ ...products.wickel_bag, kategorie: "Wickelausstattung" });
+  } else if (p.prioritaet === "design" || p.budget === "luxus") {
+    recs.push({ ...products.wickel_pro, kategorie: "Wickelausstattung" });
+    recs.push({ ...products.wickel_eimer, kategorie: "Wickelausstattung" });
+    recs.push({ ...products.wickel_premium, kategorie: "Wickelausstattung" });
+  } else {
+    recs.push({ ...products.wickel_pro, kategorie: "Wickelausstattung" });
+    recs.push({ ...products.wickel_eimer, kategorie: "Wickelausstattung" });
+  }
+
+  // --- Stillen & Füttern ---
+  if (p.phase === "schwangerschaft" || p.phase === "neugeboren") {
+    if (p.budget === "luxus") recs.push({ ...products.still_elvie, kategorie: "Stillen & Füttern" });
+    else if (p.budget === "gut") recs.push({ ...products.still_pumpe2, kategorie: "Stillen & Füttern" });
+    else recs.push({ ...products.still_pumpe1, kategorie: "Stillen & Füttern" });
+    recs.push({ ...products.still_flaschen, kategorie: "Stillen & Füttern" });
+    recs.push({ ...products.still_waermer, kategorie: "Stillen & Füttern" });
+  }
+  recs.push({ ...products.still_dosier, kategorie: "Stillen & Füttern" });
+
+  // --- Trage ---
+  if (p.budget === "sparsam") {
+    recs.push({ ...products.trage_mid, kategorie: "Babytrage" });
+  } else if (p.prioritaet === "nachhaltig") {
+    recs.push({ ...products.trage_pro, kategorie: "Babytrage" });
+  } else if (p.prioritaet === "komfort" || p.wohnen === "reisen") {
+    recs.push({ ...products.trage_air, kategorie: "Babytrage" });
+    recs.push({ ...products.trage_reise, kategorie: "Babytrage" });
+  } else {
+    recs.push({ ...products.trage_pro, kategorie: "Babytrage" });
+  }
+
+  // --- Möbel ---
+  if (p.budget === "sparsam") {
+    recs.push({ ...products.moebel_hauck, kategorie: "Möbel" });
+    recs.push({ ...products.moebel_bett, kategorie: "Möbel" });
+  } else if (p.prioritaet === "design" || p.budget === "luxus") {
+    recs.push({ ...products.moebel_stuhl, kategorie: "Möbel" });
+    recs.push({ ...products.moebel_set, kategorie: "Möbel" });
+    recs.push({ ...products.moebel_bouncer, kategorie: "Möbel" });
+  } else {
+    recs.push({ ...products.moebel_stuhl, kategorie: "Möbel" });
+    recs.push({ ...products.moebel_bett, kategorie: "Möbel" });
+    if (p.phase !== "kleinkind") recs.push({ ...products.moebel_bouncer, kategorie: "Möbel" });
+  }
+
+  // --- Pflege ---
+  recs.push({ ...products.pflege_bad, kategorie: "Pflege" });
+  recs.push({ ...products.pflege_weleda, kategorie: "Pflege" });
+  if (p.budget !== "sparsam") recs.push({ ...products.pflege_thermo, kategorie: "Pflege" });
+  recs.push({ ...products.pflege_schere, kategorie: "Pflege" });
+  if (p.phase === "baby" || p.phase === "neugeboren") recs.push({ ...products.pflege_beiss, kategorie: "Pflege" });
+  recs.push({ ...products.pflege_luft, kategorie: "Pflege" });
+
+  // --- Spielzeug ---
+  if (p.phase === "neugeboren" || p.phase === "baby") {
+    recs.push({ ...products.spiel_klavier, kategorie: "Spielzeug" });
+    recs.push({ ...products.spiel_wuerfel, kategorie: "Spielzeug" });
+    recs.push({ ...products.spiel_krabbel, kategorie: "Spielzeug" });
+  }
+  if (p.phase === "baby" || p.phase === "kleinkind") {
+    recs.push({ ...products.spiel_regen, kategorie: "Spielzeug" });
+    recs.push({ ...products.spiel_duplo, kategorie: "Spielzeug" });
+  }
+
+  // --- Reise ---
+  if (p.wohnen === "reisen") {
+    recs.push({ ...products.reise_bett, kategorie: "Reise" });
+    recs.push({ ...products.reise_kuehl, kategorie: "Reise" });
+    recs.push({ ...products.reise_orga, kategorie: "Reise" });
+  }
+  recs.push({ ...products.reise_sonne, kategorie: "Reise" });
+  recs.push({ ...products.reise_orga, kategorie: "Reise" });
+
+  // Top 12 limitieren
+  return recs.slice(0, 12);
+}
+
+function getWhyText(answers) {
+  const texts = [];
+  if (answers.phase === "schwangerschaft") texts.push("Du bereitest dich gerade auf dein Baby vor – perfekt, jetzt die Erstausstattung zu planen!");
+  if (answers.phase === "neugeboren") texts.push("Herzlichen Glückwunsch zum Baby! Diese Produkte erleichtern dir die ersten Monate.");
+  if (answers.phase === "kleinkind") texts.push("Dein Kleinkind wird größer – Zeit für wachstumsfähige Möbel & neue Herausforderungen.");
+  if (answers.budget === "sparsam") texts.push("Sparsam heißt nicht schlecht: Unsere Budget-Empfehlungen bieten Top-Qualität zum kleinen Preis.");
+  if (answers.budget === "luxus") texts.push("Du möchtest das Beste vom Besten? Unsere Luxus-Empfehlungen verwöhnen dich und dein Baby.");
+  if (answers.wohnen === "wohnung") texts.push("In der Wohnung sind kompakte, leichte Produkte ideal – wir haben darauf geachtet.");
+  if (answers.wohnen === "land") texts.push("Für das Leben auf dem Land empfehlen wir geländegängige Kinderwagen & robuste Ausstattung.");
+  if (answers.prioritaet === "sicherheit") texts.push("Sicherheit steht für dich an erster Stelle – alle unsere Empfehlungen sind ADAC-/Stiftung-Warentest-prämiert.");
+  if (answers.prioritaet === "nachhaltig") texts.push("Nachhaltigkeit ist dir wichtig – wir empfehlen langlebige, schadstoffgeprüfte Produkte aus verantwortungsvoller Produktion.");
+  if (answers.besonders === "zwillinge") texts.push("Zwillinge sind doppeltes Glück! Unsere Empfehlungen sind auf die besonderen Anforderungen von Mehrlingen abgestimmt.");
+  if (answers.besonders === "fruehchen") texts.push("Für Frühchen haben wir besonders sanfte, anpassungsfähige Produkte ausgewählt.");
+  return texts.join(" ");
+}
+
+function getSparText(answers) {
+  if (answers.budget === "sparsam") {
+    return "💡 <strong>Spar-Tipp für dich:</strong> Schaue auch auf Kleinanzeigen nach gebrauchten Marken-Kinderwagen und -Möbeln. Viele Stokke Tripp Trapp oder Cybex-Produkte halten jahrelang und sind gebraucht 50% günstiger!";
+  }
+  if (answers.budget === "mittel") {
+    return "💡 <strong>Spar-Tipp:</strong> Kombiniere Premium-Kernprodukte (Autositz, Kinderwagen) mit günstigeren Accessoires. Das spart 200-400€ ohne Qualitätseinbußen bei der Sicherheit.";
+  }
+  return "💡 <strong>Spar-Tipp:</strong> Viele Babyprodukte wachsen mit – der Stokke Tripp Trapp (ca. 239€) hält 20+ Jahre! Das sind nur ca. 12€ pro Jahr. Qualität lohnt sich auf Dauer.";
+}
+
+function getBudgetComparison() {
+  return `
+    <div class="budget-card"><div class="stufe">Bis 300€</div><div class="label">Basis</div><div class="preis-s">Wickeltasche, Flaschen, Pflege</div></div>
+    <div class="budget-card"><div class="stufe">300-800€</div><div class="label">Komfort</div><div class="preis-s">+Kinderwagen +Autositz +Hochstuhl</div></div>
+    <div class="budget-card"><div class="stufe">800-1.500€</div><div class="label">Fortgeschritten</div><div class="preis-s">+Babyphone +Trage +Möbel-Set</div></div>
+    <div class="budget-card"><div class="stufe">1.500€+</div><div class="label">Luxus</div><div class="preis-s">+Design-Kombi +Elvie +AI-Babyphone</div></div>
+  `;
+}
+
+// ===== WIZARD LOGIC =====
+let currentStep = 1;
+const totalSteps = 5;
+const answers = {};
+
+function renderProgress() {
+  const p = document.getElementById("progress");
+  p.innerHTML = "";
+  for (let i = 1; i <= totalSteps; i++) {
+    const dot = document.createElement("div");
+    dot.className = "dot" + (i === currentStep ? " active" : "") + (i < currentStep ? " done" : "");
+    if (i < currentStep) dot.textContent = "✓";
+    p.appendChild(dot);
+  }
+}
+
+function showStep(step) {
+  document.querySelectorAll(".wizard-step").forEach(s => s.classList.remove("active"));
+  document.querySelector(`[data-step="${step}"]`).classList.add("active");
+  currentStep = step;
+  renderProgress();
+
+  const prevBtn = document.getElementById("btnPrev");
+  const nextBtn = document.getElementById("btnNext");
+  prevBtn.style.display = step === 1 ? "none" : "block";
+
+  const stepKey = document.querySelector(`[data-step="${step}"] .options`).dataset.question;
+  if (answers[stepKey]) {
+    nextBtn.disabled = false;
+  } else {
+    nextBtn.disabled = true;
+  }
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) {
+    showStep(currentStep + 1);
+  } else {
+    showResults();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) showStep(currentStep - 1);
+}
+
+document.querySelectorAll(".option-btn").forEach(btn => {
+  btn.addEventListener("click", function() {
+    const parent = this.parentElement;
+    parent.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+    this.classList.add("selected");
+
+    const question = parent.dataset.question;
+    answers[question] = this.dataset.value;
+
+    const step = parent.closest(".wizard-step");
+    const stepNum = parseInt(step.dataset.step);
+    const nextBtn = document.getElementById("btnNext");
+
+    if (stepNum === totalSteps) {
+      nextBtn.textContent = "🎯 Ergebnisse anzeigen";
+    } else {
+      nextBtn.textContent = "Weiter →";
+    }
+    nextBtn.disabled = false;
+  });
+});
+
+function showResults() {
+  document.getElementById("wizard").style.display = "none";
+  document.getElementById("results").classList.add("active");
+
+  const recs = getRecommendations(answers);
+
+  const grid = document.getElementById("resultGrid");
+  grid.innerHTML = "";
+  recs.forEach(p => {
+    grid.innerHTML += `
+      <div class="result-card">
+        <div class="icon">${p.icon}</div>
+        <h4>${p.name}</h4>
+        <div class="preis">${p.preis}</div>
+        <div style="color:#8B5CF6;font-size:.78em;margin:2px 0">${p.kategorie}</div>
+        <div class="desc">${p.desc}</div>
+        <a class="amz" href="${p.link}" target="_blank">→ Bei Amazon</a>
+      </div>
+    `;
+  });
+
+  document.getElementById("resultSummary").textContent = 
+    `Basierend auf deiner Wahl (${answers.phase}, ${answers.budget}-Budget, ${answers.wohnen}, Priorität: ${answers.prioritaet}) haben wir diese ${recs.length} Produkte für dich zusammengestellt.`;
+
+  document.getElementById("whyBox").innerHTML = `
+    <h3>💡 Warum diese Produkte?</h3>
+    <p>${getWhyText(answers)}</p>
+  `;
+
+  document.getElementById("sparBox").innerHTML = getSparText(answers);
+  document.getElementById("budgetVergleich").innerHTML = getBudgetComparison();
+}
+
+function resetFinder() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.getElementById("wizard").style.display = "block";
+  document.getElementById("results").classList.remove("active");
+  document.querySelectorAll(".option-btn").forEach(b => b.classList.remove("selected"));
+  document.getElementById("btnNext").textContent = "Weiter →";
+  document.getElementById("btnNext").disabled = true;
+  showStep(1);
+}
+
+// Init
+showStep(1);
+</script>
+</body>
+</html>

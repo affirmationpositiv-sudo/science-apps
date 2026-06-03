@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reisegepäck-Finder 2026 – Finde dein perfektes Reise-Equipment</title>
+<meta name="description" content="Interaktiver Reisegepäck-Finder: Finde Koffer, Rucksack, Reiseadapter, Packing Cubes & mehr. 10-Fragen-Wizard – personalisierte Top-12-Empfehlungen. Amazon Affiliate (tag=ikune21-21).">
+<meta name="keywords" content="Reisegepäck-Finder, Reiseausrüstung, Koffer-Finder, Rucksack-Berater, Reisezubehör, Packing Cubes, Amazon Affiliate, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Reisegepäck-Finder 2026 – Finde dein Reise-Equipment">
+<meta property="og:description" content="Interaktiver Wizard: Finde Koffer, Rucksack, Adapter & mehr in 10 Fragen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/reisegepaeck-finder.html">
+<meta property="og:site_name" content="Licht und Schatten">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reisegepäck-Finder 2026">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;background:#0A0A0A;color:#E5E5E5;line-height:1.6;min-height:100vh}
+a{color:#60A5FA;text-decoration:none}
+a:hover{color:#FFD700}
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(59,130,246,0.1)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px}
+.nav-logo{font-size:1.2rem;font-weight:800;background:linear-gradient(135deg,#3B82F6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{color:#9CA3AF;font-size:0.9rem}
+.nav-links a:hover{color:#FFD700}
+.container{max-width:1000px;margin:0 auto;padding:20px 24px}
+.hero{padding:130px 24px 40px;background:linear-gradient(135deg,#0A0A0A 0%,#0a1a2e 50%,#0A0A0A 100%);text-align:center}
+.hero-badge{display:inline-block;background:rgba(59,130,246,0.12);color:#60A5FA;padding:4px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.hero h1{font-size:2.5em;font-weight:800;background:linear-gradient(135deg,#3B82F6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.hero p{color:#9CA3AF;font-size:1.1em;max-width:650px;margin:0 auto}
+.hero-meta{color:#6B7280;font-size:0.85rem;margin-top:10px}
+.quiz-container{background:#141414;border:1px solid #2A2A2A;border-radius:18px;padding:36px 32px;margin:30px 0;min-height:420px}
+.screen{display:none}
+.screen.active{display:block}
+.question-number{color:#60A5FA;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.progress-bar{height:4px;background:#2A2A2A;border-radius:2px;margin-bottom:24px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#3B82F6,#FFD700);border-radius:2px;transition:width 0.4s ease;width:0%}
+.question-text{font-size:1.3em;font-weight:700;margin-bottom:20px;color:#fff}
+.options{display:grid;grid-template-columns:1fr;gap:10px}
+.option{background:#1A1A1A;border:2px solid #2A2A2A;border-radius:12px;padding:16px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:12px}
+.option:hover{border-color:#3B82F6;background:#1e1e2e;transform:translateX(4px)}
+.option.selected{border-color:#3B82F6;background:#1a1a3e;box-shadow:0 0 20px rgba(59,130,246,0.15)}
+.option .emoji{font-size:1.5em;width:40px;text-align:center}
+.option .label{font-weight:600;color:#fff}
+.option .desc{color:#6B7280;font-size:0.85rem;margin-top:2px}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:28px;gap:12px}
+.btn{background:#2A2A2A;color:#E5E5E5;border:none;padding:12px 28px;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:all 0.3s}
+.btn:hover{background:#3B82F6}
+.btn-primary{background:#3B82F6;color:#fff}
+.btn-primary:hover{background:#2563EB}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.btn-reset{background:#2A2A2A;color:#888}
+.btn-reset:hover{background:#3d3d3d}
+.results{background:#141414;border:1px solid #2A2A2A;border-radius:18px;padding:36px 32px;margin:30px 0}
+.results h2{font-size:1.6em;font-weight:700;background:linear-gradient(135deg,#3B82F6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.results p{color:#9CA3AF;margin-bottom:20px}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.result-card{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:12px;padding:18px;transition:all 0.3s}
+.result-card:hover{border-color:#3B82F6;transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,0.12)}
+.result-card .rcat{font-size:0.7rem;text-transform:uppercase;color:#60A5FA;letter-spacing:1px;margin-bottom:4px}
+.result-card .rname{font-weight:700;color:#fff;font-size:1.05em;margin-bottom:4px}
+.result-card .rdesc{color:#6B7280;font-size:0.83rem;margin-bottom:10px}
+.result-card .rprice{color:#FFD700;font-weight:600;font-size:0.9rem;margin-bottom:8px}
+.result-card .rlink{display:inline-block;background:#3B82F6;color:#fff;padding:6px 16px;border-radius:8px;font-size:0.83rem;font-weight:600;transition:background 0.3s}
+.result-card .rlink:hover{background:#2563EB;color:#fff}
+.budget-summary{background:#1A1A1A;border:1px solid #FFD700;border-radius:12px;padding:20px 24px;margin:20px 0}
+.budget-summary h4{color:#FFD700;margin-bottom:8px}
+.budget-summary .bar{height:20px;background:#2A2A2A;border-radius:10px;overflow:hidden;margin:8px 0}
+.budget-summary .bar-fill{height:100%;background:linear-gradient(90deg,#3B82F6,#FFD700);border-radius:10px;transition:width 0.8s ease;width:0%}
+.budget-summary .spartipps{color:#9CA3AF;font-size:0.85rem;margin-top:10px}
+.budget-summary .spartipps strong{color:#4ADE80}
+.disclaimer{background:#141414;border:1px solid #2A2A2A;border-radius:8px;padding:16px 20px;margin:20px 0;font-size:0.82em;color:#6B7280}
+footer{background:#0A0A0A;border-top:1px solid rgba(59,130,246,0.1);padding:32px 24px;text-align:center}
+.footer-brand{font-weight:800;background:linear-gradient(135deg,#3B82F6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.footer-links{display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+.footer-links a{color:#6B7280;font-size:0.82rem}
+.footer-links a:hover{color:#60A5FA}
+@media(max-width:600px){.hero h1{font-size:1.8em}.quiz-container{padding:24px 18px}.results{padding:24px 18px}}
+</style>
+</head>
+<body>
+<nav class="navbar">
+<div class="nav-inner"><div class="nav-logo">✦ Licht & Schatten</div>
+<ul class="nav-links">
+<li><a href="../index.html">🏪 Start</a></li>
+<li><a href="../blog/">📝 Blog</a></li>
+<li><a href="../store.html">🛒 Shop</a></li>
+</ul></div>
+</nav>
+<header class="hero">
+<span class="hero-badge">🧳 Reise-Equipment 2026</span>
+<h1>✈️ Reisegepäck-Finder</h1>
+<p>Beantworte 10 Fragen und erhalte dein personalisiertes Reise-Equipment – Koffer, Rucksack, Packing Cubes, Reiseadapter & mehr.</p>
+<p class="hero-meta">🔗 Amazon Affiliate (tag=ikune21-21)</p>
+</header>
+<div class="container">
+<div id="quiz" class="quiz-container"></div>
+<div id="results" class="results" style="display:none"></div>
+<div class="disclaimer">
+<strong>Affiliate-Disclaimer:</strong> Die Produkt-Links sind Amazon-Affiliate-Links (tag=ikune21-21). Wenn du über diese Links einkaufst, erhalten wir eine kleine Provision – für dich entstehen keine Mehrkosten.
+</div>
+</div>
+<footer>
+<div class="footer-brand">✦ Licht & Schatten Verlag</div>
+<div class="footer-links">
+<a href="../index.html">🏪 Start</a>
+<a href="../blog/">📝 Blog</a>
+<a href="../buecher/">📚 Bücher</a>
+<a href="../shop.html">🛒 Shop</a>
+<a href="../impressum/">⚖️ Impressum</a>
+</div>
+</footer>
+<script>
+(function(){
+const T='ikune21-21';
+const Q=[
+{id:'reiseart',q:'🧭 Welche Reise planst du?',o:[{e:'✈️',l:'Städtereise / Flugreise',d:'Kurz- oder Langstrecke, Hotel/Airbnb'},{e:'🏕️',l:'Camping & Outdoor',d:'Zelt, Natur, Trekking'},{e:'🏖️',l:'Badeurlaub / Strand',d:'All-Inclusive, Hotel, Relaxen'},{e:'💼',l:'Geschäftsreise',d:'Laptop, Meetings, Business-Look'}]},
+{id:'dauer',q:'📅 Wie lange reist du?',o:[{e:'2-3',l:'Wochenend-Trip (2-3 Tage)',d:'Kurztrip, Handgepäck reicht'},{e:'4-7',l:'1 Woche (4-7 Tage)',d:'Normaler Urlaub, mittlerer Koffer'},{e:'8-14',l:'2 Wochen (8-14 Tage)',d:'Längerer Urlaub, großer Koffer'},{e:'14+',l:'Langzeitreise (14+ Tage)',d:'Weltreise, Backpacking'}]},
+{id:'gepaeckart',q:'🧳 Welches Gepäck bevorzugst du?',o:[{e:'🧳',l:'Koffer (Hartschale)',d:'Stabil, wasserdicht, sicher'},{e:'🎒',l:'Rucksack',d:'Flexibel, Hände frei, Trekking'},{e:'👜',l:'Reisetasche',d:'Leicht, weich, vielseitig'},{e:'🔄',l:'Kombi (Koffer+Rucksack)',d:'Beides für maximale Flexibilität'}]},
+{id:'budget',q:'💰 Gesamtbudget für Reise-Equipment?',o:[{e:'💶',l:'Sparsam (bis 50 €)',d:'Basis-Ausstattung, gute Schnäppchen'},{e:'💶💶',l:'Solide (50-200 €)',d:'Gute Qualität, beste Preis-Leistung'},{e:'💶💶💶',l:'Gut (200-500 €)',d:'Marken-Qualität, langlebig'},{e:'💶💶💶💶',l:'Premium (500-1.000 €)',d:'High-End, Rimowa, Osprey, Samsonite'}]},
+{id:'reiseziel',q:'🌍 Wohin reist du?',o:[{e:'🇪🇺',l:'Europa',d:'EU-Stecker, kurze bis mittlere Strecken'},{e:'🌎',l:'Nord-/Südamerika',d:'USA-Stecker, Fernreise'},{e:'🌏',l:'Asien / Australien',d:'Andere Stecker, oft Fernreise'},{e:'🌍',l:'Afrika / Nahost',d:'Gemischte Stecker, oft Abenteuer'}]},
+{id:'flugart',q:'✈️ Wie fliegst du?',o:[{e:'🎒',l:'Nur Handgepäck',d:'Max. 56x36x23 cm, 8-10 kg'},{e:'🧳',l:'Handgepäck + Aufgabe',d:'Koffer + Trolley, max. 23 kg'},{e:'💼',l:'Primär Business',d:'Laptop-Trolley, Business-Look'},{e:'🚗',l:'Auto / Bahn / Camper',d:'Keine Gewichtsbeschränkung'}]},
+{id:'organisation',q:'📦 Wie wichtig ist Organisation?',o:[{e:'🥇',l:'Sehr wichtig – Ordnung',d:'Packing Cubes, Organizer, Trennfächer'},{e:'👍',l:'Ziemlich wichtig',d:'Ein paar Cubes, grundlegende Ordnung'},{e:'🤷',l:'Egal – einfach reinwerfen',d:'Minimale Organisation'}]},
+{id:'elektronik',q:'🔌 Wie viel Elektronik nimmst du mit?',o:[{e:'💻',l:'Viel (Laptop + Tablet + Handy)',d:'Brauche Laptoptasche, Powerbank, Adapter'},{e:'📱',l:'Mittel (Handy + Tablet)',d:'Reiseadapter + Powerbank'},{e:'📱',l:'Wenig (nur Handy)',d:'Minimale Ladegeräte'}]},
+{id:'komfort',q:'😴 Wie wichtig ist Schlafkomfort unterwegs?',o:[{e:'🛌',l:'Sehr wichtig – guter Schlaf',d:'Nackenkissen, Schlafmaske, Ohrstöpsel'},{e:'😊',l:'Einigermaßen wichtig',d:'Basis-Kissen + Schlafmaske'},{e:'🤷',l:'Egal – schlafe überall',d:'Kein Zubehör nötig'}]},
+{id:'sicherheit',q:'🔒 Wie wichtig ist Diebstahlschutz?',o:[{e:'🔒',l:'Sehr wichtig',d:'RFID-Schutz, Sicherer Rucksack, Safe'},{e:'👍',l:'Einigermaßen',d:'Kabelschloss, Geldgürtel'},{e:'🤷',l:'Egal',d:'Kein Schutz nötig'}]}
+];
+const P={koffer_hp:[{n:"Samsonite S'Cure Eco (75cm)",d:'100% recycelt, 3,2 kg, TSA-Schloss, 4 Doppelrollen',p:'279 €',u:`https://www.amazon.de/s?k=Samsonite+S%27Cure+Eco+Koffer&tag=${T}`,c:'Koffer'},{n:'Rimowa Essential (67cm)',d:'Polycarbonat, Multiwheel, TSA, 5 Jahre Garantie',p:'649 €',u:`https://www.amazon.de/s?k=Rimowa+Essential+Koffer&tag=${T}`,c:'Koffer'}],
+koffer_m:[{n:'American Tourister Soundbox (67cm)',d:'ABS-Polycarbonat, TSA, leise Rollen',p:'149 €',u:`https://www.amazon.de/s?k=American+Tourister+Soundbox+Koffer&tag=${T}`,c:'Koffer'},{n:"Samsonite S'Cure Spinner (69cm)",d:'Polypropylen, 2,3 kg, TSA',p:'229 €',u:`https://www.amazon.de/s?k=Samsonite+S%27Cure+Spinner+Koffer&tag=${T}`,c:'Koffer'}],
+koffer_b:[{n:'Travelite Viva (69cm)',d:'ABS-Hartschale, 2,7 kg, TSA, deutsche Marke',p:'89 €',u:`https://www.amazon.de/s?k=Travelite+Viva+Koffer&tag=${T}`,c:'Koffer'},{n:'Lacdo Hartschalenkoffer (68cm)',d:'ABS+PC-Mix, TSA, 8 leise Rollen',p:'69 €',u:`https://www.amazon.de/s?k=Lacdo+Hartschalenkoffer&tag=${T}`,c:'Koffer'}],
+ruck_p:[{n:'Osprey Farpoint 55',d:'55L + Daypack, AirSpeed-System, Icon für Backpacker',p:'269 €',u:`https://www.amazon.de/s?k=Osprey+Farpoint+55&tag=${T}`,c:'Rucksack'},{n:'Deuter Transit 50',d:'50L, belüftet, Daypack, wasserabweisend',p:'199 €',u:`https://www.amazon.de/s?k=Deuter+Transit+50&tag=${T}`,c:'Rucksack'}],
+ruck_m:[{n:'Deuter Gogo 35',d:'35L, Handgepäck-geeignet, Brust- & Hüftgurt',p:'99 €',u:`https://www.amazon.de/s?k=Deuter+Gogo+35&tag=${T}`,c:'Rucksack'},{n:'Fjällräven Kånken Laptop 15"',d:'Design, Laptopfach, wasserdicht, Sitzkissen',p:'129 €',u:`https://www.amazon.de/s?k=Fjällräven+Kånken+Laptop+15&tag=${T}`,c:'Rucksack'}],
+ruck_b:[{n:'Vaude Aquarius 24',d:'80% recycelt, 24L, wasserabweisend, umweltfreundlich',p:'79 €',u:`https://www.amazon.de/s?k=Vaude+Aquarius+24+Rucksack&tag=${T}`,c:'Rucksack'}],
+reise_t:[{n:'Patagonia Black Hole Duffel 55L',d:'Wasserdicht, recycelt, Rucksackgurte, unverwüstlich',p:'149 €',u:`https://www.amazon.de/s?k=Patagonia+Black+Hole+Duffel+55L&tag=${T}`,c:'Reisetasche'},{n:'Eastpak Tranverz M (50L)',d:'30 Jahre Garantie, wasserabweisend, beste PL',p:'79 €',u:`https://www.amazon.de/s?k=Eastpak+Tranverz+M&tag=${T}`,c:'Reisetasche'}],
+pack_p:[{n:'Monos Kompressions-Cubes (4er)',d:'40% Platzersparnis, wasserdichtes Nylon',p:'79 €',u:`https://www.amazon.de/s?k=Monos+Packing+Cubes+Compression&tag=${T}`,c:'Packing Cubes'},{n:'Eagle Creek Pack-It (3er)',d:'Erfinder der Cubes, Ripstop-Nylon',p:'39 €',u:`https://www.amazon.de/s?k=Eagle+Creek+Pack-It+Original&tag=${T}`,c:'Packing Cubes'}],
+pack_b:[{n:'Veken Packing Cubes (6er)',d:'6-teilig, Kompression, inkl. Waschbeutel',p:'24 €',u:`https://www.amazon.de/s?k=Veken+Packing+Cubes+6er&tag=${T}`,c:'Packing Cubes'},{n:'Travel Mate Cubes (4er)',d:'4 Größen, wasserabweisend, günstiger Start',p:'16 €',u:`https://www.amazon.de/s?k=Travel+Mate+Packing+Cubes+Set&tag=${T}`,c:'Packing Cubes'}],
+nacken:[{n:'Trtl Travel Pillow Plus',d:'Kopfstütze ohne Umkippen, kompakt, waschbar',p:'49 €',u:`https://www.amazon.de/s?k=Trtl+Travel+Pillow+Plus&tag=${T}`,c:'Nackenkissen'},{n:'Cabeau Evolution Cool',d:'Memory Foam, Kühlbezug, 360° Stütze',p:'44 €',u:`https://www.amazon.de/s?k=Cabeau+Evolution+Cool+Nackenkissen&tag=${T}`,c:'Nackenkissen'}],
+adapter:[{n:'Ceptics Universal Reiseadapter',d:'6 Adapter/220 Länder, 65W PD GaN, Komplettset',p:'49 €',u:`https://www.amazon.de/s?k=Ceptics+Universal+Reiseadapter&tag=${T}`,c:'Adapter'},{n:'Brennenstuhl Universal-Adapter',d:'4 Steckertypen, 2 USB-A, TÜV, deutsche Qualität',p:'22 €',u:`https://www.amazon.de/s?k=Brennenstuhl+Reiseadapter+Universal&tag=${T}`,c:'Adapter'}],
+power:[{n:'Anker Power Bank 20.000 PD',d:'20.000 mAh, USB-C 30W PD, lädt Laptops',p:'35 €',u:`https://www.amazon.de/s?k=Anker+Power+Bank+20000+PD&tag=${T}`,c:'Powerbank'},{n:'Anker PowerPort Cube 65W',d:'2x USB-C 65W GaN, kompakt, Laptop+Handy',p:'59 €',u:`https://www.amazon.de/s?k=Anker+PowerPort+Cube+Reise&tag=${T}`,c:'Powerbank'}],
+schlaf:[{n:'Manta Sleep Mask Pro',d:'100% Blackout, einstellbare Augenhöhlen',p:'49 €',u:`https://www.amazon.de/s?k=Manta+Sleep+Mask+Pro&tag=${T}`,c:'Schlaf'},{n:'Loop Quiet 2',d:'-24 dB Dämpfung, 4 Größen, bequem',p:'24 €',u:`https://www.amazon.de/s?k=Loop+Quiet+2+Ohrstöpsel&tag=${T}`,c:'Schlaf'}],
+sicher:[{n:'Pacsafe Travelsafe 12L',d:'Tragbarer Safe, durchtastsicheres Mesh',p:'59 €',u:`https://www.amazon.de/s?k=Pacsafe+Travelsafe+12L&tag=${T}`,c:'Sicherheit'},{n:'RFID Geldgürtel',d:'RFID-blockierend, unter Kleidung',p:'16 €',u:`https://www.amazon.de/s?k=RFID+Geldgürtel+Reise&tag=${T}`,c:'Sicherheit'}],
+laptop:[{n:'Bellroy Laptop Sleeve 13"/14"',d:'Recyceltes PET, wasserabweisend, schlank',p:'69 €',u:`https://www.amazon.de/s?k=Bellroy+Laptop+Sleeve+Recycelt&tag=${T}`,c:'Laptoptasche'},{n:'Targus CityGear Laptop-Rucksack',d:'Gepolstert, wasserabweisend, 15,6"',p:'44 €',u:`https://www.amazon.de/s?k=Targus+CityGear+Laptop+Rucksack&tag=${T}`,c:'Laptoptasche'}],
+camp_z:[{n:'MSR Hubba Hubba (2-Personen)',d:'1,7 kg, 3 Min Aufbau, doppelwandig',p:'399 €',u:`https://www.amazon.de/s?k=MSR+Hubba+Hubba+Zelt&tag=${T}`,c:'Camping'},{n:'Therm-a-Rest NeoAir XLite NXT',d:'Isomatte R-Wert 4.5, 370g, Komfort',p:'199 €',u:`https://www.amazon.de/s?k=Therm-a-Rest+NeoAir+XLite+NXT&tag=${T}`,c:'Camping'}],
+camp_k:[{n:'Jetboil Flash Campingkocher',d:'0,5L in 100s, windfest, kompakt',p:'99 €',u:`https://www.amazon.de/s?k=Jetboil+Flash+Campingkocher&tag=${T}`,c:'Camping'}],
+kultur:[{n:'Osprey UltraLight Roll Organizer',d:'Rollen, Haken, wasserdicht, nur 86g',p:'39 €',u:`https://www.amazon.de/s?k=Osprey+UltraLight+Roll+Organizer&tag=${T}`,c:'Toiletries'},{n:'Eastpak Pack-it Toiletry Bag',d:'Haken, wasserabweisend, 30 Jahre Garantie',p:'29 €',u:`https://www.amazon.de/s?k=Eastpak+Pack-it+Toiletry+Bag&tag=${T}`,c:'Toiletries'}],
+airfly:[{n:'AirFly Pro Bluetooth-Adapter',d:'AirPods am Flugzeug, 8h Akku',p:'39 €',u:`https://www.amazon.de/s?k=AirFly+Pro+Bluetooth+Flugzeug&tag=${T}`,c:'Accessoires'}],
+camp_kiss:[{n:'Sea to Summit Aeros Ultralight',d:'Aufblasbares Campingkissen, 45g, kompakt',p:'34 €',u:`https://www.amazon.de/s?k=Sea+to+Summit+Aeros+Ultralight+Kissen&tag=${T}`,c:'Camping'}]
+};
+let ans={},cur=0;
+function selQ(qi,oi){ans[Q[qi].id]=oi;ren(cur)}
+function nxQ(i){if(ans[Q[i].id]===undefined)return;cur=i+1;ren(cur)}
+function rQ(){
+if(cur>=Q.length){shR();return}
+const q=Q[cur],pct=Math.round((cur/Q.length)*100);
+let h='<div class="question-number">FRAGE '+(cur+1)+' VON '+Q.length+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div><div class="question-text">'+q.q+'</div><div class="options">';
+q.o.forEach((o,i)=>{
+const s=ans[q.id]===i?' selected':'';
+h+='<div class="option'+s+'" onclick="selQ('+cur+','+i+')"><span class="emoji">'+o.e+'</span><div><div class="label">'+o.l+'</div><div class="desc">'+o.d+'</div></div></div>';
+});
+h+='</div><div class="nav-buttons">';
+h+=cur>0?'<button class="btn" onclick="cur='+(cur-1)+';rQ()">← Zurück</button>':'<button class="btn" disabled>← Zurück</button>';
+const nl=cur<Q.length-1?'Weiter →':'🎉 Ergebnisse';
+h+='<button class="btn btn-primary" onclick="nxQ('+cur+')"'+(ans[q.id]===undefined?' disabled':'')+'>'+nl+'</button></div>';
+document.getElementById('quiz').innerHTML=h;
+}
+function shR(){
+let h='<h2>🎯 Dein personalisiertes Reise-Equipment 2026</h2><p>Basierend auf deinen Antworten haben wir die passende Ausrüstung zusammengestellt.</p>';
+let pks=[];const a=ans;
+const ra=a.reiseart||0,du=a.dauer||0,gp=a.gepaeckart||0,bd=a.budget||1,re=a.reiseziel||0,fl=a.flugart||0,or=a.organisation||1,el=a.elektronik||1,ko=a.komfort||1,si=a.sicherheit||1;
+const pm=bd>=2,bdgt=bd<=1;
+if(gp===0||gp===3){if(pm){pks.push(P.koffer_hp[0]);if(bd>=3)pks.push(P.koffer_hp[1])}else if(bd>=1){pks.push(P.koffer_m[0]);if(bd>=2)pks.push(P.koffer_m[1])}else pks.push(P.koffer_b[0])}
+if(gp===1||gp===3){if(pm){pks.push(P.ruck_p[0]);pks.push(P.ruck_p[1])}else if(bd>=1){pks.push(P.ruck_m[0]);pks.push(P.ruck_m[1])}else pks.push(P.ruck_b[0])}
+if(gp===2){if(pm)pks.push(P.reise_t[0]);else pks.push(P.reise_t[1])}
+if(or<=1){if(pm)pks.push(P.pack_p[0]);else pks.push(P.pack_b[0]);if(or===0)pks.push(P.pack_p[1]);if(or===1&&!bdgt)pks.push(P.pack_b[1])}
+if(ko<=1){pks.push(P.nacken[0]);if(ko===0)pks.push(P.nacken[1])}
+pks.push(P.adapter[bd>=2?0:1]);pks.push(P.kultur[0]);
+if(el<=1)pks.push(P.power[0]);if(el===0)pks.push(P.power[1]);
+if(ko<=1){pks.push(P.schlaf[0]);pks.push(P.schlaf[1])}
+if(si===0)pks.push(P.sicher[0]);if(si<=1)pks.push(P.sicher[1]);
+if(el===0)pks.push(P.laptop[0]);
+if(ra===1){if(pm)pks.push(P.camp_z[0]);pks.push(P.camp_z[1]);pks.push(P.camp_k[0]);if(ko<=1)pks.push(P.camp_kiss[0])}
+if(fl<=1&&bd>=1)pks.push(P.airfly[0]);
+const s=new Set();pks=pks.filter(p=>{const k=p.n;if(s.has(k))return false;s.add(k);return true});
+const cO=['Koffer','Rucksack','Reisetasche','Packing Cubes','Nackenkissen','Adapter','Powerbank','Schlaf','Sicherheit','Laptoptasche','Toiletries','Camping','Accessoires'];
+pks.sort((a,b)=>cO.indexOf(a.c)-cO.indexOf(b.c));
+const t12=pks.slice(0,12);
+let tc=0;t12.forEach(p=>{const pr=parseFloat(p.p.replace(/[^0-9,]/g,'').replace(',','.'));if(!isNaN(pr))tc+=pr});
+const bM=bd===0?50:bd===1?200:bd===2?500:1000;
+h+='<div class="budget-summary"><h4>💰 Geschätzte Gesamtkosten: €'+tc.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,'.')+'</h4><div class="bar"><div class="bar-fill" style="width:'+Math.min(100,Math.round((tc/bM)*100))+'%"></div></div>'+(tc<=bM?'<div class="spartipps"><strong>✅ Im Budget!</strong> Perfekt zusammengestellt.</div>':'<div class="spartipps"><strong>💡 Spartipp:</strong> Budget-Varianten wählen (z.B. Veken Cubes statt Monos).</div>')+'</div>';
+h+='<div class="results-grid">';
+t12.forEach(p=>{h+='<div class="result-card"><div class="rcat">'+p.c+'</div><div class="rname">'+p.n+'</div><div class="rdesc">'+p.d+'</div><div class="rprice">ca. '+p.p+'</div><a class="rlink" href="'+p.u+'" target="_blank" rel="nofollow">🔗 Bei Amazon prüfen</a></div>'});
+h+='</div><div style="margin-top:28px;text-align:center"><button class="btn btn-primary" onclick="rsQ()">🔄 Nochmal</button> <a href="../blog/reisezubehoer-2026.html" class="btn" style="display:inline-block">📖 Ratgeber-Artikel</a></div>';
+document.getElementById('results').style.display='block';document.getElementById('results').innerHTML=h;document.getElementById('quiz').style.display='none';
+window.scrollTo({top:document.getElementById('results').offsetTop-80,behavior:'smooth'});
+}
+window.rsQ=function(){ans={};cur=0;document.getElementById('results').style.display='none';document.getElementById('quiz').style.display='block';rQ();window.scrollTo({top:0,behavior:'smooth'})};
+window.selQ=selQ;window.rQ=rQ;window.nxQ=nxQ;
+rQ();
+})();
+</script>
+</body>
+</html>
