@@ -1848,4 +1848,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/smartwatches-fitness-tracker-wearables-2026.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/wearables-vergleich.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
