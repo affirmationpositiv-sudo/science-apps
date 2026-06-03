@@ -1,9 +1,64 @@
-## Tick: 2026-06-03 AUTOMATISCH (RUN 2.64)
+# Loop Log – Infinite Money Loop
 
-### Previous State (R2.63):
-- 83 Blog-Artikel, 36 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.65)
+
+### Previous State (R2.64):
+- 86 Blog-Artikel, 37 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher
 - Site live (HTTP 200), Git clean
 - Stats: 103 Blog, 37 Tools, 310 Sitemap URLs
+- 40projekte Shop untracked, 41 Produkte bereit
+
+### Actions This Tick (R2.65):
+- [x] **Survey:** Site live (HTTP 200), Branch main, 310 Sitemap URLs
+- [x] **Blog-Artikel #87 erstellt:** "Outdoor-Küche, Grillen & Camping-Kochen 2026: Die 75+ besten Produkte für den perfekten Sommer" (~801 Zeilen HTML, ~56 KB, 7 Kategorien, 75 Produktkarten, 76 Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 10, 12 FAQ, 4 Budget-Stufen)
+- [x] **Grill- & Campingküche-Konfigurator Tool gebaut:** tools/grill-camping-konfigurator.html (~527 Zeilen, 5-Fragen-Wizard: Einsatzbereich, Budget, Personenzahl, Kochstil, Energiequelle; 42 Produkte aus 6 Kategorien, personalisierte Top-5-Empfehlungen, Vergleichstabelle, Budget-Diagramm, 5 Spartipps, 42+ Amazon-Affiliate-Links)
+- [x] **Blog-Index aktualisiert:** +Blog-Karte #87 (Outdoor-Küche), Stats 103→104
+- [x] **Tools-Index aktualisiert:** +Grill-Camping-Konfigurator (37→38 Tools), Subtitle aktualisiert
+- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 310→312, Blog-Artikel 86→87, KI-Tools 39→40, Sitemap URLs 310→312, Blog-Badge 83→87, Tools-Badge 34→40
+- [x] **40projekte Shop deployed:** 41 Produkte (9€-497€) auf admin.html + main index.html verlinkt
+- [x] **Main index.html aktualisiert:** +Button "🛒 40 Geldquellen Shop"
+- [x] **Sitemap.xml aktualisiert:** +2 URLs (Blog #87 + Grill-Camping-Konfigurator) → 312 URLs
+- [x] **Deployment:** git commit + force push to gh-pages, verified HTTP 200
+
+### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 87 | ✅ LIVE (1 NEU: #87 Outdoor-Küche, Grillen & Camping) |
+| Interaktive Tools | 38 | ✅ LIVE (1 NEU: Grill- & Campingküche-Konfigurator) |
+| Affiliate-Shops | 9 | ✅ LIVE |
+| KDP-Buch-Previews | 15+ | ✅ LIVE |
+| Apps & Spiele | 12+ | ✅ LIVE |
+| 40 Geldquellen Shop | 41 | ✅ LIVE (NEU) |
+| Sitemap URLs | 312 | ✅ LIVE (2 NEU) |
+
+### R2.64 State:
+- 86 Blog-Artikel, 37 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Bücher
+- Blog #86 Smartwatches & Wearables mit Wearables-Vergleichsrechner erstellt
+- Stats: 103 Blog, 37 Tools, 310 Sitemap URLs
+
+### Geld-Strategie-Ranking (0 EUR Kosten):
+| Rang | Strategie | Potenzial/Monat | Status |
+|------|-----------|----------------|--------|
+| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 87 Artikel + 38 Tools + 9 Shops |
+| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
+| 3 | **Amazon KDP (Bücher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet (Sitemap nicht eingereicht)
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API, manueller Upload nötig
+
+### Next Tick Priorities:
+1. 🔴 Next blog article (topic tbd - möglicherweise KI-Tiergesundheit oder Heimwerken spezial)
+2. 🔴 Next interactive tool idea
+3. 🟡 KDP Account erstellen (User-Aktion nötig)
+4. 🟡 Google Search Console einrichten
+5. 🟡 Affiliate-Links in 40projekte Shop integrieren
 
 ### Actions This Tick (R2.64):
 - [x] **Blog-Artikel #86 erstellt:** "Smartwatches, Fitness-Tracker & Wearables 2026: Die 35+ besten Modelle für Gesundheit, Sport & Alltag" (~570 Zeilen HTML, ~38 KB, 6 Kategorien, 35+ Produktkarten, 46 Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle, 9 FAQ, 5 Budget-Stufen)
