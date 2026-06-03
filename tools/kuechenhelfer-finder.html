@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Küchenhelfer-Finder – Finde deine perfekte Küchenausstattung</title>
+<meta name="description" content="Finde mit dem Küchenhelfer-Finder deine perfekte Küchenausstattung. Beantworte 6 Fragen und erhalte personalisierte Produktempfehlungen für deine Küche.">
+<meta name="keywords" content="Küchenhelfer, Küchenausstattung, Kochutensilien, Küchengeräte, Produktfinder, Küchenzubehör, Kochzubehör">
+<meta name="author" content="Küchenhelfer-Finder">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Küchenhelfer-Finder – Finde deine perfekte Küchenausstattung">
+<meta property="og:description" content="Personalisierte Küchenprodukt-Empfehlungen in 6 Fragen.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://ikune.de/tools/kuechenhelfer-finder.html">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0A;--surface:#1A1A1A;--surface2:#252525;--text:#E5E5E5;--text2:#999;--accent:#8B5CF6;--gold:#FFD700;--gold-dim:#B8960F;--error:#EF4444;--success:#22C55E;--radius:12px;--radius-sm:8px;--shadow:0 4px 24px rgba(0,0,0,.4);--font:'Segoe UI',system-ui,-apple-system,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;line-height:1.6}
+.container{max-width:900px;width:100%;margin:0 auto;padding:20px}
+header{text-align:center;padding:30px 20px 10px}
+header h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+header p{color:var(--text2);font-size:clamp(.85rem,2vw,1.05rem);margin-top:6px}
+.progress-wrap{display:flex;align-items:center;gap:10px;margin:20px 0 10px}
+.progress-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:3px;transition:width .5s ease}
+.progress-text{font-size:.8rem;color:var(--text2);white-space:nowrap;min-width:40px;text-align:right}
+.card{background:var(--surface);border-radius:var(--radius);padding:clamp(20px,4vw,40px);box-shadow:var(--shadow);border:1px solid rgba(139,92,246,.15);margin-bottom:20px}
+.card h2{font-size:clamp(1.1rem,3vw,1.4rem);margin-bottom:20px;color:var(--gold)}
+.step{display:none}
+.step.active{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.options{display:grid;gap:10px}
+.options label{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface2);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;font-size:clamp(.9rem,2vw,1rem)}
+.options label:hover{border-color:var(--accent);background:rgba(139,92,246,.08)}
+.options input[type="radio"]{appearance:none;width:18px;height:18px;border:2px solid var(--text2);border-radius:50%;flex-shrink:0;position:relative;transition:all .2s}
+.options input[type="radio"]:checked{border-color:var(--accent);background:var(--accent);box-shadow:inset 0 0 0 4px var(--surface2)}
+.options input[type="radio"]:checked+span{color:#fff}
+.nav{display:flex;justify-content:space-between;margin-top:24px;gap:12px}
+.btn{padding:12px 28px;border:none;border-radius:var(--radius-sm);font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#7C3AED);color:#fff}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(139,92,246,.35)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-secondary{background:var(--surface2);color:var(--text);border:1px solid #333}
+.btn-secondary:hover{background:#333}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#0A0A0A}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,215,0,.3)}
+.result-card{background:var(--surface2);border-radius:var(--radius-sm);padding:16px;border:1px solid rgba(139,92,246,.1);transition:all .2s}
+.result-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.result-card h3{font-size:1rem;margin-bottom:4px;color:var(--text)}
+.result-card .cat-tag{font-size:.75rem;color:var(--accent);margin-bottom:6px;display:block}
+.result-card .price-range{color:var(--gold);font-weight:600;font-size:.9rem}
+.result-card .rating{color:var(--gold);font-size:.85rem;margin:4px 0}
+.result-card .desc{font-size:.82rem;color:var(--text2);margin:6px 0 10px;line-height:1.4}
+.result-card .aff-btn{display:inline-block;padding:8px 16px;background:linear-gradient(135deg,var(--accent),#7C3AED);color:#fff;border-radius:var(--radius-sm);font-size:.82rem;font-weight:600;text-decoration:none;transition:all .2s}
+.result-card .aff-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(139,92,246,.3)}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:16px}
+.summary-badge{display:inline-flex;gap:16px;flex-wrap:wrap;padding:12px 20px;background:var(--surface2);border-radius:var(--radius-sm);margin-bottom:16px;font-size:.9rem}
+.summary-badge span{display:flex;align-items:center;gap:6px}
+.summary-badge .label{color:var(--text2)}
+.summary-badge .value{color:var(--gold);font-weight:600}
+.tips{background:var(--surface2);border-radius:var(--radius-sm);padding:20px;margin-top:20px;border-left:4px solid var(--gold)}
+.tips h3{color:var(--gold);margin-bottom:10px;font-size:1rem}
+.tips ul{list-style:none;padding:0}
+.tips ul li{padding:6px 0;font-size:.9rem;color:var(--text2);position:relative;padding-left:20px}
+.tips ul li::before{content:"💡";position:absolute;left:0}
+.reset-area{text-align:center;margin-top:20px}
+footer{text-align:center;padding:30px 20px;color:var(--text2);font-size:.8rem;margin-top:auto}
+footer a{color:var(--accent);text-decoration:none}
+.hidden{display:none!important}
+.stars{color:var(--gold);letter-spacing:1px}
+.budget-overview{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(255,215,0,.08));border-radius:var(--radius-sm);padding:16px 20px;margin-bottom:16px;border:1px solid rgba(139,92,246,.2)}
+.budget-overview .budget-total{font-size:1.2rem;font-weight:700;color:var(--gold)}
+.budget-overview .budget-detail{font-size:.85rem;color:var(--text2);margin-top:4px}
+.no-results{text-align:center;padding:40px 20px;color:var(--text2)}
+@media(max-width:600px){.container{padding:12px}.card{padding:16px}.results-grid{grid-template-columns:1fr}.nav{flex-direction:column}.nav .btn{width:100%;justify-content:center}.summary-badge{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<h1>🍳 Küchenhelfer-Finder</h1>
+<p>Finde deine perfekte Küchenausstattung – beantworte 6 Fragen</p>
+</div>
+</header>
+
+<main class="container">
+<div class="progress-wrap">
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<span class="progress-text" id="progressText">0/6</span>
+</div>
+
+<div class="card" id="wizard">
+<form id="quizForm">
+
+<div class="step active" data-step="1">
+<h2>👨‍🍳 Was ist deine Koch-Erfahrung?</h2>
+<div class="options">
+<label><input type="radio" name="q1" value="anfaenger"><span>Anfänger – Ich stehe selten am Herd</span></label>
+<label><input type="radio" name="q1" value="hobbykoch"><span>Hobbykoch – Ich koche regelmäßig</span></label>
+<label><input type="radio" name="q1" value="fortgeschritten"><span>Fortgeschritten – Ich koche ambitioniert</span></label>
+<label><input type="radio" name="q1" value="profi"><span>Profi – Kochen ist meine Leidenschaft</span></label>
+</div>
+</div>
+
+<div class="step" data-step="2">
+<h2>💰 Wie hoch ist dein Budget?</h2>
+<div class="options">
+<label><input type="radio" name="q2" value="unter50"><span>Unter 50 € – Nur das Nötigste</span></label>
+<label><input type="radio" name="q2" value="50-150"><span>50–150 € – Gute Basisausstattung</span></label>
+<label><input type="radio" name="q2" value="150-300"><span>150–300 € – Ordentliche Qualität</span></label>
+<label><input type="radio" name="q2" value="300-600"><span>300–600 € – Hochwertige Ausstattung</span></label>
+<label><input type="radio" name="q2" value="600plus"><span>600 €+ – Keine Kompromisse</span></label>
+</div>
+</div>
+
+<div class="step" data-step="3">
+<h2>🔪 Was fehlt dir am meisten?</h2>
+<div class="options">
+<label><input type="radio" name="q3" value="schneiden"><span>🔪 Schneiden – Messer, Schneidbretter</span></label>
+<label><input type="radio" name="q3" value="kochen"><span>🍲 Kochen – Töpfe, Pfannen, Kochgeschirr</span></label>
+<label><input type="radio" name="q3" value="backen"><span>🥐 Backen – Backformen, Rührgeräte</span></label>
+<label><input type="radio" name="q3" value="mixen"><span>🌀 Mixen – Standmixer, Pürierstäbe</span></label>
+<label><input type="radio" name="q3" value="kaffee"><span>☕ Kaffee – Kaffeemaschinen, Zubehör</span></label>
+<label><input type="radio" name="q3" value="aufbewahren"><span>📦 Aufbewahren – Dosen, Behälter, Gläser</span></label>
+</div>
+</div>
+
+<div class="step" data-step="4">
+<h2>👥 Wie viele Personen kochst du?</h2>
+<div class="options">
+<label><input type="radio" name="q4" value="1"><span>1 Person – Nur für mich</span></label>
+<label><input type="radio" name="q4" value="2"><span>2 Personen – Für zwei</span></label>
+<label><input type="radio" name="q4" value="3-4"><span>3–4 Personen – Familie / WG</span></label>
+<label><input type="radio" name="q4" value="5plus"><span>5+ Personen – Große Runden</span></label>
+</div>
+</div>
+
+<div class="step" data-step="5">
+<h2>🏠 Welche Küchengröße hast du?</h2>
+<div class="options">
+<label><input type="radio" name="q5" value="mini"><span>Miniküche – Wenig Platz, cleane Lösung</span></label>
+<label><input type="radio" name="q5" value="mittel"><span>Mittel – Normale Küche, gut ausgestattet</span></label>
+<label><input type="radio" name="q5" value="gross"><span>Groß – Viel Platz für viel Equipment</span></label>
+<label><input type="radio" name="q5" value="gewerblich"><span>Gewerblich – Profi-Küchenstandard</span></label>
+</div>
+</div>
+
+<div class="step" data-step="6">
+<h2>🧱 Bevorzugtes Material?</h2>
+<div class="options">
+<label><input type="radio" name="q6" value="edelstahl"><span>Edelstahl – Robust, pflegeleicht, modern</span></label>
+<label><input type="radio" name="q6" value="gusseisen"><span>Gusseisen – Perfekte Hitze, traditionell</span></label>
+<label><input type="radio" name="q6" value="keramik"><span>Keramik – Sanftes Kochen, stylish</span></label>
+<label><input type="radio" name="q6" value="antihaft"><span>Antihaft – Leicht, fettarm, praktisch</span></label>
+<label><input type="radio" name="q6" value="holz"><span>Holz – Natürlich, warm, nachhaltig</span></label>
+<label><input type="radio" name="q6" value="silikon"><span>Silikon – Flexibel, hitzebeständig</span></label>
+</div>
+</div>
+
+<div class="nav">
+<button type="button" class="btn btn-secondary" id="prevBtn" onclick="prevStep()">← Zurück</button>
+<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">Weiter →</button>
+</div>
+
+</form>
+</div>
+
+<div class="card hidden" id="resultsCard">
+<div id="resultsContent"></div>
+<div class="reset-area">
+<button class="btn btn-gold" onclick="resetQuiz()">🔄 Neu starten</button>
+</div>
+</div>
+
+</main>
+
+<footer>
+<div class="container">
+<p>🔗 Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. <a href="/impressum">Impressum</a> | <a href="/datenschutz">Datenschutz</a></p>
+<p>© 2026 Küchenhelfer-Finder</p>
+</div>
+</footer>
+
+<script>
+const AFF_TAG = 'tag=ikune21-21';
+const AMZ_BASE = 'https://www.amazon.de/dp/';
+
+const CATALOG = [
+  // ––– MESSER & SCHNEIDEN –––
+  {id:1,name:'Wüsthof Professional Plus Kochmesser 20cm',cat:'Schneiden',price:'149-199€',rating:4.8,priceVal:180,tags:['schneiden','edelstahl','profi','fortgeschritten'],desc:'Präzisions-Kochmesser aus deutschem Stahl – ideal für anspruchsvolle Schnitte.',asin:'B0000CFHGT'},
+  {id:2,name:'Zwilling Pro 7-Zoll Kochmesser',cat:'Schneiden',price:'99-139€',rating:4.7,priceVal:120,tags:['schneiden','edelstahl','hobbykoch','fortgeschritten'],desc:'Klassischer Allrounder für jede Küche – scharf und ausgewogen.',asin:'B000E1DI32'},
+  {id:3,name:'F. Dick Kochmesser 20cm',cat:'Schneiden',price:'89-129€',rating:4.6,priceVal:100,tags:['schneiden','edelstahl','hobbykoch','anfaenger'],desc:'Einsteigerfreundliches Messer mit hervorragender Schärfe.',asin:'B0000WM1XG'},
+  {id:4,name:'Victorinox Fibrox Santoku',cat:'Schneiden',price:'35-55€',rating:4.7,priceVal:45,tags:['schneiden','holz','edelstahl','anfaenger','hobbykoch','unter50','50-150'],desc:'Preis-Leistungs-Knaller – vielseitiges Santoku für den Alltag.',asin:'B0000CCY77'},
+  {id:5,name:'Global G-2 Kochmesser',cat:'Schneiden',price:'119-169€',rating:4.8,priceVal:145,tags:['schneiden','edelstahl','fortgeschritten','profi','150-300'],desc:'Japanisches Edelstahlmesser mit atemberaubender Schärfe.',asin:'B0000CCY74'},
+  {id:6,name:'Burg Wächter Schneidbrett Massivholz',cat:'Schneiden',price:'29-49€',rating:4.4,priceVal:38,tags:['schneiden','holz','anfaenger','hobbykoch','unter50'],desc:'Nachhaltiges Holz-Schneidbrett – messerschonend und hygienisch.',asin:'B0000CBJRT'},
+
+  // ––– TÖPFE & KOCHEN –––
+  {id:7,name:'Fissler Topf-Set 4-teilig',cat:'Kochen',price:'189-279€',rating:4.7,priceVal:230,tags:['kochen','edelstahl','hobbykoch','fortgeschritten','150-300','300-600'],desc:'Premium-Kochtopfset aus Edelstahl für gleichmäßige Hitzeverteilung.',asin:'B0000CG5G0'},
+  {id:8,name:'Le Creuset Bräter Gusseisen',cat:'Kochen',price:'219-329€',rating:4.9,priceVal:270,tags:['kochen','gusseisen','fortgeschritten','profi','150-300','300-600'],desc:'Legendärer Bräter – perfekt für Schmorgerichte und Brot.',asin:'B0000E1DI3G'},
+  {id:9,name:'Tefal Jamie Oliver Pfanne 28cm',cat:'Kochen',price:'39-59€',rating:4.5,priceVal:48,tags:['kochen','antihaft','anfaenger','hobbykoch','unter50','50-150'],desc:'Antihaft-Pfanne mit Thermo-Signal – perfekt für Einsteiger.',asin:'B00K9VG6N0'},
+  {id:10,name:'WMF Perfect Schnelltopf 6,5L',cat:'Kochen',price:'89-139€',rating:4.6,priceVal:110,tags:['kochen','edelstahl','hobbykoch','fortgeschritten','50-150','150-300'],desc:'Schnellkochtopf für zeitsparendes Kochen – bis zu 70% schneller.',asin:'B0000CNU9Z'},
+  {id:11,name:'Staub Cocotte Gusseisen 24cm',cat:'Kochen',price:'179-259€',rating:4.8,priceVal:210,tags:['kochen','gusseisen','fortgeschritten','profi','150-300','300-600'],desc:'Französische Cocotte für Ofengerichte – hält Hitze perfekt.',asin:'B0000CGBJG'},
+  {id:12,name:'Rösle Profi-Pfanne 28cm',cat:'Kochen',price:'79-129€',rating:4.6,priceVal:100,tags:['kochen','edelstahl','fortgeschritten','hobbykoch','50-150','150-300'],desc:'Edelstahl-Pfanne mit mehrschichtigem Boden – ofenfest.',asin:'B0000CGM34'},
+  {id:13,name:'GreenPan Ceramic Pfanne 30cm',cat:'Kochen',price:'59-89€',rating:4.4,priceVal:72,tags:['kochen','keramik','hobbykoch','50-150'],desc:'Keramikbeschichtete Pfanne – gesünder kochen ohne Chemie.',asin:'B00AKN5WDW'},
+
+  // ––– BACKEN –––
+  {id:14,name:'KitchenAid Artisan Küchenmaschine',cat:'Backen',price:'399-599€',rating:4.8,priceVal:490,tags:['backen','mixen','edelstahl','fortgeschritten','profi','300-600','600plus'],desc:'Die Kult-Küchenmaschine – unverzichtbar für ambitionierte Bäcker.',asin:'B0000CFHGV'},
+  {id:15,name:'Kenwood Chef Titanium Küchenmaschine',cat:'Backen',price:'329-479€',rating:4.7,priceVal:400,tags:['backen','mixen','edelstahl','fortgeschritten','profi','300-600'],desc:'Leistungsstarke Küchenmaschine für Teig und Rührarbeiten.',asin:'B0000E1DI2'},
+  {id:16,name:'Springform 26cm von Kaiser',cat:'Backen',price:'19-35€',rating:4.5,priceVal:26,tags:['backen','antihaft','anfaenger','hobbykoch','unter50'],desc:'Backform mit Antihaftbeschichtung – ideal für Kuchen und Torten.',asin:'B0000CMKWQ'},
+  {id:17,name:'Wilton Backset 3-teilig',cat:'Backen',price:'29-49€',rating:4.3,priceVal:38,tags:['backen','silikon','anfaenger','hobbykoch','unter50','50-150'],desc:'Silikon-Backset – flexibel und antihaft für einfaches Backen.',asin:'B0000SJD01'},
+  {id:18,name:'Dr. Oetker Backform Royal',cat:'Backen',price:'14-24€',rating:4.4,priceVal:18,tags:['backen','antihaft','anfaenger','unter50'],desc:'Günstige Antihaft-Kastenform für den Alltag.',asin:'B0000DJ7ZW'},
+  {id:19,name:'Bosch MUM Serie 4 Küchenmaschine',cat:'Backen',price:'109-179€',rating:4.5,priceVal:140,tags:['backen','mixen','edelstahl','hobbykoch','fortgeschritten','150-300','50-150'],desc:'Kompakte Küchenmaschine für Teig, Schlagsahne & Rühren.',asin:'B0000EVJQ7'},
+
+  // ––– MIXEN & PÜRIEREN –––
+  {id:20,name:'Vitamix A3300 Standmixer',cat:'Mixen',price:'499-699€',rating:4.9,priceVal:580,tags:['mixen','edelstahl','profi','fortgeschritten','600plus','300-600'],desc:'Professioneller Hochleistungsmixer für Smoothies & Suppen.',asin:'B0000E1FPK'},
+  {id:21,name:'Nutribullet Pro 900',cat:'Mixen',price:'49-79€',rating:4.6,priceVal:64,tags:['mixen','edelstahl','anfaenger','hobbykoch','50-150','unter50'],desc:'Kompakter Mixer für schnelle Smoothies – platzsparend.',asin:'B0000CG4H6'},
+  {id:22,name:'ESGE Zauberstab Pürierstab',cat:'Mixen',price:'44-69€',rating:4.5,priceVal:55,tags:['mixen','edelstahl','anfaenger','hobbykoch','unter50','50-150'],desc:'Der legendäre Pürierstab – Suppen, Saucen, Babynahrung.',asin:'B0000CMG7G'},
+  {id:23,name:'Bamix Gastro 250 Pürierstab',cat:'Mixen',price:'119-179€',rating:4.7,priceVal:148,tags:['mixen','edelstahl','fortgeschritten','profi','150-300'],desc:'Schweizer Profi-Pürierstab für feinste Saucen.',asin:'B0000STT66'},
+  {id:24,name:'Philips HR3652 Standmixer',cat:'Mixen',price:'69-109€',rating:4.4,priceVal:88,tags:['mixen','edelstahl','hobbykoch','50-150','150-300'],desc:'Alltagsmixer mit ProBlend Technologie – cremige Ergebnisse.',asin:'B0000F74MZ'},
+
+  // ––– KAFFEE –––
+  {id:25,name:'DeLonghi Magnifica S Kaffeevollautomat',cat:'Kaffee',price:'379-529€',rating:4.6,priceVal:450,tags:['kaffee','edelstahl','hobbykoch','fortgeschritten','300-600','600plus'],desc:'Kaffeevollautomat für perfekten Espresso & Milchkaffee.',asin:'B0000E1WI6'},
+  {id:26,name:'Sage Barista Express Siebträger',cat:'Kaffee',price:'499-699€',rating:4.7,priceVal:590,tags:['kaffee','edelstahl','fortgeschritten','profi','600plus','300-600'],desc:'Siebträgermaschine mit integriertem Mahlwerk – für Barista-Qualität.',asin:'B0000E1ZFM'},
+  {id:27,name:'Aeropress Kaffeebereiter',cat:'Kaffee',price:'29-39€',rating:4.8,priceVal:33,tags:['kaffee','holz','anfaenger','hobbykoch','fortgeschritten','profi','unter50'],desc:'Brillanter Filterkaffee in Sekunden – einfach & genial.',asin:'B0000GQZQY'},
+  {id:28,name:'Bialetti Moka Express 3 Tassen',cat:'Kaffee',price:'19-29€',rating:4.5,priceVal:24,tags:['kaffee','edelstahl','anfaenger','hobbykoch','unter50'],desc:'Italienischer Klassiker für starken Kaffee auf dem Herd.',asin:'B0000CMNJW'},
+  {id:29,name:'Hario V60 Drip Decanter Set',cat:'Kaffee',price:'34-49€',rating:4.4,priceVal:42,tags:['kaffee','keramik','holz','hobbykoch','fortgeschritten','unter50','50-150'],desc:'Handaufguss-Set für puren Filterkaffee-Genuss.',asin:'B0000CF3QE'},
+  {id:30,name:'Melitta Barista TS Smart',cat:'Kaffee',price:'599-799€',rating:4.3,priceVal:690,tags:['kaffee','edelstahl','fortgeschritten','profi','600plus'],desc:'Vollautomat mit App-Steuerung für individuellen Kaffeegenuss.',asin:'B0000E1WI8'},
+
+  // ––– AUFBEWAHREN –––
+  {id:31,name:'IKEA 365+ Aufbewahrungsdosen Set 5er',cat:'Aufbewahren',price:'7-15€',rating:4.3,priceVal:10,tags:['aufbewahren','edelstahl','anfaenger','hobbykoch','unter50'],desc:'Günstige Frischhaltedosen – stapelbar und vielseitig.',asin:'B0000CGBJW'},
+  {id:32,name:'WECK Vorratsgläser Set 6er',cat:'Aufbewahren',price:'18-29€',rating:4.5,priceVal:24,tags:['aufbewahren','holz','anfaenger','hobbykoch','unter50','50-150'],desc:'Klassische Einmachgläser – Vorräte stilvoll lagern.',asin:'B0000CMK2K'},
+  {id:33,name:'Twist-Ritzel Vorratsdosen 8er',cat:'Aufbewahren',price:'34-49€',rating:4.6,priceVal:42,tags:['aufbewahren','edelstahl','holz','hobbykoch','fortgeschritten','50-150'],desc:'Design-Dosen mit Holzdeckel – luftdicht praktisch.',asin:'B0000CFNJH'},
+  {id:34,name:'Lock & Lock Frischhaltedosen Set',cat:'Aufbewahren',price:'24-39€',rating:4.4,priceVal:30,tags:['aufbewahren','silikon','anfaenger','hobbykoch','unter50','50-150'],desc:'100% dichte Dosen – auslaufsicher und mikrowellengeeignet.',asin:'B0000CMG7H'},
+  {id:35,name:'Contacto Edelstahl Vorratsbehälter 3L',cat:'Aufbewahren',price:'39-59€',rating:4.5,priceVal:48,tags:['aufbewahren','edelstahl','fortgeschritten','50-150'],desc:'Große Edelstahlbox – hygienisch für Mehl, Reis & Co.',asin:'B0000CGLQ4'},
+
+  // ––– ALLGEMEINE KÜCHENHELFER –––
+  {id:36,name:'Microplane Premium Zestenreißer',cat:'Allgemein',price:'14-19€',rating:4.7,priceVal:16,tags:['schneiden','holz','anfaenger','hobbykoch','fortgeschritten','profi','unter50'],desc:'Scharfe Zestenreibe aus Edelstahl – für Zitrus & Parmesan.',asin:'B0000CGBK5'},
+  {id:37,name:'OXO Good Grips Gemüseschäler',cat:'Allgemein',price:'9-14€',rating:4.5,priceVal:11,tags:['schneiden','holz','anfaenger','hobbykoch','unter50'],desc:'Ergonomischer Schäler mit rutschfestem Griff.',asin:'B0000CG5H0'},
+  {id:38,name:'Thermapen ONE Kerntemperaturfühler',cat:'Allgemein',price:'59-79€',rating:4.9,priceVal:69,tags:['kochen','edelstahl','fortgeschritten','profi','50-150'],desc:'Professionelles Thermometer für perfekte Garergebnisse.',asin:'B0000E1DI8'},
+  {id:39,name:'Joseph Joseph Nest 9-teilig',cat:'Allgemein',price:'34-54€',rating:4.5,priceVal:44,tags:['kochen','holz','silikon','anfaenger','hobbykoch','unter50','50-150'],desc:'Platzsparender Küchenhelfer-Set – 9 Utensilien zum Einnesten.',asin:'B0000CG5H2'},
+  {id:40,name:'OXO Salz- & Pfeffermühle',cat:'Allgemein',price:'24-39€',rating:4.4,priceVal:32,tags:['holz','keramik','anfaenger','hobbykoch','unter50','50-150'],desc:'Mühlen mit Keramikmahlwerk – präzise Dosierung.',asin:'B0000CG5H4'},
+  {id:41,name:'Rösle Edelstahl-Küchenschere',cat:'Allgemein',price:'29-44€',rating:4.6,priceVal:36,tags:['schneiden','edelstahl','hobbykoch','fortgeschritten','unter50','50-150'],desc:'Hochwertige Küchenschere – zerlegbar und spülmaschinenfest.',asin:'B0000CGM33'},
+  {id:42,name:'Küchenprofi Edelstahl-Schaumlöffel',cat:'Allgemein',price:'12-18€',rating:4.4,priceVal:15,tags:['kochen','edelstahl','anfaenger','hobbykoch','unter50'],desc:'Klassischer Schaumlöffel aus Edelstahl – langlebig.',asin:'B0000CGBK8'},
+
+  // ––– SPEZIALGERÄTE –––
+  {id:43,name:'Thermomix TM6',cat:'Spezial',price:'1.299-1.499€',rating:4.7,priceVal:1390,tags:['mixen','kochen','backen','edelstahl','profi','600plus'],desc:'Der All-in-One-Küchenroboter – Kochen, Mixen, Dampfgaren.',asin:'B0000E1FPJ'},
+  {id:44,name:'KitchenAid Stabmixer 2in1',cat:'Spezial',price:'69-99€',rating:4.5,priceVal:84,tags:['mixen','edelstahl','hobbykoch','fortgeschritten','50-150','150-300'],desc:'Leistungsstarker Pürierstab mit Zerkleinerer-Aufsatz.',asin:'B0000CFHGW'},
+  {id:45,name:'Breville Joule Sous-Vide',cat:'Spezial',price:'129-179€',rating:4.7,priceVal:155,tags:['kochen','edelstahl','fortgeschritten','profi','150-300'],desc:'Präzises Sous-Vide-Garen – perfekt für Steak & Fisch.',asin:'B0000E1ZFL'},
+  {id:46,name:'Hudson Reed Heißwasserhahn',cat:'Spezial',price:'129-189€',rating:4.4,priceVal:160,tags:['kochen','edelstahl','fortgeschritten','150-300'],desc:'Sofort kochendes Wasser am Wasserhahn – Zeitersparnis pur.',asin:'B0000CGBJH'},
+  {id:47,name:'Eismaschine Unold 1,2L',cat:'Spezial',price:'79-119€',rating:4.3,priceVal:98,tags:['backen','edelstahl','hobbykoch','fortgeschritten','50-150','150-300'],desc:'Kompakte Eismaschine für selbstgemachtes Speiseeis.',asin:'B0000CMH2S'},
+  {id:48,name:'WMF Lono Bräter & Dampfgarer',cat:'Spezial',price:'129-179€',rating:4.5,priceVal:150,tags:['kochen','edelstahl','hobbykoch','fortgeschritten','150-300'],desc:'Bräter mit Dampfeinsatz – vielseitig und platzsparend.',asin:'B0000CNU9Y'},
+
+  // ––– KLEIN-UTENSILIEN –––
+  {id:49,name:'Küchenprofi Knoblauchpresse',cat:'Utensilien',price:'12-18€',rating:4.3,priceVal:15,tags:['schneiden','edelstahl','anfaenger','hobbykoch','unter50'],desc:'Robuste Knoblauchpresse aus Edelstahl – leicht zu reinigen.',asin:'B0000CGBK6'},
+  {id:50,name:'OXO Gemüse-Zerkleinerer',cat:'Utensilien',price:'15-24€',rating:4.4,priceVal:19,tags:['schneiden','edelstahl','holz','anfaenger','hobbykoch','unter50'],desc:'Hand-Zerkleinerer für Zwiebeln & Gemüse – schnell gezupft.',asin:'B0000CG5H1'},
+  {id:51,name:'Rösle Dosenöffner Edelstahl',cat:'Utensilien',price:'22-34€',rating:4.6,priceVal:28,tags:['edelstahl','anfaenger','hobbykoch','unter50','50-150'],desc:'Schweizer Qualität – Dosenöffner für saubere Kanten.',asin:'B0000CGM32'},
+  {id:52,name:'Microplane Reibe mittelfein',cat:'Utensilien',price:'14-19€',rating:4.6,priceVal:17,tags:['schneiden','edelstahl','hobbykoch','fortgeschritten','unter50'],desc:'Vielseitige Reibe für Ingwer, Parmesan & Knoblauch.',asin:'B0000CGBK7'},
+  {id:53,name:'Joseph Joseph Schüssel-Set 3er',cat:'Utensilien',price:'29-44€',rating:4.5,priceVal:36,tags:['backen','kochen','holz','anfaenger','hobbykoch','unter50','50-150'],desc:'Stapelbare Rührschüsseln mit rutschfestem Boden.',asin:'B0000CG5H3'},
+  {id:54,name:'WMF Profi Plus Teigschaber',cat:'Utensilien',price:'9-14€',rating:4.4,priceVal:11,tags:['backen','silikon','edelstahl','anfaenger','hobbykoch','unter50'],desc:'Flexibler Teigschaber – restlos Auskratzen.',asin:'B0000CNU9X'}
+];
+
+const BUDGET_RANGES = {
+  'unter50':{label:'Unter 50 €',max:50},
+  '50-150':{label:'50–150 €',max:150},
+  '150-300':{label:'150–300 €',max:300},
+  '300-600':{label:'300–600 €',max:600},
+  '600plus':{label:'600 €+',max:Infinity}
+};
+
+const EXP_LABELS = {'anfaenger':'Anfänger','hobbykoch':'Hobbykoch','fortgeschritten':'Fortgeschritten','profi':'Profi'};
+const NEED_LABELS = {'schneiden':'Schneiden','kochen':'Kochen','backen':'Backen','mixen':'Mixen','kaffee':'Kaffee','aufbewahren':'Aufbewahren'};
+const PERS_LABELS = {'1':'1 Person','2':'2 Personen','3-4':'3–4 Personen','5plus':'5+ Personen'};
+const SIZE_LABELS = {'mini':'Miniküche','mittel':'Mittel','gross':'Groß','gewerblich':'Gewerblich'};
+const MAT_LABELS = {'edelstahl':'Edelstahl','gusseisen':'Gusseisen','keramik':'Keramik','antihaft':'Antihaft','holz':'Holz','silikon':'Silikon'};
+
+let currentStep = 1;
+const totalSteps = 6;
+
+function nextStep(){
+  const radios = document.querySelectorAll(`.step[data-step="${currentStep}"] input[type="radio"]`);
+  let checked = false;
+  radios.forEach(r=>{if(r.checked)checked=true});
+  if(!checked) return;
+  if(currentStep<totalSteps){currentStep++;renderStep()}
+  else if(currentStep===totalSteps){showResults()}
+}
+
+function prevStep(){
+  if(currentStep>1){currentStep--;renderStep()}
+}
+
+function renderStep(){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+  document.getElementById('progressFill').style.width=((currentStep-1)/totalSteps*100)+'%';
+  document.getElementById('progressText').textContent=(currentStep-1)+'/6';
+  document.getElementById('prevBtn').style.display=currentStep===1?'none':'inline-flex';
+  const nextBtn=document.getElementById('nextBtn');
+  if(currentStep===totalSteps){nextBtn.textContent='🔍 Ergebnisse anzeigen'}else{nextBtn.textContent='Weiter →'}
+}
+
+function getAnswers(){
+  return{
+    q1:document.querySelector('input[name="q1"]:checked')?.value||'',
+    q2:document.querySelector('input[name="q2"]:checked')?.value||'',
+    q3:document.querySelector('input[name="q3"]:checked')?.value||'',
+    q4:document.querySelector('input[name="q4"]:checked')?.value||'',
+    q5:document.querySelector('input[name="q5"]:checked')?.value||'',
+    q6:document.querySelector('input[name="q6"]:checked')?.value||''
+  };
+}
+
+function showResults(){
+  const a=getAnswers();
+  if(!a.q1||!a.q2||!a.q3||!a.q4||!a.q5||!a.q6) return;
+
+  document.getElementById('wizard').classList.add('hidden');
+  document.getElementById('resultsCard').classList.remove('hidden');
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('progressText').textContent='6/6';
+
+  const filtered = CATALOG.filter(p=>{
+    const needTag = {schneiden:'schneiden',kochen:'kochen',backen:'backen',mixen:'mixen',kaffee:'kaffee',aufbewahren':'aufbewahren'}[a.q3];
+    const matTag = a.q6;
+    let score = 0;
+    if(p.tags.includes(needTag)) score+=4;
+    if(p.tags.includes(matTag)) score+=3;
+    if(p.tags.includes(a.q1)) score+=3;
+    if(p.tags.includes(a.q2)) score+=2;
+    const persons = a.q4;
+    if(persons==='1'&&p.priceVal<60) score+=1;
+    if(persons==='5plus'&&p.cat!=='Aufbewahren'&&p.cat!=='Utensilien') score+=1;
+    const kitchenSize = a.q5;
+    if(kitchenSize==='mini'&&p.priceVal<60) score+=1;
+    if(kitchenSize==='gewerblich'&&p.tags.includes('profi')) score+=2;
+    return score>0?score:0;
+  });
+
+  filtered.sort((a,b)=>b.score-a.score||b.rating-a.rating);
+  const top12 = filtered.slice(0,12);
+
+  const budgetInfo = BUDGET_RANGES[a.q2]||{label:'Unbekannt',max:Infinity};
+  const totalCost = top12.reduce((s,p)=>s+p.priceVal,0);
+  const budgetOk = budgetInfo.max===Infinity?true:totalCost<=budgetInfo.max;
+
+  const expLabel = EXP_LABELS[a.q1]||a.q1;
+  const needLabel = NEED_LABELS[a.q3]||a.q3;
+  const persLabel = PERS_LABELS[a.q4]||a.q4;
+  const sizeLabel = SIZE_LABELS[a.q5]||a.q5;
+  const matLabel = MAT_LABELS[a.q6]||a.q6;
+
+  let html = '';
+  html+='<h2>🎯 Deine personalisierten Empfehlungen</h2>';
+  html+=`<div class="summary-badge">
+    <span><span class="label">Erfahrung:</span> <span class="value">${expLabel}</span></span>
+    <span><span class="label">Budget:</span> <span class="value">${budgetInfo.label}</span></span>
+    <span><span class="label">Fokus:</span> <span class="value">${needLabel}</span></span>
+    <span><span class="label">Personen:</span> <span class="value">${persLabel}</span></span>
+    <span><span class="label">Küche:</span> <span class="value">${sizeLabel}</span></span>
+    <span><span class="label">Material:</span> <span class="value">${matLabel}</span></span>
+  </div>`;
+
+  if(top12.length===0){
+    html+=`<div class="no-results"><p>😕 Leider keine passenden Produkte gefunden. Versuche andere Antworten.</p></div>`;
+  }else{
+    html+=`<div class="budget-overview">
+      <div class="budget-total">${budgetOk?'✅':'⚠️'} Gesamt: ${totalCost.toFixed(0)} € ${budgetInfo.label!=='600 €+'?`(Budget: ${budgetInfo.label})`:''}</div>
+      <div class="budget-detail">${budgetOk?'Die empfohlenen Produkte liegen innerhalb deines Budgetrahmens.':'Einige Produkte liegen über deinem Budget – priorisiere nach Bedarf.'}</div>
+    </div>`;
+    html+=`<div class="results-grid">`;
+    top12.forEach(p=>{
+      const stars = getStars(p.rating);
+      const amzLink = `${AMZ_BASE}${p.asin}?${AFF_TAG}`;
+      html+=`<div class="result-card">
+        <span class="cat-tag">${p.cat}</span>
+        <h3>${p.name}</h3>
+        <div class="price-range">💰 ${p.price} €</div>
+        <div class="rating">${stars} ${p.rating.toFixed(1)}</div>
+        <div class="desc">${p.desc}</div>
+        <a class="aff-btn" href="${amzLink}" target="_blank" rel="noopener sponsored">Auf Amazon ansehen →</a>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+
+  html+=`<div class="tips">
+    <h3>💡 Spartipps für deine Küche</h3>
+    <ul>
+      <li>Setze Prioritäten: Investiere in die Produkte, die du täglich nutzt (Messer, Pfanne).</li>
+      <li>Edelstahl und Gusseisen halten Jahrzehnte – das lohnt sich langfristig.</li>
+      <li>Aufbewahrung: Stapelbare Behälter und Weckgläser sind günstig & vielseitig.</li>
+      <li>Kaufe Basics bei Marken wie Victorinox oder Tefal – Profi-Qualität zum kleinen Preis.</li>
+      <li>Second-Hand: Hochwertige Gusseisen-Töpfe und Küchenmaschinen gibt es oft gebraucht.</li>
+      <li>Starte mit einem guten Kochmesser und einer beschichteten Pfanne – das deckt 80% ab.</li>
+    </ul>
+  </div>`;
+
+  document.getElementById('resultsContent').innerHTML = html;
+}
+
+function getStars(rating){
+  const full = Math.floor(rating);
+  const half = rating-full>=0.5?1:0;
+  let s='';
+  for(let i=0;i<full;i++) s+='★';
+  if(half) s+='½';
+  const empty = 5-full-half;
+  for(let i=0;i<empty;i++) s+='☆';
+  return s;
+}
+
+function resetQuiz(){
+  document.getElementById('quizForm').reset();
+  document.getElementById('resultsCard').classList.add('hidden');
+  document.getElementById('wizard').classList.remove('hidden');
+  currentStep=1;
+  renderStep();
+}
+
+renderStep();
+</script>
+</body>
+</html>
