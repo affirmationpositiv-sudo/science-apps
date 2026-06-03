@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏋️ Heim-Fitnessstudio-Konfigurator 2026 – Finde deine perfekte Fitnessausstattung | Licht und Schatten</title>
+<meta name="description" content="Interaktiver Heim-Fitnessstudio-Konfigurator 2026: Beantworte 6 Fragen und erhalte personalisierte Fitnessgeräte-Empfehlungen – Hanteln, Cardiogeräte, Yoga-Zubehör & mehr. Mit Budget-Übersicht, Spartipps & Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Heim Fitnessstudio Konfigurator, Fitnessgeräte, Home Gym, Fitnessstudio Zuhause, Produktberatung, Trainingsgeräte, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="🏋️ Heim-Fitnessstudio-Konfigurator 2026">
+<meta property="og:description" content="Finde in 6 Fragen deine perfekte Heim-Fitnessausstattung mit personalisierten Top-12-Empfehlungen, Budget-Vergleich & Spartipps.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/sport-fitness-konfigurator.html">
+<meta property="og:site_name" content="Licht und Schatten">
+<meta property="og:locale" content="de_DE">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; }
+.container { max-width: 820px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 2.2em; font-weight: 800; background: linear-gradient(135deg,#22C55E,#8B5CF6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-align:center; margin: 20px 0 8px; }
+.subtitle { text-align:center; color:#888; margin-bottom: 30px; font-size:1.05em; }
+.steps { display:flex; justify-content:center; gap:10px; margin-bottom: 30px; flex-wrap:wrap; }
+.step { width: 36px; height: 36px; border-radius: 50%; background: #1A1A1A; border: 2px solid #2A2A2A; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85em; color:#555; transition: all .3s; }
+.step.active { background: linear-gradient(135deg,#22C55E,#8B5CF6); border-color:#22C55E; color:#000; }
+.step.done { background: #0d3d0d; border-color:#22C55E; color:#22C55E; }
+.card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 30px; margin-bottom: 20px; }
+.card h2 { color: #22C55E; font-size: 1.3em; margin-bottom: 6px; }
+.card p { color: #888; margin-bottom: 20px; }
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.option { background: #151515; border: 2px solid #2A2A2A; border-radius: 12px; padding: 16px; cursor: pointer; transition: all .3s; text-align:center; user-select:none; }
+.option:hover { border-color: #22C55E; background: #1a2a1a; }
+.option.selected { border-color: #22C55E; background: #0d2d0d; }
+.option .icon { font-size: 2em; margin-bottom: 6px; }
+.option .label { color: #fff; font-weight: 600; font-size: .95em; }
+.option .desc { color: #888; font-size: .8em; margin-top: 4px; }
+.checkbox-option { display:flex; align-items:center; gap:12px; background:#151515; border:2px solid #2A2A2A; border-radius:12px; padding:14px 16px; cursor:pointer; transition:all .3s; }
+.checkbox-option:hover { border-color:#22C55E; background:#1a2a1a; }
+.checkbox-option.selected { border-color:#22C55E; background:#0d2d0d; }
+.checkbox-option .check { width:22px; height:22px; border:2px solid #555; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:14px; color:transparent; flex-shrink:0; transition:all .3s; }
+.checkbox-option.selected .check { border-color:#22C55E; background:#22C55E; color:#000; }
+.checkbox-option .icon { font-size:1.4em; flex-shrink:0; }
+.checkbox-option .label { color:#fff; font-weight:600; font-size:.95em; }
+.checkbox-option .desc { color:#888; font-size:.8em; margin-top:2px; }
+.btn-row { display:flex; gap: 12px; margin-top: 20px; flex-wrap:wrap; }
+.btn { padding: 12px 28px; border-radius: 30px; border: none; font-weight: 700; font-size: 1em; cursor: pointer; transition: all .3s; font-family:'Inter',sans-serif; }
+.btn-primary { background: linear-gradient(135deg,#22C55E,#8B5CF6); color: #000; }
+.btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(34,197,94,.3); }
+.btn-primary:disabled { opacity:.4; cursor:not-allowed; }
+.btn-secondary { background: #2A2A2A; color: #e0e0e0; }
+.btn-secondary:hover { background: #333; }
+.btn-small { padding: 8px 18px; font-size: .85em; }
+.btn-success { background: linear-gradient(135deg,#22C55E,#16a34a); color:#000; }
+.btn-gold { background:#FFD700; color:#000; }
+.btn-gold:hover { transform:translateY(-2px); box-shadow:0 4px 15px rgba(255,215,0,.3); }
+
+.results { display: none; }
+.result-card { background: #1A1A1A; border: 1px solid #22C55E; border-radius: 14px; padding: 18px; margin-bottom: 14px; transition: all .3s; }
+.result-card:hover { border-color: #8B5CF6; transform: translateY(-2px); }
+.result-card h4 { color: #FFD700; font-size: 1em; margin-bottom: 4px; }
+.result-card .category { color: #22C55E; font-size: .8em; font-weight:600; margin-bottom: 4px; }
+.result-card .price { color: #22C55E; font-weight: 600; font-size: .9em; }
+.result-card .why { color: #999; font-size: .85em; margin: 6px 0; }
+.result-card .amz { display: inline-block; background: #FFD700; color: #000 !important; font-weight: 600; padding: 4px 14px; border-radius: 20px; font-size: .8em; text-decoration: none; transition:all .3s; }
+.result-card .amz:hover { transform:scale(1.05); }
+.summary-box { background: #0d1d0d; border: 1px solid #22C55E; border-radius: 16px; padding: 24px; margin: 20px 0; }
+.summary-box h3 { color: #22C55E; margin-bottom: 12px; }
+.summary-box .total { font-size: 1.6em; font-weight: 800; color: #FFD700; }
+.tip-box { background: #1a1a0d; border: 1px solid #3d3d0d; border-radius: 12px; padding: 18px; margin: 16px 0; }
+.tip-box h4 { color:#FFD700; margin-bottom:8px; }
+.tip-box ul { color:#bbb; font-size:.9em; padding-left:20px; }
+.tip-box ul li { margin-bottom:4px; }
+.disclaimer { background: #1a1a0d; border: 1px solid #3d3d0d; border-radius: 12px; padding: 14px; margin: 24px 0; font-size: .8em; color: #aaa; text-align:center; }
+.disclaimer a { color:#8B5CF6; }
+footer { text-align:center; padding: 20px; color: #555; font-size: .85em; }
+footer a { color: #8B5CF6; text-decoration:none; }
+.hidden { display: none; }
+.selection-count { text-align:center; color:#888; font-size:.85em; margin-top:10px; }
+@media (max-width: 600px) { .options { grid-template-columns: 1fr; } h1 { font-size: 1.6em; } .checkbox-option { padding:12px; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<div style="text-align:center;margin-bottom:8px;"><span style="display:inline-block;background:#22C55E;color:#000;padding:4px 14px;border-radius:20px;font-size:.85em;font-weight:600;">🏋️ KOSTENLOS</span></div>
+<h1>🏋️ Heim-Fitnessstudio-Konfigurator 2026</h1>
+<p class="subtitle">Beantworte 6 Fragen und erhalte personalisierte Fitnessgeräte-Empfehlungen für dein perfektes Heim-Fitnessstudio</p>
+
+<div class="steps" id="stepIndicators">
+<div class="step active" id="step1">1</div>
+<div class="step" id="step2">2</div>
+<div class="step" id="step3">3</div>
+<div class="step" id="step4">4</div>
+<div class="step" id="step5">5</div>
+<div class="step" id="step6">6</div>
+</div>
+
+<div id="questionArea"></div>
+<div id="resultsArea" class="results"></div>
+
+</div>
+
+<footer>
+    <p><a href="https://affirmationpositiv-sudo.github.io/science-apps/blog/fitness-wellness-2026.html">← Zurück zum Ratgeber</a> · <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">Alle Amazon-Angebote</a></p>
+    <p style="margin-top:6px;">Amazon-Partnerwerbung · Als Amazon-Partner verdienen wir an qualifizierten Verkäufen</p>
+</footer>
+
+<script>
+// ==================== PRODUCT DATABASE (60+ Products) ====================
+const ALL_PRODUCTS = [
+    // ===== Hanteln =====
+    { name: "Bowflex SelectTech 552 Kurzhantelset", cat: "Hanteln", price: 399, amz: "Bowflex+SelectTech+552", tags: ["weights","dumbbells","adjustable","strength","medium-space","intermediate","pro"], why: "5-52kg verstellbar – 15 Hanteln in einem" },
+    { name: "PowerBlock Elite EXP 50", cat: "Hanteln", price: 349, amz: "PowerBlock+Elite+EXP+50", tags: ["weights","dumbbells","adjustable","strength","compact","intermediate"], why: "Kompaktes Wechselsystem 2,5-24,5kg pro Hantel" },
+    { name: "Gorilla Sports Kurzhantel-Set 30kg", cat: "Hanteln", price: 89.99, amz: "Gorilla+Sports+Kurzhantel+Set", tags: ["weights","dumbbells","strength","beginner","re-entry","budget"], why: "Komplettset mit Ablage – ideal für Einsteiger" },
+    { name: "Sportneer Adjustable Dumbbells 20kg", cat: "Hanteln", price: 159.99, amz: "Sportneer+Adjustable+Dumbbells", tags: ["weights","dumbbells","adjustable","strength","compact","beginner","re-entry"], why: "Platzsparend & schnell verstellbar 1-20kg" },
+    { name: "CAP Barbell Coated Dumbbell Set 40kg", cat: "Hanteln", price: 119.99, amz: "CAP+Barbell+Coated+Dumbbell+Set", tags: ["weights","dumbbells","strength","beginner","budget"], why: "Gummiert & geräuscharm – perfekt für Zuhause" },
+    { name: "Gorilla Sports Premium Kurzhantel 20kg", cat: "Hanteln", price: 59.99, amz: "Gorilla+Sports+Premium+Kurzhantel", tags: ["weights","dumbbells","strength","beginner","budget","compact"], why: "Einzelhantel 20kg mit Chromgriff" },
+
+    // ===== Langhanteln =====
+    { name: "Gorilla Sports Langhantel-Set 50kg", cat: "Langhanteln", price: 149.99, amz: "Gorilla+Sports+Langhantel+Set+50kg", tags: ["weights","barbell","strength","beginner","re-entry","medium-space"], why: "Komplett-Set mit Hantelscheiben & Ablage" },
+    { name: "Bell Sport Olympic Langhantel-Set 70kg", cat: "Langhanteln", price: 229.99, amz: "Bell+Sport+Olympic+Langhantel+Set", tags: ["weights","barbell","strength","intermediate","medium-space","pro"], why: "Olympia-Standard 50mm mit Kugellagern" },
+    { name: "Sveltus Hantelscheiben-Set 100kg", cat: "Langhanteln", price: 319, amz: "Sveltus+Hantelscheiben+Set+100kg", tags: ["weights","barbell","strength","intermediate","pro","large-space"], why: "Gummiertes Gewichtsscheiben-Set 2x 1,25-20kg" },
+    { name: "Fitness Reality 150kg Langhantel-Set", cat: "Langhanteln", price: 499, amz: "Fitness+Reality+150kg+Langhantel+Set", tags: ["weights","barbell","strength","pro","large-space","full-gym"], why: "150kg Profi-Set mit olympischer Stange" },
+
+    // ===== Hantelbänke =====
+    { name: "Flybird Adjustable Weight Bench", cat: "Hantelbänke", price: 169.99, amz: "Flybird+Adjustable+Weight+Bench", tags: ["bench","strength","adjustable","compact","beginner","re-entry"], why: "Verstellbar 7 Positionen – platzsparend & stabil" },
+    { name: "Marcy Adjustable Utility Bench", cat: "Hantelbänke", price: 129.99, amz: "Marcy+Adjustable+Utility+Bench", tags: ["bench","strength","adjustable","beginner","budget","medium-space"], why: "6 Positionen mit Beinstrecker & Gewichtshalter" },
+    { name: "Gorilla Sports FID-Bank Pro", cat: "Hantelbänke", price: 279, amz: "Gorilla+Sports+FID+Bank+Pro", tags: ["bench","strength","adjustable","intermediate","pro","medium-space"], why: "Flach-Schräg-Beinstrecker – professionelle Qualität" },
+    { name: "Fitness Reality 1000 Super Max", cat: "Hantelbänke", price: 349.99, amz: "Fitness+Reality+1000+Super+Max+Bench", tags: ["bench","strength","adjustable","intermediate","pro","large-space"], why: "Premium-FID-Bank mit 900lbs Belastbarkeit" },
+
+    // ===== Kettlebells =====
+    { name: "Gorilla Sports Kettlebell Set 4-20kg", cat: "Kettlebells", price: 129.99, amz: "Gorilla+Sports+Kettlebell+Set", tags: ["kettlebell","functional","strength","compact","beginner","re-entry","medium-space"], why: "5 Kettlebells 4-20kg inkl. Ständer" },
+    { name: "Onnit Kettlebell 16kg", cat: "Kettlebells", price: 74.99, amz: "Onnit+Kettlebell+16kg", tags: ["kettlebell","functional","strength","compact","intermediate"], why: "Powder-Coated – perfekte Griffigkeit" },
+    { name: "Rogue Kettlebell 24kg", cat: "Kettlebells", price: 89.99, amz: "Rogue+Kettlebell+24kg", tags: ["kettlebell","functional","strength","pro","compact"], why: "Eisenkern mit Gummiboden – Profi-Qualität" },
+    { name: "Sportsteel Kettlebell 12kg", cat: "Kettlebells", price: 39.99, amz: "Sportsteel+Kettlebell+12kg", tags: ["kettlebell","functional","strength","compact","beginner","budget"], why: "Günstige Einstiegs-Kettlebell mit rutschfestem Griff" },
+
+    // ===== Cardio =====
+    { name: "Concept2 RowErg Rudergerät", cat: "Cardio", price: 990, amz: "Concept2+RowErg+Rudergerät", tags: ["cardio","endurance","conditioning","rowing","full-gym","large-space","pro","intermediate"], why: "Goldstandard der Rudergeräte – leise & präzise" },
+    { name: "WaterRower Natural Holzrudergerät", cat: "Cardio", price: 1349, amz: "WaterRower+Natural+Holzrudergerät", tags: ["cardio","endurance","rowing","full-gym","large-space","pro","premium"], why: "Wasserwiderstand aus massivem Kirschholz – Designobjekt" },
+    { name: "NordicTrack Commercial 1750 Laufband", cat: "Cardio", price: 1799, amz: "NordicTrack+Commercial+1750+Laufband", tags: ["cardio","endurance","treadmill","running","full-gym","large-space","pro","premium"], why: "Professionell mit 22-Zoll-Touchscreen & iFit" },
+    { name: "Schwinn IC3 Indoor Cycle", cat: "Cardio", price: 449, amz: "Schwinn+IC3+Indoor+Cycle", tags: ["cardio","endurance","bike","cycling","large-space","intermediate","medium-space"], why: "Schwungrad 20kg mit verstellbarem Sitz & Lenker" },
+    { name: "Horizon 7.0AT Laufband", cat: "Cardio", price: 1299, amz: "Horizon+7.0AT+Laufband", tags: ["cardio","endurance","treadmill","running","large-space","intermediate","pro"], why: "3,0 PS Motor mit faltbarem Rahmen & Dämpfung" },
+    { name: "Sportsteel Crosstrainer ESX700", cat: "Cardio", price: 599, amz: "Sportsteel+Crosstrainer+ESX700", tags: ["cardio","endurance","elliptical","medium-space","intermediate"], why: "Ellipsentrainer mit 14 Programmen & Pulsmessung" },
+    { name: "Crossrope Jump Rope Set", cat: "Cardio", price: 49.99, amz: "Crossrope+Jump+Rope+Set", tags: ["cardio","endurance","jump-rope","compact","beginner","budget","outdoor","portable"], why: "2 Seile (leicht/schwer) mit Smartphone-App" },
+    { name: "Elite Jumps Speed Rope", cat: "Cardio", price: 14.99, amz: "Elite+Jumps+Speed+Rope", tags: ["cardio","endurance","jump-rope","compact","beginner","budget","outdoor","portable"], why: "Kugellager-Sprungseil – schnell, leicht, günstig" },
+
+    // ===== Kraftstationen =====
+    { name: "Marcy Smith Cage System MWM-990", cat: "Kraftstationen", price: 749, amz: "Marcy+Smith+Cage+System+MWM+990", tags: ["strength","cage","full-gym","large-space","intermediate","pro"], why: "Smith-Maschine mit Klimmzugstange & Latzug" },
+    { name: "Gorilla Sports Power Rack Pro", cat: "Kraftstationen", price: 499, amz: "Gorilla+Sports+Power+Rack+Pro", tags: ["strength","cage","rack","full-gym","large-space","intermediate","pro"], why: "Stabiles Power Rack mit Dip-Station & Klimmzug" },
+    { name: "Fitness Reality Power Cage 810XLT", cat: "Kraftstationen", price: 399, amz: "Fitness+Reality+Power+Cage+810XLT", tags: ["strength","cage","rack","large-space","intermediate","medium-space"], why: "Käfig mit integrierten Dip-Griffen & J-Hooks" },
+    { name: "Bell Sport Power Rack Premium", cat: "Kraftstationen", price: 649, amz: "Bell+Sport+Power+Rack+Premium", tags: ["strength","cage","rack","full-gym","large-space","pro"], why: "Profi-Power-Rack mit Kabelzug & vielen Extras" },
+    { name: "Dip Station Pro Plus", cat: "Kraftstationen", price: 89.99, amz: "Dip+Station+Pro+Plus", tags: ["strength","dips","bodyweight","compact","beginner","budget","medium-space"], why: "Klappbare Dip-Station mit Liegestütz-Griffen" },
+
+    // ===== Klimmzugstangen =====
+    { name: "Iron Gym Pull-Up Bar", cat: "Klimmzugstangen", price: 29.99, amz: "Iron+Gym+Pull+Up+Bar", tags: ["pullup","bodyweight","strength","compact","beginner","budget","small-space","foldable"], why: "Türrahmen-Klimmzugstange – ohne Bohren montiert" },
+    { name: "Pullup & Dip Bar Universal", cat: "Klimmzugstangen", price: 59.99, amz: "Pullup+Dip+Bar+Universal", tags: ["pullup","bodyweight","strength","compact","beginner","budget","small-space"], why: "Klimmzüge & Dips in einem – stabil & vielseitig" },
+    { name: "Gorilla Sports Wall-Mounted Pull-Up Bar", cat: "Klimmzugstangen", price: 79.99, amz: "Gorilla+Sports+Wall+Mounted+Pull+Up+Bar", tags: ["pullup","bodyweight","strength","medium-space","intermediate","foldable"], why: "Wandmontierte Klimmzugstange mit Liegestützgriffen" },
+    { name: "Relife Wall-Mounted Pull-Up Bar", cat: "Klimmzugstangen", price: 139.99, amz: "Relife+Wall+Mounted+Pull+Up+Bar", tags: ["pullup","bodyweight","strength","medium-space","intermediate","pro"], why: "Profi-Klimmzugstange mit 3 Griffvarianten" },
+
+    // ===== Widerstandsbänder =====
+    { name: "TheraBand CLX Übungsband", cat: "Widerstandsbänder", price: 44.99, amz: "TheraBand+CLX+Übungsband", tags: ["bands","resistance","flexibility","compact","beginner","re-entry","budget","yoga","pilates","portable"], why: "Patentiertes Loop-System mit 5 Widerstandsstufen" },
+    { name: "WODfitters Resistance Bands Set", cat: "Widerstandsbänder", price: 29.99, amz: "WODfitters+Resistance+Bands+Set", tags: ["bands","resistance","strength","compact","beginner","budget","portable"], why: "5 Bänder 4,5-45kg inkl. Türhaken & Tragetasche" },
+    { name: "Serious Steel Resistance Bands", cat: "Widerstandsbänder", price: 59.99, amz: "Serious+Steel+Resistance+Bands", tags: ["bands","resistance","strength","compact","intermediate","portable"], why: "7-lagige Latexbänder – extrem reißfest" },
+    { name: "Gorilla Sports Loop Bänder Set", cat: "Widerstandsbänder", price: 19.99, amz: "Gorilla+Sports+Loop+Bänder+Set", tags: ["bands","resistance","compact","beginner","budget","yoga","pilates","portable"], why: "5 Mini-Loops für Aktivierung & Pilates" },
+    { name: "Black Mountain Products Resistance Band Set", cat: "Widerstandsbänder", price: 39.99, amz: "Black+Mountain+Products+Resistance+Band+Set", tags: ["bands","resistance","strength","compact","beginner","budget","portable"], why: "12-teilig mit Türverankerung – komplettes Heimstudio" },
+
+    // ===== Yoga =====
+    { name: "Manduka Pro Yoga Mat 6mm", cat: "Yoga", price: 129, amz: "Manduka+Pro+Yoga+Mat+6mm", tags: ["yoga","pilates","mat","flexibility","stretching","intermediate","pro"], why: "Lebenslange Garantie – die Referenz unter den Yoga-Matten" },
+    { name: "Liforme Yoga Mat Original", cat: "Yoga", price: 149.99, amz: "Liforme+Yoga+Mat+Original", tags: ["yoga","pilates","mat","flexibility","stretching","intermediate","pro"], why: "AlignForMe-System mit rutschfestem Grip – Profi-Liebling" },
+    { name: "JadeYoga Harmony Mat 5mm", cat: "Yoga", price: 89.99, amz: "JadeYoga+Harmony+Mat", tags: ["yoga","pilates","mat","flexibility","stretching","beginner","intermediate"], why: "Ökologisch aus Naturkautschuk – umweltfreundlich & griffig" },
+    { name: "Manduka Cork Yoga Blocks 2er Set", cat: "Yoga", price: 39.99, amz: "Manduka+Cork+Yoga+Blocks", tags: ["yoga","pilates","flexibility","stretching","beginner","budget","compact"], why: "Kork-Blöcke aus nachhaltiger Forstwirtschaft" },
+    { name: "Gaiam Yoga Block Set 2er", cat: "Yoga", price: 19.99, amz: "Gaiam+Yoga+Block+Set", tags: ["yoga","pilates","flexibility","stretching","beginner","budget","compact"], why: "Leichte EVA-Schaum-Blöcke in 3 Größen" },
+    { name: "TriggerPoint Grid Foam Roller", cat: "Yoga", price: 44.99, amz: "TriggerPoint+Grid+Foam+Roller", tags: ["yoga","pilates","massage","recovery","flexibility","stretching","beginner","intermediate","compact"], why: "Multi-Grip-Schaumrolle – myofasziale Entspannung" },
+
+    // ===== Functional =====
+    { name: "TRX All-in-One Suspension Training", cat: "Functional", price: 129.99, amz: "TRX+All+in+One+Suspension+Trainer", tags: ["functional","suspension","bodyweight","strength","compact","intermediate","portable","small-space"], why: "Das Original – ganzheitliches Schlingentraining für Zuhause" },
+    { name: "TRX Pro4 System", cat: "Functional", price: 249.99, amz: "TRX+Pro4+System", tags: ["functional","suspension","bodyweight","strength","compact","pro","portable"], why: "Professionelle Version mit 2 Ankern & 12-Monats-App" },
+    { name: "Dynamax Medicine Ball 5kg", cat: "Functional", price: 49.99, amz: "Dynamax+Medicine+Ball+5kg", tags: ["functional","medicine-ball","strength","core","compact","intermediate","outdoor"], why: "Robuster Medizinball für explosive Übungen" },
+    { name: "TRX Medicine Ball Set 2-6kg", cat: "Functional", price: 139.99, amz: "TRX+Medicine+Ball+Set", tags: ["functional","medicine-ball","strength","core","compact","intermediate","pro"], why: "3 Bälle 2-6kg mit Trainings-Poster" },
+    { name: "Indo Board Original Balance Board", cat: "Functional", price: 99.99, amz: "Indo+Board+Original+Balance+Board", tags: ["functional","balance","core","coordination","compact","beginner","intermediate","small-space"], why: "Für Gleichgewicht, Koordination & Spaß" },
+    { name: "Balance Board Trainer Pro", cat: "Functional", price: 34.99, amz: "Balance+Board+Trainer+Pro", tags: ["functional","balance","core","compact","beginner","budget","small-space"], why: "Einstiegs-Balanceboard für Stabilität & Rumpfkraft" },
+
+    // ===== Boxen =====
+    { name: "Everlast Boxsack 100lb", cat: "Boxen", price: 149.99, amz: "Everlast+Boxsack+100lb", tags: ["boxing","martial-arts","heavy-bag","strength","cardio","medium-space","intermediate","large-space"], why: "Professioneller Boxsack 45kg gefüllt mit Kettenaufhängung" },
+    { name: "Hayabusa T3 Boxing Gloves", cat: "Boxen", price: 119.99, amz: "Hayabusa+T3+Boxing+Gloves", tags: ["boxing","martial-arts","gloves","portable","intermediate","pro"], why: "Doppelter Klettverschluss & Daumenunterstützung" },
+    { name: "Venum Boxing Gloves Kontact 3.0", cat: "Boxen", price: 49.99, amz: "Venum+Boxing+Gloves+Kontact+3.0", tags: ["boxing","martial-arts","gloves","beginner","budget","portable"], why: "Einsteiger-Handschuhe mit belüftetem Innenfutter" },
+    { name: "Fairtex Heavy Bag Set 40kg", cat: "Boxen", price: 179, amz: "Fairtex+Heavy+Bag+Set+40kg", tags: ["boxing","martial-arts","heavy-bag","strength","cardio","medium-space","intermediate"], why: "Premium-Boxsack aus Kunstleder mit Boxhandschuhen" },
+    { name: "Outslayer Heavy Bag 150lb", cat: "Boxen", price: 249, amz: "Outslayer+Heavy+Bag+150lb", tags: ["boxing","martial-arts","heavy-bag","strength","cardio","large-space","pro"], why: "Wasserbefüllbarer Profi-Boxsack für maximales Training" },
+    { name: "Rival Boxing Gloves RS1", cat: "Boxen", price: 89.99, amz: "Rival+Boxing+Gloves+RS1", tags: ["boxing","martial-arts","gloves","intermediate","pro","portable"], why: "Intelligentes Polsterdesign für maximalen Schutz" },
+
+    // ===== Massage =====
+    { name: "Theragun Pro 5.0 Massagepistole", cat: "Massage", price: 449, amz: "Theragun+Pro+5.0+Massagepistole", tags: ["massage","recovery","pro","premium"], why: "Professionelle Tiefenmassage mit Bluetooth & OLED" },
+    { name: "Hyperice Hypervolt 2 Pro", cat: "Massage", price: 329, amz: "Hyperice+Hypervolt+2+Pro", tags: ["massage","recovery","pro","premium"], why: "5-Gang-Motor mit 3 Aufsätzen für Tiefenmuskulatur" },
+    { name: "Achedaway Pro Massage Gun", cat: "Massage", price: 249, amz: "Achedaway+Pro+Massage+Gun", tags: ["massage","recovery","intermediate","pro"], why: "Leise 35dB mit 12mm Amplitude & 6 Aufsätzen" },
+    { name: "Renpho Percussion Massager", cat: "Massage", price: 79.99, amz: "Renpho+Percussion+Massager", tags: ["massage","recovery","beginner","budget","intermediate"], why: "Günstige Massage-Pistole mit 9 Intensitäten & 5 Aufsätzen" },
+    { name: "Hyperice Vyper 2.0 Vibrating Foam Roller", cat: "Massage", price: 149, amz: "Hyperice+Vyper+2.0+Vibrating+Foam+Roller", tags: ["massage","recovery","foam-roller","yoga","flexibility","intermediate","compact"], why: "Vibrations-Schaumrolle mit 3 Geschwindigkeiten" },
+    { name: "TheraSphere Massage Ball", cat: "Massage", price: 39.99, amz: "TheraSphere+Massage+Ball", tags: ["massage","recovery","compact","beginner","budget","portable"], why: "Vibrierende Massagekugel für Triggerpunkt-Therapie" },
+
+    // ===== Wearables =====
+    { name: "Garmin Forerunner 265", cat: "Wearables", price: 449.99, amz: "Garmin+Forerunner+265", tags: ["wearable","tracker","running","cardio","gps","intermediate","pro"], why: "AMOLED-Display mit Trainingsbereitschaft & Körperbatterie" },
+    { name: "Garmin Fenix 7 Sapphire Solar", cat: "Wearables", price: 699.99, amz: "Garmin+Fenix+7+Sapphire+Solar", tags: ["wearable","tracker","gps","outdoor","pro","premium"], why: "Multisport-GPS-Uhr mit Solarladung & Topo-Karten" },
+    { name: "Fitbit Charge 6", cat: "Wearables", price: 159.95, amz: "Fitbit+Charge+6", tags: ["wearable","tracker","running","cardio","gps","beginner","intermediate"], why: "Integriertes GPS, EKG & 7 Tage Akku" },
+    { name: "Apple Watch Series 10", cat: "Wearables", price: 449, amz: "Apple+Watch+Series+10", tags: ["wearable","tracker","running","cardio","gps","pro","premium","general"], why: "LTE, Schlafapnoe-Erkennung & Trainings-Apps" },
+    { name: "Whoop 4.0 Fitness Tracker", cat: "Wearables", price: 239, amz: "Whoop+4.0+Fitness+Tracker", tags: ["wearable","tracker","recovery","sleep","pro","intermediate"], why: "24/7 Belastungsmessung, Schlafanalyse & Coaching" },
+    { name: "Oura Ring 4", cat: "Wearables", price: 349, amz: "Oura+Ring+4", tags: ["wearable","tracker","sleep","recovery","compact","premium","pro"], why: "Smart Ring für Schlaf, Stress & Erholung" },
+    { name: "Polar H10 Herzfrequenz-Brustgurt", cat: "Wearables", price: 69.99, amz: "Polar+H10+Herzfrequenz+Brustgurt", tags: ["wearable","tracker","hr-monitor","cardio","beginner","intermediate","budget"], why: "Medizinisches EKG-Präzision – Goldstandard für HR-Messung" },
+
+    // ===== Zubehör =====
+    { name: "Gorilla Sports Fitnessmatte Large 180x100cm", cat: "Zubehör", price: 49.99, amz: "Gorilla+Sports+Fitnessmatte+Large", tags: ["accessories","mat","flooring","beginner","budget","medium-space","yoga","pilates"], why: "15mm dicke Trainingsmatte als Boden- & Geräteschutz" },
+    { name: "BalanceFrom Yoga Mat 10mm", cat: "Zubehör", price: 24.99, amz: "BalanceFrom+Yoga+Mat+10mm", tags: ["accessories","mat","yoga","pilates","beginner","budget","compact","portable"], why: "Doppelseitige NBR-Gymnastikmatte mit Tragegurt" },
+    { name: "Nalgene Wide Mouth Water Bottle 1L", cat: "Zubehör", price: 14.99, amz: "Nalgene+Wide+Mouth+Water+Bottle+1L", tags: ["accessories","water-bottle","outdoor","portable","beginner","budget","general"], why: "Unzerbrechliche Trinkflasche aus Tritan – made in USA" },
+    { name: "Hydro Flask 32oz Water Bottle", cat: "Zubehör", price: 44.95, amz: "Hydro+Flask+32oz+Water+Bottle", tags: ["accessories","water-bottle","outdoor","portable","intermediate"], why: "Isolierte Edelstahlflasche – 24h kalt, 12h heiß" },
+    { name: "Nike Performance Fitness Gloves", cat: "Zubehör", price: 19.99, amz: "Nike+Fitness+Gloves+Performance", tags: ["accessories","gloves","strength","weights","beginner","budget","compact","portable"], why: "Belüftete Trainingshandschuhe mit Silikon-Grip" },
+    { name: "Harbinger Pro Fitness Gloves", cat: "Zubehör", price: 24.99, amz: "Harbinger+Pro+Fitness+Gloves", tags: ["accessories","gloves","strength","weights","intermediate","budget","compact","portable"], why: "Lederhandschuhe mit gepolsterten Handflächen" },
+];
+
+// ==================== QUESTIONS ====================
+const QUESTIONS = [
+    {
+        q: "Was ist dein primäres Fitnessziel?",
+        type: "single",
+        options: [
+            { icon: "⚖️", label: "Abnehmen / Gewichtsverlust", desc: "Fett verbrennen, Kalorien verbrauchen & Ausdauer aufbauen", tags: ["cardio","weight-loss","hiit","jump-rope","endurance"] },
+            { icon: "💪", label: "Muskeln aufbauen", desc: "Krafttraining, Hypertrophie & Muskeldefinition", tags: ["strength","muscle-building","weights","dumbbells","barbell","bench","cage"] },
+            { icon: "🏃", label: "Kondition verbessern", desc: "Ausdauer, Herz-Kreislauf & Lungenvolumen steigern", tags: ["cardio","endurance","conditioning","treadmill","bike","rowing","running"] },
+            { icon: "🧘", label: "Flexibilität & Dehnung", desc: "Beweglichkeit, Yoga, Stretching & Mobilität", tags: ["yoga","pilates","flexibility","stretching","mat","balance"] },
+            { icon: "🌟", label: "Allgemeine Fitness", desc: "Rundum gesund & fit – Kraft + Ausdauer + Beweglichkeit", tags: ["general","all-round","functional","bodyweight","bands"] },
+            { icon: "🥊", label: "Sportartspezifisches Training", desc: "Boxen, Kampfsport oder spezielle Sportart", tags: ["boxing","martial-arts","sport-specific","functional","heavy-bag"] },
+        ]
+    },
+    {
+        q: "Wie hoch ist dein Budget für dein Heim-Fitnessstudio?",
+        type: "single",
+        options: [
+            { icon: "💶", label: "Unter 100€ (Einsteiger)", desc: "Basis-Ausstattung für den Start ohne große Investition", tags: ["budget"] },
+            { icon: "💶💶", label: "100–300€ (Basis)", desc: "Solide Grundausstattung für regelmäßiges Training", tags: ["budget-mid"] },
+            { icon: "💶💶💶", label: "300–800€ (Mittelklasse)", desc: "Hochwertige Geräte für ambitioniertes Training", tags: ["mid-range"] },
+            { icon: "💰💰", label: "800–2.000€ (Fortgeschritten)", desc: "Professionelle Ausstattung für ernsthafte Trainingsziele", tags: ["premium"] },
+            { icon: "💎", label: "2.000€+ (Luxus/Profi)", desc: "Das Beste vom Besten – komplette Heim-Fitnessstudios", tags: ["luxury","pro"] },
+        ]
+    },
+    {
+        q: "Wieviel Platz hast du für dein Fitnessstudio?",
+        type: "single",
+        options: [
+            { icon: "📱", label: "Kein Platz (nur mobil)", desc: "Nur Online-Kurse, Apps & Übungen ohne Geräte", tags: ["online-only","mobile"] },
+            { icon: "📦", label: "Wenig Platz (< 2 qm)", desc: "Ich brauche kompakte, klappbare & platzsparende Lösungen", tags: ["small-space","compact","foldable"] },
+            { icon: "🏠", label: "Mittel (2–5 qm)", desc: "Eine Ecke im Zimmer oder Keller fürs Training", tags: ["medium-space"] },
+            { icon: "🏗️", label: "Viel (5–10 qm)", desc: "Extra Raum für größere Trainingsgeräte", tags: ["large-space"] },
+            { icon: "🏢", label: "Kompletten Raum (> 10 qm)", desc: "Ein ganzes Zimmer wird zum Fitnessstudio", tags: ["full-gym","large-space"] },
+        ]
+    },
+    {
+        q: "Wie ist deine Trainingserfahrung?",
+        type: "single",
+        options: [
+            { icon: "🌱", label: "Anfänger (noch nie trainiert)", desc: "Ich fange gerade erst an – einfache & sichere Geräte", tags: ["beginner","starter","basic"] },
+            { icon: "🔄", label: "Wiedereinsteiger (früher aktiv)", desc: "Ich hatte früher trainiert und fange wieder an", tags: ["re-entry","beginner"] },
+            { icon: "📈", label: "Fortgeschritten (regelmäßig)", desc: "Ich trainiere regelmäßig und kenne mich gut aus", tags: ["intermediate","advanced"] },
+            { icon: "🏆", label: "Profi (sehr erfahren)", desc: "Ich bin ambitioniert und brauche Profi-Qualität", tags: ["pro","advanced","heavy-duty"] },
+        ]
+    },
+    {
+        q: "Welche Trainingsarten bevorzugst du? (Mehrfachauswahl)",
+        type: "multi",
+        options: [
+            { icon: "🏋️", label: "Krafttraining", desc: "Hanteln, Langhantel & Kraftstationen", tags: ["strength","weights","dumbbells","barbell","bench","cage"] },
+            { icon: "🏃", label: "Cardio / Kondition", desc: "Laufen, Radfahren, Rudern & Ausdauer", tags: ["cardio","endurance","treadmill","bike","rowing","jump-rope"] },
+            { icon: "🧘", label: "Yoga / Pilates", desc: "Flexibilität, Atmung & Körperbewusstsein", tags: ["yoga","pilates","mat","flexibility","stretching"] },
+            { icon: "🥊", label: "Kampfsport", desc: "Boxen, Kickboxen & Self-Defense", tags: ["boxing","martial-arts","heavy-bag","gloves"] },
+            { icon: "💫", label: "Functional Training", desc: "TRX, Medizinball & Balance-Training", tags: ["functional","trx","suspension","medicine-ball","balance","core"] },
+            { icon: "🌲", label: "Outdoor-Sport", desc: "Laufen, Radfahren & Sport in der Natur", tags: ["outdoor","portable","running","jump-rope"] },
+            { icon: "🏊", label: "Schwimmen", desc: "Wassersport & wasserdichte Technik", tags: ["swimming","water","waterproof"] },
+            { icon: "👥", label: "Gruppenfitness", desc: "Kurse mit Freunden oder Familie", tags: ["group","multi-user","classes"] },
+        ]
+    },
+    {
+        q: "Welche zusätzlichen Wünsche hast du? (Mehrfachauswahl)",
+        type: "multi",
+        options: [
+            { icon: "⌚", label: "Trainingsverfolgung / Wearable", desc: "Smartwatch, Fitness-Tracker & Pulsgurt", tags: ["wearable","tracker","smartwatch","hr-monitor","gps"] },
+            { icon: "🎥", label: "Videos / Kurse online", desc: "Digitale Trainingskurse & Streaming", tags: ["online","app","digital","classes"] },
+            { icon: "💆", label: "Massage / Erholung", desc: "Regeneration nach dem Training", tags: ["massage","recovery","foam-roller","self-care"] },
+            { icon: "🎵", label: "Musik / Podcasts beim Training", desc: "Kopfhörer & Audio fürs Training", tags: ["music","audio","headphones"] },
+            { icon: "👫", label: "Training mit Partner", desc: "Geräte für 2 Personen gleichzeitig", tags: ["partner","multi-user","adjustable","tandem"] },
+            { icon: "📦", label: "Platzsparend / klappbar", desc: "Geräte die sich verstauen lassen", tags: ["foldable","compact","space-saving","small-space"] },
+        ]
+    }
+];
+
+// ==================== STATE ====================
+let currentQuestion = 0;
+let answers = []; // For single: index; for multi: array of indices
+let multiSelections = {}; // { questionIndex: [selectedIndices] }
+
+function renderQuestion() {
+    const q = QUESTIONS[currentQuestion];
+    const area = document.getElementById('questionArea');
+
+    let optsHtml;
+    if (q.type === 'single') {
+        optsHtml = q.options.map((o, i) => `
+            <div class="option" onclick="selectSingle(${i})" id="opt${i}">
+                <div class="icon">${o.icon}</div>
+                <div class="label">${o.label}</div>
+                <div class="desc">${o.desc}</div>
+            </div>
+        `).join('');
+    } else {
+        const selected = multiSelections[currentQuestion] || [];
+        optsHtml = q.options.map((o, i) => {
+            const sel = selected.includes(i) ? 'selected' : '';
+            return `
+            <div class="checkbox-option ${sel}" onclick="toggleMulti(${i})" id="opt${i}">
+                <div class="check">${selected.includes(i) ? '✓' : ''}</div>
+                <div>
+                    <div class="icon" style="display:inline;font-size:1.2em;">${o.icon}</div>
+                    <span class="label" style="margin-left:6px;">${o.label}</span>
+                    <div class="desc">${o.desc}</div>
+                </div>
+            </div>
+            `;
+        }).join('');
+        const selCount = selected.length;
+        optsHtml += `<div class="selection-count" id="selCount">${selCount > 0 ? selCount + ' ausgewählt' : 'Bitte wähle mindestens eine Option'}</div>`;
+    }
+
+    const prevBtn = currentQuestion > 0 ? `<button class="btn btn-secondary" onclick="prevQuestion()">← Zurück</button>` : '';
+    
+    let nextBtn;
+    if (currentQuestion < QUESTIONS.length - 1) {
+        nextBtn = `<button class="btn btn-primary" id="nextBtn" disabled onclick="nextQuestion()">Weiter →</button>`;
+    } else {
+        nextBtn = `<button class="btn btn-primary" id="nextBtn" disabled onclick="calculateResults()">🎯 Ergebnisse anzeigen</button>`;
+    }
+
+    const questionTypeLabel = q.type === 'multi' ? ' (Mehrfachauswahl)' : '';
+    area.innerHTML = `
+        <div class="card">
+            <h2>Frage ${currentQuestion+1} von ${QUESTIONS.length}</h2>
+            <p>${q.q}</p>
+            <div class="options" id="optionsGrid">
+                ${optsHtml}
+            </div>
+            <div class="btn-row">
+                ${prevBtn}
+                ${nextBtn}
+            </div>
+        </div>
+    `;
+
+    // Update steps
+    document.querySelectorAll('.step').forEach((s, i) => {
+        s.className = 'step';
+        if (i === currentQuestion) s.classList.add('active');
+        else if (i < currentQuestion) s.classList.add('done');
+    });
+
+    // Pre-select for single type
+    if (q.type === 'single' && answers[currentQuestion] !== undefined) {
+        document.getElementById(`opt${answers[currentQuestion]}`)?.classList.add('selected');
+        document.getElementById('nextBtn').disabled = false;
+    }
+    // Pre-select for multi type
+    if (q.type === 'multi') {
+        const sel = multiSelections[currentQuestion] || [];
+        if (sel.length > 0) {
+            sel.forEach(idx => {
+                document.getElementById(`opt${idx}`)?.classList.add('selected');
+                const check = document.querySelector(`#opt${idx} .check`);
+                if (check) check.textContent = '✓';
+            });
+            document.getElementById('nextBtn').disabled = false;
+        }
+    }
+}
+
+function selectSingle(idx) {
+    answers[currentQuestion] = idx;
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById(`opt${idx}`).classList.add('selected');
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function toggleMulti(idx) {
+    if (!multiSelections[currentQuestion]) multiSelections[currentQuestion] = [];
+    const sel = multiSelections[currentQuestion];
+    const pos = sel.indexOf(idx);
+    if (pos > -1) {
+        sel.splice(pos, 1);
+    } else {
+        sel.push(idx);
+    }
+    // Update UI
+    const el = document.getElementById(`opt${idx}`);
+    el.classList.toggle('selected');
+    const check = el.querySelector('.check');
+    if (check) check.textContent = sel.includes(idx) ? '✓' : '';
+    // Update count
+    const countEl = document.getElementById('selCount');
+    if (countEl) {
+        countEl.textContent = sel.length > 0 ? sel.length + ' ausgewählt' : 'Bitte wähle mindestens eine Option';
+    }
+    document.getElementById('nextBtn').disabled = sel.length === 0;
+}
+
+function nextQuestion() {
+    const q = QUESTIONS[currentQuestion];
+    if (q.type === 'single' && answers[currentQuestion] === undefined) return;
+    if (q.type === 'multi') {
+        const sel = multiSelections[currentQuestion] || [];
+        if (sel.length === 0) return;
+    }
+    currentQuestion++;
+    renderQuestion();
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) { currentQuestion--; renderQuestion(); }
+}
+
+// ==================== RESULTS ====================
+function calculateResults() {
+    // Gather selected tags with weights
+    const selectedTags = [];
+    answers.forEach((ansIdx, qIdx) => {
+        const q = QUESTIONS[qIdx];
+        if (q.type === 'single') {
+            const option = q.options[ansIdx];
+            if (option && option.tags) {
+                option.tags.forEach(t => selectedTags.push({ tag: t, weight: 3 }));
+            }
+        }
+    });
+    // Multi-select questions
+    Object.keys(multiSelections).forEach(qIdx => {
+        const qIdxNum = parseInt(qIdx);
+        const q = QUESTIONS[qIdxNum];
+        const selIndices = multiSelections[qIdxNum] || [];
+        selIndices.forEach(idx => {
+            const option = q.options[idx];
+            if (option && option.tags) {
+                option.tags.forEach(t => selectedTags.push({ tag: t, weight: 2 }));
+            }
+        });
+    });
+
+    // Budget parsing
+    const budgetIdx = answers[1]; // question 1 (index 1)
+    let budgetMax = Infinity;
+    let budgetMin = 0;
+    if (budgetIdx === 0) { budgetMax = 100; }
+    else if (budgetIdx === 1) { budgetMin = 100; budgetMax = 300; }
+    else if (budgetIdx === 2) { budgetMin = 300; budgetMax = 800; }
+    else if (budgetIdx === 3) { budgetMin = 800; budgetMax = 2000; }
+    else if (budgetIdx === 4) { budgetMin = 2000; }
+
+    // Score products
+    const scored = ALL_PRODUCTS.map(p => {
+        let score = 0;
+        selectedTags.forEach(st => {
+            if (p.tags.includes(st.tag)) score += st.weight;
+        });
+        // Budget bonus
+        if (p.price <= budgetMax && p.price >= budgetMin) score += 2;
+        else if (budgetIdx === 0 && p.price <= 100) score += 2;
+        else if (budgetIdx === 1 && p.price <= 300) score += 1;
+        else if (budgetIdx === 4 && p.price >= 2000) score += 2;
+        else if (budgetIdx === 4 && p.price >= 1000) score += 1;
+        // Penalty if way over budget
+        if (budgetIdx === 0 && p.price > 150) score -= 1;
+        if (budgetIdx === 1 && p.price > 400) score -= 1;
+        if (budgetIdx === 2 && p.price > 1000) score -= 1;
+        if (budgetIdx === 3 && p.price > 2500) score -= 1;
+        return { ...p, score };
+    });
+
+    // Sort by score descending
+    scored.sort((a, b) => b.score - a.score);
+    let topProducts = scored.filter(p => p.score > 1).slice(0, 12);
+    
+    // Fallback: fill with highest scored regardless
+    if (topProducts.length < 6) {
+        const extras = scored.filter(p => !topProducts.includes(p) && p.score > 0).slice(0, 12 - topProducts.length);
+        extras.forEach(e => topProducts.push(e));
+    }
+    if (topProducts.length < 6) {
+        const extras = ALL_PRODUCTS.filter(p => !topProducts.includes(p)).slice(0, 12 - topProducts.length);
+        extras.forEach(e => topProducts.push({ ...e, score: 1 }));
+    }
+
+    // Keep max 12
+    topProducts = topProducts.slice(0, 12);
+
+    // Calculate total
+    const total = topProducts.reduce((sum, p) => sum + p.price, 0);
+
+    // Generate savings tips
+    const tips = [];
+    if (budgetIdx <= 1) { // Budget or Budget-mid
+        tips.push("Widerstandsbänder sind der günstigste Einstieg – 20–60€ für ein komplettes Set");
+        tips.push("Türrahmen-Klimmzugstangen kosten unter 30€ und sind extrem platzsparend");
+        tips.push("Sprungseile für 15–50€ bieten effektives Cardio-Training auf kleinstem Raum");
+        tips.push("Yoga-Matten ab 20€ sind vielseitig einsetzbar – auch für Boden-Workouts");
+    }
+    if (budgetIdx >= 2 && budgetIdx <= 3) {
+        tips.push("Eine verstellbare Hantelbank (150–300€) ersetzt mehrere Geräte und spart Platz und Geld");
+        tips.push("Verstellbare Kurzhanteln wie SelectTech (350–400€) ersetzen ein ganzes Hantel-Rack");
+        tips.push("Kombiniere ein Rudergerät mit einer Klimmzugstange für Ganzkörpertraining unter 500€");
+        tips.push("Second-Hand-Geräte auf Kleinanzeigen sind oft wie neu – besonders Kraftstationen");
+    }
+    if (budgetIdx === 4) {
+        tips.push("Ein komplettes Power Rack mit Smith-Maschine ist die Basis für jedes Profi-Heimstudio");
+        tips.push("Concept2 RowErg + Power Cage + Hantelset = das perfekte Trio für 2.500–3.500€");
+        tips.push("Investiere in Qualität bei Geräten, die du täglich nutzt (z.B. Rudergerät, Kabelzug)");
+        tips.push("Profiböden (Gummimatten) schützen deinen Raum und deine Geräte – ca. 2–5€/qm");
+    }
+    // Additional general tips
+    tips.push("Starte mit 3–5 Kernprodukten und erweitere dein Studio nach und nach");
+    tips.push("Achte auf die maximale Belastbarkeit – besonders bei Hantelbänken und Klimmzugstangen");
+
+    // Render results
+    document.getElementById('questionArea').innerHTML = '';
+    document.getElementById('resultsArea').style.display = 'block';
+    document.querySelectorAll('.step').forEach(s => s.classList.add('done'));
+
+    const goalNames = ['Abnehmen','Muskelaufbau','Kondition','Flexibilität','Allgemeine Fitness','Sportartspezifisch'];
+    const goalLabel = goalNames[answers[0]] || 'Fitness';
+
+    let resultsHtml = `
+        <div class="summary-box">
+            <h3>🎯 Deine personalisierten Fitnessstudio-Empfehlungen</h3>
+            <p>Basierend auf deinen Antworten – Ziel: <strong>${goalLabel}</strong>, Budget-Klasse: ${budgetIdx+1}/5, Platz: ${answers[2]+1}/5, Erfahrung: ${answers[3]+1}/4</p>
+            <p style="margin-top:10px;">💰 <strong>Gesamt-Investition:</strong> <span class="total">ca. ${total.toFixed(0)} €</span></p>
+            <p style="color:#888;font-size:.9em;">${topProducts.length} empfohlene Produkte aus ${new Set(topProducts.map(p=>p.cat)).size} Kategorien</p>
+        </div>
+        <div class="btn-row" style="justify-content:center;margin-bottom:20px;">
+            <button class="btn btn-secondary" onclick="resetFinder()">🔄 Neu starten</button>
+            <a class="btn btn-primary" style="display:inline-block;text-decoration:none;" href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">🛒 Alle Fitness-Angebote bei Amazon</a>
+        </div>
+    `;
+
+    topProducts.forEach((p, i) => {
+        resultsHtml += `
+            <div class="result-card">
+                <span style="color:#22C55E;font-weight:800;font-size:.85em;">#${i+1} <span style="color:#666;font-weight:400;">Score: ${p.score}</span></span>
+                <h4>${p.name}</h4>
+                <div class="category">📂 ${p.cat}</div>
+                <div class="why">💡 ${p.why}</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+                    <span class="price">💰 ca. ${p.price.toFixed(2).replace('.',',')} €</span>
+                    <a class="amz" href="https://www.amazon.de/s?k=${encodeURIComponent(p.amz)}&tag=ikune21-21" target="_blank" rel="nofollow sponsored">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+        `;
+    });
+
+    // Savings Tips
+    resultsHtml += `
+        <div class="tip-box">
+            <h4>💰 Spartipps für dein Heim-Fitnessstudio</h4>
+            <ul>
+                ${tips.map(t => `<li>${t}</li>`).join('')}
+            </ul>
+        </div>
+    `;
+
+    resultsHtml += `
+        <div class="disclaimer">
+            <strong>📢 Affiliate-Hinweis:</strong> Alle Produktlinks sind Amazon-Partnerlinks (tag=ikune21-21). 
+            Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. Die Auswahl basiert auf deinen Antworten, 
+            nicht auf Provisionshöhe. <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">→ Alle Amazon-Angebote</a>
+        </div>
+        <div style="text-align:center;margin:20px 0;">
+            <button class="btn btn-secondary btn-small" onclick="resetFinder()">🔄 Neu starten</button>
+            <button class="btn btn-success btn-small" onclick="window.print()">🖨️ Empfehlungen drucken</button>
+        </div>
+    `;
+
+    document.getElementById('resultsArea').innerHTML = resultsHtml;
+    document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetFinder() {
+    currentQuestion = 0;
+    answers = [];
+    multiSelections = {};
+    document.getElementById('resultsArea').style.display = 'none';
+    document.getElementById('resultsArea').innerHTML = '';
+    renderQuestion();
+    window.scrollTo(0, 0);
+}
+
+// Start
+renderQuestion();
+</script>
+
+</body>
+</html>

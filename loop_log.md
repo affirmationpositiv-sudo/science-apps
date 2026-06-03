@@ -1,6 +1,57 @@
-# Loop Log – science-apps Auto-Pilot
-
-## Tick: 2026-06-03 AUTOMATISCH (RUN 2.71)
+1|# Loop Log – science-apps Auto-Pilot
+2|
+3|## Tick: 2026-06-03 AUTOMATISCH (RUN 2.72)
+4|
+5|### Previous State (R2.71):
+6|- 92 Blog-Artikel, 44 interaktive Tools, 4 LeadGen AI Seiten, 325 Sitemap URLs
+7|- Sport & Fitness Nische fehlt
+8|
+9|### Actions This Tick (R2.72):
+10|- [x] **Survey:** Site live (HTTP 200), Branch main, 325 Sitemap URLs
+11|- [x] **Blog-Artikel #95 erstellt:** "Sportausrüstung & Fitnessgeräte für Zuhause 2026: Die 70+ besten Produkte für dein Heim-Fitnessstudio" (~68 KB HTML, 929 Zeilen, 12 Kategorien, 70+ Produktkarten, 123 Amazon-Affiliate-Links (tag=ikune21-21), Vergleichstabelle Top 15, 6 Budget-Stufen (10€ bis 2.000€+), 10 FAQ, 7-Tage-Startplan)
+12|- [x] **Heim-Fitnessstudio-Konfigurator Tool gebaut:** tools/sport-fitness-konfigurator.html (~48 KB, 48 KB, 6-Fragen-Wizard: Ziel, Budget, Platz, Erfahrung, Trainingsart, Zusatzwünsche; 77 Produkte aus 14 Kategorien, personalisierte Top-12-Empfehlungen, Budget-Gesamtsumme, 60+ Amazon-Affiliate-Links)
+13|- [x] **LeadGen AI erweitert:** +3 Branchen-Spezialseiten (Bildung, Handel, Finanzen) → jetzt 7 Branchen gesamt
+14|- [x] **Blog-Index aktualisiert:** +Blog-Karte #95 (Sport & Fitness) vor Artikel #94
+15|- [x] **Tools-Index aktualisiert:** +Heim-Fitnessstudio-Konfigurator (44→45 Tools), Subtitle aktualisiert
+16|- [x] **LeadGen-Index aktualisiert:** +3 Branchen-Links (Bildung, Handel, Finanzen)
+17|- [x] **Admin-Dashboard aktualisiert:** HTML-Seiten 337→340, Blog-Artikel 92→93, KI-Tools 45→46, +LeadGen AI Seiten (7), Sitemap URLs 327→330
+18|- [x] **Sitemap.xml aktualisiert:** +5 URLs (Blog #95 + Tool + 3 LeadGen Seiten) → 330 URLs
+19|
+20|### Live Inventory (affirmationpositiv-sudo.github.io/science-apps/):
+21|| Kategorie | Anzahl | Status |
+22||-----------|--------|--------|
+23|| Blog-Artikel | 93 | ✅ LIVE (1 NEU: #95 Sport & Fitness) |
+24|| Interaktive Tools | 45 | ✅ LIVE (1 NEU: Heim-Fitnessstudio-Konfigurator) |
+25|| LeadGen AI Seiten | 7 | ✅ LIVE (3 NEU: Bildung, Handel, Finanzen) |
+26|| Affiliate-Shops | 9 | ✅ LIVE |
+27|| KDP-Buch-Previews | 15+ | ✅ LIVE |
+28|| Apps & Spiele | 12+ | ✅ LIVE |
+29|| Sitemap URLs | 330 | ✅ LIVE (5 NEU) |
+30|
+31|### Geld-Strategie-Ranking (0 EUR Kosten):
+32|| Rang | Strategie | Potenzial/Monat | Status |
+33||------|-----------|----------------|--------|
+34|| 1 | **Amazon Affiliate (SEO-Traffic)** | EUR 50-500 | ✅ 93 Artikel + 45 Tools + 9 Shops + 7 LeadGen |
+35|| 2 | **40 Geldquellen Shop** | EUR 50-500 | ✅ 41 Produkte LIVE (PayPal-Zahlung) |
+36|| 3 | **Amazon KDP (Buecher)** | EUR 250-500 | ❌ Blockiert (Konto fehlt) |
+37|| 4 | **Spreadshirt/Redbubble** | EUR 50-500 | ❌ Blockiert (Konto fehlt) |
+38|| 5 | **Ko-fi Spenden** | EUR 0-100 | ✅ Button integriert |
+39|| 6 | **LinkedIn Autoritaet** | EUR 50-200 | ❌ Blockiert (Profil fehlt) |
+40|
+41|### Blocked Items (User-Aktion noetig):
+42|1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+43|2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+44|3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+45|4. 🟡 **Google Search Console** - Nicht eingerichtet
+46|5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
+47|
+48|### Next Tick Priorities:
+49|1. 🔴 Next blog article (topic: Outdoor-Camping-Ausrüstung oder Wintersport 2026/27)
+50|2. 🔴 Next interactive tool idea
+51|3. 🟡 KDP Account erstellen (User-Aktion noetig)
+52|4. 🟡 Google Search Console einrichten
+53|
+54|## Tick: 2026-06-03 AUTOMATISCH (RUN 2.71)
 
 ### Previous State (R2.70):
 - 91 Blog-Artikel, 43 interaktive Tools, 5 LeadGen AI Seiten, 323 Sitemap URLs
