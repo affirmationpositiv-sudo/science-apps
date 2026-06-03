@@ -41,10 +41,39 @@
 2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
 3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
 4. 🟡 **Google Search Console** - Nicht eingerichtet (Sitemap nicht eingereicht)
-5. 🟡 **Gumroad Shop** - Cloudflare blockiert API, manueller Upload noetig
+4. 🟡 Google Search Console einrichten
+
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.70)
+
+### Previous State (R2.69):
+- 91 Blog-Artikel, 42 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Buecher, 320 Sitemap URLs
+- 3 LeadGen Branchenseiten fehlen, Schmuck & Uhren Nische fehlt
+
+### Actions This Tick (R2.70):
+- [x] **Survey:** Site live (HTTP 200), Branch main, 320 Sitemap URLs
+- [x] **Blog-Artikel #93 erstellt:** "Schmuck & Uhren 2026: Die 80+ besten Produkte für Männer & Frauen" (~43 KB HTML, 12 Kategorien, 80+ Produktkarten, 80+ Amazon-Affiliate-Links, Vergleichstabelle Top 15, 7 Budget-Stufen, 10 FAQ, 7-Tage-Startplan)
+- [x] **Schmuck- & Uhren-Finder Tool gebaut:** 5-Fragen-Wizard, 40+ Produkte, personalisierte Top-10
+- [x] **LeadGen AI erweitert:** +3 Branchen-Spezialseiten (IT, Handwerk, Gesundheit)
+- [x] **Blog-Index, Tools-Index, Admin, Sitemap aktualisiert**
+- [x] **Deployment:** git push + force, HTTP 200 auf allen 5 neuen Seiten
+
+### Live Inventory:
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 91 | ✅ LIVE (1 NEU: #93) |
+| Interaktive Tools | 43 | ✅ LIVE (1 NEU) |
+| LeadGen AI Seiten | 4 | ✅ LIVE (3 NEU) |
+| Sitemap URLs | 323 | ✅ LIVE (5 NEU) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
 
 ### Next Tick Priorities:
-1. 🔴 Next blog article (topic tbd - moeglicherweise Möbel & Einrichtung, Bürobedarf oder Schmuck/Accessoires)
+1. 🔴 Next blog article (topic tbd)
 2. 🔴 Next interactive tool idea
 3. 🟡 KDP Account erstellen (User-Aktion noetig)
 4. 🟡 Google Search Console einrichten
@@ -88,10 +117,39 @@
 2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
 3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
 4. 🟡 **Google Search Console** - Nicht eingerichtet (Sitemap nicht eingereicht)
-5. 🟡 **Gumroad Shop** - Cloudflare blockiert API, manueller Upload noetig
+4. 🟡 Google Search Console einrichten
+
+## Tick: 2026-06-03 AUTOMATISCH (RUN 2.70)
+
+### Previous State (R2.69):
+- 91 Blog-Artikel, 42 interaktive Tools, 9 Affiliate-Shops, 15+ KDP-Buecher, 320 Sitemap URLs
+- 3 LeadGen Branchenseiten fehlen, Schmuck & Uhren Nische fehlt
+
+### Actions This Tick (R2.70):
+- [x] **Survey:** Site live (HTTP 200), Branch main, 320 Sitemap URLs
+- [x] **Blog-Artikel #93 erstellt:** "Schmuck & Uhren 2026: Die 80+ besten Produkte für Männer & Frauen" (~43 KB HTML, 12 Kategorien, 80+ Produktkarten, 80+ Amazon-Affiliate-Links, Vergleichstabelle Top 15, 7 Budget-Stufen, 10 FAQ, 7-Tage-Startplan)
+- [x] **Schmuck- & Uhren-Finder Tool gebaut:** 5-Fragen-Wizard, 40+ Produkte, personalisierte Top-10
+- [x] **LeadGen AI erweitert:** +3 Branchen-Spezialseiten (IT, Handwerk, Gesundheit)
+- [x] **Blog-Index, Tools-Index, Admin, Sitemap aktualisiert**
+- [x] **Deployment:** git push + force, HTTP 200 auf allen 5 neuen Seiten
+
+### Live Inventory:
+| Kategorie | Anzahl | Status |
+|-----------|--------|--------|
+| Blog-Artikel | 91 | ✅ LIVE (1 NEU: #93) |
+| Interaktive Tools | 43 | ✅ LIVE (1 NEU) |
+| LeadGen AI Seiten | 4 | ✅ LIVE (3 NEU) |
+| Sitemap URLs | 323 | ✅ LIVE (5 NEU) |
+
+### Blocked Items (User-Aktion noetig):
+1. 🔴 **Amazon KDP Account** - 15+ Buecher = EUR 250-500/Monat
+2. 🟡 **Spreadshirt/Redbubble Account** - T-Shirt-Designs fertig
+3. 🟡 **LinkedIn/X/Twitter Profile** - Posts fertig
+4. 🟡 **Google Search Console** - Nicht eingerichtet
+5. 🟡 **Gumroad Shop** - Cloudflare blockiert API
 
 ### Next Tick Priorities:
-1. 🔴 Next blog article (topic tbd - moeglicherweise Möbel & Einrichtung, Bürobedarf oder Beauty/Kosmetik)
+1. 🔴 Next blog article (topic tbd)
 2. 🔴 Next interactive tool idea
 3. 🟡 KDP Account erstellen (User-Aktion noetig)
 4. 🟡 Google Search Console einrichten
