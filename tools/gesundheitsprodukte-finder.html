@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🩺 Gesundheitsprodukte-Finder 2026 – Finde deine perfekten Gesundheitsprodukte | Licht und Schatten</title>
+<meta name="description" content="Interaktiver Gesundheitsprodukte-Finder 2026: Finde in 5 Fragen deine perfekte Gesundheitsausstattung – Massagegeräte, Blutdruckmessgeräte, Schlafhilfen, Fitness-Tracker, Luftreiniger, Nahrungsergänzung & mehr. Mit personalisierten Top-10-Empfehlungen, Budget-Vergleich & Amazon-Affiliate-Links (tag=ikune21-21).">
+<meta name="keywords" content="Gesundheitsprodukte Finder, Wellness Produkte, Gesundheitstest, Produktberatung, Gesundheitsausstattung, Produktempfehlung, Health Finder, ikune21-21">
+<meta name="author" content="Licht und Schatten">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph -->
+<meta property="og:title" content="🩺 Gesundheitsprodukte-Finder 2026">
+<meta property="og:description" content="Finde in 5 Fragen deine perfekte Gesundheitsausstattung mit personalisierten Top-10-Empfehlungen.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/gesundheitsprodukte-finder.html">
+<meta property="og:site_name" content="Licht und Schatten">
+<meta property="og:locale" content="de_DE">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0A0A0A; color: #E5E5E5; line-height: 1.6; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+h1 { font-size: 2.2em; font-weight: 800; background: linear-gradient(135deg,#22C55E,#8B5CF6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-align:center; margin: 20px 0 8px; }
+.subtitle { text-align:center; color:#888; margin-bottom: 30px; font-size:1.05em; }
+.steps { display:flex; justify-content:center; gap:10px; margin-bottom: 30px; flex-wrap:wrap; }
+.step { width: 36px; height: 36px; border-radius: 50%; background: #1A1A1A; border: 2px solid #2A2A2A; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85em; color:#555; }
+.step.active { background: linear-gradient(135deg,#22C55E,#8B5CF6); border-color:#22C55E; color:#000; }
+.step.done { background: #0d3d0d; border-color:#22C55E; color:#22C55E; }
+.card { background: #1A1A1A; border: 1px solid #2A2A2A; border-radius: 16px; padding: 30px; margin-bottom: 20px; }
+.card h2 { color: #22C55E; font-size: 1.3em; margin-bottom: 6px; }
+.card p { color: #888; margin-bottom: 20px; }
+.options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.option { background: #151515; border: 2px solid #2A2A2A; border-radius: 12px; padding: 16px; cursor: pointer; transition: all .3s; text-align:center; }
+.option:hover { border-color: #22C55E; background: #1a2a1a; }
+.option.selected { border-color: #22C55E; background: #0d2d0d; }
+.option .icon { font-size: 2em; margin-bottom: 6px; }
+.option .label { color: #fff; font-weight: 600; font-size: .95em; }
+.option .desc { color: #888; font-size: .8em; margin-top: 4px; }
+.btn-row { display:flex; gap: 12px; margin-top: 20px; }
+.btn { padding: 12px 28px; border-radius: 30px; border: none; font-weight: 700; font-size: 1em; cursor: pointer; transition: all .3s; }
+.btn-primary { background: linear-gradient(135deg,#22C55E,#8B5CF6); color: #000; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(34,197,94,.3); }
+.btn-secondary { background: #2A2A2A; color: #e0e0e0; }
+.btn-secondary:hover { background: #333; }
+.btn-small { padding: 8px 18px; font-size: .85em; }
+
+.results { display: none; }
+.result-card { background: #1A1A1A; border: 1px solid #22C55E; border-radius: 14px; padding: 18px; margin-bottom: 14px; transition: all .3s; }
+.result-card:hover { border-color: #8B5CF6; transform: translateY(-2px); }
+.result-card h4 { color: #FFD700; font-size: 1em; margin-bottom: 4px; }
+.result-card .category { color: #22C55E; font-size: .8em; font-weight:600; margin-bottom: 4px; }
+.result-card .price { color: #22C55E; font-weight: 600; font-size: .9em; }
+.result-card .why { color: #999; font-size: .85em; margin: 6px 0; }
+.result-card .amz { display: inline-block; background: #FFD700; color: #000 !important; font-weight: 600; padding: 4px 14px; border-radius: 20px; font-size: .8em; text-decoration: none; }
+.summary-box { background: #0d1d0d; border: 1px solid #22C55E; border-radius: 16px; padding: 24px; margin: 20px 0; }
+.summary-box h3 { color: #22C55E; margin-bottom: 12px; }
+.summary-box .total { font-size: 1.6em; font-weight: 800; color: #FFD700; }
+.disclaimer { background: #1a1a0d; border: 1px solid #3d3d0d; border-radius: 12px; padding: 14px; margin: 24px 0; font-size: .8em; color: #aaa; text-align:center; }
+footer { text-align:center; padding: 20px; color: #555; font-size: .85em; }
+footer a { color: #8B5CF6; text-decoration:none; }
+.hidden { display: none; }
+@media (max-width: 600px) { .options { grid-template-columns: 1fr; } h1 { font-size: 1.6em; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<div style="text-align:center;margin-bottom:8px;"><span style="display:inline-block;background:#22C55E;color:#000;padding:4px 14px;border-radius:20px;font-size:.85em;font-weight:600;">🩺 KOSTENLOS</span></div>
+<h1>🩺 Gesundheitsprodukte-Finder 2026</h1>
+<p class="subtitle">Beantworte 5 Fragen und erhalte personalisierte Produktempfehlungen für dein Wohlbefinden</p>
+
+<div class="steps" id="stepIndicators">
+<div class="step active" id="step1">1</div>
+<div class="step" id="step2">2</div>
+<div class="step" id="step3">3</div>
+<div class="step" id="step4">4</div>
+<div class="step" id="step5">5</div>
+</div>
+
+<div id="questionArea"></div>
+<div id="resultsArea" class="results"></div>
+
+</div>
+
+<footer>
+    <p><a href="https://affirmationpositiv-sudo.github.io/science-apps/blog/gesundheit-wellness-2026.html">← Zurück zum Ratgeber</a> · <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">Alle Amazon-Angebote</a></p>
+    <p style="margin-top:6px;">Amazon-Partnerwerbung · Als Amazon-Partner verdienen wir an qualifizierten Verkäufen</p>
+</footer>
+
+<script>
+// ==================== DATABASE ====================
+const ALL_PRODUCTS = [
+    // Blutdruck & Blutzucker
+    { name: "Omron X7 Smart Blutdruckmessgerät", cat: "Blutdruck", price: 69.99, amz: "B09VJKZ675", tags: ["blutdruck","oberarm","bluetooth","smart"], why: "Klinisch validiert mit App & Mehrbenutzermodus" },
+    { name: "Beurer BM 77 Oberarm-Blutdruckmessgerät", cat: "Blutdruck", price: 49.99, amz: "B00NFKFMZI", tags: ["blutdruck","oberarm","basic"], why: "XL-Manschette & WHO-Risiko-Indikator" },
+    { name: "Contour Next ONE Blutzuckermessgerät", cat: "Blutdruck", price: 19.99, amz: "B07G1BN8ZD", tags: ["blutdruck","blutzucker","basic"], why: "Präzise SmartLight-Technologie & App" },
+    { name: "Omron RS7 Handgelenk-Messgerät", cat: "Blutdruck", price: 54.99, amz: "B09W5KMXNM", tags: ["blutdruck","handgelenk","unterwegs"], why: "Ideal für unterwegs mit Bluetooth" },
+    // Massage
+    { name: "Theragun Pro 5.0 Massagepistole", cat: "Massage", price: 399, amz: "B0CGYY98P2", tags: ["massage","sport","profi"], why: "Professionelle Tiefenmassage mit intelligenter Steuerung" },
+    { name: "Theragun Mini 2.0 Massagepistole", cat: "Massage", price: 179, amz: "B0CGYW1LRN", tags: ["massage","sport","unterwegs"], why: "Kompakte Massagepistole für unterwegs" },
+    { name: "Shiatsu-Nackenmassagegerät Zyllion", cat: "Massage", price: 49.99, amz: "B07Q2Z3H5T", tags: ["massage","entspannung","nacken"], why: "Knetmassage mit Wärme – perfekt nach Büroarbeit" },
+    { name: "Beurer MG 99 Shiatsu-Massagekissen", cat: "Massage", price: 69.99, amz: "B07HG9VFBK", tags: ["massage","entspannung","auto"], why: "Vielseitiges Massagekissen für Auto & Büro" },
+    { name: "Medisana Fußmassagegerät FM 885", cat: "Massage", price: 59.99, amz: "B0B5RKLSXC", tags: ["massage","entspannung","füße"], why: "Luftdruck + Shiatsu mit Infrarotwärme" },
+    // Schlaf
+    { name: "Manta Sleep Mask Pro", cat: "Schlaf", price: 44.99, amz: "B0CFG1JCX8", tags: ["schlaf","maske","3d"], why: "100% Lichtblockade ohne Druck auf die Augen" },
+    { name: "LectroFan EVO White Noise Machine", cat: "Schlaf", price: 49.99, amz: "B07LJS5BJN", tags: ["schlaf","geräusch","entspannung"], why: "22 Klänge für erholsamen Schlaf" },
+    { name: "Gewichtsdecke Weighted Dream 6 kg", cat: "Schlaf", price: 79.99, amz: "B08JH65F2B", tags: ["schlaf","decke","schwerdecke"], why: "Fördert Serotonin & Melatonin-Ausschüttung" },
+    { name: "Philips SmartSleep Wake-Up Light HF3520", cat: "Schlaf", price: 84.99, amz: "B009316W6W", tags: ["schlaf","licht","wecker"], why: "Natürlicher Sonnenaufgang für sanftes Erwachen" },
+    { name: "Melatonin Spray Vitamaze", cat: "Schlaf", price: 19.99, amz: "B07Q2R55G4", tags: ["schlaf","melatonin","basic"], why: "Hochdosiert & pflanzlich – Einschlafhilfe pur" },
+    { name: "Philips Somneo Schlaflicht HF7690", cat: "Schlaf", price: 159.99, amz: "B07D4MJ6V1", tags: ["schlaf","licht","premium"], why: "Premium-Wake-up-Light mit Einschlafhilfe" },
+    // Luftreiniger
+    { name: "Levoit Core 300 Luftreiniger", cat: "Luftreiniger", price: 99.99, amz: "B08TBCLF5N", tags: ["luft","allergie","basic"], why: "HEPA-H13-Filter, 360°-Ansug für 50 m²" },
+    { name: "Philips Series 2000i AC2889/10", cat: "Luftreiniger", price: 199.99, amz: "B084C6Q8PB", tags: ["luft","allergie","premium"], why: "Professioneller Sensor, Räume bis 79 m²" },
+    { name: "Beurer IH 60 Inhaliergerät", cat: "Luftreiniger", price: 39.99, amz: "B072JZP4N6", tags: ["luft","inhalation","allergie"], why: "Ideal bei Erkältungen & Allergien" },
+    { name: "Dyson Pure Hot+Cool HP07", cat: "Luftreiniger", price: 499, amz: "B08HDNZMZ1", tags: ["luft","allergie","luxus"], why: "3-in-1: Reiniger, Heizer & Ventilator" },
+    // Fitness-Tracker
+    { name: "Fitbit Charge 6", cat: "Fitness", price: 159.95, amz: "B0CG6P6H7Y", tags: ["tracker","fitness","gps"], why: "Integriertes GPS, EKG & 7 Tage Akku" },
+    { name: "Garmin Venu 3", cat: "Fitness", price: 449.99, amz: "B0CH1X1C5L", tags: ["tracker","sport","gps"], why: "AMOLED, Body Battery & 30 Sport-Apps" },
+    { name: "Xiaomi Smart Band 8 Pro", cat: "Fitness", price: 59.99, amz: "B0CN4Y6L3Q", tags: ["tracker","fitness","basic"], why: "Günstig mit GPS, SpO2 & 14 Tage Akku" },
+    { name: "Withings ScanWatch 2", cat: "Fitness", price: 349.95, amz: "B0CCJ4LNYD", tags: ["tracker","design","medizinisch"], why: "Medizinisches EKG im klassischen Uhren-Design" },
+    { name: "Polar Pacer Pro", cat: "Fitness", price: 249.90, amz: "B0BMF2XXWZ", tags: ["tracker","laufen","sport"], why: "GPS-Laufuhr für ambitionierte Läufer" },
+    // Nahrungsergänzung
+    { name: "Vitamin D3+K2 von Vitamaze", cat: "Nahrung", price: 24.99, amz: "B07NDT3M5V", tags: ["vitamin","basis","immun"], why: "5.000 IE Vitamin D3 – das wichtigste Supplement" },
+    { name: "Omega-3 Fischöl Natural Elements", cat: "Nahrung", price: 29.99, amz: "B07S31NF2J", tags: ["vitamin","herz","gehirn"], why: "1.500 mg Omega-3 für Herz & Gehirn" },
+    { name: "Magnesium Glycinat Nu U", cat: "Nahrung", price: 34.99, amz: "B08W3W6G1R", tags: ["vitamin","muskel","schlaf"], why: "Hochbioverfügbar für Muskeln & Nerven" },
+    { name: "Ashwagandha 600 mg Nu U", cat: "Nahrung", price: 22.99, amz: "B08JGVS1BM", tags: ["vitamin","stress","entspannung"], why: "Adaptogen gegen Stress & für besseren Schlaf" },
+    { name: "Zink + Histidin Natural Elements", cat: "Nahrung", price: 19.99, amz: "B07T5STQ94", tags: ["vitamin","immun","haut"], why: "Unterstützt Immunsystem, Haut & Haare" },
+    // Zahnpflege
+    { name: "Oral-B iO Series 9", cat: "Zahnpflege", price: 249.99, amz: "B09KYF2NBL", tags: ["zahn","elektrisch","premium"], why: "KI-Erkennung & interaktives Display" },
+    { name: "Philips Sonicare DiamondClean 9000", cat: "Zahnpflege", price: 179.99, amz: "B09QHWTD4V", tags: ["zahn","elektrisch","schall"], why: "Schalltechnologie mit Premium-Glas-Ladestation" },
+    { name: "Oral-B iO Series 3", cat: "Zahnpflege", price: 79.99, amz: "B09KYDYTM9", tags: ["zahn","elektrisch","einstieg"], why: "Einstieg in die iO-Technologie mit Timer" },
+    { name: "Waterpik WP-660 Aquarius Munddusche", cat: "Zahnpflege", price: 69.99, amz: "B00G7W4KPY", tags: ["zahn","munddusche","plaque"], why: "Entfernt 99% Plaque in Zahnzwischenräumen" },
+    { name: "Philips Sonicare AirFloss Ultra", cat: "Zahnpflege", price: 59.99, amz: "B00APVYBN6", tags: ["zahn","munddusche","unterwegs"], why: "Komprimierte Luft-Wasser-Technologie" },
+    // Hautpflege
+    { name: "Foreo Luna 4 Gesichtsreinigungsbürste", cat: "Hautpflege", price: 199, amz: "B0CFRNS1P5", tags: ["haut","reinigung","premium"], why: "T-Sonic-Pulsationen aus medizinischem Silikon" },
+    { name: "CurrentBody Skin LED-Maske", cat: "Hautpflege", price: 349, amz: "B08DCFJV1Y", tags: ["haut","led","anti-aging"], why: "132 LEDs für Kollagenproduktion" },
+    { name: "Braun Series 9 Pro Rasierer", cat: "Hautpflege", price: 289.99, amz: "B0CWH5MS2Z", tags: ["haut","rasur","premium"], why: "Präzise 5-in-1-Rasur mit PowerCase" },
+    { name: "Beurer FC 95 Gesichtsreinigungsbürste", cat: "Hautpflege", price: 39.99, amz: "B07V4LFYS1", tags: ["haut","reinigung","basic"], why: "3-in-1: Reinigung, Peeling & Massage" },
+    // Waagen
+    { name: "Withings Body Cardio", cat: "Waage", price: 149.95, amz: "B07K7GL2FJ", tags: ["waage","analyse","premium"], why: "Segment-Bioimpedanz & Gefäßalter-Messung" },
+    { name: "Garmin Index S2", cat: "Waage", price: 149.99, amz: "B09TCSXT7D", tags: ["waage","analyse","garmin"], why: "Sync mit Garmin Connect & 6 Messwerten" },
+    { name: "Xiaomi Mi Body Composition Scale 2", cat: "Waage", price: 29.99, amz: "B08PDZD1WM", tags: ["waage","basic","analyse"], why: "13 Messwerte zum günstigsten Preis" },
+    { name: "Beurer BF 1000 Super Precision", cat: "Waage", price: 119.99, amz: "B07J2852QT", tags: ["waage","analyse","medizinisch"], why: "8-Elektroden für Segment-Analyse" },
+    // Relaxation
+    { name: "Beurer HD 75 XXL Heizdecke", cat: "Relax", price: 89.99, amz: "B07Z6YGJM2", tags: ["relax","wärme","2personen"], why: "Übergroße Heizdecke für 2 Personen" },
+    { name: "HigherDose Infrarot-Saunadecke", cat: "Relax", price: 349, amz: "B07P2CN7WY", tags: ["relax","sauna","infrarot"], why: "Entgiftung & Muskelentspannung zuhause" },
+    { name: "Aroma-Diffuser Asakuki", cat: "Relax", price: 29.99, amz: "B07D32RDJ2", tags: ["relax","aroma","entspannung"], why: "Ultraschall-Diffuser mit LED-Beleuchtung" },
+    { name: "Beurer FB 50 Fußspa", cat: "Relax", price: 49.99, amz: "B003LQKOUY", tags: ["relax","füße","wärme"], why: "Vibrationsmassage & Thermal-Wärmefunktion" },
+    { name: "Tempur Schlafkissen Original", cat: "Relax", price: 79.99, amz: "B000I2VRT0", tags: ["relax","kissen","nacken"], why: "Ergonomisches Nackenstützkissen aus TEMPUR" },
+];
+
+// ==================== QUESTIONS ====================
+const QUESTIONS = [
+    {
+        q: "Was ist dein primäres Gesundheitsziel?",
+        options: [
+            { icon: "🫀", label: "Vorsorge & Monitoring", desc: "Blutdruck, Blutzucker & Gewicht im Blick behalten", tags: ["blutdruck","blutzucker","waage"] },
+            { icon: "💪", label: "Bewegung & Regeneration", desc: "Muskelentspannung, Massage & Fitness-Tracking", tags: ["massage","sport","tracker","fitness"] },
+            { icon: "😴", label: "Besserer Schlaf", desc: "Einschlafhilfen, Schlafmasken & Melatonin", tags: ["schlaf","melatonin","maske","decke"] },
+            { icon: "🫁", label: "Atmung & Allergien", desc: "Luftreiniger & Inhalationsgeräte", tags: ["luft","allergie","inhalation"] },
+        ]
+    },
+    {
+        q: "Wie hoch ist dein Budget für Gesundheitsprodukte?",
+        options: [
+            { icon: "💶", label: "Sparsam (€10-50)", desc: "Einsteiger-Produkte, die trotzdem wirken", tags: ["basic","einstieg","günstig"] },
+            { icon: "💶💶", label: "Mittel (€50-150)", desc: "Gute Qualität zum fairen Preis", tags: ["mittel","standard"] },
+            { icon: "💶💶💶", label: "Investiert (€150-300)", desc: "Hochwertige Markengeräte", tags: ["premium","gps","bluetooth"] },
+            { icon: "💎", label: "Premium (über €300)", desc: "Das Beste vom Besten für maximale Gesundheit", tags: ["profi","smart","luxus"] },
+        ]
+    },
+    {
+        q: "Wie aktiv bist du im Alltag?",
+        options: [
+            { icon: "🪑", label: "Wenig aktiv (Bürojob)", desc: "Viel Sitzen, wenig Bewegung – fokussiere auf Haltung & Entspannung", tags: ["nacken","entspannung","kissen","wärme"] },
+            { icon: "🚶", label: "Moderat aktiv", desc: "Regelmäßig unterwegs, etwas Sport – Allrounder", tags: ["fitness","tracker","schritte"] },
+            { icon: "🏋️", label: "Sehr aktiv (Sportler)", desc: "Regelmäßiges Training, Leistungssport – Regeneration ist key", tags: ["sport","muskel","laufen","profi"] },
+            { icon: "🧘", label: "Entspannung suchend", desc: "Yoga, Meditation, Stressabbau", tags: ["relax","aroma","massage","entspannung"] },
+        ]
+    },
+    {
+        q: "Welche gesundheitlichen Schwerpunkte hast du?",
+        options: [
+            { icon: "🫀", label: "Herz & Kreislauf", desc: "Blutdruck, Blutzucker & Cholesterin", tags: ["blutdruck","blutzucker","herz"] },
+            { icon: "🦷", label: "Zahn- & Mundhygiene", desc: "Zahnbürste, Munddusche & Co.", tags: ["zahn","elektrisch","munddusche","plaque"] },
+            { icon: "🧴", label: "Haut & Körperpflege", desc: "Hautreinigung, Rasur & Anti-Aging", tags: ["haut","reinigung","rasur"] },
+            { icon: "💊", label: "Vitamine & Supplements", desc: "Nährstoffversorgung optimieren", tags: ["vitamin","immun","stress","muskel"] },
+        ]
+    },
+    {
+        q: "Wo nutzt du Gesundheitsprodukte hauptsächlich?",
+        options: [
+            { icon: "🏠", label: "Zuhause", desc: "Feste Produkte für den Heimgebrauch", tags: ["home","zuhause","standard"] },
+            { icon: "🧳", label: "Unterwegs (Reise)", desc: "Kompakte & portable Lösungen", tags: ["unterwegs","reise","kompakt"] },
+            { icon: "🏢", label: "Büro/Arbeitsplatz", desc: "Ergonomie & Entspannung am Arbeitsplatz", tags: ["nacken","kissen","entspannung","auto"] },
+            { icon: "🏟️", label: "Im Fitnessstudio", desc: "Equipment für Training & Regeneration", tags: ["sport","massage","muskel","gps"] },
+        ]
+    }
+];
+
+// ==================== STATE ====================
+let currentQuestion = 0;
+let answers = [];
+
+function renderQuestion() {
+    const q = QUESTIONS[currentQuestion];
+    const area = document.getElementById('questionArea');
+    
+    let optsHtml = q.options.map((o, i) => `
+        <div class="option" onclick="selectOption(${i})" id="opt${i}">
+            <div class="icon">${o.icon}</div>
+            <div class="label">${o.label}</div>
+            <div class="desc">${o.desc}</div>
+        </div>
+    `).join('');
+
+    const prevBtn = currentQuestion > 0 ? `<button class="btn btn-secondary" onclick="prevQuestion()">← Zurück</button>` : '';
+    const nextBtn = currentQuestion < QUESTIONS.length - 1 
+        ? `<button class="btn btn-primary" id="nextBtn" disabled onclick="nextQuestion()">Weiter →</button>`
+        : `<button class="btn btn-primary" id="nextBtn" disabled onclick="calculateResults()">🎯 Ergebnisse anzeigen</button>`;
+
+    area.innerHTML = `
+        <div class="card">
+            <h2>Frage ${currentQuestion+1} von ${QUESTIONS.length}</h2>
+            <p>${q.q}</p>
+            <div class="options">
+                ${optsHtml}
+            </div>
+            <div class="btn-row">
+                ${prevBtn}
+                ${nextBtn}
+            </div>
+        </div>
+    `;
+
+    // Update steps
+    document.querySelectorAll('.step').forEach((s, i) => {
+        s.className = 'step';
+        if (i === currentQuestion) s.classList.add('active');
+        else if (i < currentQuestion) s.classList.add('done');
+    });
+
+    // Pre-select if answered
+    if (answers[currentQuestion] !== undefined) {
+        document.getElementById(`opt${answers[currentQuestion]}`)?.classList.add('selected');
+        document.getElementById('nextBtn').disabled = false;
+    }
+}
+
+function selectOption(idx) {
+    answers[currentQuestion] = idx;
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.getElementById(`opt${idx}`).classList.add('selected');
+    document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+    if (answers[currentQuestion] === undefined) return;
+    currentQuestion++;
+    renderQuestion();
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) { currentQuestion--; renderQuestion(); }
+}
+
+function calculateResults() {
+    // Gather all selected tags
+    const selectedTags = [];
+    answers.forEach((ansIdx, qIdx) => {
+        const option = QUESTIONS[qIdx].options[ansIdx];
+        if (option && option.tags) {
+            option.tags.forEach(t => selectedTags.push(t));
+        }
+    });
+
+    // Score products
+    const scored = ALL_PRODUCTS.map(p => {
+        let score = 0;
+        selectedTags.forEach(tag => {
+            if (p.tags.includes(tag)) score += 2;
+        });
+        // Budget preference
+        const budgetIdx = answers[1] || 1;
+        if (budgetIdx === 0 && p.price <= 50) score += 3;
+        if (budgetIdx === 1 && p.price <= 150) score += 3;
+        if (budgetIdx === 2 && p.price >= 50 && p.price <= 300) score += 3;
+        if (budgetIdx === 3 && p.price >= 300) score += 3;
+        return { ...p, score };
+    });
+
+    // Sort by score descending
+    scored.sort((a, b) => b.score - a.score);
+    const topProducts = scored.filter(p => p.score > 0).slice(0, 12);
+    
+    // If not enough matches, add top-rated regardless
+    if (topProducts.length < 6) {
+        const extras = ALL_PRODUCTS.filter(p => !topProducts.includes(p)).slice(0, 12 - topProducts.length);
+        extras.forEach(e => topProducts.push({ ...e, score: 1 }));
+    }
+
+    // Calculate total
+    const total = topProducts.reduce((sum, p) => sum + p.price, 0);
+
+    // Render results
+    document.getElementById('questionArea').innerHTML = '';
+    document.getElementById('resultsArea').style.display = 'block';
+    document.querySelectorAll('.step').forEach(s => s.classList.add('done'));
+
+    let resultsHtml = `
+        <div class="summary-box">
+            <h3>🎯 Deine personalisierten Gesundheits-Empfehlungen</h3>
+            <p>Basierend auf deinen Antworten haben wir die besten Produkte für dich ausgewählt.</p>
+            <p style="margin-top:10px;">💰 <strong>Gesamt-Investition:</strong> <span class="total">ca. ${total.toFixed(0)} €</span></p>
+            <p style="color:#888;font-size:.9em;">${topProducts.length} Produkte aus ${new Set(topProducts.map(p=>p.cat)).size} Kategorien</p>
+        </div>
+        <div class="btn-row" style="justify-content:center;margin-bottom:20px;">
+            <button class="btn btn-secondary" onclick="resetFinder()">🔄 Neu starten</button>
+            <a class="btn btn-primary" style="display:inline-block;text-decoration:none;" href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">🛒 Alle Angebote bei Amazon</a>
+        </div>
+    `;
+
+    topProducts.forEach((p, i) => {
+        resultsHtml += `
+            <div class="result-card">
+                <span style="color:#22C55E;font-weight:800;font-size:.85em;">#${i+1}</span>
+                <h4>${p.name}</h4>
+                <div class="category">📂 ${p.cat}</div>
+                <div class="why">💡 ${p.why}</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <span class="price">💰 ca. ${p.price.toFixed(2).replace('.',',')} €</span>
+                    <a class="amz" href="https://www.amazon.de/dp/${p.amz}?tag=ikune21-21" target="_blank" rel="nofollow sponsored">🛒 Bei Amazon kaufen</a>
+                </div>
+            </div>
+        `;
+    });
+
+    resultsHtml += `
+        <div class="disclaimer">
+            <strong>📢 Affiliate-Hinweis:</strong> Alle Produktlinks sind Amazon-Partnerlinks (tag=ikune21-21). 
+            Als Amazon-Partner verdienen wir an qualifizierten Verkäufen. Die Auswahl basiert auf deinen Antworten, 
+            nicht auf Provisionshöhe. <a href="https://www.amazon.de/s?tag=ikune21-21" target="_blank">→ Alle Amazon-Angebote</a>
+        </div>
+        <div style="text-align:center;margin:20px 0;">
+            <button class="btn btn-secondary btn-small" onclick="resetFinder()">🔄 Neu starten</button>
+        </div>
+    `;
+
+    document.getElementById('resultsArea').innerHTML = resultsHtml;
+    document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetFinder() {
+    currentQuestion = 0;
+    answers = [];
+    document.getElementById('resultsArea').style.display = 'none';
+    document.getElementById('resultsArea').innerHTML = '';
+    renderQuestion();
+    window.scrollTo(0, 0);
+}
+
+// Start
+renderQuestion();
+</script>
+
+</body>
+</html>

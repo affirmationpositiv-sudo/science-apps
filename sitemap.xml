@@ -1950,4 +1950,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/blog/gesundheit-wellness-2026.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://affirmationpositiv-sudo.github.io/science-apps/tools/gesundheitsprodukte-finder.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
