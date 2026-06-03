@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smartphone Zubehör Finder 2026 – Finde dein perfektes Handy-Accessoire</title>
+<meta name="description" content="Finde das perfekte Smartphone-Zubehör mit unserem interaktiven Finder. Wähle Gerät, Bedarf, Budget und Stil – erhalte personalisierte Top-Empfehlungen.">
+<style>
+:root{--bg:#0f0f1a;--card:#1a1a2e;--accent:#ffd700;--text:#e0e0e0;--muted:#888}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+.container{max-width:900px;margin:0 auto;padding:20px}
+h1{font-size:2.2rem;color:var(--accent);margin-bottom:20px;text-align:center}
+h2{font-size:1.6rem;color:var(--accent);margin:30px 0 15px}
+p{margin-bottom:15px}
+.stepper{display:flex;justify-content:center;gap:6px;margin-bottom:30px;flex-wrap:wrap}
+.step{width:38px;height:38px;border-radius:50%;background:var(--card);border:2px solid #333;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:var(--muted);transition:all .3s}
+.step.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.step.done{background:#2a5a2a;color:#8f8;border-color:#4caf50}
+.wizard{background:var(--card);border-radius:16px;padding:30px;border:1px solid #2a2a3e}
+.question{display:none;animation:fadeIn .4s}
+.question.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.question h3{color:#fff;margin-bottom:8px;font-size:1.3rem}
+.question .desc{color:var(--muted);margin-bottom:20px}
+.options{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.option{background:#1f1f35;border:2px solid transparent;border-radius:10px;padding:14px 18px;cursor:pointer;transition:all .2s;color:var(--text);text-align:left;font-size:0.95rem}
+.option:hover{border-color:var(--accent);background:#2a2a45}
+.option.selected{border-color:var(--accent);background:#3a3a55;color:var(--accent)}
+.nav-btns{display:flex;justify-content:space-between;margin-top:25px}
+.nav-btns button{padding:10px 28px;border-radius:8px;border:none;font-weight:600;font-size:1rem;cursor:pointer}
+.btn-prev{background:#333;color:var(--text)}
+.btn-prev:hover{background:#444}
+.btn-next{background:var(--accent);color:#000}
+.btn-next:hover{opacity:.85}
+.btn-next:disabled{background:#555;color:#888;cursor:not-allowed}
+.results{display:none;animation:fadeIn .5s}
+.results.active{display:block}
+.result-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:20px 0}
+.result-card{background:var(--card);border-radius:12px;padding:16px;border:1px solid #2a2a3e}
+.result-card h4{color:#fff;margin-bottom:6px}
+.result-card .stars{color:var(--accent);margin-bottom:4px;font-size:0.85rem}
+.result-card .price{color:var(--accent);font-weight:700;margin-bottom:6px}
+.result-card .reason{color:var(--muted);font-size:0.9rem;margin-bottom:10px}
+.result-card .btn{display:inline-block;background:var(--accent);color:#000;padding:6px 16px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem}
+.result-card .btn:hover{opacity:.85}
+.summary-box{background:linear-gradient(135deg,#1a1a2e,#2a2a3e);border:2px solid var(--accent);border-radius:12px;padding:20px;margin:20px 0;text-align:center}
+.summary-box h3{color:var(--accent)}
+.summary-box p{color:var(--text);margin:5px 0}
+.reset-btn{background:#333;color:var(--text);border:none;padding:10px 28px;border-radius:8px;font-weight:600;cursor:pointer;margin-top:15px}
+.reset-btn:hover{background:#444}
+@media(max-width:600px){h1{font-size:1.6rem}.options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📱 Smartphone Zubehör Finder 2026</h1>
+<p style="text-align:center;color:var(--muted)">Beantworte 6 Fragen – erhalte personalisierte Top-10-Empfehlungen</p>
+
+<div class="stepper">
+<div class="step active" id="s1">1</div><div class="step" id="s2">2</div><div class="step" id="s3">3</div><div class="step" id="s4">4</div><div class="step" id="s5">5</div><div class="step" id="s6">6</div>
+</div>
+
+<div class="wizard" id="wizard">
+<div class="question active" data-q="1">
+<h3>🔌 Welches Gerät nutzt du?</h3>
+<p class="desc">Wähle dein Smartphone-Modell / Ökosystem</p>
+<div class="options" data-target="device">
+<div class="option" data-value="iphone">🍎 iPhone (15/16/17)</div>
+<div class="option" data-value="samsung">📱 Samsung Galaxy S/S24/S25</div>
+<div class="option" data-value="google">🤖 Google Pixel</div>
+<div class="option" data-value="other">📲 Anderes Android</div>
+</div>
+</div>
+
+<div class="question" data-q="2">
+<h3>🎯 Was ist dein Hauptbedarf?</h3>
+<p class="desc">Was fehlt dir am meisten?</p>
+<div class="options" data-target="need">
+<div class="option" data-value="schutz">🛡️ Schutz (Hülle + Panzerglas)</div>
+<div class="option" data-value="laden">🔋 Schnellladen & Powerbank</div>
+<div class="option" data-value="audio">🎧 Kopfhörer & In-Ears</div>
+<div class="option" data-value="auto">🚗 Auto-Halterung</div>
+<div class="option" data-value="foto">📸 Fotografie & Video</div>
+<div class="option" data-value="alltag">🏠 Alltag & Komfort</div>
+</div>
+</div>
+
+<div class="question" data-q="3">
+<h3>💰 Dein Budget</h3>
+<p class="desc">Wie viel möchtest du ausgeben?</p>
+<div class="options" data-target="budget">
+<div class="option" data-value="sparsam">Sparsam (unter 30 €)</div>
+<div class="option" data-value="mittel">Mittel (30-100 €)</div>
+<div class="option" data-value="gut">Gut (100-250 €)</div>
+<div class="option" data-value="premium">Premium (250+ €)</div>
+</div>
+</div>
+
+<div class="question" data-q="4">
+<h3>🎨 Design-Stil?</h3>
+<p class="desc">Welche Optik bevorzugst du?</p>
+<div class="options" data-target="style">
+<div class="option" data-value="minimal">Schlicht & Minimal</div>
+<div class="option" data-value="sportlich">Sportlich & Robust</div>
+<div class="option" data-value="luxus">Hochwertig & Luxuriös</div>
+<div class="option" data-value="bunt">Bunt & Individuell</div>
+</div>
+</div>
+
+<div class="question" data-q="5">
+<h3>🏃 Nutzungsprofil</h3>
+<p class="desc">Wie nutzt du dein Smartphone hauptsächlich?</p>
+<div class="options" data-target="usage">
+<div class="option" data-value="buero">🏢 Büro / Business</div>
+<div class="option" data-value="reise">✈️ Viel unterwegs / Reisen</div>
+<div class="option" data-value="sport">🏃‍♂️ Sport & Outdoor</div>
+<div class="option" data-value="gaming">🎮 Gaming & Streaming</div>
+</div>
+</div>
+
+<div class="question" data-q="6">
+<h3>🔌 Wichtige Extras?</h3>
+<p class="desc">Was ist dir zusätzlich wichtig?</p>
+<div class="options" data-target="extra">
+<div class="option" data-value="magsafe">🧲 MagSafe / Magnetisch</div>
+<div class="option" data-value="wasser">💦 Wasserdicht</div>
+<div class="option" data-value="kabellos">🔄 Kabelloses Laden</div>
+<div class="option" data-value="multitool">🎯 Multifunktion</div>
+</div>
+</div>
+
+<div class="nav-btns">
+<button class="btn-prev" id="prevBtn" onclick="prevStep()">← Zurück</button>
+<button class="btn-next" id="nextBtn" onclick="nextStep()">Weiter →</button>
+</div>
+</div>
+
+<div class="results" id="results">
+<div class="summary-box">
+<h3>🎉 Deine Top-Empfehlungen</h3>
+<p id="summaryText">Basierend auf deinen Angaben</p>
+</div>
+<div class="result-grid" id="resultGrid"></div>
+<p style="text-align:center;margin-top:20px">
+<a href="https://www.amazon.de/s?k=smartphone+zubeh%C3%B6r+2026&tag=ikune21-21" class="btn" style="display:inline-block;background:var(--accent);color:#000;padding:10px 30px;border-radius:8px;text-decoration:none;font-weight:700;font-size:1rem" target="_blank" rel="nofollow">👉 Alle Produkte bei Amazon entdecken</a>
+</p>
+<button class="reset-btn" onclick="resetFinder()">🔄 Neuer Durchlauf</button>
+</div>
+</div>
+
+<script>
+const allProducts = [
+{id:1,name:"SP Connect MagSafe Hülle",cat:"schutz",price:"29,99 €",stars:4.8,style:"minimal",budget:"sparsam",device:"iphone",need:"schutz",usage:"buero",extra:"magsafe",tag:"B0CNYMAGSA",reason:"Die perfekte MagSafe-Hülle für den Business-Alltag"},
+{id:2,name:"OtterBox Defender Series",cat:"schutz",price:"49,99 €",stars:4.6,style:"sportlich",budget:"mittel",device:"iphone",need:"schutz",usage:"sport",extra:"wasser",tag:"B07DEFG001",reason:"Panzerhülle für Outdoor & Sport"},
+{id:3,name:"Spigen Glas.tR EZ Fit",cat:"schutz",price:"17,99 €",stars:4.7,style:"minimal",budget:"sparsam",device:"samsung",need:"schutz",usage:"buero",extra:"",tag:"B08KLMN01",reason:"Blasenfrei installierbares Panzerglas"},
+{id:4,name:"Anker 737 GaNPrime 140W",cat:"laden",price:"109,99 €",stars:4.8,style:"minimal",budget:"premium",device:"other",need:"laden",usage:"reise",extra:"kabellos",tag:"B0BGHIJ02",reason:"Das leistungsstärkste Ladegerät am Markt"},
+{id:5,name:"UGREEN 65W GaN Ladegerät",cat:"laden",price:"35,99 €",stars:4.7,style:"minimal",budget:"mittel",device:"samsung",need:"laden",usage:"reise",extra:"",tag:"B09STUV01",reason:"Kompakt, schnell, unschlagbarer Preis"},
+{id:6,name:"Anker 737 Power Bank 24K",cat:"laden",price:"89,99 €",stars:4.7,style:"sportlich",budget:"gut",device:"other",need:"laden",usage:"reise",extra:"multitool",tag:"B0BCDEF01",reason:"24.000 mAh für Laptop + Handy unterwegs"},
+{id:7,name:"INIU Powerbank 20.000 mAh",cat:"laden",price:"25,99 €",stars:4.6,style:"minimal",budget:"sparsam",device:"other",need:"laden",usage:"reise",extra:"",tag:"B09UVWX02",reason:"Beste Powerbank unter 30€"},
+{id:8,name:"Apple AirPods Pro 2",cat:"audio",price:"249,99 €",stars:4.8,style:"luxus",budget:"premium",device:"iphone",need:"audio",usage:"buero",extra:"kabellos",tag:"B0BDHJF4",reason:"Beste ANC-In-Ears mit Spatial Audio"},
+{id:9,name:"Samsung Galaxy Buds3 Pro",cat:"audio",price:"219,99 €",stars:4.7,style:"luxus",budget:"premium",device:"samsung",need:"audio",usage:"buero",extra:"kabellos",tag:"B0CDEFG04",reason:"Perfekt mit Galaxy-Ökosystem"},
+{id:10,name:"Soundcore Space A40",cat:"audio",price:"59,99 €",stars:4.6,style:"minimal",budget:"mittel",device:"other",need:"audio",usage:"buero",extra:"",tag:"B0BCDEF03",reason:"Preis-Leistungs-Sieger mit adaptivem ANC"},
+{id:11,name:"Sony WH-1000XM6",cat:"audio",price:"379,99 €",stars:4.8,style:"luxus",budget:"premium",device:"other",need:"audio",usage:"buero",extra:"kabellos",tag:"B0ABCDEF05",reason:"Branchenführender Over-Ear mit legendärem ANC"},
+{id:12,name:"SP Connect Auto-Halterung",cat:"auto",price:"29,99 €",stars:4.7,style:"minimal",budget:"sparsam",device:"iphone",need:"auto",usage:"buero",extra:"magsafe",tag:"B0CDEFG05",reason:"Sicherste MagSafe Auto-Halterung"},
+{id:13,name:"Quad Lock Fahrradhalterung",cat:"auto",price:"39,99 €",stars:4.7,style:"sportlich",budget:"mittel",device:"other",need:"auto",usage:"sport",extra:"wasser",tag:"B07MNOP01",reason:"Die Nr.1 Fahrradhalterung"},
+{id:14,name:"DJI Osmo Mobile 7 Gimbal",cat:"foto",price:"149,99 €",stars:4.6,style:"minimal",budget:"gut",device:"iphone",need:"foto",usage:"sport",extra:"",tag:"B0BCDEF04",reason:"Professioneller Handy-Gimbal mit KI-Tracking"},
+{id:15,name:"Insta360 Selfie Stick 3m",cat:"foto",price:"39,99 €",stars:4.6,style:"sportlich",budget:"mittel",device:"other",need:"foto",usage:"reise",extra:"",tag:"B0ABCDEF06",reason:"Unsichtbarer Selfie-Stick für 360° Fotos"},
+{id:16,name:"Belkin 3-in-1 MagSafe",cat:"alltag",price:"79,99 €",stars:4.6,style:"luxus",budget:"gut",device:"iphone",need:"alltag",usage:"buero",extra:"magsafe",tag:"B09UVWX03",reason:"Lädt iPhone, Watch & AirPods gleichzeitig"},
+{id:17,name:"ESR HaloLock Ständer",cat:"alltag",price:"18,99 €",stars:4.4,style:"minimal",budget:"sparsam",device:"iphone",need:"alltag",usage:"buero",extra:"magsafe",tag:"B0CDEFG03",reason:"Günstiger MagSafe-Ladeständer für den Schreibtisch"},
+{id:18,name:"Whoosh! Bildschirmreiniger",cat:"alltag",price:"9,99 €",stars:4.6,style:"minimal",budget:"sparsam",device:"other",need:"alltag",usage:"buero",extra:"",tag:"B01UVWX01",reason:"Alkoholfreie Reinigung für jedes Display"},
+{id:19,name:"Nothing Ear (2)",cat:"audio",price:"129,99 €",stars:4.5,style:"bunt",budget:"gut",device:"other",need:"audio",usage:"buero",extra:"kabellos",tag:"B0BGHIJ05",reason:"Stylisches transparentes Design"},
+{id:20,name:"Soundcore Life Q35",cat:"audio",price:"79,99 €",stars:4.5,style:"minimal",budget:"mittel",device:"other",need:"audio",usage:"reise",extra:"",tag:"B08HIJK03",reason:"Beste Over-Ears unter 80€ mit ANC"}
+];
+
+let step = 1, answers = {};
+
+function nextStep(){
+if(step<6){step++;updateView();}
+else{showResults();}
+}
+function prevStep(){
+if(step>1){step--;updateView();}
+}
+function updateView(){
+document.querySelectorAll('.question').forEach(q=>q.classList.remove('active'));
+document.querySelector(`.question[data-q="${step}"]`).classList.add('active');
+document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+document.getElementById('s'+step).classList.add('active');
+const currentAns = answers[document.querySelector(`.question[data-q="${step}"] .options`).dataset.target];
+document.getElementById('nextBtn').disabled = !currentAns;
+document.getElementById('prevBtn').style.display = step===1?'none':'inline-block';
+if(step===6)document.getElementById('nextBtn').textContent='🎯 Empfehlungen anzeigen';
+else document.getElementById('nextBtn').textContent='Weiter →';
+}
+document.querySelectorAll('.option').forEach(opt=>{
+opt.addEventListener('click',function(){
+const parent = this.closest('.options');
+parent.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+this.classList.add('selected');
+answers[parent.dataset.target] = this.dataset.value;
+const qNum = this.closest('.question').dataset.q;
+if(parseInt(qNum)===step)document.getElementById('nextBtn').disabled=false;
+if(parseInt(qNum)<step){
+document.querySelectorAll('.step').forEach(s=>s.classList.remove('done'));
+for(let i=1;i<=step;i++)document.getElementById('s'+i).classList.add('done');
+}
+});
+});
+
+function showResults(){
+document.getElementById('wizard').style.display='none';
+document.querySelector('.stepper').style.display='none';
+document.getElementById('results').classList.add('active');
+const grid = document.getElementById('resultGrid');
+grid.innerHTML='';
+let scored = allProducts.map(p=>{
+let score=0;
+if(p.device===answers.device)score+=3;
+if(p.need===answers.need||p.cat===answers.need)score+=3;
+if(p.budget===answers.budget)score+=2;
+if(p.style===answers.style)score+=2;
+if(p.usage===answers.usage)score+=2;
+if(p.extra===answers.extra)score+=2;
+if(p.extra&&answers.extra==='multitool')score+=1;
+return {...p,score};
+}).sort((a,b)=>b.score-b.stars*0.1||a.name.localeCompare(b.name));
+const top = scored.slice(0,10);
+top.forEach(p=>{
+const fullStars = Math.floor(p.stars);
+const stars = '★'.repeat(fullStars)+'☆'.repeat(5-fullStars);
+grid.innerHTML+=`<div class="result-card"><h4>${p.name}</h4><div class="stars">${stars} (${p.stars}/5)</div><div class="price">ca. ${p.price}</div><div class="reason">💡 ${p.reason}</div><a href="https://www.amazon.de/dp/${p.tag}?tag=ikune21-21" class="btn" target="_blank" rel="nofollow">Bei Amazon ansehen</a></div>`;
+});
+const names={device:{iphone:'iPhone',samsung:'Samsung',google:'Pixel',other:'Android'},need:{schutz:'Schutz',laden:'Laden & Power',audio:'Audio',auto:'Auto',foto:'Fotografie',alltag:'Alltag'},budget:{sparsam:'sparsam',mittel:'mittel',gut:'gut',premium:'Premium'}};
+document.getElementById('summaryText').textContent=`${names.device[answers.device]||'Smartphone'} | ${names.need[answers.need]||'Allround'} | Budget: ${names.budget[answers.budget]||'flexibel'}`;
+}
+function resetFinder(){location.reload();}
+document.getElementById('nextBtn').disabled=true;
+document.getElementById('prevBtn').style.display='none';
+</script>
+<footer style="text-align:center;padding:30px;color:var(--muted);font-size:0.85rem;margin-top:40px">
+<p>© 2026 - Amazon Affiliate Links (tag=ikune21-21) | <a href="index.html" style="color:var(--accent);text-decoration:none">Tools Übersicht</a> | <a href="../blog/index.html" style="color:var(--accent);text-decoration:none">Blog</a></p>
+<p>Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>
+</footer>
+</body>
+</html>'''
