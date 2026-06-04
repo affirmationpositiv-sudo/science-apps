@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APEX v5 — Life, Gamified.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ── RESET + BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0A0A0F; --bg2:#111118; --card:#1A1A2E; --card2:#222240;
+  --gold:#C9A84C; --xp:#58CC02; --streak:#FF9600; --danger:#FF4B4B;
+  --league:#CE82FF; --blue:#1CB0F6; --score:#FFC800; --text:#E8E8F0;
+  --text2:#8888AA; --text3:#555577; --radius:16px; --radius-sm:10px;
+  --shadow:0 8px 32px rgba(0,0,0,0.5); --glow:0 0 20px rgba(201,168,76,0.15);
+  font-family:'Inter',sans-serif; color:var(--text); background:var(--bg);
+  scroll-behavior:smooth; -webkit-tap-highlight-color:transparent;
+}
+body{min-height:100vh;overflow-x:hidden;background:radial-gradient(ellipse at 50% 0%, #1A1A2E 0%, #0A0A0F 70%)}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:700}
+a{color:var(--gold);text-decoration:none}
+input,textarea,select,button{font-family:'Inter',sans-serif}
+button{cursor:pointer;border:none;outline:none;background:none;color:inherit}
+::selection{background:var(--gold);color:var(--bg)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--text3);border-radius:3px}
+
+/* ── UTILITY ── */
+.hidden{display:none!important}
+.fade{opacity:0;pointer-events:none;transition:opacity 0.3s}
+.fade.show{opacity:1;pointer-events:auto}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:12px 28px;
+  border-radius:50px;font-weight:600;font-size:15px;transition:all 0.25s;
+  background:var(--gold);color:var(--bg);box-shadow:0 4px 15px rgba(201,168,76,0.3);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(201,168,76,0.4)}
+.btn:active{transform:translateY(0)}
+.btn-sm{padding:8px 18px;font-size:13px}
+.btn-outline{background:transparent;border:2px solid var(--text3);color:var(--text2);box-shadow:none}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.1);box-shadow:none}
+.btn-xp{background:var(--xp);box-shadow:0 4px 15px rgba(88,204,2,0.3)}
+.btn-xp:hover{box-shadow:0 6px 25px rgba(88,204,2,0.4)}
+.btn-danger{background:var(--danger);box-shadow:0 4px 15px rgba(255,75,75,0.3)}
+
+/* ── SIDEBAR / NAV ── */
+#appShell{display:flex;min-height:100vh}
+#sidebar{
+  width:220px;background:var(--bg2);border-right:1px solid rgba(255,255,255,0.04);
+  padding:24px 16px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;overflow-y:auto;
+  flex-shrink:0;
+}
+.side-logo{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--gold);text-align:center;margin-bottom:20px;letter-spacing:1px}
+.side-logo span{color:var(--text);font-size:14px;display:block;font-weight:400;font-family:'Inter',sans-serif;opacity:0.5;letter-spacing:2px;margin-top:-4px}
+.nav-item{
+  display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius-sm);
+  color:var(--text2);font-size:14px;font-weight:500;transition:all 0.2s;cursor:pointer;
+}
+.nav-item:hover{background:rgba(255,255,255,0.04);color:var(--text)}
+.nav-item.active{background:rgba(201,168,76,0.12);color:var(--gold)}
+.nav-item .ico{font-size:18px;width:24px;text-align:center}
+#mainContent{flex:1;padding:28px 36px;max-width:1000px;margin:0 auto;width:100%}
+
+/* ── PAGE HEADER ── */
+.page-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.page-header h2{font-size:28px}
+.page-header .sub{color:var(--text2);font-size:14px;font-weight:400}
+
+/* ── CARDS ── */
+.card{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow)}
+.card-glow{border-color:rgba(201,168,76,0.2);box-shadow:0 0 30px rgba(201,168,76,0.06)}
+.card-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:20px}
+
+/* ── XP BAR ── */
+.xp-bar-wrap{background:var(--bg2);border-radius:20px;height:12px;overflow:hidden;position:relative;margin:8px 0}
+.xp-bar-fill{height:100%;background:linear-gradient(90deg,var(--xp),#7AE810);border-radius:20px;transition:width 0.8s cubic-bezier(0.34,1.56,0.64,1);position:relative}
+.xp-bar-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15));border-radius:20px}
+.xp-label{display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:4px}
+
+/* ── PILLAR STATS ── */
+.pillar-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}
+.pillar-item{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--bg2);border-radius:var(--radius-sm)}
+.pillar-item .ico{font-size:20px;width:28px;text-align:center}
+.pillar-item .info{flex:1}
+.pillar-item .name{font-size:13px;font-weight:600}
+.pillar-item .sub{font-size:11px;color:var(--text3)}
+.pillar-bar{height:4px;background:var(--bg);border-radius:4px;margin-top:4px;overflow:hidden}
+.pillar-bar-fill{height:100%;border-radius:4px;transition:width 0.6s}
+
+/* ── BADGES GRID ── */
+.badge-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.badge-item{
+  aspect-ratio:1;border-radius:var(--radius-sm);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;font-size:28px;
+  background:var(--bg2);border:1px solid rgba(255,255,255,0.04);transition:all 0.3s;cursor:pointer;position:relative;
+}
+.badge-item.earned{background:linear-gradient(135deg,var(--card),rgba(201,168,76,0.15));border-color:rgba(201,168,76,0.3);box-shadow:0 0 20px rgba(201,168,76,0.06)}
+.badge-item.locked{filter:grayscale(0.8);opacity:0.4}
+.badge-item .badge-label{font-size:8px;font-weight:500;text-align:center;line-height:1.1;color:var(--text2)}
+.badge-item.earned .badge-label{color:var(--gold)}
+
+/* ── LEAGUE ── */
+.league-card{text-align:center;padding:24px}
+.league-icon{font-size:64px;margin-bottom:8px}
+.league-name{font-size:22px;font-weight:700;font-family:'Playfair Display',serif;color:var(--gold)}
+.league-sub{color:var(--text2);font-size:13px;margin-bottom:16px}
+.rank-list{display:flex;flex-direction:column;gap:6px}
+.rank-item{display:flex;align-items:center;gap:12px;padding:8px 14px;border-radius:var(--radius-sm);background:var(--bg2);font-size:14px}
+.rank-item.me{background:rgba(201,168,76,0.12);border:1px solid rgba(201,168,76,0.2)}
+.rank-pos{width:24px;font-weight:700;color:var(--text3)}
+.rank-pos.top3{color:var(--gold)}
+.rank-pos.bottom3{color:var(--danger)}
+.rank-name{flex:1;font-weight:500}
+.rank-score{color:var(--text2);font-size:13px}
+
+/* ── SESSION CARDS ── */
+.session-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.session-card{
+  background:var(--card);border-radius:var(--radius);padding:16px;border:1px solid rgba(255,255,255,0.04);
+  cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;
+}
+.session-card:hover{transform:translateY(-3px);border-color:rgba(201,168,76,0.2);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+.session-card .thumb{width:100%;aspect-ratio:16/9;background:var(--bg2);border-radius:8px;margin-bottom:10px;position:relative;overflow:hidden}
+.session-card .thumb iframe{width:100%;height:100%;border:none;pointer-events:none}
+.session-card .thumb .play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);font-size:40px}
+.session-card h4{font-size:15px;font-family:'Inter',sans-serif;font-weight:600}
+.session-card .meta{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-top:4px}
+.session-card .done-badge{position:absolute;top:10px;right:10px;background:var(--xp);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;z-index:2}
+
+/* ── SESSION TABS ── */
+.tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;transition:all 0.2s;background:var(--bg2)}
+.tab.active{background:var(--gold);color:var(--bg)}
+.tab:hover:not(.active){background:rgba(255,255,255,0.05)}
+
+/* ── SESSION PLAYER ── */
+#playerOverlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(10px);
+}
+#playerBox{
+  background:var(--card);border-radius:var(--radius);max-width:700px;width:100%;
+  max-height:90vh;overflow-y:auto;padding:28px;box-shadow:var(--shadow);
+}
+#playerBox h3{font-size:22px;margin-bottom:16px}
+.player-step{display:none}
+.player-step.active{display:block}
+.player-step .step-title{font-size:16px;font-weight:600;margin-bottom:6px}
+.player-step .step-text{color:var(--text2);font-size:14px;margin-bottom:14px;line-height:1.5}
+.timer-display{font-size:48px;font-weight:800;text-align:center;color:var(--gold);font-family:'Playfair Display',serif;margin:16px 0}
+.timer-controls{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.video-wrap{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg2);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.video-wrap iframe{width:100%;height:100%;border:none}
+
+/* ── COACH CHAT ── */
+.chat-box{background:var(--bg2);border-radius:var(--radius);padding:16px;max-height:400px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{max-width:80%;padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.4;animation:chatIn 0.3s ease}
+.chat-msg.bot{background:var(--card);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-msg.user{background:var(--gold);color:var(--bg);align-self:flex-end;border-bottom-right-radius:4px;font-weight:500}
+.chat-input-wrap{display:flex;gap:8px}
+.chat-input-wrap input{flex:1;padding:10px 16px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:var(--bg2);color:var(--text);font-size:14px}
+.chat-input-wrap input:focus{border-color:var(--gold);outline:none}
+@keyframes chatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── CONFETTI ── */
+.confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+
+/* ── MISC ANIMATIONS ── */
+@keyframes bounceIn{0%{transform:scale(0.3);opacity:0}50%{transform:scale(1.1)}70%{transform:scale(0.9)}100%{transform:scale(1);opacity:1}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 10px rgba(201,168,76,0.2)}50%{box-shadow:0 0 30px rgba(201,168,76,0.5)}}
+@keyframes dangerPulse{0%,100%{box-shadow:0 0 10px rgba(255,75,75,0.2)}50%{box-shadow:0 0 40px rgba(255,75,75,0.6)}}
+@keyframes scoreCount{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+@keyframes slideInBadge{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+.slide-up{animation:slideUp 0.4s ease}
+
+/* ── REWARD OVERLAY ── */
+.reward-overlay{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px)}
+.reward-box{background:var(--card);border-radius:var(--radius);padding:40px;text-align:center;max-width:380px;animation:bounceIn 0.5s ease}
+.reward-box .big{font-size:72px;margin-bottom:12px}
+.reward-box h3{font-size:24px;margin-bottom:8px}
+.reward-box p{color:var(--text2);font-size:14px;margin-bottom:20px}
+.reward-box .btn{margin-top:8px}
+
+/* ── MYSTERY BOX ── */
+.mystery-box{
+  position:fixed;bottom:90px;right:24px;z-index:100;width:64px;height:64px;
+  background:linear-gradient(135deg,var(--gold),#E8C84A);border-radius:16px;
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  cursor:pointer;animation:float 2s ease-in-out infinite;box-shadow:0 0 30px rgba(201,168,76,0.3);
+  transition:all 0.3s;
+}
+.mystery-box:hover{transform:scale(1.1)}
+.mystery-box .count{bottom:-6px;right:-6px;background:var(--danger);color:#fff;font-size:11px;padding:2px 6px;border-radius:10px;font-weight:700;position:absolute}
+
+/* ── PROGRESS CHARTS ── */
+.chart-wrap{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.04)}
+.chart-wrap h4{font-size:16px;margin-bottom:12px;font-family:'Inter',sans-serif;font-weight:600}
+
+/* ── STREAK DANGER ── */
+.danger-banner{
+  background:rgba(255,75,75,0.12);border:1px solid rgba(255,75,75,0.3);border-radius:var(--radius);
+  padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  animation:dangerPulse 2s infinite;
+}
+.danger-banner .ico{font-size:28px}
+.danger-banner .msg{flex:1;font-size:14px;font-weight:500}
+.danger-banner .msg strong{color:var(--danger)}
+
+/* ── EMOTION PICKER ── */
+.emotion-picker{display:flex;gap:16px;justify-content:center;margin:16px 0}
+.emotion-btn{font-size:48px;padding:12px 20px;border-radius:var(--radius);background:var(--bg2);cursor:pointer;transition:all 0.2s;border:2px solid transparent}
+.emotion-btn:hover,.emotion-btn.selected{transform:scale(1.15);border-color:var(--gold);background:rgba(201,168,76,0.1)}
+
+/* ── GRADE SLIDERS ── */
+.grade-row{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.grade-row label{font-size:14px;font-weight:500;display:flex;justify-content:space-between}
+.grade-row label span{color:var(--gold);font-weight:700}
+.grade-row input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:3px;background:var(--bg2);outline:none}
+.grade-row input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(201,168,76,0.4)}
+
+/* ── PROOF UPLOAD ── */
+.proof-zone{background:var(--bg2);border:2px dashed rgba(255,255,255,0.08);border-radius:var(--radius);padding:30px;text-align:center;cursor:pointer;transition:all 0.3s;margin:12px 0}
+.proof-zone:hover{border-color:var(--gold);background:rgba(201,168,76,0.04)}
+.proof-zone .ico{font-size:40px;margin-bottom:8px}
+.proof-zone .sub{color:var(--text3);font-size:13px}
+input[type=file]{display:none}
+.proof-input{width:100%;padding:10px 14px;border-radius:20px;border:1px solid rgba(255,255,255,0.08);background:var(--bg2);color:var(--text);font-size:14px;margin-top:8px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  #sidebar{width:60px;padding:16px 8px}
+  .side-logo{font-size:16px;margin-bottom:12px}
+  .side-logo span{display:none}
+  .nav-item .label{display:none}
+  .nav-item{padding:10px;justify-content:center}
+  .nav-item .ico{font-size:22px;margin:0}
+  #mainContent{padding:16px}
+  .badge-grid{grid-template-columns:repeat(3,1fr)}
+  .pillar-grid{grid-template-columns:1fr}
+  .session-grid{grid-template-columns:1fr}
+  .page-header h2{font-size:22px}
+}
+@media(max-width:480px){
+  .badge-grid{grid-template-columns:repeat(3,1fr)}
+  #playerBox{padding:16px;max-height:95vh}
+}
+
+/* ── GRADE RESULT ── */
+.grade-result{text-align:center;padding:20px}
+.grade-result .big-score{font-size:64px;font-weight:900;font-family:'Playfair Display',serif;color:var(--score);animation:scoreCount 0.6s ease}
+.grade-result .grade-letter{font-size:28px;font-weight:700;margin-top:4px}
+.grade-letter.A{color:var(--xp)}.grade-letter.B{color:var(--gold)}.grade-letter.C{color:var(--streak)}.grade-letter.D{color:var(--league)}.grade-letter.F{color:var(--danger)}
+.grade-details{display:flex;gap:12px;justify-content:center;margin:12px 0;flex-wrap:wrap}
+.grade-details .item{background:var(--bg2);padding:8px 14px;border-radius:10px;font-size:13px;text-align:center;min-width:80px}
+.grade-details .item .val{font-weight:700;font-size:18px;color:var(--gold)}
+
+/* ── ADMIN ── */
+.admin-section{margin-bottom:20px}
+.admin-section h4{font-size:16px;margin-bottom:8px;font-family:'Inter',sans-serif}
+.admin-pre{background:var(--bg2);border-radius:var(--radius-sm);padding:14px;font-size:12px;color:var(--text2);max-height:300px;overflow:auto;white-space:pre-wrap;word-break:break-all;margin-bottom:10px}
+
+/* ── LEVEL UP OVERLAY ── */
+#levelUpOverlay{
+  position:fixed;inset:0;z-index:3000;display:none;
+  align-items:center;justify-content:center;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);
+}
+#levelUpOverlay.show{display:flex}
+#levelUpBox{text-align:center;animation:bounceIn 0.6s ease}
+#levelUpBox .big{font-size:80px;margin-bottom:10px}
+#levelUpBox h2{font-size:36px;color:var(--gold)}
+#levelUpBox p{color:var(--text2);margin-bottom:16px}
+</style>
+</head>
+<body>
+
+<!-- ════════════ APP SHELL ════════════ -->
+<div id="appShell">
+  <!-- SIDEBAR -->
+  <nav id="sidebar">
+    <div class="side-logo">APEX<span>v5</span></div>
+    <div class="nav-item active" data-page="dashboard"><span class="ico">✦</span><span class="label">Dashboard</span></div>
+    <div class="nav-item" data-page="sessions"><span class="ico">📋</span><span class="label">Sessions</span></div>
+    <div class="nav-item" data-page="badges"><span class="ico">🏆</span><span class="label">Badges</span></div>
+    <div class="nav-item" data-page="league"><span class="ico">🎮</span><span class="label">League</span></div>
+    <div class="nav-item" data-page="progress"><span class="ico">📊</span><span class="label">Progress</span></div>
+    <div class="nav-item" data-page="coach"><span class="ico">🧠</span><span class="label">Coach AI</span></div>
+    <div class="nav-item" data-page="admin"><span class="ico">⚙️</span><span class="label">Admin</span></div>
+    <div style="flex:1"></div>
+    <div class="nav-item" id="streakDisplay" style="color:var(--streak);font-size:13px;justify-content:center"><span class="ico">🔥</span><span class="label" id="streakLabel">0 days</span></div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main id="mainContent">
+    <!-- ─── DASHBOARD ─── -->
+    <div class="page" id="page-dashboard">
+      <div class="page-header"><h2>✦ Dashboard</h2><span class="sub" id="greeting">Good morning!</span></div>
+
+      <div id="dangerBanner" class="danger-banner hidden"><span class="ico">⚠️</span><div class="msg"><strong>Danger!</strong> Open APEX before midnight to save your streak!</div><button class="btn btn-sm btn-danger" onclick="app.recordVisit()">🔥 I'm Here!</button></div>
+
+      <!-- XP / Level -->
+      <div class="card card-glow" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <div><span style="font-size:14px;color:var(--text2)">⟡ Level</span> <strong id="lvlDisplay" style="font-size:20px;color:var(--gold)">1</strong></div>
+          <div style="text-align:right"><span style="font-size:13px;color:var(--text2)">APEX Score</span><br><strong id="scoreDisplay" style="font-size:18px;color:var(--score)">0</strong></div>
+        </div>
+        <div class="xp-label"><span id="xpCurrentLabel">0 XP</span><span id="xpNextLabel">100 XP</span></div>
+        <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xpBar" style="width:0%"></div></div>
+      </div>
+
+      <!-- Today's Recommendation -->
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><span style="font-size:13px;color:var(--text2)">✦ Today's Recommendation</span><h4 id="recName" style="font-size:17px;margin-top:4px">Morning Mobility</h4><span id="recMeta" style="font-size:12px;color:var(--text3)">7 min • Body</span></div>
+          <button class="btn btn-xp" onclick="app.startSession(app.recommendedId)">▶ Start</button>
+        </div>
+      </div>
+
+      <!-- Pillar stats -->
+      <div class="pillar-grid">
+        <div class="pillar-item"><span class="ico">◆</span><div class="info"><div class="name">Body</div><div class="sub"><span id="bodyPct">0</span>%</div><div class="pillar-bar"><div class="pillar-bar-fill" id="bodyBar" style="width:0%;background:var(--blue)"></div></div></div></div>
+        <div class="pillar-item"><span class="ico">▲</span><div class="info"><div class="name">Mind</div><div class="sub"><span id="mindPct">0</span>%</div><div class="pillar-bar"><div class="pillar-bar-fill" id="mindBar" style="width:0%;background:var(--league)"></div></div></div></div>
+        <div class="pillar-item"><span class="ico">●</span><div class="info"><div class="name">Wealth</div><div class="sub"><span id="wealthPct">0</span>%</div><div class="pillar-bar"><div class="pillar-bar-fill" id="wealthBar" style="width:0%;background:var(--gold)"></div></div></div></div>
+        <div class="pillar-item"><span class="ico">■</span><div class="info"><div class="name">Soul</div><div class="sub"><span id="soulPct">0</span>%</div><div class="pillar-bar"><div class="pillar-bar-fill" id="soulBar" style="width:0%;background:var(--streak)"></div></div></div></div>
+      </div>
+
+      <!-- Quick badges -->
+      <div class="badge-grid" id="dashBadges" style="grid-template-columns:repeat(6,1fr);margin-top:12px;gap:8px"></div>
+    </div>
+
+    <!-- ─── SESSIONS ─── -->
+    <div class="page hidden" id="page-sessions">
+      <div class="page-header"><h2>📋 Sessions</h2><span class="sub">Complete exercises to earn XP</span></div>
+      <div class="tabs" id="sessionTabs">
+        <div class="tab active" data-filter="all">All</div>
+        <div class="tab" data-filter="body">◆ Body</div>
+        <div class="tab" data-filter="mind">▲ Mind</div>
+        <div class="tab" data-filter="wealth">● Wealth</div>
+        <div class="tab" data-filter="soul">■ Soul</div>
+      </div>
+      <div class="session-grid" id="sessionGrid"></div>
+    </div>
+
+    <!-- ─── BADGES ─── -->
+    <div class="page hidden" id="page-badges">
+      <div class="page-header"><h2>🏆 Badges</h2><span class="sub">18 achievements to unlock</span></div>
+      <div class="badge-grid" id="badgeGrid"></div>
+    </div>
+
+    <!-- ─── LEAGUE ─── -->
+    <div class="page hidden" id="page-league">
+      <div class="page-header"><h2>🎮 League</h2><span class="sub">Weekly competition</span></div>
+      <div class="card league-card">
+        <div class="league-icon" id="leagueIcon">🥉</div>
+        <div class="league-name" id="leagueName">Bronze</div>
+        <div class="league-sub" id="leagueSub">3 days left • Top 3 advance</div>
+        <div class="rank-list" id="rankList"></div>
+      </div>
+    </div>
+
+    <!-- ─── PROGRESS ─── -->
+    <div class="page hidden" id="page-progress">
+      <div class="page-header"><h2>📊 Progress</h2><span class="sub">Your journey visualized</span></div>
+      <div class="chart-wrap"><h4>📈 XP (Last 7 Days)</h4><canvas id="xpChart"></canvas></div>
+      <div class="chart-wrap"><h4>📊 Sessions Per Week</h4><canvas id="sessionsChart"></canvas></div>
+      <div class="chart-wrap"><h4>🎯 Average Score</h4><canvas id="scoreChart"></canvas></div>
+    </div>
+
+    <!-- ─── COACH ─── -->
+    <div class="page hidden" id="page-coach">
+      <div class="page-header"><h2>🧠 Coach AI</h2><span class="sub">I remember everything about you</span></div>
+      <div class="card">
+        <div class="chat-box" id="chatBox"></div>
+        <div class="chat-input-wrap">
+          <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')app.sendChat()">
+          <button class="btn btn-sm" onclick="app.sendChat()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── ADMIN ─── -->
+    <div class="page hidden" id="page-admin">
+      <div class="page-header"><h2>⚙️ Admin</h2><span class="sub">Manage your data</span></div>
+      <div class="card admin-section">
+        <h4>📦 Export All Data</h4>
+        <div class="admin-pre" id="adminExport">Loading...</div>
+        <button class="btn btn-sm" onclick="app.exportData()">📥 Download JSON</button>
+        <button class="btn btn-sm btn-outline" style="margin-left:8px" onclick="app.copyData()">📋 Copy</button>
+      </div>
+      <div class="card admin-section">
+        <h4>🔄 Reset Everything</h4>
+        <p style="font-size:13px;color:var(--text2);margin-bottom:10px">This will delete all your progress, badges, and data.</p>
+        <button class="btn btn-sm btn-danger" onclick="if(confirm('Sure? This cannot be undone!'))app.resetAll()">⚠️ Reset</button>
+      </div>
+      <div class="card admin-section">
+        <h4>🧪 Debug: Add Test Sessions</h4>
+        <button class="btn btn-sm btn-outline" onclick="app.addTestSessions()">Add 5 Test Sessions</button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ─── SESSION PLAYER OVERLAY ─── -->
+<div id="playerOverlay" class="hidden fade">
+  <div id="playerBox">
+    <h3 id="playerTitle">Session</h3>
+    <div id="playerSteps"></div>
+    <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end" id="playerActions"></div>
+  </div>
+</div>
+
+<!-- ─── LEVEL UP OVERLAY ─── -->
+<div id="levelUpOverlay">
+  <div id="levelUpBox">
+    <div class="big">🎉</div>
+    <h2 id="lvlUpTitle">Level Up!</h2>
+    <p id="lvlUpText">You reached Level 2</p>
+    <button class="btn" onclick="app.dismissLevelUp()">Awesome! ✨</button>
+  </div>
+</div>
+
+<!-- ─── CANVAS FOR CONFETTI ─── -->
+<canvas class="confetti-canvas" id="confettiCanvas"></canvas>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+//  APEX v5 — THE ULTIMATE GAMIFIED LIFE ASSISTANT
+//  All game logic in one file. No server. localStorage only.
+// ═══════════════════════════════════════════════════════════════
+
+const DB = [
+  // BODY
+  {id:'body_mobility',name:'Morning Mobility',pillar:'body',videoId:'gBGRtg1g1Lo',duration:7,steps:[{title:'Set Your Intention',text:'Stand tall, close your eyes. Take 3 deep breaths. What do you want from today?',timer:30},{title:'Neck Rolls',text:'Slowly roll your neck in circles — 5 each direction. Breathe deep.',timer:60},{title:'Cat-Cow Flow',text:'On hands and knees, alternate cat and cow poses. Move with your breath.',timer:90},{title:'Sun Salutation',text:'Flow through 3 sun salutations. Move smoothly, breathe fully.',timer:120},{title:'Final Stretch',text:'Stand tall, reach arms to the sky, then fold forward. Stay for 5 breaths.',timer:60}]},
+  {id:'body_hiit',name:'Quick HIIT',pillar:'body',videoId:'ml6cT4CsIbA',duration:15,steps:[{title:'Warm-Up',text:'Jumping jacks, arm circles, leg swings — 60 seconds each.',timer:120},{title:'Round 1: Squats',text:'20 squats. Keep your chest up, knees tracking over toes. Go!',timer:60},{title:'Round 1: Push-Ups',text:'15 push-ups. Modify on knees if needed. Quality over speed.',timer:60},{title:'Rest',text:'30 seconds. Shake out your arms and legs. Deep breaths.',timer:30},{title:'Round 2: Lunges',text:'12 each leg. Keep your front knee at 90 degrees.',timer:60},{title:'Round 2: Plank Jacks',text:'30 seconds. From plank position, jump feet in and out.',timer:30},{title:'Cool Down',text:'Hamstring stretch, quad stretch, deep breathing. Great work!',timer:90}]},
+  {id:'body_breath',name:'3-Part Breath',pillar:'body',videoId:'4p3pXq3VqTk',duration:5,steps:[{title:'Get Comfortable',text:'Sit or lie down. Close your eyes. Place one hand on belly, one on chest.',timer:30},{title:'Part 1: Belly',text:'Breathe into your belly — feel your hand rise. Exhale fully. 10 breaths.',timer:90},{title:'Part 2: Ribcage',text:'Now breathe into your ribs — feel them expand sideways. 10 breaths.',timer:90},{title:'Part 3: Chest',text:'Fill your upper chest last. Full 3-part breath in, slow exhale out. 10 cycles.',timer:90}]},
+  {id:'body_stretch',name:'Evening Stretch',pillar:'body',videoId:'g_tea8ZNk5A',duration:10,steps:[{title:'Child\'s Pose',text:'Kneel, sit back on heels, extend arms forward. 10 deep breaths.',timer:90},{title:'Hamstring Stretch',text:'Sitting, extend one leg, fold forward. Hold 30s each side.',timer:60},{title:'Hip Opener',text:'Figure-4 stretch lying down. 45 seconds each side.',timer:90},{title:'Spinal Twist',text:'Lying on back, drop knees to one side. 45s each.',timer:90},{title:'Shavasana',text:'Lie flat, arms at sides, eyes closed. 2 minutes of stillness.',timer:120}]},
+  {id:'body_cold',name:'Cold Exposure',pillar:'body',videoId:'c9kEU1Lm4HQ',duration:5,steps:[{title:'Prepare',text:'Fill a basin with cold water. Add ice if you have it. Set a timer.',timer:30},{title:'Breathe',text:'Take 10 deep, slow breaths. Calm your nervous system.',timer:60},{title:'The Plunge',text:'Submerge your face or hands in cold water. Breathe slowly. Start with 15 seconds.',timer:30},{title:'Recovery Breath',text:'Step back. Breathe deeply. Feel the rush of energy and clarity.',timer:60},{title:'Reflection',text:'Notice how you feel — energized, calm, alive. Write one word to describe it.',timer:60}]},
+  {id:'body_activation',name:'5-Min Activation',pillar:'body',videoId:'IiL1t_w23ZY',duration:5,steps:[{title:'Jump-Start',text:'30 jumping jacks, 10 burpees, 20 high knees. Go!',timer:60},{title:'Activate Core',text:'Plank hold — 30 seconds. Then 15 leg raises lying down.',timer:60},{title:'Activate Glutes',text:'20 glute bridges. Squeeze at the top! Then 15 each side leg kickbacks.',timer:60},{title:'Final Burst',text:'30 seconds of mountain climbers as fast as you can!',timer:30}]},
+  // MIND
+  {id:'mind_stillness',name:'Five Minutes of Stillness',pillar:'mind',videoId:'ZToicYSMuuA',duration:5,steps:[{title:'Sit Comfortably',text:'Find a quiet spot. Sit with your spine straight. Hands on knees.',timer:30},{title:'Follow Your Breath',text:'Notice the sensation of breath at your nostrils. In... out...',timer:120},{title:'Body Scan',text:'Slowly move awareness from head to toe. Notice without judgment.',timer:120},{title:'Return',text:'Gently open your eyes. Carry this stillness with you.',timer:30}]},
+  {id:'mind_intention',name:'Daily Intention',pillar:'mind',videoId:'ssss7V1_eyA',duration:3,steps:[{title:'Breathe & Center',text:'Three deep breaths. Let go of yesterday. Focus on now.',timer:30},{title:'Set Your Intention',text:'Complete this sentence: "Today I will be..." — or choose a one-word theme.',timer:60,input:true},{title:'Visualize',text:'Close your eyes. Picture living your intention fully today. Feel it.',timer:90}]},
+  {id:'mind_gratitude',name:'Gratitude Practice',pillar:'mind',videoId:'W8c0oC-pF8o',duration:5,steps:[{title:'Center',text:'Sit quietly. Take 3 deep breaths. Bring your attention to your heart.',timer:30},{title:'Three Gratitudes',text:'Think of 3 things you\'re grateful for — big or small. Feel the gratitude.',timer:120},{title:'Write Them Down',text:'Grab a journal or write here. Be specific. Savor each one.',timer:120,input:true},{title:'Close with Thanks',text:'Place your hand on your heart. Whisper "thank you" three times.',timer:30}]},
+  {id:'mind_frog',name:'Eat That Frog',pillar:'mind',videoId:'9l6vNkyR8SI',duration:10,steps:[{title:'Identify Your Frog',text:'What\'s the ONE task you\'ve been avoiding? Write it down.',timer:60,input:true},{title:'Chop It Up',text:'Break your frog into 3 small, actionable steps. What\'s step 1?',timer:120,input:true},{title:'Set a Timer',text:'Commit to working on step 1 for just 5 minutes. Start the timer. Go!',timer:300},{title:'Review',text:'How do you feel? The frog is smaller than it seemed. Check it off!',timer:60}]},
+  {id:'mind_pomodoro',name:'Focus Session',pillar:'mind',videoId:'mNBcR6jEPKw',duration:25,steps:[{title:'Plan',text:'Write down ONE thing you want to focus on this session.',timer:60,input:true},{title:'Pomodoro 1',text:'Focus on your task. No distractions. Full attention for 25 minutes.',timer:1500},{title:'Short Break',text:'Stand up, stretch, grab water. 5 minutes. You earned it.',timer:300},{title:'Pomodoro 2',text:'Another 25 minutes of deep focus. You\'re building a powerful habit.',timer:1500},{title:'Long Break',text:'Take 15 minutes. Go outside, talk to someone, or just breathe.',timer:900}]},
+  // WEALTH
+  {id:'wealth_test',name:'Financial Health Test',pillar:'wealth',videoId:'',duration:10,steps:[{title:'Income',text:'What\'s your monthly take-home income? Write it down or estimate.',timer:60,input:true},{title:'Expenses',text:'List your fixed monthly expenses (rent, utilities, subscriptions).',timer:120,input:true},{title:'Debt Check',text:'List any current debts (amount, interest rate). Knowledge is power.',timer:120,input:true},{title:'Savings Rate',text:'Income minus expenses = savings. What % of income do you save?',timer:120,input:true},{title:'Score',text:'Based on your data — a healthy savings rate is 20%+. Set one goal.',timer:60}]},
+  {id:'wealth_emergency',name:'Emergency Fund Calculator',pillar:'wealth',videoId:'',duration:5,steps:[{title:'Monthly Expenses',text:'What are your total monthly living expenses?',timer:60,input:true},{title:'Target',text:'Multiply monthly expenses × 6. That\'s your 6-month emergency fund target.',timer:60},{title:'Current Savings',text:'How much do you currently have in liquid savings?',timer:60,input:true},{title:'The Gap',text:'Target - Current = what you need to save. Start with $1000 mini-fund.',timer:60}]},
+  {id:'wealth_compound',name:'Compound Simulator',pillar:'wealth',videoId:'F3QpgXBtDeo',duration:10,steps:[{title:'Starting Amount',text:'How much can you invest today? Any amount works.',timer:60,input:true},{title:'Monthly Addition',text:'How much can you add each month? Be realistic.',timer:60,input:true},{title:'Time Horizon',text:'Years until you need this money. The longer, the more powerful.',timer:60,input:true},{title:'Visualize',text:'At 7% average return: your money doubles every ~10 years. Imagine what time does.',timer:120},{title:'The Formula',text:'Future Value = P×((1+r)^n - 1)/r + PV×(1+r)^n. Compound interest is magic.',timer:60}]},
+  {id:'wealth_5steps',name:'5-Step Wealth Plan',pillar:'wealth',videoId:'',duration:15,steps:[{title:'Step 1: Budget',text:'Track every dollar for 30 days. Use the 50/30/20 rule.',timer:120},{title:'Step 2: Emergency Fund',text:'Save $1000 mini-fund, then 3-6 months of expenses.',timer:60},{title:'Step 3: Kill Debt',text:'List debts smallest to largest. Snowball method: pay minimum on all, extra on smallest.',timer:120},{title:'Step 4: Invest 15%',text:'Invest 15% of gross income in low-cost index funds (VTI, VXUS, BND).',timer:120},{title:'Step 5: Build Wealth',text:'After retirement, invest in real estate or taxable accounts. Time is your ally.',timer:60}]},
+  {id:'wealth_income',name:'Passive Income Calculator',pillar:'wealth',videoId:'',duration:10,steps:[{title:'Your Goal',text:'How much monthly passive income do you want? Dream big!',timer:60,input:true},{title:'Your Assets',text:'What assets do you have (savings, investments, skills, property)?',timer:120,input:true},{title:'Idea Generation',text:'3 passive income ideas: dividend stocks, digital products, rental income. Which fits you?',timer:120},{title:'First Step',text:'What\'s ONE thing you can do this week to move toward passive income?',timer:120,input:true}]},
+  // SOUL
+  {id:'soul_reflection',name:'End of Day Reflection',pillar:'soul',videoId:'',duration:5,steps:[{title:'Breathe',text:'Three deep breaths. Let the day settle around you.',timer:30},{title:'High Point',text:'What was the best moment of your day? Savor it.',timer:60,input:true},{title:'Low Point',text:'What was challenging? No judgment — just observe.',timer:60,input:true},{title:'Lesson',text:'What did today teach you? Even small lessons count.',timer:60,input:true},{title:'Goodnight',text:'Place your hand on your heart. "I did my best today. I rest now."',timer:30}]},
+  {id:'soul_weekly',name:'Weekly Review',pillar:'soul',videoId:'',duration:10,steps:[{title:'The Wins',text:'List 3 wins from this week. Big or small — celebrate them!',timer:120,input:true},{title:'The Lessons',text:'What didn\'t go as planned? What did you learn?',timer:120,input:true},{title:'Gratitude',text:'3 things you\'re grateful for this week. Feel the appreciation.',timer:90,input:true},{title:'Next Week',text:'Set 3 intentions for next week. What kind of week will you create?',timer:120,input:true},{title:'Close',text:'Thank yourself for showing up. Growth is a marathon, not a sprint.',timer:30}]},
+  {id:'soul_balance',name:'Monthly Balance',pillar:'soul',videoId:'',duration:15,steps:[{title:'Body Check',text:'How did you treat your body this month? Sleep, movement, nutrition from 1-10?',timer:120,input:true},{title:'Mind Check',text:'How was your mental state? Stress, focus, learning, peace from 1-10?',timer:120,input:true},{title:'Wealth Check',text:'Progress on financial goals. Spending, saving, investing from 1-10?',timer:120,input:true},{title:'Soul Check',text:'Were you aligned with your values? Joy, purpose, connection from 1-10?',timer:120,input:true},{title:'The Balance',text:'Average your 4 scores. What\'s one thing to improve next month?',timer:60}]},
+];
+
+// ═══════════════════════════════════════════════════════════════
+//  BADGE DEFINITIONS (18)
+// ═══════════════════════════════════════════════════════════════
+const BADGES = [
+  {id:'first_spark',icon:'🔥',name:'First Spark',desc:'Complete your 1st session'},
+  {id:'rising_star',icon:'⭐',name:'Rising Star',desc:'Complete 5 sessions'},
+  {id:'dedicated',icon:'💪',name:'Dedicated',desc:'Complete 30 sessions'},
+  {id:'champion',icon:'🏆',name:'Champion',desc:'Complete 100 sessions'},
+  {id:'week_warrior',icon:'🔥',name:'Week Warrior',desc:'7-day streak'},
+  {id:'monthly_master',icon:'👑',name:'Monthly Master',desc:'30-day streak'},
+  {id:'century_club',icon:'💎',name:'Century Club',desc:'100-day streak'},
+  {id:'mind_explorer',icon:'🧠',name:'Mind Explorer',desc:'Complete 5 Mind sessions'},
+  {id:'wealth_builder',icon:'💰',name:'Wealth Builder',desc:'Complete 3 Wealth sessions'},
+  {id:'body_sculptor',icon:'🎯',name:'Body Sculptor',desc:'Complete 10 Body sessions'},
+  {id:'game_master',icon:'🎮',name:'Game Master',desc:'Reach Level 10'},
+  {id:'soul_seeker',icon:'❤️',name:'Soul Seeker',desc:'Complete 5 Soul sessions'},
+  {id:'speed_runner',icon:'⚡',name:'Speed Runner',desc:'Complete 3 sessions in one day'},
+  {id:'perfect_week',icon:'🌟',name:'Perfect Week',desc:'7 days, all sessions done'},
+  {id:'video_star',icon:'📹',name:'Video Star',desc:'Submit 1 video proof'},
+  {id:'coachs_pet',icon:'🏅',name:"Coach's Pet",desc:'Get 3 graded reviews'},
+  {id:'diamond',icon:'✨',name:'Diamond',desc:'Earn all badges in one pillar'},
+  {id:'the_one',icon:'👑',name:'The One',desc:'Earn ALL 18 badges!'}
+];
+
+const LEAGUES = [
+  {name:'Bronze',icon:'🥉',minXp:0},
+  {name:'Silver',icon:'🥈',minXp:500},
+  {name:'Gold',icon:'🥇',minXp:1500},
+  {name:'Sapphire',icon:'💎',minXp:3500},
+  {name:'Ruby',icon:'🔴',minXp:6000},
+  {name:'Diamond',icon:'💠',minXp:10000}
+];
+
+const BOT_NAMES = ['Athena','Sage','Nova','Blaze','Pulse','Zen','Max','Raven','Onyx'];
+
+// ═══════════════════════════════════════════════════════════════
+//  APP STATE
+// ═══════════════════════════════════════════════════════════════
+let state = {
+  name:'',
+  xp:0, level:1,
+  streak:0, lastVisit:'', streakFrozen:false,
+  sessions:[],        // completed session records
+  grades:[],          // graded reviews
+  badges:[],          // earned badge ids
+  emotions:[],        // {sessionId, emotion}
+  proofs:[],          // {sessionId, type:'video'|'youtube', data}
+  coachMessages:[],   // chat history
+  mysteryBoxCount:0,  // completed sessions since last box
+  leagueScore:0,
+  leagueRanks:[],
+  weekDays:[],        // xp per day last 7 days
+};
+
+function defaultState(){
+  return {
+    name:'', xp:0, level:1,
+    streak:0, lastVisit:'', streakFrozen:false,
+    sessions:[], grades:[], badges:[], emotions:[], proofs:[],
+    coachMessages:[], mysteryBoxCount:0, leagueScore:0, leagueRanks:[],
+    weekDays:[]
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  SOUND (Web Audio API)
+// ═══════════════════════════════════════════════════════════════
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+function ensureAudio(){ if(!audioCtx) audioCtx = new AudioCtx(); return audioCtx; }
+
+function playDing(){
+  try{
+    const ctx = ensureAudio();
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.frequency.setValueAtTime(880,ctx.currentTime);
+    o.frequency.linearRampToValueAtTime(1760,ctx.currentTime+0.15);
+    g.gain.setValueAtTime(0.3,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.3);
+    o.start(); o.stop(ctx.currentTime+0.3);
+  }catch(e){}
+}
+
+function playLevelUp(){
+  try{
+    const ctx = ensureAudio();
+    [523,659,784].forEach((freq,i)=>{
+      const o = ctx.createOscillator(); const g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = freq;
+      o.type = 'triangle';
+      g.gain.setValueAtTime(0.3,ctx.currentTime+i*0.15);
+      g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+i*0.15+0.3);
+      o.start(ctx.currentTime+i*0.15);
+      o.stop(ctx.currentTime+i*0.15+0.3);
+    });
+  }catch(e){}
+}
+
+function playStreakDanger(){
+  try{
+    const ctx = ensureAudio();
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.frequency.value = 220;
+    g.gain.setValueAtTime(0.3,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.5);
+    o.start(); o.stop(ctx.currentTime+0.5);
+  }catch(e){}
+}
+
+function playWrong(){
+  try{
+    const ctx = ensureAudio();
+    const o = ctx.createOscillator(); const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    o.frequency.setValueAtTime(400,ctx.currentTime);
+    o.frequency.linearRampToValueAtTime(200,ctx.currentTime+0.4);
+    g.gain.setValueAtTime(0.3,ctx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.4);
+    o.start(); o.stop(ctx.currentTime+0.4);
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  CONFETTI
+// ═══════════════════════════════════════════════════════════════
+let confettiAnim = null;
+function fireConfetti(count=100){
+  const canvas = document.getElementById('confettiCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const pieces = [];
+  const colors = ['#C9A84C','#58CC02','#FF9600','#CE82FF','#1CB0F6','#FFC800','#FF4B4B','#fff'];
+  for(let i=0;i<count;i++){
+    pieces.push({
+      x: Math.random()*canvas.width, y: Math.random()*canvas.height - canvas.height,
+      w: 6+Math.random()*6, h: 4+Math.random()*6,
+      color: colors[Math.floor(Math.random()*colors.length)],
+      vx: (Math.random()-0.5)*6, vy: 2+Math.random()*4,
+      rot: Math.random()*360, rv: (Math.random()-0.5)*8,
+      opacity: 1
+    });
+  }
+  if(confettiAnim) cancelAnimationFrame(confettiAnim);
+  let start = Date.now();
+  function draw(){
+    const elapsed = (Date.now()-start)/1000;
+    if(elapsed>3){ ctx.clearRect(0,0,canvas.width,canvas.height); return; }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.rot += p.rv;
+      p.vy += 0.1;
+      p.opacity = Math.max(0,1 - elapsed/3);
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    });
+    confettiAnim = requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  APP OBJECT
+// ═══════════════════════════════════════════════════════════════
+const app = {
+  currentSession: null,
+  currentStep: 0,
+  timerInterval: null,
+  sessionEmotion: null,
+  sessionProof: null,
+  playerCallback: null,
+  recommendedId: DB[0].id,
+
+  // ─── INIT ───
+  init(){
+    this.load();
+    if(!state.name){
+      const n = prompt('Welcome to APEX! What should I call you?','Explorer');
+      if(n&&n.trim()) state.name = n.trim();
+      else state.name = 'Explorer';
+      this.save();
+    }
+    this.checkStreak();
+    this.generateLeagueRanks();
+    this.renderDashboard();
+    this.renderSessions();
+    this.renderBadges();
+    this.renderLeague();
+    this.renderProgress();
+    this.renderCoach();
+    this.renderAdmin();
+    this.renderBadgeDots();
+    this.checkMysteryBox();
+    this.setupRouting();
+    this.setupGreeting();
+    // Daily recommendation
+    const completed = state.sessions.map(s=>s.id);
+    const avail = DB.filter(d=>!completed.includes(d.id));
+    if(avail.length) this.recommendedId = avail[Math.floor(Math.random()*avail.length)].id;
+  },
+
+  setupGreeting(){
+    const h = new Date().getHours();
+    let g = 'Good evening!';
+    if(h<12) g = 'Good morning!';
+    else if(h<17) g = 'Good afternoon!';
+    else if(h<21) g = 'Good evening!';
+    document.getElementById('greeting').textContent = `${g} ${state.name}`;
+  },
+
+  setupRouting(){
+    document.querySelectorAll('.nav-item').forEach(el=>{
+      el.onclick = ()=>{
+        const page = el.dataset.page;
+        if(!page) return;
+        document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+        el.classList.add('active');
+        document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+        const target = document.getElementById('page-'+page);
+        if(target) target.classList.remove('hidden');
+        if(page==='dashboard'){ this.renderDashboard(); this.checkStreak(); this.checkMysteryBox(); this.renderBadgeDots(); }
+        if(page==='sessions') this.renderSessions();
+        if(page==='badges') this.renderBadges();
+        if(page==='league'){ this.generateLeagueRanks(); this.renderLeague(); }
+        if(page==='progress'){ setTimeout(()=>this.renderCharts(),100); }
+        if(page==='coach') this.renderCoach();
+        if(page==='admin') this.renderAdmin();
+      };
+    });
+    // Session tab filters
+    document.querySelectorAll('#sessionTabs .tab').forEach(tab=>{
+      tab.onclick = ()=>{
+        document.querySelectorAll('#sessionTabs .tab').forEach(t=>t.classList.remove('active'));
+        tab.classList.add('active');
+        this.renderSessions(tab.dataset.filter);
+      };
+    });
+  },
+
+  // ─── PERSISTENCE ───
+  save(){
+    localStorage.setItem('apex_v5',JSON.stringify(state));
+  },
+  load(){
+    const d = localStorage.getItem('apex_v5');
+    if(d){ try{ const p = JSON.parse(d); Object.assign(state,defaultState(),p); }catch(e){} }
+  },
+
+  // ─── STREAK ───
+  checkStreak(){
+    const now = new Date();
+    const today = now.toDateString();
+    const last = state.lastVisit;
+    const hour = now.getHours();
+    // Show danger banner after 10PM if not visited today
+    const db = document.getElementById('dangerBanner');
+    if(last !== today && hour >= 22){
+      db.classList.remove('hidden');
+      playStreakDanger();
+    } else {
+      db.classList.add('hidden');
+    }
+    // Update streak display
+    document.getElementById('streakLabel').textContent = `${state.streak} day${state.streak!==1?'s':''}`;
+  },
+
+  recordVisit(){
+    const now = new Date();
+    const today = now.toDateString();
+    const last = state.lastVisit;
+    if(last !== today){
+      // Check if yesterday
+      const yesterday = new Date(now);
+      yesterday.setDate(yesterday.getDate()-1);
+      if(last === yesterday.toDateString()){
+        state.streak++;
+      } else if(last){
+        if(state.streakFrozen){
+          state.streakFrozen = false;
+          state.streak++;
+        } else {
+          state.streak = 1;
+          playWrong();
+        }
+      } else {
+        state.streak = 1;
+      }
+      state.lastVisit = today;
+      // Streak freeze after 7
+      if(state.streak >= 7) state.streakFrozen = true;
+      this.save();
+      this.checkStreak();
+      this.checkBadges();
+      this.renderDashboard();
+    }
+    document.getElementById('dangerBanner').classList.add('hidden');
+  },
+
+  // ─── XP & LEVEL ───
+  addXp(amount){
+    state.xp += amount;
+    state.leagueScore += amount;
+    // Track weekly XP
+    const today = new Date().toDateString();
+    const wd = state.weekDays;
+    const existing = wd.find(d=>d.date===today);
+    if(existing) existing.xp += amount;
+    else wd.push({date:today,xp:amount});
+    // Keep only last 7 days
+    if(wd.length>7) wd.splice(0,wd.length-7);
+    while(this.levelUp()){}
+    this.save();
+    this.renderDashboard();
+    this.checkBadges();
+  },
+
+  levelUp(){
+    const needed = state.level * 100;
+    if(state.xp >= needed){
+      state.xp -= needed;
+      state.level++;
+      playLevelUp();
+      fireConfetti(150);
+      document.getElementById('levelUpOverlay').classList.add('show');
+      document.getElementById('lvlUpTitle').textContent = `🎉 Level ${state.level}!`;
+      document.getElementById('lvlUpText').textContent = `You reached Level ${state.level}! Keep going!`;
+      this.save();
+      return true;
+    }
+    return false;
+  },
+
+  dismissLevelUp(){
+    document.getElementById('levelUpOverlay').classList.remove('show');
+  },
+
+  getXpForLevel(lvl){ return lvl * 100; },
+  getTotalXp(){
+    let total = state.xp;
+    for(let i=1;i<state.level;i++) total += i*100;
+    return total;
+  },
+
+  getPillarCount(pillar){
+    return state.sessions.filter(s=>{
+      const ex = DB.find(d=>d.id===s.id);
+      return ex && ex.pillar === pillar;
+    }).length;
+  },
+
+  getPillarPct(pillar){
+    const total = state.sessions.length;
+    if(!total) return 0;
+    return Math.round((this.getPillarCount(pillar)/total)*100);
+  },
+
+  // ─── SESSION SYSTEM ───
+  startSession(id){
+    const ex = DB.find(d=>d.id===id);
+    if(!ex) return;
+    this.currentSession = ex;
+    this.currentStep = 0;
+    this.sessionEmotion = null;
+    this.sessionProof = null;
+    this.playerCallback = null;
+    const overlay = document.getElementById('playerOverlay');
+    overlay.classList.remove('hidden');
+    setTimeout(()=>overlay.classList.add('show'),10);
+    this.renderPlayerStep();
+  },
+
+  renderPlayerStep(){
+    const ex = this.currentSession;
+    if(!ex) return;
+    document.getElementById('playerTitle').textContent = ex.name;
+    const container = document.getElementById('playerSteps');
+    const actions = document.getElementById('playerActions');
+
+    // Phase 1: Steps with timer
+    if(this.currentStep < ex.steps.length){
+      const step = ex.steps[this.currentStep];
+      let html = `<div class="player-step active">
+        <div class="step-title">${step.title}</div>
+        <div class="step-text">${step.text}</div>`;
+      if(ex.videoId && this.currentStep === 0){
+        html += `<div class="video-wrap"><iframe src="https://www.youtube.com/embed/${ex.videoId}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+      }
+      if(step.timer){
+        html += `<div class="timer-display" id="timerDisplay">${step.timer}</div>`;
+        html += `<div class="timer-controls">
+          <button class="btn btn-sm btn-outline" onclick="app.toggleTimer()">⏸ Pause</button>
+          <button class="btn btn-sm btn-xp" onclick="app.nextStep()">Skip →</button>
+        </div>`;
+      }
+      if(step.input){
+        html += `<textarea class="proof-input" id="stepInput" rows="3" placeholder="Write here..." style="margin:8px 0;resize:vertical"></textarea>`;
+        html += `<div style="margin-top:8px"><button class="btn btn-sm btn-xp" onclick="app.nextStep()">Next →</button></div>`;
+      }
+      html += `</div>`;
+      container.innerHTML = html;
+      actions.innerHTML = '';
+
+      if(step.timer){
+        this.startTimer(step.timer);
+      } else if(!step.input){
+        // Auto-advance for text-only steps after a few seconds? No, need manual
+        actions.innerHTML = `<button class="btn btn-sm btn-xp" onclick="app.nextStep()">Next →</button>`;
+      }
+    } else {
+      // Phase 2: Post-session screens
+      this.showPostSession();
+    }
+  },
+
+  startTimer(seconds){
+    if(this.timerInterval) clearInterval(this.timerInterval);
+    let remaining = seconds;
+    const display = document.getElementById('timerDisplay');
+    if(!display) return;
+    this.timerInterval = setInterval(()=>{
+      remaining--;
+      if(display) display.textContent = remaining;
+      if(remaining <= 0){
+        clearInterval(this.timerInterval);
+        this.timerInterval = null;
+        playDing();
+        // Auto-advance
+        this.nextStep();
+      }
+    },1000);
+  },
+
+  toggleTimer(){
+    // Simple: just pause/resume not critical, skip for now
+  },
+
+  nextStep(){
+    if(this.timerInterval){ clearInterval(this.timerInterval); this.timerInterval = null; }
+    this.currentStep++;
+    this.renderPlayerStep();
+  },
+
+  showPostSession(){
+    const container = document.getElementById('playerSteps');
+    const actions = document.getElementById('playerActions');
+    const ex = this.currentSession;
+    if(!ex) return;
+
+    // Stage: how felt, proof, grade
+    if(!this.sessionEmotion){
+      container.innerHTML = `<div class="player-step active">
+        <div class="step-title">How was it?</div>
+        <div class="step-text">How do you feel after this session?</div>
+        <div class="emotion-picker">
+          <button class="emotion-btn" onclick="app.setEmotion('easy')">😌</button>
+          <button class="emotion-btn" onclick="app.setEmotion('good')">💪</button>
+          <button class="emotion-btn" onclick="app.setEmotion('hard')">🔥</button>
+        </div>
+      </div>`;
+      actions.innerHTML = '';
+      return;
+    }
+
+    if(!this.sessionProof){
+      container.innerHTML = `<div class="player-step active">
+        <div class="step-title">Submit Proof</div>
+        <div class="step-text">Record a video or paste a YouTube link as proof of your practice.</div>
+        <div class="proof-zone" onclick="document.getElementById('videoUpload').click()">
+          <div class="ico">📹</div>
+          <div>Record or Upload Video</div>
+          <div class="sub">Tap to select a file</div>
+        </div>
+        <input type="file" id="videoUpload" accept="video/*" onchange="app.handleVideoUpload(event)">
+        <div style="margin:12px 0;text-align:center;color:var(--text3)">— or —</div>
+        <input class="proof-input" id="youtubeLink" placeholder="Paste YouTube link here...">
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="btn btn-sm btn-xp" onclick="app.submitYoutubeLink()">🎬 Submit Link</button>
+          <button class="btn btn-sm btn-outline" onclick="app.skipProof()">Skip</button>
+        </div>
+      </div>`;
+      actions.innerHTML = '';
+      return;
+    }
+
+    // Show grading
+    container.innerHTML = `<div class="player-step active">
+      <div class="step-title">Self-Grade Your Session</div>
+      <div class="step-text">Rate yourself honestly — this helps you grow.</div>
+      <div class="grade-row">
+        <label>Form & Technique <span id="formScore">3</span>/5</label>
+        <input type="range" min="1" max="5" value="3" oninput="app.updateGrade('form',this.value)">
+      </div>
+      <div class="grade-row">
+        <label>Intensity & Effort <span id="intensityScore">3</span>/5</label>
+        <input type="range" min="1" max="5" value="3" oninput="app.updateGrade('intensity',this.value)">
+      </div>
+      <div class="grade-row">
+        <label>Consistency & Dedication <span id="consistencyScore">3</span>/5</label>
+        <input type="range" min="1" max="5" value="3" oninput="app.updateGrade('consistency',this.value)">
+      </div>
+    </div>`;
+    actions.innerHTML = `<button class="btn btn-xp" onclick="app.submitGrade()">Submit Grade ✨</button>`;
+  },
+
+  setEmotion(val){
+    this.sessionEmotion = val;
+    state.emotions.push({sessionId:this.currentSession.id,emotion:val});
+    this.showPostSession();
+  },
+
+  handleVideoUpload(e){
+    const file = e.target.files[0];
+    if(file){
+      const reader = new FileReader();
+      reader.onload = (ev)=>{
+        this.sessionProof = {type:'video',data:ev.target.result};
+        state.proofs.push({sessionId:this.currentSession.id,type:'video',data:ev.target.result});
+        this.showPostSession();
+      };
+      reader.readAsDataURL(file);
+    }
+  },
+
+  submitYoutubeLink(){
+    const input = document.getElementById('youtubeLink');
+    if(input && input.value.trim()){
+      const url = input.value.trim();
+      this.sessionProof = {type:'youtube',data:url};
+      state.proofs.push({sessionId:this.currentSession.id,type:'youtube',data:url});
+      this.showPostSession();
+    }
+  },
+
+  skipProof(){
+    this.sessionProof = {type:'skipped',data:''};
+    this.showPostSession();
+  },
+
+  updateGrade(field,val){
+    document.getElementById(field+'Score').textContent = val;
+  },
+
+  submitGrade(){
+    const form = parseInt(document.getElementById('formScore').textContent);
+    const intensity = parseInt(document.getElementById('intensityScore').textContent);
+    const consistency = parseInt(document.getElementById('consistencyScore').textContent);
+    const total = form + intensity + consistency;
+    const pct = Math.round((total/15)*100);
+    let letter = 'F';
+    if(pct >= 90) letter = 'A';
+    else if(pct >= 75) letter = 'B';
+    else if(pct >= 60) letter = 'C';
+    else if(pct >= 40) letter = 'D';
+
+    const grade = {form,intensity,consistency,total,pct,letter,sessionId:this.currentSession.id};
+    state.grades.push(grade);
+
+    // Complete the session
+    state.sessions.push({id:this.currentSession.id,name:this.currentSession.name,date:new Date().toISOString()});
+
+    // Add XP based on grade
+    const xpEarned = Math.round(pct/10) * 10;
+    this.addXp(xpEarned);
+
+    // Mystery box counter
+    state.mysteryBoxCount++;
+    this.save();
+
+    // Show result
+    const container = document.getElementById('playerSteps');
+    const actions = document.getElementById('playerActions');
+    container.innerHTML = `<div class="player-step active">
+      <div class="grade-result">
+        <div class="big-score">${pct}%</div>
+        <div class="grade-letter ${letter}">Grade: ${letter}</div>
+        <div class="grade-details">
+          <div class="item"><div class="val">${form}</div>Form</div>
+          <div class="item"><div class="val">${intensity}</div>Intensity</div>
+          <div class="item"><div class="val">${consistency}</div>Consistency</div>
+        </div>
+        <p style="color:var(--text2);font-size:14px;margin-top:10px">+${xpEarned} XP earned!</p>
+      </div>
+    </div>`;
+    actions.innerHTML = `<button class="btn btn-xp" onclick="app.closePlayer()">Done! ✨</button>`;
+
+    playDing();
+    fireConfetti(60);
+
+    // Coach memory
+    state.coachMessages.push({role:'assistant',text:`Great session on "${this.currentSession.name}"! You scored ${pct}% (${letter}). ${xpEarned} XP earned. Keep growing! 💪`});
+    this.save();
+
+    // Check badges
+    this.checkBadges();
+
+    // Check mystery box
+    if(state.mysteryBoxCount >= 5){
+      state.mysteryBoxCount = 0;
+      this.save();
+      setTimeout(()=>this.showMysteryBox(),500);
+    }
+  },
+
+  closePlayer(){
+    const overlay = document.getElementById('playerOverlay');
+    overlay.classList.remove('show');
+    setTimeout(()=>overlay.classList.add('hidden'),300);
+    if(this.timerInterval){ clearInterval(this.timerInterval); this.timerInterval=null; }
+    this.renderDashboard();
+    this.renderSessions();
+  },
+
+  // ─── MYSTERY BOX ───
+  checkMysteryBox(){
+    const existing = document.querySelector('.mystery-box');
+    if(!existing && state.mysteryBoxCount > 0 && state.mysteryBoxCount < 5){
+      // Show pending count
+    }
+  },
+
+  showMysteryBox(){
+    const overlay = document.createElement('div');
+    overlay.className = 'reward-overlay';
+    overlay.id = 'mysteryOverlay';
+    const rewards = [
+      {icon:'💰',title:'Bonus XP!',desc:'+50 bonus XP!',action:()=>this.addXp(50)},
+      {icon:'⚡',title:'2x Multiplier!',desc:'Next session gives double XP!',action:()=>{state.xpMultiplier=2;this.save();}},
+      {icon:'❄️',title:'Streak Freeze!',desc:'One missed day won\'t break your streak!',action:()=>{state.streakFrozen=true;this.save();}},
+      {icon:'🏅',title:'Special Badge Boost!',desc:'You\'re one step closer to The One!',action:()=>{}},
+      {icon:'✨',title:'XP Rain!',desc:'+25 XP instantly!',action:()=>this.addXp(25)},
+      {icon:'🎯',title:'Double Trouble!',desc:'Complete 2 sessions today for bonus!',action:()=>{}},
+    ];
+    const reward = rewards[Math.floor(Math.random()*rewards.length)];
+    overlay.innerHTML = `<div class="reward-box">
+      <div class="big">📦</div>
+      <div class="big" style="font-size:64px">${reward.icon}</div>
+      <h3>${reward.title}</h3>
+      <p>${reward.desc}</p>
+      <button class="btn" onclick="app.claimReward()">Claim! 🎉</button>
+    </div>`;
+    document.body.appendChild(overlay);
+    this._pendingReward = reward;
+  },
+
+  claimReward(){
+    if(this._pendingReward){
+      this._pendingReward.action();
+      this._pendingReward = null;
+    }
+    const overlay = document.getElementById('mysteryOverlay');
+    if(overlay) overlay.remove();
+    fireConfetti(80);
+    playDing();
+  },
+
+  // ─── BADGES ───
+  checkBadges(){
+    const earned = state.badges;
+    const totalSessions = state.sessions.length;
+    const streak = state.streak;
+    const bodyCnt = this.getPillarCount('body');
+    const mindCnt = this.getPillarCount('mind');
+    const wealthCnt = this.getPillarCount('wealth');
+    const soulCnt = this.getPillarCount('soul');
+    const maxStreak = Math.max(...state.sessions.map(s=>{
+      // approximate: count consecutive days
+      return streak;
+    }));
+    const gradesCount = state.grades.length;
+    const proofsCount = state.proofs.length;
+    const level = state.level;
+
+    // Session counts today
+    const today = new Date().toDateString();
+    const todaySessions = state.sessions.filter(s=>new Date(s.date).toDateString()===today).length;
+
+    // Week counts
+    const weekAgo = new Date(Date.now()-7*86400000);
+    const weekSessions = state.sessions.filter(s=>new Date(s.date)>=weekAgo).length;
+
+    const badgeChecks = [
+      {id:'first_spark',check:()=>totalSessions>=1},
+      {id:'rising_star',check:()=>totalSessions>=5},
+      {id:'dedicated',check:()=>totalSessions>=30},
+      {id:'champion',check:()=>totalSessions>=100},
+      {id:'week_warrior',check:()=>streak>=7},
+      {id:'monthly_master',check:()=>streak>=30},
+      {id:'century_club',check:()=>streak>=100},
+      {id:'mind_explorer',check:()=>mindCnt>=5},
+      {id:'wealth_builder',check:()=>wealthCnt>=3},
+      {id:'body_sculptor',check:()=>bodyCnt>=10},
+      {id:'game_master',check:()=>level>=10},
+      {id:'soul_seeker',check:()=>soulCnt>=5},
+      {id:'speed_runner',check:()=>todaySessions>=3},
+      {id:'perfect_week',check:()=>weekSessions>=7},
+      {id:'video_star',check:()=>proofsCount>=1},
+      {id:'coachs_pet',check:()=>gradesCount>=3},
+      {id:'diamond',check:()=>{
+        const allIds = BADGES.map(b=>b.id);
+        const pillarBadges = ['mind_explorer','wealth_builder','body_sculptor','soul_seeker'];
+        return pillarBadges.some(p=>earned.includes(p));
+      }},
+      {id:'the_one',check:()=>{
+        const allIds = BADGES.map(b=>b.id);
+        return allIds.every(id=>earned.includes(id));
+      }},
+    ];
+
+    let newBadge = false;
+    badgeChecks.forEach(bc=>{
+      if(!earned.includes(bc.id) && bc.check()){
+        earned.push(bc.id);
+        newBadge = true;
+        setTimeout(()=>{
+          const badge = BADGES.find(b=>b.id===bc.id);
+          if(badge){
+            playDing();
+            fireConfetti(40);
+            alert(`🏆 Badge Unlocked: ${badge.icon} ${badge.name}!\n${badge.desc}`);
+          }
+        },300);
+      }
+    });
+
+    if(newBadge){
+      this.save();
+      this.renderBadges();
+      this.renderBadgeDots();
+    }
+  },
+
+  // ─── LEAGUE ───
+  generateLeagueRanks(){
+    const myScore = state.leagueScore;
+    const players = [];
+    // Add bots
+    BOT_NAMES.forEach((name,i)=>{
+      const base = i===0 ? myScore+500 : i===1 ? myScore+200 : myScore-100*i;
+      players.push({name,score:Math.max(0,base+Math.floor(Math.random()*200-100))});
+    });
+    // Add user
+    players.push({name:state.name||'You',score:myScore,me:true});
+    players.sort((a,b)=>b.score-a.score);
+    state.leagueRanks = players.map((p,i)=>({...p,rank:i+1}));
+    this.save();
+  },
+
+  getLeagueTier(){
+    const totalXp = this.getTotalXp();
+    let tier = LEAGUES[0];
+    for(const l of LEAGUES){
+      if(totalXp >= l.minXp) tier = l;
+    }
+    return tier;
+  },
+
+  // ─── RENDER ───
+  renderDashboard(){
+    document.getElementById('lvlDisplay').textContent = state.level;
+    const total = this.getTotalXp();
+    document.getElementById('scoreDisplay').textContent = total.toLocaleString();
+    const current = state.xp;
+    const needed = state.level * 100;
+    const pct = Math.min(100,Math.round((current/needed)*100));
+    document.getElementById('xpBar').style.width = pct+'%';
+    document.getElementById('xpCurrentLabel').textContent = current+' XP';
+    document.getElementById('xpNextLabel').textContent = needed+' XP';
+
+    // Pillar stats
+    document.getElementById('bodyPct').textContent = this.getPillarPct('body');
+    document.getElementById('mindPct').textContent = this.getPillarPct('mind');
+    document.getElementById('wealthPct').textContent = this.getPillarPct('wealth');
+    document.getElementById('soulPct').textContent = this.getPillarPct('soul');
+    document.getElementById('bodyBar').style.width = this.getPillarPct('body')+'%';
+    document.getElementById('mindBar').style.width = this.getPillarPct('mind')+'%';
+    document.getElementById('wealthBar').style.width = this.getPillarPct('wealth')+'%';
+    document.getElementById('soulBar').style.width = this.getPillarPct('soul')+'%';
+
+    // Recommendation
+    const rec = DB.find(d=>d.id===this.recommendedId) || DB[0];
+    document.getElementById('recName').textContent = rec.name;
+    document.getElementById('recMeta').textContent = `${rec.duration} min • ${rec.pillar.charAt(0).toUpperCase()+rec.pillar.slice(1)}`;
+
+    // Streak
+    document.getElementById('streakLabel').textContent = `${state.streak} day${state.streak!==1?'s':''}`;
+  },
+
+  renderBadgeDots(){
+    const container = document.getElementById('dashBadges');
+    if(!container) return;
+    container.innerHTML = BADGES.slice(0,6).map(b => {
+      const earned = state.badges.includes(b.id);
+      return `<div class="badge-item ${earned?'earned':'locked'}" style="aspect-ratio:1;font-size:22px;border-radius:10px;padding:4px" title="${b.name}">
+        ${earned ? b.icon : '🔒'}
+        <span class="badge-label">${earned?b.name:'???'}</span>
+      </div>`;
+    }).join('');
+  },
+
+  renderSessions(filter){
+    filter = filter || 'all';
+    const grid = document.getElementById('sessionGrid');
+    const completed = state.sessions.map(s=>s.id);
+    const items = DB.filter(d=>filter==='all'||d.pillar===filter);
+    grid.innerHTML = items.map(ex=>{
+      const done = completed.includes(ex.id);
+      return `<div class="session-card" onclick="${done?'':'app.startSession(\''+ex.id+'\')'}">
+        <div class="thumb">
+          ${ex.videoId ? `<iframe src="https://www.youtube.com/embed/${ex.videoId}?rel=0" allowfullscreen></iframe>` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--text3);font-size:14px">${ex.pillar} exercise</div>`}
+          <div class="play-overlay">▶</div>
+        </div>
+        ${done ? '<div class="done-badge">✓</div>' : ''}
+        <h4>${ex.name}</h4>
+        <div class="meta"><span>${ex.duration} min</span><span>${done?'✓ Done':'+'+Math.round(ex.duration*10)+' XP'}</span></div>
+      </div>`;
+    }).join('');
+  },
+
+  renderBadges(){
+    const grid = document.getElementById('badgeGrid');
+    grid.innerHTML = BADGES.map(b=>{
+      const earned = state.badges.includes(b.id);
+      return `<div class="badge-item ${earned?'earned':'locked'}" title="${b.desc}">
+        ${earned ? b.icon : '🔒'}
+        <span class="badge-label">${earned?b.name:'???'}</span>
+      </div>`;
+    }).join('');
+  },
+
+  renderLeague(){
+    const tier = this.getLeagueTier();
+    document.getElementById('leagueIcon').textContent = tier.icon;
+    document.getElementById('leagueName').textContent = tier.name;
+    // Days left (random between 1-6)
+    const daysLeft = Math.floor(Math.random()*5)+1;
+    document.getElementById('leagueSub').textContent = `${daysLeft} day${daysLeft>1?'s':''} left • Top 3 advance`;
+
+    const list = document.getElementById('rankList');
+    list.innerHTML = state.leagueRanks.map(p=>{
+      const cls = p.me ? 'me' : '';
+      const posCls = p.rank<=3 ? 'top3' : p.rank>=8 ? 'bottom3' : '';
+      return `<div class="rank-item ${cls}">
+        <span class="rank-pos ${posCls}">${p.rank<=3&&p.rank>0 ? ['🥇','🥈','🥉'][p.rank-1] : '#'+p.rank}</span>
+        <span class="rank-name">${p.name}${p.me?' (You)':''}</span>
+        <span class="rank-score">${p.score.toLocaleString()} XP</span>
+      </div>`;
+    }).join('');
+  },
+
+  renderCharts(){
+    // XP Chart (last 7 days)
+    const wd = state.weekDays;
+    const labels = wd.length ? wd.map(d=>{
+      const dt = new Date(d.date);
+      return dt.toLocaleDateString('en',{weekday:'short'});
+    }) : ['No data yet'];
+    const data = wd.length ? wd.map(d=>d.xp) : [0];
+
+    const xpCanvas = document.getElementById('xpChart');
+    if(xpCanvas){
+      // Resize parent to get canvas visible before rendering
+      xpCanvas.parentElement.style.minHeight = '200px';
+    }
+    if(window._xpChart) window._xpChart.destroy();
+    if(xpCanvas){
+      window._xpChart = new Chart(xpCanvas,{
+        type:'bar',
+        data:{labels,datasets:[{label:'XP',data,backgroundColor:'rgba(88,204,2,0.6)',borderColor:'#58CC02',borderWidth:2,borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.04)'}},x:{grid:{display:false}}}}
+      });
+    }
+
+    // Sessions per week
+    const sLabels = ['Week 1','Week 2','Week 3','Week 4'];
+    const now = Date.now();
+    const weekCounts = [0,0,0,0];
+    state.sessions.forEach(s=>{
+      const daysAgo = Math.floor((now - new Date(s.date).getTime())/86400000);
+      const weekIdx = Math.floor(daysAgo/7);
+      if(weekIdx>=0 && weekIdx<4) weekCounts[weekIdx]++;
+    });
+    weekCounts.reverse();
+    const sessionsCanvas = document.getElementById('sessionsChart');
+    if(sessionsCanvas) sessionsCanvas.parentElement.style.minHeight = '200px';
+    if(window._sessionsChart) window._sessionsChart.destroy();
+    if(sessionsCanvas){
+      window._sessionsChart = new Chart(sessionsCanvas,{
+        type:'bar',
+        data:{labels:sLabels,datasets:[{label:'Sessions',data:weekCounts,backgroundColor:'rgba(206,130,255,0.6)',borderColor:'#CE82FF',borderWidth:2,borderRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.04)'}},x:{grid:{display:false}}}}
+      });
+    }
+
+    // Avg score
+    const hasGrades = state.grades.length > 0;
+    const scoreLabels = hasGrades ? state.grades.map((g,i)=>'#'+(i+1)) : ['No grades yet'];
+    const scoreData = hasGrades ? state.grades.map(g=>g.pct) : [0];
+    const scoreCanvas = document.getElementById('scoreChart');
+    if(scoreCanvas) scoreCanvas.parentElement.style.minHeight = '200px';
+    if(window._scoreChart) window._scoreChart.destroy();
+    if(scoreCanvas){
+      window._scoreChart = new Chart(scoreCanvas,{
+        type:'line',
+        data:{labels:scoreLabels,datasets:[{label:'Score %',data:scoreData,borderColor:'#FFC800',backgroundColor:'rgba(255,200,0,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#FFC800',pointRadius:4}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,grid:{color:'rgba(255,255,255,0.04)'}},x:{grid:{display:false}}}}
+      });
+    }
+  },
+
+  renderProgress(){
+    // Charts rendered when tab is shown
+  },
+
+  renderCoach(){
+    const box = document.getElementById('chatBox');
+    const msgs = state.coachMessages;
+    if(msgs.length === 0){
+      // Initial message
+      const lastS = state.sessions[state.sessions.length-1];
+      let msg = `Hey ${state.name}! I'm APEX. I remember everything about your journey. Let's start! 💪`;
+      if(lastS){
+        const lastG = state.grades.find(g=>g.sessionId===lastS.id);
+        msg = `Good to see you, ${state.name}! Your last session was "${lastS.name}"${lastG?` and you scored ${lastG.pct}% (${lastG.letter})`:''}. Ready for today? 🚀`;
+      }
+      msgs.push({role:'assistant',text:msg});
+      this.save();
+    }
+    box.innerHTML = msgs.map(m=>
+      `<div class="chat-msg ${m.role}">${m.text}</div>`
+    ).join('');
+    box.scrollTop = box.scrollHeight;
+    document.getElementById('chatInput').value = '';
+  },
+
+  sendChat(){
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if(!text) return;
+    state.coachMessages.push({role:'user',text});
+    // Generate AI response
+    const response = this.generateCoachResponse(text);
+    state.coachMessages.push({role:'assistant',text:response});
+    this.save();
+    this.renderCoach();
+  },
+
+  generateCoachResponse(userInput){
+    const lower = userInput.toLowerCase();
+    const lastSession = state.sessions[state.sessions.length-1];
+    const total = state.sessions.length;
+    const badges = state.badges.length;
+    const level = state.level;
+    const streak = state.streak;
+    const lastGrade = state.grades[state.grades.length-1];
+
+    if(lower.includes('progress')||lower.includes('how am i')||lower.includes('stats')){
+      return `Here's your progress, ${state.name}: Level ${level} ⬆️ | ${total} sessions completed | ${streak}-day streak 🔥 | ${badges}/18 badges earned | ${state.xp} XP current. You're doing amazing! Keep it up! 🚀`;
+    }
+    if(lower.includes('badge')||lower.includes('achievement')){
+      const earned = BADGES.filter(b=>state.badges.includes(b.id));
+      if(earned.length===0) return `You haven't earned any badges yet! Complete your first session to earn "First Spark" 🔥.`;
+      return `You've earned ${earned.length}/18 badges! Here they are: ${earned.map(b=>b.icon+' '+b.name).join(', ')}. Keep going for more! 🏆`;
+    }
+    if(lower.includes('session')||lower.includes('exercise')||lower.includes('what should i do')){
+      const avail = DB.filter(d=>!state.sessions.map(s=>s.id).includes(d.id));
+      if(avail.length===0) return `You've completed ALL sessions! That's incredible! Try revisiting your favorites for a higher score. 🌟`;
+      const pick = avail[Math.floor(Math.random()*avail.length)];
+      return `I recommend "${pick.name}" (${pick.pillar}, ${pick.duration} min). It's fresh and you haven't tried it yet! Ready to start? 🎯`;
+    }
+    if(lower.includes('grade')||lower.includes('score')){
+      if(!lastGrade) return `You don't have any grades yet. Complete a session with self-grading to get your first score!`;
+      return `Your last session scored ${lastGrade.pct}% (${lastGrade.letter}). Form: ${lastGrade.form}/5, Intensity: ${lastGrade.intensity}/5, Consistency: ${lastGrade.consistency}/5. ${lastGrade.pct>=75?'Great work! 🎉':lastGrade.pct>=50?'Good, but room to improve! 💪':'Keep practicing, you'll get better! 🔥'}`;
+    }
+    if(lower.includes('streak')){
+      return `Your current streak is ${streak} day${streak!==1?'s':''} 🔥${streak>=7?' — Streak Freeze active! ❄️':''}. ${streak===0?'Start today to begin your streak!':streak<7?'5 more days to unlock Streak Freeze!':'You\'re on fire! Keep that streak going!'}`;
+    }
+    if(lower.includes('help')||lower.includes('what can you')){
+      return `I'm APEX Coach 🧠 — I remember everything about your journey! Ask me about your progress, badges, streaks, sessions, grades, or just chat. I'm here to keep you motivated! 💪`;
+    }
+    if(lower.includes('level')){
+      return `You're Level ${level} with ${state.xp} XP. Next level needs ${level*100} XP. ${level>=10?'🎮 Game Master badge unlocked! Keep climbing!':'Reach Level 10 to unlock the Game Master badge! 🎮'}`;
+    }
+    if(lower.includes('hello')||lower.includes('hi')||lower.includes('hey')){
+      return `Hey ${state.name}! 👋 Ready to crush your goals today? You've completed ${total} sessions so far — let's make it ${total+1}! 🚀`;
+    }
+    // Default contextual response
+    if(lastSession){
+      return `You last did "${lastSession.name}" — ${lastGrade?`scoring ${lastGrade.pct}% (${lastGrade.letter})`:'nice work!'} ${total>=10?`That's ${total} sessions total. Consistency is key! 🔑`:'Keep building that streak!'} What would you like to focus on today?`;
+    }
+    return `Ready for your first session? I recommend starting with "${DB[0].name}" — it's only ${DB[0].duration} minutes! 🎯`;
+  },
+
+  renderAdmin(){
+    const dump = JSON.stringify(state,null,2);
+    document.getElementById('adminExport').textContent = dump;
+  },
+
+  exportData(){
+    const dump = JSON.stringify(state,null,2);
+    const blob = new Blob([dump],{type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'apex-v5-data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  },
+
+  copyData(){
+    const dump = JSON.stringify(state,null,2);
+    navigator.clipboard.writeText(dump).then(()=>alert('Data copied to clipboard!'));
+  },
+
+  resetAll(){
+    Object.assign(state,defaultState());
+    state.name = prompt('Welcome back! What should I call you?','Explorer')||'Explorer';
+    this.save();
+    this.generateLeagueRanks();
+    this.renderDashboard();
+    this.renderSessions();
+    this.renderBadges();
+    this.renderLeague();
+    this.renderCoach();
+    this.renderAdmin();
+    this.renderBadgeDots();
+  },
+
+  addTestSessions(){
+    for(let i=0;i<5;i++){
+      const ex = DB[Math.floor(Math.random()*DB.length)];
+      state.sessions.push({id:ex.id,name:ex.name,date:new Date(Date.now()-(4-i)*86400000).toISOString()});
+      this.addXp(Math.floor(Math.random()*50)+20);
+    }
+    this.save();
+    this.renderDashboard();
+    this.renderSessions();
+    this.renderBadges();
+    this.renderCoach();
+    alert('5 test sessions added! Check your progress.');
+  }
+};
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded',()=>app.init());
+</script>
+</body>
+</html>
