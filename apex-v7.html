@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APEX v7 – Dein Creature Begleiter</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ROOT & RESET
+   ============================================================ */
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a2e;
+  --bg-card-hover: #222240;
+  --text-primary: #f0f0f5;
+  --text-secondary: #9090a8;
+  --text-muted: #606078;
+  --border-color: rgba(255,255,255,0.06);
+  --shadow-card: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  /* Element defaults */
+  --elem-primary: #FF6B00;
+  --elem-secondary: #FF9A3C;
+  --elem-accent: #FF4400;
+  --elem-glow: rgba(255,107,0,0.3);
+  --elem-glow-strong: rgba(255,107,0,0.5);
+  --elem-eye: #fff;
+  --elem-mouth: #fff;
+
+  /* Creature size */
+  --creature-size: 120px;
+  --creature-glow-size: 200px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: var(--font-main);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated gradient background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(-45deg, #0a0a0f, #12121a, #1a1a2e, #0f0f1a, #0a0a0f);
+  background-size: 400% 400%;
+  animation: gradient-move 20s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating particles */
+.particle-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  animation: particle-float linear infinite;
+  opacity: 0;
+}
+@keyframes particle-float {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* App container */
+#app {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ============================================================
+   PAGES (SPA)
+   ============================================================ */
+.page {
+  display: none;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  animation: page-in 0.4s ease;
+  scroll-behavior: smooth;
+}
+.page::-webkit-scrollbar { width: 3px; }
+.page::-webkit-scrollbar-track { background: transparent; }
+.page::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+.page.active { display: flex; }
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   BUTTONS & INPUTS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-main);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--elem-primary), var(--elem-accent));
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(var(--elem-primary-rgb, 255,107,0), 0.3);
+}
+.btn-primary:hover { box-shadow: 0 6px 30px rgba(var(--elem-primary-rgb, 255,107,0), 0.5); }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.12); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 10px 16px;
+}
+.btn-ghost:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+
+.btn-sm { padding: 10px 18px; font-size: 13px; }
+.btn-lg { padding: 18px 36px; font-size: 17px; }
+
+.input-field {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 16px;
+  transition: all 0.3s;
+  outline: none;
+}
+.input-field:focus {
+  border-color: var(--elem-primary);
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.15);
+}
+.input-field::placeholder { color: var(--text-muted); }
+
+/* ============================================================
+   CREATURE CSS (THE HEART)
+   ============================================================ */
+.creature-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--creature-glow-size);
+  height: var(--creature-glow-size);
+  margin: 0 auto;
+}
+
+.creature {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float-creature 3s ease-in-out infinite;
+  transition: all 0.5s ease;
+}
+
+.creature.happy { animation: bounce-creature 1s ease infinite; }
+.creature.neutral { animation: float-creature 3s ease-in-out infinite; }
+.creature.unhappy { animation: droop-creature 2s ease infinite; }
+.creature.sad { animation: shake-creature 0.5s ease infinite; }
+
+@keyframes float-creature {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes bounce-creature {
+  0%, 100% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-12px) scale(1.03); }
+  50% { transform: translateY(0) scale(1); }
+  75% { transform: translateY(-6px) scale(1.02); }
+}
+@keyframes droop-creature {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(5px) rotate(-2deg); }
+  75% { transform: translateY(3px) rotate(2deg); }
+}
+@keyframes shake-creature {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-3px) rotate(-1deg); }
+  40% { transform: translateX(3px) rotate(1deg); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+/* Creature Glow */
+.creature-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--elem-glow) 0%, transparent 70%);
+  animation: glow-pulse 3s ease-in-out infinite;
+  z-index: -1;
+}
+.creature.glow-strong .creature-glow {
+  background: radial-gradient(circle, var(--elem-glow-strong) 0%, transparent 70%);
+}
+
+@keyframes glow-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Creature Body */
+.creature-body {
+  position: relative;
+  width: var(--creature-size);
+  height: calc(var(--creature-size) * 1.05);
+  border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%;
+  background: var(--elem-primary);
+  animation: morph 8s ease-in-out infinite;
+  overflow: hidden;
+  box-shadow: inset 0 -20px 40px rgba(0,0,0,0.2), inset 0 10px 20px rgba(255,255,255,0.05);
+}
+
+.creature-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 35% 25%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 40%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.creature-body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.2) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes morph {
+  0%, 100% { border-radius: 45% 55% 50% 50% / 50% 50% 55% 45%; }
+  33% { border-radius: 50% 50% 45% 55% / 55% 45% 50% 50%; }
+  66% { border-radius: 48% 52% 55% 45% / 48% 55% 45% 52%; }
+}
+
+/* 3D Highlight */
+.creature-highlight {
+  position: absolute;
+  width: 40%;
+  height: 35%;
+  top: 12%;
+  left: 25%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.25) 0%, transparent 70%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Eyes */
+.creature-eyes {
+  position: absolute;
+  top: 32%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: calc(var(--creature-size) * 0.25);
+  z-index: 4;
+}
+.eye {
+  width: calc(var(--creature-size) * 0.16);
+  height: calc(var(--creature-size) * 0.18);
+  background: var(--elem-eye);
+  border-radius: 50%;
+  position: relative;
+  animation: blink 4s ease-in-out infinite;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.eye .pupil {
+  position: absolute;
+  width: 55%;
+  height: 60%;
+  background: #1a1a2e;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s;
+}
+.eye.happy-eyes .pupil { top: 40%; }
+.eye.sad-eyes { height: calc(var(--creature-size) * 0.10); top: 5px; }
+
+@keyframes blink {
+  0%, 48%, 52%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.1); }
+}
+
+/* Cheeks */
+.creature-cheeks {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 3;
+  pointer-events: none;
+}
+.cheek {
+  width: calc(var(--creature-size) * 0.12);
+  height: calc(var(--creature-size) * 0.08);
+  border-radius: 50%;
+  background: rgba(255,100,100,0.2);
+  opacity: 0.6;
+}
+
+/* Mouth */
+.creature-mouth {
+  position: absolute;
+  bottom: 26%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  transition: all 0.3s ease;
+}
+.creature-mouth.happy {
+  width: calc(var(--creature-size) * 0.2);
+  height: calc(var(--creature-size) * 0.1);
+  border-bottom: 3px solid var(--elem-mouth);
+  border-radius: 0 0 50% 50%;
+}
+.creature-mouth.neutral {
+  width: calc(var(--creature-size) * 0.15);
+  height: 3px;
+  background: var(--elem-mouth);
+  border-radius: 2px;
+}
+.creature-mouth.unhappy {
+  width: calc(var(--creature-size) * 0.2);
+  height: calc(var(--creature-size) * 0.1);
+  border-top: 3px solid var(--elem-mouth);
+  border-radius: 50% 50% 0 0;
+}
+.creature-mouth.sad {
+  width: calc(var(--creature-size) * 0.25);
+  height: calc(var(--creature-size) * 0.12);
+  border-top: 3px solid var(--elem-mouth);
+  border-radius: 50% 50% 0 0;
+  transform: translateX(-50%) rotate(5deg);
+}
+
+/* Tears */
+.creature-tears {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+.tear {
+  position: absolute;
+  width: 4px;
+  height: 8px;
+  background: rgba(100,180,255,0.6);
+  border-radius: 50%;
+  animation: tear-fall 1.5s ease infinite;
+}
+.tear.left { left: calc(50% - var(--creature-size) * 0.2); top: 45%; }
+.tear.right { right: calc(50% - var(--creature-size) * 0.2); top: 45%; }
+@keyframes tear-fall {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(15px); opacity: 0; }
+}
+
+/* Ears */
+.creature-ears {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.ear {
+  position: absolute;
+  transition: all 0.3s ease;
+}
+.ear.round {
+  width: calc(var(--creature-size) * 0.2);
+  height: calc(var(--creature-size) * 0.18);
+  border-radius: 50%;
+  background: var(--elem-secondary);
+}
+.ear.round.left { top: -8%; left: -8%; }
+.ear.round.right { top: -8%; right: -8%; }
+.ear.pointy {
+  width: 0; height: 0;
+  border-left: calc(var(--creature-size) * 0.12) solid transparent;
+  border-right: calc(var(--creature-size) * 0.12) solid transparent;
+  border-bottom: calc(var(--creature-size) * 0.2) solid var(--elem-secondary);
+}
+.ear.pointy.left { top: -8%; left: -5%; }
+.ear.pointy.right { top: -8%; right: -5%; }
+.ear.floppy {
+  width: calc(var(--creature-size) * 0.15);
+  height: calc(var(--creature-size) * 0.3);
+  border-radius: 0 0 50% 50%;
+  background: var(--elem-secondary);
+  animation: floppy-wag 3s ease-in-out infinite;
+}
+.ear.floppy.left { top: -2%; left: -5%; transform-origin: top center; }
+.ear.floppy.right { top: -2%; right: -5%; transform-origin: top center; animation-delay: 0.5s; }
+@keyframes floppy-wag {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+/* Tail */
+.creature-tail {
+  position: absolute;
+  bottom: -10%;
+  right: -15%;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+.tail {
+  transition: all 0.3s ease;
+}
+.tail.short {
+  width: calc(var(--creature-size) * 0.3);
+  height: calc(var(--creature-size) * 0.12);
+  border-radius: 0 50% 50% 0;
+  background: var(--elem-secondary);
+}
+.tail.long {
+  width: calc(var(--creature-size) * 0.4);
+  height: calc(var(--creature-size) * 0.1);
+  border-radius: 0 50% 50% 0;
+  background: var(--elem-secondary);
+  animation: tail-wag 2s ease-in-out infinite;
+  transform-origin: left center;
+}
+@keyframes tail-wag {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+.tail.fluffy {
+  width: calc(var(--creature-size) * 0.35);
+  height: calc(var(--creature-size) * 0.18);
+  border-radius: 0 60% 60% 0;
+  background: var(--elem-secondary);
+  filter: blur(0.5px);
+}
+
+/* Pattern overlay */
+.creature-pattern {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.15;
+  transition: all 0.3s ease;
+}
+.pattern-spots::before {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle 6px, var(--elem-accent) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.pattern-stripes::before {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(90deg, transparent, transparent 8px, var(--elem-accent) 8px, var(--elem-accent) 10px);
+}
+.pattern-stars::before {
+  content: '✦';
+  position: absolute;
+  font-size: 14px;
+  color: var(--elem-accent);
+  top: 10%;
+  left: 20%;
+  text-shadow: 0 0 10px var(--elem-glow);
+}
+.pattern-flames::before {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse 8px 12px at 20% 30%, var(--elem-accent) 1px, transparent 1px),
+              radial-gradient(ellipse 6px 10px at 60% 20%, var(--elem-accent) 1px, transparent 1px),
+              radial-gradient(ellipse 10px 14px at 40% 60%, var(--elem-accent) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Accessory */
+.creature-accessory {
+  position: absolute;
+  top: -18%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  font-size: calc(var(--creature-size) * 0.25);
+  line-height: 1;
+}
+.accessory-none { display: none; }
+.accessory-crown::before { content: '👑'; font-size: inherit; }
+.accessory-hat::before { content: '🎩'; font-size: inherit; }
+.accessory-glasses::before {
+  content: '';
+  position: absolute;
+  top: 150%;
+  left: -100%;
+  width: 300%;
+  height: 30%;
+  border: 2px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.accessory-bow::before { content: '🎀'; font-size: inherit; top: 0; position: relative; }
+.accessory-scarf::before { content: '🧣'; font-size: inherit; }
+
+/* ============================================================
+   NEEDS BARS
+   ============================================================ */
+.needs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.need-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.need-icon { font-size: 18px; width: 24px; text-align: center; }
+.need-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  width: 60px;
+  flex-shrink: 0;
+}
+.need-bar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.need-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.8s ease, background 0.5s;
+  position: relative;
+}
+.need-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15));
+  border-radius: 10px;
+}
+.need-fill.good { background: linear-gradient(90deg, #43A047, #66BB6A); }
+.need-fill.ok { background: linear-gradient(90deg, #FB8C00, #FFA726); }
+.need-fill.bad { background: linear-gradient(90deg, #E53935, #EF5350); }
+.need-value { font-size: 12px; color: var(--text-secondary); width: 32px; text-align: right; }
+
+/* ============================================================
+   HOME PAGE
+   ============================================================ */
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  margin-bottom: 8px;
+}
+.home-creature-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+.home-creature-level {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.home-creature-type {
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-secondary);
+}
+.home-mood {
+  font-size: 28px;
+}
+.home-creature-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  min-height: 200px;
+  position: relative;
+}
+.home-needs {
+  padding: 12px 0;
+}
+.home-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px 0;
+}
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+}
+.action-btn:hover {
+  background: rgba(255,255,255,0.1);
+  transform: translateY(-2px);
+}
+.action-btn:active { transform: scale(0.95); }
+.action-btn .icon { font-size: 20px; }
+.action-btn .label { font-size: 11px; color: var(--text-secondary); }
+.home-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 8px 0;
+  margin-top: auto;
+}
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-main);
+  border-radius: var(--radius-sm);
+}
+.nav-btn:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.nav-btn.active { color: var(--elem-primary); }
+.nav-btn .icon { font-size: 20px; }
+.nav-btn .label { font-size: 10px; }
+
+/* ============================================================
+   LANDING PAGE
+   ============================================================ */
+.landing-creature {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.landing-creature .creature-container {
+  --creature-size: 80px;
+  --creature-glow-size: 160px;
+  opacity: 0.4;
+}
+.landing-title {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 900;
+  text-align: center;
+  background: linear-gradient(135deg, #FF6B00, #FF9A3C, #0288D1, #7B1FA2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.landing-sub {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.6;
+}
+.landing-btn {
+  margin-top: 20px;
+}
+
+/* ============================================================
+   SELECTION PAGE
+   ============================================================ */
+.selection-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+.selection-card {
+  padding: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+.selection-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--elem-primary);
+}
+.selection-card.selected {
+  border-color: var(--elem-primary);
+  box-shadow: 0 0 20px rgba(255,107,0,0.2), var(--shadow-card);
+}
+.selection-card .emoji { font-size: 40px; display: block; margin-bottom: 8px; }
+.selection-card .name { font-weight: 700; font-size: 16px; }
+.selection-card .desc { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.selection-card .type-color {
+  display: inline-block;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  margin-top: 8px;
+}
+
+/* ============================================================
+   ONBOARDING
+   ============================================================ */
+.onboarding-step { display: none; flex-direction: column; gap: 20px; align-items: center; justify-content: center; flex: 1; text-align: center; }
+.onboarding-step.active { display: flex; }
+.onboarding-step .step-icon { font-size: 60px; }
+.onboarding-step h2 { font-size: 24px; font-weight: 700; }
+.onboarding-step p { color: var(--text-secondary); font-size: 15px; line-height: 1.6; }
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.score-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.score-ring svg { transform: rotate(-90deg); }
+.score-ring circle {
+  fill: none;
+  stroke-width: 6;
+  cx: 60; cy: 60; r: 54;
+}
+.score-ring .bg { stroke: rgba(255,255,255,0.06); }
+.score-ring .progress { stroke: var(--elem-primary); stroke-linecap: round; transition: stroke-dashoffset 1s ease; }
+.score-value {
+  position: absolute;
+  font-size: 32px;
+  font-weight: 800;
+}
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+.pillar {
+  padding: 14px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+.pillar .name { font-size: 12px; color: var(--text-secondary); }
+.pillar .value { font-size: 20px; font-weight: 700; margin-top: 4px; }
+.pillar .bar { height: 4px; background: rgba(255,255,255,0.08); border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.pillar .fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+
+/* ============================================================
+   SESSIONS GRID
+   ============================================================ */
+.sessions-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 12px;
+}
+.session-card {
+  padding: 14px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-card);
+  border: 1px solid transparent;
+}
+.session-card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.1); }
+.session-card.completed {
+  border-color: #43A047;
+  opacity: 0.8;
+}
+.session-card.completed .check { display: inline; }
+.session-card .check { display: none; font-size: 14px; color: #43A047; }
+.session-card .name { font-weight: 600; font-size: 14px; }
+.session-card .meta { font-size: 12px; color: var(--text-muted); margin-top: 4px; display: flex; gap: 8px; flex-wrap: wrap; }
+.session-card .effects { font-size: 11px; color: var(--text-secondary); margin-top: 6px; }
+
+/* ============================================================
+   CUSTOMIZE
+   ============================================================ */
+.customize-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 0;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+.customize-tabs::-webkit-scrollbar { display: none; }
+.customize-tab {
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: all 0.3s;
+  font-family: var(--font-main);
+}
+.customize-tab:hover { background: rgba(255,255,255,0.1); }
+.customize-tab.active { background: var(--elem-primary); color: #fff; border-color: var(--elem-primary); }
+.customize-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.customize-option {
+  padding: 12px 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.customize-option:hover { background: rgba(255,255,255,0.1); }
+.customize-option.selected { border-color: var(--elem-primary); background: rgba(255,107,0,0.1); color: var(--text-primary); }
+.customize-option.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+  position: relative;
+}
+.customize-option.locked::after {
+  content: '🔒';
+  font-size: 10px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.customize-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0;
+  min-height: 200px;
+}
+
+/* ============================================================
+   BADGES
+   ============================================================ */
+.badges-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+.badge-item {
+  padding: 16px 10px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-card);
+  opacity: 0.4;
+}
+.badge-item.unlocked { opacity: 1; }
+.badge-item .icon { font-size: 28px; display: block; margin-bottom: 6px; }
+.badge-item .name { font-size: 11px; font-weight: 600; }
+.badge-item .desc { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
+
+/* ============================================================
+   LEAGUE / PROGRESS / ADMIN
+   ============================================================ */
+.league-tier {
+  padding: 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.league-tier.current { border-color: var(--elem-primary); }
+.league-tier .tier-icon { font-size: 36px; }
+.league-tier .tier-name { font-size: 18px; font-weight: 700; margin-top: 4px; }
+.league-tier .tier-xp { font-size: 13px; color: var(--text-secondary); }
+
+.progress-chart-placeholder {
+  width: 100%;
+  height: 200px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  margin: 12px 0;
+}
+
+.admin-section { padding: 12px 0; }
+.admin-btn {
+  width: 100%;
+  padding: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  font-size: 14px;
+  margin-bottom: 8px;
+  transition: all 0.3s;
+}
+.admin-btn:hover { background: rgba(255,255,255,0.1); }
+.admin-btn.danger { color: #EF5350; border-color: rgba(239,83,80,0.3); }
+.admin-btn.danger:hover { background: rgba(239,83,80,0.1); }
+
+/* ============================================================
+   SCROLL STYLING
+   ============================================================ */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.page-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 400px) {
+  #app { max-width: 100%; }
+  .page { padding: 14px; }
+  .selection-grid { grid-template-columns: 1fr; }
+  .sessions-grid { grid-template-columns: 1fr; }
+  .customize-options { grid-template-columns: repeat(3, 1fr); }
+  .badges-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-actions { grid-template-columns: repeat(2, 1fr); }
+  .landing-title { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<div class="particle-container" id="particles"></div>
+
+<div id="app">
+
+<!-- ==========================================================
+     LANDING PAGE
+     ========================================================== -->
+<div class="page active" id="page-landing">
+  <div class="landing-creature">
+    <div class="creature-container">
+      <div class="creature" id="landing-creature">
+        <div class="creature-glow"></div>
+        <div class="creature-body">
+          <div class="creature-highlight"></div>
+          <div class="creature-ears">
+            <div class="ear round left"></div>
+            <div class="ear round right"></div>
+          </div>
+          <div class="creature-eyes">
+            <div class="eye left"><div class="pupil"></div></div>
+            <div class="eye right"><div class="pupil"></div></div>
+          </div>
+          <div class="creature-cheeks">
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+          </div>
+          <div class="creature-mouth happy"></div>
+        </div>
+      </div>
+    </div>
+    <div class="landing-title">APEX</div>
+    <p class="landing-sub">Your creature is waiting…<br>Wake it up and grow together.</p>
+    <button class="btn btn-primary btn-lg landing-btn" onclick="navigate('selection')">✨ Wake it up</button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     SELECTION PAGE
+     ========================================================== -->
+<div class="page" id="page-selection">
+  <h2 class="page-title">Choose Your Companion</h2>
+  <p class="page-sub">Each creature has a unique element and personality.</p>
+  <div class="selection-grid" id="selection-grid"></div>
+  <div style="margin-top:16px;display:flex;gap:8px;justify-content:center;">
+    <button class="btn btn-secondary" onclick="navigate('landing')">Back</button>
+    <button class="btn btn-primary" id="select-confirm" onclick="confirmSelection()" disabled>Confirm</button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     ONBOARDING PAGE
+     ========================================================== -->
+<div class="page" id="page-onboarding">
+  <div class="onboarding-step active" id="onb-step-1">
+    <div class="step-icon">👋</div>
+    <h2>Welcome to APEX!</h2>
+    <p>First, what's your name?</p>
+    <input class="input-field" id="onb-name" placeholder="Your name..." style="max-width:250px;" maxlength="20">
+    <button class="btn btn-primary" onclick="onbNext(1)">Next →</button>
+  </div>
+  <div class="onboarding-step" id="onb-step-2">
+    <div class="step-icon">🐾</div>
+    <h2>Name your Creature</h2>
+    <p>What should your companion be called?</p>
+    <input class="input-field" id="onb-creature-name" placeholder="Creature name..." style="max-width:250px;" maxlength="20">
+    <button class="btn btn-primary" onclick="onbNext(2)">Next →</button>
+  </div>
+  <div class="onboarding-step" id="onb-step-3">
+    <div class="step-icon" id="onb-type-icon">🔥</div>
+    <h2 id="onb-greeting"></h2>
+    <p>Complete sessions to keep your creature happy and healthy.<br>Let's grow together!</p>
+    <button class="btn btn-primary btn-lg" onclick="finishOnboarding()">🚀 Start!</button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     HOME PAGE
+     ========================================================== -->
+<div class="page" id="page-home">
+  <div class="home-header">
+    <div>
+      <div class="home-creature-name" id="home-name">Creature</div>
+      <div class="home-creature-level" id="home-level">Lv. 1</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span class="home-creature-type" id="home-type">🔥 Pyro</span>
+      <span class="home-mood" id="home-mood">😊</span>
+    </div>
+  </div>
+
+  <div class="home-creature-area">
+    <div class="creature-container" id="home-creature-container">
+      <div class="creature" id="main-creature">
+        <div class="creature-glow"></div>
+        <div class="creature-body">
+          <div class="creature-highlight"></div>
+          <div class="creature-ears"></div>
+          <div class="creature-pattern"></div>
+          <div class="creature-eyes">
+            <div class="eye left"><div class="pupil"></div></div>
+            <div class="eye right"><div class="pupil"></div></div>
+          </div>
+          <div class="creature-cheeks">
+            <div class="cheek left"></div>
+            <div class="cheek right"></div>
+          </div>
+          <div class="creature-mouth happy"></div>
+          <div class="creature-tears"></div>
+        </div>
+        <div class="creature-tail"></div>
+        <div class="creature-accessory accessory-none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-needs">
+    <div class="needs-grid" id="needs-grid"></div>
+  </div>
+
+  <div class="home-actions" id="home-actions">
+    <button class="action-btn" onclick="actionFeed()"><span class="icon">🍽️</span><span class="label">Feed</span></button>
+    <button class="action-btn" onclick="actionWash()"><span class="icon">🧼</span><span class="label">Wash</span></button>
+    <button class="action-btn" onclick="actionPlay()"><span class="icon">🎮</span><span class="label">Play</span></button>
+    <button class="action-btn" onclick="actionRest()"><span class="icon">⚡</span><span class="label">Rest</span></button>
+    <button class="action-btn" onclick="actionSleep()"><span class="icon">😴</span><span class="label">Sleep</span></button>
+    <button class="action-btn" onclick="actionHealth()"><span class="icon">❤️</span><span class="label">Care</span></button>
+  </div>
+
+  <div class="home-nav">
+    <button class="nav-btn active" onclick="navigate('home')"><span class="icon">🏠</span><span class="label">Home</span></button>
+    <button class="nav-btn" onclick="navigate('dashboard')"><span class="icon">📊</span><span class="label">Stats</span></button>
+    <button class="nav-btn" onclick="navigate('sessions')"><span class="icon">🎯</span><span class="label">Sessions</span></button>
+    <button class="nav-btn" onclick="navigate('customize')"><span class="icon">🎨</span><span class="label">Style</span></button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     DASHBOARD PAGE
+     ========================================================== -->
+<div class="page" id="page-dashboard">
+  <div class="home-header">
+    <h2 class="page-title" style="margin:0;">Dashboard</h2>
+    <div class="creature-container" style="--creature-size:50px;--creature-glow-size:80px;">
+      <div class="creature" id="dash-creature">
+        <div class="creature-glow"></div>
+        <div class="creature-body" style="width:50px;height:53px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="score-ring">
+    <svg width="120" height="120">
+      <circle class="bg" cx="60" cy="60" r="54"/>
+      <circle class="progress" id="score-circle" cx="60" cy="60" r="54" stroke-dasharray="339.292" stroke-dashoffset="0"/>
+    </svg>
+    <div class="score-value" id="dash-score">0</div>
+  </div>
+
+  <div class="pillars-grid" id="pillars-grid"></div>
+
+  <div style="display:flex;justify-content:space-between;padding:8px 0;">
+    <div><span style="color:var(--text-secondary);font-size:13px;">XP</span> <strong id="dash-xp">0</strong></div>
+    <div><span style="color:var(--text-secondary);font-size:13px;">Streak</span> <strong id="dash-streak">0</strong> 🔥</div>
+  </div>
+
+  <div class="home-nav">
+    <button class="nav-btn" onclick="navigate('home')"><span class="icon">🏠</span><span class="label">Home</span></button>
+    <button class="nav-btn active" onclick="navigate('dashboard')"><span class="icon">📊</span><span class="label">Stats</span></button>
+    <button class="nav-btn" onclick="navigate('sessions')"><span class="icon">🎯</span><span class="label">Sessions</span></button>
+    <button class="nav-btn" onclick="navigate('customize')"><span class="icon">🎨</span><span class="label">Style</span></button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     SESSIONS PAGE
+     ========================================================== -->
+<div class="page" id="page-sessions">
+  <h2 class="page-title">Sessions</h2>
+  <p class="page-sub">Complete exercises to feed and grow your creature.</p>
+  <div class="sessions-grid" id="sessions-grid"></div>
+
+  <div class="home-nav" style="margin-top:12px;">
+    <button class="nav-btn" onclick="navigate('home')"><span class="icon">🏠</span><span class="label">Home</span></button>
+    <button class="nav-btn" onclick="navigate('dashboard')"><span class="icon">📊</span><span class="label">Stats</span></button>
+    <button class="nav-btn active" onclick="navigate('sessions')"><span class="icon">🎯</span><span class="label">Sessions</span></button>
+    <button class="nav-btn" onclick="navigate('customize')"><span class="icon">🎨</span><span class="label">Style</span></button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     CUSTOMIZE PAGE
+     ========================================================== -->
+<div class="page" id="page-customize">
+  <h2 class="page-title">Customize</h2>
+  <p class="page-sub">Change your creature's appearance.</p>
+
+  <div class="customize-preview">
+    <div class="creature-container" id="customize-creature-container" style="--creature-size:100px;--creature-glow-size:160px;">
+      <div class="creature" id="customize-creature">
+        <div class="creature-glow"></div>
+        <div class="creature-body">
+          <div class="creature-highlight"></div>
+          <div class="creature-ears"></div>
+          <div class="creature-pattern"></div>
+          <div class="creature-eyes">
+            <div class="eye left"><div class="pupil"></div></div>
+            <div class="eye right"><div class="pupil"></div></div>
+          </div>
+          <div class="creature-mouth happy"></div>
+        </div>
+        <div class="creature-tail"></div>
+        <div class="creature-accessory accessory-none"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="customize-tabs" id="customize-tabs"></div>
+  <div class="customize-options" id="customize-options"></div>
+
+  <div class="home-nav" style="margin-top:12px;">
+    <button class="nav-btn" onclick="navigate('home')"><span class="icon">🏠</span><span class="label">Home</span></button>
+    <button class="nav-btn" onclick="navigate('dashboard')"><span class="icon">📊</span><span class="label">Stats</span></button>
+    <button class="nav-btn" onclick="navigate('sessions')"><span class="icon">🎯</span><span class="label">Sessions</span></button>
+    <button class="nav-btn active" onclick="navigate('customize')"><span class="icon">🎨</span><span class="label">Style</span></button>
+  </div>
+</div>
+
+<!-- ==========================================================
+     BADGES PAGE
+     ========================================================== -->
+<div class="page" id="page-badges">
+  <h2 class="page-title">Badges</h2>
+  <p class="page-sub">Achievements and milestones.</p>
+  <div class="badges-grid" id="badges-grid"></div>
+  <div style="margin-top:12px;"><button class="btn btn-secondary" onclick="navigate('home')">← Back</button></div>
+</div>
+
+<!-- ==========================================================
+     LEAGUE PAGE
+     ========================================================== -->
+<div class="page" id="page-league">
+  <h2 class="page-title">League</h2>
+  <p class="page-sub">Your creature's rank.</p>
+  <div id="league-tiers"></div>
+  <div style="margin-top:12px;"><button class="btn btn-secondary" onclick="navigate('home')">← Back</button></div>
+</div>
+
+<!-- ==========================================================
+     PROGRESS PAGE
+     ========================================================== -->
+<div class="page" id="page-progress">
+  <h2 class="page-title">Progress</h2>
+  <p class="page-sub">Your growth over time.</p>
+  <div class="progress-chart-placeholder">📈 Charts coming soon</div>
+  <div style="margin-top:12px;"><button class="btn btn-secondary" onclick="navigate('home')">← Back</button></div>
+</div>
+
+<!-- ==========================================================
+     ADMIN PAGE
+     ========================================================== -->
+<div class="page" id="page-admin">
+  <h2 class="page-title">Admin</h2>
+  <p class="page-sub">Game management.</p>
+  <div class="admin-section">
+    <button class="admin-btn" onclick="adminAddXP(100)">➕ Add 100 XP</button>
+    <button class="admin-btn" onclick="adminBoostNeeds()">💚 Boost All Needs</button>
+    <button class="admin-btn" onclick="adminResetBadges()">🏅 Reset Badges</button>
+    <button class="admin-btn danger" onclick="adminResetGame()">⚠️ Reset Entire Game</button>
+    <button class="admin-btn" onclick="navigate('home')">← Back</button>
+  </div>
+</div>
+
+</div><!-- /#app -->
+
+<script>
+/* ============================================================
+   APEX v7 – FULL GAME ENGINE
+   ============================================================ */
+
+// ─── ELEMENT TYPES ───
+const ELEMENTS = [
+  { id: 'pyro',    name: 'Pyro',    emoji: '🔥', primary: '#FF6B00', secondary: '#FF9A3C', accent: '#FF4400', glow: 'rgba(255,107,0,0.3)', glowStrong: 'rgba(255,107,0,0.5)', eye: '#FFF5E0', mouth: '#FFF', desc: 'Feuriger Salamander' },
+  { id: 'aqua',    name: 'Aqua',    emoji: '💧', primary: '#0288D1', secondary: '#4FC3F7', accent: '#01579B', glow: 'rgba(2,136,209,0.3)', glowStrong: 'rgba(2,136,209,0.5)', eye: '#E1F5FE', mouth: '#FFF', desc: 'Verspielter Axolotl' },
+  { id: 'verdant', name: 'Verdant', emoji: '🌿', primary: '#43A047', secondary: '#81C784', accent: '#1B5E20', glow: 'rgba(67,160,71,0.3)', glowStrong: 'rgba(67,160,71,0.5)', eye: '#E8F5E9', mouth: '#FFF', desc: 'Ruhiges Baumwesen' },
+  { id: 'lunar',   name: 'Lunar',   emoji: '🌙', primary: '#7B1FA2', secondary: '#CE93D8', accent: '#4A148C', glow: 'rgba(123,31,162,0.3)', glowStrong: 'rgba(123,31,162,0.5)', eye: '#F3E5F5', mouth: '#E1BEE7', desc: 'Geheimnisvoller Fuchs' },
+  { id: 'storm',   name: 'Storm',   emoji: '⚡', primary: '#F9A825', secondary: '#FFF176', accent: '#F57F17', glow: 'rgba(249,168,37,0.3)', glowStrong: 'rgba(249,168,37,0.5)', eye: '#FFFDE7', mouth: '#5D4037', desc: 'Energisches Eichhörnchen' }
+];
+
+// ─── NEEDS DEFINITION ───
+const NEEDS_DEF = [
+  { id: 'hunger',    icon: '🍽️', label: 'Satt',     decay: 0.4, color: '#FF6B00' },
+  { id: 'hygiene',   icon: '🧼', label: 'Sauber',   decay: 0.2, color: '#0288D1' },
+  { id: 'happiness', icon: '🎮', label: 'Glücklich', decay: 0.3, color: '#FDD835' },
+  { id: 'energy',    icon: '⚡', label: 'Energie',   decay: 0.5, color: '#7B1FA2' },
+  { id: 'sleep',     icon: '😴', label: 'Ausgeruht', decay: 0.15, color: '#43A047' },
+  { id: 'health',    icon: '❤️', label: 'Gesund',    decay: 0.08, color: '#E53935' }
+];
+
+// ─── SESSIONS ───
+const SESSIONS = [
+  { id: 's1',  name: 'Walking',          dur: '10m', xp: 20, effects: '+🍽️ +⚡', need: 'hunger', val: 25,  need2: 'energy', val2: 15 },
+  { id: 's2',  name: 'HIIT',             dur: '20m', xp: 40, effects: '+🍽️ +❤️', need: 'hunger', val: 35,  need2: 'health', val2: 20 },
+  { id: 's3',  name: 'Yoga',             dur: '15m', xp: 30, effects: '+😴 +⚡', need: 'sleep', val: 30,   need2: 'energy', val2: 20 },
+  { id: 's4',  name: 'Meditation',       dur: '10m', xp: 25, effects: '+😴 +🧼', need: 'sleep', val: 40,   need2: 'hygiene', val2: 20 },
+  { id: 's5',  name: 'Journaling',       dur: '10m', xp: 20, effects: '+🧼 +🎮', need: 'hygiene', val: 30, need2: 'happiness', val2: 20 },
+  { id: 's6',  name: 'Cold Shower',      dur: '5m',  xp: 15, effects: '+⚡ +❤️', need: 'energy', val: 25,  need2: 'health', val2: 15 },
+  { id: 's7',  name: 'Reading',          dur: '20m', xp: 25, effects: '+🎮 +😴', need: 'happiness', val: 25, need2: 'sleep', val2: 15 },
+  { id: 's8',  name: 'Strength',         dur: '30m', xp: 50, effects: '+🍽️ +❤️', need: 'hunger', val: 40,  need2: 'health', val2: 30 },
+  { id: 's9',  name: 'Running',          dur: '25m', xp: 45, effects: '+⚡ +🍽️', need: 'energy', val: 35,  need2: 'hunger', val2: 25 },
+  { id: 's10', name: 'Breathing',        dur: '5m',  xp: 15, effects: '+😴 +🧼', need: 'sleep', val: 35,   need2: 'hygiene', val2: 15 },
+  { id: 's11', name: 'Stretching',       dur: '10m', xp: 20, effects: '+⚡ +😴', need: 'energy', val: 20,  need2: 'sleep', val2: 20 },
+  { id: 's12', name: 'Gratitude',        dur: '5m',  xp: 15, effects: '+🎮 +❤️', need: 'happiness', val: 30, need2: 'health', val2: 10 },
+  { id: 's13', name: 'Focus Session',    dur: '25m', xp: 35, effects: '+🎮 +🍽️', need: 'happiness', val: 30, need2: 'hunger', val2: 20 },
+  { id: 's14', name: 'Bodyweight',       dur: '20m', xp: 35, effects: '+❤️ +🍽️', need: 'health', val: 30,  need2: 'hunger', val2: 25 },
+  { id: 's15', name: 'Dance',            dur: '15m', xp: 25, effects: '+🎮 +⚡', need: 'happiness', val: 35, need2: 'energy', val2: 15 },
+  { id: 's16', name: 'Nature Walk',      dur: '20m', xp: 30, effects: '+🧼 +😴', need: 'hygiene', val: 25,  need2: 'sleep', val2: 25 },
+  { id: 's17', name: 'Affirmations',     dur: '5m',  xp: 15, effects: '+🎮 +❤️', need: 'happiness', val: 30, need2: 'health', val2: 15 },
+  { id: 's18', name: 'Push-ups',         dur: '10m', xp: 20, effects: '+❤️ +⚡', need: 'health', val: 25,   need2: 'energy', val2: 15 },
+  { id: 's19', name: 'Plank Challenge',  dur: '5m',  xp: 20, effects: '+❤️ +🍽️', need: 'health', val: 30,  need2: 'hunger', val2: 15 }
+];
+
+// ─── BADGES ───
+const BADGES = [
+  { id: 'b1',  name: 'First Steps',    icon: '🐣', desc: 'Complete 1 session',        check: s => s.totalCompleted >= 1 },
+  { id: 'b2',  name: 'Dedicated',      icon: '🔥', desc: 'Complete 5 sessions',       check: s => s.totalCompleted >= 5 },
+  { id: 'b3',  name: 'Champion',       icon: '🏆', desc: 'Complete 10 sessions',      check: s => s.totalCompleted >= 10 },
+  { id: 'b4',  name: 'Streak Starter', icon: '📅', desc: '2-day streak',             check: s => s.streak >= 2 },
+  { id: 'b5',  name: 'Week Warrior',   icon: '💪', desc: '7-day streak',             check: s => s.streak >= 7 },
+  { id: 'b6',  name: 'Fortnight',      icon: '🌙', desc: '14-day streak',            check: s => s.streak >= 14 },
+  { id: 'b7',  name: 'Happy Creature', icon: '😊', desc: 'All needs > 80%',          check: s => s.allNeedsHigh },
+  { id: 'b8',  name: 'Element Master', icon: '✨', desc: 'Reach Lv. 10',             check: s => s.level >= 10 },
+  { id: 'b9',  name: 'Evolved',        icon: '🦋', desc: 'Reach Mid evolution',       check: s => s.evoStage >= 1 },
+  { id: 'b10', name: 'Fully Evolved',  icon: '🐉', desc: 'Reach Adult evolution',     check: s => s.evoStage >= 2 },
+  { id: 'b11', name: 'Designer',       icon: '🎨', desc: 'Customize 3 parts',        check: s => s.customParts >= 3 },
+  { id: 'b12', name: 'Collector',      icon: '💎', desc: 'Unlock 5 customization parts', check: s => s.unlockedParts >= 5 },
+  { id: 'b13', name: 'Morning Person', icon: '🌅', desc: '3 morning sessions',       check: s => s.morningSessions >= 3 },
+  { id: 'b14', name: 'Night Owl',      icon: '🦉', desc: '3 evening sessions',       check: s => s.eveningSessions >= 3 },
+  { id: 'b15', name: 'Balanced',       icon: '⚖️', desc: 'All pillars > 50',        check: s => s.allPillarsHigh },
+  { id: 'b16', name: 'Speedster',      icon: '🏃', desc: 'Complete a 5m session',    check: s => s.fastSessionDone },
+  { id: 'b17', name: 'Loyal Friend',   icon: '🤝', desc: 'Play 30 min total',        check: s => s.totalMin >= 30 },
+  { id: 'b18', name: 'APEX Legend',    icon: '👑', desc: 'Reach Lv. 20',             check: s => s.level >= 20 }
+];
+
+// ─── LEAGUE TIERS ───
+const LEAGUE_TIERS = [
+  { name: 'Bronze I',   icon: '🥉', minLv: 1 },
+  { name: 'Bronze II',  icon: '🥉', minLv: 2 },
+  { name: 'Bronze III', icon: '🥉', minLv: 3 },
+  { name: 'Silver I',   icon: '🥈', minLv: 5 },
+  { name: 'Silver II',  icon: '🥈', minLv: 7 },
+  { name: 'Silver III', icon: '🥈', minLv: 9 },
+  { name: 'Gold I',     icon: '🥇', minLv: 12 },
+  { name: 'Gold II',    icon: '🥇', minLv: 15 },
+  { name: 'Gold III',   icon: '🥇', minLv: 18 },
+  { name: 'Platinum',   icon: '💎', minLv: 22 },
+  { name: 'Diamond',    icon: '🔷', minLv: 26 },
+  { name: 'APEX',       icon: '👑', minLv: 30 }
+];
+
+// ─── CUSTOMIZATION OPTIONS ───
+const CUSTOMIZE_CATS = {
+  bodyColor: { label: 'Body', options: ['primary', 'secondary', 'accent'] },
+  eyeType:   { label: 'Eyes', options: ['round', 'happy', 'sharp', 'sleepy', 'star'] },
+  earType:   { label: 'Ears', options: ['round', 'pointy', 'floppy', 'horn', 'wing'] },
+  tailType:  { label: 'Tail', options: ['none', 'short', 'long', 'fluffy', 'fin'] },
+  pattern:   { label: 'Pattern', options: ['none', 'spots', 'stripes', 'stars', 'flames'] },
+  accessory: { label: 'Accessory', options: ['none', 'crown', 'hat', 'glasses', 'bow', 'scarf'] }
+};
+
+// ─── UNLOCK CONDITIONS ───
+const UNLOCK_CONDITIONS = {
+  floppy:   { cat: 'earType',  check: s => s.morningSessions >= 3,    label: '3 Morning Mobilities' },
+  star:     { cat: 'eyeType',  check: s => s.streak >= 7,            label: '7-Day Streak' },
+  star_ptn: { cat: 'pattern',  check: s => s.totalCompleted >= 5,    label: '5 Sessions' },
+  hat:      { cat: 'accessory', check: s => s.totalCompleted >= 10,  label: '10 Sessions Total' },
+  wing:     { cat: 'earType',  check: s => s.level >= 8,             label: 'Lv. 8' },
+  horn:     { cat: 'earType',  check: s => s.level >= 12,            label: 'Lv. 12' },
+  sharp:    { cat: 'eyeType',  check: s => s.level >= 5,            label: 'Lv. 5' },
+  sleep_eye: { cat: 'eyeType', check: s => s.totalMin >= 20,        label: '20 Min Sessions' }
+};
+function getOptionLocked(catKey, opt, state) {
+  if (opt === 'none' || opt === 'round' || opt === 'primary' || opt === 'secondary' || opt === 'accent') return false;
+  if (catKey === 'earType' && (opt === 'pointy' || opt === 'floppy')) return !UNLOCK_CONDITIONS.floppy.check(state);
+  if (catKey === 'earType' && opt === 'wing') return !UNLOCK_CONDITIONS.wing.check(state);
+  if (catKey === 'earType' && opt === 'horn') return !UNLOCK_CONDITIONS.horn.check(state);
+  if (catKey === 'eyeType' && opt === 'star') return !UNLOCK_CONDITIONS.star.check(state);
+  if (catKey === 'eyeType' && opt === 'sharp') return !UNLOCK_CONDITIONS.sharp.check(state);
+  if (catKey === 'eyeType' && opt === 'sleepy') return !UNLOCK_CONDITIONS.sleep_eye.check(state);
+  if (catKey === 'pattern' && opt !== 'none') return !UNLOCK_CONDITIONS.star_ptn.check(state);
+  if (catKey === 'accessory' && opt !== 'none') return !UNLOCK_CONDITIONS.hat.check(state);
+  if (catKey === 'tailType' && (opt === 'long' || opt === 'fluffy')) return false;
+  if (catKey === 'tailType' && opt === 'fin') return !UNLOCK_CONDITIONS.wing.check(state);
+  return false;
+}
+
+// ─── STATE ───
+function defaultState() {
+  const needs = {};
+  NEEDS_DEF.forEach(n => { needs[n.id] = 100; });
+  return {
+    initialized: false,
+    userName: '',
+    creatureName: 'Pou',
+    element: 'pyro',
+    level: 1,
+    xp: 0,
+    streak: 0,
+    lastDate: '',
+    needs: needs,
+    completedSessions: [],
+    totalCompleted: 0,
+    totalMin: 0,
+    morningSessions: 0,
+    eveningSessions: 0,
+    fastSessionDone: false,
+    customization: { bodyColor: 'primary', eyeType: 'round', earType: 'round', tailType: 'none', pattern: 'none', accessory: 'none' },
+    unlockedParts: 0,
+    customParts: 0
+  };
+}
+
+let state = defaultState();
+
+// ─── STORAGE ───
+function saveState() {
+  try { localStorage.setItem('apex-v7-state', JSON.stringify(state)); } catch(e) {}
+}
+function loadState() {
+  try {
+    const d = localStorage.getItem('apex-v7-state');
+    if (d) {
+      const parsed = JSON.parse(d);
+      state = { ...defaultState(), ...parsed };
+      // Merge needs
+      NEEDS_DEF.forEach(n => {
+        if (state.needs[n.id] === undefined) state.needs[n.id] = 100;
+      });
+      // Merge customization
+      const defCust = defaultState().customization;
+      Object.keys(defCust).forEach(k => {
+        if (!state.customization[k]) state.customization[k] = defCust[k];
+      });
+      state.initialized = true;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+// ─── NEEDS DECAY ───
+let lastDecayTime = Date.now();
+function decayNeeds() {
+  if (!state.initialized) return;
+  const now = Date.now();
+  const elapsed = (now - lastDecayTime) / 60000; // minutes
+  if (elapsed < 0.5) return; // only decay every 30s
+
+  NEEDS_DEF.forEach(n => {
+    state.needs[n.id] = Math.max(0, state.needs[n.id] - n.decay * elapsed);
+  });
+  lastDecayTime = now;
+  saveState();
+}
+
+// ─── EVOLUTION ───
+function getEvolutionStage() {
+  if (state.level >= 15) return 2; // Adult
+  if (state.level >= 5) return 1;  // Mid
+  return 0; // Baby
+}
+
+// ─── MOOD ───
+function getMood() {
+  const avg = getAverageNeeds();
+  if (avg > 80) return 'happy';
+  if (avg > 50) return 'neutral';
+  if (avg > 20) return 'unhappy';
+  return 'sad';
+}
+function getMoodEmoji(mood) {
+  return { happy: '😊', neutral: '😐', unhappy: '😟', sad: '😢' }[mood] || '😐';
+}
+
+function getAverageNeeds() {
+  let t = 0, c = 0;
+  NEEDS_DEF.forEach(n => { t += state.needs[n.id] || 0; c++; });
+  return c ? t / c : 0;
+}
+
+// ─── XP & LEVEL ───
+function addXP(amount) {
+  state.xp += amount;
+  const needed = state.level * 50;
+  while (state.xp >= needed) {
+    state.xp -= needed;
+    state.level++;
+    if (state.level === 15 || state.level === 5) {
+      // Evolution!
+    }
+  }
+  checkBadges();
+  saveState();
+}
+
+// ─── BADGE CHECKING ───
+function computeBadgeState() {
+  const avg = getAverageNeeds();
+  const allHigh = NEEDS_DEF.every(n => (state.needs[n.id] || 0) > 80);
+  const pillars = computePillars();
+  const allPillarsHigh = Object.values(pillars).every(v => v >= 50);
+  return {
+    totalCompleted: state.totalCompleted,
+    streak: state.streak,
+    level: state.level,
+    evoStage: getEvolutionStage(),
+    allNeedsHigh: allHigh,
+    customParts: state.customParts,
+    unlockedParts: state.unlockedParts,
+    morningSessions: state.morningSessions,
+    eveningSessions: state.eveningSessions,
+    allPillarsHigh: allPillarsHigh,
+    fastSessionDone: state.fastSessionDone,
+    totalMin: state.totalMin
+  };
+}
+function checkBadges() {
+  const bs = computeBadgeState();
+  const unlocked = [];
+  BADGES.forEach(b => {
+    if (b.check(bs)) unlocked.push(b.id);
+  });
+  // count newly unlocked
+  const oldUnlocked = state.unlockedParts;
+  // For simplicity, we recompute customize unlocks
+  let newUnlocked = 0;
+  Object.entries(CUSTOMIZE_CATS).forEach(([catKey, cat]) => {
+    cat.options.forEach(opt => {
+      if (!getOptionLocked(catKey, opt, bs)) newUnlocked++;
+    });
+  });
+  state.unlockedParts = newUnlocked - Object.keys(CUSTOMIZE_CATS).length; // subtract default unlocked
+  if (state.unlockedParts < 0) state.unlockedParts = 0;
+  return unlocked;
+}
+
+// ─── PILLARS ───
+function computePillars() {
+  const n = state.needs;
+  return {
+    Body: Math.round(((n.hunger||0) + (n.health||0)) / 2),
+    Mind: Math.round(((n.sleep||0) + (n.happiness||0)) / 2),
+    Wealth: Math.round(((n.energy||0) + (n.hunger||0)) / 2),
+    Soul: Math.round(((n.hygiene||0) + (n.happiness||0)) / 2)
+  };
+}
+
+// ─── COMPLETE SESSION ───
+function completeSession(sessionId) {
+  const ses = SESSIONS.find(s => s.id === sessionId);
+  if (!ses) return;
+  if (state.completedSessions.includes(sessionId)) return;
+
+  const mood = getMood();
+  const bonus = mood === 'happy' ? 1.5 : mood === 'neutral' ? 1.0 : 0.75;
+  const xpGain = Math.round(ses.xp * bonus);
+
+  addXP(xpGain);
+  state.totalCompleted++;
+  state.totalMin += parseInt(ses.dur);
+  if (parseInt(ses.dur) <= 5) state.fastSessionDone = true;
+
+  // Fill needs
+  if (ses.need && state.needs[ses.need] !== undefined) {
+    state.needs[ses.need] = Math.min(100, state.needs[ses.need] + ses.val);
+  }
+  if (ses.need2 && state.needs[ses.need2] !== undefined) {
+    state.needs[ses.need2] = Math.min(100, state.needs[ses.need2] + ses.val2);
+  }
+
+  state.completedSessions.push(sessionId);
+  checkBadges();
+  saveState();
+  renderAll();
+}
+
+// ─── ACTIONS ───
+function actionFeed() {
+  state.needs.hunger = Math.min(100, (state.needs.hunger||0) + 25);
+  state.totalCompleted++;
+  addXP(10);
+  saveState(); renderAll();
+}
+function actionWash() {
+  state.needs.hygiene = Math.min(100, (state.needs.hygiene||0) + 20);
+  state.totalCompleted++;
+  addXP(8);
+  saveState(); renderAll();
+}
+function actionPlay() {
+  state.needs.happiness = Math.min(100, (state.needs.happiness||0) + 30);
+  state.totalCompleted++;
+  addXP(15);
+  saveState(); renderAll();
+}
+function actionRest() {
+  state.needs.energy = Math.min(100, (state.needs.energy||0) + 35);
+  state.totalCompleted++;
+  addXP(12);
+  saveState(); renderAll();
+}
+function actionSleep() {
+  state.needs.sleep = Math.min(100, (state.needs.sleep||0) + 30);
+  state.totalCompleted++;
+  addXP(10);
+  saveState(); renderAll();
+}
+function actionHealth() {
+  state.needs.health = Math.min(100, (state.needs.health||0) + 25);
+  state.totalCompleted++;
+  addXP(12);
+  saveState(); renderAll();
+}
+
+// ─── NAVIGATION ───
+let currentPage = 'landing';
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-' + page);
+  if (el) el.classList.add('active');
+  currentPage = page;
+  window.scrollTo(0, 0);
+  renderAll();
+}
+
+// ─── RENDER ───
+function renderAll() {
+  try {
+    renderCreature();
+    renderNeeds();
+    renderDashboard();
+    renderSessions();
+    renderCustomize();
+    renderBadges();
+    renderLeague();
+  } catch(e) { console.warn('Render error:', e); }
+}
+
+function renderCreature() {
+  const elem = ELEMENTS.find(e => e.id === state.element) || ELEMENTS[0];
+  const root = document.documentElement;
+  root.style.setProperty('--elem-primary', elem.primary);
+  root.style.setProperty('--elem-secondary', elem.secondary);
+  root.style.setProperty('--elem-accent', elem.accent);
+  root.style.setProperty('--elem-glow', elem.glow);
+  root.style.setProperty('--elem-glow-strong', elem.glowStrong);
+  root.style.setProperty('--elem-eye', elem.eye);
+  root.style.setProperty('--elem-mouth', elem.mouth);
+  root.style.setProperty('--creature-r', parseInt(elem.primary.slice(1,3),16));
+  root.style.setProperty('--creature-g', parseInt(elem.primary.slice(3,5),16));
+  root.style.setProperty('--creature-b', parseInt(elem.primary.slice(5,7),16));
+
+  const evo = getEvolutionStage();
+  const sizes = [100, 130, 160];
+  const glowSizes = [160, 200, 240];
+  const sz = sizes[evo];
+  const gz = glowSizes[evo];
+
+  document.querySelectorAll('.creature-container').forEach(c => {
+    c.style.setProperty('--creature-size', sz + 'px');
+    c.style.setProperty('--creature-glow-size', gz + 'px');
+  });
+
+  const mood = getMood();
+  const moodEmoji = getMoodEmoji(mood);
+  const moodEl = document.getElementById('home-mood');
+  if (moodEl) moodEl.textContent = moodEmoji;
+
+  const nameEl = document.getElementById('home-name');
+  if (nameEl) nameEl.textContent = state.creatureName || 'Creature';
+  const lvlEl = document.getElementById('home-level');
+  if (lvlEl) lvlEl.textContent = 'Lv. ' + state.level;
+  const typeEl = document.getElementById('home-type');
+  if (typeEl) typeEl.textContent = elem.emoji + ' ' + elem.name;
+
+  // Apply mood class to all creatures
+  document.querySelectorAll('.creature').forEach(c => {
+    c.classList.remove('happy','neutral','unhappy','sad');
+    c.classList.add(mood);
+    if (mood !== 'unhappy' && mood !== 'sad') c.classList.remove('glow-strong');
+    else c.classList.add('glow-strong');
+  });
+
+  // Apply customization to main creature
+  applyCustomization(document.getElementById('main-creature'));
+  applyCustomization(document.getElementById('customize-creature'));
+  applyCustomization(document.getElementById('dash-creature'));
+}
+
+function applyCustomization(el) {
+  if (!el) return;
+  const cust = state.customization;
+  const elem = ELEMENTS.find(e => e.id === state.element) || ELEMENTS[0];
+
+  // Body color
+  const body = el.querySelector('.creature-body');
+  if (body) {
+    const colorMap = { primary: elem.primary, secondary: elem.secondary, accent: elem.accent };
+    body.style.background = colorMap[cust.bodyColor] || elem.primary;
+  }
+
+  // Ears
+  const earsContainer = el.querySelector('.creature-ears');
+  if (earsContainer) {
+    earsContainer.innerHTML = '';
+    if (cust.earType && cust.earType !== 'none') {
+      const left = document.createElement('div');
+      left.className = 'ear ' + cust.earType + ' left';
+      const right = document.createElement('div');
+      right.className = 'ear ' + cust.earType + ' right';
+      if (cust.earType === 'horn' || cust.earType === 'wing') {
+        left.style.cssText = `width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:${cust.earType === 'horn' ? '16px' : '22px'} solid ${elem.secondary};position:absolute;top:-10%;left:-2%;`;
+        right.style.cssText = left.style.cssText;
+        right.style.left = 'auto';
+        right.style.right = '-2%';
+        if (cust.earType === 'wing') {
+          left.style.borderBottomColor = elem.accent;
+          right.style.borderBottomColor = elem.accent;
+        }
+      }
+      earsContainer.appendChild(left);
+      earsContainer.appendChild(right);
+    }
+  }
+
+  // Pattern
+  const patternEl = el.querySelector('.creature-pattern');
+  if (patternEl) {
+    patternEl.className = 'creature-pattern';
+    if (cust.pattern && cust.pattern !== 'none') {
+      patternEl.classList.add('pattern-' + cust.pattern);
+    }
+  }
+
+  // Eyes
+  const eyesContainer = el.querySelector('.creature-eyes');
+  if (eyesContainer) {
+    const eyes = eyesContainer.querySelectorAll('.eye');
+    eyes.forEach(e => {
+      e.className = 'eye';
+      if (cust.eyeType === 'happy') e.classList.add('happy-eyes');
+      if (cust.eyeType === 'sleepy') { e.style.transform = 'scaleY(0.3)'; e.style.marginTop = '5px'; }
+      else e.style.transform = '';
+      if (cust.eyeType === 'star') {
+        const p = e.querySelector('.pupil');
+        if (p) { p.style.clipPath = 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)'; }
+      }
+      if (cust.eyeType === 'sharp') {
+        const p = e.querySelector('.pupil');
+        if (p) { p.style.clipPath = 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)'; p.style.borderRadius = '0'; }
+      }
+    });
+  }
+
+  // Tail
+  const tailContainer = el.querySelector('.creature-tail');
+  if (tailContainer) {
+    tailContainer.innerHTML = '';
+    if (cust.tailType && cust.tailType !== 'none') {
+      const t = document.createElement('div');
+      t.className = 'tail ' + cust.tailType;
+      tailContainer.appendChild(t);
+    }
+  }
+
+  // Accessory
+  const accEl = el.querySelector('.creature-accessory');
+  if (accEl) {
+    accEl.className = 'creature-accessory';
+    if (cust.accessory && cust.accessory !== 'none') {
+      accEl.classList.add('accessory-' + cust.accessory);
+    } else {
+      accEl.classList.add('accessory-none');
+    }
+  }
+
+  // Mouth based on mood
+  const mouth = el.querySelector('.creature-mouth');
+  if (mouth) {
+    const mood = getMood();
+    mouth.className = 'creature-mouth ' + mood;
+  }
+
+  // Tears
+  const tears = el.querySelector('.creature-tears');
+  if (tears) {
+    tears.innerHTML = '';
+    if (getMood() === 'sad') {
+      const l = document.createElement('div');
+      l.className = 'tear left';
+      const r = document.createElement('div');
+      r.className = 'tear right';
+      tears.appendChild(l);
+      tears.appendChild(r);
+    }
+  }
+}
+
+function renderNeeds() {
+  const grid = document.getElementById('needs-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  NEEDS_DEF.forEach(n => {
+    const val = Math.round(state.needs[n.id] || 0);
+    const cls = val > 60 ? 'good' : val > 30 ? 'ok' : 'bad';
+    const item = document.createElement('div');
+    item.className = 'need-item';
+    item.innerHTML = `
+      <span class="need-icon">${n.icon}</span>
+      <span class="need-label">${n.label}</span>
+      <div class="need-bar"><div class="need-fill ${cls}" style="width:${val}%;background:${n.color};"></div></div>
+      <span class="need-value">${val}%</span>
+    `;
+    grid.appendChild(item);
+  });
+}
+
+function renderDashboard() {
+  const avg = Math.round(getAverageNeeds());
+  const scoreEl = document.getElementById('dash-score');
+  if (scoreEl) scoreEl.textContent = avg;
+
+  const circle = document.getElementById('score-circle');
+  if (circle) {
+    const circ = 2 * Math.PI * 54;
+    const offset = circ - (avg / 100) * circ;
+    circle.style.strokeDasharray = circ;
+    circle.style.strokeDashoffset = offset;
+    const elem = ELEMENTS.find(e => e.id === state.element) || ELEMENTS[0];
+    circle.style.stroke = elem.primary;
+  }
+
+  const xpEl = document.getElementById('dash-xp');
+  if (xpEl) xpEl.textContent = state.xp + '/' + (state.level * 50);
+  const streakEl = document.getElementById('dash-streak');
+  if (streakEl) streakEl.textContent = state.streak;
+
+  const pillars = computePillars();
+  const pGrid = document.getElementById('pillars-grid');
+  if (pGrid) {
+    pGrid.innerHTML = '';
+    const colors = { Body: '#FF6B00', Mind: '#7B1FA2', Wealth: '#FDD835', Soul: '#43A047' };
+    Object.entries(pillars).forEach(([name, val]) => {
+      const div = document.createElement('div');
+      div.className = 'pillar';
+      div.innerHTML = `
+        <div class="name">${name}</div>
+        <div class="value">${val}</div>
+        <div class="bar"><div class="fill" style="width:${val}%;background:${colors[name]||'#FF6B00'};"></div></div>
+      `;
+      pGrid.appendChild(div);
+    });
+  }
+}
+
+function renderSessions() {
+  const grid = document.getElementById('sessions-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  SESSIONS.forEach(s => {
+    const done = state.completedSessions.includes(s.id);
+    const card = document.createElement('div');
+    card.className = 'session-card' + (done ? ' completed' : '');
+    card.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span class="name">${s.name}</span>
+        <span class="check">✅</span>
+      </div>
+      <div class="meta">
+        <span>⏱ ${s.dur}</span>
+        <span>⭐ +${s.xp} XP</span>
+      </div>
+      <div class="effects">${s.effects}</div>
+    `;
+    if (!done) {
+      card.onclick = () => {
+        state.completedSessions.push(s.id);
+        completeSession(s.id);
+      };
+    }
+    grid.appendChild(card);
+  });
+}
+
+// ─── CUSTOMIZE ───
+let customizeCat = 'bodyColor';
+
+function renderCustomize() {
+  const tabs = document.getElementById('customize-tabs');
+  const opts = document.getElementById('customize-options');
+  if (!tabs || !opts) return;
+
+  tabs.innerHTML = '';
+  Object.entries(CUSTOMIZE_CATS).forEach(([key, cat]) => {
+    const tab = document.createElement('button');
+    tab.className = 'customize-tab' + (key === customizeCat ? ' active' : '');
+    tab.textContent = cat.label;
+    tab.onclick = () => { customizeCat = key; renderCustomize(); };
+    tabs.appendChild(tab);
+  });
+
+  const catData = CUSTOMIZE_CATS[customizeCat];
+  if (!catData) return;
+  opts.innerHTML = '';
+
+  const bs = computeBadgeState();
+  catData.options.forEach(opt => {
+    const isSelected = state.customization[customizeCat] === opt;
+    const isLocked = getOptionLocked(customizeCat, opt, bs);
+    const div = document.createElement('div');
+    div.className = 'customize-option' + (isSelected ? ' selected' : '') + (isLocked ? ' locked' : '');
+    div.textContent = opt.charAt(0).toUpperCase() + opt.slice(1);
+    if (!isLocked) {
+      div.onclick = () => {
+        state.customization[customizeCat] = opt;
+        if (opt !== 'none' && customizeCat !== 'bodyColor') {
+          // count custom parts
+          let count = 0;
+          Object.values(state.customization).forEach(v => { if (v !== 'none' && v !== 'primary' && v !== 'secondary' && v !== 'accent' && v !== 'round') count++; });
+          state.customParts = count;
+        }
+        saveState();
+        renderCustomize();
+        renderCreature();
+      };
+    }
+    opts.appendChild(div);
+  });
+}
+
+function renderBadges() {
+  const grid = document.getElementById('badges-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const bs = computeBadgeState();
+  BADGES.forEach(b => {
+    const unlocked = b.check(bs);
+    const div = document.createElement('div');
+    div.className = 'badge-item' + (unlocked ? ' unlocked' : '');
+    div.innerHTML = `<span class="icon">${b.icon}</span><div class="name">${b.name}</div><div class="desc">${b.desc}</div>`;
+    grid.appendChild(div);
+  });
+}
+
+function renderLeague() {
+  const container = document.getElementById('league-tiers');
+  if (!container) return;
+  container.innerHTML = '';
+  let currentTier = LEAGUE_TIERS[0];
+  for (const t of LEAGUE_TIERS) {
+    if (state.level >= t.minLv) currentTier = t;
+  }
+  LEAGUE_TIERS.forEach(t => {
+    const isCurrent = t === currentTier;
+    const div = document.createElement('div');
+    div.className = 'league-tier' + (isCurrent ? ' current' : '');
+    div.innerHTML = `
+      <div class="tier-icon">${t.icon}</div>
+      <div class="tier-name">${t.name}</div>
+      <div class="tier-xp">Lv. ${t.minLv}+</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ─── SELECTION ───
+let selectedElement = null;
+
+function initSelection() {
+  const grid = document.getElementById('selection-grid');
+  grid.innerHTML = '';
+  ELEMENTS.forEach(e => {
+    const card = document.createElement('div');
+    card.className = 'selection-card';
+    card.dataset.id = e.id;
+    card.style.setProperty('--elem-primary', e.primary);
+    card.innerHTML = `
+      <span class="emoji">${e.emoji}</span>
+      <div class="name">${e.name}</div>
+      <div class="desc">${e.desc}</div>
+      <span class="type-color" style="background:${e.primary}"></span>
+    `;
+    card.onclick = () => {
+      document.querySelectorAll('.selection-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      selectedElement = e.id;
+      document.getElementById('select-confirm').disabled = false;
+    };
+    grid.appendChild(card);
+  });
+}
+
+function confirmSelection() {
+  if (!selectedElement) return;
+  state.element = selectedElement;
+  navigate('onboarding');
+  initOnboarding();
+}
+
+// ─── ONBOARDING ───
+function initOnboarding() {
+  document.querySelectorAll('.onboarding-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('onb-step-1').classList.add('active');
+  document.getElementById('onb-name').value = state.userName || '';
+  document.getElementById('onb-creature-name').value = state.creatureName || 'Pou';
+}
+
+function onbNext(step) {
+  if (step === 1) {
+    const name = document.getElementById('onb-name').value.trim();
+    if (!name) return;
+    state.userName = name;
+    document.getElementById('onb-step-1').classList.remove('active');
+    document.getElementById('onb-step-2').classList.add('active');
+  } else if (step === 2) {
+    const cname = document.getElementById('onb-creature-name').value.trim() || 'Pou';
+    state.creatureName = cname;
+    document.getElementById('onb-step-2').classList.remove('active');
+    document.getElementById('onb-step-3').classList.add('active');
+    const elem = ELEMENTS.find(e => e.id === state.element) || ELEMENTS[0];
+    document.getElementById('onb-type-icon').textContent = elem.emoji;
+    document.getElementById('onb-greeting').textContent = `I'm ${state.creatureName}. Let's grow together!`;
+  }
+}
+
+function finishOnboarding() {
+  state.initialized = true;
+  saveState();
+  navigate('home');
+  // Start decay loop
+  lastDecayTime = Date.now();
+}
+
+// ─── ADMIN ───
+function adminAddXP(xp) { addXP(xp); saveState(); renderAll(); }
+function adminBoostNeeds() {
+  NEEDS_DEF.forEach(n => state.needs[n.id] = 100);
+  saveState(); renderAll();
+}
+function adminResetBadges() {
+  state.completedSessions = [];
+  state.totalCompleted = 0;
+  state.morningSessions = 0;
+  state.eveningSessions = 0;
+  state.fastSessionDone = false;
+  state.totalMin = 0;
+  checkBadges();
+  saveState(); renderAll();
+}
+function adminResetGame() {
+  localStorage.removeItem('apex-v7-state');
+  state = defaultState();
+  selectedElement = null;
+  navigate('landing');
+  initSelection();
+}
+
+// ─── PARTICLES ───
+function initParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (15 + Math.random() * 25) + 's';
+    p.style.animationDelay = Math.random() * 20 + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 4) + 'px';
+    container.appendChild(p);
+  }
+}
+
+// ─── DECAY LOOP ───
+setInterval(() => {
+  if (state.initialized) {
+    decayNeeds();
+    renderAll();
+  }
+}, 30000); // every 30 seconds
+
+// ─── STREAK CHECK ───
+setInterval(() => {
+  if (!state.initialized) return;
+  const today = new Date().toDateString();
+  if (state.lastDate && state.lastDate !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (state.lastDate === yesterday) {
+      state.streak++;
+    } else {
+      state.streak = 1;
+    }
+    // Morning/evening check
+    const h = new Date().getHours();
+    if (h >= 5 && h <= 10) state.morningSessions++;
+    if (h >= 20 || h <= 4) state.eveningSessions++;
+    checkBadges();
+  }
+  state.lastDate = today;
+  saveState();
+}, 60000);
+
+// ─── INIT ───
+function init() {
+  initParticles();
+  const loaded = loadState();
+  initSelection();
+
+  if (loaded && state.initialized) {
+    navigate('home');
+    lastDecayTime = Date.now();
+  } else {
+    navigate('landing');
+  }
+  renderAll();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
