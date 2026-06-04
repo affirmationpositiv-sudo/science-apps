@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>APEX v6 — Luna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ========== RESET & BASE ========== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#FF8A8A;--secondary:#FFB5B5;--accent:#FF6B6B;--bg:#FFF0F0;--eye:#2D2D2D;
+  --text:#FF6B6B;--surface:#fff;--surface2:#fafafa;--surface3:#f0f0f0;
+  --text-primary:#1a1a2e;--text-secondary:#555;--radius:16px;--radius-sm:10px;
+  --shadow:0 4px 24px rgba(0,0,0,.08);--shadow-lg:0 8px 40px rgba(0,0,0,.12);
+  --font:'Inter',sans-serif;--font-display:'Playfair Display',serif;
+  --nav-h:64px;--avatar-s:80px;--transition:0.3s cubic-bezier(.4,0,.2,1)
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text-primary);min-height:100vh;overflow-x:hidden;transition:background var(--transition),color var(--transition)}
+a{color:var(--accent);text-decoration:none}
+button{cursor:pointer;font-family:var(--font);border:none;outline:none}
+input,textarea{font-family:var(--font);outline:none;border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:10px 14px;font-size:15px;background:var(--surface);color:var(--text-primary);transition:border var(--transition)}
+input:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:60px}
+.hidden{display:none!important}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;opacity:.4}
+
+/* ========== THEMES ========== */
+[data-theme="coral"]{--primary:#FF8A8A;--secondary:#FFB5B5;--accent:#FF6B6B;--bg:#FFF0F0;--eye:#2D2D2D;--text:#FF6B6B;--text-on-accent:#fff}
+[data-theme="ocean"]{--primary:#7EC8E3;--secondary:#A8D8EA;--accent:#4A90D9;--bg:#F0F8FF;--eye:#2D2D2D;--text:#4A90D9;--text-on-accent:#fff}
+[data-theme="forest"]{--primary:#81C784;--secondary:#A5D6A7;--accent:#4CAF50;--bg:#F1F8E9;--eye:#2D2D2D;--text:#4CAF50;--text-on-accent:#fff}
+[data-theme="midnight"]{--primary:#B39DDB;--secondary:#D1C4E9;--accent:#7C4DFF;--bg:#F3E5F5;--eye:#2D2D2D;--text:#7C4DFF;--text-on-accent:#fff}
+[data-theme="ember"]{--primary:#FF8A65;--secondary:#FFAB91;--accent:#FF5722;--bg:#FBE9E7;--eye:#2D2D2D;--text:#FF5722;--text-on-accent:#fff}
+
+/* ========== LUNA AVATAR ========== */
+.luna-avatar{position:relative;width:var(--avatar-s);height:var(--avatar-s);flex-shrink:0}
+.luna-head{width:100%;height:100%;border-radius:50%;background:var(--primary);position:relative;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px var(--accent),0 0 60px var(--accent);transition:box-shadow var(--transition),background var(--transition);animation:luna-float 3s ease-in-out infinite}
+@keyframes luna-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.luna-eyes{position:absolute;top:28%;width:60%;display:flex;justify-content:space-between;z-index:2}
+.luna-eye{width:28%;aspect-ratio:1/.9;background:var(--eye);border-radius:50%;position:relative;transition:all .15s;animation:luna-blink 4s ease-in-out infinite}
+.luna-eye::after{content:'';position:absolute;width:35%;aspect-ratio:1;background:var(--bg);border-radius:50%;top:20%;left:25%;transition:all .15s}
+@keyframes luna-blink{0%,95%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+.luna-mouth{position:absolute;bottom:22%;width:30%;height:8%;border-radius:0 0 50% 50%;background:var(--eye);z-index:2;transition:all var(--transition)}
+
+/* Mouth expressions */
+.luna-mouth.happy{border-radius:50%;width:28%;height:14%;bottom:20%;background:var(--eye);transform:scaleX(1)}
+.luna-mouth.open{border-radius:50%;width:22%;height:18%;bottom:18%;background:var(--bg);border:2px solid var(--eye)}
+.luna-mouth.sad{border-radius:50% 50% 0 0;width:26%;height:10%;bottom:24%}
+.luna-mouth.thinking{border-radius:50%;width:16%;height:16%;bottom:22%;background:var(--eye);transform:scaleX(.7)}
+.luna-mouth.calm{width:22%;height:4%;border-radius:50%;bottom:23%}
+.luna-mouth.motivating{width:32%;height:12%;border-radius:50%;bottom:20%}
+
+.luna-cheeks{position:absolute;bottom:28%;width:70%;display:flex;justify-content:space-between;z-index:1;pointer-events:none}
+.luna-cheek{width:16%;aspect-ratio:1;background:var(--secondary);border-radius:50%;opacity:.7;transition:background var(--transition)}
+.luna-glow{position:absolute;inset:-15px;border-radius:50%;background:radial-gradient(circle,var(--accent) 0%,transparent 70%);opacity:.25;animation:luna-glow-pulse 3s ease-in-out infinite;pointer-events:none}
+@keyframes luna-glow-pulse{0%,100%{opacity:.2;transform:scale(1)}50%{opacity:.35;transform:scale(1.08)}}
+
+/* Sizes */
+.luna-avatar.sm{--avatar-s:48px}
+.luna-avatar.md{--avatar-s:80px}
+.luna-avatar.lg{--avatar-s:140px}
+.luna-avatar.xl{--avatar-s:200px}
+
+/* ========== BUTTONS ========== */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all var(--transition);border:2px solid transparent}
+.btn-primary{background:var(--accent);color:var(--text-on-accent,#fff)}.btn-primary:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn-secondary{background:var(--surface);color:var(--accent);border-color:var(--accent)}.btn-secondary:hover{background:var(--accent);color:var(--text-on-accent,#fff)}
+.btn-ghost{background:transparent;color:var(--text-secondary)}.btn-ghost:hover{background:var(--surface3)}
+.btn-sm{padding:6px 14px;font-size:13px}
+.btn-icon{padding:8px;border-radius:50%;aspect-ratio:1;display:inline-flex;align-items:center;justify-content:center;font-size:18px}
+.btn-block{width:100%;justify-content:center}
+
+/* ========== LAYOUT ========== */
+.app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:80px}
+.page{padding:16px;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ========== TOP BAR ========== */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;position:sticky;top:0;z-index:100;background:var(--bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.top-bar-left{display:flex;align-items:center;gap:12px}
+.top-bar-title{font-weight:700;font-size:18px;color:var(--text-primary)}
+.top-bar-right{display:flex;align-items:center;gap:8px}
+
+/* ========== BOTTOM NAV ========== */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:var(--surface);border-top:1px solid var(--surface3);display:flex;justify-content:space-around;padding:6px 0 env(safe-area-inset-bottom,6px);z-index:200;box-shadow:0 -2px 20px rgba(0,0,0,.06)}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 12px;border-radius:10px;background:transparent;color:var(--text-secondary);font-size:10px;font-weight:500;transition:all var(--transition);border:none;min-width:50px}
+.nav-item.active{color:var(--accent);background:var(--bg)}
+.nav-item .nav-icon{font-size:20px;line-height:1}
+
+/* ========== CARDS ========== */
+.card{background:var(--surface);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--surface3);transition:all var(--transition)}
+.card:hover{box-shadow:var(--shadow-lg)}
+.card-glass{background:rgba(255,255,255,.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.8)}
+
+/* ========== SCORE RING ========== */
+.score-ring{position:relative;width:120px;height:120px;margin:0 auto}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-bg{fill:none;stroke:var(--surface3);stroke-width:8}
+.score-ring-fg{fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;stroke-dasharray:314;transition:stroke-dashoffset 1s ease,stroke var(--transition)}
+.score-ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.score-ring-value{font-size:32px;font-weight:800;color:var(--text-primary);line-height:1}
+.score-ring-label{font-size:11px;color:var(--text-secondary);font-weight:500}
+
+/* ========== PILLAR BARS ========== */
+.pillar{display:flex;align-items:center;gap:12px;padding:10px 0}
+.pillar-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pillar-info{flex:1;min-width:0}
+.pillar-name{font-size:13px;font-weight:600;display:flex;justify-content:space-between}
+.pillar-bar{height:6px;background:var(--surface3);border-radius:3px;margin-top:4px;overflow:hidden}
+.pillar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+
+/* ========== CHAT ========== */
+.chat-container{display:flex;flex-direction:column;height:calc(100vh - 140px);max-height:calc(100vh - 140px)}
+.chat-messages{flex:1;overflow-y:auto;padding:12px 4px;display:flex;flex-direction:column;gap:12px}
+.msg{display:flex;gap:10px;max-width:85%;animation:msgIn .3s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.luna{align-self:flex-start}
+.msg.user{align-self:flex-end;flex-direction:row-reverse}
+.msg-bubble{background:var(--surface);padding:12px 16px;border-radius:var(--radius);box-shadow:var(--shadow);font-size:14px;line-height:1.5;border:1px solid var(--surface3)}
+.msg.luna .msg-bubble{border-bottom-left-radius:4px}
+.msg.user .msg-bubble{background:var(--accent);color:var(--text-on-accent,#fff);border-bottom-right-radius:4px}
+.msg-time{font-size:10px;color:var(--text-secondary);margin-top:4px;opacity:.7}
+.chat-input-area{display:flex;gap:8px;padding:12px 0;border-top:1px solid var(--surface3);margin-top:auto}
+.chat-input-area input{flex:1}
+.chat-quick-reply{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chat-quick-reply .btn{font-size:12px;padding:6px 12px}
+
+/* ========== EXERCISE GRID ========== */
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ex-card{background:var(--surface);border-radius:var(--radius);padding:16px;border:1px solid var(--surface3);box-shadow:var(--shadow);transition:all var(--transition);cursor:pointer}
+.ex-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.ex-card .ex-icon{font-size:28px;margin-bottom:8px}
+.ex-card .ex-name{font-size:14px;font-weight:600}
+.ex-card .ex-meta{font-size:12px;color:var(--text-secondary);margin-top:4px;display:flex;gap:8px}
+.ex-card .ex-pillar{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600}
+.ex-card .ex-pillar.body{background:#FFE0E0;color:#D32F2F}
+.ex-card .ex-pillar.mind{background:#E0E8FF;color:#1565C0}
+.ex-card .ex-pillar.soul{background:#E8E0FF;color:#6A1B9A}
+.ex-card .ex-pillar.wealth{background:#FFF3E0;color:#E65100}
+
+/* ========== ONBOARDING ========== */
+.onboarding{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;gap:24px}
+.onboarding-step{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%;max-width:360px;animation:fadeIn .4s ease}
+.onboarding h1{font-family:var(--font-display);font-size:32px;color:var(--text-primary)}
+.onboarding p{color:var(--text-secondary);font-size:16px;line-height:1.6}
+.onboarding-options{display:flex;flex-direction:column;gap:8px;width:100%}
+.onboarding-opt{background:var(--surface);border:2px solid var(--surface3);border-radius:var(--radius-sm);padding:14px 18px;text-align:left;font-size:15px;font-weight:500;color:var(--text-primary);transition:all var(--transition);display:flex;align-items:center;gap:12px}
+.onboarding-opt:hover{border-color:var(--accent)}
+.onboarding-opt.selected{border-color:var(--accent);background:var(--bg)}
+.onboarding-opt .opt-icon{font-size:20px}
+
+/* ========== SESSION PLAYER ========== */
+.player-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.player-step{font-size:14px;font-weight:600;color:var(--accent)}
+.player-video{aspect-ratio:16/9;background:#000;border-radius:var(--radius);overflow:hidden;margin-bottom:16px}
+.player-video iframe{width:100%;height:100%;border:none}
+.player-timer{text-align:center;padding:16px;font-size:42px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.player-steps{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.player-step-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--surface);border-radius:var(--radius-sm);border:1px solid var(--surface3)}
+.player-step-item.done{opacity:.5;text-decoration:line-through}
+.player-step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--text-on-accent,#fff);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+
+/* ========== BADGE GRID ========== */
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.badge{background:var(--surface);border-radius:var(--radius);padding:16px;text-align:center;border:1px solid var(--surface3);transition:all var(--transition)}
+.badge.locked{opacity:.4;filter:grayscale(1)}
+.badge-icon{font-size:36px;margin-bottom:6px}
+.badge-name{font-size:12px;font-weight:600}
+.badge-desc{font-size:10px;color:var(--text-secondary);margin-top:2px}
+
+/* ========== LEAGUE ========== */
+.league-tier{background:var(--surface);border-radius:var(--radius);padding:16px;margin-bottom:8px;border:1px solid var(--surface3);display:flex;align-items:center;gap:12px}
+.league-tier.active{border-color:var(--accent);background:var(--bg)}
+.league-rank{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--surface3)}
+.league-rank:last-child{border-bottom:none}
+.league-pos{width:24px;font-weight:700;font-size:13px;color:var(--text-secondary)}
+
+/* ========== ADMIN ========== */
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.admin-stat{background:var(--surface);border-radius:var(--radius-sm);padding:14px;text-align:center;border:1px solid var(--surface3)}
+.admin-stat-value{font-size:24px;font-weight:800;color:var(--accent)}
+.admin-stat-label{font-size:11px;color:var(--text-secondary);margin-top:4px}
+
+/* ========== THEME PICKER ========== */
+.theme-picker{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.theme-dot{width:40px;height:40px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all var(--transition)}
+.theme-dot.active{border-color:var(--text-primary);transform:scale(1.15)}
+.theme-dot:hover{transform:scale(1.1)}
+
+/* ========== PROGRESS CHARTS ========== */
+.chart-container{background:var(--surface);border-radius:var(--radius);padding:16px;margin-bottom:16px;border:1px solid var(--surface3);min-height:200px}
+
+/* ========== LUNA BUBBLE (floating) ========== */
+.luna-bubble{position:fixed;bottom:80px;right:16px;z-index:150;cursor:pointer;transition:all var(--transition)}
+.luna-bubble:hover{transform:scale(1.08)}
+.luna-bubble .luna-avatar{--avatar-s:56px}
+.luna-bubble .luna-head{box-shadow:0 0 20px var(--accent),0 0 40px var(--accent)}
+
+/* ========== MODAL ========== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:300;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeIn .2s ease}
+.modal{background:var(--surface);border-radius:var(--radius);padding:24px;width:100%;max-width:380px;max-height:80vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.modal h3{font-size:18px;margin-bottom:12px}
+.modal-actions{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+
+/* ========== RESPONSIVE ========== */
+@media(min-width:768px){
+  .app{max-width:600px}
+  .bottom-nav{max-width:600px}
+}
+
+/* ========== MISC ========== */
+.personality-card{padding:14px;background:var(--surface);border:2px solid var(--surface3);border-radius:var(--radius-sm);cursor:pointer;transition:all var(--transition);text-align:center}
+.personality-card:hover,.personality-card.active{border-color:var(--accent);background:var(--bg)}
+.personality-card .pers-icon{font-size:32px;margin-bottom:4px}
+.personality-card .pers-name{font-size:14px;font-weight:600}
+.personality-card .pers-desc{font-size:11px;color:var(--text-secondary);margin-top:4px}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text-secondary)}
+.empty-state .empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
+.divider{height:1px;background:var(--surface3);margin:16px 0}
+</style>
+</head>
+<body>
+
+<div id="app" class="app"></div>
+
+<script>
+// ====================================================================
+// APEX v6 — Complete Application
+// ====================================================================
+
+const APP = {
+  version: '6.0',
+  defaultState: {
+    initialized: false,
+    user: { name:'', experience:'', goal:'', vibe:'nurturing', theme:'coral', lunaName:'Luna' },
+    scores: { body:0, mind:0, soul:0, wealth:0, overall:0 },
+    xp: 0, level: 1, streak: 0,
+    lastActive: null,
+    chatHistory: [],
+    moodLog: [],
+    sessionsDone: [],
+    badges: [],
+    badgesUnlocked: [],
+    weeklyXP: [],
+    leagueTier: 3,
+    leagueRank: 5,
+    analysisHistory: []
+  }
+};
+
+// --- 19 Exercises ---
+const EXERCISES = [
+  {id:'e1',name:'Morning Mobility',icon:'🧘',pillar:'body',duration:5,xp:25,desc:'Gentle stretches to wake up',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e2',name:'Breath of Fire',icon:'🔥',pillar:'body',duration:3,xp:20,desc:'Energizing breathing',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e3',name:'Core Flow',icon:'🌀',pillar:'body',duration:8,xp:35,desc:'Core strength sequence',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e4',name:'Power Stretch',icon:'⭐',pillar:'body',duration:6,xp:30,desc:'Full body stretch',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e5',name:'HIIT Boost',icon:'💪',pillar:'body',duration:12,xp:50,desc:'High intensity interval',minScore:3,video:'dQw4w9WgXcQ'},
+  {id:'e6',name:'Yoga Flow',icon:'🧘',pillar:'body',duration:10,xp:40,desc:'Vinyasa sequence',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e7',name:'Mindful Minute',icon:'🧠',pillar:'mind',duration:1,xp:15,desc:'One minute of stillness',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e8',name:'Journal Prompt',icon:'✍️',pillar:'mind',duration:5,xp:25,desc:'Reflective writing',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e9',name:'Focus Training',icon:'🎯',pillar:'mind',duration:7,xp:30,desc:'Concentration drill',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e10',name:'Memory Game',icon:'🃏',pillar:'mind',duration:5,xp:25,desc:'Cognitive exercise',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e11',name:'Deep Reading',icon:'📖',pillar:'mind',duration:10,xp:35,desc:'Focused reading session',minScore:3,video:'dQw4w9WgXcQ'},
+  {id:'e12',name:'Evening Stillness',icon:'🌙',pillar:'soul',duration:5,xp:25,desc:'Calm wind-down',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e13',name:'Gratitude Flow',icon:'🙏',pillar:'soul',duration:3,xp:20,desc:'Three things you\'re grateful for',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e14',name:'Body Scan',icon:'🔍',pillar:'soul',duration:8,xp:30,desc:'Mindful body awareness',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e15',name:'Meditation',icon:'☮️',pillar:'soul',duration:10,xp:40,desc:'Guided stillness',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e16',name:'Visualization',icon:'✨',pillar:'soul',duration:6,xp:30,desc:'Future self visualization',minScore:3,video:'dQw4w9WgXcQ'},
+  {id:'e17',name:'Budget Review',icon:'💰',pillar:'wealth',duration:5,xp:25,desc:'Check your finances',minScore:1,video:'dQw4w9WgXcQ'},
+  {id:'e18',name:'Skill Session',icon:'📚',pillar:'wealth',duration:10,xp:40,desc:'Learn something new',minScore:2,video:'dQw4w9WgXcQ'},
+  {id:'e19',name:'Idea Sprint',icon:'💡',pillar:'wealth',duration:7,xp:35,desc:'Brainstorm opportunities',minScore:3,video:'dQw4w9WgXcQ'}
+];
+
+// --- 18 Badges ---
+const BADGES = [
+  {id:'b1',name:'First Step',icon:'👶',desc:'Complete your first session',req:s=>s.sessionsDone.length>=1},
+  {id:'b2',name:'Dedicated',icon:'🔥',desc:'5-day streak',req:s=>s.streak>=5},
+  {id:'b3',name:'Unstoppable',icon:'⚡',desc:'10-day streak',req:s=>s.streak>=10},
+  {id:'b4',name:'Body Builder',icon:'💪',desc:'10 body sessions',req:s=>s.sessionsDone.filter(x=>EXERCISES.find(e=>e.id===x)?.pillar==='body').length>=10},
+  {id:'b5',name:'Mind Master',icon:'🧠',desc:'10 mind sessions',req:s=>s.sessionsDone.filter(x=>EXERCISES.find(e=>e.id===x)?.pillar==='mind').length>=10},
+  {id:'b6',name:'Soul Seeker',icon:'☮️',desc:'10 soul sessions',req:s=>s.sessionsDone.filter(x=>EXERCISES.find(e=>e.id===x)?.pillar==='soul').length>=10},
+  {id:'b7',name:'Wealth Builder',icon:'💰',desc:'10 wealth sessions',req:s=>s.sessionsDone.filter(x=>EXERCISES.find(e=>e.id===x)?.pillar==='wealth').length>=10},
+  {id:'b8',name:'Level 5',icon:'⭐',desc:'Reach level 5',req:s=>s.level>=5},
+  {id:'b9',name:'Level 10',icon:'🌟',desc:'Reach level 10',req:s=>s.level>=10},
+  {id:'b10',name:'Century',icon:'💯',desc:'1000 XP total',req:s=>s.xp>=1000},
+  {id:'b11',name:'Analyzer',icon:'🔍',desc:'Complete 5 analyses',req:s=>(s.analysisHistory||[]).length>=5},
+  {id:'b12',name:'Chatty',icon:'💬',desc:'Send 50 chat messages',req:s=>s.chatHistory.length>=50},
+  {id:'b13',name:'Perfect Week',icon:'📅',desc:'7-day streak',req:s=>s.streak>=7},
+  {id:'b14',name:'All Rounder',icon:'🌈',desc:'Try all 4 pillars',req:s=>{let p=new Set(s.sessionsDone.map(x=>EXERCISES.find(e=>e.id===x)?.pillar).filter(Boolean));return p.size>=4}},
+  {id:'b15',name:'Social Butterfly',icon:'🦋',desc:'5 analysis reviews',req:s=>false},
+  {id:'b16',name:'Night Owl',icon:'🦉',desc:'Session after 10pm',req:s=>false},
+  {id:'b17',name:'Early Bird',icon:'🐦',desc:'Session before 7am',req:s=>false},
+  {id:'b18',name:'Apex Legend',icon:'👑',desc:'All badges unlocked',req:s=>APP.state.badgesUnlocked.length>=17}
+];
+
+// --- Personalities ---
+const PERSONALITIES = {
+  nurturing: {
+    name:'Nurturing',icon:'💛',greeting:'Hey {name}! You\'re doing amazing. Remember — every small step counts. How can I support you today?',
+    affirmations:['You\'ve got this!','I believe in you.','Progress, not perfection.','Be kind to yourself today.','Every step forward matters.'],
+    encouragement:'You\'re doing great, {name}! Keep going at your own pace. 🌸',
+    analysis:'Let\'s check in gently. How are you feeling, {name}?'
+  },
+  dynamic: {
+    name:'Dynamic',icon:'⚡',greeting:'LET\'S GO {name}! 🔥 Another day, another chance to crush it! What are we tackling today?',
+    affirmations:['No excuses!','You\'re unstoppable!','Go hard or go home!','Today is YOUR day!','Level up NOW!'],
+    encouragement:'COME ON {name}! YOU GOT THIS! LET\'S GOOO! 🔥🔥🔥',
+    analysis:'Time for a power check! Let\'s see where you\'re at!'
+  },
+  wise: {
+    name:'Wise',icon:'🧠',greeting:'Welcome back, {name}. Let us observe where you are today without judgment. The journey continues.',
+    affirmations:['Be present.','Each moment is fresh.','Observe without attachment.','Growth comes from awareness.','The path reveals itself.'],
+    encouragement:'Consider your progress, {name}. Each session builds upon the last. 🧘',
+    analysis:'Let us examine your current state with mindfulness and clarity.'
+  }
+};
+
+// --- League Tiers ---
+const LEAGUE_TIERS = ['Bronze I','Bronze II','Silver I','Silver II','Gold I','Gold II'];
+const LEAGUE_BOT_NAMES = ['Aria','Blake','Chen','Drew','Eve','Finn','Gia','Hiro','Ivy'];
+
+// ====================================================================
+// STATE MANAGEMENT
+// ====================================================================
+
+let state = {...APP.defaultState};
+function saveState(){
+  try{
+    const s = {...state};
+    s.chartInstances = undefined;
+    localStorage.setItem('apex-v6-state',JSON.stringify(s));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem('apex-v6-state');
+    if(raw){
+      const loaded = JSON.parse(raw);
+      Object.assign(state,APP.defaultState,loaded);
+      state.initialized = true;
+    }
+  }catch(e){}
+}
+function resetState(){
+  state = {...APP.defaultState};
+  state.initialized = false;
+  localStorage.removeItem('apex-v6-state');
+  navigate('landing');
+  render();
+}
+
+loadState();
+
+// ====================================================================
+// UTILITY
+// ====================================================================
+
+function $(sel,ctx=document){return ctx.querySelector(sel)}
+function $$(sel,ctx=document){return Array.from(ctx.querySelectorAll(sel))}
+
+function htmlEscape(s){return String(s).replace(/[&<>"']/g,c=>`&#${c.charCodeAt(0)};`)}
+
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+
+function clamp(v,min,max){return Math.max(min,Math.min(max,v))}
+
+function getDayKey(){return new Date().toISOString().slice(0,10)}
+
+function getHour(){return new Date().getHours()}
+
+function getTimeAgo(dateStr){
+  if(!dateStr) return '';
+  const d=new Date(dateStr),now=new Date();
+  const diff=Math.floor((now-d)/1000);
+  if(diff<60) return 'just now';
+  if(diff<3600) return Math.floor(diff/60)+'m ago';
+  if(diff<86400) return Math.floor(diff/3600)+'h ago';
+  return Math.floor(diff/86400)+'d ago';
+}
+
+function calcLevel(xp){
+  let lv=1;
+  while(xp>=lv*100){xp-=lv*100;lv++}
+  return Math.min(lv,50);
+}
+
+function calcXPForNextLevel(level){
+  return level*100;
+}
+
+function calcOverallScore(scores){
+  return Math.round(((scores.body+scores.mind+scores.soul+scores.wealth)/4)*10)/10;
+}
+
+// ====================================================================
+// LUNA PERSONALITY HELPERS
+// ====================================================================
+
+function lunaPersonality(){
+  const vibe = state.user.vibe || 'nurturing';
+  return PERSONALITIES[vibe] || PERSONALITIES.nurturing;
+}
+
+function lunaSay(key,replace){
+  const p = lunaPersonality();
+  let text = p[key] || p.greeting;
+  const name = state.user.name || 'there';
+  text = text.replace(/{name}/g,name);
+  if(replace) Object.keys(replace).forEach(k=>{text=text.replace(new RegExp(`{${k}}`,'g'),replace[k])});
+  return text;
+}
+
+function lunaAffirmation(){
+  const p = lunaPersonality();
+  const list = p.affirmations;
+  return list[rand(0,list.length-1)].replace(/{name}/g,state.user.name||'there');
+}
+
+function lunaExpressionForContext(ctx){
+  const map = {
+    success:'happy',celebration:'happy',levelup:'happy',
+    thinking:'thinking',analysis:'thinking',
+    sad:'sad',streakloss:'sad',
+    motivate:'motivating',workout:'motivating',
+    calm:'calm',meditation:'calm',
+    greeting:'happy',default:'happy'
+  };
+  return map[ctx]||map.default;
+}
+
+// ====================================================================
+// CHAT ENGINE
+// ====================================================================
+
+function chatAddMessage(sender,text){
+  const msg = {sender,text,time:new Date().toISOString()};
+  state.chatHistory.push(msg);
+  if(state.chatHistory.length>200) state.chatHistory.splice(0,50);
+  saveState();
+  return msg;
+}
+
+function chatGetRecent(limit=30){
+  return state.chatHistory.slice(-limit);
+}
+
+function chatGetContext(){
+  const recent = chatGetRecent(6);
+  return recent.map(m=>`${m.sender==='luna'?'Luna':'User'}: ${m.text}`).join('\n');
+}
+
+function chatGenerateReply(userMsg){
+  const p = lunaPersonality();
+  const name = state.user.name || 'there';
+  const lower = userMsg.toLowerCase();
+  const scores = state.scores;
+  const hasData = scores.body>0||scores.mind>0||scores.soul>0||scores.wealth>0;
+
+  // Analysis trigger
+  if(lower.includes('analyse')||lower.includes('analyse')||lower.includes('analyse')||lower.includes('check-in')||lower.includes('check in')){
+    return {text:`Absolutely, ${name}! Let me ask you a few quick questions to see how you're doing. Shall we start? 🌸`,action:'start-analysis'};
+  }
+
+  // Greeting
+  if(lower.match(/^(hi|hey|hello|yo|sup|howdy)/)){
+    const streak = state.streak;
+    let extra = '';
+    if(streak>0) extra = ` I see you're on a ${streak}-day streak! ${streak>=5?'🔥':'💪'}`;
+    return {text:`${lunaSay('greeting')}${extra}`,action:null};
+  }
+
+  // How are you
+  if(lower.includes('how are you')){
+    return {text:`I'm doing wonderfully, ${name}! Especially now that I get to chat with you. Ready for a new session today? 🌟`,action:null};
+  }
+
+  // Recommend
+  if(lower.includes('recommend')||lower.includes('suggest')||lower.includes('what should i do')||lower.includes('workout')||lower.includes('exercise')){
+    if(hasData){
+      const lowestPillar = Object.entries(scores).filter(([k])=>k!=='overall').sort((a,b)=>a[1]-b[1])[0];
+      const pillarName = lowestPillar[0];
+      const available = EXERCISES.filter(e=>e.pillar===pillarName&&e.minScore<=Math.max(...Object.values(scores)));
+      if(available.length){
+        const pick = available[rand(0,available.length-1)];
+        return {text:`Your ${pillarName} score could use some love. I recommend **${pick.name}** (${pick.duration}min, ${pick.xp}XP). Want to start it?`,action:'recommend',exercise:pick};
+      }
+    }
+    const pick = EXERCISES[rand(0,EXERCISES.length-1)];
+    return {text:`How about **${pick.name}**? It's ${pick.duration} minutes and worth ${pick.xp}XP. Ready to go?`,action:'recommend',exercise:pick};
+  }
+
+  // Streak
+  if(lower.includes('streak')){
+    const s=state.streak;
+    if(s===0) return {text:`No streak yet, ${name}. Let's start one today! A single session is all it takes. 💪`,action:null};
+    if(s<3) return {text:`You're on a ${s}-day streak! Nice start — keep the momentum! 🔥`,action:null};
+    return {text:`${s}-day streak! That's incredible, ${name}! You're building a powerful habit. 🌟`,action:null};
+  }
+
+  // XP / Level
+  if(lower.includes('xp')||lower.includes('level')||lower.includes('progress')){
+    return {text:`You're **Level ${state.level}** with **${state.xp} XP**. ${calcXPForNextLevel(state.level)} XP to next level. Keep going, ${name}! 📈`,action:null};
+  }
+
+  // Mood
+  if(lower.includes('mood')||lower.includes('feeling')||lower.includes('feel')){
+    return {text:`I'm here for you, ${name}. How are you feeling right now? On a scale of 1-5? You can tell me anything. 💛`,action:'mood-check'};
+  }
+
+  // Help
+  if(lower.includes('help')||lower.includes('what can you do')){
+    return {text:`I can do lots! 🤗 Ask me for a **workout recommendation**, start an **analysis**, check your **streak**, tell me your **mood**, or just chat! What sounds good?`,action:null};
+  }
+
+  // Personality-based default
+  const affirmations = lunaPersonality().affirmations;
+  const aff = affirmations[rand(0,affirmations.length-1)].replace(/{name}/g,name);
+
+  // Check for gratitude or negative tone
+  if(lower.includes('sad')||lower.includes('tired')||lower.includes('bad')||lower.includes('rough')||lower.includes('hard day')){
+    const responses = {
+      nurturing:`I'm sorry you're feeling that way, ${name}. Take a deep breath with me. You don't have to be strong all the time. I'm here. 🌸`,
+      dynamic:`TOUGH DAY? THAT'S OKAY! Tomorrow is a new battle. Rest up and come back stronger! 💪🔥`,
+      wise:`Acknowledge the feeling without judgment. This too shall pass. Be gentle with yourself, ${name}. 🧘`
+    };
+    return {text:responses[state.user.vibe]||responses.nurturing,action:null};
+  }
+
+  if(lower.includes('thanks')||lower.includes('grateful')||lower.includes('good day')||lower.includes('happy')){
+    const responses = {
+      nurturing:`That makes me so happy to hear, ${name}! You deserve all the good things. 🌸✨`,
+      dynamic:`YES! That's the energy! LET'S KEEP THIS ROLLING! 🔥🔥🔥`,
+      wise:`Gratitude is the foundation of contentment. Hold onto this feeling, ${name}. 🙏`
+    };
+    return {text:responses[state.user.vibe]||responses.nurturing,action:null};
+  }
+
+  return {text:`${aff}`,action:null};
+}
+
+// ====================================================================
+// ANALYSIS ENGINE
+// ====================================================================
+
+function startAnalysis(){
+  state.analysisStep = 0;
+  state.analysisAnswers = [];
+  state.analysisQuestions = [
+    {q:'How are you feeling today?',type:'scale',min:1,max:5,labels:['😢','😊']},
+    {q:'Did you sleep well?',type:'bool'},
+    {q:'Have you eaten today?',type:'bool'},
+    {q:'How stressed are you?',type:'scale',min:1,max:5,labels:['😌','😰']},
+    {q:'How much energy do you have?',type:'scale',min:1,max:5,labels:['🪫','⚡']}
+  ];
+  state.analysisActive = true;
+  saveState();
+}
+
+function processAnalysisAnswer(answer){
+  if(!state.analysisActive) return null;
+  state.analysisAnswers.push(answer);
+  state.analysisStep = (state.analysisStep||0)+1;
+  const idx = state.analysisStep;
+  const questions = state.analysisQuestions;
+  if(idx >= questions.length){
+    // Calculate score
+    const a = state.analysisAnswers;
+    let score = 0;
+    // Q1: feeling (1-5)
+    score += (a[0]-1)/4; // normalize
+    // Q2: sleep -> bool to 0/1
+    score += a[1] ? 1 : 0;
+    // Q3: ate -> bool to 0/1
+    score += a[2] ? 1 : 0;
+    // Q4: stress inverted (1-5 -> 5=good)
+    score += (5-a[3])/4;
+    // Q5: energy (1-5)
+    score += (a[4]-1)/4;
+    score = Math.round((score/5)*10)/10;
+    score = clamp(score,0,5);
+
+    state.lastAnalysis = {score,date:new Date().toISOString(),answers:[...state.analysisAnswers]};
+    if(!state.analysisHistory) state.analysisHistory=[];
+    state.analysisHistory.push(state.lastAnalysis);
+    state.analysisActive = false;
+
+    // Generate recommendation
+    let rec;
+    let levelLabel;
+    if(score<2){rec='☁️ Gentle Breathing (3 min)';levelLabel='Rest & Recover'}
+    else if(score<3){rec='🌿 Light Mobility (5 min)';levelLabel='Easy Flow'}
+    else if(score<4){rec='💪 Moderate Workout (10 min)';levelLabel='Active Session'}
+    else{rec='🔥 Full Session (15 min)';levelLabel='Peak Performance'}
+
+    // Update overall score slightly based on analysis
+    state.scores.overall = Math.round((state.scores.overall + score*20)/2);
+    saveState();
+
+    return {done:true,score,rec,levelLabel};
+  }
+  saveState();
+  return {done:false,question:questions[idx],index:idx};
+}
+
+// ====================================================================
+// ROUTER
+// ====================================================================
+
+let currentRoute = 'landing';
+
+function navigate(route,data){
+  currentRoute = route;
+  window.location.hash = route;
+  render(data);
+}
+
+function handleHashChange(){
+  const hash = window.location.hash.slice(1) || 'landing';
+  currentRoute = hash;
+  render();
+}
+
+window.addEventListener('hashchange',handleHashChange);
+
+// ====================================================================
+// RENDER ENGINE
+// ====================================================================
+
+function render(data){
+  const app = document.getElementById('app');
+  if(!app) return;
+
+  // If not initialized, show landing or onboarding
+  if(!state.initialized){
+    if(currentRoute==='onboarding'||currentRoute==='landing'){
+      if(currentRoute==='onboarding'){app.innerHTML=renderOnboarding();attachOnboarding();return}
+      app.innerHTML=renderLanding();attachLanding();return
+    }
+    navigate('landing');
+    return;
+  }
+
+  switch(currentRoute){
+    case 'dashboard': app.innerHTML=renderDashboard();attachDashboard();break;
+    case 'sessions': app.innerHTML=renderSessions();attachSessions(data);break;
+    case 'player': app.innerHTML=renderPlayer(data);attachPlayer(data);break;
+    case 'chat': app.innerHTML=renderChat();attachChat();break;
+    case 'customize': app.innerHTML=renderCustomize();attachCustomize();break;
+    case 'badges': app.innerHTML=renderBadges();attachBadges();break;
+    case 'league': app.innerHTML=renderLeague();attachLeague();break;
+    case 'progress': app.innerHTML=renderProgress();attachProgress();break;
+    case 'admin': app.innerHTML=renderAdmin();attachAdmin();break;
+    default: navigate('dashboard');
+  }
+
+  updateMouthExpression(currentRoute,data);
+}
+
+function updateMouthExpression(ctx,data){
+  const mouth = document.querySelector('.luna-mouth');
+  if(!mouth) return;
+  const expr = lunaExpressionForContext(ctx);
+  mouth.className = 'luna-mouth';
+  if(expr!=='happy') mouth.classList.add(expr);
+}
+
+// ====================================================================
+// LANDING PAGE
+// ====================================================================
+
+function renderLanding(){
+  return `
+    <div class="onboarding">
+      <div class="luna-avatar xl" style="margin-bottom:8px">
+        <div class="luna-glow"></div>
+        <div class="luna-head">
+          <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+          <div class="luna-mouth happy"></div>
+          <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+        </div>
+      </div>
+      <h1>Meet <span style="color:var(--accent)">Luna</span></h1>
+      <p style="max-width:300px">Your personal AI coach — here to help you grow in body, mind, soul, and wealth.</p>
+
+      <div style="margin:8px 0 4px;font-size:13px;color:var(--text-secondary);font-weight:500">Pick my color! 🎨</div>
+      <div class="theme-picker" id="landing-theme-picker">
+        <div class="theme-dot active" data-theme="coral" style="background:#FF8A8A" title="Coral"></div>
+        <div class="theme-dot" data-theme="ocean" style="background:#7EC8E3" title="Ocean"></div>
+        <div class="theme-dot" data-theme="forest" style="background:#81C784" title="Forest"></div>
+        <div class="theme-dot" data-theme="midnight" style="background:#B39DDB" title="Midnight"></div>
+        <div class="theme-dot" data-theme="ember" style="background:#FF8A65" title="Ember"></div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="landing-start" style="margin-top:12px;font-size:16px;padding:14px 24px">
+        ✨ Get Started
+      </button>
+      ${state.initialized?`<button class="btn btn-ghost btn-block" id="landing-resume" style="font-size:14px">↻ Resume Dashboard</button>`:''}
+      <p style="font-size:12px;color:var(--text-secondary);margin-top:8px">v${APP.version} · Built with 💛</p>
+    </div>
+  `;
+}
+
+function attachLanding(){
+  const picker = document.getElementById('landing-theme-picker');
+  if(picker){
+    $$('.theme-dot',picker).forEach(dot=>{
+      dot.addEventListener('click',()=>{
+        $$('.theme-dot',picker).forEach(d=>d.classList.remove('active'));
+        dot.classList.add('active');
+        const theme = dot.dataset.theme;
+        document.documentElement.setAttribute('data-theme',theme);
+        state.user.theme = theme;
+        saveState();
+      });
+    });
+  }
+  document.getElementById('landing-start')?.addEventListener('click',()=>{
+    if(state.initialized) navigate('dashboard');
+    else navigate('onboarding');
+  });
+  document.getElementById('landing-resume')?.addEventListener('click',()=>{navigate('dashboard')});
+}
+
+// ====================================================================
+// ONBOARDING
+// ====================================================================
+
+function renderOnboarding(){
+  const name = state.user.name||'';
+  const exp = state.user.experience||'';
+  const goal = state.user.goal||'';
+  const vibe = state.user.vibe||'nurturing';
+  const theme = state.user.theme||'coral';
+
+  return `
+    <div class="onboarding">
+      <div class="luna-avatar lg" style="margin-bottom:4px">
+        <div class="luna-glow"></div>
+        <div class="luna-head">
+          <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+          <div class="luna-mouth happy"></div>
+          <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+        </div>
+      </div>
+      <div id="onboarding-container">
+        ${renderOnboardingStep(0,name,exp,goal,vibe,theme)}
+      </div>
+    </div>
+  `;
+}
+
+const ONBOARDING_STEPS = [
+  {title:'Hey there! 👋',desc:'Before we begin, what should I call you?',field:'name',type:'input'},
+  {title:'How experienced are you?',desc:'This helps me tailor sessions just for you.',field:'experience',type:'options',
+    options:[{val:'beginner',label:'🌱 Beginner',desc:'New to this stuff'},{val:'some',label:'🌿 Some Experience',desc:'Tried a few things'},{val:'advanced',label:'🌳 Advanced',desc:'Pretty experienced'}]},
+  {title:'What\'s your main goal?',desc:'This will be our north star.',field:'goal',type:'options',
+    options:[{val:'fit',label:'💪 Get Fit',desc:'Body & energy'},{val:'mind',label:'🧠 Clear Mind',desc:'Mental clarity'},{val:'soul',label:'☮️ Soul Growth',desc:'Inner peace'},{val:'all',label:'🌈 All of It',desc:'Everything! 💫'}]},
+  {title:'What vibe do you like?',desc:'This shapes how I talk to you.',field:'vibe',type:'vibe'},
+  {title:'Pick my color! 🎨',desc:'Choose a theme that resonates with you.',field:'theme',type:'theme'},
+  {title:'Ready to begin! 🎉',desc:'Let\'s start your journey together!',field:'done',type:'done'}
+];
+
+function renderOnboardingStep(stepIdx,name,exp,goal,vibe,theme){
+  const step = ONBOARDING_STEPS[stepIdx];
+  if(!step) return '';
+  let content = '';
+
+  if(step.type==='input'){
+    content = `<input type="text" id="ob-input" placeholder="Your name..." value="${htmlEscape(name)}" style="text-align:center;font-size:18px;padding:14px;width:100%" maxlength="20">`;
+  } else if(step.type==='options'){
+    content = `<div class="onboarding-options">${step.options.map(o=>{
+      const sel = (fieldVal(step.field,name,exp,goal,vibe,theme)===o.val)?' selected':'';
+      return `<button class="onboarding-opt${sel}" data-value="${o.val}"><span class="opt-icon">${o.label.split(' ')[0]}</span> <span>${o.label.replace(/^[^\s]+\s/,'')}<br><small style="font-weight:400;color:var(--text-secondary)">${o.desc}</small></span></button>`
+    }).join('')}</div>`;
+  } else if(step.type==='vibe'){
+    content = `<div style="display:flex;flex-direction:column;gap:8px;width:100%">
+      ${Object.entries(PERSONALITIES).map(([k,v])=>{
+        const sel = vibe===k?' active':'';
+        return `<div class="personality-card${sel}" data-vibe="${k}"><div class="pers-icon">${v.icon}</div><div class="pers-name">${v.name}</div><div class="pers-desc">${v.greeting.replace(/{name}/g,name||'you').slice(0,50)}...</div></div>`
+      }).join('')}
+    </div>`;
+  } else if(step.type==='theme'){
+    content = `<div class="theme-picker" style="margin:8px 0">
+      ${Object.entries({coral:'#FF8A8A',ocean:'#7EC8E3',forest:'#81C784',midnight:'#B39DDB',ember:'#FF8A65'}).map(([k,v])=>{
+        return `<div class="theme-dot${theme===k?' active':''}" data-theme="${k}" style="background:${v}"></div>`
+      }).join('')}
+    </div>`;
+  } else if(step.type==='done'){
+    content = `<p>I'm so excited to work with you, <strong>${name||'champion'}</strong>! 🎉</p>
+      <button class="btn btn-primary btn-block" id="ob-finish" style="font-size:16px;padding:14px">Let's Go! 🚀</button>`;
+  }
+
+  return `
+    <div class="onboarding-step">
+      <h1>${step.title}</h1>
+      <p>${step.desc}</p>
+      ${content}
+      ${stepIdx>0&&step.type!=='done'?`<button class="btn btn-ghost" id="ob-back" style="margin-top:8px">← Back</button>`:''}
+      ${step.type!=='done'&&step.type!=='vibe'&&step.type!=='theme'?`<button class="btn btn-primary" id="ob-next" style="margin-top:${step.type==='input'?8:0}px">Next →</button>`:''}
+      <div style="display:flex;gap:4px;margin-top:12px">${ONBOARDING_STEPS.map((_,i)=>`<div style="width:8px;height:8px;border-radius:50%;background:${i===stepIdx? 'var(--accent)':'var(--surface3)'};transition:background var(--transition)"></div>`).join('')}</div>
+    </div>
+  `;
+}
+
+function fieldVal(field,name,exp,goal,vibe,theme){
+  const map={name,experience:exp,goal,vibe,theme};
+  return map[field]||'';
+}
+
+function attachOnboarding(){
+  let step = 0;
+
+  function renderStep(){
+    const cont = document.getElementById('onboarding-container');
+    if(!cont) return;
+    cont.innerHTML = renderOnboardingStep(step,state.user.name||'',state.user.experience||'',state.user.goal||'',state.user.vibe||'nurturing',state.user.theme||'coral');
+    attachStepEvents();
+  }
+
+  function attachStepEvents(){
+    const s = ONBOARDING_STEPS[step];
+    if(!s) return;
+
+    // Input
+    const inp = document.getElementById('ob-input');
+    if(inp){
+      inp.focus();
+      inp.addEventListener('keydown',e=>{
+        if(e.key==='Enter' && inp.value.trim()){
+          state.user.name = inp.value.trim();
+          saveState();
+          step++; renderStep();
+        }
+      });
+      document.getElementById('ob-next')?.addEventListener('click',()=>{
+        if(inp.value.trim()){
+          state.user.name = inp.value.trim();
+          saveState();
+          step++; renderStep();
+        }
+      });
+    }
+
+    // Options
+    $$('.onboarding-opt').forEach(opt=>{
+      opt.addEventListener('click',()=>{
+        $$('.onboarding-opt').forEach(o=>o.classList.remove('selected'));
+        opt.classList.add('selected');
+        state.user[s.field] = opt.dataset.value;
+        saveState();
+        setTimeout(()=>{step++; renderStep()},200);
+      });
+    });
+
+    // Vibe
+    $$('.personality-card').forEach(card=>{
+      card.addEventListener('click',()=>{
+        $$('.personality-card').forEach(c=>c.classList.remove('active'));
+        card.classList.add('active');
+        state.user.vibe = card.dataset.vibe;
+        saveState();
+        setTimeout(()=>{step++; renderStep()},200);
+      });
+    });
+
+    // Theme
+    $$('.theme-dot').forEach(dot=>{
+      dot.addEventListener('click',()=>{
+        $$('.theme-dot').forEach(d=>d.classList.remove('active'));
+        dot.classList.add('active');
+        const t = dot.dataset.theme;
+        state.user.theme = t;
+        document.documentElement.setAttribute('data-theme',t);
+        saveState();
+        setTimeout(()=>{step++; renderStep()},200);
+      });
+    });
+
+    // Back
+    document.getElementById('ob-back')?.addEventListener('click',()=>{step--; renderStep()});
+
+    // Finish
+    document.getElementById('ob-finish')?.addEventListener('click',()=>{
+      state.initialized = true;
+      state.lastActive = new Date().toISOString();
+      // Give first badge
+      if(!state.badgesUnlocked.includes('b1')){
+        state.badgesUnlocked.push('b1');
+        state.xp += 50;
+        state.level = calcLevel(state.xp);
+      }
+      saveState();
+      navigate('dashboard');
+    });
+  }
+
+  renderStep();
+}
+
+// ====================================================================
+// DASHBOARD
+// ====================================================================
+
+function renderDashboard(){
+  const s = state.scores;
+  const overall = calcOverallScore(s);
+  const ringDash = 314;
+  const ringOffset = ringDash - (overall/5)*ringDash;
+  const name = state.user.name||'Champion';
+  const p = lunaPersonality();
+
+  // Recommendation based on lowest pillar
+  const lowest = Object.entries(s).filter(([k])=>k!=='overall').sort((a,b)=>a[1]-b[1])[0];
+  const recEx = lowest ? EXERCISES.filter(e=>e.pillar===lowest[0]&&e.minScore<=Math.max(...Object.values(s))).sort((a,b)=>a.duration-b.duration)[0] : EXERCISES[0];
+
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <div class="luna-avatar sm" style="cursor:pointer" onclick="navigate('customize')">
+          <div class="luna-head" style="box-shadow:0 0 12px var(--accent);animation:luna-float 3s ease-in-out infinite">
+            <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+            <div class="luna-mouth happy"></div>
+            <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="top-bar-title">${p.icon} ${name}</div>
+          <div style="font-size:11px;color:var(--text-secondary)">Level ${state.level} · ${state.xp} XP</div>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('customize')" title="Customize">🎨</button>
+      </div>
+    </div>
+
+    <div class="page">
+      <!-- Luna says -->
+      <div class="card" style="margin-bottom:16px;background:var(--bg);border-color:var(--accent);border-width:2px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="luna-avatar md">
+            <div class="luna-glow"></div>
+            <div class="luna-head">
+              <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+              <div class="luna-mouth happy"></div>
+              <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+            </div>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:4px">${p.icon} ${state.user.lunaName||'Luna'}</div>
+            <div style="font-size:14px;line-height:1.5">${lunaSay('greeting')}</div>
+            ${state.streak>0?`<div style="margin-top:6px;font-size:13px;color:var(--text-secondary)">🔥 ${state.streak}-day streak!</div>`:''}
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" onclick="navigate('chat')">💬 Talk to me</button>
+          ${recEx?`<button class="btn btn-secondary btn-sm" onclick="navigate('player',{id:'${recEx.id}'})">▶ ${recEx.name}</button>`:''}
+        </div>
+      </div>
+
+      <!-- Score Ring + Stats -->
+      <div style="display:flex;gap:16px;margin-bottom:16px;align-items:center">
+        <div class="score-ring">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle class="score-ring-bg" cx="60" cy="60" r="50"/>
+            <circle class="score-ring-fg" cx="60" cy="60" r="50" style="stroke-dashoffset:${ringOffset}"/>
+          </svg>
+          <div class="score-ring-text">
+            <div class="score-ring-value">${overall.toFixed(1)}</div>
+            <div class="score-ring-label">/ 5.0</div>
+          </div>
+        </div>
+        <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="admin-stat"><div class="admin-stat-value">${state.level}</div><div class="admin-stat-label">Level</div></div>
+          <div class="admin-stat"><div class="admin-stat-value">${state.xp}</div><div class="admin-stat-label">XP</div></div>
+          <div class="admin-stat"><div class="admin-stat-value">${state.streak}</div><div class="admin-stat-label">🔥 Streak</div></div>
+          <div class="admin-stat"><div class="admin-stat-value">${state.sessionsDone.length}</div><div class="admin-stat-label">Sessions</div></div>
+        </div>
+      </div>
+
+      <!-- 4 Pillars -->
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:12px">📊 Your Pillars</h3>
+        ${renderPillar('body','💪','Body','#FF6B6B',s.body)}
+        ${renderPillar('mind','🧠','Mind','#4A90D9',s.mind)}
+        ${renderPillar('soul','☮️','Soul','#7C4DFF',s.soul)}
+        ${renderPillar('wealth','💰','Wealth','#FF9800',s.wealth)}
+      </div>
+
+      <!-- Today's Recommendation -->
+      ${recEx?`
+      <div class="card" style="margin-bottom:16px;cursor:pointer" onclick="navigate('player',{id:'${recEx.id}'})">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:36px">${recEx.icon}</div>
+          <div style="flex:1">
+            <div style="font-size:13px;color:var(--text-secondary)">🌟 Recommended for you</div>
+            <div style="font-weight:600;font-size:16px">${recEx.name}</div>
+            <div style="font-size:12px;color:var(--text-secondary)">${recEx.duration} min · ${recEx.xp} XP</div>
+          </div>
+          <div style="font-size:20px">▶</div>
+        </div>
+      </div>`:''}
+
+      <!-- Quick Stats -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+        <div class="card" style="padding:14px;text-align:center;cursor:pointer" onclick="navigate('badges')">
+          <div style="font-size:24px">🏅</div>
+          <div style="font-size:13px;font-weight:600;margin-top:4px">${state.badgesUnlocked.length}/${BADGES.length} Badges</div>
+        </div>
+        <div class="card" style="padding:14px;text-align:center;cursor:pointer" onclick="navigate('league')">
+          <div style="font-size:24px">🏆</div>
+          <div style="font-size:13px;font-weight:600;margin-top:4px">${LEAGUE_TIERS[state.leagueTier]||'Bronze I'}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function renderPillar(id,icon,name,color,score){
+  const pct = Math.min((score/100)*100,100);
+  return `
+    <div class="pillar">
+      <div class="pillar-icon" style="background:${color}22;color:${color}">${icon}</div>
+      <div class="pillar-info">
+        <div class="pillar-name">
+          <span>${name}</span>
+          <span>${score}</span>
+        </div>
+        <div class="pillar-bar"><div class="pillar-fill" style="width:${pct}%;background:${color}"></div></div>
+      </div>
+    </div>
+  `;
+}
+
+function attachDashboard(){}
+
+// ====================================================================
+// SESSIONS LIST
+// ====================================================================
+
+function renderSessions(){
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">🧘 Sessions</div>
+      </div>
+      <div class="top-bar-right">
+        <div class="luna-avatar sm" onclick="navigate('customize')" style="cursor:pointer">
+          <div class="luna-head" style="box-shadow:0 0 12px var(--accent)">
+            <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+            <div class="luna-mouth happy"></div>
+            <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+      <div class="card" style="margin-bottom:16px;background:var(--bg);border-color:var(--accent);border-width:2px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="luna-avatar md">
+            <div class="luna-head">
+              <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+              <div class="luna-mouth happy"></div>
+              <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+            </div>
+          </div>
+          <div style="font-size:14px;line-height:1.5">${lunaSay('greeting')} Here are all the sessions you can try! 🌟</div>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="btn btn-sm ${!state._filterPillar?'btn-primary':'btn-ghost'}" onclick="state._filterPillar='';navigate('sessions')">All</button>
+        ${[['body','💪 Body'],['mind','🧠 Mind'],['soul','☮️ Soul'],['wealth','💰 Wealth']].map(([p,label])=>
+          `<button class="btn btn-sm ${state._filterPillar===p?'btn-primary':'btn-ghost'}" onclick="state._filterPillar='${p}';navigate('sessions')">${label}</button>`
+        ).join('')}
+      </div>
+
+      <div class="ex-grid">
+        ${EXERCISES.filter(e=>!state._filterPillar||e.pillar===state._filterPillar).map(ex=>{
+          const done = state.sessionsDone.includes(ex.id);
+          return `
+            <div class="ex-card" onclick="navigate('player',{id:'${ex.id}'})" style="${done?'opacity:.7':''}">
+              <div class="ex-icon">${ex.icon}</div>
+              <div class="ex-name">${ex.name}${done?' ✅':''}</div>
+              <div class="ex-meta">
+                <span>${ex.duration}min</span>
+                <span>${ex.xp}XP</span>
+              </div>
+              <div class="ex-pillar ${ex.pillar}">${ex.pillar}</div>
+            </div>
+          `
+        }).join('')}
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item active" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function attachSessions(data){}
+
+// ====================================================================
+// SESSION PLAYER
+// ====================================================================
+
+function renderPlayer(data){
+  const id = data?.id || (typeof data==='string'?data:null) || 'e1';
+  const ex = EXERCISES.find(e=>e.id===id) || EXERCISES[0];
+
+  const steps = [
+    {text:`${ex.name} — Get ready!`,duration:10},
+    {text:'Warm up — gentle movements',duration:30},
+    {text:'Main exercise — focus on your form',duration:ex.duration*30},
+    {text:'Cool down — stretch & breathe',duration:30},
+    {text:'Reflection — how do you feel?',duration:15}
+  ];
+
+  const totalSec = steps.reduce((a,s)=>a+s.duration,0);
+
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('sessions')">←</button>
+        <div class="top-bar-title">▶ ${ex.name}</div>
+      </div>
+      <div class="top-bar-right">
+        <div class="luna-avatar sm" onclick="navigate('customize')" style="cursor:pointer">
+          <div class="luna-head" style="box-shadow:0 0 12px var(--accent)">
+            <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+            <div class="luna-mouth motivating"></div>
+            <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Luna pre-roll -->
+      <div class="card" style="margin-bottom:16px;background:var(--bg);border-color:var(--accent)">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="luna-avatar md">
+            <div class="luna-head">
+              <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+              <div class="luna-mouth motivating"></div>
+              <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+            </div>
+          </div>
+          <div style="font-size:14px;line-height:1.5">${lunaSay('encouragement')}<br><strong>${ex.name}</strong> · ${ex.duration} min</div>
+        </div>
+      </div>
+
+      <!-- Video -->
+      <div class="player-video">
+        <iframe src="https://www.youtube.com/embed/${ex.video}?rel=0&showinfo=0" allowfullscreen loading="lazy"></iframe>
+      </div>
+
+      <!-- Timer -->
+      <div class="player-timer" id="player-timer">${formatTime(totalSec)}</div>
+
+      <!-- Steps -->
+      <div class="player-steps" id="player-steps">
+        ${steps.map((s,i)=>`
+          <div class="player-step-item" data-step="${i}">
+            <div class="player-step-num">${i+1}</div>
+            <span>${s.text}</span>
+            <span style="margin-left:auto;font-size:12px;color:var(--text-secondary)">${formatTime(s.duration)}</span>
+          </div>
+        `).join('')}
+      </div>
+
+      <!-- Controls -->
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="btn btn-primary btn-block" id="player-start-btn">▶ Start Session</button>
+      </div>
+
+      <!-- Completion (hidden) -->
+      <div id="player-complete" class="hidden" style="text-align:center;padding:20px">
+        <div style="font-size:48px;margin-bottom:12px">🎉</div>
+        <h3 style="margin-bottom:8px">Amazing job, ${state.user.name||'champion'}!</h3>
+        <p style="color:var(--text-secondary);margin-bottom:16px">+${ex.xp} XP earned!</p>
+        <div style="display:flex;gap:8px;justify-content:center">
+          <button class="btn btn-primary" onclick="APP.completeSession('${ex.id}',${ex.xp});navigate('dashboard')">Finish ✅</button>
+          <button class="btn btn-secondary" onclick="navigate('sessions')">More Sessions</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function formatTime(sec){
+  const m = Math.floor(sec/60);
+  const s = sec%60;
+  return `${m}:${String(s).padStart(2,'0')}`;
+}
+
+function attachPlayer(data){
+  const id = data?.id || (typeof data==='string'?data:null) || 'e1';
+  const ex = EXERCISES.find(e=>e.id===id) || EXERCISES[0];
+
+  let timerInterval = null;
+  let remaining = 0;
+  let isRunning = false;
+
+  const timerEl = document.getElementById('player-timer');
+  const startBtn = document.getElementById('player-start-btn');
+  const stepsEl = document.getElementById('player-steps');
+  const completeEl = document.getElementById('player-complete');
+
+  const stepDurations = [10,30,ex.duration*30,30,15];
+  let totalSec = stepDurations.reduce((a,b)=>a+b,0);
+  let currentStep = 0;
+  let elapsed = 0;
+
+  function updateTimer(){
+    const rem = Math.max(0,totalSec - elapsed);
+    if(timerEl) timerEl.textContent = formatTime(rem);
+    // Update step progress
+    let acc = 0;
+    for(let i=0;i<stepDurations.length;i++){
+      acc += stepDurations[i];
+      if(elapsed <= acc){
+        if(i !== currentStep){
+          currentStep = i;
+          // Mark prev as done
+          $$('.player-step-item').forEach((el,idx)=>{
+            if(idx < i) el.classList.add('done');
+            if(idx === i) el.style.borderColor = 'var(--accent)';
+            else el.style.borderColor = '';
+          });
+        }
+        break;
+      }
+    }
+    if(rem <= 0){
+      clearInterval(timerInterval);
+      isRunning = false;
+      if(startBtn) startBtn.textContent = '✅ Done!';
+      if(completeEl) completeEl.classList.remove('hidden');
+      if(stepsEl) $$('.player-step-item').forEach(el=>el.classList.add('done'));
+    }
+  }
+
+  if(startBtn){
+    startBtn.addEventListener('click',()=>{
+      if(!isRunning){
+        if(remaining > 0){
+          // Resume
+          isRunning = true;
+          startBtn.textContent = '⏸ Pause';
+          timerInterval = setInterval(()=>{
+            elapsed++;
+            updateTimer();
+          },1000);
+        } else {
+          // Start fresh
+          elapsed = 0;
+          remaining = totalSec;
+          isRunning = true;
+          startBtn.textContent = '⏸ Pause';
+          timerInterval = setInterval(()=>{
+            elapsed++;
+            updateTimer();
+          },1000);
+        }
+      } else {
+        clearInterval(timerInterval);
+        isRunning = false;
+        startBtn.textContent = '▶ Resume';
+      }
+    });
+  }
+}
+
+// ====================================================================
+// CHAT PAGE
+// ====================================================================
+
+function renderChat(){
+  const msgs = chatGetRecent(30);
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">💬 ${state.user.lunaName||'Luna'}</div>
+      </div>
+      <div class="top-bar-right">
+        <button class="btn btn-ghost btn-sm" onclick="APP.startAnalysis();navigate('chat')" title="Start Analysis">🔍 Analyze</button>
+      </div>
+    </div>
+    <div class="page" style="padding-top:4px;display:flex;flex-direction:column;height:calc(100vh - 60px)">
+      <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+          ${msgs.map(m=>renderChatMsg(m)).join('')}
+          ${msgs.length===0?`<div class="empty-state"><div class="empty-icon">💬</div><div>Start a conversation with ${state.user.lunaName||'Luna'}!<br><small style="color:var(--text-secondary)">Try saying "Analyze me" or "Recommend something"</small></div></div>`:''}
+        </div>
+
+        <!-- Analysis mode -->
+        <div id="chat-analysis-area" class="hidden"></div>
+
+        <div class="chat-input-area">
+          <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off">
+          <button class="btn btn-primary btn-icon" id="chat-send" style="font-size:18px">➤</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderChatMsg(m){
+  if(m.sender==='luna'){
+    return `
+      <div class="msg luna">
+        <div class="luna-avatar sm">
+          <div class="luna-head" style="box-shadow:0 0 10px var(--accent)">
+            <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+            <div class="luna-mouth happy"></div>
+            <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="msg-bubble">${m.text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</div>
+          <div class="msg-time">${getTimeAgo(m.time)}</div>
+        </div>
+      </div>
+    `;
+  }
+  return `
+    <div class="msg user">
+      <div>
+        <div class="msg-bubble">${htmlEscape(m.text).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')}</div>
+        <div class="msg-time" style="text-align:right">${getTimeAgo(m.time)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function attachChat(){
+  const input = document.getElementById('chat-input');
+  const send = document.getElementById('chat-send');
+  const msgsCont = document.getElementById('chat-messages');
+  const analysisArea = document.getElementById('chat-analysis-area');
+
+  function scrollBottom(){
+    if(msgsCont) msgsCont.scrollTop = msgsCont.scrollHeight;
+  }
+  scrollBottom();
+
+  function addMsgAndRender(sender,text){
+    chatAddMessage(sender,text);
+    if(msgsCont){
+      const div = document.createElement('div');
+      div.innerHTML = renderChatMsg({sender,text,time:new Date().toISOString()});
+      msgsCont.appendChild(div.firstElementChild);
+      scrollBottom();
+    }
+  }
+
+  function sendMessage(){
+    const text = input?.value?.trim();
+    if(!text) return;
+    if(input) input.value = '';
+
+    // Check if in analysis mode
+    if(state.analysisActive && analysisArea){
+      processAnalysisChat(text,analysisArea,addMsgAndRender);
+      return;
+    }
+
+    addMsgAndRender('user',text);
+
+    // Generate reply
+    setTimeout(()=>{
+      const reply = chatGenerateReply(text);
+      addMsgAndRender('luna',reply.text);
+
+      if(reply.action === 'start-analysis'){
+        APP.startAnalysis();
+        showAnalysisUI(analysisArea,addMsgAndRender);
+      }
+      if(reply.action === 'recommend' && reply.exercise){
+        const qaDiv = document.createElement('div');
+        qaDiv.className = 'chat-quick-reply';
+        qaDiv.innerHTML = `<button class="btn btn-primary btn-sm" onclick="navigate('player',{id:'${reply.exercise.id}'})">▶ Start ${reply.exercise.name}</button>`;
+        document.querySelector('.chat-messages')?.appendChild(qaDiv);
+        scrollBottom();
+      }
+    },600);
+  }
+
+  if(send) send.addEventListener('click',sendMessage);
+  if(input){
+    input.addEventListener('keydown',e=>{if(e.key==='Enter')sendMessage()});
+    input.focus();
+  }
+}
+
+function showAnalysisUI(area,addMsg){
+  if(!area) return;
+  area.classList.remove('hidden');
+  const q = state.analysisQuestions?.[0];
+  if(!q) return;
+  area.innerHTML = `
+    <div class="card" style="margin-bottom:8px;border-color:var(--accent);background:var(--bg)">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span style="font-size:18px">🔍</span>
+        <strong>Analysis — Step ${(state.analysisStep||0)+1}/${state.analysisQuestions.length}</strong>
+      </div>
+      <div style="font-size:15px;margin-bottom:12px">${q.q}</div>
+      <div id="analysis-answers" style="display:flex;gap:8px;flex-wrap:wrap">
+        ${q.type==='bool' ? 
+          `<button class="btn btn-primary analysis-btn" data-val="true">✅ Yes</button><button class="btn btn-secondary analysis-btn" data-val="false">❌ No</button>` :
+          [1,2,3,4,5].map(v=>`<button class="btn ${v===3?'btn-primary':'btn-secondary'} analysis-btn" data-val="${v}">${v}</button>`).join('')
+        }
+      </div>
+    </div>
+  `;
+  $$('.analysis-btn',area).forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const val = btn.dataset.val === 'true' ? true : btn.dataset.val === 'false' ? false : parseInt(btn.dataset.val);
+      processAnalysisChat(null,area,addMsg,val);
+    });
+  });
+}
+
+function processAnalysisChat(text,area,addMsg,predefinedVal){
+  let val = predefinedVal;
+  if(val === undefined && text !== null){
+    // Try to parse text input
+    if(text.toLowerCase()==='yes'||text.toLowerCase()==='y') val=true;
+    else if(text.toLowerCase()==='no'||text.toLowerCase()==='n') val=false;
+    else {
+      const num = parseInt(text);
+      if(!isNaN(num) && num>=1 && num<=5) val=num;
+      else {
+        addMsg('luna','Please give me a number between 1-5 or Yes/No. 😊');
+        return;
+      }
+    }
+  }
+
+  const result = processAnalysisAnswer(val);
+  if(!result) return;
+
+  if(result.done){
+    // Analysis complete
+    area.classList.add('hidden');
+    area.innerHTML = '';
+    // Show result
+    const p = lunaPersonality();
+    addMsg('luna',`Analysis complete! 🌟\n\n**Your Score: ${result.score}/5.0**\n**Level: ${result.levelLabel}**\n\n📋 **Recommendation:** ${result.rec}\n\n${p.affirmations[rand(0,p.affirmations.length-1)].replace(/{name}/g,state.user.name||'there')}`);
+    // Quick actions
+    setTimeout(()=>{
+      const qaDiv = document.createElement('div');
+      qaDiv.className = 'chat-quick-reply';
+      qaDiv.innerHTML = `<button class="btn btn-primary btn-sm" onclick="navigate('dashboard')">📊 Go to Dashboard</button>`;
+      document.querySelector('.chat-messages')?.appendChild(qaDiv);
+    },300);
+    // Check badge
+    if((state.analysisHistory||[]).length>=5 && !state.badgesUnlocked.includes('b11')){
+      state.badgesUnlocked.push('b11');
+      state.xp += 30;
+      state.level = calcLevel(state.xp);
+      saveState();
+      setTimeout(()=>addMsg('luna','🏅 **New Badge Unlocked: Analyzer!** Complete 5 analyses. +30XP'),500);
+    }
+  } else {
+    // Next question
+    showAnalysisUI(area,addMsg);
+  }
+}
+
+// ====================================================================
+// CUSTOMIZE LUNA
+// ====================================================================
+
+function renderCustomize(){
+  const theme = state.user.theme||'coral';
+  const vibe = state.user.vibe||'nurturing';
+  const lunaName = state.user.lunaName||'Luna';
+
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">🎨 Customize ${state.user.lunaName||'Luna'}</div>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Live Preview -->
+      <div class="card" style="text-align:center;margin-bottom:20px">
+        <div class="luna-avatar xl" style="margin:0 auto 12px">
+          <div class="luna-glow"></div>
+          <div class="luna-head">
+            <div class="luna-eyes"><div class="luna-eye"></div><div class="luna-eye"></div></div>
+            <div class="luna-mouth happy"></div>
+            <div class="luna-cheeks"><div class="luna-cheek"></div><div class="luna-cheek"></div></div>
+          </div>
+        </div>
+        <h3 style="font-family:var(--font-display)">${lunaName}</h3>
+        <p style="color:var(--text-secondary);font-size:13px">${lunaPersonality().name} · ${theme.charAt(0).toUpperCase()+theme.slice(1)} theme</p>
+      </div>
+
+      <!-- Name -->
+      <div class="card" style="margin-bottom:16px">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px">Name</label>
+        <input type="text" id="luna-name-input" value="${htmlEscape(lunaName)}" maxlength="20" style="width:100%">
+      </div>
+
+      <!-- Theme -->
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:10px">🎨 Color Theme</h3>
+        <div class="theme-picker">
+          ${Object.entries({coral:'#FF8A8A',ocean:'#7EC8E3',forest:'#81C784',midnight:'#B39DDB',ember:'#FF8A65'}).map(([k,v])=>{
+            return `<div class="theme-dot${theme===k?' active':''}" data-theme="${k}" style="background:${v}" title="${k}"></div>`
+          }).join('')}
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px">
+          ${Object.keys({coral:'',ocean:'',forest:'',midnight:'',ember:''}).map(k=>
+            `<span style="font-size:11px;padding:2px 8px;border-radius:20px;background:${theme===k?'var(--accent)':'var(--surface3)'};color:${theme===k?'var(--text-on-accent,#fff)':'var(--text-secondary)'}">${k}</span>`
+          ).join('')}
+        </div>
+      </div>
+
+      <!-- Personality -->
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:10px">🧠 Personality</h3>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          ${Object.entries(PERSONALITIES).map(([k,v])=>{
+            return `<div class="personality-card${vibe===k?' active':''}" data-vibe="${k}" style="text-align:left;display:flex;align-items:center;gap:12px;padding:12px">
+              <div class="pers-icon">${v.icon}</div>
+              <div><div class="pers-name">${v.name}</div><div class="pers-desc">"${v.affirmations[0]}"</div></div>
+            </div>`
+          }).join('')}
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" onclick="navigate('dashboard')" style="margin-top:8px">Save & Go Back ✅</button>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item active" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function attachCustomize(){
+  // Name
+  const nameInput = document.getElementById('luna-name-input');
+  if(nameInput){
+    nameInput.addEventListener('input',()=>{
+      state.user.lunaName = nameInput.value.trim() || 'Luna';
+      saveState();
+    });
+  }
+
+  // Theme
+  $$('.theme-dot').forEach(dot=>{
+    dot.addEventListener('click',()=>{
+      $$('.theme-dot').forEach(d=>d.classList.remove('active'));
+      dot.classList.add('active');
+      const t = dot.dataset.theme;
+      state.user.theme = t;
+      document.documentElement.setAttribute('data-theme',t);
+      saveState();
+      // Re-render customize with new theme
+      navigate('customize');
+    });
+  });
+
+  // Personality
+  $$('.personality-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      $$('.personality-card').forEach(c=>c.classList.remove('active'));
+      card.classList.add('active');
+      state.user.vibe = card.dataset.vibe;
+      saveState();
+      navigate('customize');
+    });
+  });
+}
+
+// ====================================================================
+// BADGES
+// ====================================================================
+
+function renderBadges(){
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">🏅 Badges</div>
+      </div>
+      <div class="top-bar-right">
+        <span style="font-size:13px;color:var(--text-secondary)">${state.badgesUnlocked.length}/${BADGES.length}</span>
+      </div>
+    </div>
+    <div class="page">
+      <div class="badge-grid">
+        ${BADGES.map(b=>{
+          const unlocked = state.badgesUnlocked.includes(b.id);
+          return `
+            <div class="badge ${unlocked?'':'locked'}">
+              <div class="badge-icon">${b.icon}</div>
+              <div class="badge-name">${b.name}</div>
+              <div class="badge-desc">${b.desc}</div>
+              ${unlocked?'<div style="font-size:10px;color:var(--accent);margin-top:4px">✅ Unlocked</div>':''}
+            </div>
+          `
+        }).join('')}
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function attachBadges(){
+  checkBadges();
+}
+
+// ====================================================================
+// LEAGUE
+// ====================================================================
+
+function renderLeague(){
+  const tier = state.leagueTier;
+  const players = [
+    {name:state.user.name||'You',xp:state.xp,isUser:true},
+    ...LEAGUE_BOT_NAMES.map((n,i)=>({name:n,xp:rand(state.xp-200,state.xp+500),isUser:false}))
+  ].sort((a,b)=>b.xp-a.xp);
+
+  const userRank = players.findIndex(p=>p.isUser)+1;
+
+  // Update rank
+  state.leagueRank = userRank;
+
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">🏆 League</div>
+      </div>
+    </div>
+    <div class="page">
+      <!-- Current Tier -->
+      <div class="league-tier active" style="margin-bottom:16px;text-align:center;flex-direction:column;padding:20px">
+        <div style="font-size:36px;margin-bottom:4px">${['🥉','🥉','🥈','🥈','🥇','🥇'][tier]||'🥉'}</div>
+        <div style="font-size:18px;font-weight:700">${LEAGUE_TIERS[tier]||'Bronze I'}</div>
+        <div style="font-size:13px;color:var(--text-secondary)">Rank #${userRank} · ${state.xp} XP</div>
+      </div>
+
+      <!-- Tiers progress -->
+      <div class="card" style="margin-bottom:16px">
+        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px">Tiers</h3>
+        ${LEAGUE_TIERS.map((t,i)=>{
+          const isActive = i===tier;
+          const isPassed = i<tier;
+          return `<div class="league-tier${isActive?' active':''}" style="margin-bottom:4px;padding:10px 14px">
+            <span style="font-size:20px">${['🥉','🥉','🥈','🥈','🥇','🥇'][i]||'🥉'}</span>
+            <span style="font-weight:${isActive||isPassed?'600':'400'};color:${isPassed?'var(--text-secondary)':'inherit'}">
+              ${t} ${isPassed?'✅':''} ${isActive?'← You are here':''}
+            </span>
+          </div>`
+        }).join('')}
+      </div>
+
+      <!-- Rankings -->
+      <div class="card">
+        <h3 style="font-size:13px;font-weight:600;margin-bottom:10px">Rankings</h3>
+        ${players.slice(0,10).map((p,i)=>{
+          const rank = i+1;
+          const medal = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':`#${rank}`;
+          return `<div class="league-rank" style="${p.isUser?'background:var(--bg);border-radius:8px;margin:4px -8px;padding:8px':''}">
+            <span class="league-pos">${medal}</span>
+            <span style="flex:1;font-weight:${p.isUser?'700':'400'}">${p.name}${p.isUser?' (You)':''}</span>
+            <span style="font-size:12px;color:var(--text-secondary)">${p.xp} XP</span>
+          </div>`
+        }).join('')}
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function attachLeague(){}
+
+// ====================================================================
+// PROGRESS (Charts)
+// ====================================================================
+
+function renderProgress(){
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">📈 Progress</div>
+      </div>
+    </div>
+    <div class="page" id="progress-page">
+      <div class="chart-container"><canvas id="chart-pillars"></canvas></div>
+      <div class="chart-container"><canvas id="chart-weekly"></canvas></div>
+      <div class="card" style="text-align:center;padding:14px">
+        <div style="font-size:13px;color:var(--text-secondary)">Total Sessions</div>
+        <div style="font-size:28px;font-weight:800;color:var(--accent)">${state.sessionsDone.length}</div>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item active" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function attachProgress(){
+  try{
+    // Pillar chart
+    const ctx1 = document.getElementById('chart-pillars')?.getContext('2d');
+    if(ctx1 && Chart){
+      new Chart(ctx1,{
+        type:'radar',
+        data:{
+          labels:['Body','Mind','Soul','Wealth'],
+          datasets:[{
+            label:'Your Scores',
+            data:[state.scores.body,state.scores.mind,state.scores.soul,state.scores.wealth],
+            backgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim()+'44',
+            borderColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+            borderWidth:2,
+            pointBackgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+            pointRadius:5
+          }]
+        },
+        options:{
+          responsive:true,
+          maintainAspectRatio:true,
+          scales:{r:{min:0,max:100,ticks:{stepSize:25,font:{size:10}}}},
+          plugins:{legend:{display:false}}
+        }
+      });
+    }
+
+    // Weekly chart
+    const ctx2 = document.getElementById('chart-weekly')?.getContext('2d');
+    if(ctx2 && Chart){
+      const days = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+      const data = state.weeklyXP?.length ? state.weeklyXP : [0,0,0,0,0,0,0];
+      new Chart(ctx2,{
+        type:'bar',
+        data:{labels:days,datasets:[{label:'XP',data,backgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),borderRadius:6}]},
+        options:{
+          responsive:true,
+          maintainAspectRatio:true,
+          plugins:{legend:{display:false}},
+          scales:{y:{beginAtZero:true,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}
+        }
+      });
+    }
+  }catch(e){}
+}
+
+// ====================================================================
+// ADMIN
+// ====================================================================
+
+function renderAdmin(){
+  return `
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button class="btn btn-ghost btn-icon" onclick="navigate('dashboard')">←</button>
+        <div class="top-bar-title">⚙️ Admin</div>
+      </div>
+    </div>
+    <div class="page">
+      <div class="admin-grid" style="margin-bottom:16px">
+        <div class="admin-stat"><div class="admin-stat-value">${state.sessionsDone.length}</div><div class="admin-stat-label">Sessions</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">${state.chatHistory.length}</div><div class="admin-stat-label">Chat Messages</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">${state.level}</div><div class="admin-stat-label">Level</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">${state.xp}</div><div class="admin-stat-label">Total XP</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">${state.badgesUnlocked.length}</div><div class="admin-stat-label">Badges</div></div>
+        <div class="admin-stat"><div class="admin-stat-value">${(state.analysisHistory||[]).length}</div><div class="admin-stat-label">Analyses</div></div>
+      </div>
+
+      <div class="card" style="margin-bottom:12px">
+        <h3 style="font-size:14px;font-weight:600;margin-bottom:8px">User</h3>
+        <div style="font-size:13px;color:var(--text-secondary)">
+          <div>Name: ${state.user.name||'—'}</div>
+          <div>Experience: ${state.user.experience||'—'}</div>
+          <div>Goal: ${state.user.goal||'—'}</div>
+          <div>Theme: ${state.user.theme||'coral'}</div>
+          <div>Personality: ${state.user.vibe||'nurturing'}</div>
+        </div>
+      </div>
+
+      <button class="btn btn-secondary btn-block" onclick="APP.exportData()" style="margin-bottom:8px">📤 Export Data</button>
+      <button class="btn btn-secondary btn-block" onclick="APP.importData()" style="margin-bottom:8px">📥 Import Data</button>
+      <button class="btn btn-secondary btn-block" style="border-color:#f44;color:#f44" onclick="APP.resetConfirm()">⚠️ Reset All Data</button>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item" onclick="navigate('dashboard')"><span class="nav-icon">🏠</span>Home</button>
+      <button class="nav-item" onclick="navigate('sessions')"><span class="nav-icon">🧘</span>Sessions</button>
+      <button class="nav-item" onclick="navigate('chat')"><span class="nav-icon">💬</span>Chat</button>
+      <button class="nav-item" onclick="navigate('progress')"><span class="nav-icon">📈</span>Progress</button>
+      <button class="nav-item" onclick="navigate('customize')"><span class="nav-icon">🎨</span>Luna</button>
+    </nav>
+  `;
+}
+
+function attachAdmin(){}
+
+// ====================================================================
+// APP HELPERS (exported / called from HTML)
+// ====================================================================
+
+APP.completeSession = function(exId,xp){
+  if(!state.sessionsDone.includes(exId)){
+    state.sessionsDone.push(exId);
+    state.xp += xp;
+    state.level = calcLevel(state.xp);
+
+    // Update pillar score
+    const ex = EXERCISES.find(e=>e.id===exId);
+    if(ex){
+      state.scores[ex.pillar] = Math.min(100, (state.scores[ex.pillar]||0) + Math.floor(xp/3));
+    }
+    state.scores.overall = calcOverallScore(state.scores);
+
+    // Streak
+    const today = getDayKey();
+    if(state.lastActiveDate !== today){
+      const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
+      if(state.lastActiveDate === yesterday || !state.lastActiveDate){
+        state.streak = (state.streak||0) + 1;
+      } else {
+        state.streak = 1;
+      }
+      state.lastActiveDate = today;
+    }
+
+    // Weekly XP
+    if(!state.weeklyXP) state.weeklyXP = [0,0,0,0,0,0,0];
+    const dayIdx = new Date().getDay(); // 0=Sun
+    const realIdx = dayIdx===0?6:dayIdx-1; // Mon=0
+    state.weeklyXP[realIdx] = (state.weeklyXP[realIdx]||0) + xp;
+
+    // Check badges
+    checkBadges();
+
+    // Check league promotion
+    if(state.xp >= (state.leagueTier+1)*500 && state.leagueTier < 5){
+      state.leagueTier++;
+    }
+
+    // Luna reaction
+    chatAddMessage('luna',`🎉 Amazing work, ${state.user.name||'champion'}! +${xp}XP!\n\n${lunaAffirmation()}`);
+    saveState();
+  }
+};
+
+function checkBadges(){
+  BADGES.forEach(b=>{
+    if(!state.badgesUnlocked.includes(b.id) && b.req(state)){
+      state.badgesUnlocked.push(b.id);
+      state.xp += 30;
+      state.level = calcLevel(state.xp);
+      chatAddMessage('luna',`🏅 **New Badge: ${b.name}!** ${b.desc} +30XP`);
+    }
+  });
+  saveState();
+}
+
+APP.startAnalysis = function(){
+  startAnalysis();
+};
+
+APP.exportData = function(){
+  const data = JSON.stringify(state,null,2);
+  const blob = new Blob([data],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `apex-v6-backup-${getDayKey()}.json`;
+  a.click();
+};
+
+APP.importData = function(){
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  input.onchange = function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      try{
+        const data = JSON.parse(ev.target.result);
+        Object.assign(state,data);
+        state.level = calcLevel(state.xp);
+        document.documentElement.setAttribute('data-theme',state.user.theme||'coral');
+        saveState();
+        navigate('dashboard');
+        alert('Data imported successfully! ✅');
+      }catch(e){alert('Invalid file ❌')}
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+};
+
+APP.resetConfirm = function(){
+  if(confirm('⚠️ Reset ALL data? This cannot be undone!')){
+    if(confirm('Are you sure you want to start fresh?')){
+      resetState();
+    }
+  }
+};
+
+// ====================================================================
+// STREAK CHECK (daily)
+// ====================================================================
+
+function checkStreak(){
+  if(!state.initialized) return;
+  const today = getDayKey();
+  if(state.lastActiveDate && state.lastActiveDate !== today){
+    const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
+    if(state.lastActiveDate !== yesterday){
+      // Streak broken
+      if(state.streak > 0){
+        chatAddMessage('luna',`Oh no, your ${state.streak}-day streak ended. 😢 But today is a new start! Let's go! 💪`);
+      }
+      state.streak = 0;
+      saveState();
+    }
+  }
+}
+
+// ====================================================================
+// INIT
+// ====================================================================
+
+// Apply theme
+document.documentElement.setAttribute('data-theme',state.user.theme||'coral');
+
+// Check streak on load
+checkStreak();
+
+// If initialized, go to dashboard by default from hash
+const hash = window.location.hash.slice(1) || (state.initialized?'dashboard':'landing');
+currentRoute = hash;
+render();
+
+// Auto-save periodically
+setInterval(saveState,30000);
+
+console.log(`🐉 APEX v${APP.version} loaded. Welcome, ${state.user.name||'champion'}!`);
+</script>
+</body>
+</html>
