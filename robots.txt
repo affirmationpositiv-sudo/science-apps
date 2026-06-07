@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://affirmationpositiv-sudo.github.io/science-apps/sitemap.xml
