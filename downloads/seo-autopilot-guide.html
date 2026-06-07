@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head><meta charset="utf-8"><title>SEO Auto-Pilot fur GitHub Pages</title>
+<style>body{font-family:Arial,sans-serif;max-width:800px;margin:40px auto;padding:20px;line-height:1.8}
+h1{color:#2563eb}h2{color:#1e40af;margin-top:30px}code{background:#f1f5f9;padding:2px 6px;border-radius:4px}
+.step{background:#eff6ff;border-left:4px solid #2563eb;padding:15px;margin:15px 0}</style></head><body>
+<h1>SEO Auto-Pilot fur GitHub Pages</h1>
+<p><strong>Version 1.0 | Juni 2026 | Lux in Umbra</strong></p>
+
+<h2>1. GitHub Pages SEO Grundlagen</h2>
+<div class="step">
+<p>GitHub Pages ist von Haus aus SEO-freundlich, aber mit diesen Optimierungen erreichst du Top-Rankings.</p>
+</div>
+
+<h2>2. Automatische Sitemap-Generierung</h2>
+<p>Erstelle eine <code>sitemap.xml</code> mit allen Seiten deiner GitHub Pages Site:</p>
+<pre><code>#!/bin/bash
+echo '&lt;?xml version="1.0" encoding="UTF-8"?&gt;'
+echo '&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;'
+find . -name "*.html" | while read f; do
+  echo "  &lt;url&gt;&lt;loc&gt;https://USER.github.io/REPO/$f&lt;/loc&gt;&lt;/url&gt;"
+done
+echo '&lt;/urlset&gt;'</code></pre>
+
+<h2>3. Meta-Tags Optimization</h2>
+<p>Jede Seite braucht optimierte Meta-Tags:</p>
+<pre><code>&lt;meta name="description" content="Deine 150-Zeichen Beschreibung mit Keywords"&gt;
+&lt;meta property="og:title" content="Titel fur Social Media"&gt;
+&lt;meta property="og:description" content="Beschreibung fur Social Media"&gt;</code></pre>
+
+<h2>4. Keyword-Recherche (Kostenlos)</h2>
+<p>Nutze diese kostenlosen Tools:</p>
+<ul>
+<li>Google Search Console (kostenlos)</li>
+<li>AnswerThePublic.com</li>
+<li>Ubersuggest (Neil Patel)</li>
+<li>Google Trends</li>
+</ul>
+
+<h2>5. Automatische Indexierung</h2>
+<p>Reiche deine Sitemap bei Google ein:</p>
+<pre><code>curl "https://www.google.com/ping?sitemap=https://USER.github.io/REPO/sitemap.xml"</code></pre>
+
+<h2>6. Performance-Optimierung</h2>
+<ul>
+<li>Bilder komprimieren (WebP-Format)</li>
+<li>CSS/JS minifizieren</li>
+<li>Lazy Loading fur Bilder</li>
+<li>CDN-Caching (automatisch bei GitHub Pages)</li>
+</ul>
+
+<h2>7. Backlink-Strategie</h2>
+<ul>
+<li>GitHub-Profil mit Link zur Page</li>
+<li>Reddit-Posts mit naturlichem Link</li>
+<li>DEV.to Cross-Posting</li>
+<li>StackOverflow-Antworten mit Referenz</li>
+</ul>
+
+<h2>8. Monitoring & Tracking</h2>
+<p>Richte Google Analytics ein (kostenlos):</p>
+<pre><code>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"&gt;&lt;/script&gt;</code></pre>
+
+<footer style="margin-top:50px;padding-top:20px;border-top:1px solid #e5e7eb">
+<p>© 2026 Lux in Umbra | <a href="https://positivity54.gumroad.com">Gumroad Store</a></p>
+</footer></body></html>
