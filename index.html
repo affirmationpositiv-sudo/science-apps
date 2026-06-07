@@ -3,270 +3,352 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Licht und Schatten Verlag – eBooks & Ratgeber</title>
+<title>AI Solutions Vogelsang — AI Sales Agent Suite</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-  
-  header { padding: 60px 0 40px; text-align: center; border-bottom: 1px solid #1a1a1a; }
-  header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3em; font-weight: 700; color: #d4a843; letter-spacing: 2px; }
-  header p { color: #888; margin-top: 10px; font-size: 1.1em; }
-  
-  .hero { padding: 80px 0; text-align: center; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
-  .hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2em; color: #fff; margin-bottom: 20px; }
-  .hero p { max-width: 600px; margin: 0 auto; color: #999; font-size: 1.1em; }
-  
-  .books { padding: 60px 0; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2em; color: #d4a843; text-align: center; margin-bottom: 50px; }
-  
-  .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
-  
-  .book-card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: all .3s; }
-  .book-card:hover { border-color: #d4a843; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.4); }
-  
-  .book-cover { width: 100%; height: 380px; object-fit: cover; display: block; background: #1a1a1a; }
-  .book-info { padding: 20px; }
-  .book-info h3 { font-size: 1.15em; color: #fff; margin-bottom: 8px; font-weight: 600; }
-  .book-info p { color: #888; font-size: .9em; margin-bottom: 15px; }
-  .book-price { color: #d4a843; font-weight: 600; font-size: 1.1em; margin-bottom: 10px; }
-  .book-actions { display: flex; gap: 10px; }
-  .btn { padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: .9em; font-weight: 600; transition: all .3s; display: inline-block; }
-  .btn-primary { background: #d4a843; color: #0a0a0a; }
-  .btn-primary:hover { background: #e0b84f; }
-  .btn-secondary { background: #222; color: #e0e0e0; border: 1px solid #333; }
-  .btn-secondary:hover { background: #2a2a2a; }
-  
-  .coming-soon { background: #111; border: 1px solid #222; border-radius: 12px; padding: 40px; text-align: center; }
-  .coming-soon h3 { color: #d4a843; margin-bottom: 10px; }
-  .coming-soon p { color: #666; }
-  
-  .newsletter { padding: 60px 0; text-align: center; border-top: 1px solid #1a1a1a; }
-  .newsletter h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: #fff; margin-bottom: 15px; }
-  .newsletter p { color: #888; margin-bottom: 25px; }
-  .newsletter-form { display: flex; max-width: 400px; margin: 0 auto; gap: 10px; }
-  .newsletter-form input { flex: 1; padding: 12px 15px; border-radius: 6px; border: 1px solid #333; background: #111; color: #fff; font-size: 1em; }
-  .newsletter-form button { padding: 12px 25px; border-radius: 6px; border: none; background: #d4a843; color: #0a0a0a; font-weight: 600; cursor: pointer; }
-  
-  footer { padding: 40px 0; text-align: center; border-top: 1px solid #1a1a1a; color: #555; font-size: .9em; }
-  
-  @media (max-width: 768px) {
-    header h1 { font-size: 2em; }
-    .book-grid { grid-template-columns: 1fr; }
-    .newsletter-form { flex-direction: column; }
+  :root {
+    --bg: #0a0c0f;
+    --surface: #111418;
+    --border: #1f2530;
+    --accent: #00d4ff;
+    --gold: #f0a500;
+    --green: #00e87a;
+    --text: #e8edf5;
+    --muted: #5a6680;
   }
-
-.related{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:25px;margin:30px 0}
-.related h3{color:#d4a843;font-size:1.1em;margin-bottom:15px}
-.related a{display:block;color:#aaa;text-decoration:none;padding:8px 12px;border-radius:6px;margin:5px 0;transition:all .2s}
-.related a:hover{background:#1a1a1a;color:#d4a843;padding-left:18px}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .badge {
+    display: inline-block;
+    background: rgba(0,212,255,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(0,212,255,0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  
+  h1 {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  
+  h1 span { color: var(--accent); }
+  
+  .subtitle {
+    font-size: 20px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 16px 40px;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 0 40px rgba(0,212,255,0.3);
+  }
+  
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(0,212,255,0.5); }
+  
+  .price-tag {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  
+  .price-tag span {
+    text-decoration: line-through;
+    color: #ff3a3a;
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 60px 0;
+    flex-wrap: wrap;
+  }
+  
+  .stat {
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  
+  .stat-label {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  
+  .features {
+    max-width: 1000px;
+    margin: 80px auto;
+    padding: 0 24px;
+  }
+  
+  .features h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 48px;
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+  
+  .feature-icon { font-size: 28px; margin-bottom: 12px; }
+  .feature-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .feature-card p { color: var(--muted); font-size: 14px; }
+  
+  .pricing {
+    max-width: 500px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 0 24px;
+  }
+  
+  .price-box {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 0 60px rgba(0,212,255,0.1);
+  }
+  
+  .price-amount {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  
+  .price-detail {
+    color: var(--muted);
+    margin: 8px 0 24px;
+  }
+  
+  .competitor {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+  
+  .competitor span { color: var(--green); }
+  
+  .pipeline {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 24px;
+  }
+  
+  .pipeline h2 {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .pipe-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .pipe-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  
+  .pipe-arrow { color: var(--accent); flex-shrink: 0; }
+  .pipe-name { font-weight: 600; min-width: 120px; }
+  .pipe-desc { color: var(--muted); font-size: 14px; }
+  
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <h1>Licht &amp; Schatten Verlag</h1>
-    <p>Praktische Ratgeber f&uuml;r ein besseres Leben – mit und ohne KI</p>
-  </div>
-</header>
-
-<section class="hero">
-  <div class="container">
-    <h2>Dein Wissen. Dein Erfolg. Deine Zukunft.</h2>
-    <p>Hochwertige eBooks zu den Themen KI, Finanzen, Minimalismus, Studium und pers&ouml;nliche Entwicklung – praxisnah, ehrlich, umsetzbar.</p>
-    <p style="margin-top:20px;">
-      <a class="btn btn-primary" href="skills/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#d4a843;color:#0a0a0a;font-weight:600;margin-right:10px;">🤖 KI-Skills kaufen</a>
-      <a class="btn btn-secondary" href="40projekte/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#1a3d1a;color:#4ade80;border:1px solid #22c55e;font-weight:600;margin-right:10px;">🛒 40 Geldquellen Shop</a>
-      <a class="btn btn-secondary" href="coach/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#222;color:#e0e0e0;border:1px solid #333;font-weight:600;">🎯 Coaching</a>
-      <a class="btn btn-secondary" href="bestellen/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#222;color:#e0e0e0;border:1px solid #333;font-weight:600;margin-top:10px;">🛒 Bestellen</a>
-    </p>
-    <p style="margin-top:10px;color:#888;">
-      📱 Telegram: @Yesaryour_bot | 💳 PayPal: affirmation.positiv@gmail.com
-    </p>
-  </div>
-</section>
-
-<section class="books">
-  <div class="container">
-    <h2 class="section-title">Unsere B&uuml;cher</h2>
-    <div class="book-grid" id="bookGrid">
-      <!-- Books injected by JS -->
+<div class="hero">
+  <div class="badge">🔥 #1 B2B Lead Gen Tool 2026</div>
+  <h1>AI Sales Agent<br>der <span>selbstständig</span> verkauft</h1>
+  <p class="subtitle">
+    Finde 88 qualifizierte B2B-Leads in 10 Industrien — in 60 Sekunden. 
+    Keine Kaltakquise. Keine Monatsgebühren.
+  </p>
+  <a href="#" class="cta">Jetzt kaufen — $29</a>
+  <span class="price-tag"><span>$149</span> → $29 Lifetime</span>
+  
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-number">12</div>
+      <div class="stat-label">AI-Agent-Stufen</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">88</div>
+      <div class="stat-label">Leads in 60s</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">10</div>
+      <div class="stat-label">Industrien</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number">$29</div>
+      <div class="stat-label">Einmalig</div>
     </div>
   </div>
-</section>
+</div>
 
-<section class="newsletter">
-  <div class="container">
-    <h2>Bleib auf dem Laufenden</h2>
-    <p>Erhalte kostenlose Tipps, neue Buchank&uuml;ndigungen und exklusive Rabatte.</p>
-    <form class="newsletter-form" action="mailto:affirmation.positiv@gmail.com" method="post" enctype="text/plain">
-      <input type="email" placeholder="Deine E-Mail-Adresse" required>
-      <button type="submit">Abonnieren</button>
-    </form>
+<div class="features">
+  <h2>Was AI Solutions Vogelsang kann</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <h3>Auto-Scout</h3>
+      <p>Durchsucht 10 Industrien nach High-Value-Unternehmen — optics, automotive, aerospace & mehr.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">👔</div>
+      <h3>C-Level Profiling</h3>
+      <p>Findet automatisch CEOs, CTOs, COOs mit echten Namen — keine generischen Titel.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📧</div>
+      <h3>E-Mail Generator</h3>
+      <p>Errechnet E-Mail-Patterns pro Firma. Exportiert in CSV/JSON für direkten Import.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📞</div>
+      <h3>Call Opener</h3>
+      <p>Schreibt branchenspezifische Gesprächs-Opener — 30× präziser als Standard-Pitches.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Fit Scoring</h3>
+      <p>Bewertet jeden Lead 0-100. Premium-Filter entfernt automatisch schwache Leads.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🌐</div>
+      <h3>Dark Dashboard</h3>
+      <p>Premium HTML-Dashboard. Alle Leads durchsuchbar, filterbar, exportierbar.</p>
+    </div>
   </div>
-</section>
+</div>
+
+<div class="pipeline">
+  <h2>12-Stage AI Pipeline</h2>
+  <div class="pipe-step">
+    <span class="pipe-num">1</span>
+    <span class="pipe-name">Scout</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-desc">Findet Firmen in Zielbranchen</span>
+  </div>
+  <div class="pipe-step">
+    <span class="pipe-num">2</span>
+    <span class="pipe-name">Verify</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-desc">Validiert Kontaktdaten</span>
+  </div>
+  <div class="pipe-step">
+    <span class="pipe-num">3</span>
+    <span class="pipe-name">Enrich</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-desc">E-Mail + LinkedIn Patterns</span>
+  </div>
+  <div class="pipe-step">
+    <span class="pipe-num">4</span>
+    <span class="pipe-name">Score</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-desc">AI Solutions Vogelsang Fit Score 0-100</span>
+  </div>
+  <div class="pipe-step">
+    <span class="pipe-num">5</span>
+    <span class="pipe-name">Map</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-desc">Branchen-Use-Cases zuordnen</span>
+  </div>
+  <span style="color:var(--muted); padding: 8px 0 8px 44px;">... und 7 weitere Stufen</span>
+  <div class="pipe-step">
+    <span class="pipe-num">12</span>
+    <span class="pipe-name">Export</span>
+    <span class="pipe-arrow">→</span>
+    <span class="pipe-desc">JSON + CSV mit allen Daten</span>
+  </div>
+</div>
+
+<div class="pricing">
+  <h2>Preis</h2>
+  <div class="price-box">
+    <div class="price-amount">$29</div>
+    <div class="price-detail">Einmalig. Lifetime Updates.</div>
+    <a href="#" class="cta">Jetzt kaufen →</a>
+    <div class="competitor">
+      Apollo.io $49<span>/Monat</span> · Lemlist $59<span>/Monat</span> · Clay $149<span>/Monat</span><br>
+      <span>→ AI Solutions Vogelsang: $29 ONCE.</span>
+    </div>
+  </div>
+</div>
 
 <footer>
-  <div class="container">
-    <p>&copy; 2026 Licht und Schatten Verlag. Alle Rechte vorbehalten.</p>
-    <p style="margin-top: 5px;">Kontakt: affirmation.positiv@gmail.com</p>
-  </div>
-
-<div class="related">
-<h3>📚 Ähnliche Artikel</h3>
-<a href="bestellen/index.html">📄 Bestellung – Licht & Schatten Verlag</a>
-<a href="affiliate/index.html">📄 Affiliate-Shops – Licht & Schatten Verlag</a>
-<a href="products/index.html">📄 Digitale Produkte – Licht & Schatten Verlag</a>
-
-<p class="tag">Mehr zum Thema – von IKUNE Verlag</p>
-</div>
+  AI Solutions Vogelsang — AI Sales Agent Suite · Made with ❤️ · Privacy-first, läuft lokal
 </footer>
-
-<script>
-const books = [
-  {
-    title: 'Passives Einkommen mit KI 2026',
-    desc: 'Praktische Strategien f&uuml;r den Aufbau automatisierter Einkommensquellen mit K&uuml;nstlicher Intelligenz.',
-    cover: 'KDP_Books/cover_Passives_Einkommen_mit_KI_2026.png',
-    docx: 'KDP_Books/Passives_Einkommen_mit_KI_2026.docx',
-    price: '9,99 €',
-    category: 'KI &amp; Geld'
-  },
-  {
-    title: 'KI-Tools f&uuml;r Anf&auml;nger 2026',
-    desc: 'Der praktische Einstieg in die Welt der K&uuml;nstlichen Intelligenz – von ChatGPT bis Bildgenerierung.',
-    cover: 'KDP_Books/cover_KI_Tools_fuer_Anfaenger_2026.png',
-    docx: 'KDP_Books/KI_Tools_fuer_Anfaenger_2026.docx',
-    price: '8,99 €',
-    category: 'KI &amp; Technik'
-  },
-  {
-    title: 'Duales Studium 2026',
-    desc: 'Der komplette Guide f&uuml;r Studium &amp; Karriere – von der Bewerbung bis zum Berufseinstieg.',
-    cover: 'KDP_Books/cover_Duales_Studium_2026.png',
-    docx: 'KDP_Books/Duales_Studium_2026.docx',
-    price: '9,99 €',
-    category: 'Karriere'
-  },
-  {
-    title: 'Steuererkl&auml;rung 2026',
-    desc: 'F&uuml;r Freiberufler und Selbstst&auml;ndige – Schritt f&uuml;r Schritt zu mehr R&uuml;ckerstattung.',
-    cover: 'KDP_Books/cover_Steuererklaerung_2026_Freiberufler.png',
-    docx: 'KDP_Books/Steuererklaerung_2026_Freiberufler.docx',
-    price: '9,99 €',
-    category: 'Finanzen'
-  },
-  {
-    title: 'Notvorrat f&uuml;r Familien 2026',
-    desc: '14 Tage Autarkie mit Kindern – inkl. vegetarischer &amp; veganer Optionen. Der praktische Notfall-Plan.',
-    cover: 'KDP_Books/cover_Notvorrat_fuer_Familien_2026.png',
-    docx: 'KDP_Books/Notvorrat_fuer_Familien_2026.docx',
-    price: '7,99 €',
-    category: 'Leben'
-  },
-  {
-    title: 'Krypto f&uuml;r Anf&auml;nger 2026',
-    desc: 'Bitcoin, Ethereum, Altcoins &amp; KI-Trading verst&auml;ndlich erkl&auml;rt. Der sichere Einstieg.',
-    cover: 'KDP_Books/cover_notvorrat_fuer_familien_2026.png',
-    docx: 'KDP_Books/Krypto_fuer_Anfaenger_2026.docx',
-    price: '8,99 €',
-    category: 'Finanzen'
-  },
-  {
-    title: 'KI-Kunst 2026',
-    desc: 'Midjourney, DALL-E und Stable Diffusion – KI-Bilder erstellen und erfolgreich verkaufen.',
-    cover: 'KDP_Books/cover_KI_Tools_fuer_Anfaenger_2026.png',
-    docx: 'KDP_Books/ki_kunst_2026.docx',
-    price: '8,99 €',
-    category: 'KI &amp; Kreativ'
-  },
-  {
-    title: 'Passive Income That Actually Works',
-    desc: 'Real strategies. No scams. 2026 edition for the US market. AI content, print-on-demand, affiliate marketing.',
-    cover: 'KDP_Books/cover_Passive_Income_That_Works.png',
-    docx: 'KDP_Books/Passive_Income_That_Works_2026.docx',
-    price: '$9.99',
-    category: '🇺🇸 US Market'
-  },
-  {
-    title: 'Kosten senken in der Schweiz 2026',
-    desc: '500 CHF mehr im Monat. Miete, Krankenkasse, Steuern, Nebenverdienst – der Schweizer Ratgeber.',
-    cover: 'KDP_Books/cover_Kosten_senken_Schweiz.png',
-    docx: 'KDP_Books/Kosten_senken_Schweiz_2026.docx',
-    price: '9,90 CHF',
-    category: '🇨🇭 Schweiz'
-  },
-  {
-    title: 'ChatGPT für Handwerker 2026',
-    desc: 'Rechnungen, Angebote und Kundenkommunikation mit KI – der Praxisleitfaden.',
-    cover: 'KDP_Books/cover_ChatGPT_fuer_Handwerker_2026.png',
-    docx: 'KDP_Books/ChatGPT_fuer_Handwerker_2026.docx',
-    price: '8,99 €',
-    category: 'KI &amp; Handwerk'
-  },
-  {
-    title: 'AI Tools for Beginners 2026',
-    desc: 'Master ChatGPT, prompts, and AI productivity. The complete beginner-friendly guide to AI tools.',
-    cover: 'KDP_Books/cover_AI_Tools_for_Beginners.png',
-    docx: 'KDP_Books/AI_Tools_for_Beginners_2026.docx',
-    price: '$9.99',
-    category: '🇺🇸 US / Technology'
-  },
-  {
-    title: 'Minimalism for Men 2026',
-    desc: 'Less stuff. More life. The practical guide to decluttering your space, finances, and mind.',
-    cover: 'KDP_Books/cover_Minimalism_for_Men.png',
-    docx: 'KDP_Books/Minimalism_for_Men_2026.docx',
-    price: '$9.99',
-    category: '🇺🇸 US / Lifestyle'
-  },
-  {
-    title: 'Crypto for Beginners 2026',
-    desc: 'Bitcoin, Ethereum, and AI trading explained clearly. Start your crypto journey safely.',
-    cover: 'KDP_Books/cover_Crypto_for_Beginners.png',
-    docx: 'KDP_Books/Crypto_for_Beginners_2026.docx',
-    price: '$9.99',
-    category: '🇺🇸 US / Finance'
-  },
-  {
-    title: 'Digital Products for Passive Income',
-    desc: 'Create and sell digital products on Gumroad, Etsy, and your own site. Automate with AI.',
-    cover: 'KDP_Books/cover_Digital_Products_Passive_Income.png',
-    docx: 'KDP_Books/Digital_Products_Passive_Income_2026.docx',
-    price: '$9.99',
-    category: '🇺🇸 US / Business'
-  },
-  {
-    title: 'The No-Code AI Business 2026',
-    desc: 'Build an AI-powered business without coding. Chatbots, content agencies, and lead generation.',
-    cover: 'KDP_Books/cover_No_Code_AI_Business.png',
-    docx: 'KDP_Books/No_Code_AI_Business_2026.docx',
-    price: '$9.99',
-    category: '🇺🇸 US / Technology'
-  }
-];
-const grid = document.getElementById('bookGrid');
-books.forEach(b => {
-  const card = document.createElement('div');
-  card.className = 'book-card';
-  card.innerHTML = `
-    <img class="book-cover" src="${b.cover}" alt="${b.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22380%22><rect fill=%22%231a1a1a%22 width=%22280%22 height=%22380%22/><text x=%22140%22 y=%22190%22 text-anchor=%22middle%22 fill=%22%23d4a843%22 font-size=%2220%22 font-family=%22serif%22>${b.title}</text></svg>'">
-    <div class="book-info">
-      <div style="color:#666;font-size:.8em;margin-bottom:5px">${b.category}</div>
-      <h3>${b.title}</h3>
-      <p>${b.desc}</p>
-      <div class="book-price">${b.price}</div>
-      <div class="book-actions">
-        <a class="btn btn-primary" href="#" onclick="alert('Bald bei Amazon KDP verfuegbar!')">Jetzt kaufen</a>
-        <a class="btn btn-secondary" href="${b.docx}" download>PDF lesen</a>
-      </div>
-    </div>
-  `;
-  grid.appendChild(card);
-});
-</script>
 
 </body>
 </html>
