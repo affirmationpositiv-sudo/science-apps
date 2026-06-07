@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Superrior Man – Das ultimative Produkt-Ökosystem. Atme. Fokussiere. Dominiere. Entdecke unsere Gumroad-Produkte, den Teachable-Kurs und den Spreadshirt-Shop.">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:title" content="Superrior Man – Atme. Fokussiere. Dominiere.">
+    <meta property="og:description" content="Das ultimative Produkt-Ökosystem für Fokus, Atmung und Dominanz.">
+    <meta property="og:type" content="website">
+    <title>Superrior Man | Atme. Fokussiere. Dominiere.</title>
+    <style>
+        /* ── Reset & Base ──────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', system-ui, sans-serif;
+            background: #08080b;
+            color: #e0dfe4;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ── Typography ────────────────────────────── */
+        h1, h2, h3 { font-weight: 700; letter-spacing: -0.02em; }
+        h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.1; }
+        h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+
+        /* ── Utility ───────────────────────────────── */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
+        .section { padding: 6rem 0; }
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #b8942e;
+            margin-bottom: 0.8rem;
+        }
+        .accent { color: #d4a843; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+            letter-spacing: 0.01em;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4a843 0%, #b8860b 100%);
+            color: #0a0a0a;
+            box-shadow: 0 4px 24px rgba(212, 168, 67, 0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(212, 168, 67, 0.4);
+        }
+        .btn-outline {
+            border: 1.5px solid rgba(212, 168, 67, 0.4);
+            color: #d4a843;
+            background: transparent;
+        }
+        .btn-outline:hover {
+            border-color: #d4a843;
+            background: rgba(212, 168, 67, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* ── Navigation ────────────────────────────── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 0;
+            background: rgba(8, 8, 11, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #d4a843;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a {
+            color: #9a99a2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #d4a843; }
+        .nav-toggle { display: none; background: none; border: none; color: #e0dfe4; font-size: 1.5rem; cursor: pointer; }
+
+        /* ── Hero ──────────────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 5rem;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(212,168,67,0.06) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 60%, rgba(184,134,11,0.04) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 720px; }
+        .hero h1 { margin-bottom: 1.2rem; }
+        .hero h1 .muted { color: #6b6a74; font-weight: 300; }
+        .hero-subtitle {
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            color: #9a99a2;
+            margin-bottom: 2.5rem;
+            max-width: 520px;
+            line-height: 1.7;
+        }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-visual {
+            position: absolute;
+            right: -10%;
+            top: 50%; transform: translateY(-50%);
+            width: 45%;
+            max-width: 600px;
+            opacity: 0.3;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+        .hero-visual .orb {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,168,67,0.5) 0%, rgba(184,134,11,0.15) 40%, transparent 70%);
+            animation: orbPulse 6s ease-in-out infinite;
+        }
+        @keyframes orbPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+        }
+
+        /* ── Section Headers ───────────────────────── */
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        .section-header h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+        .section-header p { color: #7b7a85; max-width: 500px; margin: 0 auto; font-size: 1rem; }
+
+        /* ── Product Cards ─────────────────────────── */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(212,168,67,0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .product-card:hover {
+            border-color: rgba(212,168,67,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .product-card:hover::before { opacity: 1; }
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(212,168,67,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: #d4a843;
+        }
+        .product-card h3 { font-size: 1.25rem; }
+        .product-card .price {
+            color: #d4a843;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 0.8rem 0;
+        }
+        .product-card p { color: #8c8b95; font-size: 0.92rem; margin-bottom: 1.2rem; line-height: 1.65; }
+        .product-card .btn { width: 100%; justify-content: center; margin-top: 0.5rem; }
+
+        .tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            background: rgba(212,168,67,0.12);
+            color: #d4a843;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── Ecosystem Platforms ───────────────────── */
+        .platform-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .platform-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        .platform-card:hover {
+            border-color: rgba(212,168,67,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .platform-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .platform-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+        .platform-card p { color: #8c8b95; font-size: 0.88rem; margin-bottom: 1.2rem; }
+        .platform-link {
+            color: #d4a843;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .platform-card:hover .platform-link { gap: 0.7rem; }
+        .platform-link span { transition: all 0.25s; }
+
+        /* ── Newsletter ────────────────────────────── */
+        .newsletter-box {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+        .newsletter-box h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .newsletter-box p { color: #8c8b95; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .newsletter-form { display: flex; gap: 0.75rem; }
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.85rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.04);
+            color: #e0dfe4;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.25s;
+        }
+        .newsletter-form input:focus { border-color: #d4a843; }
+        .newsletter-form input::placeholder { color: #5a5963; }
+
+        /* ── Footer ────────────────────────────────── */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 3rem 0;
+            text-align: center;
+            color: #5a5963;
+            font-size: 0.85rem;
+        }
+        footer a { color: #8c8b95; text-decoration: none; }
+        footer a:hover { color: #d4a843; }
+        .footer-links { display: flex; gap: 1.5rem; justify-content: center; list-style: none; margin-bottom: 1.2rem; flex-wrap: wrap; }
+
+        /* ── Divider ───────────────────────────────── */
+        .divider { width: 60px; height: 3px; background: linear-gradient(90deg, #d4a843, #b8860b); border-radius: 2px; margin: 0 auto 3rem; }
+
+        /* ── Responsive ────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0; right: 0;
+                background: rgba(8,8,11,0.98);
+                backdrop-filter: blur(20px);
+                padding: 1.5rem;
+                gap: 1.2rem;
+                border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            .hero { text-align: center; }
+            .hero-content { margin: 0 auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { display: none; }
+            .platform-cards { grid-template-columns: 1fr; }
+            .newsletter-form { flex-direction: column; }
+            .products-grid { grid-template-columns: 1fr; }
+            .section { padding: 4rem 0; }
+            .newsletter-box { padding: 2rem 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .hero-buttons { flex-direction: column; align-items: stretch; }
+            .hero-buttons .btn { text-align: center; justify-content: center; }
+        }
+
+        /* ── Animations ────────────────────────────── */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in { animation: fadeInUp 0.7s ease forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════ NAVIGATION ════════════════ -->
+    <nav>
+        <div class="container">
+            <a href="#" class="nav-logo">SUPERRIOR MAN</a>
+            <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+            <ul class="nav-links">
+                <li><a href="#products">Produkte</a></li>
+                <li><a href="#ecosystem">Ecosystem</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══════════════ HERO ═══════════════════════ -->
+    <section class="hero">
+        <div class="hero-visual"><div class="orb"></div></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-label animate-in">Superrior Man Ecosystem</span>
+                <h1 class="animate-in delay-1">
+                    <span class="accent">Atme.</span>
+                    <span class="muted">Fokussiere.</span>
+                    <span class="accent">Dominiere.</span>
+                </h1>
+                <p class="hero-subtitle animate-in delay-2">
+                    Das ultimative Produkt-Ökosystem für den modernen Mann.
+                    Entdecke Tools, Kurse und Apparel, die deine Atmung,
+                    deinen Fokus und deine Dominanz auf das nächste Level heben.
+                </p>
+                <div class="hero-buttons animate-in delay-3">
+                    <a href="#products" class="btn btn-primary">Produkte entdecken →</a>
+                    <a href="#ecosystem" class="btn btn-outline">Ecosystem erkunden</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ GUMROAD PRODUCTS ════════════ -->
+    <section id="products" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Gumroad</span>
+                <h2>Digitale Produkte</h2>
+                <p>Hochwertige digitale Ressourcen für deine persönliche Entwicklung – direkt auf Gumroad erhältlich.</p>
+            </div>
+            <div class="products-grid">
+
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <div class="product-icon">🧘</div>
+                    <span class="tag">Bestseller</span>
+                    <h3>Breath Mastery Guide</h3>
+                    <div class="price">€29</div>
+                    <p>Die komplette Anleitung zur Wim-Hof-inspirierten Atemtechnik. 40+ Seiten PDF mit Übungen und Tracking-Sheets.</p>
+                    <a href="https://ikone.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Auf Gumroad ansehen →</a>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-icon">🎯</div>
+                    <span class="tag">Neu</span>
+                    <h3>Focus Protocol System</h3>
+                    <div class="price">€39</div>
+                    <p>Ein strukturiertes 30-Tage-Programm für tiefe Konzentration. Arbeitsblätter, Routinen und Fokus-Tracker inklusive.</p>
+                    <a href="https://ikone.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Auf Gumroad ansehen →</a>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-icon">🔥</div>
+                    <span class="tag">Exklusiv</span>
+                    <h3>Dominance Mindset Blueprint</h3>
+                    <div class="price">€49</div>
+                    <p>Psychologische Frameworks und tägliche Affirmationen für Selbstbeherrschung, Disziplin und unerschütterliches Selbstvertrauen.</p>
+                    <a href="https://ikone.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Auf Gumroad ansehen →</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ ECOSYSTEM ═══════════════════ -->
+    <section id="ecosystem" class="section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Ecosystem</span>
+                <h2>Alle Plattformen</h2>
+                <p>Dein Superrior-Man-Erlebnis erstreckt sich über mehrere Plattformen – Kurse, Kleidung und mehr.</p>
+            </div>
+            <div class="divider"></div>
+            <div class="platform-cards">
+
+                <!-- Gumroad -->
+                <a href="https://ikone.gumroad.com" target="_blank" rel="noopener" class="platform-card">
+                    <span class="platform-icon">📦</span>
+                    <h3>Gumroad Shop</h3>
+                    <p>Digitale Produkte, Guides und Workbooks. Sofort-Download nach Kauf.</p>
+                    <span class="platform-link"><span>Zum Shop</span> →</span>
+                </a>
+
+                <!-- Teachable -->
+                <a href="https://ikone.teachable.com" target="_blank" rel="noopener" class="platform-card">
+                    <span class="platform-icon">🎓</span>
+                    <h3>Teachable Kurs</h3>
+                    <p>Der exklusive Online-Kurs. Strukturierte Lektionen, Videos und Community.</p>
+                    <span class="platform-link"><span>Zum Kurs</span> →</span>
+                </a>
+
+                <!-- Spreadshirt -->
+                <a href="https://ikone0.myspreadshop.de" target="_blank" rel="noopener" class="platform-card">
+                    <span class="platform-icon">👕</span>
+                    <h3>Spreadshirt Shop</h3>
+                    <p>Premium-Apparel. T-Shirts, Hoodies und Accessoires mit exklusiven Designs.</p>
+                    <span class="platform-link"><span>Zum Shop</span> →</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ NEWSLETTER ════════════════ -->
+    <section id="newsletter" class="section">
+        <div class="container">
+            <div class="newsletter-box">
+                <span class="section-label">Bleib verbunden</span>
+                <h3>Superrior Man Newsletter</h3>
+                <p>Exklusive Inhalte, neue Produkt-Releases und Mindset-Impulse direkt in dein Postfach. Kein Spam.</p>
+                <form class="newsletter-form" action="#" method="POST">
+                    <input type="email" placeholder="deine@email.de" required>
+                    <button type="submit" class="btn btn-primary">Abonnieren</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════════ -->
+    <footer>
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="https://ikone.gumroad.com" target="_blank" rel="noopener">Gumroad</a></li>
+                <li><a href="https://ikone.teachable.com" target="_blank" rel="noopener">Teachable</a></li>
+                <li><a href="https://ikone0.myspreadshop.de" target="_blank" rel="noopener">Spreadshirt</a></li>
+            </ul>
+            <p>&copy; 2026 Superrior Man. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
