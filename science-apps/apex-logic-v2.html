@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Apex Logic v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0A0A0F;--bg2:#12121A;--card:#1A1A2E;--card2:#22223A;--gold:#C9A84C;--gold-light:#E8D48B;--gold-dark:#A8882E;--text:#E8E8F0;--text2:#A0A0B8;--text3:#6A6A80;--success:#4ADE80;--danger:#EF4444;--warning:#FBBF24;--info:#60A5FA;--radius:16px;--radius-sm:10px;--blur:20px;--shadow:0 8px 32px rgba(0,0,0,0.4);--transition:all 0.3s cubic-bezier(0.4,0,0.2,1)}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6}
+a{color:var(--gold);text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;outline:none;transition:var(--transition);font-size:0.9rem}
+input,select,textarea{font-family:inherit;font-size:0.9rem;background:var(--bg2);border:1px solid rgba(255,255,255,0.08);color:var(--text);padding:12px 16px;border-radius:var(--radius-sm);width:100%;outline:none;transition:var(--transition)}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A84C' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+label{display:block;font-size:0.8rem;font-weight:600;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+h1,h2,h3,h4{font-weight:700;line-height:1.2}
+h1{font-size:2rem}h2{font-size:1.5rem}h3{font-size:1.2rem}h4{font-size:1rem}
+/* Layout */
+.app-layout{display:flex;min-height:100vh}
+.sidebar{width:72px;background:var(--card);border-right:1px solid rgba(255,255,255,0.05);display:flex;flex-direction:column;align-items:center;padding:16px 0;position:fixed;top:0;left:0;height:100vh;z-index:100;overflow-y:auto;backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur))}
+.sidebar-logo{font-size:1.4rem;font-weight:900;color:var(--gold);margin-bottom:20px;letter-spacing:-1px}
+.sidebar-nav{display:flex;flex-direction:column;gap:4px;width:100%;padding:0 8px;flex:1}
+.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 6px;border-radius:12px;color:var(--text3);transition:var(--transition);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.3px;font-weight:600;gap:3px;text-decoration:none;background:transparent}
+.nav-item i{font-size:1.15rem;transition:var(--transition)}
+.nav-item:hover{color:var(--text);background:rgba(201,168,76,0.08)}
+.nav-item.active{color:var(--gold);background:rgba(201,168,76,0.12)}
+.nav-item.active i{color:var(--gold)}
+.main-content{flex:1;margin-left:72px;padding:24px 32px;max-width:1100px;width:100%}
+/* Glass Cards */
+.card{background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:var(--transition)}
+.card:hover{border-color:rgba(201,168,76,0.15)}
+.card-glow{border-color:rgba(201,168,76,0.2);box-shadow:0 0 40px rgba(201,168,76,0.06)}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:var(--radius-sm);font-weight:600;transition:var(--transition);font-size:0.9rem}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#0A0A0F;box-shadow:0 4px 20px rgba(201,168,76,0.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(201,168,76,0.35)}
+.btn-secondary{background:var(--card2);color:var(--text);border:1px solid rgba(255,255,255,0.08)}
+.btn-secondary:hover{background:rgba(255,255,255,0.08)}
+.btn-danger{background:rgba(239,68,68,0.15);color:var(--danger);border:1px solid rgba(239,68,68,0.2)}
+.btn-danger:hover{background:rgba(239,68,68,0.25)}
+.btn-success{background:rgba(74,222,128,0.15);color:var(--success);border:1px solid rgba(74,222,128,0.2)}
+.btn-sm{padding:8px 16px;font-size:0.8rem}
+.btn-icon{width:44px;height:44px;padding:0;border-radius:50%}
+.btn-block{width:100%}
+/* Hero */
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;text-align:center;padding:40px 20px}
+.hero-badge{display:inline-block;background:rgba(201,168,76,0.12);color:var(--gold);padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
+.hero h1{font-size:3.5rem;font-weight:900;letter-spacing:-2px;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
+.hero p{font-size:1.1rem;color:var(--text2);max-width:480px;margin-bottom:32px;line-height:1.7}
+.hero .btn{margin:4px}
+/* Grids */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+/* Dashboard */
+.dashboard-header{margin-bottom:24px}
+.dashboard-header h1{font-size:1.8rem}
+.dashboard-header p{color:var(--text2);margin-top:4px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--card);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,0.05);transition:var(--transition)}
+.stat-card:hover{border-color:rgba(201,168,76,0.15);transform:translateY(-2px)}
+.stat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:12px}
+.stat-icon.gold{background:rgba(201,168,76,0.15);color:var(--gold)}
+.stat-icon.green{background:rgba(74,222,128,0.15);color:var(--success)}
+.stat-icon.blue{background:rgba(96,165,250,0.15);color:var(--info)}
+.stat-icon.red{background:rgba(239,68,68,0.15);color:var(--danger)}
+.stat-value{font-size:1.8rem;font-weight:800;letter-spacing:-1px}
+.stat-label{font-size:0.8rem;color:var(--text3);margin-top:2px;font-weight:500}
+/* Progress Bar */
+.progress-bar{width:100%;height:6px;background:var(--bg2);border-radius:10px;overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:10px;transition:width 0.5s ease}
+/* Interview */
+.interview-progress{margin-bottom:24px}
+.interview-progress .progress-bar{height:8px}
+.interview-question{font-size:1.2rem;font-weight:600;margin-bottom:20px;line-height:1.5}
+.interview-options{display:flex;gap:12px;margin-bottom:16px}
+.interview-options button{flex:1;padding:14px;border-radius:var(--radius-sm);font-weight:600;font-size:0.95rem;background:var(--card2);color:var(--text);border:2px solid transparent;transition:var(--transition)}
+.interview-options button.selected{border-color:var(--gold);background:rgba(201,168,76,0.1)}
+.interview-options button:hover{border-color:rgba(201,168,76,0.3)}
+/* Workout Plan */
+.week-tabs{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.week-tab{padding:8px 18px;border-radius:10px;background:var(--card2);color:var(--text2);font-weight:600;font-size:0.8rem;white-space:nowrap;transition:var(--transition);border:1px solid transparent}
+.week-tab.active{background:rgba(201,168,76,0.12);color:var(--gold);border-color:rgba(201,168,76,0.2)}
+.workout-card{background:var(--card2);border-radius:var(--radius-sm);padding:16px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05);transition:var(--transition);cursor:pointer}
+.workout-card:hover{border-color:rgba(201,168,76,0.2);transform:translateX(4px)}
+.workout-card h4{font-size:0.95rem;margin-bottom:4px}
+.workout-card .meta{font-size:0.78rem;color:var(--text3);display:flex;gap:12px}
+/* Workout Player */
+.player-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.exercise-card{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.05)}
+.exercise-name{font-size:1.3rem;font-weight:700;margin-bottom:4px}
+.exercise-meta{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;font-size:0.85rem;color:var(--text2)}
+.exercise-meta span{display:flex;align-items:center;gap:6px}
+.set-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.set-row:last-child{border-bottom:none}
+.set-row label{display:flex;align-items:center;gap:8px;cursor:pointer;margin:0;text-transform:none;font-size:0.85rem;color:var(--text)}
+.set-row input[type="checkbox"]{width:20px;height:20px;accent-color:var(--gold)}
+/* Timer */
+.timer-display{text-align:center;padding:20px;background:var(--bg2);border-radius:var(--radius-sm);margin:16px 0}
+.timer-time{font-size:3.5rem;font-weight:900;letter-spacing:2px;font-variant-numeric:tabular-nums;color:var(--gold)}
+.timer-label{font-size:0.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.timer-controls{display:flex;gap:10px;justify-content:center;margin-top:12px}
+/* Habits */
+.habit-item{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--card);border-radius:var(--radius-sm);margin-bottom:8px;border:1px solid rgba(255,255,255,0.05);transition:var(--transition)}
+.habit-item:hover{border-color:rgba(201,168,76,0.15)}
+.habit-info{flex:1}
+.habit-name{font-weight:600;font-size:0.9rem}
+.habit-type{font-size:0.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.3px}
+.habit-streak{display:flex;align-items:center;gap:6px;font-size:0.85rem;color:var(--gold);font-weight:700}
+.habit-checkbox{width:24px;height:24px;accent-color:var(--gold);cursor:pointer;margin-left:12px}
+/* Admin Table */
+.admin-table{width:100%;border-collapse:collapse;font-size:0.82rem}
+.admin-table th{text-align:left;padding:12px 14px;background:var(--bg2);color:var(--text2);font-weight:600;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.5px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.admin-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+.admin-table tr:hover td{background:rgba(201,168,76,0.03)}
+/* Page Transitions */
+.page{display:none;animation:fadeIn 0.3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:slideUp 0.4s ease forwards}
+/* Settings */
+.setting-group{margin-bottom:24px}
+.setting-group h3{margin-bottom:12px;font-size:1rem;color:var(--gold)}
+.language-grid{display:flex;gap:8px;flex-wrap:wrap}
+.lang-btn{padding:10px 20px;border-radius:10px;font-weight:600;font-size:0.85rem;background:var(--card2);color:var(--text2);border:2px solid transparent;transition:var(--transition)}
+.lang-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.1)}
+.lang-btn:hover{border-color:rgba(201,168,76,0.3)}
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;padding:14px 24px;background:var(--card);border:1px solid rgba(201,168,76,0.2);border-radius:var(--radius-sm);color:var(--text);font-size:0.85rem;font-weight:500;z-index:9999;box-shadow:var(--shadow);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));animation:slideUp 0.3s ease;max-width:360px}
+.toast.success{border-color:rgba(74,222,128,0.3)}
+.toast.error{border-color:rgba(239,68,68,0.3)}
+/* Empty State */
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-state i{font-size:2.5rem;margin-bottom:12px;color:var(--text3)}
+.empty-state p{font-size:0.95rem}
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--card2);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{width:60px;padding:12px 0}
+  .sidebar-logo{font-size:1.1rem;margin-bottom:14px}
+  .nav-item{padding:8px 2px 4px;font-size:0.5rem}
+  .nav-item i{font-size:1rem}
+  .main-content{margin-left:60px;padding:16px}
+  .hero h1{font-size:2rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .timer-time{font-size:2.5rem}
+  .admin-table{font-size:0.7rem}
+  .admin-table th,.admin-table td{padding:6px 8px}
+}
+@media(max-width:480px){
+  .main-content{padding:12px}
+  .stats-grid{grid-template-columns:1fr}
+  .hero h1{font-size:1.6rem}
+  .card{padding:16px}
+}
+/* Modal overlay */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn 0.2s ease}
+.modal-content{background:var(--card);border-radius:var(--radius);padding:28px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;border:1px solid rgba(255,255,255,0.08);box-shadow:var(--shadow)}
+.modal-content h2{margin-bottom:16px}
+.modal-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+/* Misc */
+.tag{display:inline-block;padding:2px 10px;border-radius:6px;font-size:0.7rem;font-weight:600}
+.tag-beginner{background:rgba(74,222,128,0.12);color:var(--success)}
+.tag-intermediate{background:rgba(251,191,36,0.12);color:var(--warning)}
+.tag-advanced{background:rgba(239,68,68,0.12);color:var(--danger)}
+.chart-container{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.05)}
+/* Floating action button for habits */
+.fab{position:fixed;bottom:24px;right:24px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#0A0A0F;font-size:1.3rem;box-shadow:0 4px 20px rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;z-index:50;transition:var(--transition)}
+.fab:hover{transform:scale(1.1);box-shadow:0 6px 30px rgba(201,168,76,0.4)}
+@media(max-width:768px){.fab{bottom:80px;right:16px}}
+</style>
+</head>
+<body>
+<div class="app-layout">
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">▲</div>
+    <div class="sidebar-nav">
+      <a class="nav-item" data-page="dashboard" href="#dashboard"><i class="fas fa-th-large"></i><span data-i18n="dashboard">Dashboard</span></a>
+      <a class="nav-item" data-page="interview" href="#interview"><i class="fas fa-comments"></i><span data-i18n="interview">Interview</span></a>
+      <a class="nav-item" data-page="plan" href="#plan"><i class="fas fa-dumbbell"></i><span data-i18n="plan">Plan</span></a>
+      <a class="nav-item" data-page="workout" href="#workout"><i class="fas fa-play-circle"></i><span data-i18n="workout">Workout</span></a>
+      <a class="nav-item" data-page="habits" href="#habits"><i class="fas fa-check-circle"></i><span data-i18n="habits">Habits</span></a>
+      <a class="nav-item" data-page="progress" href="#progress"><i class="fas fa-chart-line"></i><span data-i18n="progress">Progress</span></a>
+      <a class="nav-item" data-page="admin" href="#admin"><i class="fas fa-cog"></i><span data-i18n="admin">Admin</span></a>
+      <a class="nav-item" data-page="settings" href="#settings"><i class="fas fa-sliders-h"></i><span data-i18n="settings">Settings</span></a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+
+    <!-- LANDING / HERO -->
+    <section class="page active" id="page-landing">
+      <div class="hero animate-in">
+        <div class="hero-badge">v2.0</div>
+        <h1>APEX LOGIC</h1>
+        <p data-i18n="tagline">Your AI-powered training & life optimization platform. Build discipline. Track progress. Evolve.</p>
+        <button class="btn btn-primary" onclick="navigate('dashboard')"><i class="fas fa-rocket"></i> <span data-i18n="start">Start</span></button>
+      </div>
+    </section>
+
+    <!-- ONBOARDING -->
+    <section class="page" id="page-onboarding">
+      <div class="card animate-in" style="max-width:520px;margin:40px auto">
+        <h2 style="margin-bottom:6px;font-size:1.3rem" data-i18n="welcome">Willkommen bei Apex Logic</h2>
+        <p style="color:var(--text2);font-size:0.85rem;margin-bottom:20px" data-i18n="onboardingSub">Lass uns dein Profil erstellen, um deinen perfekten Trainingsplan zu berechnen.</p>
+        <form id="onboardingForm">
+          <div style="margin-bottom:14px">
+            <label data-i18n="name">Name</label>
+            <input type="text" id="onName" placeholder="z.B. Max" required>
+          </div>
+          <div class="grid-2" style="margin-bottom:14px">
+            <div>
+              <label data-i18n="age">Alter</label>
+              <input type="number" id="onAge" min="10" max="120" required>
+            </div>
+            <div>
+              <label data-i18n="weight">Gewicht (kg)</label>
+              <input type="number" id="onWeight" min="20" max="300" step="0.1" required>
+            </div>
+          </div>
+          <div class="grid-2" style="margin-bottom:14px">
+            <div>
+              <label data-i18n="height">Größe (cm)</label>
+              <input type="number" id="onHeight" min="100" max="250" required>
+            </div>
+            <div>
+              <label data-i18n="fitnessLevel">Fitness-Level</label>
+              <select id="onFitnessLevel">
+                <option value="beginner" data-i18n="beginner">Anfänger</option>
+                <option value="intermediate" data-i18n="intermediate">Fortgeschritten</option>
+                <option value="advanced" data-i18n="advanced">Profi</option>
+              </select>
+            </div>
+          </div>
+          <div style="margin-bottom:20px">
+            <label data-i18n="goal">Ziel</label>
+            <select id="onGoal">
+              <option value="strength" data-i18n="strength">Kraft</option>
+              <option value="hypertrophy" data-i18n="hypertrophy">Hypertrophie</option>
+              <option value="endurance" data-i18n="endurance">Ausdauer</option>
+              <option value="weight_loss" data-i18n="weight_loss">Abnehmen</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-check"></i> <span data-i18n="save">Speichern</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section class="page" id="page-dashboard">
+      <div class="dashboard-header">
+        <h1 id="dashGreeting" data-i18n="welcomeBack">Willkommen zurück</h1>
+        <p id="dashSub" data-i18n="dashboardSub">Hier ist deine heutige Übersicht</p>
+      </div>
+      <div class="stats-grid" id="dashStats"></div>
+      <div class="grid-2" id="dashActions"></div>
+      <div class="card" style="margin-top:16px" id="dashNextWorkout">
+        <h4 style="color:var(--gold);margin-bottom:10px"><i class="fas fa-dumbbell"></i> <span data-i18n="nextWorkout">Nächstes Workout</span></h4>
+        <p id="dashNextText" style="color:var(--text2)">—</p>
+      </div>
+    </section>
+
+    <!-- INTERVIEW -->
+    <section class="page" id="page-interview">
+      <div class="card">
+        <div class="interview-progress">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.8rem">
+            <span data-i18n="interview">Interview</span>
+            <span id="interviewCounter">0/10</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="interviewProgress" style="width:0%"></div></div>
+        </div>
+        <div id="interviewContent">
+          <p class="interview-question" id="interviewQuestion">Lade Fragen...</p>
+          <div class="interview-options" id="interviewOptions"></div>
+          <textarea id="interviewNote" placeholder="Deine Gedanken..." style="margin-bottom:12px;resize:vertical;min-height:60px;"></textarea>
+          <div style="display:flex;gap:10px;justify-content:space-between">
+            <button class="btn btn-secondary" id="interviewPrevBtn" onclick="interviewPrev()"><i class="fas fa-arrow-left"></i> <span data-i18n="prev">Zurück</span></button>
+            <button class="btn btn-primary" id="interviewNextBtn" onclick="interviewNext()"><span data-i18n="next">Weiter</span> <i class="fas fa-arrow-right"></i></button>
+          </div>
+          <button class="btn btn-success btn-block" id="interviewFinishBtn" style="display:none;margin-top:12px" onclick="interviewFinish()"><i class="fas fa-check"></i> <span data-i18n="generatePlan">Jetzt Plan generieren</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAINING PLAN -->
+    <section class="page" id="page-plan">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+        <h2 data-i18n="trainingPlan">Trainingsplan</h2>
+        <button class="btn btn-primary btn-sm" onclick="generateTrainingPlan()"><i class="fas fa-sync"></i> <span data-i18n="regenerate">Neu generieren</span></button>
+      </div>
+      <div id="planWeekTabs"></div>
+      <div id="planContent"><div class="empty-state"><i class="fas fa-dumbbell"></i><p data-i18n="noPlan">Noch kein Trainingsplan erstellt. Führe das Interview durch oder klicke auf "Neu generieren".</p></div></div>
+    </section>
+
+    <!-- WORKOUT PLAYER -->
+    <section class="page" id="page-workout">
+      <div class="player-header">
+        <div>
+          <h2 id="workoutTitle" data-i18n="workout">Workout</h2>
+          <p id="workoutMeta" style="color:var(--text2);font-size:0.85rem"></p>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" onclick="saveAndExitWorkout()"><i class="fas fa-save"></i> <span data-i18n="saveExit">Speichern & Verlassen</span></button>
+        </div>
+      </div>
+      <div id="workoutContent">
+        <div class="empty-state"><i class="fas fa-play-circle"></i><p data-i18n="noWorkout">Kein aktives Workout. Wähle einen Plan aus.</p></div>
+      </div>
+    </section>
+
+    <!-- HABITS -->
+    <section class="page" id="page-habits">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <h2 data-i18n="habits">Gewohnheiten</h2>
+        <button class="btn btn-primary btn-sm" onclick="showAddHabitModal()"><i class="fas fa-plus"></i> <span data-i18n="add">Hinzufügen</span></button>
+      </div>
+      <div id="habitsList"></div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="page" id="page-progress">
+      <h2 style="margin-bottom:20px" data-i18n="progress">Fortschritt</h2>
+      <div class="chart-container"><canvas id="weightChart"></canvas></div>
+      <div class="chart-container"><canvas id="workoutsChart"></canvas></div>
+      <div class="chart-container"><canvas id="streakChart"></canvas></div>
+    </section>
+
+    <!-- ADMIN -->
+    <section class="page" id="page-admin">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+        <h2 data-i18n="admin">Admin</h2>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" onclick="exportData()"><i class="fas fa-download"></i> <span data-i18n="exportData">Export</span></button>
+          <button class="btn btn-danger btn-sm" onclick="clearAllData()"><i class="fas fa-trash"></i> <span data-i18n="deleteAll">Alle löschen</span></button>
+        </div>
+      </div>
+      <div class="card" style="overflow-x:auto">
+        <table class="admin-table" id="adminTable">
+          <thead><tr><th data-i18n="name">Name</th><th data-i18n="age">Alter</th><th data-i18n="weight">Gewicht</th><th data-i18n="height">Größe</th><th data-i18n="fitnessLevel">Level</th><th data-i18n="goal">Ziel</th><th data-i18n="streak">Streak</th><th data-i18n="workouts">Workouts</th></tr></thead>
+          <tbody id="adminBody"></tbody>
+        </table>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h4 style="margin-bottom:10px;color:var(--gold)" data-i18n="trainingPlanManagement">Trainingsplan-Verwaltung</h4>
+        <div id="adminPlans"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="page" id="page-settings">
+      <h2 style="margin-bottom:20px" data-i18n="settings">Einstellungen</h2>
+      <div class="card">
+        <div class="setting-group">
+          <h3 data-i18n="language">Sprache</h3>
+          <div class="language-grid" id="langSelector">
+            <button class="lang-btn" data-lang="de">DE</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="tr">TR</button>
+            <button class="lang-btn" data-lang="ku">KU</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <h3 data-i18n="editProfile">Profil bearbeiten</h3>
+          <form id="profileForm">
+            <div style="margin-bottom:12px">
+              <label data-i18n="name">Name</label>
+              <input type="text" id="editName">
+            </div>
+            <div class="grid-2" style="margin-bottom:12px">
+              <div><label data-i18n="age">Alter</label><input type="number" id="editAge"></div>
+              <div><label data-i18n="weight">Gewicht (kg)</label><input type="number" id="editWeight" step="0.1"></div>
+            </div>
+            <div class="grid-2" style="margin-bottom:12px">
+              <div><label data-i18n="height">Größe (cm)</label><input type="number" id="editHeight"></div>
+              <div><label data-i18n="fitnessLevel">Level</label><select id="editFitnessLevel"><option value="beginner">Beginner</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
+            </div>
+            <div style="margin-bottom:16px">
+              <label data-i18n="goal">Ziel</label>
+              <select id="editGoal"><option value="strength">Strength</option><option value="hypertrophy">Hypertrophy</option><option value="endurance">Endurance</option><option value="weight_loss">Weight Loss</option></select>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> <span data-i18n="save">Speichern</span></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- Modal Container -->
+<div id="modalContainer"></div>
+
+<script>
+// ============================================================
+// TRANSLATIONS
+// ============================================================
+const TRANSLATIONS = {
+  de: {
+    welcome: "Willkommen bei Apex Logic", welcomeBack: "Willkommen zurück", tagline: "Deine KI-gestützte Trainings- & Life-Optimierungs-Plattform. Baue Disziplin auf. Tracke Fortschritt. Entwickle dich weiter.",
+    start: "Starten", dashboard: "Dashboard", interview: "Interview", plan: "Plan", workout: "Workout", habits: "Gewohnheiten",
+    progress: "Fortschritt", admin: "Admin", settings: "Einstellungen", language: "Sprache", name: "Name", age: "Alter",
+    weight: "Gewicht (kg)", height: "Größe (cm)", fitnessLevel: "Fitness-Level", goal: "Ziel", save: "Speichern",
+    cancel: "Abbrechen", delete: "Löschen", edit: "Bearbeiten", complete: "Abschließen", next: "Weiter", prev: "Zurück",
+    daysPerWeek: "Tage/Woche", exercises: "Übungen", sets: "Sätze", reps: "Wdh.", rest: "Pause", calories: "Kalorien",
+    streak: "Serie", chart: "Diagramm", userManagement: "Benutzerverwaltung", exportData: "Daten exportieren",
+    timer: "Timer", startWorkout: "Workout starten", pause: "Pause", reset: "Zurücksetzen",
+    onboardingSub: "Lass uns dein Profil erstellen, um deinen perfekten Trainingsplan zu berechnen.",
+    beginner: "Anfänger", intermediate: "Fortgeschritten", advanced: "Profi",
+    strength: "Kraft", hypertrophy: "Hypertrophie", endurance: "Ausdauer", weight_loss: "Abnehmen",
+    dashboardSub: "Hier ist deine heutige Übersicht", nextWorkout: "Nächstes Workout",
+    generatePlan: "Jetzt Plan generieren", regenerate: "Neu generieren", noPlan: "Noch kein Trainingsplan erstellt.",
+    noWorkout: "Kein aktives Workout. Wähle einen Plan aus.", add: "Hinzufügen",
+    deleteAll: "Alle Daten löschen", editProfile: "Profil bearbeiten",
+    saveExit: "Speichern & Verlassen", finish: "Abschließen",
+    completeWorkout: "Workout abschließen", weightChart: "Gewichtsverlauf", workoutsPerWeek: "Workouts pro Woche",
+    streakHistory: "Serien-Verlauf", noData: "Keine Daten vorhanden",
+    today: "Heute", planned: "Geplant", noPlanForToday: "Kein Workout für heute geplant",
+    kcal: "kcal", activeMinutes: "Aktive Min.", level: "Level",
+    interviewQ1: "Wie oft trainierst du aktuell pro Woche?", interviewQ2: "Hast du Zugang zu einem Fitnessstudio?",
+    interviewQ3: "Wie viele Stunden Schlaf bekommst du durchschnittlich?", interviewQ4: "Wie würdest du deine Ernährung beschreiben?",
+    interviewQ5: "Hast du gesundheitliche Einschränkungen?", interviewQ6: "Wie stressig ist dein Alltag?",
+    interviewQ7: "Wie viel Zeit hast du pro Training (Minuten)?", interviewQ8: "Bist du diszipliniert bei der Umsetzung?",
+    interviewQ9: "Hast du Erfahrung mit Krafttraining?", interviewQ10: "Was ist dein primäres Fitness-Ziel?",
+    yes: "Ja", no: "Nein", unsure: "Unsicher", well: "Gut", moderate: "Mittel", poor: "Schlecht",
+    backToDashboard: "Zurück zum Dashboard", trainingPlan: "Trainingsplan",
+    habitAdd: "Neue Gewohnheit", habitName: "Name der Gewohnheit", habitType: "Typ",
+    habitBuild: "Aufbauen", habitBreak: "Abbrechen",
+    interviewComplete: "Interview abgeschlossen! Jetzt kannst du deinen personalisierten Trainingsplan generieren.",
+    planGenerated: "Trainingsplan erfolgreich generiert!", workoutCompleted: "Workout abgeschlossen!",
+    dataExported: "Daten exportiert!", dataCleared: "Alle Daten gelöscht.",
+    trainingPlanManagement: "Trainingsplan-Verwaltung",
+    editPlan: "Plan bearbeiten", deletePlan: "Plan löschen",
+    confirmDelete: "Bist du sicher?", yes: "Ja", no: "Nein",
+    selectWorkout: "Wähle ein Workout aus deinem Plan",
+    restTimer: "Pausen-Timer", nextExercise: "Nächste Übung"
+  },
+  en: {
+    welcome: "Welcome to Apex Logic", welcomeBack: "Welcome back", tagline: "Your AI-powered training & life optimization platform. Build discipline. Track progress. Evolve.",
+    start: "Start", dashboard: "Dashboard", interview: "Interview", plan: "Plan", workout: "Workout", habits: "Habits",
+    progress: "Progress", admin: "Admin", settings: "Settings", language: "Language", name: "Name", age: "Age",
+    weight: "Weight (kg)", height: "Height (cm)", fitnessLevel: "Fitness Level", goal: "Goal", save: "Save",
+    cancel: "Cancel", delete: "Delete", edit: "Edit", complete: "Complete", next: "Next", prev: "Prev",
+    daysPerWeek: "Days/Week", exercises: "Exercises", sets: "Sets", reps: "Reps", rest: "Rest", calories: "Calories",
+    streak: "Streak", chart: "Chart", userManagement: "User Management", exportData: "Export Data",
+    timer: "Timer", startWorkout: "Start Workout", pause: "Pause", reset: "Reset",
+    onboardingSub: "Let's create your profile to calculate your perfect training plan.",
+    beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced",
+    strength: "Strength", hypertrophy: "Hypertrophy", endurance: "Endurance", weight_loss: "Weight Loss",
+    dashboardSub: "Here's your overview for today", nextWorkout: "Next Workout",
+    generatePlan: "Generate Plan Now", regenerate: "Regenerate", noPlan: "No training plan created yet.",
+    noWorkout: "No active workout. Select a plan.", add: "Add",
+    deleteAll: "Delete All Data", editProfile: "Edit Profile",
+    saveExit: "Save & Exit", finish: "Finish",
+    completeWorkout: "Complete Workout", weightChart: "Weight Progress", workoutsPerWeek: "Workouts per Week",
+    streakHistory: "Streak History", noData: "No data available",
+    today: "Today", planned: "Planned", noPlanForToday: "No workout planned for today",
+    kcal: "kcal", activeMinutes: "Active Min.", level: "Level",
+    interviewQ1: "How many times do you train per week currently?", interviewQ2: "Do you have access to a gym?",
+    interviewQ3: "How many hours of sleep do you get on average?", interviewQ4: "How would you describe your diet?",
+    interviewQ5: "Do you have any health restrictions?", interviewQ6: "How stressful is your daily life?",
+    interviewQ7: "How much time do you have per training (minutes)?", interviewQ8: "Are you disciplined in following through?",
+    interviewQ9: "Do you have experience with strength training?", interviewQ10: "What is your primary fitness goal?",
+    yes: "Yes", no: "No", unsure: "Unsure", well: "Well", moderate: "Moderate", poor: "Poor",
+    backToDashboard: "Back to Dashboard", trainingPlan: "Training Plan",
+    habitAdd: "New Habit", habitName: "Habit Name", habitType: "Type",
+    habitBuild: "Build", habitBreak: "Break",
+    interviewComplete: "Interview complete! Now you can generate your personalized training plan.",
+    planGenerated: "Training plan generated successfully!", workoutCompleted: "Workout completed!",
+    dataExported: "Data exported!", dataCleared: "All data cleared.",
+    trainingPlanManagement: "Training Plan Management",
+    editPlan: "Edit Plan", deletePlan: "Delete Plan",
+    confirmDelete: "Are you sure?", yes: "Yes", no: "No",
+    selectWorkout: "Select a workout from your plan",
+    restTimer: "Rest Timer", nextExercise: "Next Exercise"
+  },
+  tr: {
+    welcome: "Apex Logic'a Hoş Geldiniz", welcomeBack: "Tekrar hoş geldiniz",
+    tagline: "Yapay zeka destekli antrenman ve yaşam optimizasyon platformunuz. Disiplin oluşturun. İlerlemeyi takip edin. Gelişin.",
+    start: "Başla", dashboard: "Panel", interview: "Röportaj", plan: "Plan", workout: "Antrenman", habits: "Alışkanlıklar",
+    progress: "İlerleme", admin: "Yönetim", settings: "Ayarlar", language: "Dil", name: "İsim", age: "Yaş",
+    weight: "Kilo (kg)", height: "Boy (cm)", fitnessLevel: "Seviye", goal: "Hedef", save: "Kaydet",
+    cancel: "İptal", delete: "Sil", edit: "Düzenle", complete: "Tamamla", next: "İleri", prev: "Geri",
+    daysPerWeek: "Gün/Hafta", exercises: "Egzersizler", sets: "Set", reps: "Tekrar", rest: "Dinlenme",
+    calories: "Kalori", streak: "Seri", chart: "Grafik", userManagement: "Kullanıcı Yönetimi",
+    exportData: "Veriyi Dışa Aktar", timer: "Zamanlayıcı", startWorkout: "Antrenmana Başla",
+    pause: "Duraklat", reset: "Sıfırla",
+    onboardingSub: "Mükemmel antrenman planını hesaplamak için profilinizi oluşturalım.",
+    beginner: "Başlangıç", intermediate: "Orta", advanced: "İleri",
+    strength: "Kuvvet", hypertrophy: "Hipertrofi", endurance: "Dayanıklılık", weight_loss: "Kilo Verme",
+    dashboardSub: "Bugünkü özetiniz", nextWorkout: "Sonraki Antrenman",
+    generatePlan: "Planı Oluştur", regenerate: "Yeniden Oluştur", noPlan: "Henüz antrenman planı oluşturulmadı.",
+    noWorkout: "Aktif antrenman yok. Bir plan seçin.", add: "Ekle",
+    deleteAll: "Tüm Verileri Sil", editProfile: "Profili Düzenle",
+    saveExit: "Kaydet ve Çık", finish: "Bitir",
+    completeWorkout: "Antrenmanı Tamamla", weightChart: "Kilo İlerlemesi",
+    workoutsPerWeek: "Haftalık Antrenman", streakHistory: "Seri Geçmişi", noData: "Veri yok",
+    today: "Bugün", planned: "Planlandı", noPlanForToday: "Bugün için planlanmış antrenman yok",
+    kcal: "kcal", activeMinutes: "Aktif Dak.", level: "Seviye",
+    interviewQ1: "Şu anda haftada kaç kez antrenman yapıyorsunuz?", interviewQ2: "Spor salonuna erişiminiz var mı?",
+    interviewQ3: "Ortalama kaç saat uyuyorsunuz?", interviewQ4: "Beslenmenizi nasıl tanımlarsınız?",
+    interviewQ5: "Sağlık kısıtlamalarınız var mı?", interviewQ6: "Günlük hayatınız ne kadar stresli?",
+    interviewQ7: "Antrenman başına ne kadar zamanınız var (dakika)?", interviewQ8: "Uygulama konusunda disiplinli misiniz?",
+    interviewQ9: "Kuvvet antrenmanı deneyiminiz var mı?", interviewQ10: "Birincil fitness hedefiniz nedir?",
+    yes: "Evet", no: "Hayır", unsure: "Emin değil", well: "İyi", moderate: "Orta", poor: "Kötü",
+    backToDashboard: "Panele Dön", trainingPlan: "Antrenman Planı",
+    habitAdd: "Yeni Alışkanlık", habitName: "Alışkanlık Adı", habitType: "Tür",
+    habitBuild: "Oluştur", habitBreak: "Bırak",
+    interviewComplete: "Röportaj tamamlandı! Artık kişiselleştirilmiş antrenman planınızı oluşturabilirsiniz.",
+    planGenerated: "Antrenman planı başarıyla oluşturuldu!", workoutCompleted: "Antrenman tamamlandı!",
+    dataExported: "Veriler dışa aktarıldı!", dataCleared: "Tüm veriler silindi.",
+    trainingPlanManagement: "Antrenman Planı Yönetimi",
+    editPlan: "Planı Düzenle", deletePlan: "Planı Sil",
+    confirmDelete: "Emin misiniz?", yes: "Evet", no: "Hayır",
+    selectWorkout: "Planınızdan bir antrenman seçin",
+    restTimer: "Dinlenme Zamanlayıcısı", nextExercise: "Sonraki Egzersiz"
+  },
+  ku: {
+    welcome: "Bi xêr hatî Apex Logic", welcomeBack: "Bi xêr hatî dîsa",
+    tagline: "Platforma te ya perwerdehî û jiyanê ya bi AI-ê. Dîsîplînê ava bike. Pêşveçûnê bişopîne. Pêşkeve.",
+    start: "Destpêk", dashboard: "Dashboard", interview: "Hevpeyvîn", plan: "Plan", workout: "Perwerde",
+    habits: "Adet", progress: "Pêşveçûn", admin: "Rêvebirî", settings: "Eyar", language: "Ziman",
+    name: "Nav", age: "Temen", weight: "Giranî (kg)", height: "Bilindî (cm)", fitnessLevel: "Asta Fitness",
+    goal: "Armanc", save: "Tomar bike", cancel: "Betal", delete: "Jê bibe", edit: "Sererast",
+    complete: "Temam", next: "Pêş", prev: "Paş", daysPerWeek: "Roj/Hefte",
+    exercises: "Temrîn", sets: "Set", reps: "Dubare", rest: "Bêhna", calories: "Kalorî",
+    streak: "Rêz", chart: "Grafîk", userManagement: "Rêveberiya Bikarhêner",
+    exportData: "Exporta Daneyan", timer: "Demjimêr", startWorkout: "Perwerdeyê Destpêke",
+    pause: "Bêhne", reset: "Vegerîne",
+    onboardingSub: "Ka em profîla te çêkin da ku plana te ya perwerdehiyê ya bêkêmasî hesab bikin.",
+    beginner: "Destpêk", intermediate: "Navîn", advanced: "Pêşketî",
+    strength: "Hêz", hypertrophy: "Hîpertrofî", endurance: "Bîhnfirehî", weight_loss: "Kêmkirina Giraniyê",
+    dashboardSub: "Li vir kurteya te ya îro ye", nextWorkout: "Perwerdeya Pêş",
+    generatePlan: "Niha Planê Çêke", regenerate: "Dîsa Çêke", noPlan: "Hêj plana perwerdehiyê nehatiye çêkirin.",
+    noWorkout: "Perwerdeya aktîf tune. Planek hilbijêrin.", add: "Zêdeke",
+    deleteAll: "Hemî Daneyan Jê Bibe", editProfile: "Profîlê Sererast",
+    saveExit: "Tomar bike û Derkeve", finish: "Temam",
+    completeWorkout: "Perwerdeyê Temam Bike", weightChart: "Pêşveçûna Giraniyê",
+    workoutsPerWeek: "Perwerde di Hefteyê de", streakHistory: "Dîroka Rêzê", noData: "Dane tune",
+    today: "Îro", planned: "Plankirî", noPlanForToday: "Ji bo îro perwerde nehatiye plankirin",
+    kcal: "kcal", activeMinutes: "Deqîqeya Aktîf", level: "Asta",
+    interviewQ1: "Tu di hefteyê de çend caran perwerdehiyê dikî?", interviewQ2: "Tu gihîştina sporê heye?",
+    interviewQ3: "Tu bi navgînî çend demjimêran radikî?", interviewQ4: "Tu xwarina xwe çawa şirove dikî?",
+    interviewQ5: "Tu sînorkirinên tenduristiyê hene?", interviewQ6: "Jiyana te ya rojane çiqas stres e?",
+    interviewQ7: "Te di perwerdeyê de çiqas dem heye (deqîqe)?", interviewQ8: "Tu di bicihanînê de dîsîplînî?",
+    interviewQ9: "Tu ezmûna perwerdehiya hêzê heye?", interviewQ10: "Armanca te ya sereke ya fitnessê çi ye?",
+    yes: "Erê", no: "Na", unsure: "Ne diyar", well: "Baş", moderate: "Navîn", poor: "Nebaş",
+    backToDashboard: "Vegere Dashboard", trainingPlan: "Plana Perwerdehiyê",
+    habitAdd: "Adeta Nû", habitName: "Navê Adetê", habitType: "Cure",
+    habitBuild: "Ava bike", habitBreak: "Bihêle",
+    interviewComplete: "Hevpeyvîn temam! Niha tu dikarî plana xwe ya perwerdehiyê ya kesane çêkî.",
+    planGenerated: "Plana perwerdehiyê bi serkeftî hate çêkirin!", workoutCompleted: "Perwerde temam!",
+    dataExported: "Dane hatin export kirin!", dataCleared: "Hemî dane hatin jêbirin.",
+    trainingPlanManagement: "Rêveberiya Plana Perwerdehiyê",
+    editPlan: "Planê Sererast Bike", deletePlan: "Planê Jê Bibe",
+    confirmDelete: "Tu piştrast î?", yes: "Erê", no: "Na",
+    selectWorkout: "Ji plana xwe perwerdeyek hilbijêrin",
+    restTimer: "Demjimêra Bêhnê", nextExercise: "Temrîna Pêş"
+  }
+};
+
+// ============================================================
+// EXERCISE DATABASE (30+ exercises)
+// ============================================================
+const EXERCISES = {
+  chest: [
+    { name: "Bench Press", muscleGroup: "chest", equipment: "Barbell", description: "Lie on flat bench, press barbell from chest to full arm extension" },
+    { name: "Incline Dumbbell Press", muscleGroup: "chest", equipment: "Dumbbells", description: "Lie on incline bench, press dumbbells up" },
+    { name: "Dumbbell Fly", muscleGroup: "chest", equipment: "Dumbbells", description: "Lie on flat bench, open arms wide then bring together" },
+    { name: "Push-Ups", muscleGroup: "chest", equipment: "Bodyweight", description: "Lower chest to floor, push back up" },
+    { name: "Cable Crossover", muscleGroup: "chest", equipment: "Cable", description: "Pull cables together in front of chest" }
+  ],
+  back: [
+    { name: "Deadlift", muscleGroup: "back", equipment: "Barbell", description: "Lift barbell from floor to hip height" },
+    { name: "Pull-Ups", muscleGroup: "back", equipment: "Bodyweight", description: "Pull chin over bar" },
+    { name: "Barbell Row", muscleGroup: "back", equipment: "Barbell", description: "Bend over, pull barbell to lower chest" },
+    { name: "Lat Pulldown", muscleGroup: "back", equipment: "Cable", description: "Pull bar down to upper chest" },
+    { name: "Seated Cable Row", muscleGroup: "back", equipment: "Cable", description: "Pull handle to torso while seated" }
+  ],
+  shoulders: [
+    { name: "Overhead Press", muscleGroup: "shoulders", equipment: "Barbell", description: "Press barbell from shoulders to overhead" },
+    { name: "Lateral Raise", muscleGroup: "shoulders", equipment: "Dumbbells", description: "Raise dumbbells out to sides to shoulder height" },
+    { name: "Front Raise", muscleGroup: "shoulders", equipment: "Dumbbells", description: "Raise dumbbells in front to shoulder height" },
+    { name: "Face Pull", muscleGroup: "shoulders", equipment: "Cable", description: "Pull cable rope toward face" }
+  ],
+  biceps: [
+    { name: "Barbell Curl", muscleGroup: "biceps", equipment: "Barbell", description: "Curl barbell from hips to shoulders" },
+    { name: "Dumbbell Hammer Curl", muscleGroup: "biceps", equipment: "Dumbbells", description: "Curl dumbbells with palms facing each other" },
+    { name: "Concentration Curl", muscleGroup: "biceps", equipment: "Dumbbell", description: "Seated curl with elbow braced against thigh" }
+  ],
+  triceps: [
+    { name: "Tricep Pushdown", muscleGroup: "triceps", equipment: "Cable", description: "Push cable bar down to full arm extension" },
+    { name: "Overhead Tricep Extension", muscleGroup: "triceps", equipment: "Dumbbell", description: "Extend dumbbell overhead from behind head" },
+    { name: "Close-Grip Bench Press", muscleGroup: "triceps", equipment: "Barbell", description: "Bench press with narrow grip" },
+    { name: "Dips", muscleGroup: "triceps", equipment: "Bodyweight", description: "Lower body between parallel bars, push back up" }
+  ],
+  legs: [
+    { name: "Squat", muscleGroup: "legs", equipment: "Barbell", description: "Lower hips back and down, return to standing" },
+    { name: "Romanian Deadlift", muscleGroup: "legs", equipment: "Barbell", description: "Hinge at hips, lower barbell along legs" },
+    { name: "Leg Press", muscleGroup: "legs", equipment: "Machine", description: "Push platform away using legs" },
+    { name: "Lunges", muscleGroup: "legs", equipment: "Dumbbells", description: "Step forward, lower back knee toward ground" },
+    { name: "Leg Curl", muscleGroup: "legs", equipment: "Machine", description: "Curl weight toward glutes" },
+    { name: "Calf Raises", muscleGroup: "legs", equipment: "Bodyweight", description: "Rise onto toes, lower slowly" }
+  ],
+  core: [
+    { name: "Plank", muscleGroup: "core", equipment: "Bodyweight", description: "Hold straight body position on forearms and toes" },
+    { name: "Crunches", muscleGroup: "core", equipment: "Bodyweight", description: "Curl upper body toward knees" },
+    { name: "Leg Raises", muscleGroup: "core", equipment: "Bodyweight", description: "Raise legs to 90 degrees while lying" },
+    { name: "Russian Twist", muscleGroup: "core", equipment: "Bodyweight", description: "Rotate torso side to side while seated" }
+  ],
+  cardio: [
+    { name: "Jumping Jacks", muscleGroup: "cardio", equipment: "Bodyweight", description: "Jump while spreading arms and legs" },
+    { name: "Burpees", muscleGroup: "cardio", equipment: "Bodyweight", description: "Squat, kick back to plank, return, jump up" },
+    { name: "Mountain Climbers", muscleGroup: "cardio", equipment: "Bodyweight", description: "Alternate driving knees to chest in plank" },
+    { name: "High Knees", muscleGroup: "cardio", equipment: "Bodyweight", description: "Run in place driving knees up" }
+  ],
+  full_body: [
+    { name: "Clean & Press", muscleGroup: "full_body", equipment: "Barbell", description: "Pull bar from floor to overhead in one motion" },
+    { name: "Kettlebell Swing", muscleGroup: "full_body", equipment: "Kettlebell", description: "Swing kettlebell from between legs to chest height" }
+  ]
+};
+
+// Flatten for easy lookup
+const ALL_EXERCISES = [];
+Object.values(EXERCISES).forEach(arr => arr.forEach(ex => ALL_EXERCISES.push(ex)));
+
+// ============================================================
+// APP STATE
+// ============================================================
+let state = {
+  lang: localStorage.getItem('apex_lang') || 'de',
+  user: JSON.parse(localStorage.getItem('apex_user') || 'null'),
+  plan: JSON.parse(localStorage.getItem('apex_plan') || 'null'),
+  progress: JSON.parse(localStorage.getItem('apex_progress') || '[]'),
+  habits: JSON.parse(localStorage.getItem('apex_habits') || '[]'),
+  interview: JSON.parse(localStorage.getItem('apex_interview') || '[]'),
+  currentWeek: 0,
+  currentWorkout: null,
+  interviewIndex: 0,
+  interviewAnswers: JSON.parse(localStorage.getItem('apex_interview_answers') || '[]')
+};
+
+function saveState() {
+  if (state.user) localStorage.setItem('apex_user', JSON.stringify(state.user));
+  if (state.plan) localStorage.setItem('apex_plan', JSON.stringify(state.plan));
+  localStorage.setItem('apex_progress', JSON.stringify(state.progress));
+  localStorage.setItem('apex_habits', JSON.stringify(state.habits));
+  localStorage.setItem('apex_interview', JSON.stringify(state.interview));
+  localStorage.setItem('apex_interview_answers', JSON.stringify(state.interviewAnswers));
+}
+
+// ============================================================
+// I18N
+// ============================================================
+function t(key) {
+  return TRANSLATIONS[state.lang]?.[key] || TRANSLATIONS['de'][key] || key;
+}
+
+function applyTranslations() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const translated = t(key);
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = translated;
+    } else {
+      el.textContent = translated;
+    }
+  });
+  document.documentElement.lang = state.lang;
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg, type = '') {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (type ? ' ' + type : '');
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function showModal(html) {
+  const c = document.getElementById('modalContainer');
+  c.innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal-content">${html}</div></div>`;
+}
+function closeModal() { document.getElementById('modalContainer').innerHTML = ''; }
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function navigate(page) {
+  if (!state.user && page !== 'landing' && page !== 'onboarding') {
+    page = 'onboarding';
+  }
+  window.location.hash = page;
+}
+
+function handleHash() {
+  let hash = window.location.hash.replace('#', '') || 'landing';
+  if (!state.user && hash !== 'landing' && hash !== 'onboarding') {
+    hash = 'onboarding';
+  }
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show target
+  const target = document.getElementById('page-' + hash);
+  if (target) {
+    target.classList.add('active');
+    // Add animate-in
+    target.querySelectorAll('.animate-in').forEach(el => el.style.animation = 'none');
+    setTimeout(() => {
+      target.querySelectorAll('.animate-in').forEach(el => {
+        el.style.animation = '';
+        el.classList.add('animate-in');
+      });
+    }, 10);
+  }
+  // Sidebar active
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navEl = document.querySelector(`.nav-item[data-page="${hash}"]`);
+  if (navEl) navEl.classList.add('active');
+
+  // Render page
+  switch(hash) {
+    case 'dashboard': renderDashboard(); break;
+    case 'interview': renderInterview(); break;
+    case 'plan': renderPlan(); break;
+    case 'workout': renderWorkout(); break;
+    case 'habits': renderHabits(); break;
+    case 'progress': renderProgress(); break;
+    case 'admin': renderAdmin(); break;
+    case 'settings': renderSettings(); break;
+    case 'onboarding': renderOnboarding(); break;
+  }
+}
+
+window.addEventListener('hashchange', handleHash);
+window.addEventListener('load', () => {
+  applyTranslations();
+  handleHash();
+});
+
+// ============================================================
+// ONBOARDING
+// ============================================================
+function renderOnboarding() {
+  const form = document.getElementById('onboardingForm');
+  if (!form) return;
+  // Remove old listener by cloning
+  const newForm = form.cloneNode(true);
+  form.parentNode.replaceChild(newForm, form);
+  newForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('onName').value.trim();
+    const age = parseInt(document.getElementById('onAge').value);
+    const weight = parseFloat(document.getElementById('onWeight').value);
+    const height = parseInt(document.getElementById('onHeight').value);
+    const fitnessLevel = document.getElementById('onFitnessLevel').value;
+    const goal = document.getElementById('onGoal').value;
+    if (!name || !age || !weight || !height) { showToast('Bitte alle Felder ausfüllen', 'error'); return; }
+    state.user = { name, age, weight, height, fitnessLevel, goal, language: state.lang, createdAt: new Date().toISOString() };
+    localStorage.setItem('apex_user', JSON.stringify(state.user));
+    showToast(t('save') + ' ✓', 'success');
+    navigate('dashboard');
+  });
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard() {
+  if (!state.user) return;
+  const u = state.user;
+  document.getElementById('dashGreeting').innerHTML = `${t('welcomeBack')}, ${u.name}!`;
+
+  // Calculate BMR
+  const bmr = 10 * u.weight + 6.25 * u.height - 5 * u.age + 5;
+  const activityFactor = u.fitnessLevel === 'beginner' ? 1.375 : u.fitnessLevel === 'intermediate' ? 1.55 : 1.725;
+  const tdee = Math.round(bmr * activityFactor);
+
+  // Streak
+  const streak = calculateStreak();
+
+  // Workouts this week
+  const workoutsThisWeek = countWorkoutsThisWeek();
+
+  // Next workout
+  let nextWorkoutText = t('noPlanForToday');
+  if (state.plan) {
+    const today = new Date().getDay();
+    const dayMap = [6,0,1,2,3,4,5]; // Sunday=0 -> index 0=Sunday
+    const dayIndex = dayMap[today];
+    const week = state.plan.weeks[state.currentWeek] || state.plan.weeks[0];
+    if (week) {
+      const wkt = week.workouts.find(w => w.dayNumber === dayIndex);
+      if (wkt) {
+        nextWorkoutText = `${wkt.name} — ${wkt.exercises.length} ${t('exercises')}`;
+      }
+    }
+  }
+  document.getElementById('dashNextText').textContent = nextWorkoutText;
+
+  // Stats
+  document.getElementById('dashStats').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-icon gold"><i class="fas fa-fire"></i></div>
+      <div class="stat-value">${streak}</div>
+      <div class="stat-label">${t('streak')} 🔥</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green"><i class="fas fa-dumbbell"></i></div>
+      <div class="stat-value">${workoutsThisWeek}</div>
+      <div class="stat-label">${t('workoutsPerWeek')}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon blue"><i class="fas fa-utensils"></i></div>
+      <div class="stat-value">${tdee}</div>
+      <div class="stat-label">${t('calories')} (TDEE)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon red"><i class="fas fa-tachometer-alt"></i></div>
+      <div class="stat-value" style="text-transform:capitalize;font-size:1.2rem">${t(u.goal)}</div>
+      <div class="stat-label">${t('goal')} · ${t(u.fitnessLevel)}</div>
+    </div>
+  `;
+
+  // Quick actions
+  const interviewDone = state.interviewAnswers.length >= 10;
+  const hasPlan = !!state.plan;
+  document.getElementById('dashActions').innerHTML = `
+    <div class="card" style="cursor:pointer" onclick="navigate('interview')">
+      <h4 style="color:var(--gold)"><i class="fas fa-comments"></i> ${t('interview')}</h4>
+      <p style="color:var(--text2);font-size:0.85rem;margin-top:4px">${interviewDone ? '✓ ' + t('complete') : state.interviewAnswers.length + '/10 ' + t('complete')}</p>
+    </div>
+    <div class="card" style="cursor:pointer" onclick="navigate('plan')">
+      <h4 style="color:var(--gold)"><i class="fas fa-dumbbell"></i> ${t('trainingPlan')}</h4>
+      <p style="color:var(--text2);font-size:0.85rem;margin-top:4px">${hasPlan ? '✓ ' + t('complete') : t('generatePlan')}</p>
+    </div>
+  `;
+}
+
+function calculateStreak() {
+  const logs = state.progress.filter(p => p.completed);
+  if (logs.length === 0) return 0;
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const hasLog = logs.some(l => l.date === dateStr);
+    if (hasLog) streak++;
+    else if (i > 0) break;
+  }
+  return streak;
+}
+
+function countWorkoutsThisWeek() {
+  const now = new Date();
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay());
+  const startStr = startOfWeek.toISOString().split('T')[0];
+  return state.progress.filter(p => p.completed && p.date >= startStr).length;
+}
+
+function getTodaysDateStr() { return new Date().toISOString().split('T')[0]; }
+
+// ============================================================
+// INTERVIEW
+// ============================================================
+const INTERVIEW_QUESTIONS = [
+  { id: 'q1', key: 'interviewQ1', type: 'choice', options: ['0-1', '2-3', '4-5', '6+'] },
+  { id: 'q2', key: 'interviewQ2', type: 'yesno' },
+  { id: 'q3', key: 'interviewQ3', type: 'choice', options: ['<5', '5-6', '7-8', '8+'] },
+  { id: 'q4', key: 'interviewQ4', type: 'choice', options: ['well', 'moderate', 'poor'] },
+  { id: 'q5', key: 'interviewQ5', type: 'yesno' },
+  { id: 'q6', key: 'interviewQ6', type: 'choice', options: ['low', 'moderate', 'high', 'very_high'] },
+  { id: 'q7', key: 'interviewQ7', type: 'choice', options: ['<30', '30-45', '45-60', '60+'] },
+  { id: 'q8', key: 'interviewQ8', type: 'yesno' },
+  { id: 'q9', key: 'interviewQ9', type: 'yesno' },
+  { id: 'q10', key: 'interviewQ10', type: 'choice', options: ['strength', 'hypertrophy', 'endurance', 'weight_loss'] }
+];
+
+function renderInterview() {
+  state.interviewIndex = state.interviewIndex || 0;
+  updateInterviewView();
+}
+
+function updateInterviewView() {
+  const idx = state.interviewIndex;
+  const total = INTERVIEW_QUESTIONS.length;
+  document.getElementById('interviewCounter').textContent = `${idx + 1}/${total}`;
+  document.getElementById('interviewProgress').style.width = `${((idx + 1) / total) * 100}%`;
+
+  const q = INTERVIEW_QUESTIONS[idx];
+  document.getElementById('interviewQuestion').textContent = t(q.key);
+
+  const saved = state.interviewAnswers[idx] || {};
+  const optsDiv = document.getElementById('interviewOptions');
+  if (q.type === 'yesno') {
+    optsDiv.innerHTML = `
+      <button class="${saved.answer === 'yes' ? 'selected' : ''}" onclick="selectInterviewAnswer('yes')">${t('yes')}</button>
+      <button class="${saved.answer === 'no' ? 'selected' : ''}" onclick="selectInterviewAnswer('no')">${t('no')}</button>
+      <button class="${saved.answer === 'unsure' ? 'selected' : ''}" onclick="selectInterviewAnswer('unsure')">${t('unsure')}</button>
+    `;
+  } else if (q.type === 'choice') {
+    optsDiv.innerHTML = q.options.map(o => {
+      const label = t(o) || o;
+      return `<button class="${saved.answer === o ? 'selected' : ''}" onclick="selectInterviewAnswer('${o}')">${label}</button>`;
+    }).join('');
+  }
+
+  document.getElementById('interviewNote').value = saved.note || '';
+
+  document.getElementById('interviewPrevBtn').style.display = idx === 0 ? 'none' : 'inline-flex';
+  document.getElementById('interviewNextBtn').style.display = idx < total - 1 ? 'inline-flex' : 'none';
+  document.getElementById('interviewFinishBtn').style.display = idx === total - 1 ? 'inline-flex' : 'none';
+}
+
+function selectInterviewAnswer(val) {
+  const idx = state.interviewIndex;
+  const q = INTERVIEW_QUESTIONS[idx];
+  if (!state.interviewAnswers[idx]) {
+    state.interviewAnswers[idx] = { questionId: q.id, category: q.key, answer: val, note: '', date: new Date().toISOString() };
+  } else {
+    state.interviewAnswers[idx].answer = val;
+  }
+  saveState();
+  updateInterviewView();
+}
+
+function interviewPrev() {
+  // Save note
+  const note = document.getElementById('interviewNote').value;
+  if (state.interviewAnswers[state.interviewIndex]) {
+    state.interviewAnswers[state.interviewIndex].note = note;
+  }
+  if (state.interviewIndex > 0) {
+    state.interviewIndex--;
+    updateInterviewView();
+  }
+}
+
+function interviewNext() {
+  const note = document.getElementById('interviewNote').value;
+  if (state.interviewAnswers[state.interviewIndex]) {
+    state.interviewAnswers[state.interviewIndex].note = note;
+  }
+  if (state.interviewIndex < INTERVIEW_QUESTIONS.length - 1) {
+    state.interviewIndex++;
+    updateInterviewView();
+  }
+  saveState();
+}
+
+function interviewFinish() {
+  const note = document.getElementById('interviewNote').value;
+  if (state.interviewAnswers[state.interviewIndex]) {
+    state.interviewAnswers[state.interviewIndex].note = note;
+  }
+  // Check if all answered
+  const allAnswered = state.interviewAnswers.every(a => a && a.answer);
+  if (!allAnswered) {
+    showToast('Bitte beantworte alle Fragen', 'error');
+    return;
+  }
+  saveState();
+  generateTrainingPlan();
+  showToast(t('interviewComplete'), 'success');
+  navigate('plan');
+}
+
+// ============================================================
+// TRAINING PLAN GENERATION
+// ============================================================
+function generateTrainingPlan() {
+  if (!state.user) { showToast('Bitte erstelle zuerst ein Profil', 'error'); return; }
+  const u = state.user;
+  const goal = u.goal || 'hypertrophy';
+  const level = u.fitnessLevel || 'beginner';
+
+  // Rep ranges by goal
+  const repRanges = { strength: [3, 5], hypertrophy: [8, 12], endurance: [15, 20], weight_loss: [12, 15] };
+  const [minReps, maxReps] = repRanges[goal] || [8, 12];
+
+  // Rest times by goal
+  const restTimes = { strength: 120, hypertrophy: 60, endurance: 30, weight_loss: 45 };
+  const restSec = restTimes[goal] || 60;
+
+  // Week structure
+  let daysPerWeek, splitType;
+  if (level === 'beginner') { daysPerWeek = 3; splitType = 'full_body'; }
+  else if (level === 'intermediate') { daysPerWeek = 4; splitType = 'upper_lower'; }
+  else { daysPerWeek = 5; splitType = 'push_pull_legs'; }
+
+  // Build workouts
+  const workouts = [];
+  const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+  if (splitType === 'full_body') {
+    const fullBodyExercises = pickExercises(['chest', 'back', 'shoulders', 'legs', 'core'], 6);
+    const exercises1 = fullBodyExercises.map(ex => ({
+      name: ex.name, sets: 3, reps: `${minReps}-${maxReps}`, weight: goal === 'strength' ? 60 : 20,
+      restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const exercises2 = pickExercises(['chest', 'back', 'legs', 'biceps', 'triceps'], 6).map(ex => ({
+      name: ex.name, sets: 3, reps: `${minReps}-${maxReps}`, weight: 20, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const exercises3 = pickExercises(['shoulders', 'legs', 'core', 'back', 'full_body'], 5).map(ex => ({
+      name: ex.name, sets: 3, reps: `${minReps}-${maxReps}`, weight: 20, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    workouts.push(
+      { dayNumber: 1, name: `Full Body A — ${t(goal)}`, exercises: exercises1, completed: false },
+      { dayNumber: 3, name: `Full Body B — ${t(goal)}`, exercises: exercises2, completed: false },
+      { dayNumber: 5, name: `Full Body C — ${t(goal)}`, exercises: exercises3, completed: false }
+    );
+    if (goal === 'weight_loss') {
+      workouts.forEach(w => {
+        w.exercises.push({
+          name: 'Burpees', sets: 3, reps: '15', weight: 0, restSec: 30,
+          muscleGroup: 'cardio', completed: []
+        });
+        w.exercises.push({
+          name: 'Mountain Climbers', sets: 3, reps: '30', weight: 0, restSec: 30,
+          muscleGroup: 'cardio', completed: []
+        });
+      });
+    }
+  } else if (splitType === 'upper_lower') {
+    const upperEx1 = pickExercises(['chest', 'back', 'shoulders', 'biceps', 'triceps'], 6).map(ex => ({
+      name: ex.name, sets: 4, reps: `${minReps}-${maxReps}`, weight: goal === 'strength' ? 55 : 20,
+      restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const upperEx2 = pickExercises(['chest', 'back', 'shoulders', 'biceps', 'triceps'], 6).map(ex => ({
+      name: ex.name, sets: 4, reps: `${minReps}-${maxReps}`, weight: 20, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const lowerEx1 = pickExercises(['legs', 'core'], 5).map(ex => ({
+      name: ex.name, sets: 4, reps: `${minReps}-${maxReps}`, weight: 40, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const lowerEx2 = pickExercises(['legs', 'core'], 5).map(ex => ({
+      name: ex.name, sets: 4, reps: `${minReps}-${maxReps}`, weight: 40, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    workouts.push(
+      { dayNumber: 1, name: `Upper A — ${t(goal)}`, exercises: upperEx1, completed: false },
+      { dayNumber: 2, name: `Lower A — ${t(goal)}`, exercises: lowerEx1, completed: false },
+      { dayNumber: 4, name: `Upper B — ${t(goal)}`, exercises: upperEx2, completed: false },
+      { dayNumber: 5, name: `Lower B — ${t(goal)}`, exercises: lowerEx2, completed: false }
+    );
+    if (goal === 'weight_loss') {
+      workouts.forEach(w => {
+        w.exercises.push({
+          name: 'Jumping Jacks', sets: 3, reps: '30', weight: 0, restSec: 20,
+          muscleGroup: 'cardio', completed: []
+        });
+      });
+    }
+  } else { // push_pull_legs
+    const pushEx = pickExercises(['chest', 'shoulders', 'triceps'], 6).map(ex => ({
+      name: ex.name, sets: 5, reps: `${minReps}-${maxReps}`, weight: goal === 'strength' ? 60 : 20,
+      restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const pullEx = pickExercises(['back', 'biceps'], 5).map(ex => ({
+      name: ex.name, sets: 5, reps: `${minReps}-${maxReps}`, weight: 20, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const legsEx = pickExercises(['legs', 'core'], 6).map(ex => ({
+      name: ex.name, sets: 5, reps: `${minReps}-${maxReps}`, weight: 50, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const pushEx2 = pickExercises(['chest', 'shoulders', 'triceps'], 5).map(ex => ({
+      name: ex.name, sets: 4, reps: `${minReps}-${maxReps}`, weight: 20, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    const pullEx2 = pickExercises(['back', 'biceps'], 5).map(ex => ({
+      name: ex.name, sets: 4, reps: `${minReps}-${maxReps}`, weight: 20, restSec, muscleGroup: ex.muscleGroup, completed: []
+    }));
+    workouts.push(
+      { dayNumber: 1, name: `Push A — ${t(goal)}`, exercises: pushEx, completed: false },
+      { dayNumber: 2, name: `Pull A — ${t(goal)}`, exercises: pullEx, completed: false },
+      { dayNumber: 3, name: `Legs — ${t(goal)}`, exercises: legsEx, completed: false },
+      { dayNumber: 4, name: `Push B — ${t(goal)}`, exercises: pushEx2, completed: false },
+      { dayNumber: 5, name: `Pull B — ${t(goal)}`, exercises: pullEx2, completed: false }
+    );
+    if (goal === 'weight_loss') {
+      workouts.forEach(w => {
+        w.exercises.push({
+          name: 'High Knees', sets: 3, reps: '30', weight: 0, restSec: 20,
+          muscleGroup: 'cardio', completed: []
+        });
+      });
+    }
+  }
+
+  state.plan = {
+    id: Date.now().toString(),
+    userId: state.user.name,
+    name: `${level} ${goal} ${t('trainingPlan')}`,
+    goal,
+    difficulty: level,
+    weeks: [{
+      weekNumber: 1,
+      focus: splitType === 'full_body' ? 'Full Body' : splitType === 'upper_lower' ? 'Upper/Lower Split' : 'Push/Pull/Legs',
+      workouts
+    }]
+  };
+  state.currentWeek = 0;
+  saveState();
+  showToast(t('planGenerated'), 'success');
+  renderPlan();
+}
+
+function pickExercises(muscleGroups, count) {
+  let pool = [];
+  muscleGroups.forEach(mg => {
+    if (EXERCISES[mg]) {
+      EXERCISES[mg].forEach(ex => pool.push(ex));
+    }
+  });
+  // Shuffle
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, count);
+}
+
+// ============================================================
+// PLAN RENDERER
+// ============================================================
+function renderPlan() {
+  const tabsDiv = document.getElementById('planWeekTabs');
+  const contentDiv = document.getElementById('planContent');
+
+  if (!state.plan || !state.plan.weeks || state.plan.weeks.length === 0) {
+    contentDiv.innerHTML = `<div class="empty-state"><i class="fas fa-dumbbell"></i><p>${t('noPlan')}</p></div>`;
+    tabsDiv.innerHTML = '';
+    return;
+  }
+
+  const weeks = state.plan.weeks;
+  const currentWeek = state.currentWeek || 0;
+
+  // Week tabs
+  tabsDiv.innerHTML = weeks.map((w, i) =>
+    `<button class="week-tab ${i === currentWeek ? 'active' : ''}" onclick="selectWeek(${i})">${t('plan')} ${w.weekNumber}: ${w.focus}</button>`
+  ).join('');
+
+  // Workout cards for selected week
+  const week = weeks[currentWeek];
+  if (!week) return;
+
+  const dayNames = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+  const dayNamesFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  contentDiv.innerHTML = week.workouts.map(w => {
+    const completed = state.progress.some(p => p.workoutId === w.name && p.date === getTodaysDateStr() && p.completed);
+    return `<div class="workout-card" onclick="startWorkout('${w.name.replace(/'/g, "\\'")}')">
+      <div style="display:flex;justify-content:space-between;align-items:start">
+        <div>
+          <h4>${dayNames[w.dayNumber] ? dayNames[w.dayNumber] + ' - ' : ''}${w.name}</h4>
+          <div class="meta">${w.exercises.length} ${t('exercises')} · ${w.exercises[0]?.reps || '8-12'} ${t('reps')} · ${w.exercises[0]?.restSec || 60}s ${t('rest')}</div>
+        </div>
+        ${completed ? '<span style="color:var(--success)"><i class="fas fa-check-circle"></i></span>' : ''}
+      </div>
+      <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+        ${w.exercises.slice(0,4).map(e => `<span class="tag" style="background:var(--bg2);color:var(--text2);font-size:0.65rem">${e.name}</span>`).join('')}
+        ${w.exercises.length > 4 ? `<span class="tag" style="background:var(--bg2);color:var(--text3)">+${w.exercises.length - 4}</span>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function selectWeek(i) { state.currentWeek = i; renderPlan(); }
+
+// ============================================================
+// WORKOUT PLAYER
+// ============================================================
+let timerInterval = null;
+let timerSeconds = 0;
+let timerRunning = false;
+let currentWorkoutExercises = [];
+let currentExerciseIndex = 0;
+
+function startWorkout(workoutName) {
+  if (!state.plan) { showToast(t('noPlan'), 'error'); return; }
+  const week = state.plan.weeks[state.currentWeek || 0];
+  if (!week) { showToast(t('noPlan'), 'error'); return; }
+  const workout = week.workouts.find(w => w.name === workoutName);
+  if (!workout) { showToast('Workout nicht gefunden', 'error'); return; }
+
+  state.currentWorkout = { ...workout, name: workoutName, exercises: workout.exercises.map(e => ({ ...e, completed: [...(e.completed || [])] })) };
+  currentWorkoutExercises = state.currentWorkout.exercises;
+  currentExerciseIndex = 0;
+  navigate('workout');
+  renderWorkout();
+}
+
+function renderWorkout() {
+  const content = document.getElementById('workoutContent');
+  const title = document.getElementById('workoutTitle');
+
+  if (!state.currentWorkout || !currentWorkoutExercises || currentWorkoutExercises.length === 0) {
+    title.textContent = t('workout');
+    content.innerHTML = `<div class="empty-state"><i class="fas fa-play-circle"></i><p>${t('selectWorkout')}</p></div>`;
+    return;
+  }
+
+  title.textContent = state.currentWorkout.name;
+  document.getElementById('workoutMeta').textContent = `${currentWorkoutExercises.length} ${t('exercises')}`;
+
+  const ex = currentWorkoutExercises[currentExerciseIndex];
+  if (!ex) {
+    content.innerHTML = `<div class="empty-state"><i class="fas fa-check-circle" style="color:var(--success)"></i><p>${t('workoutCompleted')}</p></div>`;
+    return;
+  }
+
+  const allDone = currentWorkoutExercises.every(e => {
+    return e.completed && e.completed.length === e.sets;
+  });
+
+  const nextEx = currentWorkoutExercises[currentExerciseIndex + 1];
+
+  content.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+      <span style="color:var(--text3);font-size:0.8rem">${t('exercises')} ${currentExerciseIndex + 1}/${currentWorkoutExercises.length}</span>
+      <div class="progress-bar" style="flex:1;max-width:300px"><div class="progress-fill" style="width:${((currentExerciseIndex + 1) / currentWorkoutExercises.length) * 100}%"></div></div>
+    </div>
+    <div class="exercise-card animate-in" id="exerciseCard">
+      <div class="exercise-name">${ex.name}</div>
+      <div style="color:var(--text3);font-size:0.8rem;text-transform:capitalize">${ex.muscleGroup} · ${ex.sets} ${t('sets')} × ${ex.reps} ${t('reps')}</div>
+      <div class="exercise-meta">
+        <span><i class="fas fa-weight"></i> ${ex.weight || 0}kg</span>
+        <span><i class="fas fa-clock"></i> ${ex.restSec}s ${t('rest')}</span>
+        <span><i class="fas fa-layer-group"></i> ${ex.sets} ${t('sets')}</span>
+      </div>
+      <div style="margin:16px 0">
+        ${Array.from({length: ex.sets}, (_, i) => `
+          <div class="set-row">
+            <label>
+              <input type="checkbox" ${ex.completed && ex.completed[i] ? 'checked' : ''} onchange="toggleSet(${currentExerciseIndex}, ${i})">
+              ${t('sets')} ${i + 1} — ${ex.reps} ${t('reps')} @ ${ex.weight}kg
+            </label>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    <!-- Timer -->
+    <div class="card" style="margin-bottom:16px">
+      <h4 style="margin-bottom:8px;color:var(--gold)"><i class="fas fa-hourglass-half"></i> ${t('restTimer')}</h4>
+      <div class="timer-display">
+        <div class="timer-time" id="timerDisplay">${formatTimer(0)}</div>
+        <div class="timer-label">${t('rest')}</div>
+      </div>
+      <div class="timer-controls">
+        <button class="btn btn-primary btn-sm" id="timerStartBtn" onclick="startTimer(${ex.restSec || 60})"><i class="fas fa-play"></i> ${t('start')}</button>
+        <button class="btn btn-secondary btn-sm" id="timerPauseBtn" style="display:none" onclick="pauseTimer()"><i class="fas fa-pause"></i> ${t('pause')}</button>
+        <button class="btn btn-secondary btn-sm" onclick="resetTimer()"><i class="fas fa-redo"></i> ${t('reset')}</button>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
+      <div>
+        <button class="btn btn-secondary btn-sm" ${currentExerciseIndex === 0 ? 'disabled style="opacity:0.4"' : ''} onclick="prevExercise()"><i class="fas fa-arrow-left"></i> ${t('prev')}</button>
+        ${nextEx ? `<button class="btn btn-primary btn-sm" onclick="nextExercise()">${t('next')} <i class="fas fa-arrow-right"></i></button>` : ''}
+      </div>
+      ${allDone ? `<button class="btn btn-success" onclick="completeWorkout()"><i class="fas fa-check-circle"></i> ${t('completeWorkout')}</button>` : ''}
+    </div>
+    ${nextEx ? `<p style="color:var(--text3);font-size:0.78rem;margin-top:8px"><i class="fas fa-arrow-up"></i> ${t('nextExercise')}: ${nextEx.name}</p>` : ''}
+  `;
+}
+
+function toggleSet(exIdx, setId) {
+  const ex = currentWorkoutExercises[exIdx];
+  if (!ex) return;
+  if (!ex.completed) ex.completed = [];
+  ex.completed[setId] = !ex.completed[setId];
+  renderWorkout();
+}
+
+function prevExercise() {
+  if (currentExerciseIndex > 0) { currentExerciseIndex--; resetTimer(); renderWorkout(); }
+}
+
+function nextExercise() {
+  if (currentExerciseIndex < currentWorkoutExercises.length - 1) { currentExerciseIndex++; resetTimer(); renderWorkout(); }
+}
+
+function completeWorkout() {
+  const allDone = currentWorkoutExercises.every(e => e.completed && e.completed.filter(Boolean).length === e.sets);
+  if (!allDone) { showToast('Bitte alle Sätze abschließen', 'error'); return; }
+
+  state.progress.push({
+    date: getTodaysDateStr(),
+    workoutId: state.currentWorkout.name,
+    completed: true,
+    weight: state.user.weight,
+    notes: ''
+  });
+
+  // Progression: +2.5kg or +1 rep for all exercises
+  currentWorkoutExercises.forEach(ex => {
+    if (ex.weight > 0) ex.weight += 2.5;
+    const reps = ex.reps;
+    if (reps && !isNaN(parseInt(reps))) {
+      const base = parseInt(reps);
+      if (reps.includes('-')) {
+        const [lo, hi] = reps.split('-').map(Number);
+        ex.reps = `${lo + 1}-${hi + 1}`;
+      } else {
+        ex.reps = `${base + 1}`;
+      }
+    }
+  });
+
+  saveState();
+  showToast(t('workoutCompleted') + ' 🔥', 'success');
+  state.currentWorkout = null;
+  currentWorkoutExercises = [];
+  currentExerciseIndex = 0;
+  navigate('dashboard');
+}
+
+function saveAndExitWorkout() {
+  state.currentWorkout = null;
+  currentWorkoutExercises = [];
+  currentExerciseIndex = 0;
+  resetTimer();
+  navigate('plan');
+}
+
+// ============================================================
+// TIMER
+// ============================================================
+function formatTimer(secs) {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+function startTimer(seconds) {
+  if (timerInterval) clearInterval(timerInterval);
+  timerSeconds = seconds || 60;
+  timerRunning = true;
+  document.getElementById('timerDisplay').textContent = formatTimer(timerSeconds);
+  document.getElementById('timerStartBtn').style.display = 'none';
+  document.getElementById('timerPauseBtn').style.display = 'inline-flex';
+  timerInterval = setInterval(() => {
+    if (timerSeconds > 0) {
+      timerSeconds--;
+      document.getElementById('timerDisplay').textContent = formatTimer(timerSeconds);
+    } else {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerRunning = false;
+      document.getElementById('timerDisplay').textContent = formatTimer(0);
+      document.getElementById('timerStartBtn').style.display = 'inline-flex';
+      document.getElementById('timerPauseBtn').style.display = 'none';
+      showToast('⏰ ' + t('rest') + ' ' + t('complete'), 'success');
+    }
+  }, 1000);
+}
+
+function pauseTimer() {
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    timerRunning = false;
+    document.getElementById('timerStartBtn').style.display = 'inline-flex';
+    document.getElementById('timerStartBtn').innerHTML = '<i class="fas fa-play"></i> ' + t('start');
+    document.getElementById('timerPauseBtn').style.display = 'none';
+  }
+}
+
+function resetTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  timerRunning = false;
+  timerSeconds = 0;
+  const display = document.getElementById('timerDisplay');
+  if (display) display.textContent = formatTimer(0);
+  const startBtn = document.getElementById('timerStartBtn');
+  if (startBtn) { startBtn.style.display = 'inline-flex'; startBtn.innerHTML = '<i class="fas fa-play"></i> ' + t('start'); }
+  const pauseBtn = document.getElementById('timerPauseBtn');
+  if (pauseBtn) pauseBtn.style.display = 'none';
+}
+
+// ============================================================
+// HABITS
+// ============================================================
+function renderHabits() {
+  const list = document.getElementById('habitsList');
+  if (!state.habits || state.habits.length === 0) {
+    list.innerHTML = `<div class="empty-state"><i class="fas fa-check-circle"></i><p>${t('noData')}</p></div>`;
+    return;
+  }
+
+  const today = getTodaysDateStr();
+  list.innerHTML = state.habits.map(h => {
+    const completedToday = h.logs && h.logs.some(l => l.date === today && l.done);
+    const streak = calculateHabitStreak(h);
+    h.streak = streak;
+    return `<div class="habit-item animate-in">
+      <div class="habit-info">
+        <div class="habit-name">${h.name}</div>
+        <div class="habit-type">${h.type === 'build' ? t('habitBuild') : t('habitBreak')} · ${t('streak')}: ${streak} 🔥</div>
+      </div>
+      <input type="checkbox" class="habit-checkbox" ${completedToday ? 'checked' : ''} onchange="toggleHabit('${h.id}', this.checked)">
+    </div>`;
+  }).join('');
+}
+
+function toggleHabit(id, done) {
+  const habit = state.habits.find(h => h.id === id);
+  if (!habit) return;
+  if (!habit.logs) habit.logs = [];
+  const today = getTodaysDateStr();
+  const existing = habit.logs.find(l => l.date === today);
+  if (existing) existing.done = done;
+  else habit.logs.push({ date: today, done });
+  saveState();
+  renderHabits();
+}
+
+function calculateHabitStreak(habit) {
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const log = habit.logs?.find(l => l.date === dateStr);
+    if (log && log.done) streak++;
+    else if (i > 0) break;
+  }
+  return streak;
+}
+
+function showAddHabitModal() {
+  showModal(`
+    <h2>${t('habitAdd')}</h2>
+    <div style="margin-bottom:14px">
+      <label>${t('habitName')}</label>
+      <input type="text" id="habitNameInput" placeholder="z.B. Meditieren">
+    </div>
+    <div style="margin-bottom:14px">
+      <label>${t('habitType')}</label>
+      <select id="habitTypeInput">
+        <option value="build">${t('habitBuild')}</option>
+        <option value="break">${t('habitBreak')}</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">${t('cancel')}</button>
+      <button class="btn btn-primary" onclick="addHabit()">${t('save')}</button>
+    </div>
+  `);
+}
+
+function addHabit() {
+  const name = document.getElementById('habitNameInput').value.trim();
+  const type = document.getElementById('habitTypeInput').value;
+  if (!name) { showToast('Name eingeben', 'error'); return; }
+  state.habits.push({ id: Date.now().toString(), name, type, streak: 0, logs: [] });
+  saveState();
+  closeModal();
+  renderHabits();
+  showToast(t('save') + ' ✓', 'success');
+}
+
+// ============================================================
+// PROGRESS CHARTS
+// ============================================================
+let weightChartInstance = null;
+let workoutsChartInstance = null;
+let streakChartInstance = null;
+
+function renderProgress() {
+  setTimeout(() => {
+    renderWeightChart();
+    renderWorkoutsChart();
+    renderStreakChart();
+  }, 100);
+}
+
+function renderWeightChart() {
+  const canvas = document.getElementById('weightChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (weightChartInstance) weightChartInstance.destroy();
+
+  const logs = state.progress.filter(p => p.completed && p.weight).sort((a, b) => a.date.localeCompare(b.date));
+  const labels = logs.map(l => l.date.slice(5));
+  const data = logs.map(l => l.weight);
+
+  if (data.length === 0) {
+    canvas.parentElement.innerHTML = `<div class="empty-state"><i class="fas fa-chart-line"></i><p>${t('noData')}</p></div>`;
+    return;
+  }
+
+  weightChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets: [{
+      label: t('weight') + ' (kg)',
+      data,
+      borderColor: '#C9A84C',
+      backgroundColor: 'rgba(201,168,76,0.1)',
+      fill: true,
+      tension: 0.4,
+      pointBackgroundColor: '#C9A84C',
+      pointRadius: 4,
+      borderWidth: 2
+    }]},
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#A0A0B8' } }, title: { display: true, text: t('weightChart'), color: '#E8E8F0' } },
+      scales: { x: { ticks: { color: '#6A6A80' }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { color: '#6A6A80' }, grid: { color: 'rgba(255,255,255,0.04)' } } }
+    }
+  });
+}
+
+function renderWorkoutsChart() {
+  const canvas = document.getElementById('workoutsChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (workoutsChartInstance) workoutsChartInstance.destroy();
+
+  // Group by week
+  const weekMap = {};
+  state.progress.filter(p => p.completed).forEach(p => {
+    const date = new Date(p.date);
+    const weekKey = getWeekNumber(date);
+    if (!weekMap[weekKey]) weekMap[weekKey] = 0;
+    weekMap[weekKey]++;
+  });
+
+  const labels = Object.keys(weekMap).slice(-12);
+  const data = labels.map(k => weekMap[k]);
+
+  if (data.length === 0) {
+    canvas.parentElement.innerHTML = `<div class="empty-state"><i class="fas fa-chart-bar"></i><p>${t('noData')}</p></div>`;
+    return;
+  }
+
+  workoutsChartInstance = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{
+      label: t('workoutsPerWeek'),
+      data,
+      backgroundColor: 'rgba(201,168,76,0.7)',
+      borderColor: '#C9A84C',
+      borderWidth: 1,
+      borderRadius: 4
+    }]},
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#A0A0B8' } }, title: { display: true, text: t('workoutsPerWeek'), color: '#E8E8F0' } },
+      scales: { x: { ticks: { color: '#6A6A80' }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { color: '#6A6A80', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.04)' } } }
+    }
+  });
+}
+
+function renderStreakChart() {
+  const canvas = document.getElementById('streakChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (streakChartInstance) streakChartInstance.destroy();
+
+  // Calculate streak over last 30 days
+  const days = [];
+  const streakValues = [];
+  let currentStreak = 0;
+  const today = new Date();
+
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const hasLog = state.progress.some(p => p.completed && p.date === dateStr);
+    if (hasLog) currentStreak++;
+    else currentStreak = 0;
+    days.push(dateStr.slice(5));
+    streakValues.push(currentStreak);
+  }
+
+  streakChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: days,
+      datasets: [{
+        label: t('streak'),
+        data: streakValues,
+        borderColor: '#4ADE80',
+        backgroundColor: 'rgba(74,222,128,0.1)',
+        fill: true,
+        tension: 0.3,
+        pointBackgroundColor: '#4ADE80',
+        pointRadius: 2,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#A0A0B8' } }, title: { display: true, text: t('streakHistory'), color: '#E8E8F0' } },
+      scales: { x: { ticks: { color: '#6A6A80', maxTicksLimit: 10 }, grid: { color: 'rgba(255,255,255,0.04)' } }, y: { ticks: { color: '#6A6A80', stepSize: 1 }, grid: { color: 'rgba(255,255,255,0.04)' } } }
+    }
+  });
+}
+
+function getWeekNumber(date) {
+  const d = new Date(date);
+  d.setHours(0,0,0,0);
+  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(d.getFullYear(), 0, 4);
+  return d.getFullYear() + '-W' + String(Math.ceil((((d - week1) / 86400000) + week1.getDay() + 1) / 7)).padStart(2, '0');
+}
+
+// ============================================================
+// ADMIN
+// ============================================================
+function renderAdmin() {
+  const body = document.getElementById('adminBody');
+  const plansDiv = document.getElementById('adminPlans');
+
+  // User table
+  const u = state.user;
+  const streak = calculateStreak();
+  const workoutsCount = state.progress.filter(p => p.completed).length;
+
+  if (u) {
+    body.innerHTML = `<tr>
+      <td>${u.name}</td>
+      <td>${u.age}</td>
+      <td>${u.weight} kg</td>
+      <td>${u.height} cm</td>
+      <td><span class="tag tag-${u.fitnessLevel}">${t(u.fitnessLevel)}</span></td>
+      <td>${t(u.goal)}</td>
+      <td>${streak}</td>
+      <td>${workoutsCount}</td>
+    </tr>`;
+  } else {
+    body.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text3)">${t('noData')}</td></tr>`;
+  }
+
+  // Plans
+  if (state.plan) {
+    plansDiv.innerHTML = `
+      <div class="workout-card" style="cursor:default">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <h4>${state.plan.name}</h4>
+            <div class="meta">${t(state.plan.goal)} · ${t(state.plan.difficulty)} · ${state.plan.weeks[0]?.workouts.length || 0} ${t('workout')}s/Woche</div>
+          </div>
+          <div style="display:flex;gap:6px">
+            <button class="btn btn-secondary btn-sm" onclick="showToast('${t('edit')} - kommende Version','')"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-danger btn-sm" onclick="deletePlan()"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      </div>`;
+  } else {
+    plansDiv.innerHTML = `<div class="empty-state"><p>${t('noPlan')}</p></div>`;
+  }
+}
+
+function deletePlan() {
+  if (!confirm(t('confirmDelete'))) return;
+  state.plan = null;
+  localStorage.removeItem('apex_plan');
+  showToast(t('dataCleared'), 'success');
+  renderAdmin();
+}
+
+function exportData() {
+  const data = {
+    user: state.user,
+    plan: state.plan,
+    progress: state.progress,
+    habits: state.habits,
+    interview: state.interviewAnswers,
+    exportedAt: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `apex-logic-export-${getTodaysDateStr()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(t('dataExported'), 'success');
+}
+
+function clearAllData() {
+  if (!confirm(t('confirmDelete') + ' ' + t('deleteAll') + '?')) return;
+  localStorage.removeItem('apex_user');
+  localStorage.removeItem('apex_plan');
+  localStorage.removeItem('apex_progress');
+  localStorage.removeItem('apex_habits');
+  localStorage.removeItem('apex_interview');
+  localStorage.removeItem('apex_interview_answers');
+  state.user = null;
+  state.plan = null;
+  state.progress = [];
+  state.habits = [];
+  state.interview = [];
+  state.interviewAnswers = [];
+  showToast(t('dataCleared'), 'success');
+  navigate('landing');
+}
+
+// ============================================================
+// SETTINGS
+// ============================================================
+function renderSettings() {
+  // Language selector
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === state.lang);
+    btn.onclick = () => {
+      state.lang = btn.dataset.lang;
+      localStorage.setItem('apex_lang', state.lang);
+      if (state.user) { state.user.language = state.lang; saveState(); }
+      applyTranslations();
+      renderSettings();
+      // Re-render current page
+      handleHash();
+    };
+  });
+
+  // Profile form
+  if (state.user) {
+    document.getElementById('editName').value = state.user.name || '';
+    document.getElementById('editAge').value = state.user.age || '';
+    document.getElementById('editWeight').value = state.user.weight || '';
+    document.getElementById('editHeight').value = state.user.height || '';
+    document.getElementById('editFitnessLevel').value = state.user.fitnessLevel || 'beginner';
+    document.getElementById('editGoal').value = state.user.goal || 'hypertrophy';
+  }
+
+  const form = document.getElementById('profileForm');
+  const newForm = form.cloneNode(true);
+  form.parentNode.replaceChild(newForm, form);
+  newForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('editName').value.trim();
+    const age = parseInt(document.getElementById('editAge').value);
+    const weight = parseFloat(document.getElementById('editWeight').value);
+    const height = parseInt(document.getElementById('editHeight').value);
+    const fitnessLevel = document.getElementById('editFitnessLevel').value;
+    const goal = document.getElementById('editGoal').value;
+    if (!name || !age || !weight || !height) { showToast('Alle Felder ausfüllen', 'error'); return; }
+    state.user = { ...state.user, name, age, weight, height, fitnessLevel, goal, language: state.lang };
+    saveState();
+    showToast(t('save') + ' ✓', 'success');
+    handleHash();
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+applyTranslations();
+</script>
+</body>
+</html>

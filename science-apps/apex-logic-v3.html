@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APEX LOGIC v3 – Your Life Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#0A0A0F;--bg2:#111118;--card:rgba(26,26,46,0.85);--card-border:rgba(201,168,76,0.12);--gold:#C9A84C;--gold-light:#E8D48B;--gold-dark:#A68A3E;--text:#E8E8F0;--text-muted:#8888A0;--text-dim:#555570;--success:#4ADE80;--danger:#F87171;--info:#60A5FA;--warning:#FBBF24;--radius:16px;--radius-sm:10px;--shadow:0 8px 32px rgba(0,0,0,0.4)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.5}
+#app{max-width:1200px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+/* Sidebar */
+#sidebar{position:fixed;top:0;left:0;bottom:0;width:240px;background:var(--bg2);border-right:1px solid var(--card-border);z-index:1000;transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);overflow-y:auto;padding:20px 0}
+#sidebar.open{transform:translateX(0)}
+#sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;display:none;backdrop-filter:blur(4px)}
+#sidebar-overlay.show{display:block}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--card-border);margin-bottom:16px}
+.sidebar-logo h2{font-size:20px;font-weight:800;color:var(--gold);letter-spacing:1px}
+.sidebar-logo p{font-size:11px;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+.sidebar-nav{display:flex;flex-direction:column;gap:2px;padding:0 8px}
+.sidebar-item{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:var(--radius-sm);color:var(--text-muted);text-decoration:none;font-size:14px;font-weight:500;transition:all .2s;cursor:pointer;border:none;background:none;width:100%;text-align:left}
+.sidebar-item i{width:20px;font-size:16px;text-align:center}
+.sidebar-item:hover{background:rgba(201,168,76,0.08);color:var(--text)}
+.sidebar-item.active{background:rgba(201,168,76,0.15);color:var(--gold);font-weight:600}
+.sidebar-item.active i{color:var(--gold)}
+/* Header */
+#header{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(10,10,15,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:100}
+#menu-btn{background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:8px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+#menu-btn:hover{background:rgba(255,255,255,0.05)}
+.header-title{font-size:18px;font-weight:700;flex:1}
+.header-title span{color:var(--gold)}
+.header-badge{background:rgba(201,168,76,0.15);color:var(--gold);padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600}
+/* Main */
+#main{flex:1;padding:20px;padding-bottom:100px}
+/* Cards */
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);transition:all .3s}
+.card:hover{border-color:rgba(201,168,76,0.25)}
+.card-glow{border-color:rgba(201,168,76,0.2);box-shadow:0 0 30px rgba(201,168,76,0.05)}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;border:none;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'Inter',sans-serif;line-height:1}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#0A0A0F}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,0.3)}
+.btn-outline{background:transparent;border:1px solid var(--card-border);color:var(--text)}
+.btn-outline:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);color:var(--gold)}
+.btn-dark{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--card-border)}
+.btn-dark:hover{background:rgba(255,255,255,0.1)}
+.btn-sm{padding:8px 16px;font-size:12px}
+.btn-icon{padding:10px;border-radius:50%;width:40px;height:40px}
+.btn-block{width:100%}
+.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none !important}
+/* Grid */
+.grid{display:grid;gap:16px}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid-4{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+/* Tags */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;background:rgba(201,168,76,0.12);color:var(--gold)}
+.tag-success{background:rgba(74,222,128,0.12);color:var(--success)}
+.tag-danger{background:rgba(248,113,113,0.12);color:var(--danger)}
+.tag-info{background:rgba(96,165,250,0.12);color:var(--info)}
+.tag-warning{background:rgba(251,191,36,0.12);color:var(--warning)}
+/* Forms */
+.input-group{display:flex;flex-direction:column;gap:6px}
+.input-group label{font-size:13px;font-weight:500;color:var(--text-muted)}
+.input-field{background:rgba(255,255,255,0.04);border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border .2s;width:100%}
+.input-field:focus{border-color:var(--gold)}
+.input-field::placeholder{color:var(--text-dim)}
+select.input-field{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238888A0' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
+textarea.input-field{resize:vertical;min-height:80px}
+/* Progress bar */
+.progress-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;transition:width .5s ease}
+/* Landing Page */
+#landing{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:90vh;text-align:center;padding:20px}
+.landing-logo{font-size:56px;font-weight:900;color:var(--gold);letter-spacing:3px;margin-bottom:8px}
+.landing-sub{font-size:18px;color:var(--text-muted);margin-bottom:48px;font-weight:300}
+.landing-pillars{display:flex;gap:20px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
+.pillar-icon{width:120px;height:120px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--card-border);gap:8px;transition:all .3s;cursor:default}
+.pillar-icon:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 12px 40px rgba(201,168,76,0.1)}
+.pillar-icon i{font-size:36px;color:var(--gold)}
+.pillar-icon span{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+/* Dashboard */
+.stat-card{padding:20px;text-align:center}
+.stat-card .stat-value{font-size:32px;font-weight:800;color:var(--gold)}
+.stat-card .stat-label{font-size:13px;color:var(--text-muted);margin-top:4px}
+.stat-card .stat-icon{font-size:28px;margin-bottom:8px}
+.streak-display{display:flex;align-items:center;gap:12px;padding:16px 20px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);border-radius:var(--radius);margin:12px 0}
+.streak-display .streak-fire{font-size:28px}
+.streak-display .streak-count{font-size:24px;font-weight:800;color:var(--warning)}
+.streak-display .streak-label{font-size:12px;color:var(--text-muted)}
+/* Session cards */
+.session-card{cursor:pointer;padding:20px;position:relative;overflow:hidden}
+.session-card:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.session-card .sess-icon{font-size:32px;margin-bottom:12px}
+.session-card .sess-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.session-card .sess-meta{font-size:12px;color:var(--text-muted);display:flex;gap:12px;flex-wrap:wrap}
+.session-card .sess-desc{font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.4}
+.session-card .sess-badge{position:absolute;top:16px;right:16px}
+/* Guided Session Player */
+.guided-overlay{position:fixed;inset:0;background:rgba(10,10,15,0.97);z-index:2000;display:none;flex-direction:column;overflow-y:auto}
+.guided-overlay.active{display:flex}
+.guided-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--card-border)}
+.guided-header h3{font-size:16px;font-weight:600}
+.guided-close{background:none;border:none;color:var(--text);font-size:24px;cursor:pointer;padding:8px}
+.guided-progress{height:4px;background:rgba(255,255,255,0.06)}
+.guided-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));transition:width .3s}
+.guided-content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;max-width:800px;margin:0 auto;width:100%}
+.guided-step-title{font-size:24px;font-weight:700;margin-bottom:8px;text-align:center}
+.guided-step-desc{font-size:16px;color:var(--text-muted);text-align:center;margin-bottom:24px;max-width:600px}
+.guided-step-icon{font-size:80px;margin-bottom:24px}
+.guided-timer{font-size:72px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;margin:16px 0}
+.guided-controls{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+.guided-video{width:100%;max-width:560px;aspect-ratio:16/9;border-radius:var(--radius);margin-bottom:20px;background:#000;overflow:hidden}
+.guided-video iframe{width:100%;height:100%;border:none}
+.guided-countdown{font-size:120px;font-weight:900;color:var(--gold);animation:countPulse .5s ease infinite}
+@keyframes countPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.1);opacity:0.7}}
+.guided-complete{text-align:center}
+.guided-complete .check{font-size:100px;color:var(--success);animation:checkBounce .6s ease}
+@keyframes checkBounce{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+.guided-complete h2{font-size:28px;margin:16px 0 8px}
+/* Tabs */
+.tabs{display:flex;gap:4px;background:rgba(255,255,255,0.03);border-radius:var(--radius-sm);padding:4px;margin-bottom:20px;overflow-x:auto}
+.tab-btn{padding:10px 20px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--text-muted);transition:all .2s;white-space:nowrap;font-family:'Inter',sans-serif}
+.tab-btn.active{background:var(--gold);color:#0A0A0F;font-weight:600}
+.tab-btn:hover:not(.active){background:rgba(255,255,255,0.04);color:var(--text)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+/* Chart containers */
+.chart-container{position:relative;width:100%;max-width:500px;margin:16px auto;height:250px}
+.chart-container canvas{width:100% !important;height:100% !important}
+/* Stars */
+.star-rating{display:flex;gap:6px;justify-content:center;font-size:32px;cursor:pointer;margin:16px 0}
+.star-rating i{color:var(--text-dim);transition:color .2s}
+.star-rating i.active{color:var(--gold)}
+.star-rating i:hover{color:var(--gold-light)}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.active{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--card-border);border-radius:var(--radius);padding:32px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto}
+.modal h3{font-size:20px;margin-bottom:16px}
+/* Onboarding */
+.onboarding-step{display:none;flex-direction:column;gap:20px}
+.onboarding-step.active{display:flex}
+.onboarding-step h2{font-size:24px;font-weight:700;text-align:center}
+.onboarding-step p{color:var(--text-muted);text-align:center}
+.option-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option-card{padding:20px;border-radius:var(--radius-sm);border:1px solid var(--card-border);background:rgba(255,255,255,0.02);cursor:pointer;text-align:center;transition:all .2s}
+.option-card:hover{border-color:var(--gold);background:rgba(201,168,76,0.06)}
+.option-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.1);box-shadow:0 0 20px rgba(201,168,76,0.1)}
+.option-card i{font-size:32px;color:var(--gold);margin-bottom:8px;display:block}
+.option-card span{font-size:14px;font-weight:600;display:block}
+.option-card small{font-size:12px;color:var(--text-muted);display:block;margin-top:4px}
+/* Journal */
+.journal-entry{background:rgba(255,255,255,0.02);border:1px solid var(--card-border);border-radius:var(--radius-sm);padding:16px;margin-bottom:12px}
+.journal-entry .j-date{font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px}
+.journal-entry .j-q{font-size:13px;color:var(--text-muted);margin-top:4px}
+.journal-entry .j-a{font-size:14px;margin-top:2px}
+/* Finance */
+.finance-result{background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius-sm);padding:20px;margin:16px 0;text-align:center}
+.finance-result .result-value{font-size:32px;font-weight:800;color:var(--gold)}
+.finance-result .result-label{font-size:13px;color:var(--text-muted);margin-top:4px}
+/* Admin */
+.admin-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.admin-table th{text-align:left;padding:10px 12px;color:var(--text-muted);font-weight:500;border-bottom:1px solid var(--card-border);font-size:11px;text-transform:uppercase;letter-spacing:1px}
+.admin-table td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text)}
+/* Badges */
+.badge-display{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+.badge-item{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:20px;font-size:12px;font-weight:600}
+.badge-item.locked{background:rgba(255,255,255,0.04);color:var(--text-dim)}
+.badge-item.unlocked{background:rgba(201,168,76,0.12);color:var(--gold)}
+/* Scores */
+.score-ring{width:80px;height:80px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;position:relative;margin:0 auto}
+.score-ring .score-bg{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--gold) var(--pct),rgba(255,255,255,0.06) 0)}
+.score-ring .score-inner{position:relative;width:60px;height:60px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;z-index:1}
+/* Mobile */
+@media(max-width:768px){
+  #main{padding:16px;padding-bottom:120px}
+  .grid-2,.grid-3,.grid-4{grid-template-columns:1fr}
+  .landing-logo{font-size:40px}
+  .guided-timer{font-size:56px}
+  .guided-countdown{font-size:80px}
+  .pillar-icon{width:90px;height:90px}
+  .pillar-icon i{font-size:28px}
+  .option-grid{grid-template-columns:1fr}
+  .modal{padding:20px}
+}
+@media(min-width:769px){
+  #sidebar{transform:translateX(0);width:220px}
+  #sidebar-overlay{display:none !important}
+  #header{padding-left:24px}
+  #main{margin-left:220px;padding:24px;padding-bottom:60px}
+  #menu-btn{display:none}
+}
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--card-border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-dark)}
+/* Utilities */
+.mt-4{margin-top:4px}.mt-8{margin-top:8px}.mt-12{margin-top:12px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}
+.mb-8{margin-bottom:8px}.mb-12{margin-bottom:12px}.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
+.gap-8{gap:8px}.gap-12{gap:12px}.gap-16{gap:16px}
+.flex{display:flex}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.flex-col{flex-direction:column}.flex-1{flex:1}
+.text-center{text-align:center}
+.text-gold{color:var(--gold)}
+.text-muted{color:var(--text-muted)}
+.text-dim{color:var(--text-dim)}
+.text-sm{font-size:13px}
+.text-xs{font-size:11px}
+.font-bold{font-weight:700}
+.font-semibold{font-weight:600}
+.w-full{width:100%}
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+<div id="app">
+  <!-- Sidebar Overlay -->
+  <div id="sidebar-overlay"></div>
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-logo">
+      <h2>APEX LOGIC</h2>
+      <p>Life Assistant</p>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="sidebar-item" data-page="dashboard"><i class="fas fa-th-large"></i> <span data-i18n="nav_dashboard">Dashboard</span></button>
+      <button class="sidebar-item" data-page="fitness"><i class="fas fa-dumbbell"></i> <span data-i18n="nav_fitness">Fitness</span></button>
+      <button class="sidebar-item" data-page="pe"><i class="fas fa-brain"></i> <span data-i18n="nav_pe">Persönlichkeit</span></button>
+      <button class="sidebar-item" data-page="finance"><i class="fas fa-coins"></i> <span data-i18n="nav_finance">Finanzen</span></button>
+      <button class="sidebar-item" data-page="guided"><i class="fas fa-play-circle"></i> <span data-i18n="nav_guided">Guided</span></button>
+      <button class="sidebar-item" data-page="admin"><i class="fas fa-cog"></i> <span data-i18n="nav_admin">Admin</span></button>
+      <button class="sidebar-item" data-page="settings"><i class="fas fa-sliders-h"></i> <span data-i18n="nav_settings">Settings</span></button>
+    </nav>
+  </aside>
+  <!-- Header -->
+  <header id="header">
+    <button id="menu-btn"><i class="fas fa-bars"></i></button>
+    <div class="header-title"><span>APEX</span> LOGIC</div>
+    <div id="header-badges" style="display:flex;gap:8px;align-items:center"></div>
+  </header>
+  <!-- Main Content -->
+  <main id="main"></main>
+</div>
+
+<!-- Guided Session Overlay -->
+<div id="guided-overlay" class="guided-overlay">
+  <div class="guided-header">
+    <h3 id="guided-name">Session</h3>
+    <button class="guided-close" onclick="guidedEnd()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="guided-progress"><div id="guided-progress-fill" class="guided-progress-fill"></div></div>
+  <div class="guided-content" id="guided-content"></div>
+</div>
+
+<script>
+// ============================================================
+// i18n
+// ============================================================
+const LANG = {
+  de: {
+    nav_dashboard:'Dashboard',nav_fitness:'Fitness',nav_pe:'Persönlichkeit',nav_finance:'Finanzen',
+    nav_guided:'Guided',nav_admin:'Admin',nav_settings:'Settings',
+    landing_title:'APEX LOGIC',landing_sub:'Your Life Assistant',landing_start:'Reise beginnen',
+    pillar_fitness:'Fitness',pillar_pe:'Persönlichkeit',pillar_finance:'Finanzen',
+    fitness:'Fitness',pe:'Persönlichkeitsentwicklung',finance:'Finanzen',
+    dashboard_title:'Dashboard',dashboard_greeting:'Hallo',dashboard_today:'Heutige Empfehlung',
+    score:'Punktzahl',level:'Level',streak:'Tage Serie',sessions:'Sessions',
+    start_guided:'Session starten',quick_actions:'Quick Actions',
+    journal:'Tagebuch',stats:'Statistiken',
+    workouts:'Workouts',exercises:'Übungen',progress:'Fortschritt',
+    sessions_label:'Sessions',methods:'Methoden',
+    calculator:'Rechner',education:'Bildung',tracking:'Tracking',
+    search:'Suchen',filter:'Filtern',difficulty:'Schwierigkeit',
+    beginner:'Anfänger',intermediate:'Fortgeschritten',advanced:'Profi',
+    duration:'Dauer',completed:'Abgeschlossen',total:'Gesamt',
+    feedback:'Wie war die Session?',rate:'Bewerten',
+    next:'Weiter',skip:'Überspringen',pause:'Pause',resume:'Fortsetzen',end:'Beenden',
+    start:'Start',save:'Speichern',cancel:'Abbrechen',export:'Exportieren',reset:'Zurücksetzen',
+    settings_title:'Einstellungen',language:'Sprache',profile:'Profil bearbeiten',
+    admin_title:'Admin',admin_data:'Nutzerdaten',admin_export:'Export JSON',
+    onboarding_title:'Willkommen bei APEX LOGIC',onboarding_name:'Dein Name',
+    onboarding_age:'Alter',onboarding_fitness:'Fitness-Level',
+    onboarding_pe:'PE-Erfahrung',onboarding_finance:'Finanz-Stand',
+    onboarding_goal:'Dein Ziel',onboarding_finish:'Starten',
+    guided_countdown:'Bereit?',guided_complete:'Session abgeschlossen!',guided_summary:'Zusammenfassung',
+    suggested_next:'Vorschlag für nächste Session',
+    day:'Tag',week:'Woche',month:'Monat',
+    no_data:'Keine Daten vorhanden',
+    badge_7:'Week Warrior',badge_30:'Monthly Master',badge_100:'Century Club',
+    session_ready:'Bereit für die Session?',
+    new:'Neu',some:'Etwas',experienced:'Erfahren',
+    debt:'Schulden',stable:'Stabil',investor:'Investor',
+    focus_all:'Alles',focus_fitness:'Fokus Fitness',focus_pe:'Fokus PE',focus_finance:'Fokus Finanzen',
+    category:'Kategorie',
+    fitness_workout:'Fitness-Workout',pe_session:'PE-Session',finance_session:'Finanz-Session',
+    min:'Min',sec:'Sek',
+    finance_self_test:'Finanz-Selbsttest',emergency_fund:'Notgroschen',
+    compound_interest:'Zinseszins',wealth_plan:'Vermögensplan',
+    passive_income:'Passive Income',
+    journal_title:'Tägliche Reflexion',journal_placeholder:'Deine Antwort...',
+    save_entry:'Eintrag speichern',
+    motivation:'Das Einzige, das zwischen dir und deinem Ziel steht, ist die Geschichte, die du dir selbst erzählst.',
+  },
+  en: {
+    nav_dashboard:'Dashboard',nav_fitness:'Fitness',nav_pe:'Growth',nav_finance:'Finance',
+    nav_guided:'Guided',nav_admin:'Admin',nav_settings:'Settings',
+    landing_title:'APEX LOGIC',landing_sub:'Your Life Assistant',landing_start:'Start Journey',
+    pillar_fitness:'Fitness',pillar_pe:'Growth',pillar_finance:'Finance',
+    fitness:'Fitness',pe:'Personal Growth',finance:'Finance',
+    dashboard_title:'Dashboard',dashboard_greeting:'Hello',dashboard_today:"Today's Recommendation",
+    score:'Score',level:'Level',streak:'Day Streak',sessions:'Sessions',
+    start_guided:'Start Session',quick_actions:'Quick Actions',
+    journal:'Journal',stats:'Stats',
+    workouts:'Workouts',exercises:'Exercises',progress:'Progress',
+    sessions_label:'Sessions',methods:'Methods',
+    calculator:'Calculator',education:'Education',tracking:'Tracking',
+    search:'Search',filter:'Filter',difficulty:'Difficulty',
+    beginner:'Beginner',intermediate:'Intermediate',advanced:'Advanced',
+    duration:'Duration',completed:'Completed',total:'Total',
+    feedback:'How was the session?',rate:'Rate',
+    next:'Next',skip:'Skip',pause:'Pause',resume:'Resume',end:'End',
+    start:'Start',save:'Save',cancel:'Cancel',export:'Export',reset:'Reset',
+    settings_title:'Settings',language:'Language',profile:'Edit Profile',
+    admin_title:'Admin',admin_data:'User Data',admin_export:'Export JSON',
+    onboarding_title:'Welcome to APEX LOGIC',onboarding_name:'Your Name',
+    onboarding_age:'Age',onboarding_fitness:'Fitness Level',
+    onboarding_pe:'Growth Experience',onboarding_finance:'Financial Status',
+    onboarding_goal:'Your Goal',onboarding_finish:'Start',
+    guided_countdown:'Ready?',guided_complete:'Session Complete!',guided_summary:'Summary',
+    suggested_next:'Suggested Next Session',
+    day:'Day',week:'Week',month:'Month',
+    no_data:'No data available',
+    badge_7:'Week Warrior',badge_30:'Monthly Master',badge_100:'Century Club',
+    session_ready:'Ready for the session?',
+    new:'New',some:'Some',experienced:'Experienced',
+    debt:'Debt',stable:'Stable',investor:'Investor',
+    focus_all:'Everything',focus_fitness:'Focus Fitness',focus_pe:'Focus Growth',focus_finance:'Focus Finance',
+    category:'Category',
+    fitness_workout:'Fitness Workout',pe_session:'Growth Session',finance_session:'Finance Session',
+    min:'Min',sec:'Sec',
+    finance_self_test:'Finance Self-Test',emergency_fund:'Emergency Fund',
+    compound_interest:'Compound Interest',wealth_plan:'Wealth Plan',
+    passive_income:'Passive Income',
+    journal_title:'Daily Reflection',journal_placeholder:'Your answer...',
+    save_entry:'Save Entry',
+    motivation:'The only thing between you and your goal is the story you keep telling yourself.',
+  },
+  tr: {
+    nav_dashboard:'Panel',nav_fitness:'Fitness',nav_pe:'Gelişim',nav_finance:'Finans',
+    nav_guided:'Rehberli',nav_admin:'Yönetim',nav_settings:'Ayarlar',
+    landing_title:'APEX LOGIC',landing_sub:'Yaşam Asistanın',landing_start:'Yolculuğa Başla',
+    pillar_fitness:'Fitness',pillar_pe:'Kişisel Gelişim',pillar_finance:'Finans',
+    fitness:'Fitness',pe:'Kişisel Gelişim',finance:'Finans',
+    dashboard_title:'Panel',dashboard_greeting:'Merhaba',dashboard_today:'Bugünün Önerisi',
+    score:'Puan',level:'Seviye',streak:'Gün Serisi',sessions:'Seanslar',
+    start_guided:'Seans Başlat',quick_actions:'Hızlı İşlemler',
+    journal:'Günlük',stats:'İstatistikler',
+    workouts:'Antrenmanlar',exercises:'Egzersizler',progress:'İlerleme',
+    sessions_label:'Seanslar',methods:'Yöntemler',
+    calculator:'Hesap',education:'Eğitim',tracking:'Takip',
+    search:'Ara',filter:'Filtrele',difficulty:'Zorluk',
+    beginner:'Başlangıç',intermediate:'Orta',advanced:'İleri',
+    duration:'Süre',completed:'Tamamlanan',total:'Toplam',
+    feedback:'Seans nasıldı?',rate:'Puanla',
+    next:'İleri',skip:'Atla',pause:'Duraklat',resume:'Devam',end:'Bitir',
+    start:'Başlat',save:'Kaydet',cancel:'İptal',export:'Dışa Aktar',reset:'Sıfırla',
+    settings_title:'Ayarlar',language:'Dil',profile:'Profili Düzenle',
+    admin_title:'Yönetim',admin_data:'Kullanıcı Verileri',admin_export:'JSON Dışa Aktar',
+    onboarding_title:'APEX LOGIC\'e Hoş Geldin',onboarding_name:'Adın',
+    onboarding_age:'Yaş',onboarding_fitness:'Fitness Seviyesi',
+    onboarding_pe:'Gelişim Deneyimi',onboarding_finance:'Finansal Durum',
+    onboarding_goal:'Hedefin',onboarding_finish:'Başla',
+    guided_countdown:'Hazır mısın?',guided_complete:'Seans Tamamlandı!',guided_summary:'Özet',
+    suggested_next:'Sonraki Seans Önerisi',
+    day:'Gün',week:'Hafta',month:'Ay',
+    no_data:'Veri yok',
+    badge_7:'Hafta Savaşçısı',badge_30:'Ayın Ustası',badge_100:'Yüzyıl Kulübü',
+    session_ready:'Seansa hazır mısın?',
+    new:'Yeni',some:'Biraz',experienced:'Deneyimli',
+    debt:'Borç',stable:'Stabil',investor:'Yatırımcı',
+    focus_all:'Her Şey',focus_fitness:'Fitness Odaklı',focus_pe:'Gelişim Odaklı',focus_finance:'Finans Odaklı',
+    category:'Kategori',
+    fitness_workout:'Fitness Antrenmanı',pe_session:'Gelişim Seansı',finance_session:'Finans Seansı',
+    min:'Dk',sec:'Sn',
+    finance_self_test:'Finans Testi',emergency_fund:'Acil Durum Fonu',
+    compound_interest:'Bileşik Faiz',wealth_plan:'Varlık Planı',
+    passive_income:'Pasif Gelir',
+    journal_title:'Günlük Yansıma',journal_placeholder:'Cevabın...',
+    save_entry:'Kaydet',
+    motivation:'Hedefinle arandaki tek şey, kendine anlattığın hikayedir.',
+  },
+  ku: {
+    nav_dashboard:'Pêşkêşgeh',nav_fitness:'Fitness',nav_pe:'Pêşketin',nav_finance:'Aborî',
+    nav_guided:'Rêber',nav_admin:'Rêveberî',nav_settings:'Eyar',
+    landing_title:'APEX LOGIC',landing_sub:'Alîkarê Jiyana Te',landing_start:'Destpêka Rêwîtiyê',
+    pillar_fitness:'Fitness',pillar_pe:'Pêşketina Kesane',pillar_finance:'Aborî',
+    fitness:'Fitness',pe:'Pêşketina Kesane',finance:'Aborî',
+    dashboard_title:'Pêşkêşgeh',dashboard_greeting:'Silav',dashboard_today:'Pêşniyara Îro',
+    score:'Puan',level:'Asta',streak:'Rêza Rojan',sessions:'Seans',
+    start_guided:'Seansê Destpêke',quick_actions:'Çalakiyên Lezgîn',
+    journal:'Rojname',stats:'Statîstîk',
+    workouts:'Ravekirin',exercises:'Temrîn',progress:'Pêşveçûn',
+    sessions_label:'Seans',methods:'Metod',
+    calculator:'Hesabker',education:'Perwerde',tracking:'Şopandin',
+    search:'Lêgerîn',filter:'Fîltre',difficulty:'Zehmetî',
+    beginner:'Destpêk',intermediate:'Navîn',advanced:'Pêşketî',
+    duration:'Dem',completed:'Qedandî',total:'Gîştî',
+    feedback:'Seans çawa bû?',rate:'Bide nirxandin',
+    next:'Paşê',skip:'Derbas bike',pause:'Rawestîne',resume:'Domîne',end:'Bidawî bike',
+    start:'Destpêke',save:'Tomar bike',cancel:'Betalkirin',export:'Eksport',reset:'Vegere serî',
+    settings_title:'Eyar',language:'Ziman',profile:'Profîlê biguherîne',
+    admin_title:'Rêveberî',admin_data:'Daneyên Bikarhêner',admin_export:'JSON Eksport',
+    onboarding_title:'Bi xêr hatî APEX LOGIC\'ê',onboarding_name:'Navê te',
+    onboarding_age:'Temen',onboarding_fitness:'Asta Fitnessê',
+    onboarding_pe:'Tecrûbeya Pêşketinê',onboarding_finance:'Rewşa Aborî',
+    onboarding_goal:'Armanca te',onboarding_finish:'Destpêke',
+    guided_countdown:'Amade?',guided_complete:'Seans Qedand!',guided_summary:'Kurtasî',
+    suggested_next:'Pêşniyara Seansê ya Paşê',
+    day:'Roj',week:'Heftî',month:'Meh',
+    no_data:'Daneyên tune',
+    badge_7:'Şervanê Heftiyê',badge_30:'Ustaya Mehê',badge_100:'Kulûba Sedsalê',
+    session_ready:'Amadeyî seansê?',
+    new:'Nû',some:'Hinek',experienced:'Bitecrûbe',
+    debt:'Deyn',stable:'Stabil',investor:'Veberhêner',
+    focus_all:'Her Tişt',focus_fitness:'Fitness Fokus',focus_pe:'Pêşketin Fokus',focus_finance:'Aborî Fokus',
+    category:'Kategorî',
+    fitness_workout:'Ravekirina Fitnessê',pe_session:'Seansa Pêşketinê',finance_session:'Seansa Aboriyê',
+    min:'Xul',sec:'San',
+    finance_self_test:'Testa Aboriyê',emergency_fund:'Fona Awarte',
+    compound_interest:'Faîza Têkhel',wealth_plan:'Plana Dewlemendiyê',
+    passive_income:'Dahata Pasîv',
+    journal_title:'Rojane Refleksiyon',journal_placeholder:'Bersiva te...',
+    save_entry:'Tomar bike',
+    motivation:'Tişta di navbera te û armanca te de, çîroka ku tu ji xwe re dibêjî ye.',
+  }
+};
+
+// ============================================================
+// DATA STORE
+// ============================================================
+const DB = {
+  get(k, def=null){
+    try{const v=localStorage.getItem('apex3_'+k);return v!==null?JSON.parse(v):def}catch(e){return def}
+  },
+  set(k,v){localStorage.setItem('apex3_'+k,JSON.stringify(v))},
+  remove(k){localStorage.removeItem('apex3_'+k)},
+  getAll(){const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('apex3_'))o[k.replace('apex3_','')]=JSON.parse(localStorage.getItem(k))}return o}
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  lang: DB.get('lang','de'),
+  onboarding: DB.get('onboarding',false),
+  profile: DB.get('profile',{name:'',age:25,fitness:'beginner',pe:'new',finance:'debt',goal:'all'}),
+  streak: DB.get('streak',{count:0,lastDate:''}),
+  scores: DB.get('scores',{fitness:0,pe:0,finance:0,total:0}),
+  completed: DB.get('completed',[]),
+  journal: DB.get('journal',[]),
+  financeLog: DB.get('financeLog',[]),
+  ratings: DB.get('ratings',{}),
+  sessionCount: DB.get('sessionCount',{fitness:0,pe:0,finance:0,total:0}),
+  badges: DB.get('badges',[]),
+  todayRecommendation: null,
+  currentPage: 'landing',
+  guidedActive: false,
+  guidedStep: 0,
+  guidedRunning: false,
+  guidedTimer: null,
+  guidedPaused: false,
+  guidedData: null,
+};
+
+function saveState(){
+  DB.set('lang',state.lang);
+  DB.set('onboarding',state.onboarding);
+  DB.set('profile',state.profile);
+  DB.set('streak',state.streak);
+  DB.set('scores',state.scores);
+  DB.set('completed',state.completed);
+  DB.set('journal',state.journal);
+  DB.set('financeLog',state.financeLog);
+  DB.set('ratings',state.ratings);
+  DB.set('sessionCount',state.sessionCount);
+  DB.set('badges',state.badges);
+}
+
+function t(key){const l=LANG[state.lang];return l[key]||key}
+
+// ============================================================
+// EXERCISES DATABASE (20 Übungen)
+// ============================================================
+const EXERCISES = {
+  // FITNESS (7)
+  breath_reset:{
+    id:'breath_reset',pillar:'fitness',title_de:'3-Part Breath Reset',title_en:'3-Part Breath Reset',title_tr:'3 Aşamalı Nefes',title_ku:'Nefesa 3-Beşî',
+    desc_de:'Geführte Atmung in 3 Phasen à 2 Minuten',desc_en:'Guided breathing in 3 phases of 2 minutes each',desc_tr:'3 aşamada rehberli nefes (her biri 2 dk)',desc_ku:'Nefesa rêberî di 3 qonaxan de (her yek 2 xulek)',
+    duration:6,level:'beginner',icon:'fa-lungs',video:'dUMWMjmrYfg',
+    steps:[
+      {title_de:'Phase 1: Bauchatmung',title_en:'Phase 1: Belly Breathing',desc_de:'Atme tief in den Bauch. 4s ein, 6s aus.',desc_en:'Breathe deep into belly. 4s in, 6s out.',timer:120},
+      {title_de:'Phase 2: Brustatmung',title_en:'Phase 2: Chest Breathing',desc_de:'Atme in die Brust. 4s ein, 4s aus.',desc_en:'Breathe into chest. 4s in, 4s out.',timer:120},
+      {title_de:'Phase 3: Vollatmung',title_en:'Phase 3: Full Breathing',desc_de:'Volle Lungen. 4s ein, halten, 6s aus.',desc_en:'Full lungs. 4s in, hold, 6s out.',timer:120},
+    ]
+  },
+  cold_shower:{
+    id:'cold_shower',pillar:'fitness',title_de:'Kalte Dusche Progressiv',title_en:'Cold Shower Progressive',title_tr:'Soğuk Duş Progresif',title_ku:'Duşa Sar Progresîv',
+    desc_de:'Level 1-5, Timer + Countdown für kalte Duschen',desc_en:'Level 1-5, Timer + Countdown for cold showers',desc_tr:'Seviye 1-5, soğuk duş için zamanlayıcı',desc_ku:'Asta 1-5, demjimêr ji bo duşa sar',
+    duration:5,level:'intermediate',icon:'fa-snowflake',video:'OIGg9eGxkOg',
+    steps:[
+      {title_de:'Level 1: 30 Sekunden',title_en:'Level 1: 30 Seconds',desc_de:'30s kaltes Wasser. Atme ruhig.',desc_en:'30s cold water. Breathe calmly.',timer:30},
+      {title_de:'Level 2: 60 Sekunden',title_en:'Level 2: 60 Seconds',desc_de:'60s. Konzentriere dich auf die Atmung.',desc_en:'60s. Focus on breathing.',timer:60},
+      {title_de:'Level 3: 90 Sekunden',title_en:'Level 3: 90 Seconds',desc_de:'90s. Du schaffst das.',desc_en:'90s. You got this.',timer:90},
+    ]
+  },
+  breath_478:{
+    id:'breath_478',pillar:'fitness',title_de:'4-7-8 Notfall-Atmung',title_en:'4-7-8 Emergency Breathing',title_tr:'4-7-8 Acil Nefes',title_ku:'Nefesa Acîl 4-7-8',
+    desc_de:'SOS-Button: 4s ein, 7s halten, 8s aus',desc_en:'SOS Button: 4s in, 7s hold, 8s out',desc_tr:'Acil: 4sn nefes al, 7sn tut, 8sn ver',desc_ku:'Acil: 4sn hilde, 7sn bigre, 8sn berde',
+    duration:3,level:'beginner',icon:'fa-heart-pulse',video:'YRPh_GaiL8s',
+    steps:[
+      {title_de:'Einatmen',title_en:'Inhale',desc_de:'Atme 4 Sekunden durch die Nase ein.',desc_en:'Inhale through nose for 4 seconds.',timer:4},
+      {title_de:'Halten',title_en:'Hold',desc_de:'Halte den Atem für 7 Sekunden.',desc_en:'Hold breath for 7 seconds.',timer:7},
+      {title_de:'Ausatmen',title_en:'Exhale',desc_de:'Atme 8 Sekunden durch den Mund aus.',desc_en:'Exhale through mouth for 8 seconds.',timer:8},
+      {title_de:'Wiederhole',title_en:'Repeat',desc_de:'Wiederhole 3-5 Runden.',desc_en:'Repeat 3-5 rounds.',timer:30},
+    ]
+  },
+  morning_mobility:{
+    id:'morning_mobility',pillar:'fitness',title_de:'Morgendliche Mobilität',title_en:'Morning Mobility',title_tr:'Sabah Mobilitesi',title_ku:'Mobîliya Sibehan',
+    desc_de:'7 Min Ganzkörper-Mobility',desc_en:'7 min full body mobility',desc_tr:'7 dk tüm vücut mobilitesi',desc_ku:'7 xulek mobîliya tevahiya laş',
+    duration:7,level:'beginner',icon:'fa-person-walking',video:'gHf9Sp2G9zs',
+    steps:[
+      {title_de:'Nackenkreisen',title_en:'Neck Rolls',desc_de:'Langsame Nackenkreisen in beide Richtungen',desc_en:'Slow neck rolls both directions',timer:60},
+      {title_de:'Schulterkreisen',title_en:'Shoulder Rolls',desc_de:'Große Schulterkreisen vor und zurück',desc_en:'Big shoulder rolls forward and back',timer:60},
+      {title_de:'Hüftkreisen',title_en:'Hip Circles',desc_de:'Hüftkreisen im Stand',desc_en:'Standing hip circles',timer:60},
+      {title_de:'Beinpendeln',title_en:'Leg Swings',desc_de:'Beinpendeln vor/zurück und seitlich',desc_en:'Leg swings forward/back and sideways',timer:120},
+      {title_de:'Wirbelsäulenmobilisation',title_en:'Spine Mobility',desc_de:'Katze-Kuh und Wirbelsäulenwellen',desc_en:'Cat-cow and spine waves',timer:120},
+    ]
+  },
+  five_min_activation:{
+    id:'five_min_activation',pillar:'fitness',title_de:'5-Min Aktivierung',title_en:'5-Min Activation',title_tr:'5 Dk Aktivasyon',title_ku:'5 Xulek Aktîvasyon',
+    desc_de:'Schnelle Übungen für den Tag',desc_en:'Quick exercises for the day',desc_tr:'Gün için hızlı egzersizler',desc_ku:'Temrînên lezgîn ji bo rojê',
+    duration:5,level:'beginner',icon:'fa-bolt',video:'5Z6bBzXBPK4',
+    steps:[
+      {title_de:'Jumping Jacks',title_en:'Jumping Jacks',desc_de:'30x Jumping Jacks',desc_en:'30 jumping jacks',timer:30},
+      {title_de:'Kniebeugen',title_en:'Squats',desc_de:'15x Kniebeugen',desc_en:'15 squats',timer:30},
+      {title_de:'Liegestütze',title_en:'Push-ups',desc_de:'10x Liegestütze (Knie, wenn nötig)',desc_en:'10 push-ups (knees if needed)',timer:30},
+      {title_de:'Ausfallschritte',title_en:'Lunges',desc_de:'10x pro Bein Ausfallschritte',desc_en:'10 lunges each leg',timer:60},
+      {title_de:'Plank',title_en:'Plank',desc_de:'30s Plank halten',desc_en:'30s plank hold',timer:30},
+      {title_de:'Wiederhole',title_en:'Repeat',desc_de:'Wiederhole den Zirkel',desc_en:'Repeat the circuit',timer:120},
+    ]
+  },
+  evening_stretch:{
+    id:'evening_stretch',pillar:'fitness',title_de:'Abendliches Dehnen',title_en:'Evening Stretching',title_tr:'Akşam Esnemesi',title_ku:'Dirêjkirina Évarê',
+    desc_de:'10Min Relax-Dehnung für den ganzen Körper',desc_en:'10Min full body relaxation stretch',desc_tr:'10 dk tüm vücut gevşeme esnemesi',desc_ku:'10 xulek dirêjkirina rihetiya tevahiya laş',
+    duration:10,level:'beginner',icon:'fa-bed',video:'g_tea8ZNk5A',
+    steps:[
+      {title_de:'Katzen-Kuh',title_en:'Cat-Cow',desc_de:'Sanfter Wechsel zwischen Katze und Kuh',desc_en:'Gentle cat-cow flow',timer:60},
+      {title_de:'Kindhaltung',title_en:'Child\'s Pose',desc_de:'Tiefe Kindhaltung mit seitlichen Dehnungen',desc_en:'Deep child\'s pose with side stretches',timer:90},
+      {title_de:'Vorbeuge',title_en:'Forward Fold',desc_de:'Stehende Vorbeuge, Kopf hängen lassen',desc_en:'Standing forward fold, let head hang',timer:60},
+      {title_de:'Schmetterling',title_en:'Butterfly',desc_de:'Schmetterlingsdehnung, Knie sanft drücken',desc_en:'Butterfly stretch, gently press knees',timer:90},
+      {title_de:'Liegende Drehung',title_en:'Supine Twist',desc_de:'Liegende Wirbelsäulendrehung beide Seiten',desc_en:'Supine spine twist both sides',timer:120},
+      {title_de:'Tiefenentspannung',title_en:'Deep Relaxation',desc_de:'Shavasana: Bewusst entspannen, Atem fließen lassen',desc_en:'Shavasana: Conscious relaxation',timer:180},
+    ]
+  },
+  hiit_15:{
+    id:'hiit_15',pillar:'fitness',title_de:'Kurzes HIIT',title_en:'Quick HIIT',title_tr:'Kısa HIIT',title_ku:'HIITê Kurt',
+    desc_de:'15Min High Intensity Intervall',desc_en:'15Min High Intensity Interval',desc_tr:'15 dk yüksek yoğunluklu interval',desc_ku:'15 xulek intervala bilind',
+    duration:15,level:'advanced',icon:'fa-fire',video:'ml6cT4a1rVQ',
+    steps:[
+      {title_de:'Aufwärmen',title_en:'Warm-up',desc_de:'Leichtes Joggen on the Spot + Armkreisen',desc_en:'Light jogging on spot + arm circles',timer:120},
+      {title_de:'Burpees',title_en:'Burpees',desc_de:'40s Burpees, 20s Pause',desc_en:'40s burpees, 20s rest',timer:60},
+      {title_de:'Bergsteiger',title_en:'Mountain Climbers',desc_de:'40s Bergsteiger, 20s Pause',desc_en:'40s mountain climbers, 20s rest',timer:60},
+      {title_de:'Squat Jumps',title_en:'Squat Jumps',desc_de:'40s Squat Jumps, 20s Pause',desc_en:'40s squat jumps, 20s rest',timer:60},
+      {title_de:'Plank Jacks',title_en:'Plank Jacks',desc_de:'40s Plank Jacks, 20s Pause',desc_en:'40s plank jacks, 20s rest',timer:60},
+      {title_de:'Wiederhole 3x',title_en:'Repeat 3x',desc_de:'Wiederhole den Zirkel 2 weitere Male',desc_en:'Repeat circuit 2 more times',timer:360},
+      {title_de:'Cool Down',title_en:'Cool Down',desc_de:'Sanftes Dehnen und tiefe Atmung',desc_en:'Gentle stretching and deep breathing',timer:120},
+    ]
+  },
+  // PERSÖNLICHKEITSENTWICKLUNG (8)
+  five_min_stillness:{
+    id:'five_min_stillness',pillar:'pe',title_de:'Der Fünf-Minuten-Stillstand',title_en:'The Five-Minute Stillness',title_tr:'Beş Dakikalık Sessizlik',title_ku:'Bêdengiya Pênc Xulekan',
+    desc_de:'Geführte Meditation mit Timer',desc_en:'Guided meditation with timer',desc_tr:'Rehberli meditasyon',desc_ku:'Meditasyona rêberî',
+    duration:5,level:'beginner',icon:'fa-spa',
+    steps:[
+      {title_de:'Position finden',title_en:'Find Your Position',desc_de:'Setze dich bequem hin, schließe die Augen',desc_en:'Sit comfortably, close your eyes',timer:30},
+      {title_de:'Atem beobachten',title_en:'Observe Breath',desc_de:'Beobachte deinen natürlichen Atemfluss',desc_en:'Observe your natural breath flow',timer:120},
+      {title_de:'Gedanken ziehen lassen',title_en:'Let Thoughts Pass',desc_de:'Gedanken kommen und gehen lassen wie Wolken',desc_en:'Let thoughts come and go like clouds',timer:120},
+      {title_de:'Rückkehr',title_en:'Return',desc_de:'Langsam die Aufmerksamkeit zurückbringen',desc_en:'Slowly bring attention back',timer:30},
+    ]
+  },
+  daily_intention:{
+    id:'daily_intention',pillar:'pe',title_de:'Der Tages-Vorsatz',title_en:'Daily Intention',title_tr:'Günlük Niyet',title_ku:'Niyeta Rojane',
+    desc_de:'Affirmation schreiben + vortragen',desc_en:'Write and speak an affirmation',desc_tr:'Onaylama yaz + sesli söyle',desc_ku:'Tesdîqê binivîse + bibêje',
+    duration:5,level:'beginner',icon:'fa-sun',
+    steps:[
+      {title_de:'Reflektieren',title_en:'Reflect',desc_de:'Was ist heute wichtig für dich?',desc_en:'What matters today?',timer:60},
+      {title_de:'Affirmation schreiben',title_en:'Write Affirmation',desc_de:'Schreibe einen positiven Satz in der Ich-Form',desc_en:'Write a positive I-statement',timer:120},
+      {title_de:'Vortragen',title_en:'Speak It',desc_de:'Spreche die Affirmation 3x laut aus',desc_en:'Say the affirmation aloud 3x',timer:60},
+      {title_de:'Verinnerlichen',title_en:'Internalize',desc_de:'Schließe die Augen und fühle die Worte',desc_en:'Close eyes and feel the words',timer:60},
+    ]
+  },
+  one_percent:{
+    id:'one_percent',pillar:'pe',title_de:'1% besser System',title_en:'1% Better System',title_tr:'%1 Daha İyi Sistemi',title_ku:'Sîstema %1 Çêtir',
+    desc_de:'Tägliche Mini-Gewohnheit wählen',desc_en:'Choose a daily mini-habit',desc_tr:'Günlük mini alışkanlık seç',desc_ku:'Adeteka min-rojane hilbijêre',
+    duration:3,level:'beginner',icon:'fa-chart-line',
+    steps:[
+      {title_de:'Bereich wählen',title_en:'Choose Area',desc_de:'In welchem Bereich willst du 1% besser werden?',desc_en:'Which area to improve 1%?',timer:30},
+      {title_de:'Mini-Gewohnheit',title_en:'Mini Habit',desc_de:'Definiere eine 2-Minuten-Gewohnheit',desc_en:'Define a 2-minute habit',timer:60},
+      {title_de:'Commitment',title_en:'Commitment',desc_de:'Sage laut: "Ich werde das heute tun."',desc_en:'Say aloud: "I will do this today."',timer:30},
+      {title_de:'Ausführen',title_en:'Execute',desc_de:'Führe die Gewohnheit jetzt direkt aus',desc_en:'Execute the habit right now',timer:60},
+    ]
+  },
+  eat_that_frog:{
+    id:'eat_that_frog',pillar:'pe',title_de:'Eat That Frog',title_en:'Eat That Frog',title_tr:'Kurbağayı Ye',title_ku:'Beqê Bixwe',
+    desc_de:'Die wichtigste Aufgabe identifizieren + Timer',desc_en:'Identify the most important task + timer',desc_tr:'En önemli görevi belirle + zamanlayıcı',desc_ku:'Karê herî girîng nas bike + demjimêr',
+    duration:25,level:'intermediate',icon:'fa-frog',
+    steps:[
+      {title_de:'Identifiziere den Frosch',title_en:'Identify the Frog',desc_de:'Was ist DIE eine Aufgabe, die heute den größten Unterschied macht?',desc_en:'What ONE task makes the biggest difference?',timer:60},
+      {title_de:'Schreibe es auf',title_en:'Write It Down',desc_de:'Notiere die Aufgabe konkret',desc_en:'Write the task specifically',timer:60},
+      {title_de:'25-Min Fokus',title_en:'25-Min Focus',desc_de:'Arbeite 25 Minuten NUR an dieser Aufgabe',desc_en:'Work 25 minutes ONLY on this task',timer:1500},
+      {title_de:'Reflexion',title_en:'Reflection',desc_de:'Wie fühlt es sich an, den Frosch gegessen zu haben?',desc_en:'How does it feel to have eaten the frog?',timer:60},
+    ]
+  },
+  five_sec_rule:{
+    id:'five_sec_rule',pillar:'pe',title_de:'5-Sekunden-Regel',title_en:'5-Second Rule',title_tr:'5 Saniye Kuralı',title_ku:'Rêbaza 5 Saniyeyan',
+    desc_de:'Countdown + Aktion auslösen',desc_en:'Countdown + trigger action',desc_tr:'Geri sayım + harekete geç',desc_ku:'Hijmara paşde + tevgerê destpêke',
+    duration:2,level:'beginner',icon:'fa-clock',
+    steps:[
+      {title_de:'Was zögert du hinaus?',title_en:'What are you procrastinating?',desc_de:'Denke an eine Sache, die du aufschiebst.',desc_en:'Think of one thing you\'re putting off.',timer:15},
+      {title_de:'5-4-3-2-1',title_en:'5-4-3-2-1',desc_de:'Zähle rückwärts und handle dann SOFORT!',desc_en:'Count backward and ACT NOW!',timer:10},
+      {title_de:'Aktion',title_en:'Action',desc_de:'Mach den ersten Schritt. JETZT.',desc_en:'Take the first step. NOW.',timer:60},
+    ]
+  },
+  pomodoro:{
+    id:'pomodoro',pillar:'pe',title_de:'Pomodoro 25/5',title_en:'Pomodoro 25/5',title_tr:'Pomodoro 25/5',title_ku:'Pomodoro 25/5',
+    desc_de:'4x 25min Fokus, 5min Pause',desc_en:'4x 25min focus, 5min break',desc_tr:'4x 25 dk odak, 5 dk mola',desc_ku:'4x 25 xulek fokus, 5 xulek bêhnvedan',
+    duration:120,level:'intermediate',icon:'fa-tomato',
+    steps:[
+      {title_de:'Pomodoro 1',title_en:'Pomodoro 1',desc_de:'25 Minuten fokussiert arbeiten',desc_en:'25 minutes focused work',timer:1500},
+      {title_de:'Pause 1',title_en:'Break 1',desc_de:'5 Minuten Pause. Steh auf, dehn dich.',desc_en:'5 min break. Stand up, stretch.',timer:300},
+      {title_de:'Pomodoro 2',title_en:'Pomodoro 2',desc_de:'25 Minuten fokussiert arbeiten',desc_en:'25 minutes focused work',timer:1500},
+      {title_de:'Pause 2',title_en:'Break 2',desc_de:'5 Minuten Pause.',desc_en:'5 min break.',timer:300},
+      {title_de:'Pomodoro 3',title_en:'Pomodoro 3',desc_de:'25 Minuten fokussiert arbeiten',desc_en:'25 minutes focused work',timer:1500},
+      {title_de:'Pause 3',title_en:'Break 3',desc_de:'5 Minuten Pause.',desc_en:'5 min break.',timer:300},
+      {title_de:'Pomodoro 4',title_en:'Pomodoro 4',desc_de:'25 Minuten fokussiert arbeiten',desc_en:'25 minutes focused work',timer:1500},
+      {title_de:'Lange Pause',title_en:'Long Break',desc_de:'15-30 Minuten Pause. Gut gemacht!',desc_en:'15-30 min break. Well done!',timer:900},
+    ]
+  },
+  gfk_4:{
+    id:'gfk_4',pillar:'pe',title_de:'GFK 4 Schritte',title_en:'NVC 4 Steps',title_tr:'ŞDD 4 Adım',title_ku:'NVC 4 Gav',
+    desc_de:'Interaktive Karte: Beobachten → Fühlen → Bedürfnis → Bitte',desc_en:'Interactive map: Observe → Feel → Need → Request',desc_tr:'Etkileşimli harita: Gözlemle → Hisset → İhtiyaç → Talep',desc_ku:'Nexşeya înteraktîf: Çavdêrî bike → Hîs bike → Pêdivî → Daxwaz',
+    duration:10,level:'advanced',icon:'fa-handshake',
+    steps:[
+      {title_de:'Schritt 1: Beobachten',title_en:'Step 1: Observe',desc_de:'Beschreibe die Situation ohne Bewertung.',desc_en:'Describe the situation without judgment.',timer:60},
+      {title_de:'Schritt 2: Fühlen',title_en:'Step 2: Feel',desc_de:'Welche Gefühle kommen bei dir hoch?',desc_en:'What feelings come up for you?',timer:60},
+      {title_de:'Schritt 3: Bedürfnis',title_en:'Step 3: Need',desc_de:'Welches Bedürfnis steckt dahinter?',desc_en:'What need is underneath?',timer:60},
+      {title_de:'Schritt 4: Bitte',title_en:'Step 4: Request',desc_de:'Formuliere eine konkrete, positive Bitte.',desc_en:'Formulate a concrete, positive request.',timer:60},
+      {title_de:'Rolle spielen',title_en:'Role Play',desc_de:'Sprich die 4 Schritte laut aus wie im echten Gespräch.',desc_en:'Say the 4 steps aloud as in a real conversation.',timer:120},
+    ]
+  },
+  evening_review:{
+    id:'evening_review',pillar:'pe',title_de:'Tages-Rückblick 5 Fragen',title_en:'Evening Review 5 Questions',title_tr:'Akşam Değerlendirmesi 5 Soru',title_ku:'Vekolîna Évarê 5 Pirs',
+    desc_de:'Abend-Journal mit 5 Leitfragen',desc_en:'Evening journal with 5 guiding questions',desc_tr:'Akşam günlüğü 5 rehber soruyla',desc_ku:'Rojnameya évarê bi 5 pirsên rêberî',
+    duration:10,level:'beginner',icon:'fa-book',
+    steps:[
+      {title_de:'Frage 1',title_en:'Question 1',desc_de:'Was war heute gut?',desc_en:'What was good today?',timer:120},
+      {title_de:'Frage 2',title_en:'Question 2',desc_de:'Was habe ich heute gelernt?',desc_en:'What did I learn today?',timer:120},
+      {title_de:'Frage 3',title_en:'Question 3',desc_de:'Wofür bin ich dankbar?',desc_en:'What am I grateful for?',timer:120},
+      {title_de:'Frage 4',title_en:'Question 4',desc_de:'Was könnte ich morgen besser machen?',desc_en:'What could I do better tomorrow?',timer:120},
+      {title_de:'Frage 5',title_en:'Question 5',desc_de:'Wie war mein Energie-Level heute (1-10)?',desc_en:'What was my energy level today (1-10)?',timer:60},
+    ]
+  },
+  // FINANZEN (5)
+  finance_self_test:{
+    id:'finance_self_test',pillar:'finance',title_de:'12-Fragen Finanz-Selbsttest',title_en:'12-Question Finance Self-Test',title_tr:'12 Soruluk Finans Testi',title_ku:'Testa Aboriyê ya 12 Pirsan',
+    desc_de:'Diagnostic + Score + Empfehlung',desc_en:'Diagnostic + Score + Recommendation',desc_tr:'Teşhis + Puan + Tavsiye',desc_ku:'Teşhîs + Puan + Pêşniyar',
+    duration:8,level:'beginner',icon:'fa-clipboard-list',
+    questions:[
+      'Hast du ein monatliches Budget?','Hast du einen Notgroschen?','Hast du Schulden?',
+      'Investierst du regelmäßig?','Hast du einen Altersvorsorgeplan?','Kennst du deine monatlichen Ausgaben?',
+      'Hast du ein Sparkonto?','Hast du eine Versicherung?','Verfolgst du deine Ausgaben?',
+      'Hast du finanzielle Ziele?','Kennst du deinen Net Worth?','Hast du passive Einkommensquellen?'
+    ],
+    steps:[]
+  },
+  emergency_fund:{
+    id:'emergency_fund',pillar:'finance',title_de:'Notgroschen-Rechner',title_en:'Emergency Fund Calculator',title_tr:'Acil Durum Fonu Hesaplayıcı',title_ku:'Hesabkera Fona Awarte',
+    desc_de:'3-6 Monatsausgaben berechnen',desc_en:'Calculate 3-6 months of expenses',desc_tr:'3-6 aylık giderleri hesapla',desc_ku:'3-6 mehên lêçûnan hesab bike',
+    duration:3,level:'beginner',icon:'fa-piggy-bank',
+    steps:[]
+  },
+  compound_interest:{
+    id:'compound_interest',pillar:'finance',title_de:'Zinseszins-Simulator',title_en:'Compound Interest Simulator',title_tr:'Bileşik Faiz Simülatörü',title_ku:'Simulatora Faîza Têkhel',
+    desc_de:'Graph + 72er-Regel',desc_en:'Graph + Rule of 72',desc_tr:'Grafik + 72 Kuralı',desc_ku:'Grafîk + Rêbaza 72\'an',
+    duration:5,level:'intermediate',icon:'fa-chart-simple',
+    steps:[]
+  },
+  wealth_plan:{
+    id:'wealth_plan',pillar:'finance',title_de:'5-Stufen Vermögensplan',title_en:'5-Step Wealth Plan',title_tr:'5 Adımlı Varlık Planı',title_ku:'Plana Dewlemendiyê ya 5 Gavan',
+    desc_de:'Notgroschen → Schulden → Invest → Vermögen → Freiheit',desc_en:'Emergency Fund → Debt → Invest → Wealth → Freedom',desc_tr:'Acil Fon → Borç → Yatırım → Varlık → Özgürlük',desc_ku:'Fona Awarte → Deyn → Veberhênan → Dewlemendî → Azadî',
+    duration:8,level:'intermediate',icon:'fa-stairs',
+    steps:[
+      {title_de:'Stufe 1: Notgroschen',title_en:'Step 1: Emergency Fund',desc_de:'Baue einen Notgroschen von 3-6 Monatsausgaben auf.',desc_en:'Build 3-6 months expenses as emergency fund.',timer:60},
+      {title_de:'Stufe 2: Schulden',title_en:'Step 2: Debt',desc_de:'Tilge alle Schulden (Zuerst die mit höchsten Zinsen).',desc_en:'Pay off all debts (highest interest first).',timer:60},
+      {title_de:'Stufe 3: Investieren',title_en:'Step 3: Invest',desc_de:'Investiere 15-20% deines Einkommens in ETFs/Aktien.',desc_en:'Invest 15-20% of income in ETFs/stocks.',timer:60},
+      {title_de:'Stufe 4: Vermögen',title_en:'Step 4: Wealth',desc_de:'Baue Vermögen auf: Immobilien, Business, Passive Income.',desc_en:'Build wealth: real estate, business, passive income.',timer:60},
+      {title_de:'Stufe 5: Freiheit',title_en:'Step 5: Freedom',desc_de:'Erreiche finanzielle Freiheit. Dein Geld arbeitet für dich.',desc_en:'Achieve financial freedom. Your money works for you.',timer:60},
+    ]
+  },
+  passive_income:{
+    id:'passive_income',pillar:'finance',title_de:'Passive Income Calculator',title_en:'Passive Income Calculator',title_tr:'Pasif Gelir Hesaplayıcı',title_ku:'Hesabkera Dahata Pasîv',
+    desc_de:'5 Quellen, Ziel errechnen',desc_en:'5 sources, calculate target',desc_tr:'5 kaynak, hedef hesapla',desc_ku:'5 çavkanî, armancê hesab bike',
+    duration:5,level:'intermediate',icon:'fa-hand-holding-usd',
+    steps:[]
+  }
+};
+
+function getExercisesByPillar(pillar){
+  return Object.values(EXERCISES).filter(e => e.pillar === pillar);
+}
+
+function getExercise(id){return EXERCISES[id]}
+
+function getExerciseTitle(ex){
+  const key='title_'+state.lang;
+  return ex[key]||ex.title_de||ex.id;
+}
+
+function getExerciseDesc(ex){
+  const key='desc_'+state.lang;
+  return ex[key]||ex.desc_de||'';
+}
+
+function getStepTitle(s, idx){
+  const key='title_'+state.lang;
+  return s[key]||s.title_de||'Schritt '+(idx+1);
+}
+
+function getStepDesc(s, idx){
+  const key='desc_'+state.lang;
+  return s[key]||s.desc_de||'';
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function navigate(page, data){
+  state.currentPage = page;
+  if(page !== 'guided' && !state.guidedActive){
+    window.location.hash = '#'+page;
+  }
+  renderPage(page, data);
+  // Update sidebar active
+  document.querySelectorAll('.sidebar-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.page === page);
+  });
+  // Close sidebar on mobile
+  closeSidebar();
+}
+
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('show');
+}
+
+// Hash routing
+window.addEventListener('hashchange', ()=>{
+  const page = window.location.hash.replace('#','') || 'landing';
+  if(!state.guidedActive) navigate(page);
+});
+
+// ============================================================
+// RENDER ENGINE
+// ============================================================
+function renderPage(page, data){
+  const main = document.getElementById('main');
+  const headerBadges = document.getElementById('header-badges');
+
+  // Update header badges
+  headerBadges.innerHTML = '';
+  if(state.onboarding){
+    const b = document.createElement('span');
+    b.className = 'header-badge';
+    b.innerHTML = `<i class="fas fa-fire"></i> ${state.streak.count} ${t('day')}`;
+    headerBadges.appendChild(b);
+  }
+
+  switch(page){
+    case 'landing': renderLanding(main); break;
+    case 'onboarding': renderOnboarding(main); break;
+    case 'dashboard': renderDashboard(main); break;
+    case 'fitness': renderFitness(main, data); break;
+    case 'pe': renderPE(main, data); break;
+    case 'finance': renderFinance(main, data); break;
+    case 'guided': renderGuidedPage(main, data); break;
+    case 'admin': renderAdmin(main); break;
+    case 'settings': renderSettings(main); break;
+    default: renderLanding(main);
+  }
+}
+
+// ============================================================
+// LANDING
+// ============================================================
+function renderLanding(el){
+  if(state.onboarding){
+    navigate('dashboard');
+    return;
+  }
+  el.innerHTML = `
+    <div id="landing">
+      <div class="landing-logo">APEX LOGIC</div>
+      <div class="landing-sub">${t('landing_sub')}</div>
+      <div class="landing-pillars">
+        <div class="pillar-icon"><i class="fas fa-dumbbell"></i><span>${t('pillar_fitness')}</span></div>
+        <div class="pillar-icon"><i class="fas fa-brain"></i><span>${t('pillar_pe')}</span></div>
+        <div class="pillar-icon"><i class="fas fa-coins"></i><span>${t('pillar_finance')}</span></div>
+      </div>
+      <button class="btn btn-gold btn-block" onclick="navigate('onboarding')" style="max-width:300px">
+        ${t('landing_start')} <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>`;
+}
+
+// ============================================================
+// ONBOARDING
+// ============================================================
+function renderOnboarding(el){
+  let step = 0;
+  const profile = {...state.profile};
+
+  function renderStep(){
+    const steps = [
+      {title:t('onboarding_title'), q:'name', type:'text', icon:'fa-user-astronaut'},
+      {title:t('onboarding_name'), q:'name', type:'text', icon:'fa-user'},
+      {title:t('onboarding_age'), q:'age', type:'number', icon:'fa-cake-candles'},
+      {title:t('onboarding_fitness'), q:'fitness', type:'options', options:[{v:'beginner',i:'fa-seedling',l:'beginner'},{v:'intermediate',i:'fa-leaf',l:'intermediate'},{v:'advanced',i:'fa-tree',l:'advanced'}], icon:'fa-dumbbell'},
+      {title:t('onboarding_pe'), q:'pe', type:'options', options:[{v:'new',i:'fa-star',l:'new'},{v:'some',i:'fa-star-half-stroke',l:'some'},{v:'experienced',i:'fa-star',l:'experienced'}], icon:'fa-brain'},
+      {title:t('onboarding_finance'), q:'finance', type:'options', options:[{v:'debt',i:'fa-circle-exclamation',l:'debt'},{v:'stable',i:'fa-circle-check',l:'stable'},{v:'investor',i:'fa-chart-line',l:'investor'}], icon:'fa-coins'},
+      {title:t('onboarding_goal'), q:'goal', type:'options', options:[{v:'all',i:'fa-infinity',l:'focus_all'},{v:'fitness',i:'fa-dumbbell',l:'focus_fitness'},{v:'pe',i:'fa-brain',l:'focus_pe'},{v:'finance',i:'fa-coins',l:'focus_finance'}], icon:'fa-bullseye'},
+    ];
+    const s = steps[step] || steps[0];
+    let html = `<div class="onboarding-step active" style="max-width:500px;margin:40px auto">
+      <div style="text-align:center;font-size:48px;color:var(--gold);margin-bottom:16px"><i class="fas ${s.icon}"></i></div>
+      <h2>${s.title}</h2>
+      <p>${step+1}/${steps.length}</p>
+      <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin:12px 0"><div style="height:100%;width:${((step+1)/steps.length)*100}%;background:var(--gold);border-radius:2px;transition:width .3s"></div></div>`;
+
+    html += `<div class="input-group" style="margin-top:12px">`;
+    if(s.type==='text'||s.type==='number'){
+      html += `<input class="input-field" type="${s.type}" id="onb-input" placeholder="${s.title}" value="${profile[s.q]||''}" ${s.q==='age'?'min=1 max=120':''}>`;
+    } else if(s.type==='options'){
+      html += `<div class="option-grid">`;
+      s.options.forEach(o => {
+        const selected = profile[s.q] === o.v;
+        html += `<div class="option-card ${selected?'selected':''}" onclick="selectOnbOption('${s.q}','${o.v}',this)">
+          <i class="fas ${o.i}"></i>
+          <span>${t(o.l)}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+    html += `</div>
+      <div style="display:flex;gap:12px;margin-top:20px">
+        ${step>0?`<button class="btn btn-outline" onclick="onbPrev()"><i class="fas fa-arrow-left"></i> ${t('cancel')}</button>`:''}
+        <button class="btn btn-gold ${step>0?'flex-1':'w-full'}" onclick="onbNext()">${step<steps.length-1?t('next'):t('onboarding_finish')} <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>`;
+    el.innerHTML = html;
+  }
+
+  window.selectOnbOption = function(q,v,el2){
+    profile[q]=v;
+    document.querySelectorAll('.option-card').forEach(c=>c.classList.remove('selected'));
+    el2.classList.add('selected');
+  };
+
+  window.onbNext = function(){
+    const s = [{q:'name',type:'text'},{q:'name',type:'text'},{q:'age',type:'number'},{q:'fitness',type:'options'},{q:'pe',type:'options'},{q:'finance',type:'options'},{q:'goal',type:'options'}][step];
+    if(s.type==='text'||s.type==='number'){
+      const inp = document.getElementById('onb-input');
+      if(inp&&inp.value) profile[s.q]=inp.value;
+    }
+    step++;
+    if(step>=7){
+      // Save profile
+      state.profile = profile;
+      state.onboarding = true;
+      state.streak = {count:0,lastDate:new Date().toISOString().split('T')[0]};
+      saveState();
+      navigate('dashboard');
+      return;
+    }
+    renderStep();
+  };
+
+  window.onbPrev = function(){
+    if(step>0) step--;
+    renderStep();
+  };
+
+  renderStep();
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard(el){
+  checkStreak();
+  updateScores();
+  updateBadges();
+
+  const p = state.profile;
+  const s = state.scores;
+  const sc = state.sessionCount;
+
+  // Generate recommendation
+  recommendSession();
+
+  const rec = state.todayRecommendation;
+  const recHtml = rec ? `
+    <div class="card session-card" onclick="startGuided('${rec.id}')">
+      <div class="sess-icon"><i class="fas ${rec.icon||'fa-play'}"></i></div>
+      <div class="sess-title">${getExerciseTitle(rec)}</div>
+      <div class="sess-meta">
+        <span><i class="fas fa-clock"></i> ${rec.duration} ${t('min')}</span>
+        <span class="tag">${t(rec.level)}</span>
+        <span class="tag tag-${rec.pillar==='fitness'?'success':rec.pillar==='pe'?'info':'warning'}">${t('pillar_'+rec.pillar)}</span>
+      </div>
+      <div class="sess-desc">${getExerciseDesc(rec)}</div>
+    </div>` : `<div class="card" style="text-align:center;padding:32px">${t('no_data')}</div>`;
+
+  el.innerHTML = `
+    <div style="margin-bottom:24px">
+      <h1 style="font-size:24px;font-weight:700">${t('dashboard_greeting')}, ${p.name||'User'}! 👋</h1>
+      <p style="color:var(--text-muted);margin-top:4px;font-size:14px;font-style:italic">"${t('motivation')}"</p>
+    </div>
+    <div class="streak-display">
+      <div class="streak-fire">🔥</div>
+      <div>
+        <div class="streak-count">${state.streak.count}</div>
+        <div class="streak-label">${t('day')} ${t('streak')}</div>
+      </div>
+      <div style="flex:1"></div>
+      ${state.badges.map(b => `<span class="badge-item unlocked"><i class="fas fa-medal"></i> ${b}</span>`).join('')}
+    </div>
+    <div class="grid grid-3 mb-24">
+      <div class="card stat-card">
+        <div class="stat-icon"><i class="fas fa-dumbbell" style="color:var(--success)"></i></div>
+        <div class="stat-value">${sc.fitness}</div>
+        <div class="stat-label">${t('fitness')} ${t('sessions')}</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon"><i class="fas fa-brain" style="color:var(--info)"></i></div>
+        <div class="stat-value">${sc.pe}</div>
+        <div class="stat-label">${t('pe')} ${t('sessions')}</div>
+      </div>
+      <div class="card stat-card">
+        <div class="stat-icon"><i class="fas fa-coins" style="color:var(--warning)"></i></div>
+        <div class="stat-value">${sc.finance}</div>
+        <div class="stat-label">${t('finance')} ${t('sessions')}</div>
+      </div>
+    </div>
+    <div class="grid grid-3 mb-24">
+      <div class="card" style="text-align:center;padding:16px">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">${t('score')}</div>
+        <div style="font-size:36px;font-weight:800;color:var(--gold)">${s.total}</div>
+      </div>
+      <div class="card" style="text-align:center;padding:16px">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">${t('level')}</div>
+        <div style="font-size:36px;font-weight:800;color:var(--gold)">${getLevel(s.total)}</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${s.total%10*10}%"></div></div>
+      </div>
+      <div class="card" style="text-align:center;padding:16px">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:8px">${t('completed')}</div>
+        <div style="font-size:36px;font-weight:800;color:var(--gold)">${state.completed.length}</div>
+      </div>
+    </div>
+    <h3 style="font-size:18px;font-weight:600;margin-bottom:12px">${t('dashboard_today')}</h3>
+    ${recHtml}
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
+      <button class="btn btn-gold flex-1" onclick="${rec?`startGuided('${rec.id}')`:'navigate(\'guided\')'}"><i class="fas fa-play"></i> ${t('start_guided')}</button>
+      <button class="btn btn-outline" onclick="navigate('pe',{tab:'journal'})"><i class="fas fa-book"></i> ${t('journal')}</button>
+      <button class="btn btn-outline" onclick="navigate('stats')"><i class="fas fa-chart-bar"></i> ${t('stats')}</button>
+    </div>
+  `;
+}
+
+// ============================================================
+// FITNESS PAGE
+// ============================================================
+function renderFitness(el, data){
+  const tab = (data&&data.tab)||'workouts';
+  const exs = getExercisesByPillar('fitness');
+
+  el.innerHTML = `
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:4px"><i class="fas fa-dumbbell" style="color:var(--success)"></i> ${t('fitness')}</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">${exs.length} ${t('exercises')}</p>
+    <div class="tabs">
+      <button class="tab-btn ${tab==='workouts'?'active':''}" onclick="navigate('fitness',{tab:'workouts'})"><i class="fas fa-list"></i> ${t('workouts')}</button>
+      <button class="tab-btn ${tab==='exercises'?'active':''}" onclick="navigate('fitness',{tab:'exercises'})"><i class="fas fa-dumbbell"></i> ${t('exercises')}</button>
+      <button class="tab-btn ${tab==='progress'?'active':''}" onclick="navigate('fitness',{tab:'progress'})"><i class="fas fa-chart-line"></i> ${t('progress')}</button>
+    </div>
+    <div class="tab-content ${tab==='workouts'?'active':''}">${renderFitnessWorkouts(exs)}</div>
+    <div class="tab-content ${tab==='exercises'?'active':''}">${renderFitnessExercises(exs)}</div>
+    <div class="tab-content ${tab==='progress'?'active':''}">${renderFitnessProgress()}</div>
+  `;
+}
+
+function renderFitnessWorkouts(exs){
+  return `<div class="grid grid-2">${exs.map(ex => `
+    <div class="card session-card" onclick="startGuided('${ex.id}')">
+      <div class="sess-icon"><i class="fas ${ex.icon||'fa-dumbbell'}"></i></div>
+      <div class="sess-title">${getExerciseTitle(ex)}</div>
+      <div class="sess-meta">
+        <span><i class="fas fa-clock"></i> ${ex.duration} ${t('min')}</span>
+        <span class="tag">${t(ex.level)}</span>
+      </div>
+      <div class="sess-desc">${getExerciseDesc(ex)}</div>
+      <div style="margin-top:12px"><button class="btn btn-gold btn-sm"><i class="fas fa-play"></i> ${t('start')}</button></div>
+    </div>`).join('')}</div>`;
+}
+
+function renderFitnessExercises(exs){
+  return `<div style="margin-bottom:12px"><input class="input-field" placeholder="${t('search')}..." id="fitness-search" oninput="filterExercises('fitness')"></div>
+  <div class="grid grid-2" id="fitness-ex-grid">${exs.map(ex => `
+    <div class="card session-card" data-search="${getExerciseTitle(ex).toLowerCase()}">
+      <div class="sess-icon"><i class="fas ${ex.icon||'fa-dumbbell'}"></i></div>
+      <div class="sess-title">${getExerciseTitle(ex)}</div>
+      <div class="sess-meta">
+        <span><i class="fas fa-clock"></i> ${ex.duration} ${t('min')}</span>
+        <span class="tag">${t(ex.level)}</span>
+      </div>
+      <div class="sess-desc">${getExerciseDesc(ex)}</div>
+    </div>`).join('')}</div>`;
+}
+
+function renderFitnessProgress(){
+  const completed = state.completed.filter(c => c.pillar === 'fitness');
+  const weeks = {};
+  completed.forEach(c => {
+    const d = new Date(c.date);
+    const wk = d.getFullYear()+'-W'+getWeekNumber(d);
+    weeks[wk] = (weeks[wk]||0)+1;
+  });
+  const labels = Object.keys(weeks).slice(-8);
+  const data = labels.map(w => weeks[w]||0);
+
+  setTimeout(() => {
+    const c = document.getElementById('fitness-chart');
+    if(window.fitnessChart) window.fitnessChart.destroy();
+    if(c) window.fitnessChart = new Chart(c,{
+      type:'bar',
+      data:{labels,datasets:[{label:t('sessions'),data,backgroundColor:'rgba(74,222,128,0.3)',borderColor:'rgba(74,222,128,1)',borderWidth:2}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(255,255,255,0.04)'}},x:{grid:{display:false}}}}
+    });
+  }, 100);
+
+  return `<div style="text-align:center;padding:20px">
+    <div style="font-size:24px;font-weight:700;color:var(--gold)">${completed.length}</div>
+    <div style="font-size:13px;color:var(--text-muted)">${t('completed')} ${t('fitness_workout').toLowerCase()}</div>
+    <div class="chart-container"><canvas id="fitness-chart"></canvas></div>
+  </div>`;
+}
+
+function getWeekNumber(d){
+  d=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  d.setUTCDate(d.getUTCDate()+4-(d.getUTCDay()||7));
+  const y = d.getUTCFullYear(),z = Math.floor((d-new Date(y,0,1))/86400000);
+  return Math.ceil((z+1)/7);
+}
+
+window.filterExercises = function(pillar){
+  const q = document.getElementById(pillar+'-search')?.value?.toLowerCase()||'';
+  document.querySelectorAll('#'+pillar+'-ex-grid .session-card').forEach(el=>{
+    el.style.display = el.dataset.search.includes(q)?'':'none';
+  });
+};
+
+// ============================================================
+// PE PAGE
+// ============================================================
+function renderPE(el, data){
+  const tab = (data&&data.tab)||'sessions';
+  const exs = getExercisesByPillar('pe');
+
+  el.innerHTML = `
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:4px"><i class="fas fa-brain" style="color:var(--info)"></i> ${t('pe')}</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">${exs.length} ${t('sessions_label')}</p>
+    <div class="tabs">
+      <button class="tab-btn ${tab==='sessions'?'active':''}" onclick="navigate('pe',{tab:'sessions'})"><i class="fas fa-list"></i> ${t('sessions_label')}</button>
+      <button class="tab-btn ${tab==='methods'?'active':''}" onclick="navigate('pe',{tab:'methods'})"><i class="fas fa-book"></i> ${t('methods')}</button>
+      <button class="tab-btn ${tab==='journal'?'active':''}" onclick="navigate('pe',{tab:'journal'})"><i class="fas fa-pen"></i> ${t('journal')}</button>
+    </div>
+    <div class="tab-content ${tab==='sessions'?'active':''}">${renderPESessions(exs)}</div>
+    <div class="tab-content ${tab==='methods'?'active':''}">${renderPEMethods(exs)}</div>
+    <div class="tab-content ${tab==='journal'?'active':''}">${renderPEJournal()}</div>
+  `;
+}
+
+function renderPESessions(exs){
+  return `<div class="grid grid-2">${exs.map(ex => `
+    <div class="card session-card" onclick="startGuided('${ex.id}')">
+      <div class="sess-icon"><i class="fas ${ex.icon||'fa-brain'}"></i></div>
+      <div class="sess-title">${getExerciseTitle(ex)}</div>
+      <div class="sess-meta">
+        <span><i class="fas fa-clock"></i> ${ex.duration} ${t('min')}</span>
+        <span class="tag">${t(ex.level)}</span>
+      </div>
+      <div class="sess-desc">${getExerciseDesc(ex)}</div>
+      <div style="margin-top:12px"><button class="btn btn-gold btn-sm"><i class="fas fa-play"></i> ${t('start')}</button></div>
+    </div>`).join('')}</div>`;
+}
+
+function renderPEMethods(exs){
+  return `<div class="grid grid-2">${exs.map(ex => `
+    <div class="card">
+      <div class="sess-icon"><i class="fas ${ex.icon||'fa-brain'}" style="font-size:24px;color:var(--gold)"></i></div>
+      <div class="sess-title" style="font-size:16px;font-weight:700;margin:8px 0 4px">${getExerciseTitle(ex)}</div>
+      <div class="sess-desc">${getExerciseDesc(ex)}</div>
+      <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">
+        <strong>${t('duration')}:</strong> ${ex.duration} ${t('min')} | <strong>${t('difficulty')}:</strong> ${t(ex.level)}
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+function renderPEJournal(){
+  const entries = state.journal;
+  return `<div style="margin-bottom:16px">
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">${t('journal_title')}</h3>
+    <div class="card" style="margin-bottom:16px">
+      <div style="font-weight:600;margin-bottom:8px">Tagesfragen:</div>
+      <div style="margin-bottom:12px;font-size:13px;color:var(--text-muted)">
+        1. Was war heute gut?<br>
+        2. Was habe ich gelernt?<br>
+        3. Wofür bin ich dankbar?<br>
+        4. Was kann ich morgen besser machen?<br>
+        5. Energie-Level (1-10)?
+      </div>
+      <textarea class="input-field" id="journal-input" placeholder="${t('journal_placeholder')}" style="min-height:120px"></textarea>
+      <button class="btn btn-gold btn-block mt-12" onclick="saveJournalEntry()"><i class="fas fa-save"></i> ${t('save_entry')}</button>
+    </div>
+    <div style="max-height:400px;overflow-y:auto">
+      ${entries.length===0?`<div class="card" style="text-align:center;padding:24px;color:var(--text-muted)">${t('no_data')}</div>`:
+      entries.slice().reverse().map(e => `
+      <div class="journal-entry">
+        <div class="j-date"><i class="far fa-calendar"></i> ${e.date}</div>
+        <div class="j-a">${e.text}</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+window.saveJournalEntry = function(){
+  const text = document.getElementById('journal-input')?.value?.trim();
+  if(!text) return;
+  state.journal.push({date:new Date().toISOString().split('T')[0],text});
+  saveState();
+  document.getElementById('journal-input').value='';
+  navigate('pe',{tab:'journal'});
+};
+
+// ============================================================
+// FINANCE PAGE
+// ============================================================
+function renderFinance(el, data){
+  const tab = (data&&data.tab)||'calculator';
+
+  el.innerHTML = `
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:4px"><i class="fas fa-coins" style="color:var(--warning)"></i> ${t('finance')}</h2>
+    <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px">5 ${t('sessions_label')}</p>
+    <div class="tabs">
+      <button class="tab-btn ${tab==='calculator'?'active':''}" onclick="navigate('finance',{tab:'calculator'})"><i class="fas fa-calculator"></i> ${t('calculator')}</button>
+      <button class="tab-btn ${tab==='education'?'active':''}" onclick="navigate('finance',{tab:'education'})"><i class="fas fa-graduation-cap"></i> ${t('education')}</button>
+      <button class="tab-btn ${tab==='tracking'?'active':''}" onclick="navigate('finance',{tab:'tracking'})"><i class="fas fa-wallet"></i> ${t('tracking')}</button>
+    </div>
+    <div class="tab-content ${tab==='calculator'?'active':''}">${renderFinanceCalculators()}</div>
+    <div class="tab-content ${tab==='education'?'active':''}">${renderFinanceEducation()}</div>
+    <div class="tab-content ${tab==='tracking'?'active':''}">${renderFinanceTracking()}</div>
+  `;
+}
+
+function renderFinanceCalculators(){
+  return `<div class="grid grid-2">
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px"><i class="fas fa-piggy-bank" style="color:var(--gold)"></i> ${t('emergency_fund')}</h3>
+      <div class="input-group"><label>Monatliche Ausgaben (€)</label><input class="input-field" type="number" id="ef-expenses" placeholder="z.B. 2000"></div>
+      <div class="input-group mt-8"><label>Monate</label><select class="input-field" id="ef-months"><option value="3">3 Monate</option><option value="4">4 Monate</option><option value="5">5 Monate</option><option value="6" selected>6 Monate</option></select></div>
+      <button class="btn btn-gold btn-block mt-12" onclick="calcEmergencyFund()"><i class="fas fa-calculator"></i> Berechnen</button>
+      <div id="ef-result" class="finance-result" style="display:none"></div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px"><i class="fas fa-chart-simple" style="color:var(--gold)"></i> ${t('compound_interest')}</h3>
+      <div class="input-group"><label>Startkapital (€)</label><input class="input-field" type="number" id="ci-start" value="10000"></div>
+      <div class="input-group mt-8"><label>Monatliche Einzahlung (€)</label><input class="input-field" type="number" id="ci-monthly" value="200"></div>
+      <div class="input-group mt-8"><label>Zinssatz (%)</label><input class="input-field" type="number" id="ci-rate" value="7" step="0.1"></div>
+      <div class="input-group mt-8"><label>Jahre</label><input class="input-field" type="number" id="ci-years" value="20"></div>
+      <button class="btn btn-gold btn-block mt-12" onclick="calcCompoundInterest()"><i class="fas fa-chart-line"></i> Simulieren</button>
+      <div id="ci-result" class="finance-result" style="display:none"></div>
+      <div class="chart-container" id="ci-chart-container" style="display:none"><canvas id="ci-chart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px"><i class="fas fa-hand-holding-usd" style="color:var(--gold)"></i> ${t('passive_income')}</h3>
+      <div class="input-group"><label>Monatliches Ziel (€)</label><input class="input-field" type="number" id="pi-target" value="2000"></div>
+      <div class="input-group mt-8"><label>Durchschnittliche Rendite (%)</label><input class="input-field" type="number" id="pi-return" value="5" step="0.1"></div>
+      <button class="btn btn-gold btn-block mt-12" onclick="calcPassiveIncome()"><i class="fas fa-calculator"></i> Berechnen</button>
+      <div id="pi-result" class="finance-result" style="display:none"></div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:8px"><i class="fas fa-clipboard-list" style="color:var(--gold)"></i> ${t('finance_self_test')}</h3>
+      <button class="btn btn-gold btn-block" onclick="startFinanceTest()"><i class="fas fa-play"></i> Test starten</button>
+      <div id="ft-result" style="display:none;margin-top:12px"></div>
+    </div>
+  </div>`;
+}
+
+window.calcEmergencyFund = function(){
+  const exp = parseFloat(document.getElementById('ef-expenses')?.value);
+  const months = parseInt(document.getElementById('ef-months')?.value);
+  if(!exp||!months){alert('Bitte Ausgaben eingeben');return}
+  const total = exp * months;
+  const el = document.getElementById('ef-result');
+  el.style.display='block';
+  el.innerHTML = `<div class="result-value">€${total.toLocaleString()}</div><div class="result-label">Notgroschen für ${months} Monate</div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">Monatlich: €${exp.toLocaleString()} × ${months} Monate</div>`;
+  recordFinanceUsage('emergency_fund');
+};
+
+window.calcCompoundInterest = function(){
+  const start = parseFloat(document.getElementById('ci-start')?.value)||0;
+  const monthly = parseFloat(document.getElementById('ci-monthly')?.value)||0;
+  const rate = parseFloat(document.getElementById('ci-rate')?.value)||7;
+  const years = parseInt(document.getElementById('ci-years')?.value)||20;
+  const r = rate/100/12;
+  const n = years*12;
+  let total = start;
+  const data = [total];
+  for(let i=1;i<=n;i++){
+    total = total*(1+r)+monthly;
+    if(i%12===0) data.push(Math.round(total));
+  }
+  const finalTotal = Math.round(total);
+  const el = document.getElementById('ci-result');
+  el.style.display='block';
+  el.innerHTML = `<div class="result-value">€${finalTotal.toLocaleString()}</div><div class="result-label">Endkapital nach ${years} Jahren</div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">
+      Eingezahlt: €${(start+monthly*n).toLocaleString()} | Gewinn: €${(finalTotal-start-monthly*n).toLocaleString()}<br>
+      72er-Regel: ${72/rate} Jahre für Verdopplung
+    </div>`;
+
+  const cc = document.getElementById('ci-chart-container');
+  cc.style.display='block';
+  setTimeout(()=>{
+    const c = document.getElementById('ci-chart');
+    if(c){
+      new Chart(c,{type:'line',data:{labels:Array.from({length:data.length},(_,i)=>'Jahr '+(i+1)),datasets:[{label:'Kapital (€)',data:data,borderColor:'#C9A84C',backgroundColor:'rgba(201,168,76,0.1)',fill:true,borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{callback:v=>'€'+(v/1000).toFixed(0)+'k'}},x:{grid:{display:false}}}}});
+    }
+  },100);
+  recordFinanceUsage('compound_interest');
+};
+
+window.calcPassiveIncome = function(){
+  const target = parseFloat(document.getElementById('pi-target')?.value);
+  const ret = parseFloat(document.getElementById('pi-return')?.value)||5;
+  if(!target){alert('Bitte Ziel eingeben');return}
+  const annualTarget = target*12;
+  const needed = Math.round(annualTarget/(ret/100));
+  const el = document.getElementById('pi-result');
+  el.style.display='block';
+  el.innerHTML = `<div class="result-value">€${needed.toLocaleString()}</div><div class="result-label">Benötigtes Kapital bei ${ret}% Rendite</div>
+    <div style="margin-top:8px;font-size:12px;color:var(--text-muted)">
+      Monatlich: €${target.toLocaleString()} | Jährlich: €${annualTarget.toLocaleString()}
+    </div>`;
+  recordFinanceUsage('passive_income');
+};
+
+let financeTestStep = 0;
+let financeTestScore = 0;
+window.startFinanceTest = function(){
+  const ex = EXERCISES.finance_self_test;
+  const qs = ex.questions;
+  financeTestStep = 0;
+  financeTestScore = 0;
+  showFinanceTestQuestion(qs);
+};
+
+function showFinanceTestQuestion(qs){
+  const el = document.getElementById('ft-result');
+  el.style.display='block';
+  if(financeTestStep >= qs.length){
+    const pct = Math.round((financeTestScore/qs.length)*100);
+    let level = 'Anfänger';
+    if(pct>=80) level='Fortgeschritten';
+    else if(pct>=50) level='Auf gutem Weg';
+    el.innerHTML = `<div class="result-value">${pct}%</div><div class="result-label">${financeTestScore}/${qs.length} richtig</div>
+      <div style="margin-top:8px;font-size:13px;color:var(--text-muted)">Dein Finanz-Level: <strong>${level}</strong></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <button class="btn btn-outline btn-block mt-12" onclick="document.getElementById('ft-result').style.display='none'">Schließen</button>`;
+    recordFinanceUsage('finance_self_test');
+    return;
+  }
+  const q = qs[financeTestStep];
+  el.innerHTML = `<div style="font-weight:600;margin-bottom:8px">Frage ${financeTestStep+1}/${qs.length}</div>
+    <div style="margin-bottom:16px;font-size:15px">${q}</div>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-gold flex-1" onclick="financeTestAnswer(true)"><i class="fas fa-check"></i> Ja</button>
+      <button class="btn btn-outline flex-1" onclick="financeTestAnswer(false)"><i class="fas fa-times"></i> Nein</button>
+    </div>`;
+}
+
+window.financeTestAnswer = function(ans){
+  if(ans) financeTestScore++;
+  financeTestStep++;
+  showFinanceTestQuestion(EXERCISES.finance_self_test.questions);
+};
+
+function recordFinanceUsage(type){
+  const now = new Date().toISOString().split('T')[0];
+  state.financeLog.push({type,date:now});
+  state.sessionCount.finance++;
+  state.sessionCount.total++;
+  state.scores.finance = Math.min(100, state.scores.finance + 5);
+  updateTotalScore();
+  saveState();
+}
+
+function renderFinanceEducation(){
+  const exs = getExercisesByPillar('finance');
+  return `<div class="grid grid-2">${exs.map(ex => `
+    <div class="card session-card" onclick="startGuided('${ex.id}')">
+      <div class="sess-icon"><i class="fas ${ex.icon||'fa-coins'}"></i></div>
+      <div class="sess-title">${getExerciseTitle(ex)}</div>
+      <div class="sess-meta">
+        <span><i class="fas fa-clock"></i> ${ex.duration} ${t('min')}</span>
+        <span class="tag">${t(ex.level)}</span>
+      </div>
+      <div class="sess-desc">${getExerciseDesc(ex)}</div>
+      <div style="margin-top:12px"><button class="btn btn-gold btn-sm"><i class="fas fa-play"></i> ${t('start')}</button></div>
+    </div>`).join('')}</div>`;
+}
+
+function renderFinanceTracking(){
+  const log = state.financeLog;
+  return `<div style="margin-bottom:16px">
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">Aktivitäten</h3>
+    ${log.length===0?`<div class="card" style="text-align:center;padding:24px;color:var(--text-muted)">${t('no_data')}</div>`:
+    `<div style="max-height:400px;overflow-y:auto">${log.slice().reverse().map(l => `
+      <div class="journal-entry">
+        <div class="j-date">${l.date}</div>
+        <div class="j-a"><i class="fas fa-coins" style="color:var(--gold)"></i> ${t(l.type.replace(/_/g,'_'))||l.type}</div>
+      </div>`).join('')}</div>`
+    }
+    <button class="btn btn-outline btn-block mt-12" onclick="recordFinanceUsage('manual')"><i class="fas fa-plus"></i> Aktivität hinzufügen</button>
+  </div>`;
+}
+
+// ============================================================
+// GUIDED SESSION ENGINE (Core Feature)
+// ============================================================
+window.startGuided = function(exerciseId){
+  const ex = getExercise(exerciseId);
+  if(!ex) return;
+
+  state.guidedActive = true;
+  state.guidedData = ex;
+  state.guidedStep = -1; // Start with countdown
+  state.guidedRunning = false;
+  state.guidedPaused = false;
+
+  const overlay = document.getElementById('guided-overlay');
+  overlay.classList.add('active');
+
+  // Update header
+  document.getElementById('guided-name').textContent = getExerciseTitle(ex);
+  document.getElementById('guided-progress-fill').style.width = '0%';
+
+  // Start countdown
+  showGuidedCountdown();
+};
+
+function showGuidedCountdown(){
+  const content = document.getElementById('guided-content');
+  let count = 3;
+  content.innerHTML = `
+    <div style="text-align:center">
+      <div style="font-size:24px;font-weight:600;margin-bottom:24px">${t('guided_countdown')}</div>
+      <div class="guided-countdown" id="countdown-num">3</div>
+    </div>`;
+
+  const interval = setInterval(() => {
+    count--;
+    if(count <= 0){
+      clearInterval(interval);
+      document.getElementById('guided-progress-fill').style.width = '5%';
+      beginGuidedSteps();
+    } else {
+      document.getElementById('countdown-num').textContent = count;
+    }
+  }, 1000);
+}
+
+function beginGuidedSteps(){
+  state.guidedStep = 0;
+  state.guidedRunning = true;
+  showGuidedStep();
+}
+
+function showGuidedStep(){
+  const ex = state.guidedData;
+  const steps = ex.steps || [];
+  const content = document.getElementById('guided-content');
+
+  // Check if session is complete
+  if(!steps || steps.length === 0 || state.guidedStep >= steps.length){
+    completeGuidedSession();
+    return;
+  }
+
+  const step = steps[state.guidedStep];
+  const totalSteps = steps.length;
+  const progress = ((state.guidedStep) / totalSteps) * 95 + 5;
+  document.getElementById('guided-progress-fill').style.width = progress + '%';
+
+  const hasVideo = ex.video && ex.pillar === 'fitness';
+  const timer = step.timer || 30;
+
+  let videoHtml = '';
+  if(hasVideo && state.guidedStep === 0){
+    videoHtml = `<div class="guided-video"><iframe src="https://www.youtube.com/embed/${ex.video}?autoplay=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+  }
+
+  content.innerHTML = `
+    <div style="text-align:center;width:100%">
+      <div style="font-size:14px;color:var(--text-muted);margin-bottom:8px">${t('sessions_label')} ${state.guidedStep+1}/${totalSteps}</div>
+      <div class="guided-step-icon"><i class="fas ${ex.icon||'fa-play'}"></i></div>
+      <div class="guided-step-title">${getStepTitle(step, state.guidedStep)}</div>
+      <div class="guided-step-desc">${getStepDesc(step, state.guidedStep)}</div>
+      ${videoHtml}
+      <div class="guided-timer" id="guided-timer-display">${formatTimer(timer)}</div>
+      <div class="guided-controls">
+        <button class="btn btn-outline btn-sm" onclick="guidedPauseResume()" id="guided-pause-btn"><i class="fas fa-pause"></i> ${t('pause')}</button>
+        <button class="btn btn-outline btn-sm" onclick="guidedSkip()"><i class="fas fa-forward"></i> ${t('skip')}</button>
+        <button class="btn btn-dark btn-sm" onclick="guidedEnd()"><i class="fas fa-stop"></i> ${t('end')}</button>
+      </div>
+    </div>`;
+
+  // Start the timer
+  startGuidedTimer(timer);
+}
+
+function startGuidedTimer(duration){
+  if(state.guidedTimer) clearInterval(state.guidedTimer);
+  let remaining = duration;
+  state.guidedPaused = false;
+  updateGuidedTimerDisplay(remaining);
+
+  state.guidedTimer = setInterval(() => {
+    if(state.guidedPaused) return;
+    remaining--;
+    if(remaining <= 0){
+      clearInterval(state.guidedTimer);
+      // Play a beep-like visual cue
+      document.getElementById('guided-timer-display').style.color = 'var(--success)';
+      setTimeout(() => {
+        state.guidedStep++;
+        showGuidedStep();
+      }, 500);
+    } else {
+      updateGuidedTimerDisplay(remaining);
+    }
+  }, 1000);
+}
+
+function updateGuidedTimerDisplay(secs){
+  const el = document.getElementById('guided-timer-display');
+  if(el) el.textContent = formatTimer(secs);
+}
+
+function formatTimer(secs){
+  if(secs >= 60){
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m}:${s.toString().padStart(2,'0')}`;
+  }
+  return `0:${secs.toString().padStart(2,'0')}`;
+}
+
+window.guidedPauseResume = function(){
+  state.guidedPaused = !state.guidedPaused;
+  const btn = document.getElementById('guided-pause-btn');
+  if(btn){
+    btn.innerHTML = state.guidedPaused ? `<i class="fas fa-play"></i> ${t('resume')}` : `<i class="fas fa-pause"></i> ${t('pause')}`;
+  }
+  if(!state.guidedPaused){
+    // Update immediately
+    const el = document.getElementById('guided-timer-display');
+    if(el) el.style.color = 'var(--gold)';
+  }
+};
+
+window.guidedSkip = function(){
+  if(state.guidedTimer) clearInterval(state.guidedTimer);
+  state.guidedStep++;
+  showGuidedStep();
+};
+
+window.guidedEnd = function(){
+  if(state.guidedTimer) clearInterval(state.guidedTimer);
+  state.guidedActive = false;
+  state.guidedRunning = false;
+  document.getElementById('guided-overlay').classList.remove('active');
+  // Destroy any remaining YouTube iframes
+  document.querySelectorAll('.guided-video iframe').forEach(el => el.src = '');
+  navigate('dashboard');
+};
+
+function completeGuidedSession(){
+  const ex = state.guidedData;
+  const content = document.getElementById('guided-content');
+  document.getElementById('guided-progress-fill').style.width = '100%';
+
+  // Record completion
+  const today = new Date().toISOString().split('T')[0];
+  state.completed.push({id:ex.id, date:today, pillar:ex.pillar});
+
+  // Update streak
+  checkStreak();
+
+  // Update session counts and scores
+  state.sessionCount[ex.pillar]++;
+  state.sessionCount.total++;
+  state.scores[ex.pillar] = Math.min(100, state.scores[ex.pillar] + 10);
+  updateTotalScore();
+
+  // Update badges
+  updateBadges();
+  saveState();
+
+  // Find next recommendation
+  recommendSession();
+  const next = state.todayRecommendation;
+
+  content.innerHTML = `
+    <div class="guided-complete">
+      <div class="check"><i class="fas fa-check-circle"></i></div>
+      <h2>${t('guided_complete')}</h2>
+      <p style="color:var(--text-muted);margin:8px 0 4px">${getExerciseTitle(ex)}</p>
+      <p style="font-size:13px;color:var(--text-dim)">+10 ${t('score')}</p>
+      <div style="margin:16px 0">
+        <p style="font-size:14px;font-weight:600;margin-bottom:8px">${t('feedback')}</p>
+        <div class="star-rating" id="star-rating">
+          <i class="far fa-star" data-star="1" onclick="rateSession('${ex.id}',1)"></i>
+          <i class="far fa-star" data-star="2" onclick="rateSession('${ex.id}',2)"></i>
+          <i class="far fa-star" data-star="3" onclick="rateSession('${ex.id}',3)"></i>
+          <i class="far fa-star" data-star="4" onclick="rateSession('${ex.id}',4)"></i>
+          <i class="far fa-star" data-star="5" onclick="rateSession('${ex.id}',5)"></i>
+        </div>
+      </div>
+      ${next ? `
+        <div style="margin-top:16px">
+          <p style="font-size:14px;color:var(--text-muted);margin-bottom:8px">${t('suggested_next')}</p>
+          <div class="card session-card" onclick="guidedEnd();setTimeout(()=>startGuided('${next.id}'),300)">
+            <div class="sess-title">${getExerciseTitle(next)}</div>
+            <div class="sess-meta"><span>${next.duration} ${t('min')}</span></div>
+          </div>
+        </div>` : ''}
+      <button class="btn btn-gold mt-24" onclick="guidedEnd()"><i class="fas fa-check"></i> ${t('end')}</button>
+    </div>`;
+
+  // Check for existing rating
+  const existingRating = state.ratings[ex.id];
+  if(existingRating){
+    document.querySelectorAll('#star-rating i').forEach((el2, idx) => {
+      if(idx < existingRating) el2.className = 'fas fa-star active';
+      else el2.className = 'far fa-star';
+    });
+  }
+}
+
+window.rateSession = function(id, stars){
+  state.ratings[id] = stars;
+  saveState();
+  document.querySelectorAll('#star-rating i').forEach(el => {
+    const s = parseInt(el.dataset.star);
+    if(s <= stars) el.className = 'fas fa-star active';
+    else el.className = 'far fa-star';
+  });
+};
+
+// ============================================================
+// GUIDED PAGE (Standalone)
+// ============================================================
+function renderGuidedPage(el){
+  const allExs = Object.values(EXERCISES);
+  el.innerHTML = `
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:16px"><i class="fas fa-play-circle" style="color:var(--gold)"></i> ${t('nav_guided')}</h2>
+    <p style="color:var(--text-muted);margin-bottom:16px">${t('session_ready')}</p>
+    <div class="grid grid-3">
+      ${allExs.map(ex => `
+        <div class="card session-card" onclick="startGuided('${ex.id}')">
+          <div class="sess-icon"><i class="fas ${ex.icon||'fa-play'}"></i></div>
+          <div class="sess-title">${getExerciseTitle(ex)}</div>
+          <div class="sess-meta">
+            <span><i class="fas fa-clock"></i> ${ex.duration} ${t('min')}</span>
+            <span class="tag tag-${ex.pillar==='fitness'?'success':ex.pillar==='pe'?'info':'warning'}">${t('pillar_'+ex.pillar)}</span>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
+// ============================================================
+// ADMIN PAGE
+// ============================================================
+function renderAdmin(el){
+  const allData = {
+    profile: state.profile,
+    streak: state.streak,
+    scores: state.scores,
+    sessionCount: state.sessionCount,
+    completed: state.completed.length,
+    journalEntries: state.journal.length,
+    financeLogEntries: state.financeLog.length,
+    badges: state.badges,
+    ratings: Object.keys(state.ratings).length
+  };
+
+  el.innerHTML = `
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:16px"><i class="fas fa-cog" style="color:var(--gold)"></i> ${t('admin_title')}</h2>
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">${t('admin_data')}</h3>
+      <table class="admin-table">
+        <tr><th>Feld</th><th>Wert</th></tr>
+        ${Object.entries(allData).map(([k,v]) => `
+          <tr><td>${k}</td><td>${typeof v === 'object' ? JSON.stringify(v) : v}</td></tr>`).join('')}
+      </table>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn btn-gold" onclick="exportData()"><i class="fas fa-download"></i> ${t('admin_export')}</button>
+      <button class="btn btn-outline" onclick="resetData()"><i class="fas fa-trash"></i> ${t('reset')}</button>
+    </div>
+  `;
+}
+
+window.exportData = function(){
+  const data = JSON.stringify(DB.getAll(), null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'apex-logic-v3-backup.json';
+  a.click();
+  URL.revokeObjectURL(url);
+};
+
+window.resetData = function(){
+  if(confirm('Wirklich ALLE Daten zurücksetzen?')){
+    localStorage.clear();
+    location.reload();
+  }
+};
+
+// ============================================================
+// SETTINGS PAGE
+// ============================================================
+function renderSettings(el){
+  el.innerHTML = `
+    <h2 style="font-size:22px;font-weight:700;margin-bottom:16px"><i class="fas fa-sliders-h" style="color:var(--gold)"></i> ${t('settings_title')}</h2>
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">${t('language')}</h3>
+      <div class="option-grid" style="grid-template-columns:repeat(4,1fr)">
+        ${['de','en','tr','ku'].map(l => `
+          <div class="option-card ${state.lang===l?'selected':''}" onclick="setLanguage('${l}')">
+            <span style="font-size:24px">${l==='de'?'🇩🇪':l==='en'?'🇬🇧':l==='tr'?'🇹🇷':'🏴'}</span>
+            <span style="margin-top:4px">${l.toUpperCase()}</span>
+          </div>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;font-weight:600;margin-bottom:12px">${t('profile')}</h3>
+      <div class="input-group"><label>${t('onboarding_name')}</label><input class="input-field" id="settings-name" value="${state.profile.name||''}"></div>
+      <div class="input-group mt-8"><label>${t('onboarding_age')}</label><input class="input-field" type="number" id="settings-age" value="${state.profile.age||25}"></div>
+      <button class="btn btn-gold btn-block mt-12" onclick="saveSettings()"><i class="fas fa-save"></i> ${t('save')}</button>
+    </div>
+  `;
+}
+
+window.setLanguage = function(l){
+  state.lang = l;
+  saveState();
+  renderPage(state.currentPage);
+  // Update all i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    el.textContent = t(key);
+  });
+};
+
+window.saveSettings = function(){
+  const name = document.getElementById('settings-name')?.value;
+  const age = parseInt(document.getElementById('settings-age')?.value);
+  if(name) state.profile.name = name;
+  if(age) state.profile.age = age;
+  saveState();
+  navigate('settings');
+};
+
+// ============================================================
+// CORE LOGIC
+// ============================================================
+function checkStreak(){
+  const today = new Date().toISOString().split('T')[0];
+  const last = state.streak.lastDate;
+  if(last === today) return; // Already checked today
+
+  // Check if yesterday was the last session
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+  const yStr = yesterday.toISOString().split('T')[0];
+
+  if(last === yStr){
+    state.streak.count++;
+  } else if(last !== today){
+    // Streak broken
+    state.streak.count = 0;
+  }
+  state.streak.lastDate = today;
+  saveState();
+}
+
+function getLevel(score){
+  if(score >= 90) return 'S';
+  if(score >= 80) return 'A';
+  if(score >= 70) return 'B';
+  if(score >= 60) return 'C';
+  if(score >= 40) return 'D';
+  return 'E';
+}
+
+function updateTotalScore(){
+  state.scores.total = Math.round((state.scores.fitness + state.scores.pe + state.scores.finance) / 3);
+}
+
+function updateScores(){
+  // Recalculate scores from completed sessions
+  const fitnessCount = state.completed.filter(c => c.pillar==='fitness').length;
+  const peCount = state.completed.filter(c => c.pillar==='pe').length;
+  const financeCount = state.completed.filter(c => c.pillar==='finance').length;
+
+  state.scores.fitness = Math.min(100, fitnessCount * 5);
+  state.scores.pe = Math.min(100, peCount * 5);
+  state.scores.finance = Math.min(100, financeCount * 5);
+  updateTotalScore();
+  saveState();
+}
+
+function updateBadges(){
+  const newBadges = [];
+  if(state.streak.count >= 7 && !state.badges.includes(t('badge_7'))) newBadges.push(t('badge_7'));
+  if(state.streak.count >= 30 && !state.badges.includes(t('badge_30'))) newBadges.push(t('badge_30'));
+  if(state.streak.count >= 100 && !state.badges.includes(t('badge_100'))) newBadges.push(t('badge_100'));
+  if(newBadges.length > 0){
+    state.badges = [...state.badges, ...newBadges];
+    saveState();
+  }
+}
+
+function recommendSession(){
+  const p = state.profile;
+  const completedIds = new Set(state.completed.map(c => c.id));
+  const allExs = Object.values(EXERCISES);
+
+  // Prioritize based on profile
+  let candidates = [];
+
+  if(p.goal === 'fitness'){
+    candidates = allExs.filter(e => e.pillar === 'fitness');
+  } else if(p.goal === 'pe'){
+    candidates = allExs.filter(e => e.pillar === 'pe');
+  } else if(p.goal === 'finance'){
+    candidates = allExs.filter(e => e.pillar === 'finance');
+  } else {
+    // Balanced: pick one from each pillar in rotation
+    const pillarOrder = ['fitness','pe','finance'];
+    const completedToday = state.completed.filter(c => c.date === new Date().toISOString().split('T')[0]).length;
+    let targetPillar = pillarOrder[completedToday % 3];
+
+    if(p.finance === 'debt' && completedToday < 1) targetPillar = 'finance';
+    candidates = allExs.filter(e => e.pillar === targetPillar);
+    if(candidates.length === 0) candidates = allExs;
+  }
+
+  // Filter by level
+  if(p.fitness === 'beginner') candidates = candidates.filter(e => e.level === 'beginner' || e.level === 'intermediate');
+  else if(p.fitness === 'advanced') candidates = candidates.filter(e => e.level === 'advanced' || e.level === 'intermediate');
+
+  // Prefer uncompleted
+  const uncompleted = candidates.filter(e => !completedIds.has(e.id));
+  const pool = uncompleted.length > 0 ? uncompleted : candidates;
+
+  // Pick random
+  state.todayRecommendation = pool[Math.floor(Math.random() * pool.length)] || allExs[Math.floor(Math.random() * allExs.length)];
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function init(){
+  // Set up sidebar
+  document.getElementById('menu-btn').addEventListener('click', ()=>{
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('show');
+  });
+  document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
+
+  // Sidebar navigation
+  document.querySelectorAll('.sidebar-item').forEach(el => {
+    el.addEventListener('click', ()=>{
+      const page = el.dataset.page;
+      if(page) navigate(page);
+    });
+  });
+
+  // Check onboarding
+  const hash = window.location.hash.replace('#','');
+  if(hash && hash !== 'landing' && !state.onboarding && hash !== 'onboarding'){
+    navigate('landing');
+  } else if(state.onboarding){
+    navigate(hash || 'dashboard');
+  } else {
+    navigate(hash || 'landing');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

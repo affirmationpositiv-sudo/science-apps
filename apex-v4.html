@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>APEX v4 – The One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+/* ============================================================
+   APEX v4 – THE ONE
+   Premium Design System
+   ============================================================ */
+:root {
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #12121A;
+  --bg-card: #1A1A2E;
+  --bg-card-hover: #22223A;
+  --gold: #C9A84C;
+  --gold-light: #E8D48B;
+  --gold-dark: #A08030;
+  --text-primary: #F0EDE5;
+  --text-secondary: #8B8B8B;
+  --text-muted: #5A5A5A;
+  --accent-body: #4CAF50;
+  --accent-mind: #7C4DFF;
+  --accent-wealth: #FFC107;
+  --accent-soul: #FF6B6B;
+  --danger: #EF4444;
+  --success: #22C55E;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(201,168,76,0.3);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.5);
+  --shadow-gold: 0 0 20px rgba(201,168,76,0.15);
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  font-weight:300;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:900;line-height:1.2}
+h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:900}
+h2{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700}
+h3{font-size:clamp(1.2rem,3vw,1.6rem);font-weight:600}
+h4{font-size:1.1rem;font-weight:600}
+
+.gold{color:var(--gold)}
+.muted{color:var(--text-muted)}
+.secondary{color:var(--text-secondary)}
+.text-center{text-align:center}
+.text-body{color:var(--accent-body)}
+.text-mind{color:var(--accent-mind)}
+.text-wealth{color:var(--accent-wealth)}
+.text-soul{color:var(--accent-soul)}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.container{max-width:480px;margin:0 auto;padding:0 20px;position:relative}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 28px;border-radius:var(--radius-sm);
+  font-family:var(--font-body);font-size:0.95rem;font-weight:500;
+  cursor:pointer;transition:var(--transition);border:none;outline:none;
+  text-decoration:none;position:relative;overflow:hidden;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));
+  color:var(--bg-primary);box-shadow:0 4px 20px rgba(201,168,76,0.3);
+}
+.btn-gold:hover{box-shadow:0 6px 30px rgba(201,168,76,0.5);transform:translateY(-1px)}
+.btn-outline{
+  background:transparent;color:var(--gold);border:1px solid var(--border-hover);
+}
+.btn-outline:hover{background:rgba(201,168,76,0.08);border-color:var(--gold)}
+.btn-ghost{
+  background:transparent;color:var(--text-secondary);border:1px solid var(--border);
+}
+.btn-ghost:hover{color:var(--text-primary);border-color:var(--border-hover)}
+.btn-block{width:100%;display:flex}
+.btn-sm{padding:10px 18px;font-size:0.85rem}
+.btn-lg{padding:16px 36px;font-size:1.05rem}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none!important}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card{
+  background:var(--bg-card);border-radius:var(--radius);
+  border:1px solid var(--border);box-shadow:var(--shadow-card);
+  padding:24px;transition:var(--transition);position:relative;
+}
+.card:hover{border-color:var(--border-hover);background:var(--bg-card-hover)}
+.card-glow{box-shadow:var(--shadow-gold)}
+.card-interactive{cursor:pointer}
+.card-interactive:active{transform:scale(0.98)}
+
+/* ============================================================
+   APP CONTAINER
+   ============================================================ */
+.screen{display:none;animation:slideUp 0.5s ease forwards;min-height:100vh;padding:24px 0 100px}
+.screen.active{display:block}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+.app-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;position:sticky;top:0;z-index:100;
+  background:rgba(10,10,15,0.85);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
+}
+.app-header h3{font-size:1.1rem;font-weight:700}
+.header-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--bg-secondary);cursor:pointer;transition:var(--transition);
+  border:1px solid var(--border);color:var(--text-secondary);font-size:1.1rem;
+}
+.header-icon:hover{border-color:var(--gold);color:var(--gold)}
+.badge{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:4px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;
+  background:rgba(201,168,76,0.12);color:var(--gold);border:1px solid rgba(201,168,76,0.2);
+}
+.badge-premium{background:rgba(201,168,76,0.15);color:var(--gold);border-color:rgba(201,168,76,0.3)}
+.badge-free{background:rgba(139,139,139,0.1);color:var(--text-secondary);border-color:var(--border)}
+.badge-coach{background:rgba(124,77,255,0.15);color:var(--accent-mind);border-color:rgba(124,77,255,0.3)}
+
+/* ============================================================
+   BOTTOM NAV
+   ============================================================ */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:200;
+  background:rgba(10,10,15,0.92);backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:stretch;padding:6px 0 env(safe-area-inset-bottom,8px);
+  max-width:480px;margin:0 auto;
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;padding:6px;cursor:pointer;transition:var(--transition);
+  color:var(--text-muted);font-size:0.6rem;font-weight:500;text-transform:uppercase;
+  letter-spacing:0.5px;border:none;background:none;font-family:var(--font-body);
+}
+.nav-item .nav-icon{font-size:1.3rem;transition:var(--transition)}
+.nav-item.active{color:var(--gold)}
+.nav-item.active .nav-icon{color:var(--gold);text-shadow:0 0 10px rgba(201,168,76,0.4)}
+.nav-item:hover{color:var(--text-secondary)}
+
+/* ============================================================
+   ONBOARDING
+   ============================================================ */
+.onboarding-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--bg-primary);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 24px;text-align:center;
+}
+.onboarding-overlay.hidden{display:none}
+.onboarding-step{display:none;animation:slideUp 0.6s ease forwards;max-width:420px;width:100%}
+.onboarding-step.active{display:flex;flex-direction:column;align-items:center;gap:24px}
+.onboarding-logo{font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--gold);letter-spacing:-2px}
+.onboarding-logo span{color:var(--text-primary)}
+.onboarding-subtitle{font-size:0.95rem;color:var(--text-secondary);max-width:320px;line-height:1.7}
+.onboarding-pitch{font-family:var(--font-display);font-size:1.4rem;font-weight:600;line-height:1.5;max-width:360px}
+.onboarding-pitch .em{color:var(--gold)}
+.onboarding-options{display:flex;flex-direction:column;gap:12px;width:100%;max-width:340px}
+.option-card{
+  display:flex;align-items:center;gap:16px;
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px 20px;
+  cursor:pointer;transition:var(--transition);text-align:left;
+}
+.option-card:hover{border-color:var(--gold);background:var(--bg-card-hover)}
+.option-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.06)}
+.option-icon{font-size:1.6rem;width:44px;text-align:center}
+.option-text{flex:1}
+.option-text strong{display:block;font-size:1rem;font-weight:600;margin-bottom:2px}
+.option-text span{font-size:0.8rem;color:var(--text-secondary)}
+
+/* ============================================================
+   APEX SCORE
+   ============================================================ */
+.score-ring{
+  width:160px;height:160px;border-radius:50%;margin:0 auto 16px;
+  position:relative;display:flex;align-items:center;justify-content:center;
+}
+.score-ring svg{position:absolute;transform:rotate(-90deg)}
+.score-ring .score-value{
+  font-family:var(--font-display);font-size:3rem;font-weight:900;
+  z-index:1;position:relative;
+}
+.score-ring .score-label{font-size:0.75rem;color:var(--text-muted);margin-top:-4px;z-index:1}
+
+.pillar-row{
+  display:flex;align-items:center;gap:12px;padding:10px 0;
+  border-bottom:1px solid var(--border);
+}
+.pillar-row:last-child{border-bottom:none}
+.pillar-icon{font-size:1.1rem;width:28px;text-align:center}
+.pillar-name{flex:0 0 70px;font-size:0.85rem;font-weight:500;text-transform:uppercase;letter-spacing:0.5px}
+.pillar-bar{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.pillar-bar-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(0.22,1,0.36,1)}
+.pillar-pct{flex:0 0 36px;text-align:right;font-size:0.8rem;font-weight:500;color:var(--text-secondary)}
+
+/* ============================================================
+   SESSION CARD
+   ============================================================ */
+.session-card{
+  background:linear-gradient(135deg,var(--bg-card),#1F1F35);
+  border-radius:var(--radius);border:1px solid var(--border);
+  padding:24px;cursor:pointer;transition:var(--transition);
+  position:relative;overflow:hidden;
+}
+.session-card:hover{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,0.5)}
+.session-card .session-icon{font-size:2rem;margin-bottom:12px}
+.session-card h3{font-size:1.15rem;margin-bottom:4px}
+.session-card .meta{display:flex;gap:16px;font-size:0.8rem;color:var(--text-secondary);margin-top:8px}
+.session-card .tag{
+  display:inline-block;padding:2px 10px;border-radius:12px;
+  font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.3px;
+}
+.tag-body{background:rgba(76,175,80,0.12);color:var(--accent-body);border:1px solid rgba(76,175,80,0.2)}
+.tag-mind{background:rgba(124,77,255,0.12);color:var(--accent-mind);border:1px solid rgba(124,77,255,0.2)}
+.tag-wealth{background:rgba(255,193,7,0.12);color:var(--accent-wealth);border:1px solid rgba(255,193,7,0.2)}
+.tag-soul{background:rgba(255,107,107,0.12);color:var(--accent-soul);border:1px solid rgba(255,107,107,0.2)}
+
+/* ============================================================
+   SESSION PLAYER
+   ============================================================ */
+.player-overlay{
+  position:fixed;inset:0;z-index:5000;
+  background:var(--bg-primary);
+  display:none;flex-direction:column;
+}
+.player-overlay.active{display:flex}
+.player-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 20px;border-bottom:1px solid var(--border);
+}
+.player-progress{display:flex;gap:6px;padding:0 20px;margin-top:16px}
+.player-dot{flex:1;height:3px;border-radius:2px;background:var(--border);transition:var(--transition)}
+.player-dot.completed{background:var(--gold)}
+.player-dot.current{background:var(--gold);box-shadow:0 0 8px rgba(201,168,76,0.5)}
+.player-content{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:40px 24px;text-align:center;gap:16px;
+}
+.player-timer{
+  font-family:var(--font-display);font-size:4rem;font-weight:700;color:var(--gold);
+  letter-spacing:-2px;text-shadow:0 0 40px rgba(201,168,76,0.15);
+}
+.player-step-label{font-size:1.1rem;font-weight:500;color:var(--text-primary);max-width:320px}
+.player-instruction{font-size:0.9rem;color:var(--text-secondary);max-width:300px;line-height:1.6}
+.player-controls{
+  display:flex;gap:16px;padding:20px;justify-content:center;
+}
+.player-progress-text{font-size:0.8rem;color:var(--text-muted);margin-top:8px}
+
+/* ============================================================
+   PRE-ROLL / REFLECTION
+   ============================================================ */
+.preroll-screen{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:40px 24px;flex:1;gap:16px;
+}
+.preroll-screen h2{font-size:1.6rem}
+.preroll-screen p{color:var(--text-secondary);max-width:300px;line-height:1.7}
+
+/* ============================================================
+   MONETIZATION / PAYWALL
+   ============================================================ */
+.paywall-overlay{
+  position:fixed;inset:0;z-index:8000;
+  background:rgba(10,10,15,0.97);backdrop-filter:blur(30px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  padding:32px 24px;text-align:center;
+}
+.paywall-overlay.active{display:flex}
+.paywall-card{
+  background:var(--bg-card);border-radius:var(--radius);
+  border:1px solid var(--border-hover);padding:32px 24px;
+  max-width:400px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+.paywall-card h2{margin-bottom:8px}
+.paywall-card .price{font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--gold);margin:16px 0 4px}
+.paywall-card .period{color:var(--text-muted);font-size:0.85rem;margin-bottom:20px}
+.paywall-features{text-align:left;margin:16px 0;padding:0;list-style:none}
+.paywall-features li{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:0.9rem;color:var(--text-secondary)}
+.paywall-features li::before{content:"✦";color:var(--gold);font-size:0.8rem}
+.pricing-tabs{display:flex;gap:8px;margin:16px 0}
+.pricing-tab{
+  flex:1;padding:10px;border-radius:8px;cursor:pointer;transition:var(--transition);
+  border:1px solid var(--border);background:transparent;color:var(--text-secondary);
+  font-family:var(--font-body);font-size:0.85rem;font-weight:500;
+}
+.pricing-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,0.06)}
+.coach-card{
+  background:linear-gradient(135deg,rgba(124,77,255,0.06),rgba(124,77,255,0.02));
+  border:1px solid rgba(124,77,255,0.2);border-radius:var(--radius);
+  padding:20px;margin-top:16px;cursor:pointer;transition:var(--transition);
+}
+.coach-card:hover{border-color:rgba(124,77,255,0.4)}
+.coach-card .coach-price{font-family:var(--font-display);font-size:2rem;font-weight:700;color:var(--accent-mind)}
+
+/* ============================================================
+   SUBSCRIPTION BANNER
+   ============================================================ */
+.trial-banner{
+  background:linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.02));
+  border:1px solid rgba(201,168,76,0.15);border-radius:var(--radius-sm);
+  padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px;
+}
+.trial-banner .days{font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:var(--gold)}
+.trial-banner .label{font-size:0.8rem;color:var(--text-secondary);line-height:1.4}
+.trial-banner .upgrade-link{color:var(--gold);font-size:0.85rem;font-weight:500;cursor:pointer;margin-left:auto;white-space:nowrap}
+.trial-banner .upgrade-link:hover{text-decoration:underline}
+
+/* ============================================================
+   SECTIONS LIST (Sessions)
+   ============================================================ */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:24px 0 12px;
+}
+.section-header h3{font-size:1.1rem}
+.section-header a{color:var(--text-muted);font-size:0.8rem;cursor:pointer;transition:var(--transition)}
+.section-header a:hover{color:var(--gold)}
+
+.session-list-item{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 16px;background:var(--bg-card);border-radius:var(--radius-sm);
+  border:1px solid var(--border);margin-bottom:8px;cursor:pointer;
+  transition:var(--transition);
+}
+.session-list-item:hover{background:var(--bg-card-hover);border-color:var(--border-hover)}
+.session-list-item .sli-icon{font-size:1.2rem;width:36px;height:36px;display:flex;align-items:center;
+  justify-content:center;border-radius:8px;flex-shrink:0}
+.session-list-item .sli-info{flex:1}
+.session-list-item .sli-info strong{display:block;font-size:0.9rem;font-weight:500}
+.session-list-item .sli-info span{font-size:0.75rem;color:var(--text-muted)}
+.session-list-item .sli-time{font-size:0.8rem;color:var(--text-secondary);white-space:nowrap}
+.locked{opacity:0.5}
+.locked .sli-icon{filter:grayscale(0.8)}
+
+/* ============================================================
+   WEALTH CALCULATORS
+   ============================================================ */
+.calc-group{margin-bottom:12px}
+.calc-group label{display:block;font-size:0.8rem;color:var(--text-secondary);margin-bottom:4px;font-weight:500}
+.calc-group input, .calc-group select{
+  width:100%;padding:12px 14px;border-radius:8px;
+  background:var(--bg-secondary);border:1px solid var(--border);
+  color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;
+  transition:var(--transition);outline:none;
+}
+.calc-group input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1)}
+.calc-group input::placeholder{color:var(--text-muted)}
+.calc-result{font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:var(--gold);margin:8px 0}
+.chart-wrap{position:relative;height:220px;margin:16px 0}
+
+/* ============================================================
+   JOURNAL
+   ============================================================ */
+.journal-prompt{
+  font-family:var(--font-display);font-size:1.2rem;font-weight:600;
+  margin-bottom:12px;line-height:1.5;
+}
+.journal-input{
+  width:100%;min-height:120px;padding:14px;border-radius:var(--radius-sm);
+  background:var(--bg-secondary);border:1px solid var(--border);
+  color:var(--text-primary);font-family:var(--font-body);font-size:0.9rem;
+  resize:vertical;transition:var(--transition);outline:none;
+}
+.journal-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.1)}
+.journal-entry{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:14px;margin-bottom:8px;border:1px solid var(--border)}
+.journal-entry .date{font-size:0.7rem;color:var(--text-muted);margin-bottom:4px}
+.journal-entry .text{font-size:0.85rem;color:var(--text-secondary);line-height:1.5}
+
+/* ============================================================
+   SETTINGS / PROFILE
+   ============================================================ */
+.setting-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 0;border-bottom:1px solid var(--border);
+}
+.setting-row:last-child{border-bottom:none}
+.setting-row .label{font-size:0.9rem}
+.setting-row .value{color:var(--text-secondary);font-size:0.85rem}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
+
+/* ============================================================
+   MISC
+   ============================================================ */
+.separator{height:1px;background:var(--border);margin:16px 0}
+.gap-8{gap:8px}
+.gap-12{gap:12px}
+.gap-16{gap:16px}
+.gap-24{gap:24px}
+.flex{display:flex}
+.flex-col{flex-direction:column}
+.items-center{align-items:center}
+.justify-center{justify-content:center}
+.justify-between{justify-content:space-between}
+.flex-1{flex:1}
+.mt-8{margin-top:8px}
+.mt-16{margin-top:16px}
+.mt-24{margin-top:24px}
+.mb-8{margin-bottom:8px}
+.mb-16{margin-bottom:16px}
+.mb-24{margin-bottom:24px}
+.w-full{width:100%}
+.text-sm{font-size:0.85rem}
+.text-xs{font-size:0.75rem}
+.op-6{opacity:0.6}
+
+/* BREATHE ANIMATION */
+@keyframes breathe{
+  0%,100%{transform:scale(1);opacity:0.6}
+  50%{transform:scale(1.05);opacity:1}
+}
+@keyframes pulse-glow{
+  0%,100%{box-shadow:0 0 5px rgba(201,168,76,0.3)}
+  50%{box-shadow:0 0 20px rgba(201,168,76,0.6)}
+}
+@keyframes countdownAnim{
+  0%{transform:scale(1.5);opacity:1}
+  100%{transform:scale(0.5);opacity:0}
+}
+.anim-breathe{animation:breathe 4s ease-in-out infinite}
+.anim-pulse{animation:pulse-glow 2s ease-in-out infinite}
+
+/* SAVED INDICATOR */
+.saved-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--success);margin-left:6px;opacity:0;transition:opacity 0.3s}
+.saved-dot.show{opacity:1}
+
+/* Responsive for larger screens */
+@media(min-width:481px){
+  body{display:flex;justify-content:center;background:#050508}
+  .bottom-nav{left:50%;transform:translateX(-50%);border-radius:20px 20px 0 0;border-left:1px solid var(--border);border-right:1px solid var(--border)}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     ONBOARDING OVERLAY
+     ============================================================ -->
+<div id="onboardingOverlay" class="onboarding-overlay">
+
+  <!-- Step 0: Splash -->
+  <div class="onboarding-step active" data-step="0">
+    <div class="onboarding-logo">⟡ APEX</div>
+    <p class="onboarding-subtitle" style="margin-top:12px">You've tried apps before. They didn't stick.<br><strong>This one's different.</strong></p>
+    <div style="margin-top:32px"><span style="font-size:2rem;color:var(--gold);opacity:0.5">✦</span></div>
+    <p style="margin-top:32px;font-size:0.8rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase">tap anywhere to begin</p>
+  </div>
+
+  <!-- Step 1: What brings you here -->
+  <div class="onboarding-step" data-step="1">
+    <p class="onboarding-pitch">We don't track calories.<br>We don't count steps.<br>We <span class="em">build humans</span>.</p>
+    <p style="font-size:0.9rem;color:var(--text-secondary)">What do you want to become?</p>
+    <div class="onboarding-options">
+      <div class="option-card" data-answer="body" onclick="selectOnboarding(this,'I want to get fit','body')">
+        <span class="option-icon" style="color:var(--accent-body)">◆</span>
+        <div class="option-text"><strong>I want to get fit</strong><span>Strong body, sharp mind, daily discipline</span></div>
+      </div>
+      <div class="option-card" data-answer="mind" onclick="selectOnboarding(this,'I want clarity','mind')">
+        <span class="option-icon" style="color:var(--accent-mind)">▲</span>
+        <div class="option-text"><strong>I want clarity</strong><span>Focus, peace, purpose — mental mastery</span></div>
+      </div>
+      <div class="option-card" data-answer="wealth" onclick="selectOnboarding(this,'I want freedom','wealth')">
+        <span class="option-icon" style="color:var(--accent-wealth)">●</span>
+        <div class="option-text"><strong>I want freedom</strong><span>Financial independence, smart decisions</span></div>
+      </div>
+      <div class="option-card" data-answer="soul" onclick="selectOnboarding(this,'I want meaning','soul')">
+        <span class="option-icon" style="color:var(--accent-soul)">■</span>
+        <div class="option-text"><strong>I want meaning</strong><span>Deeper reflection, gratitude, purpose</span></div>
+      </div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="nextStep()" style="margin-top:8px">Skip →</button>
+  </div>
+
+  <!-- Step 2: Personalized -->
+  <div class="onboarding-step" data-step="2">
+    <p class="onboarding-pitch">Let me guess…<br>you've <span class="em">tried before</span>.</p>
+    <p style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:8px">What's been missing?</p>
+    <div class="onboarding-options">
+      <div class="option-card" onclick="selectOnboarding(this,'Consistency','')">
+        <span class="option-icon" style="color:var(--gold)">✦</span>
+        <div class="option-text"><strong>Consistency</strong><span>I start strong, then fade</span></div>
+      </div>
+      <div class="option-card" onclick="selectOnboarding(this,'Direction','')">
+        <span class="option-icon" style="color:var(--gold)">✦</span>
+        <div class="option-text"><strong>Direction</strong><span>I don't know what to do</span></div>
+      </div>
+      <div class="option-card" onclick="selectOnboarding(this,'Accountability','')">
+        <span class="option-icon" style="color:var(--gold)">✦</span>
+        <div class="option-text"><strong>Accountability</strong><span>I need someone to push me</span></div>
+      </div>
+      <div class="option-card" onclick="selectOnboarding(this,'All of it','')">
+        <span class="option-icon" style="color:var(--gold)">✦</span>
+        <div class="option-text"><strong>All of the above</strong><span>I need a complete system</span></div>
+      </div>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="nextStep()" style="margin-top:8px">Skip →</button>
+  </div>
+
+  <!-- Step 3: Name -->
+  <div class="onboarding-step" data-step="3">
+    <p class="onboarding-pitch">Alright. Let's do this.<br>What should I call <span class="em">you</span>?</p>
+    <input type="text" id="onboardingName" placeholder="Your name..." 
+      style="width:100%;max-width:280px;padding:14px 18px;border-radius:var(--radius-sm);
+      background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);
+      font-family:var(--font-body);font-size:1.1rem;text-align:center;outline:none;
+      transition:var(--transition);"
+      onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor=''"
+      onkeydown="if(event.key==='Enter'){event.preventDefault();finishOnboarding()}">
+    <button class="btn btn-gold btn-lg" onclick="finishOnboarding()" style="margin-top:8px">
+      ⟡ Begin my 30 days
+    </button>
+    <p style="font-size:0.8rem;color:var(--text-muted)">No email. No credit card. Just 30 days to prove it works.</p>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     PAYWALL OVERLAY
+     ============================================================ -->
+<div id="paywallOverlay" class="paywall-overlay">
+  <div class="paywall-card">
+    <span style="font-size:2.5rem;color:var(--gold);opacity:0.6">⟡</span>
+    <h2 style="margin-top:8px">Your trial ended</h2>
+    <p style="color:var(--text-secondary);font-size:0.9rem;max-width:300px;margin:0 auto">
+      The 30 days showed you what's possible. Now it's time to commit.
+    </p>
+
+    <div class="pricing-tabs">
+      <div class="pricing-tab active" data-plan="monthly" onclick="switchPricing(this,'monthly')">Monthly</div>
+      <div class="pricing-tab" data-plan="yearly" onclick="switchPricing(this,'yearly')">Yearly <span style="font-size:0.7rem;color:var(--success)">−40%</span></div>
+    </div>
+
+    <div id="monthlyPricing">
+      <div class="price">$19.99</div>
+      <div class="period">per month</div>
+    </div>
+    <div id="yearlyPricing" style="display:none">
+      <div class="price">$99.99</div>
+      <div class="period">per year · <span style="color:var(--success);font-weight:500">Save $140</span></div>
+    </div>
+
+    <ul class="paywall-features">
+      <li>Unlimited guided sessions</li>
+      <li>Full finance calculators + charts</li>
+      <li>Daily journal &amp; reflection</li>
+      <li>APEX Score analytics</li>
+      <li>Coach access available</li>
+    </ul>
+
+    <button class="btn btn-gold btn-block btn-lg" onclick="upgradePremium()">
+      ✦ Upgrade to Premium
+    </button>
+    <button class="btn btn-ghost btn-block btn-sm" onclick="closePaywall()" style="margin-top:8px">
+      Maybe later
+    </button>
+
+    <div class="coach-card" onclick="upgradeCoach()">
+      <div style="font-size:0.75rem;color:var(--accent-mind);text-transform:uppercase;letter-spacing:1px;font-weight:600">✦ COACH TIER</div>
+      <div class="coach-price">$99</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary)">/month · human coach + priority support</div>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-top:8px">Get paired with a real coach who knows your journey.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     PLAYER OVERLAY
+     ============================================================ -->
+<div id="playerOverlay" class="player-overlay">
+  <div class="player-header">
+    <button class="btn btn-ghost btn-sm" onclick="closePlayer()">✕ Close</button>
+    <span id="playerTitle" style="font-size:0.85rem;font-weight:500;color:var(--text-secondary)"></span>
+    <span id="playerStepCount" style="font-size:0.8rem;color:var(--text-muted)">1/3</span>
+  </div>
+
+  <!-- Pre-Roll -->
+  <div id="prerollScreen" class="preroll-screen">
+    <span style="font-size:3rem;color:var(--gold);opacity:0.4">✦</span>
+    <h2 id="prerollTitle">Before we begin…</h2>
+    <p id="prerollText">Why are you here today?</p>
+    <button class="btn btn-gold btn-lg" onclick="startSessionSteps()">⟡ I'm ready</button>
+  </div>
+
+  <!-- Steps -->
+  <div id="playerSteps" style="display:none;flex-direction:column;flex:1">
+    <div class="player-progress" id="playerProgress"></div>
+    <div class="player-content" id="playerContent">
+      <div id="playerTimer" class="player-timer anim-breathe">0</div>
+      <div id="playerLabel" class="player-step-label"></div>
+      <div id="playerInstruction" class="player-instruction"></div>
+    </div>
+    <div class="player-controls">
+      <button id="pauseBtn" class="btn btn-ghost" onclick="togglePause()">❚❚ Pause</button>
+      <button id="skipBtn" class="btn btn-ghost" onclick="skipStep()">Skip →</button>
+    </div>
+  </div>
+
+  <!-- Reflection -->
+  <div id="reflectionScreen" style="display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;flex:1;gap:16px">
+    <span style="font-size:3rem;color:var(--gold);opacity:0.4">⟡</span>
+    <h2 id="reflectionTitle">You showed up.</h2>
+    <p id="reflectionText" style="color:var(--text-secondary);max-width:300px">That's already 90% of the battle.</p>
+    <p id="reflectionPrompt" style="font-size:0.85rem;color:var(--text-muted);margin-top:8px">What will you take with you?</p>
+    <textarea id="reflectionInput" placeholder="Write something…" 
+      style="width:100%;max-width:320px;min-height:80px;padding:12px;border-radius:var(--radius-sm);
+      background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-primary);
+      font-family:var(--font-body);font-size:0.9rem;resize:none;outline:none;
+      transition:var(--transition);"
+      onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor=''"></textarea>
+    <button class="btn btn-gold" onclick="completeSession()">⟡ Complete</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN APP
+     ============================================================ -->
+
+<!-- Header -->
+<header class="app-header">
+  <h3>⟡ <span style="font-weight:400">APEX</span></h3>
+  <div style="display:flex;align-items:center;gap:8px">
+    <span id="trialBadge" class="badge badge-free">30-day trial</span>
+    <span id="premiumBadge" class="badge badge-premium" style="display:none">✦ Premium</span>
+    <span id="coachBadge" class="badge badge-coach" style="display:none">⟡ Coach</span>
+    <span class="header-icon" onclick="showPaywall()" title="Upgrade">✦</span>
+  </div>
+</header>
+
+<!-- SCREEN: Dashboard -->
+<div id="screenDashboard" class="screen active">
+  <div class="container">
+
+    <!-- Trial Banner -->
+    <div id="trialBanner" class="trial-banner">
+      <div>
+        <div class="days" id="trialDaysLeft">30</div>
+        <div class="label">days left in trial</div>
+      </div>
+      <div style="flex:1;padding:0 12px">
+        <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden">
+          <div id="trialProgressBar" style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;width:100%;transition:width 0.5s ease"></div>
+        </div>
+      </div>
+      <span class="upgrade-link" onclick="showPaywall()">Upgrade ✦</span>
+    </div>
+
+    <!-- Welcome -->
+    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:4px">
+      <span id="greeting">Welcome back</span>, <strong id="userNameDisplay" style="color:var(--text-primary)">Explorer</strong>.
+      <span id="streakText" style="color:var(--text-muted)"></span>
+    </p>
+
+    <!-- APEX Score -->
+    <div class="card" style="text-align:center;margin-bottom:20px" id="scoreCard">
+      <div class="score-ring" id="scoreRing">
+        <svg width="160" height="160" viewBox="0 0 160 160">
+          <circle cx="80" cy="80" r="70" fill="none" stroke="var(--border)" stroke-width="4"/>
+          <circle cx="80" cy="80" r="70" fill="none" stroke="var(--gold)" stroke-width="4" stroke-dasharray="439.8" stroke-dashoffset="439.8" stroke-linecap="round" id="scoreCircle"/>
+        </svg>
+        <div style="display:flex;flex-direction:column;align-items:center">
+          <span class="score-value" id="apexScoreNum">0</span>
+          <span class="score-label">APEX Score</span>
+        </div>
+      </div>
+
+      <div style="margin-top:4px">
+        <div class="pillar-row">
+          <span class="pillar-icon" style="color:var(--accent-body)">◆</span>
+          <span class="pillar-name" style="color:var(--accent-body)">Body</span>
+          <div class="pillar-bar"><div class="pillar-bar-fill" id="bodyBar" style="width:0%;background:var(--accent-body)"></div></div>
+          <span class="pillar-pct" id="bodyPct">0%</span>
+        </div>
+        <div class="pillar-row">
+          <span class="pillar-icon" style="color:var(--accent-mind)">▲</span>
+          <span class="pillar-name" style="color:var(--accent-mind)">Mind</span>
+          <div class="pillar-bar"><div class="pillar-bar-fill" id="mindBar" style="width:0%;background:var(--accent-mind)"></div></div>
+          <span class="pillar-pct" id="mindPct">0%</span>
+        </div>
+        <div class="pillar-row">
+          <span class="pillar-icon" style="color:var(--accent-wealth)">●</span>
+          <span class="pillar-name" style="color:var(--accent-wealth)">Wealth</span>
+          <div class="pillar-bar"><div class="pillar-bar-fill" id="wealthBar" style="width:0%;background:var(--accent-wealth)"></div></div>
+          <span class="pillar-pct" id="wealthPct">0%</span>
+        </div>
+        <div class="pillar-row">
+          <span class="pillar-icon" style="color:var(--accent-soul)">■</span>
+          <span class="pillar-name" style="color:var(--accent-soul)">Soul</span>
+          <div class="pillar-bar"><div class="pillar-bar-fill" id="soulBar" style="width:0%;background:var(--accent-soul)"></div></div>
+          <span class="pillar-pct" id="soulPct">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Today's Session -->
+    <div style="margin-bottom:24px">
+      <div class="section-header">
+        <h3>✦ Today's Session</h3>
+        <a>Recommended for you</a>
+      </div>
+      <div class="session-card" onclick="startSession(getTodaysSession())">
+        <div class="session-icon" id="todayIcon">◆</div>
+        <h3 id="todayTitle">Morning Mobility</h3>
+        <p style="font-size:0.85rem;color:var(--text-secondary)" id="todayDesc">7 minutes · Full body activation</p>
+        <div class="meta">
+          <span class="tag tag-body" id="todayTag">Body</span>
+          <span id="todayDuration">7 min</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Streak + Quick Stats -->
+    <div style="display:flex;gap:12px;margin-bottom:24px">
+      <div class="card" style="flex:1;padding:16px;text-align:center">
+        <span style="font-size:1.6rem;color:var(--gold)">🔥</span>
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-top:4px" id="streakCount">0</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">day streak</div>
+      </div>
+      <div class="card" style="flex:1;padding:16px;text-align:center">
+        <span style="font-size:1.6rem;color:var(--gold)">✦</span>
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-top:4px" id="sessionsDone">0</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">sessions done</div>
+      </div>
+      <div class="card" style="flex:1;padding:16px;text-align:center">
+        <span style="font-size:1.6rem;color:var(--gold)">⟡</span>
+        <div style="font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-top:4px" id="journalCount">0</div>
+        <div style="font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">journal entries</div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div class="card" style="text-align:center;padding:20px;border-left:3px solid var(--gold)">
+      <p style="font-family:var(--font-display);font-size:1.1rem;font-style:italic;color:var(--text-secondary);line-height:1.6" id="dailyQuote">
+        "Your body is ready. Is your mind?"
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCREEN: Sessions -->
+<div id="screenSessions" class="screen">
+  <div class="container">
+
+    <h2 style="margin-bottom:16px">✦ Sessions</h2>
+
+    <!-- Body -->
+    <div class="section-header">
+      <h3 style="color:var(--accent-body)">◆ Body</h3>
+    </div>
+    <div id="bodySessions"></div>
+
+    <!-- Mind -->
+    <div class="section-header">
+      <h3 style="color:var(--accent-mind)">▲ Mind</h3>
+    </div>
+    <div id="mindSessions"></div>
+
+    <!-- Wealth -->
+    <div class="section-header">
+      <h3 style="color:var(--accent-wealth)">● Wealth</h3>
+    </div>
+    <div id="wealthSessions"></div>
+
+    <!-- Soul -->
+    <div class="section-header">
+      <h3 style="color:var(--accent-soul)">■ Soul</h3>
+    </div>
+    <div id="soulSessions"></div>
+
+  </div>
+</div>
+
+<!-- SCREEN: Wealth Tools -->
+<div id="screenWealth" class="screen">
+  <div class="container">
+    <h2 style="margin-bottom:16px">● Wealth Tools</h2>
+
+    <!-- 12-Question Self-Test -->
+    <div class="card" style="margin-bottom:16px;cursor:pointer" onclick="showFinancialTest()">
+      <span style="font-size:1.2rem;color:var(--accent-wealth)">✦</span>
+      <h3 style="margin-top:4px">12-Question Financial Self-Test</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary)">Know where you stand</p>
+    </div>
+
+    <!-- Emergency Fund Calculator -->
+    <div class="card" id="emergencyCalc" style="margin-bottom:16px">
+      <span style="font-size:1.2rem;color:var(--accent-wealth)">●</span>
+      <h3 style="margin-top:4px">Emergency Fund Calculator</h3>
+      <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px">How much do you need saved?</p>
+      <div class="calc-group">
+        <label>Monthly expenses ($)</label>
+        <input type="number" id="emergencyMonthly" placeholder="e.g. 3000" value="3000" oninput="calcEmergency()">
+      </div>
+      <div class="calc-group">
+        <label>Months of coverage</label>
+        <select id="emergencyMonths" onchange="calcEmergency()">
+          <option value="3">3 months (minimum)</option>
+          <option value="6" selected>6 months (recommended)</option>
+          <option value="9">9 months (conservative)</option>
+          <option value="12">12 months (peace of mind)</option>
+        </select>
+      </div>
+      <div class="calc-result" id="emergencyResult">$18,000</div>
+      <p style="font-size:0.75rem;color:var(--text-muted)">Your target emergency fund</p>
+    </div>
+
+    <!-- Compound Interest Simulator -->
+    <div class="card" id="compoundCalc" style="margin-bottom:16px">
+      <span style="font-size:1.2rem;color:var(--accent-wealth)">⟡</span>
+      <h3 style="margin-top:4px">Compound Interest Simulator</h3>
+      <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px">See your money grow over time</p>
+      <div class="calc-group">
+        <label>Initial investment ($)</label>
+        <input type="number" id="compoundInitial" placeholder="10000" value="10000" oninput="calcCompound()">
+      </div>
+      <div class="calc-group">
+        <label>Monthly contribution ($)</label>
+        <input type="number" id="compoundMonthly" placeholder="500" value="500" oninput="calcCompound()">
+      </div>
+      <div class="calc-group">
+        <label>Annual return (%)</label>
+        <input type="number" id="compoundRate" placeholder="8" value="8" step="0.1" oninput="calcCompound()">
+      </div>
+      <div class="calc-group">
+        <label>Years</label>
+        <select id="compoundYears" onchange="calcCompound()">
+          <option value="5">5 years</option>
+          <option value="10">10 years</option>
+          <option value="15">15 years</option>
+          <option value="20">20 years</option>
+          <option value="30" selected>30 years</option>
+        </select>
+      </div>
+      <div class="calc-result" id="compoundResult">$0</div>
+      <p style="font-size:0.75rem;color:var(--text-muted)">Projected total after selected period</p>
+      <div class="chart-wrap"><canvas id="compoundChart"></canvas></div>
+    </div>
+
+    <!-- Passive Income Calculator -->
+    <div class="card" id="passiveCalc" style="margin-bottom:16px">
+      <span style="font-size:1.2rem;color:var(--accent-wealth)">★</span>
+      <h3 style="margin-top:4px">Passive Income Calculator</h3>
+      <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px">What would it take to live off investments?</p>
+      <div class="calc-group">
+        <label>Target monthly income ($)</label>
+        <input type="number" id="passiveTarget" placeholder="5000" value="5000" oninput="calcPassive()">
+      </div>
+      <div class="calc-group">
+        <label>Expected annual return (%)</label>
+        <input type="number" id="passiveRate" placeholder="4" value="4" step="0.1" oninput="calcPassive()">
+      </div>
+      <div class="calc-result" id="passiveResult">$1,500,000</div>
+      <p style="font-size:0.75rem;color:var(--text-muted)">Capital needed</p>
+    </div>
+
+    <!-- 5-Step Wealth Plan -->
+    <div class="card" style="margin-bottom:16px;cursor:pointer" onclick="showWealthPlan()">
+      <span style="font-size:1.2rem;color:var(--accent-wealth)">★</span>
+      <h3 style="margin-top:4px">5-Step Wealth Plan</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary)">Your roadmap to financial freedom</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCREEN: Journal -->
+<div id="screenJournal" class="screen">
+  <div class="container">
+    <h2 style="margin-bottom:16px">■ Journal</h2>
+
+    <!-- Daily Review -->
+    <div class="card" style="margin-bottom:16px">
+      <span style="font-size:1.2rem;color:var(--accent-soul)">✦</span>
+      <h3 style="margin-top:4px">Daily Reflection</h3>
+      <p class="journal-prompt" id="journalPrompt">What went well today?</p>
+      <textarea id="journalInput" class="journal-input" placeholder="Write your reflection…"></textarea>
+      <button class="btn btn-gold btn-block" style="margin-top:8px" onclick="saveJournal()">⟡ Save Reflection</button>
+      <span class="saved-dot" id="journalSaved"></span>
+    </div>
+
+    <!-- Past Entries -->
+    <div class="section-header">
+      <h3>⟡ Past Entries</h3>
+      <a onclick="clearJournal()" style="color:var(--danger);font-size:0.75rem">Clear all</a>
+    </div>
+    <div id="journalEntries"></div>
+
+    <!-- Journal Prompts -->
+    <div style="margin-top:24px">
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">switch prompt:</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost btn-sm" onclick="setJournalPrompt(0)">Gratitude</button>
+        <button class="btn btn-ghost btn-sm" onclick="setJournalPrompt(1)">Today</button>
+        <button class="btn btn-ghost btn-sm" onclick="setJournalPrompt(2)">Lesson</button>
+        <button class="btn btn-ghost btn-sm" onclick="setJournalPrompt(3)">Release</button>
+        <button class="btn btn-ghost btn-sm" onclick="setJournalPrompt(4)">Tomorrow</button>
+      </div>
+    </div>
+
+    <!-- Weekly Review -->
+    <div class="card" style="margin-top:16px;cursor:pointer" onclick="showWeeklyReview()">
+      <span style="font-size:1.2rem;color:var(--accent-soul)">■</span>
+      <h3 style="margin-top:4px">Weekly Review</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary)">Look back at your week</p>
+    </div>
+
+    <!-- Monthly Balance -->
+    <div class="card" style="margin-top:8px;cursor:pointer" onclick="showMonthlyBalance()">
+      <span style="font-size:1.2rem;color:var(--accent-soul)">◆</span>
+      <h3 style="margin-top:4px">Monthly Balance</h3>
+      <p style="font-size:0.85rem;color:var(--text-secondary)">End-of-month reflection</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- SCREEN: Profile/Settings -->
+<div id="screenProfile" class="screen">
+  <div class="container">
+    <h2 style="margin-bottom:16px">⚡ Profile</h2>
+
+    <div class="card" style="margin-bottom:16px">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+        <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--bg-primary);font-weight:700;font-family:var(--font-display)" id="avatarLetter">E</div>
+        <div>
+          <h3 id="profileName">Explorer</h3>
+          <span id="profileTier" class="badge badge-free">Free Trial</span>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <span class="label">✦ Name</span>
+        <span class="value" id="settingsName">Explorer</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">◆ Joined</span>
+        <span class="value" id="joinDate">Today</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">🔥 Streak</span>
+        <span class="value" id="settingsStreak">0 days</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">✦ Sessions completed</span>
+        <span class="value" id="settingsSessions">0</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">■ Journal entries</span>
+        <span class="value" id="settingsJournal">0</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">⚡ APEX Score</span>
+        <span class="value" id="settingsScore">0</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="margin-bottom:8px;font-size:1rem">⟡ Subscription</h3>
+      <div class="setting-row">
+        <span class="label">Plan</span>
+        <span class="value" id="settingsPlan">Free Trial</span>
+      </div>
+      <div class="setting-row">
+        <span class="label">Days remaining</span>
+        <span class="value" id="settingsTrialDays">30</span>
+      </div>
+      <button class="btn btn-gold btn-block btn-sm" style="margin-top:8px" onclick="showPaywall()">✦ Upgrade Now</button>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3 style="margin-bottom:8px;font-size:1rem">⚡ Reset</h3>
+      <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:8px">This clears all your data and starts fresh.</p>
+      <button class="btn btn-outline btn-block btn-sm" style="border-color:var(--danger);color:var(--danger)" onclick="resetAll()">⟡ Reset Everything</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal overlay for Wealth Plan / Financial Test / Reviews -->
+<div id="modalOverlay" style="position:fixed;inset:0;z-index:6000;background:rgba(10,10,15,0.95);display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-y:auto">
+  <div style="max-width:420px;width:100%">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <h3 id="modalTitle">Modal</h3>
+      <button class="btn btn-ghost btn-sm" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <button class="nav-item active" data-screen="screenDashboard" onclick="switchScreen('screenDashboard')">
+    <span class="nav-icon">⚡</span> Home
+  </button>
+  <button class="nav-item" data-screen="screenSessions" onclick="switchScreen('screenSessions')">
+    <span class="nav-icon">✦</span> Sessions
+  </button>
+  <button class="nav-item" data-screen="screenWealth" onclick="switchScreen('screenWealth')">
+    <span class="nav-icon">●</span> Wealth
+  </button>
+  <button class="nav-item" data-screen="screenJournal" onclick="switchScreen('screenJournal')">
+    <span class="nav-icon">■</span> Journal
+  </button>
+  <button class="nav-item" data-screen="screenProfile" onclick="switchScreen('screenProfile')">
+    <span class="nav-icon">⌘</span> Profile
+  </button>
+</nav>
+
+<script>
+/* ============================================================
+   APEX v4 – APP ENGINE
+   ============================================================ */
+
+// ---- STATE ----
+const STATE_KEY = 'apex_v4_state';
+
+const defaultState = {
+  name: '',
+  joinDate: new Date().toISOString(),
+  onboardingDone: false,
+  subscription: 'trial',        // trial | premium | coach
+  trialStart: null,
+  sessionsCompleted: 0,
+  streak: 0,
+  lastSessionDate: null,
+  journalEntries: [],
+  scores: { body: 0, mind: 0, wealth: 0, soul: 0 },
+  sessionsLog: [],              // { id, pillar, date }
+  todaysSessionIndex: 0,
+  financialTestDone: false,
+  weeklyReviewDone: false,
+  monthlyBalanceDone: false,
+};
+
+let state = loadState();
+let currentSession = null;
+let playerInterval = null;
+let playerPaused = false;
+let playerCurrentStep = 0;
+let compoundChart = null;
+
+// ---- SESSION DATA ----
+const SESSIONS = {
+  body: [
+    { id: 'body-1', icon: '◆', title: 'Morning Mobility', duration: 7, tag: 'Body', tagClass: 'tag-body', desc: 'Full body activation to start your day right', steps: [
+      { label: 'Neck Rolls', instruction: 'Slowly roll your neck in a circle. Feel the tension release.', seconds: 30 },
+      { label: 'Shoulder Circles', instruction: 'Roll your shoulders back and down. Open your chest.', seconds: 30 },
+      { label: 'Cat-Cow Stretch', instruction: 'On all fours, alternate between arching and rounding your spine.', seconds: 45 },
+      { label: 'Hip Openers', instruction: 'Gently open your hips. One side at a time.', seconds: 45 },
+      { label: 'Full Body Shake', instruction: 'Shake out your entire body. Let go of stiffness.', seconds: 30 },
+      { label: 'Deep Breaths', instruction: 'Three deep breaths. Inhale purpose. Exhale tension.', seconds: 30 }
+    ]},
+    { id: 'body-2', icon: '◆', title: '5-Min Activation', duration: 5, tag: 'Body', tagClass: 'tag-body', desc: 'Quick energy boost anytime', steps: [
+      { label: 'Jumping Jacks', instruction: 'Light cardio to wake the body. Stay soft on your knees.', seconds: 60 },
+      { label: 'Bodyweight Squats', instruction: 'Feet shoulder-width. Sit back like a chair.', seconds: 60 },
+      { label: 'Push-ups', instruction: 'Shoulder-width. Lower chest to ground. Or do knee push-ups.', seconds: 60 },
+      { label: 'High Knees', instruction: 'Drive your knees up. Light on your feet.', seconds: 60 },
+      { label: 'Final Shake + Breath', instruction: 'Shake it out. One deep breath. You are activated.', seconds: 60 }
+    ]},
+    { id: 'body-3', icon: '◆', title: 'Quick HIIT', duration: 15, tag: 'Body', tagClass: 'tag-body', desc: 'Short, intense burst for busy days', locked: true },
+    { id: 'body-4', icon: '◆', title: 'Evening Stretch', duration: 10, tag: 'Body', tagClass: 'tag-body', desc: 'Wind down and release the day', locked: true },
+    { id: 'body-5', icon: '◆', title: 'Cold Exposure Prep', duration: 5, tag: 'Body', tagClass: 'tag-body', desc: 'Prepare your mind for the cold', locked: true },
+    { id: 'body-6', icon: '◆', title: '3-Part Breath Reset', duration: 4, tag: 'Body', tagClass: 'tag-body', desc: 'Box breathing for calm and control', steps: [
+      { label: 'Inhale', instruction: 'Breathe in through your nose for 4 seconds. Fill your lungs completely.', seconds: 4 },
+      { label: 'Hold', instruction: 'Hold your breath. Feel the stillness.', seconds: 4 },
+      { label: 'Exhale', instruction: 'Slow exhale through your mouth for 4 seconds.', seconds: 4 },
+      { label: 'Hold Empty', instruction: 'Hold your lungs empty. Rest in the void.', seconds: 4 },
+      { label: 'Repeat Cycle', instruction: 'One more full cycle. You are in control.', seconds: 16 }
+    ]},
+    { id: 'body-7', icon: '◆', title: '4-7-8 Emergency Breath', duration: 3, tag: 'Body', tagClass: 'tag-body', desc: 'Instant calm for high-stress moments', steps: [
+      { label: 'Exhale Completely', instruction: 'Empty your lungs fully through your mouth.', seconds: 4 },
+      { label: 'Inhale', instruction: 'Quiet inhale through your nose for 4 seconds.', seconds: 4 },
+      { label: 'Hold', instruction: 'Hold your breath for 7 seconds. Stay calm.', seconds: 7 },
+      { label: 'Slow Exhale', instruction: 'Exhale through your mouth for 8 seconds. Let it all go.', seconds: 8 },
+      { label: 'Repeat', instruction: 'One more round. You are grounding yourself.', seconds: 19 }
+    ]},
+  ],
+  mind: [
+    { id: 'mind-1', icon: '▲', title: 'Five Minutes of Stillness', duration: 5, tag: 'Mind', tagClass: 'tag-mind', desc: 'Guided meditation for clarity', steps: [
+      { label: 'Settle In', instruction: 'Find a comfortable seat. Close your eyes.', seconds: 30 },
+      { label: 'Follow Your Breath', instruction: 'Notice the air moving in and out. No need to change it.', seconds: 120 },
+      { label: 'Notice Thoughts', instruction: 'Thoughts will come. Just observe them like clouds.', seconds: 90 },
+      { label: 'Return to Breath', instruction: 'Gently bring your focus back to your breath.', seconds: 60 },
+      { label: 'Slowly Return', instruction: 'Start to wiggle your fingers and toes. Open your eyes.', seconds: 30 }
+    ]},
+    { id: 'mind-2', icon: '▲', title: 'Daily Intention', duration: 3, tag: 'Mind', tagClass: 'tag-mind', desc: 'Set your intention for the day', steps: [
+      { label: 'Pause', instruction: 'Take a moment. This is your time.', seconds: 15 },
+      { label: 'Ask Yourself', instruction: 'What matters most today? One thing.', seconds: 45 },
+      { label: 'State Your Intention', instruction: 'Say it aloud: "Today I will focus on…"', seconds: 30 },
+      { label: 'Breathe Into It', instruction: 'Three deep breaths. Each one anchors your intention.', seconds: 30 },
+      { label: 'Begin', instruction: 'You have your direction. Now move.', seconds: 15 }
+    ]},
+    { id: 'mind-3', icon: '▲', title: '1% Better System', duration: 5, tag: 'Mind', tagClass: 'tag-mind', desc: 'Atomic Habits micro-session', steps: [
+      { label: 'The Power of 1%', instruction: 'Small improvements compound. What is one thing you can improve by 1% today?', seconds: 45 },
+      { label: 'Identify the Cue', instruction: 'What triggers your current habit? Be specific.', seconds: 45 },
+      { label: 'Design the Routine', instruction: 'What will your new 1% better action look like?', seconds: 45 },
+      { label: 'Commit Aloud', instruction: 'Say: "When [cue], I will [routine]."', seconds: 45 },
+      { label: 'Anchor It', instruction: 'Link it to an existing habit. Stack your routines.', seconds: 30 }
+    ]},
+    { id: 'mind-4', icon: '▲', title: 'Eat That Frog', duration: 8, tag: 'Mind', tagClass: 'tag-mind', desc: 'Conquer your hardest task first', locked: true },
+    { id: 'mind-5', icon: '▲', title: '5-Second Rule', duration: 4, tag: 'Mind', tagClass: 'tag-mind', desc: 'Stop overthinking. Take action now.', locked: true },
+  ],
+  wealth: [
+    { id: 'wealth-1', icon: '●', title: 'Financial Self-Test', duration: 10, tag: 'Wealth', tagClass: 'tag-wealth', desc: '12 questions to assess your financial health', locked: true },
+    { id: 'wealth-2', icon: '●', title: 'Emergency Fund Deep Dive', duration: 8, tag: 'Wealth', tagClass: 'tag-wealth', desc: 'Build your safety net', locked: true },
+    { id: 'wealth-3', icon: '●', title: 'Compound Mindset', duration: 6, tag: 'Wealth', tagClass: 'tag-wealth', desc: 'Understand the 8th wonder of the world', locked: true },
+    { id: 'wealth-4', icon: '●', title: '5-Step Wealth Plan', duration: 12, tag: 'Wealth', tagClass: 'tag-wealth', desc: 'Your roadmap to financial freedom', locked: true },
+    { id: 'wealth-5', icon: '●', title: 'Passive Income Strategy', duration: 10, tag: 'Wealth', tagClass: 'tag-wealth', desc: 'Build income that works for you', locked: true },
+  ],
+  soul: [
+    { id: 'soul-1', icon: '■', title: 'Gratitude Check-in', duration: 5, tag: 'Soul', tagClass: 'tag-soul', desc: 'Three things you are grateful for', steps: [
+      { label: 'Settle', instruction: 'Close your eyes. Take three deep breaths.', seconds: 30 },
+      { label: 'Recall', instruction: 'Think of one thing you are grateful for today. Let the feeling fill you.', seconds: 60 },
+      { label: 'Another', instruction: 'One more thing. Big or small. Feel the gratitude.', seconds: 60 },
+      { label: 'One More', instruction: 'A third thing. Someone helped you today? Something went right?', seconds: 60 },
+      { label: 'Sit in Gratitude', instruction: 'Just sit with this feeling. It is yours.', seconds: 60 }
+    ]},
+    { id: 'soul-2', icon: '■', title: 'End-of-Day Reflection', duration: 5, tag: 'Soul', tagClass: 'tag-soul', desc: 'Close your day with intention', steps: [
+      { label: 'Pause', instruction: 'Take a breath. The day is ending. Reflect.', seconds: 20 },
+      { label: 'What Went Well?', instruction: 'Think of one thing that went well today. Hold onto it.', seconds: 60 },
+      { label: 'What Could Improve?', instruction: 'One thing you would do differently. No judgment.', seconds: 60 },
+      { label: 'What Did You Learn?', instruction: 'Every day teaches something. What was today\'s lesson?', seconds: 60 },
+      { label: 'Let Go', instruction: 'Release the day. Tomorrow is a fresh start.', seconds: 40 }
+    ]},
+    { id: 'soul-3', icon: '■', title: 'Weekly Review', duration: 10, tag: 'Soul', tagClass: 'tag-soul', desc: 'Look back at your week', locked: true },
+    { id: 'soul-4', icon: '■', title: 'Monthly Balance', duration: 15, tag: 'Soul', tagClass: 'tag-soul', desc: 'End-of-month reflection', locked: true },
+  ]
+};
+
+const QUOTES = [
+  '"Your body is ready. Is your mind?"',
+  '"Don\'t wait for motivation. Build discipline."',
+  '"You showed up. That\'s 90% of the battle."',
+  '"Small steps. Every day. That\'s how you change."',
+  '"The only person you should be better than is who you were yesterday."',
+  '"Discipline is choosing between what you want now and what you want most."',
+  '"The pain of discipline is nothing like the pain of regret."',
+  '"You are not your thoughts. You are the observer."',
+];
+
+const JOURNAL_PROMPTS = [
+  'What are three things you are grateful for?',
+  'What went well today?',
+  'What did you learn today?',
+  'What do you need to let go of?',
+  'What will you focus on tomorrow?',
+];
+
+// ---- HELPERS ----
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STATE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return { ...defaultState, ...parsed };
+    }
+  } catch(e) {}
+  return { ...defaultState };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STATE_KEY, JSON.stringify(state));
+  } catch(e) {}
+}
+
+function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+// ---- ONBOARDING ----
+let onboardingStep = 0;
+let onboardingAnswers = {};
+
+function nextStep() {
+  const steps = document.querySelectorAll('.onboarding-step');
+  steps.forEach(s => s.classList.remove('active'));
+  onboardingStep = Math.min(onboardingStep + 1, steps.length - 1);
+  steps[onboardingStep].classList.add('active');
+}
+
+function selectOnboarding(el, label, answer) {
+  const parent = el.closest('.onboarding-options');
+  if (parent) {
+    parent.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+  }
+  el.classList.add('selected');
+  onboardingAnswers[el.closest('.onboarding-step').dataset.step] = label;
+  setTimeout(() => nextStep(), 300);
+}
+
+function finishOnboarding() {
+  const nameInput = document.getElementById('onboardingName');
+  const name = nameInput.value.trim() || 'Explorer';
+  state.name = name;
+  state.onboardingDone = true;
+  state.trialStart = new Date().toISOString();
+  state.joinDate = state.trialStart;
+  saveState();
+  document.getElementById('onboardingOverlay').classList.add('hidden');
+  initApp();
+}
+
+// ---- PAYWALL ----
+function showPaywall() {
+  if (state.subscription !== 'trial') {
+    alert(state.subscription === 'premium' ? 'You are already a Premium member. Thank you!' : 'You are already a Coach member. Thank you!');
+    return;
+  }
+  document.getElementById('paywallOverlay').classList.add('active');
+}
+
+function closePaywall() {
+  document.getElementById('paywallOverlay').classList.remove('active');
+}
+
+function switchPricing(el, plan) {
+  document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('monthlyPricing').style.display = plan === 'monthly' ? 'block' : 'none';
+  document.getElementById('yearlyPricing').style.display = plan === 'yearly' ? 'block' : 'none';
+}
+
+function upgradePremium() {
+  state.subscription = 'premium';
+  saveState();
+  closePaywall();
+  updateUI();
+  alert('✦ You are now a Premium member. Thank you for believing in yourself.');
+}
+
+function upgradeCoach() {
+  state.subscription = 'coach';
+  saveState();
+  closePaywall();
+  updateUI();
+  alert('⟡ Welcome to Coach tier. A coach will be assigned to you shortly.');
+}
+
+// ---- SCREEN MANAGEMENT ----
+function switchScreen(screenId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(screenId).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelector(`.nav-item[data-screen="${screenId}"]`).classList.add('active');
+
+  if (screenId === 'screenWealth') { setTimeout(calcCompound, 100); }
+  if (screenId === 'screenJournal') { renderJournal(); }
+}
+
+// ---- SESSION PLAYER ----
+function getTodaysSession() {
+  const allSessions = [];
+  for (const pillar of ['body','mind','wealth','soul']) {
+    for (const s of SESSIONS[pillar]) {
+      if (!s.locked && s.steps) allSessions.push(s);
+    }
+  }
+  if (allSessions.length === 0) return SESSIONS.body[0];
+  const idx = state.todaysSessionIndex % allSessions.length;
+  return allSessions[idx];
+}
+
+function startSession(session) {
+  if (!session) { alert('No session selected.'); return; }
+  if (session.locked) {
+    if (state.subscription === 'trial') {
+      showPaywall();
+      return;
+    }
+    alert('This session is coming soon.');
+    return;
+  }
+  if (!session.steps) {
+    alert('This session has no guided steps yet.');
+    return;
+  }
+
+  // Check trial limits: Free tier gets 1 guided session/week
+  if (state.subscription === 'trial') {
+    const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+    const weeklyCount = state.sessionsLog.filter(s => new Date(s.date).getTime() > weekAgo).length;
+    if (weeklyCount >= 1) {
+      if (!confirm('Free trial: you get 1 guided session per week. Upgrade for unlimited sessions. Start anyway?')) {
+        showPaywall();
+        return;
+      }
+    }
+  }
+
+  currentSession = session;
+  currentSession.preroll = currentSession.preroll || {
+    title: 'Before we begin…',
+    text: 'Why are you here today? Take a moment.'
+  };
+  currentSession.reflection = currentSession.reflection || {
+    title: 'You showed up.',
+    text: 'That\'s already 90% of the battle.',
+    prompt: 'What will you take with you?'
+  };
+
+  document.getElementById('playerOverlay').classList.add('active');
+  document.getElementById('playerTitle').textContent = session.title;
+  document.getElementById('prerollScreen').style.display = 'flex';
+  document.getElementById('playerSteps').style.display = 'none';
+  document.getElementById('reflectionScreen').style.display = 'none';
+  document.getElementById('prerollTitle').textContent = session.preroll.title || 'Before we begin…';
+  document.getElementById('prerollText').textContent = session.preroll.text || 'Why are you here today?';
+  document.getElementById('reflectionTitle').textContent = session.reflection.title || 'You showed up.';
+  document.getElementById('reflectionText').textContent = session.reflection.text || "That's already 90% of the battle.";
+  document.getElementById('reflectionPrompt').textContent = session.reflection.prompt || 'What will you take with you?';
+  document.getElementById('reflectionInput').value = '';
+}
+
+function startSessionSteps() {
+  if (!currentSession || !currentSession.steps) return;
+  document.getElementById('prerollScreen').style.display = 'none';
+  document.getElementById('playerSteps').style.display = 'flex';
+  playerCurrentStep = 0;
+  playerPaused = false;
+  document.getElementById('pauseBtn').textContent = '❚❚ Pause';
+  renderStep();
+}
+
+function renderStep() {
+  if (!currentSession || !currentSession.steps) return;
+  const steps = currentSession.steps;
+  const step = steps[playerCurrentStep];
+  if (!step) { finishPlayerSteps(); return; }
+
+  // Progress dots
+  const progressEl = document.getElementById('playerProgress');
+  progressEl.innerHTML = '';
+  steps.forEach((s, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'player-dot';
+    if (i < playerCurrentStep) dot.classList.add('completed');
+    if (i === playerCurrentStep) dot.classList.add('current');
+    progressEl.appendChild(dot);
+  });
+
+  document.getElementById('playerStepCount').textContent = `${playerCurrentStep + 1}/${steps.length}`;
+  document.getElementById('playerLabel').textContent = step.label;
+  document.getElementById('playerInstruction').textContent = step.instruction;
+
+  let timeLeft = step.seconds;
+  document.getElementById('playerTimer').textContent = timeLeft;
+  document.getElementById('playerTimer').style.animation = 'none';
+  void document.getElementById('playerTimer').offsetWidth;
+  document.getElementById('playerTimer').style.animation = 'breathe 4s ease-in-out infinite';
+
+  if (playerInterval) clearInterval(playerInterval);
+  playerInterval = setInterval(() => {
+    if (playerPaused) return;
+    timeLeft--;
+    document.getElementById('playerTimer').textContent = Math.max(0, timeLeft);
+    if (timeLeft <= 0) {
+      clearInterval(playerInterval);
+      playerInterval = null;
+      playerCurrentStep++;
+      if (playerCurrentStep >= steps.length) {
+        finishPlayerSteps();
+      } else {
+        renderStep();
+      }
+    }
+  }, 1000);
+}
+
+function togglePause() {
+  playerPaused = !playerPaused;
+  document.getElementById('pauseBtn').textContent = playerPaused ? '▶ Resume' : '❚❚ Pause';
+}
+
+function skipStep() {
+  if (playerInterval) clearInterval(playerInterval);
+  playerCurrentStep++;
+  if (!currentSession || !currentSession.steps || playerCurrentStep >= currentSession.steps.length) {
+    finishPlayerSteps();
+  } else {
+    renderStep();
+  }
+}
+
+function finishPlayerSteps() {
+  if (playerInterval) clearInterval(playerInterval);
+  document.getElementById('playerSteps').style.display = 'none';
+  document.getElementById('reflectionScreen').style.display = 'flex';
+
+  // Award score
+  const pillarMap = { 'Body': 'body', 'Mind': 'mind', 'Wealth': 'wealth', 'Soul': 'soul' };
+  const pillar = pillarMap[currentSession.tag] || 'body';
+  state.scores[pillar] = Math.min(100, state.scores[pillar] + rand(5, 12));
+  state.sessionsCompleted++;
+  state.sessionsLog.push({ id: currentSession.id, pillar: pillar, date: new Date().toISOString() });
+
+  // Update streak
+  const today = new Date().toDateString();
+  if (state.lastSessionDate !== today) {
+    const yesterday = new Date(Date.now() - 86400000).toDateString();
+    if (state.lastSessionDate === yesterday) {
+      state.streak++;
+    } else if (state.lastSessionDate !== today) {
+      state.streak = 1;
+    }
+    state.lastSessionDate = today;
+  }
+
+  // Rotate session
+  state.todaysSessionIndex++;
+  saveState();
+  updateUI();
+}
+
+function completeSession() {
+  const reflection = document.getElementById('reflectionInput').value.trim();
+  if (reflection) {
+    state.journalEntries.unshift({
+      date: new Date().toISOString(),
+      text: reflection,
+      type: 'session-reflection'
+    });
+    saveState();
+  }
+  closePlayer();
+}
+
+function closePlayer() {
+  if (playerInterval) clearInterval(playerInterval);
+  playerInterval = null;
+  document.getElementById('playerOverlay').classList.remove('active');
+  currentSession = null;
+  updateUI();
+}
+
+// ---- SESSION LIST RENDER ----
+function renderSessionList() {
+  for (const pillar of ['body','mind','wealth','soul']) {
+    const container = document.getElementById(`${pillar}Sessions`);
+    if (!container) continue;
+    container.innerHTML = '';
+    SESSIONS[pillar].forEach(s => {
+      const div = document.createElement('div');
+      div.className = 'session-list-item' + (s.locked ? ' locked' : '');
+      const tagClass = s.tagClass || 'tag-body';
+      div.innerHTML = `
+        <div class="sli-icon ${tagClass}">${s.icon}</div>
+        <div class="sli-info">
+          <strong>${s.title}</strong>
+          <span>${s.desc}${s.locked ? ' · 🔒 Premium' : ''}</span>
+        </div>
+        <span class="sli-time">${s.duration} min</span>
+      `;
+      div.addEventListener('click', () => startSession(s));
+      container.appendChild(div);
+    });
+  }
+}
+
+// ---- WEALTH TOOLS ----
+function calcEmergency() {
+  const monthly = parseFloat(document.getElementById('emergencyMonthly').value) || 0;
+  const months = parseInt(document.getElementById('emergencyMonths').value) || 6;
+  const total = monthly * months;
+  document.getElementById('emergencyResult').textContent = '$' + total.toLocaleString('en-US', {minimumFractionDigits:0});
+}
+
+function calcCompound() {
+  const initial = parseFloat(document.getElementById('compoundInitial').value) || 0;
+  const monthly = parseFloat(document.getElementById('compoundMonthly').value) || 0;
+  const rate = parseFloat(document.getElementById('compoundRate').value) || 0;
+  const years = parseInt(document.getElementById('compoundYears').value) || 10;
+
+  const monthlyRate = rate / 100 / 12;
+  const months = years * 12;
+  let total = initial;
+  const dataPoints = [];
+  for (let m = 1; m <= months; m++) {
+    total = total * (1 + monthlyRate) + monthly;
+    if (m % Math.ceil(months / 30) === 0 || m === months) {
+      dataPoints.push({ month: m, value: Math.round(total) });
+    }
+  }
+  document.getElementById('compoundResult').textContent = '$' + Math.round(total).toLocaleString('en-US');
+
+  // Chart
+  const ctx = document.getElementById('compoundChart');
+  if (!ctx) return;
+  if (compoundChart) compoundChart.destroy();
+  compoundChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: dataPoints.map(d => 'Y' + Math.ceil(d.month/12)),
+      datasets: [{
+        label: 'Portfolio Value',
+        data: dataPoints.map(d => d.value),
+        borderColor: '#C9A84C',
+        backgroundColor: 'rgba(201,168,76,0.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 2,
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#5A5A5A', font: {size:10} } },
+        y: { grid: { color: 'rgba(255,255,255,0.03)' }, ticks: { color: '#5A5A5A', font: {size:10}, callback: v => '$' + (v/1000).toFixed(0) + 'k' } }
+      }
+    }
+  });
+}
+
+function calcPassive() {
+  const target = parseFloat(document.getElementById('passiveTarget').value) || 0;
+  const rate = parseFloat(document.getElementById('passiveRate').value) || 4;
+  const capital = (target * 12) / (rate / 100);
+  document.getElementById('passiveResult').textContent = '$' + Math.round(capital).toLocaleString('en-US');
+}
+
+function showFinancialTest() {
+  const questions = [
+    { q: 'Do you have an emergency fund?', opts: ['Yes, 6+ months', 'Yes, 3-6 months', 'Less than 3 months', 'No'] },
+    { q: 'Do you carry credit card debt?', opts: ['No', 'Less than $1,000', '$1,000 - $5,000', 'Over $5,000'] },
+    { q: 'Do you invest monthly?', opts: ['Yes, consistently', 'Sometimes', 'Rarely', 'No'] },
+    { q: 'Do you have a budget?', opts: ['Yes, detailed', 'Yes, rough', 'In my head', 'No'] },
+    { q: 'Do you know your net worth?', opts: ['Exactly', 'Approximately', 'Vaguely', 'No'] },
+    { q: 'How is your credit score?', opts: ['Excellent (750+)', 'Good (700-749)', 'Fair (650-699)', 'Poor (<650)'] },
+    { q: 'Do you have multiple income streams?', opts: ['3+ streams', '2 streams', '1 side hustle', 'Just my job'] },
+    { q: 'Do you track expenses?', opts: ['Daily', 'Weekly', 'Monthly', 'Never'] },
+    { q: 'Do you have insurance?', opts: ['Comprehensive', 'Basic', 'Minimal', 'No'] },
+    { q: 'Are you saving for retirement?', opts: ['Maxing out', 'On track', 'Started late', 'Not yet'] },
+    { q: 'Do you have a financial goal?', opts: ['Clear, written goals', 'General idea', 'Vague', 'No goals'] },
+    { q: 'How is your financial stress?', opts: ['No stress', 'Low stress', 'Moderate stress', 'High stress'] },
+  ];
+
+  let currentQ = 0;
+  let score = 0;
+  let answers = [];
+
+  function renderQ() {
+    if (currentQ >= questions.length) {
+      const pct = Math.round((score / (questions.length * 3)) * 100);
+      let grade = pct >= 80 ? 'Excellent' : pct >= 60 ? 'Good' : pct >= 40 ? 'Fair' : 'Needs Work';
+      document.getElementById('modalContent').innerHTML = `
+        <div style="text-align:center">
+          <span style="font-size:3rem;color:var(--accent-wealth)">●</span>
+          <h2 style="margin:12px 0">Your Financial Health</h2>
+          <div style="font-family:var(--font-display);font-size:3rem;font-weight:900;color:var(--gold)">${pct}%</div>
+          <div style="font-size:1.1rem;color:var(--text-secondary);margin:8px 0">${grade}</div>
+          <div style="height:6px;background:var(--border);border-radius:3px;margin:16px 0;overflow:hidden">
+            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--accent-wealth),var(--gold));border-radius:3px;transition:width 1s ease"></div>
+          </div>
+          <p style="font-size:0.85rem;color:var(--text-muted);max-width:320px;margin:12px auto">
+            ${pct < 50 ? 'Start with the basics: emergency fund and budget.' : pct < 75 ? 'Good foundation. Focus on investing and multiple income streams.' : 'Strong financial health. Keep optimizing!'}
+          </p>
+          <button class="btn btn-gold btn-block" onclick="closeModal()">⟡ Done</button>
+        </div>
+      `;
+      return;
+    }
+
+    const q = questions[currentQ];
+    let optsHtml = q.opts.map((o, i) => `
+      <div class="option-card" onclick="answerFinanceQ(${i})">
+        <span class="option-icon" style="color:var(--accent-wealth)">●</span>
+        <div class="option-text"><strong>${o}</strong></div>
+      </div>
+    `).join('');
+
+    document.getElementById('modalContent').innerHTML = `
+      <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:4px">Question ${currentQ+1} of ${questions.length}</p>
+      <div style="height:4px;background:var(--border);border-radius:2px;margin-bottom:16px;overflow:hidden">
+        <div style="height:100%;width:${((currentQ+1)/questions.length)*100}%;background:var(--gold);border-radius:2px"></div>
+      </div>
+      <h3 style="margin-bottom:16px">${q.q}</h3>
+      <div class="onboarding-options">${optsHtml}</div>
+    `;
+  }
+
+  window.answerFinanceQ = function(optIdx) {
+    score += (3 - optIdx);
+    answers.push(optIdx);
+    currentQ++;
+    renderQ();
+  };
+
+  showModal('Financial Health Assessment');
+  document.getElementById('modalTitle').textContent = '● Financial Self-Test';
+  renderQ();
+}
+
+function showWealthPlan() {
+  const steps = [
+    { icon: '1', title: 'Emergency Fund', desc: 'Save 3-6 months of expenses. This is your foundation.' },
+    { icon: '2', title: 'Kill High-Interest Debt', desc: 'Pay off credit cards and loans above 8% interest first.' },
+    { icon: '3', title: 'Invest 15% of Income', desc: 'Max out tax-advantaged accounts. Start early. Let compound work.' },
+    { icon: '4', title: 'Build Multiple Streams', desc: 'Side hustle, passive income, investments outside your 9-5.' },
+    { icon: '5', title: 'Protect & Give', desc: 'Insurance, estate planning, and generosity. Wealth has purpose.' },
+  ];
+
+  document.getElementById('modalContent').innerHTML = steps.map((s, i) => `
+    <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border)">
+      <div style="width:40px;height:40px;border-radius:50%;background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;color:var(--gold);flex-shrink:0">${s.icon}</div>
+      <div>
+        <h4>${s.title}</h4>
+        <p style="font-size:0.85rem;color:var(--text-secondary)">${s.desc}</p>
+      </div>
+    </div>
+  `).join('') + `
+    <button class="btn btn-gold btn-block" style="margin-top:16px" onclick="closeModal()">⟡ Start Building</button>
+  `;
+  showModal('★ 5-Step Wealth Plan');
+}
+
+// ---- JOURNAL ----
+let journalPromptIndex = 0;
+
+function setJournalPrompt(idx) {
+  journalPromptIndex = idx;
+  document.getElementById('journalPrompt').textContent = JOURNAL_PROMPTS[idx];
+}
+
+function saveJournal() {
+  const text = document.getElementById('journalInput').value.trim();
+  if (!text) { alert('Write something before saving.'); return; }
+  state.journalEntries.unshift({
+    date: new Date().toISOString(),
+    text: text,
+    prompt: JOURNAL_PROMPTS[journalPromptIndex],
+    type: 'journal'
+  });
+  document.getElementById('journalInput').value = '';
+  const dot = document.getElementById('journalSaved');
+  dot.classList.add('show');
+  setTimeout(() => dot.classList.remove('show'), 1500);
+  saveState();
+  renderJournal();
+  updateUI();
+}
+
+function renderJournal() {
+  const container = document.getElementById('journalEntries');
+  if (!container) return;
+  if (state.journalEntries.length === 0) {
+    container.innerHTML = '<p style="color:var(--text-muted);font-size:0.85rem;text-align:center;padding:24px">No entries yet. Start reflecting.</p>';
+    return;
+  }
+  container.innerHTML = state.journalEntries.slice(0, 20).map(e => {
+    const d = new Date(e.date);
+    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    return `<div class="journal-entry">
+      <div class="date">${dateStr} ${e.prompt ? '· ' + e.prompt.substring(0, 30) + '…' : ''}</div>
+      <div class="text">${e.text}</div>
+    </div>`;
+  }).join('');
+}
+
+function clearJournal() {
+  if (confirm('Delete all journal entries?')) {
+    state.journalEntries = [];
+    saveState();
+    renderJournal();
+    updateUI();
+  }
+}
+
+function showWeeklyReview() {
+  const completed = state.sessionsCompleted;
+  const streak = state.streak;
+  const journalCount = state.journalEntries.length;
+
+  document.getElementById('modalContent').innerHTML = `
+    <div style="text-align:center">
+      <span style="font-size:2.5rem;color:var(--accent-soul)">■</span>
+      <h3 style="margin:12px 0">Your Week in Review</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:16px 0">
+        <div class="card" style="padding:16px;text-align:center;background:var(--bg-secondary)">
+          <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--gold)">${completed}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Sessions</div>
+        </div>
+        <div class="card" style="padding:16px;text-align:center;background:var(--bg-secondary)">
+          <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--gold)">${streak}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Day Streak</div>
+        </div>
+        <div class="card" style="padding:16px;text-align:center;background:var(--bg-secondary)">
+          <div style="font-family:var(--font-display);font-size:1.6rem;font-weight:700;color:var(--gold)">${journalCount}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Reflections</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem;color:var(--text-secondary)">${completed >= 5 ? 'Strong week. Keep building momentum.' : completed >= 3 ? 'Good week. Consistency is key.' : 'Every step counts. Start fresh tomorrow.'}</p>
+      <div style="margin-top:16px">
+        <textarea class="journal-input" id="weeklyReviewInput" placeholder="How was your week? What stood out?" style="min-height:80px"></textarea>
+        <button class="btn btn-gold btn-block" style="margin-top:8px" onclick="closeModal(); saveWeeklyReview()">⟡ Save Review</button>
+      </div>
+    </div>
+  `;
+  showModal('■ Weekly Review');
+}
+
+function saveWeeklyReview() {
+  const text = document.getElementById('weeklyReviewInput')?.value?.trim();
+  if (text) {
+    state.journalEntries.unshift({ date: new Date().toISOString(), text: text, prompt: 'Weekly Review', type: 'weekly-review' });
+    state.weeklyReviewDone = true;
+    saveState();
+    renderJournal();
+    updateUI();
+  }
+}
+
+function showMonthlyBalance() {
+  const completed = state.sessionsCompleted;
+  const score = Math.round(Object.values(state.scores).reduce((a,b) => a+b, 0) / 4);
+
+  document.getElementById('modalContent').innerHTML = `
+    <div style="text-align:center">
+      <span style="font-size:2.5rem;color:var(--accent-soul)">◆</span>
+      <h3 style="margin:12px 0">Monthly Balance</h3>
+      <div style="font-family:var(--font-display);font-size:2.5rem;font-weight:900;color:var(--gold)">${score}</div>
+      <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px">Average APEX Score</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card" style="padding:12px;text-align:center;background:var(--bg-secondary)">
+          <span style="color:var(--accent-body)">◆</span>
+          <div style="font-size:1.2rem;font-weight:600">${state.scores.body}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Body</div>
+        </div>
+        <div class="card" style="padding:12px;text-align:center;background:var(--bg-secondary)">
+          <span style="color:var(--accent-mind)">▲</span>
+          <div style="font-size:1.2rem;font-weight:600">${state.scores.mind}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Mind</div>
+        </div>
+        <div class="card" style="padding:12px;text-align:center;background:var(--bg-secondary)">
+          <span style="color:var(--accent-wealth)">●</span>
+          <div style="font-size:1.2rem;font-weight:600">${state.scores.wealth}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Wealth</div>
+        </div>
+        <div class="card" style="padding:12px;text-align:center;background:var(--bg-secondary)">
+          <span style="color:var(--accent-soul)">■</span>
+          <div style="font-size:1.2rem;font-weight:600">${state.scores.soul}</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)">Soul</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <textarea class="journal-input" id="monthlyInput" placeholder="How was this month? What changed?" style="min-height:80px"></textarea>
+        <button class="btn btn-gold btn-block" style="margin-top:8px" onclick="closeModal(); saveMonthlyBalance()">⟡ Save</button>
+      </div>
+    </div>
+  `;
+  showModal('◆ Monthly Balance');
+}
+
+function saveMonthlyBalance() {
+  const text = document.getElementById('monthlyInput')?.value?.trim();
+  if (text) {
+    state.journalEntries.unshift({ date: new Date().toISOString(), text: text, prompt: 'Monthly Balance', type: 'monthly-balance' });
+    state.monthlyBalanceDone = true;
+    saveState();
+    renderJournal();
+    updateUI();
+  }
+}
+
+// ---- MODAL ----
+function showModal(title) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalOverlay').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').style.display = 'none';
+}
+
+// ---- TRIAL TRACKING ----
+function getTrialDaysLeft() {
+  if (!state.trialStart) return 30;
+  const start = new Date(state.trialStart);
+  const now = new Date();
+  const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  return Math.max(0, 30 - diff);
+}
+
+// ---- UI UPDATE ----
+function updateUI() {
+  const daysLeft = getTrialDaysLeft();
+
+  // Badges
+  const trialBadge = document.getElementById('trialBadge');
+  const premiumBadge = document.getElementById('premiumBadge');
+  const coachBadge = document.getElementById('coachBadge');
+  trialBadge.style.display = state.subscription === 'trial' ? 'inline-flex' : 'none';
+  premiumBadge.style.display = state.subscription === 'premium' ? 'inline-flex' : 'none';
+  coachBadge.style.display = state.subscription === 'coach' ? 'inline-flex' : 'none';
+
+  // Trial banner
+  const banner = document.getElementById('trialBanner');
+  if (state.subscription === 'trial') {
+    banner.style.display = 'flex';
+    document.getElementById('trialDaysLeft').textContent = daysLeft;
+    const pct = Math.max(0, (daysLeft / 30) * 100);
+    document.getElementById('trialProgressBar').style.width = pct + '%';
+    // Check if trial ended
+    if (daysLeft <= 0 && state.subscription === 'trial') {
+      showPaywall();
+    }
+  } else {
+    banner.style.display = 'none';
+  }
+
+  // Name / Greeting
+  const name = state.name || 'Explorer';
+  document.getElementById('userNameDisplay').textContent = name;
+  document.getElementById('profileName').textContent = name;
+  document.getElementById('settingsName').textContent = name;
+  document.getElementById('avatarLetter').textContent = name.charAt(0).toUpperCase();
+
+  const hour = new Date().getHours();
+  document.getElementById('greeting').textContent = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
+
+  // Streak
+  document.getElementById('streakText').textContent = state.streak > 0 ? `· ${state.streak} day streak 🔥` : '';
+  document.getElementById('streakCount').textContent = state.streak;
+
+  // Sessions done
+  document.getElementById('sessionsDone').textContent = state.sessionsCompleted;
+
+  // Journal count
+  document.getElementById('journalCount').textContent = state.journalEntries.length;
+
+  // APEX Score
+  const avgScore = Math.round(Object.values(state.scores).reduce((a,b) => a+b, 0) / 4);
+  document.getElementById('apexScoreNum').textContent = avgScore;
+
+  // Score circle
+  const circle = document.getElementById('scoreCircle');
+  const circumference = 439.8;
+  const offset = circumference - (avgScore / 100) * circumference;
+  circle.style.strokeDashoffset = offset;
+
+  // Pillar bars
+  document.getElementById('bodyBar').style.width = state.scores.body + '%';
+  document.getElementById('bodyPct').textContent = state.scores.body + '%';
+  document.getElementById('mindBar').style.width = state.scores.mind + '%';
+  document.getElementById('mindPct').textContent = state.scores.mind + '%';
+  document.getElementById('wealthBar').style.width = state.scores.wealth + '%';
+  document.getElementById('wealthPct').textContent = state.scores.wealth + '%';
+  document.getElementById('soulBar').style.width = state.scores.soul + '%';
+  document.getElementById('soulPct').textContent = state.scores.soul + '%';
+
+  // Today's session
+  const todays = getTodaysSession();
+  if (todays) {
+    document.getElementById('todayTitle').textContent = todays.title;
+    document.getElementById('todayDesc').textContent = todays.desc || (todays.duration + ' minutes');
+    document.getElementById('todayDuration').textContent = todays.duration + ' min';
+    document.getElementById('todayIcon').textContent = todays.icon || '◆';
+    const tagClass = todays.tagClass || 'tag-body';
+    document.getElementById('todayTag').textContent = todays.tag || 'Body';
+    document.getElementById('todayTag').className = 'tag ' + tagClass;
+  }
+
+  // Settings
+  document.getElementById('settingsStreak').textContent = state.streak + ' days';
+  document.getElementById('settingsSessions').textContent = state.sessionsCompleted;
+  document.getElementById('settingsJournal').textContent = state.journalEntries.length;
+  document.getElementById('settingsScore').textContent = avgScore;
+  document.getElementById('settingsPlan').textContent = state.subscription === 'trial' ? 'Free Trial' : state.subscription === 'premium' ? '✦ Premium' : '⟡ Coach';
+  document.getElementById('settingsTrialDays').textContent = daysLeft;
+
+  const joinD = new Date(state.joinDate);
+  document.getElementById('joinDate').textContent = joinD.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+  // Daily quote
+  const qidx = new Date().getDate() % QUOTES.length;
+  document.getElementById('dailyQuote').textContent = QUOTES[qidx];
+
+  // Session list
+  renderSessionList();
+
+  // Journal
+  renderJournal();
+}
+
+// ---- RESET ----
+function resetAll() {
+  if (!confirm('This will delete ALL your data. Are you sure?')) return;
+  if (!confirm('Really? Every session, every journal entry, everything?')) return;
+  localStorage.removeItem(STATE_KEY);
+  state = { ...defaultState };
+  location.reload();
+}
+
+// ---- INIT ----
+function initApp() {
+  updateUI();
+  // Auto-switch to wealth calculator if needed
+  setTimeout(() => calcEmergency(), 200);
+  setTimeout(() => calcCompound(), 300);
+  setTimeout(() => calcPassive(), 400);
+}
+
+// ---- AUTO-START ----
+if (state.onboardingDone) {
+  document.getElementById('onboardingOverlay').classList.add('hidden');
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Step 0: tap anywhere to proceed
+    document.querySelector('.onboarding-step[data-step="0"]').addEventListener('click', nextStep);
+  });
+}
+
+// Expose functions globally
+window.nextStep = nextStep;
+window.selectOnboarding = selectOnboarding;
+window.finishOnboarding = finishOnboarding;
+window.showPaywall = showPaywall;
+window.closePaywall = closePaywall;
+window.switchPricing = switchPricing;
+window.upgradePremium = upgradePremium;
+window.upgradeCoach = upgradeCoach;
+window.switchScreen = switchScreen;
+window.startSession = startSession;
+window.startSessionSteps = startSessionSteps;
+window.togglePause = togglePause;
+window.skipStep = skipStep;
+window.completeSession = completeSession;
+window.closePlayer = closePlayer;
+window.setJournalPrompt = setJournalPrompt;
+window.saveJournal = saveJournal;
+window.clearJournal = clearJournal;
+window.showFinancialTest = showFinancialTest;
+window.showWealthPlan = showWealthPlan;
+window.showWeeklyReview = showWeeklyReview;
+window.showMonthlyBalance = showMonthlyBalance;
+window.closeModal = closeModal;
+window.resetAll = resetAll;
+window.calcEmergency = calcEmergency;
+window.calcCompound = calcCompound;
+window.calcPassive = calcPassive;
+</script>
+</body>
+</html>

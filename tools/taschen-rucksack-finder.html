@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taschen- & Rucksack-Finder</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:#0A0A0A;color:#E5E5E5;min-height:100vh}
+.header{background:linear-gradient(135deg,#0A0A0A 0%,#1a0a2e 50%,#0A0A0A 100%);border-bottom:1px solid rgba(139,92,246,0.2);padding:2rem 1rem;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,0.08) 0%,transparent 60%);pointer-events:none}
+.header h1{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px}
+.header p{color:#888;margin-top:.5rem;font-size:1rem;max-width:500px;margin-left:auto;margin-right:auto}
+.container{max-width:800px;margin:0 auto;padding:2rem 1rem}
+/* Frage-Karten */
+.question-card{background:linear-gradient(145deg,#121212,#1a1a1a);border:1px solid rgba(139,92,246,0.15);border-radius:16px;padding:2rem;margin-bottom:1.5rem;transition:all .3s ease;display:none}
+.question-card.active{display:block;animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:2rem}
+.step-dot{width:12px;height:12px;border-radius:50%;background:#333;border:2px solid transparent;transition:all .3s ease;cursor:pointer}
+.step-dot.active{background:#8B5CF6;border-color:#8B5CF6;box-shadow:0 0 12px rgba(139,92,246,0.4)}
+.step-dot.done{background:#FFD700;border-color:#FFD700}
+.question-number{font-size:.8rem;color:#8B5CF6;font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:.75rem}
+.question-text{font-size:1.4rem;font-weight:700;margin-bottom:1.5rem;line-height:1.4}
+/* Options-Grid */
+.options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.option-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 18px;text-align:left;color:#D0D0D0;cursor:pointer;transition:all .2s ease;font-size:.95rem;font-weight:500;width:100%;position:relative;overflow:hidden}
+.option-btn:hover{background:rgba(139,92,246,0.1);border-color:rgba(139,92,246,0.3);transform:translateY(-2px)}
+.option-btn.selected{background:rgba(139,92,246,0.15);border-color:#8B5CF6;color:#fff;box-shadow:0 0 20px rgba(139,92,246,0.2)}
+.option-btn.selected::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#8B5CF6;font-weight:700}
+.option-btn .sub{display:block;font-size:.75rem;color:#666;margin-top:4px;font-weight:400}
+/* Extras (Checkboxen) */
+.checkbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.checkbox-label{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;cursor:pointer;transition:all .2s ease;color:#D0D0D0;font-size:.9rem}
+.checkbox-label:hover{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.25)}
+.checkbox-label input[type="checkbox"]{accent-color:#8B5CF6;width:18px;height:18px;flex-shrink:0}
+.checkbox-label.checked{background:rgba(139,92,246,0.12);border-color:#8B5CF6;color:#fff}
+/* Navigation */
+.nav-buttons{display:flex;justify-content:space-between;margin-top:2rem;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s ease;border:none;text-decoration:none}
+.btn-back{background:rgba(255,255,255,0.06);color:#aaa;border:1px solid rgba(255,255,255,0.08)}
+.btn-back:hover{background:rgba(255,255,255,0.1);color:#fff}
+.btn-next{background:linear-gradient(135deg,#8B5CF6,#7C3AED);color:#fff;box-shadow:0 4px 15px rgba(139,92,246,0.3)}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(139,92,246,0.4)}
+.btn-next:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-gold{background:linear-gradient(135deg,#FFD700,#F59E0B);color:#0A0A0A;font-weight:700}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(255,215,0,0.3)}
+.btn-sm{padding:10px 20px;font-size:.85rem}
+/* Ergebnisse */
+.results-section{display:none}
+.results-section.active{display:block;animation:fadeIn .5s ease}
+.results-header{text-align:center;margin-bottom:2rem}
+.results-header h2{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,#8B5CF6,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.results-header p{color:#888;margin-top:.5rem}
+.budget-summary{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(139,92,246,0.08));border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:1rem 1.5rem;margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.budget-summary .label{color:#888;font-size:.9rem}
+.budget-summary .amount{font-size:1.5rem;font-weight:800;color:#FFD700}
+.budget-summary .count{color:#8B5CF6;font-weight:600}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.product-card{background:linear-gradient(145deg,#121212,#1a1a1a);border:1px solid rgba(139,92,246,0.12);border-radius:14px;padding:1.25rem;transition:all .3s ease;position:relative;overflow:hidden}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#8B5CF6,#FFD700);opacity:0;transition:opacity .3s ease}
+.product-card:hover::before{opacity:1}
+.product-card:hover{border-color:rgba(139,92,246,0.3);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.product-card .badge{display:inline-block;background:rgba(139,92,246,0.15);color:#8B5CF6;font-size:.7rem;padding:3px 10px;border-radius:20px;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.product-card h3{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:4px}
+.product-card .brand{font-size:.85rem;color:#888;margin-bottom:8px}
+.product-card .price{font-size:1.3rem;font-weight:800;color:#FFD700;margin-bottom:10px}
+.product-card .reason{font-size:.85rem;color:#aaa;line-height:1.5;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid rgba(139,92,246,0.3);margin-bottom:12px}
+.product-card .amazon-btn{display:inline-flex;align-items:center;gap:6px;background:#FFD700;color:#0A0A0A;padding:8px 16px;border-radius:8px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s ease}
+.product-card .amazon-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(255,215,0,0.3)}
+.view-all-wrap{text-align:center;margin-top:2rem}
+.reset-wrap{text-align:center;margin-top:1.5rem}
+.reset-link{color:#666;cursor:pointer;font-size:.9rem;text-decoration:underline;transition:color .2s}
+.reset-link:hover{color:#8B5CF6}
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:#0A0A0A}
+::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:#555}
+@media(max-width:600px){
+  .header h1{font-size:1.6rem}
+  .question-text{font-size:1.15rem}
+  .options-grid{grid-template-columns:1fr 1fr}
+  .product-grid{grid-template-columns:1fr}
+  .checkbox-grid{grid-template-columns:1fr 1fr}
+  .container{padding:1rem .75rem}
+  .question-card{padding:1.25rem}
+  .nav-buttons{flex-direction:column}
+  .btn{justify-content:center;padding:12px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎒 Taschen- & Rucksack-Finder</h1>
+  <p>Finde die perfekte Tasche für deinen Style, dein Budget und deinen Alltag</p>
+</div>
+
+<div class="container">
+  <!-- Step Dots -->
+  <div class="step-indicator" id="stepDots"></div>
+
+  <!-- Question Cards -->
+  <div id="questionsContainer"></div>
+
+  <!-- Results -->
+  <div class="results-section" id="resultsSection">
+    <div class="results-header">
+      <h2>Deine persönlichen Empfehlungen</h2>
+      <p>Basierend auf deinen Antworten haben wir die passendsten Produkte für dich gefunden</p>
+    </div>
+    <div class="budget-summary" id="budgetSummary">
+      <span><span class="label">Budget-Range:</span> <span class="count" id="budgetRangeText">–</span></span>
+      <span><span class="label">Empfehlungen:</span> <span class="count" id="resultCount">0</span></span>
+      <span><span class="label">Ø Preis:</span> <span class="amount" id="avgPrice">0 €</span></span>
+    </div>
+    <div class="product-grid" id="productGrid"></div>
+    <div class="view-all-wrap">
+      <a class="btn btn-gold" id="amazonAllLink" href="https://www.amazon.de/s?k=Tasche+Rucksack&tag=ikune21-21" target="_blank">🛒 Alle bei Amazon ansehen</a>
+    </div>
+    <div class="reset-wrap">
+      <span class="reset-link" onclick="resetFinder()">↺ Von vorne beginnen</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ========== PRODUKT-DATENBANK ==========
+const products = [
+  // --- RUCKSACK (Alltag/Business) ---
+  {name: "Samsonite Pro Rucksack DLX 5", marke: "Samsonite", kategorie: "rucksack", preis: 139, tags: ["alltag","business","laptop","klassisch","unisex","mittel"], beschreibung: "Hochwertiger Business-Rucksack mit gepolstertem Laptopfach für 15,6\" Geräte und großzügigem Stauraum."},
+  {name: "Eastpak Pak'R Rucksack", marke: "Eastpak", kategorie: "rucksack", preis: 55, tags: ["alltag","schule","unisex","klassisch","klein"], beschreibung: "Der ikonische Eastpak Tagesrucksack – robust, leicht und in vielen Farben erhältlich."},
+  {name: "Fjällräven Kånken Rucksack", marke: "Fjällräven", kategorie: "rucksack", preis: 100, tags: ["alltag","schule","shopping","klassisch","unisex","klein","nachoekologisch"], beschreibung: "Schwedischer Kult-Rucksack aus strapazierfähigem Vinylon F – zeitlos und nachhaltig."},
+  {name: "Patagonia Refugio Rucksack 26L", marke: "Patagonia", kategorie: "rucksack", preis: 130, tags: ["alltag","outdoor","laptop","nachoekologisch","unisex","mittel","modern"], beschreibung: "Nachhaltiger Tagesrucksack aus recycelten Materialien mit gepolstertem Laptopfach."},
+  {name: "The North Face Borealis Rucksack", marke: "The North Face", kategorie: "rucksack", preis: 85, tags: ["alltag","sport","unisex","mittel","sportlich"], beschreibung: "Vielseitiger Tagesrucksack mit FlexVent-Rückenpolster und organisiertem Hauptfach."},
+  {name: "Bellroy Tokyo Totepack", marke: "Bellroy", kategorie: "rucksack", preis: 149, tags: ["alltag","business","shopping","laptop","modern","unisex","mittel"], beschreibung: "Hybrid aus Tote Bag und Rucksack – verwandelbar und perfekt für den urbanen Alltag."},
+  {name: "Vaude Idris Rucksack 24L", marke: "Vaude", kategorie: "rucksack", preis: 120, tags: ["alltag","outdoor","nachoekologisch","unisex","klein","sportlich"], beschreibung: "Nachhaltiger Tagesrucksack mit Eco-Finish, grünem Knopfdruck und angenehmem Tragekomfort."},
+  // --- SCHULRUCKSACK ---
+  {name: "Dakine Campus Rucksack 33L", marke: "Dakine", kategorie: "schulrucksack", preis: 65, tags: ["schule","alltag","laptop","unisex","mittel","modern"], beschreibung: "Perfekt für Schule und Uni: großes Hauptfach, Laptopfach und viele Organizer-Taschen."},
+  {name: "Scout Alpha Schulrucksack", marke: "Scout", kategorie: "schulrucksack", preis: 90, tags: ["schule","alltag","unisex","mittel","sportlich","klassisch"], beschreibung: "Ergonomischer Schulrucksack mit dem patentierten Scout-System für eine gesunde Körperhaltung."},
+  {name: "Ergobag Cube Schulrucksack", marke: "Ergobag", kategorie: "schulrucksack", preis: 120, tags: ["schule","alltag","unisex","mittel","nachoekologisch","modern"], beschreibung: "Leichter Schulrucksack aus recycelten PET-Flaschen mit ergonomischem Rückenpolster."},
+  {name: "Step by Step Spaceschiff", marke: "Step by Step", kategorie: "schulrucksack", preis: 80, tags: ["schule","alltag","unisex","mittel","klassisch"], beschreibung: "Bekannter Schulrucksack mit Magnetverschluss und vielen Extras für den Schultag."},
+  // --- SPORT / FITNESS ---
+  {name: "Nike Elemental Backpack", marke: "Nike", kategorie: "sport", preis: 45, tags: ["sport","alltag","unisex","klein","sportlich","modern"], beschreibung: "Leichter Sportrucksack mit separatem Schuhfach und verstellbaren gepolsterten Trägern."},
+  {name: "Adidas Power V Rucksack", marke: "adidas", kategorie: "sport", preis: 35, tags: ["sport","alltag","unisex","klein","sportlich"], beschreibung: "Geräumiger Sportrucksack mit seitlichen Taschen für Trinkflaschen und gepolstertem Boden."},
+  {name: "Under Armour Hustle 5.0", marke: "Under Armour", kategorie: "sport", preis: 55, tags: ["sport","alltag","unisex","mittel","sportlich","laptop"], beschreibung: "Langlebiger Trainingsrucksack mit wasserabweisender Beschichtung und Laptopfach."},
+  {name: "Puma Phase Backpack", marke: "Puma", kategorie: "sport", preis: 30, tags: ["sport","alltag","unisex","klein","sportlich"], beschreibung: "Sportlicher Rucksack mit zwei Hauptfächern und verstärktem Boden – ideal fürs Training."},
+  // --- OUTDOOR / WANDERN ---
+  {name: "Deuter Aircontact Lite 45+10", marke: "Deuter", kategorie: "outdoor", preis: 180, tags: ["outdoor","gross","unisex","sportlich","klassisch"], beschreibung: "Vielseitiger Wanderrucksack mit dem bewährten Aircontact-Rückensystem für optimalen Tragekomfort."},
+  {name: "Deuter Walker 24L", marke: "Deuter", kategorie: "outdoor", preis: 80, tags: ["outdoor","klein","unisex","klassisch","sportlich"], beschreibung: "Klassischer Tagesrucksack für Wanderungen mit ergonomischem Rückensystem und Regenhülle."},
+  {name: "Mammut Lithium 25L", marke: "Mammut", kategorie: "outdoor", preis: 100, tags: ["outdoor","klein","unisex","sportlich","modern"], beschreibung: "Technischer Tagesrucksack für anspruchsvolle Touren mit Helmhalterung und Stockbefestigung."},
+  {name: "Salomon Trailblazer 20L", marke: "Salomon", kategorie: "outdoor", preis: 50, tags: ["outdoor","sport","klein","unisex","sportlich"], beschreibung: "Leichter Trailrunning-Rucksack mit Trinksystem-Vorbereitung und vielen Taschen."},
+  {name: "Decathlon Quechua MH500 20L", marke: "Quechua", kategorie: "outdoor", preis: 20, tags: ["outdoor","klein","unisex","sportlich","klassisch"], beschreibung: "Preiswerter Wander-Tagesrucksack mit Regenhülle und Brustgurt – ideal für Einsteiger."},
+  {name: "Ortlieb Atrack 35L", marke: "Ortlieb", kategorie: "outdoor", preis: 160, tags: ["outdoor","mittel","wasserdicht","unisex","sportlich","modern"], beschreibung: "Wasserdichter Rucksack aus reißfestem Material – perfekt für Radreisen und Outdoor-Abenteuer."},
+  {name: "Gregory Stout 45L", marke: "Gregory", kategorie: "outdoor", preis: 170, tags: ["outdoor","gross","unisex","klassisch","sportlich"], beschreibung: "Robuster Trekkingrucksack mit FreeFloat-Rückenplatte und abnehmbarem Tagesrucksack."},
+  {name: "Osprey Farpoint 40", marke: "Osprey", kategorie: "reisegepaeck", preis: 200, tags: ["reise","gross","unisex","klassisch","laptop"], beschreibung: "Der ultimative Reiserucksack mit abnehmbarem Tagesrucksack und verstaubaren Trägern."},
+  // --- REISEGEPÄCK ---
+  {name: "Samsonite S'Cure Spinner 69cm", marke: "Samsonite", kategorie: "reisegepaeck", preis: 250, tags: ["reise","gross","klassisch","unisex","luxus"], beschreibung: "Leichter Hartschalen-Koffer aus Polypropylen mit Dual-Wheel-Rollen und Zahlenschloss."},
+  {name: "Rimowa Essential Cabin", marke: "Rimowa", kategorie: "reisegepaeck", preis: 750, tags: ["reise","klein","luxus","klassisch","unisex","herren"], beschreibung: "Premium-Handgepäck-Koffer aus Polycarbonat mit ikonischem Rillen-Design und Multiwheel-System."},
+  {name: "American Tourister Bon Air", marke: "American Tourister", kategorie: "reisegepaeck", preis: 80, tags: ["reise","mittel","klassisch","unisex","modern"], beschreibung: "Leichter Hartschalen-Koffer in vielen Farben – top Preis-Leistungs-Verhältnis für Reiseeinsteiger."},
+  {name: "Travelite Momentum 55cm", marke: "Travelite", kategorie: "reisegepaeck", preis: 110, tags: ["reise","klein","modern","unisex","damen"], beschreibung: "Handgepäck-Koffer mit vier Doppelrollen, TSA-Schloss und herausnehmbarer Wäschetasche."},
+  {name: "Bric's Bellagio 55cm", marke: "Bric's", kategorie: "reisegepaeck", preis: 185, tags: ["reise","klein","luxus","klassisch","unisex","damen"], beschreibung: "Eleganter Handgepäck-Koffer aus Leder und Polycarbonat – italienisches Design trifft Funktionalität."},
+  // --- HANDTASCHE / SHOPPER ---
+  {name: "Longchamp Le Pliage Shopper", marke: "Longchamp", kategorie: "shopper", preis: 95, tags: ["shopping","alltag","damen","klassisch","klein"], beschreibung: "Die legendäre Le-Pliage-Tasche aus Nylon – leicht, zusammenfaltbar und zeitlos elegant."},
+  {name: "Michael Kors Jet Set Travel", marke: "Michael Kors", kategorie: "handtasche", preis: 198, tags: ["shopping","alltag","damen","luxus","modern","klein"], beschreibung: "Stylische Logo-Tasche aus saffiano-Leder mit abnehmbarem Schulterriemen und viel Stauraum."},
+  {name: "Fossil Carson Shopper", marke: "Fossil", kategorie: "shopper", preis: 129, tags: ["shopping","alltag","damen","klassisch","mittel"], beschreibung: "Geräumige Shopper Bag aus weichem Leder mit Reißverschluss und Organizer-Taschen."},
+  {name: "Guess Noelle Handtasche", marke: "Guess", kategorie: "handtasche", preis: 89, tags: ["shopping","alltag","damen","modern","klein"], beschreibung: "Schicke Schultertasche mit einer Kette und Logoverzierung – ideal für den Alltag."},
+  {name: "Desigual Shopper Medium", marke: "Desigual", kategorie: "shopper", preis: 69, tags: ["shopping","alltag","damen","modern","mittel"], beschreibung: "Bunter Shopper mit charakteristischem Desigual-Design und viel Platz für den Einkauf."},
+  {name: "Picard Coco Shopper", marke: "Picard", kategorie: "shopper", preis: 109, tags: ["shopping","alltag","damen","klassisch","mittel","nachoekologisch"], beschreibung: "Nachhaltige Ledertasche aus deutscher Manufaktur mit edlem Design und viel Stauraum."},
+  // --- LAPTOPTASCHE ---
+  {name: "Targus CityGear Laptoptasche", marke: "Targus", kategorie: "laptoptasche", preis: 49, tags: ["business","alltag","laptop","klassisch","unisex","klein"], beschreibung: "Gepolsterte Laptoptasche mit Organizer-Fach und Schultergurt – für den täglichen Büroweg."},
+  {name: "Incase EO Travel Backpack", marke: "Incase", kategorie: "laptoptasche", preis: 149, tags: ["business","reise","laptop","modern","unisex","mittel"], beschreibung: "Sleeker Rucksack für Laptop und Kameraausrüstung mit durchdachtem Innenleben."},
+  {name: "Peak Design Everyday Backpack 20L", marke: "Peak Design", kategorie: "laptoptasche", preis: 279, tags: ["business","reise","laptop","modern","unisex","mittel","luxus"], beschreibung: "Premium-Kamerarucksack mit anpassbaren FlexFold-Trennern und Schnellzugriff von der Seite."},
+  {name: "Thule Subterra Laptop-Rucksack", marke: "Thule", kategorie: "laptoptasche", preis: 129, tags: ["business","alltag","laptop","klassisch","unisex","mittel","modern"], beschreibung: "Skandinavisch-designte Laptoptasche mit SafeZone-Fach für Wertsachen und Laptop bis 15,6\"."},
+  {name: "Bric's Bellagio Laptoptasche", marke: "Bric's", kategorie: "laptoptasche", preis: 185, tags: ["business","reise","laptop","luxus","klassisch","unisex","klein"], beschreibung: "Italienische Leder-Laptoptasche mit edlem Design und gepolstertem Laptopfach."},
+  {name: "Samsonite Tectonic 2 Laptoprucksack", marke: "Samsonite", kategorie: "laptoptasche", preis: 99, tags: ["business","alltag","laptop","klassisch","unisex","mittel"], beschreibung: "Business-Rucksack mit RFID-Schutz, Laptopfach und integriertem USB-Anschluss."},
+  // --- GELDBÖRSE ---
+  {name: "Secrid Cardprotector Wallet", marke: "Secrid", kategorie: "geldboerse", preis: 35, tags: ["alltag","business","rfid","klein","modern","unisex","klassisch"], beschreibung: "Minimalistische Kartenbörse mit RFID-Schutz und patentiertem Ausziehmechanismus."},
+  {name: "Bellroy Slim Sleeve", marke: "Bellroy", kategorie: "geldboerse", preis: 69, tags: ["alltag","business","klein","modern","unisex","nachoekologisch"], beschreibung: "Schlanke Ledergeldbörse aus Premium-Leder – minimalistisch und nachhaltig produziert."},
+  {name: "Hugo Boss Geldbörse Quattro", marke: "Hugo Boss", kategorie: "geldboerse", preis: 89, tags: ["herren","business","klassisch","klein","luxus"], beschreibung: "Klassische Herrengeldbörse aus glattem Rindleder mit vielen Kartenfächern."},
+  {name: "Fossil Marshall Geldbörse", marke: "Fossil", kategorie: "geldboerse", preis: 79, tags: ["herren","alltag","klassisch","klein","klassisch"], beschreibung: "Hochwertige Leder-Geldbörse mit RFID-Blockierung und Vintage-Design."},
+  {name: "MCM Visetos Geldbörse", marke: "MCM", kategorie: "geldboerse", preis: 295, tags: ["damen","luxus","klein","modern","klassisch"], beschreibung: "Designer-Geldbörse aus Visetos-Material mit ikonischem MCM-Logo und RFID-Schutz."},
+  {name: "Kapten & Son Aces Wallet", marke: "Kapten & Son", kategorie: "geldboerse", preis: 45, tags: ["unisex","alltag","klein","modern","klassisch"], beschreibung: "Minimalistische Kartenbörse im Scandi-Design mit RFID-Schutz und Platz für bis zu 8 Karten."},
+  // --- WICKELTASCHE ---
+  {name: "Skip Hop Duo Wickeltasche", marke: "Skip Hop", kategorie: "wickeltasche", preis: 49, tags: ["alltag","mittel","damen","modern"], beschreibung: "Vielseitige Wickeltasche mit isolierten Flaschenhaltern, Wickelunterlage und vielen Organizern."},
+  {name: "Jako-o Wickelrucksack Comfort", marke: "Jako-o", kategorie: "wickeltasche", preis: 79, tags: ["alltag","mittel","unisex","modern"], beschreibung: "Praktischer Wickelrucksack mit Wickelauflage, Flaschenhaltern und Kühlfach für Babynahrung."},
+  {name: "Deyeah Baby-Wickelrucksack", marke: "Deyeah", kategorie: "wickeltasche", preis: 36, tags: ["alltag","mittel","unisex","modern","usb"], beschreibung: "Großer Wickelrucksack mit USB-Ladefunktion, Wickelauflage und vielen Steckfächern."},
+  // --- WEITERE RUCKSÄCKE ---
+  {name: "Doughnut Macaroon Rucksack", marke: "Doughnut", kategorie: "rucksack", preis: 65, tags: ["alltag","schule","damen","klein","modern"], beschreibung: "Pastellfarbener Tagesrucksack im Retro-Stil mit Teddyfell-Futter und Laptopfach."},
+  {name: "Herschel Settlement Rucksack", marke: "Herschel Supply Co.", kategorie: "rucksack", preis: 60, tags: ["alltag","schule","unisex","klein","klassisch","modern"], beschreibung: "Klassischer Rucksack mit Herschel-typischem Design, gepolstertem Laptopfach und Kordelzug."},
+  {name: "Sandqvist Bernt Rucksack", marke: "Sandqvist", kategorie: "rucksack", preis: 110, tags: ["alltag","business","unisex","mittel","nachoekologisch","klassisch"], beschreibung: "Schwedischer Rucksack aus recyceltem Polyester mit wasserabweisender Beschichtung."},
+  {name: "Aevor Daypack Rucksack", marke: "Aevor", kategorie: "rucksack", preis: 99, tags: ["alltag","sport","unisex","sportlich","mittel","modern","laptop"], beschreibung: "Urbaner Rucksack aus recycelten Materialien mit Laptopfach und Fahrrad-Design-Details."},
+  {name: "Nordgreen Rucksack", marke: "Nordgreen", kategorie: "rucksack", preis: 135, tags: ["alltag","business","unisex","mittel","modern","laptop","nachoekologisch"], beschreibung: "Minimalistischer skandinavischer Rucksack aus recycelten Materialien mit Organizer-Fach."},
+  // --- TASCHE (Damen) ---
+  {name: "SURI FREYA Tote Bag", marke: "SURI", kategorie: "shopper", preis: 79, tags: ["shopping","alltag","damen","klein","modern","laptop"], beschreibung: "Leichte Shopper Bag aus veganem Leder mit integriertem Organizer für Laptop und Essentials."},
+  {name: "Vivienne Westwood Orb Handtasche", marke: "Vivienne Westwood", kategorie: "handtasche", preis: 185, tags: ["shopping","damen","klein","luxus","modern","klassisch"], beschreibung: "Designer-Handtasche mit ikonischem Orb-Logo – ein echtes Statement-Piece."},
+  {name: "Lacoste Handtasche L.12.12", marke: "Lacoste", kategorie: "handtasche", preis: 75, tags: ["shopping","alltag","damen","klein","sportlich","klassisch"], beschreibung: "Sportlich-elegante Umhängetasche mit dem berühmten Lacoste-Krokodil."},
+  // --- REISE-ZUBEHÖR ---
+  {name: "Doughnut Wanderlust Reiserucksack 40L", marke: "Doughnut", kategorie: "reisegepaeck", preis: 139, tags: ["reise","gross","unisex","mittel","modern"], beschreibung: "Vielseitiger Reiserucksack mit verdecktem Zahlenschloss und abnehmbarem Tagesrucksack."},
+  {name: "Cabaïa Reiserucksack 40L", marke: "Cabaïa", kategorie: "reisegepaeck", preis: 129, tags: ["reise","mittel","unisex","modern","laptop"], beschreibung: "Leichter Reiserucksack mit Laptopfach, Rückenpolster und Diebstahlschutz-Reißverschluss."},
+  {name: "Hackit Reise-Rucksack 50L", marke: "Hackit", kategorie: "reisegepaeck", preis: 56, tags: ["reise","gross","unisex","sportlich","usb","klassisch"], beschreibung: "Großer Reiserucksack mit USB-Ladeanschluss, Schuhfach und TSA-Schloss – budgetfreundlich."},
+  // --- OUTDOOR ZUSATZ ---
+  {name: "Jack Wolfskin Tasman Rucksack 28L", marke: "Jack Wolfskin", kategorie: "outdoor", preis: 75, tags: ["outdoor","alltag","klein","unisex","sportlich","klassisch"], beschreibung: "Täglicher Begleiter mit wasserabweisendem Finish, Laptopfach und ergonomischem Rücken."},
+  {name: "Clinoptilite Tagesrucksack 30L", marke: "Clinoptilite", kategorie: "outdoor", preis: 36, tags: ["outdoor","klein","unisex","sportlich","usb","wasserdicht"], beschreibung: "Wasserdichter Wanderrucksack mit USB-Anschluss und Regenhülle – ideal für den Einstieg."},
+  {name: "Osprey Talon 22", marke: "Osprey", kategorie: "outdoor", preis: 140, tags: ["outdoor","klein","unisex","sportlich","klassisch"], beschreibung: "Der Klassiker für Tageswanderungen mit AirScape-Rücken, Stockbefestigung und Trinksystem."},
+  // --- LAPTOP / BUSINESS ZUSATZ ---
+  {name: "Alpaka Elements Tech Case", marke: "Alpaka", kategorie: "laptoptasche", preis: 69, tags: ["reise","business","klein","unisex","modern","usb"], beschreibung: "Organizer-Tasche für Technik-Zubehör mit RFID-Schutz und Schlaufen für Kabel."},
+  {name: "Wenger Business-Laptop-Rucksack", marke: "Wenger", kategorie: "laptoptasche", preis: 75, tags: ["business","alltag","laptop","klassisch","unisex","mittel"], beschreibung: "Geräumiger Laptoprucksack mit Organizer-Fach, USB-Anschluss und verstärktem Rücken."},
+  // --- SPORT ZUSATZ ---
+  {name: "Gymax Sportrucksack", marke: "Gymax", kategorie: "sport", preis: 22, tags: ["sport","alltag","unisex","klein","sportlich","klassisch"], beschreibung: "Leichter Sportrucksack mit separatem Nassfach für Kleidung und seitlicher Flaschentasche."},
+  {name: "Nike Brasilia 9.5", marke: "Nike", kategorie: "sport", preis: 38, tags: ["sport","alltag","unisex","mittel","sportlich"], beschreibung: "Trainingsrucksack mit Mesh-Seitentaschen, ergonomischen Trägern und verstärktem Boden."},
+  // --- SHOPPER / EINKAUF ---
+  {name: "MUSTANG Shopper Medium", marke: "Mustang", kategorie: "shopper", preis: 45, tags: ["shopping","alltag","damen","klassisch","mittel"], beschreibung: "Geräumige Einkaufstasche aus Baumwoll-Canvas mit langen Henkeln – nachhaltig und praktisch."},
+  {name: "Lily&Bean Jute Shopper", marke: "Lily&Bean", kategorie: "shopper", preis: 19, tags: ["shopping","alltag","damen","unisex","klein","klassisch","nachoekologisch"], beschreibung: "Umweltfreundlicher Jute-Shopper mit Baumwollfutter – der ideale Einkaufsbegleiter."},
+  // --- GELDBÖRSEN ZUSATZ ---
+  {name: "TROIKa Geldbörse RFID", marke: "TROIKA", kategorie: "geldboerse", preis: 25, tags: ["alltag","klein","unisex","modern","rfid","klassisch"], beschreibung: "Slim-Geldbörse aus Aluminium mit RFID-Schutz und Kartenauswurfsystem."},
+  {name: "Porter Geldbörse Slim", marke: "Porter", kategorie: "geldboerse", preis: 149, tags: ["herren","business","luxus","klein","klassisch"], beschreibung: "Japanische Premium-Geldbörse aus feinstem Rindsleder mit minimalistischem Design."},
+  // --- WEITERE TASCHEN ---
+  {name: "MZ Skin Tote Bag", marke: "MZ Skin", kategorie: "handtasche", preis: 159, tags: ["damen","shopping","luxus","mittel","modern","klassisch"], beschreibung: "Elegante Tote Bag aus weichem Leder mit Reißverschlussfach und abnehmbarem Schultergurt."},
+  {name: "Tommy Hilfiger Umhängetasche", marke: "Tommy Hilfiger", kategorie: "handtasche", preis: 69, tags: ["damen","shopping","alltag","klein","klassisch","modern"], beschreibung: "Klein aber fein: Umhängetasche mit ikonischem Tommy-Logo und verstellbarem Riemen."},
+  {name: "Eastpak Floid Rucksack 24L", marke: "Eastpak", kategorie: "rucksack", preis: 70, tags: ["alltag","business","unisex","klein","laptop","klassisch","modern"], beschreibung: "Eleganter Rucksack mit Laptopfach und gepolstertem Boden – perfekt für den modernen Alltag."},
+  {name: "Burton Tinder Rucksack 25L", marke: "Burton", kategorie: "rucksack", preis: 65, tags: ["alltag","sport","unisex","klein","sportlich","laptop"], beschreibung: "Robuster Snowboard-Rucksack mit Laptopfach und verschließbarem Reißverschluss."},
+  {name: "Delsey Paris Helium Aero Koffer", marke: "Delsey", kategorie: "reisegepaeck", preis: 130, tags: ["reise","mittel","unisex","klassisch","modern"], beschreibung: "Leichter Hartschalen-Koffer aus 100% Polycarbonat mit erstklassigen Doppelrollen."}
+];
+
+// ========== FRAGEN ==========
+const questions = [
+  {
+    id: "use",
+    text: "Wofür brauchst du eine Tasche?",
+    type: "single",
+    options: [
+      {value: "alltag", label: "Alltag & Business", sub: "Arbeit, Pendeln, Meetings"},
+      {value: "reise", label: "Reisen", sub: "Urlaub, Wochenendtrips, Flüge"},
+      {value: "sport", label: "Sport & Fitness", sub: "Training, Studio, Sport"},
+      {value: "outdoor", label: "Outdoor & Wandern", sub: "Wanderungen, Camping, Trekking"},
+      {value: "shopping", label: "Shopping & Alltag", sub: "Einkäufe, Stadtbummel, Kaffee"},
+      {value: "schule", label: "Schule & Uni", sub: "Vorlesungen, Lernen, Bücher"},
+      {value: "business", label: "Business & Laptop", sub: "Geschäftstreffen, Homeoffice"}
+    ]
+  },
+  {
+    id: "budget",
+    text: "Dein Budget – was möchtest du ausgeben?",
+    type: "single",
+    options: [
+      {value: "budget_30", label: "Bis 30 €", sub: "Günstig & praktisch"},
+      {value: "budget_30_80", label: "30–80 €", sub: "Gutes Preis-Leistungs-Verhältnis"},
+      {value: "budget_80_200", label: "80–200 €", sub: "Qualität & Langlebigkeit"},
+      {value: "budget_200_500", label: "200–500 €", sub: "Premium & Design"},
+      {value: "budget_500", label: "500 €+", sub: "Luxus & Exklusivität"}
+    ]
+  },
+  {
+    id: "size",
+    text: "Wieviel Stauraum brauchst du?",
+    type: "single",
+    options: [
+      {value: "minimal", label: "Minimal (10–15 L)", sub: "Nur das Nötigste"},
+      {value: "tagesausflug", label: "Tagesausflug (20–30 L)", sub: "Für den Tag unterwegs"},
+      {value: "normal", label: "Normal (30–40 L)", sub: "Alltag & Arbeit"},
+      {value: "gross", label: "Groß (40–60 L)", sub: "Wochenendtrips"},
+      {value: "sehrgross", label: "Sehr groß (60 L+)", sub: "Reisen & Camping"}
+    ]
+  },
+  {
+    id: "style",
+    text: "Deine Styling-Präferenz?",
+    type: "single",
+    options: [
+      {value: "klassisch", label: "Klassisch & Zeitlos", sub: "Schlicht, elegant, langlebig"},
+      {value: "modern", label: "Modern & Trendy", sub: "Angesagt, farbenfroh, aktuell"},
+      {value: "sportlich", label: "Sportlich & Funktionell", sub: "Praktisch, robust, aktiv"},
+      {value: "luxus", label: "Luxuriös & Elegant", sub: "Hochwertig, edel, exklusiv"},
+      {value: "nachoekologisch", label: "Nachhaltig & Öko", sub: "Umweltfreundlich, fair, recycelt"}
+    ]
+  },
+  {
+    id: "extras",
+    text: "Welche Extras sind dir wichtig?",
+    type: "checkbox",
+    options: [
+      {value: "laptop", label: "💻 Laptopfach"},
+      {value: "wasserdicht", label: "🌧️ Wasserdicht"},
+      {value: "usb", label: "🔋 USB-Ladung"},
+      {value: "rfid", label: "🛡️ Sicherheit (RFID/Diebstahl)"},
+      {value: "sportlich", label: "🔄 Rückenpolster"},
+      {value: "klassisch", label: "🧳 Klappbar/Kompakt"}
+    ]
+  },
+  {
+    id: "gender",
+    text: "Für wen suchst du?",
+    type: "single",
+    options: [
+      {value: "unisex", label: "Unisex", sub: "Für alle gleichermaßen geeignet"},
+      {value: "herren", label: "Herren", sub: "Speziell für Männer designt"},
+      {value: "damen", label: "Damen", sub: "Speziell für Frauen designt"}
+    ]
+  }
+];
+
+// ========== STATE ==========
+let currentStep = 0;
+let answers = {};
+
+// ========== INIT ==========
+function init() {
+  renderStepDots();
+  renderAllQuestions();
+  showStep(0);
+}
+
+function renderStepDots() {
+  const container = document.getElementById('stepDots');
+  container.innerHTML = questions.map((q,i) =>
+    `<div class="step-dot ${i === 0 ? 'active' : ''}" data-step="${i}" onclick="goToStep(${i})"></div>`
+  ).join('');
+}
+
+function renderAllQuestions() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = questions.map((q, qi) => {
+    const isLast = qi === questions.length - 1;
+    const btnText = isLast ? '🎯 Empfehlungen zeigen' : 'Weiter →';
+
+    let optionsHtml = '';
+    if (q.type === 'checkbox') {
+      optionsHtml = `<div class="checkbox-grid">${q.options.map((o, oi) =>
+        `<label class="checkbox-label" data-question="${qi}" data-value="${o.value}">
+          <input type="checkbox" value="${o.value}" onchange="toggleExtra(${qi}, '${o.value}', this)">
+          ${o.label}
+        </label>`
+      ).join('')}</div>`;
+    } else {
+      optionsHtml = `<div class="options-grid">${q.options.map(o =>
+        `<button class="option-btn" data-question="${qi}" data-value="${o.value}" onclick="selectOption(${qi}, '${o.value}')">
+          ${o.label}
+          <span class="sub">${o.sub}</span>
+        </button>`
+      ).join('')}</div>`;
+    }
+
+    const isFirst = qi === 0;
+    return `<div class="question-card" data-step="${qi}">
+      <div class="question-number">Frage ${qi+1} von ${questions.length}</div>
+      <div class="question-text">${q.text}</div>
+      ${optionsHtml}
+      <div class="nav-buttons">
+        <button class="btn btn-back" onclick="prevStep()" ${isFirst ? 'style="visibility:hidden"' : ''}>← Zurück</button>
+        <button class="btn btn-next" id="nextBtn${qi}" onclick="${isLast ? 'showResults()' : 'nextStep()'}" disabled>${btnText}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ========== NAVIGATION ==========
+function showStep(index) {
+  currentStep = index;
+  document.querySelectorAll('.question-card').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+  });
+  document.querySelectorAll('.step-dot').forEach((el, i) => {
+    el.classList.toggle('active', i === index);
+    el.classList.toggle('done', i < index);
+  });
+  updateNextBtn();
+}
+
+function nextStep() {
+  if (currentStep < questions.length - 1) {
+    showStep(currentStep + 1);
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) {
+    showStep(currentStep - 1);
+  }
+}
+
+function goToStep(index) {
+  // Only allow going back or to already visited (done) steps
+  if (index <= currentStep || document.querySelectorAll('.step-dot')[index].classList.contains('done')) {
+    showStep(index);
+  }
+}
+
+function updateNextBtn() {
+  const q = questions[currentStep];
+  const btn = document.getElementById(`nextBtn${currentStep}`);
+  if (!btn) return;
+  if (q.type === 'checkbox') {
+    btn.disabled = false; // Checkboxen optional
+  } else {
+    btn.disabled = !answers[q.id];
+  }
+}
+
+// ========== SELECTION ==========
+function selectOption(qi, value) {
+  const q = questions[qi];
+  answers[q.id] = value;
+
+  // Visual
+  document.querySelectorAll(`.option-btn[data-question="${qi}"]`).forEach(el => {
+    el.classList.toggle('selected', el.dataset.value === value);
+  });
+
+  updateNextBtn();
+}
+
+function toggleExtra(qi, value, checkbox) {
+  const q = questions[qi];
+  if (!answers[q.id]) answers[q.id] = [];
+  const arr = answers[q.id];
+
+  if (checkbox.checked) {
+    if (!arr.includes(value)) arr.push(value);
+  } else {
+    const idx = arr.indexOf(value);
+    if (idx > -1) arr.splice(idx, 1);
+  }
+
+  checkbox.closest('.checkbox-label').classList.toggle('checked', checkbox.checked);
+}
+
+// ========== MATCHING ==========
+function getScore(product, answers) {
+  let score = 0;
+  const useKey = {
+    "alltag": ["alltag","business","rucksack","laptoptasche"],
+    "reise": ["reise","reisegepaeck"],
+    "sport": ["sport"],
+    "outdoor": ["outdoor"],
+    "shopping": ["shopping","shopper","handtasche","geldboerse"],
+    "schule": ["schule","schulrucksack"],
+    "business": ["business","laptoptasche","rucksack"]
+  };
+
+  const sizeMap = {
+    "minimal": "klein",
+    "tagesausflug": "klein",
+    "normal": "mittel",
+    "gross": "gross",
+    "sehrgross": "sehrgross"
+  };
+
+  const styleMap = {
+    "klassisch": "klassisch",
+    "modern": "modern",
+    "sportlich": "sportlich",
+    "luxus": "luxus",
+    "nachoekologisch": "nachoekologisch"
+  };
+
+  // 1. Use case (max 30)
+  const use = answers["q0"] || answers["use"];
+  if (use) {
+    const cats = useKey[use] || [use];
+    if (cats.includes(product.kategorie)) score += 20;
+    if (product.tags.includes(use)) score += 10;
+    if (use === "schulrucksack" && product.kategorie === "schulrucksack") score += 10;
+  }
+
+  // 2. Budget (max 20)
+  const budget = answers["q1"] || answers["budget"];
+  if (budget) {
+    const p = product.preis;
+    if (budget === "budget_30" && p <= 30) score += 20;
+    else if (budget === "budget_30_80" && p > 30 && p <= 80) score += 20;
+    else if (budget === "budget_80_200" && p > 80 && p <= 200) score += 20;
+    else if (budget === "budget_200_500" && p > 200 && p <= 500) score += 20;
+    else if (budget === "budget_500" && p > 500) score += 20;
+    else if (budget === "budget_30" && p <= 35) score += 10;
+    else if (budget === "budget_30_80" && p >= 20 && p <= 90) score += 10;
+    else if (budget === "budget_80_200" && p >= 60 && p <= 220) score += 10;
+    else if (budget === "budget_200_500" && p >= 150 && p <= 550) score += 10;
+    else if (budget === "budget_500" && p >= 350) score += 10;
+  }
+
+  // 3. Size (max 15)
+  const size = answers["q2"] || answers["size"];
+  if (size) {
+    const mappedSize = sizeMap[size];
+    if (mappedSize && product.tags.includes(mappedSize)) score += 15;
+  }
+
+  // 4. Style (max 15)
+  const style = answers["q3"] || answers["style"];
+  if (style) {
+    const mappedStyle = styleMap[style];
+    if (mappedStyle && product.tags.includes(mappedStyle)) score += 15;
+  }
+
+  // 5. Extras (max 10)
+  const extras = answers["q4"] || answers["extras"];
+  if (extras && Array.isArray(extras)) {
+    extras.forEach(extra => {
+      if (product.tags.includes(extra)) score += 4;
+    });
+    // Bonus for multiple matches
+    const matches = extras.filter(e => product.tags.includes(e)).length;
+    if (matches >= 3) score += 5;
+  }
+
+  // 6. Gender (max 10)
+  const gender = answers["q5"] || answers["gender"];
+  if (gender) {
+    if (gender === "unisex" && product.tags.includes("unisex")) score += 10;
+    else if (gender === "herren" && product.tags.includes("herren")) score += 10;
+    else if (gender === "damen" && product.tags.includes("damen")) score += 10;
+    else if (gender === "unisex" && (product.tags.includes("herren") || product.tags.includes("damen"))) score += 3;
+    else if (gender === "herren" && product.tags.includes("unisex")) score += 5;
+    else if (gender === "damen" && product.tags.includes("unisex")) score += 5;
+  }
+
+  return score;
+}
+
+function showResults() {
+  // Hide questions, show results
+  document.querySelectorAll('.question-card').forEach(el => el.style.display = 'none');
+  document.getElementById('stepDots').style.display = 'none';
+  document.getElementById('resultsSection').classList.add('active');
+
+  // Score all products
+  const scored = products.map(p => ({
+    ...p,
+    score: getScore(p, answers)
+  }))
+  .filter(p => p.score > 0)
+  .sort((a, b) => b.score - a.score);
+
+  // Take top 15
+  const top15 = scored.slice(0, 15);
+
+  // Budget range text
+  const budget = answers["q1"] || answers["budget"];
+  const budgetLabels = {
+    "budget_30": "Bis 30 €",
+    "budget_30_80": "30–80 €",
+    "budget_80_200": "80–200 €",
+    "budget_200_500": "200–500 €",
+    "budget_500": "500 €+"
+  };
+  document.getElementById('budgetRangeText').textContent = budgetLabels[budget] || "Alle";
+  document.getElementById('resultCount').textContent = top15.length;
+
+  const avgPrice = top15.length > 0 ? Math.round(top15.reduce((s,p) => s + p.preis, 0) / top15.length) : 0;
+  document.getElementById('avgPrice').textContent = avgPrice + ' €';
+
+  // Render products
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = top15.map((p, i) => {
+    const amazonUrl = `https://www.amazon.de/s?k=${encodeURIComponent(p.name + ' ' + p.marke)}&tag=ikune21-21`;
+    const heart = i === 0 ? '👑 ' : '';
+    return `<div class="product-card">
+      <span class="badge">#${i+1} · ${p.kategorie}</span>
+      <h3>${heart}${p.name}</h3>
+      <div class="brand">${p.marke}</div>
+      <div class="price">${p.preis.toFixed(0).replace('.',',')} €</div>
+      <div class="reason">💡 ${getReason(p, answers)}</div>
+      <a class="amazon-btn" href="${amazonUrl}" target="_blank" rel="noopener">🛒 Bei Amazon ansehen</a>
+    </div>`;
+  }).join('');
+
+  // Scroll to top
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function getReason(product, answers) {
+  const use = answers["q0"] || answers["use"];
+  const style = answers["q3"] || answers["style"];
+  const extras = answers["q4"] || answers["extras"] || [];
+
+  const reasons = [];
+  if (use && product.tags.includes(use)) reasons.push(`perfekt für ${use}`);
+  if (extras.includes("laptop") && product.tags.includes("laptop")) reasons.push("mit Laptopfach");
+  if (extras.includes("wasserdicht") && product.tags.includes("wasserdicht")) reasons.push("wasserdicht");
+  if (extras.includes("usb") && product.tags.includes("usb")) reasons.push("mit USB-Ladung");
+  if (extras.includes("rfid") && product.tags.includes("rfid")) reasons.push("mit RFID-Schutz");
+  if (style && product.tags.includes(style)) reasons.push(`${style}es Design`);
+  if (product.preis <= 30 && reasons.length === 0) reasons.push("besonders günstig & praktisch");
+
+  return reasons.length > 0
+    ? `Diese Tasche passt zu dir, weil sie ${reasons.slice(0,2).join(' und ')} ist.`
+    : `Vielseitige Tasche, die zu deinen Anforderungen passt.`;
+}
+
+function resetFinder() {
+  answers = {};
+  currentStep = 0;
+  document.getElementById('resultsSection').classList.remove('active');
+  document.querySelectorAll('.question-card').forEach(el => el.style.display = '');
+  document.getElementById('stepDots').style.display = '';
+  // Reset selections
+  document.querySelectorAll('.option-btn.selected').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.checkbox-label.checked').forEach(el => el.classList.remove('checked'));
+  document.querySelectorAll('.checkbox-label input').forEach(el => el.checked = false);
+  showStep(0);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Amazon All-Link
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  const link = document.getElementById('amazonAllLink');
+  if (link) {
+    const use = answers["q0"] || "";
+    const searchTerms = {
+      "alltag": "Rucksack+Alltag",
+      "reise": "Reisegepäck+Koffer",
+      "sport": "Sportrucksack",
+      "outdoor": "Wanderrucksack",
+      "shopping": "Handtasche+Shopper",
+      "schule": "Schulrucksack",
+      "business": "Business+Rucksack+Laptop"
+    };
+    // Will be updated on results show
+  }
+});
+</script>
+</body>
+</html>

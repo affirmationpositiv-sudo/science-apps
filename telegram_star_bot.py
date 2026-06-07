@@ -169,12 +169,9 @@ if updates.get("ok"):
 with open(OFFSET_FILE, "w") as f:
     f.write(str(new_offset))
 
-# Report
+# Report – nur bei neuen Zahlungen
 if payments_found:
     print(f"\n💰 NEUE ZAHLUNGEN ({len(payments_found)}):")
     for p in payments_found:
         print(f"  {p['amount']} {p['currency']} – Payload: {p['payload']} – User: {p['from']}")
-else:
-    print("📭 Keine neuen Zahlungen.")
-
-print(f"✅ Bot verarbeitet. Offset: {new_offset}")
+# Silent wenn nichts – kein "Keine neuen Zahlungen" Spam mehr

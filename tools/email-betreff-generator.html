@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kostenloser E-Mail Betreffzeilen Generator – IKUNE</title>
+<meta name="description" content="Kostenloser E-Mail Betreffzeilen Generator. Erstelle perfekte Subject Lines für Newsletter, Verkauf und Follow-ups.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6;min-height:100vh}
+.container{max-width:700px;margin:0 auto;padding:20px}
+header{text-align:center;padding:40px 0;border-bottom:1px solid #1a1a1a}
+header h1{color:#d4a843;font-size:2.2em}
+header p{color:#888;margin-top:10px}
+.tool{background:#111;border:1px solid #222;border-radius:12px;padding:30px;margin:20px 0}
+.tool label{color:#d4a843;font-weight:600;display:block;margin:15px 0 8px}
+.tool input,.tool select{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#1a1a1a;color:#fff;font-size:1em}
+.tool button{width:100%;padding:15px;border-radius:8px;border:none;background:#d4a843;color:#0a0a0a;font-size:1.1em;font-weight:600;cursor:pointer;margin-top:15px}
+.results{display:none;margin-top:15px}
+.result-item{background:#0a0a0a;border:1px solid #333;border-radius:8px;padding:15px;margin:8px 0;color:#d4a843}
+.cta{background:#111;border:1px solid #d4a843;border-radius:12px;padding:30px;margin:40px 0;text-align:center}
+.btn{display:inline-block;padding:12px 30px;border-radius:8px;background:#d4a843;color:#0a0a0a;text-decoration:none;font-weight:600;margin:10px}
+footer{text-align:center;color:#555;padding:40px 0}
+footer a{color:#888;text-decoration:none}
+
+.related{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:25px;margin:30px 0}
+.related h3{color:#d4a843;font-size:1.1em;margin-bottom:15px}
+.related a{display:block;color:#aaa;text-decoration:none;padding:8px 12px;border-radius:6px;margin:5px 0;transition:all .2s}
+.related a:hover{background:#1a1a1a;color:#d4a843;padding-left:18px}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<h1>✉️ E-Mail Betreffzeilen Generator</h1>
+<p>Kostenlos. 50+ Formeln. Sofort einsetzbar.</p>
+</header>
+
+<div class="tool">
+<h2 style="color:#d4a843;margin-bottom:20px;">Deine Betreffzeile</h2>
+<label>Art der E-Mail</label>
+<select id="type">
+<option value="newsletter">Newsletter</option>
+<option value="sales">Verkauf</option>
+<option value="followup">Follow-up</option>
+<option value="event">Event / Webinar</option>
+<option value="welcome">Willkommens-E-Mail</option>
+</select>
+
+<label>Thema / Angebot</label>
+<input id="topic" value="KI-Automation">
+
+<label>Zielgruppe</label>
+<select id="audience">
+<option value="business">Geschäftskunden</option>
+<option value="consumers">Endverbraucher</option>
+<option value="freelancer">Freelancer</option>
+<option value="startup">Startups</option>
+</select>
+
+<button onclick="generate()">✉️ Betreffzeilen generieren</button>
+<div class="results" id="results"></div>
+</div>
+
+<div class="cta">
+<h3>📬 Fertige E-Mail-Vorlagen + Sequenzen</h3>
+<p>10 Newsletter-Vorlagen + 5 automatisierte E-Mail-Sequenzen. Ab 9★ bei @Yesaryour_bot</p>
+<a class="btn" href="https://t.me/Yesaryour_bot">🤖 Jetzt holen</a>
+<a class="btn-sec" href="https://affirmationpositiv-sudo.github.io/science-apps/40projekte/">🛒 Shop</a>
+</div>
+
+<footer>
+<a href="../impressum/">Impressum</a> • <a href="../datenschutz/">Datenschutz</a><br>
+IKUNE – © 2026
+
+<div class="related">
+<h3>📚 Ähnliche Artikel</h3>
+<a href="../lead/guide.html">📄 IKUNE 7-Tage-KI-Startup-Formel – Dein kostenloser Guide</a>
+<a href="../prompt-generator/index.html">📄 IKUNE Prompt Generator — Premium Prompt Erstellung</a>
+<a href="seo-generator.html">📄 SEO Content Generator</a>
+
+<p class="tag">Mehr zum Thema – von IKUNE Verlag</p>
+</div>
+</footer>
+</div>
+
+<script>
+const formulas = {
+  newsletter: [
+    "{topic}: Deine {woe} Updates",
+    "Das musst du diese {woe} wissen: {topic}",
+    "🔴 {topic} – {grund}, warum es wichtig ist",
+    "{topic} für Anfänger: {vorteil}",
+  ],
+  sales: [
+    "{aktion} auf {topic} – nur {tage} Tage",
+    "Dein exklusiver Zugang zu {topic}",
+    "{grund}, warum {zielgruppe} auf {topic} setzen",
+    "Letzte Chance: {topic} zum Sonderpreis",
+  ],
+  followup: [
+    "Kurze Erinnerung zu {topic}",
+    "Hast du {topic} schon gesehen?",
+    "{vorteil} – verpasst du das?",
+    "Nochmal ich wegen {topic}",
+  ],
+  event: [
+    "📅 Nur noch {tage} Tage: {topic}",
+    "Deine Einladung zu {topic}",
+    "Du bist dabei? {topic} startet bald",
+    "Verpasst? Aufzeichnung von {topic}",
+  ],
+  welcome: [
+    "Willkommen bei {topic}! 🎉",
+    "Dein erster Schritt zu {vorteil}",
+    "{topic} – Los geht's!",
+    "Schön, dass du da bist: {topic}",
+  ],
+};
+
+const words = {
+  woe: ["Woche", "Monat", "Quartal"],
+  grund: ["5 Gründe", "3 Fakten", "Die Wahrheit"],
+  vorteil: ["Mehr Umsatz", "Weniger Arbeit", "Bessere Ergebnisse", "Zeit sparen"],
+  aktion: ["50% Rabatt", "Kostenloser Test", "Exklusives Angebot"],
+  tage: ["3", "5", "7", "14"],
+  zielgruppe: ["Unternehmer", "Freelancer", "Teams", "Gründer"],
+};
+
+function random(arr) { return arr[Math.floor(Math.random() * arr.length)] }
+
+function generate() {
+  const type = document.getElementById('type').value;
+  const topic = document.getElementById('topic').value;
+  const audience = document.getElementById('audience').value;
+  const form = formulas[type];
+  
+  let html = '<h3 style="color:#d4a843;margin:15px 0;">📨 5 Betreffzeilen für dich:</h3>';
+  for (let i = 0; i < 5; i++) {
+    let line = form[i % form.length]
+      .replace('{topic}', topic)
+      .replace('{zielgruppe}', audience === 'business' ? 'Unternehmer' : audience === 'consumers' ? 'Kunden' : audience === 'freelancer' ? 'Freelancer' : 'Startups')
+      .replace('{woe}', random(words.woe))
+      .replace('{grund}', random(words.grund))
+      .replace('{vorteil}', random(words.vorteil))
+      .replace('{aktion}', random(words.aktion))
+      .replace('{tage}', random(words.tage));
+    html += `<div class="result-item">✉️ ${line}</div>`;
+  }
+  
+  document.getElementById('results').innerHTML = html;
+  document.getElementById('results').style.display = 'block';
+}
+</script>
+</body>
+</html>
