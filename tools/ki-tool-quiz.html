@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KI-Tool-Empfehlungs-Quiz 2026 – Welches KI-Tool passt zu dir?</title>
+<meta name="description" content="Interaktives Quiz: Finde in 2 Minuten heraus, welche KI-Tools perfekt zu deinem Business passen. Personalisierte Empfehlungen für 2026. Kostenlos.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-tool-quiz.html">
+<meta property="og:title" content="KI-Tool-Empfehlungs-Quiz 2026 – Finde dein perfektes KI-Tool">
+<meta property="og:description" content="Beantworte 6 Fragen und erhalte personalisierte KI-Tool-Empfehlungen für dein Business. Welcher KI-Typ bist du?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/ki-tool-quiz.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="KI-Tool-Empfehlungs-Quiz 2026">
+<meta name="twitter:description" content="Finde in 2 Minuten dein perfektes KI-Tool. Personalisiertes Quiz mit direkten Empfehlungen.">
+<meta name="author" content="Licht und Schatten">
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;
+  background:#0a0a0f;
+  color:#e4e4e7;
+  line-height:1.6;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+a{color:#a78bfa;text-decoration:none;transition:color .2s}
+a:hover{color:#c4b5fd}
+
+/* ===== MAIN CONTAINER ===== */
+.container{
+  max-width:680px;
+  width:100%;
+  background:#111118;
+  border:1px solid #1e1e2a;
+  border-radius:20px;
+  padding:36px 32px;
+  position:relative;
+  overflow:hidden;
+}
+.container::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,#8b5cf6,#06b6d4,#10b981,#f59e0b,#8b5cf6);
+  background-size:200% 100%;
+  animation:shimmer 4s linear infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ===== HEADER ===== */
+.header{text-align:center;margin-bottom:28px}
+.header .badge{
+  display:inline-block;
+  background:rgba(139,92,246,.15);
+  color:#a78bfa;
+  font-size:.75rem;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  padding:5px 14px;
+  border-radius:20px;
+  margin-bottom:14px;
+  border:1px solid rgba(139,92,246,.25);
+}
+.header h1{
+  font-size:1.75rem;
+  font-weight:700;
+  background:linear-gradient(135deg,#c4b5fd,#8b5cf6,#06b6d4);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px;
+  line-height:1.3;
+}
+.header p{color:#71717a;font-size:.9rem;max-width:480px;margin:0 auto}
+
+/* ===== STEAD PROGRESS ===== */
+.stepper{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-bottom:24px;
+}
+.stepper .dot{
+  width:32px;
+  height:4px;
+  border-radius:2px;
+  background:#27272a;
+  transition:all .35s ease;
+}
+.stepper .dot.active{background:#8b5cf6;box-shadow:0 0 10px rgba(139,92,246,.4)}
+.stepper .dot.done{background:#10b981}
+
+/* ===== QUIZ STEPS ===== */
+.step{display:none;animation:fadeSlide .35s ease}
+.step.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.step h2{font-size:1.15rem;color:#f4f4f5;text-align:center;margin-bottom:22px;font-weight:600;line-height:1.45}
+.step .emoji-intro{display:block;font-size:2rem;margin-bottom:8px}
+
+/* ===== OPTIONS ===== */
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.option{
+  background:#16161f;
+  border:2px solid #1e1e2a;
+  border-radius:12px;
+  padding:18px 14px;
+  cursor:pointer;
+  text-align:center;
+  transition:all .25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.option:hover{
+  border-color:#3a3a4e;
+  background:#1a1a26;
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(0,0,0,.3);
+}
+.option.selected{
+  border-color:#8b5cf6;
+  background:rgba(139,92,246,.1);
+  box-shadow:0 0 0 4px rgba(139,92,246,.08),0 6px 20px rgba(0,0,0,.4);
+}
+.option.selected::after{
+  content:'✓';
+  position:absolute;
+  top:8px;right:10px;
+  color:#8b5cf6;
+  font-weight:700;
+  font-size:.85rem;
+}
+.option .icon{font-size:2rem;display:block;margin-bottom:8px}
+.option .label{font-size:.9rem;color:#d4d4d8;font-weight:500}
+.option .desc{font-size:.72rem;color:#52525b;margin-top:5px;line-height:1.35}
+
+/* ===== BUTTONS ===== */
+.btn-row{display:flex;gap:10px}
+.btn{
+  flex:1;
+  padding:13px 20px;
+  border-radius:10px;
+  font-size:.95rem;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .25s ease;
+  border:none;
+  text-align:center;
+  letter-spacing:.01em;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#8b5cf6,#7c3aed);
+  color:#fff;
+  box-shadow:0 4px 16px rgba(139,92,246,.25);
+}
+.btn-primary:hover{box-shadow:0 6px 24px rgba(139,92,246,.4);transform:translateY(-1px)}
+.btn-primary:disabled{background:#27272a;color:#52525b;cursor:not-allowed;box-shadow:none;transform:none}
+.btn-secondary{
+  background:transparent;
+  color:#71717a;
+  border:1px solid #27272a;
+}
+.btn-secondary:hover{color:#a78bfa;border-color:#3a3a4e}
+
+/* ===== RESULTS ===== */
+#result-section{display:none;animation:fadeSlide .5s ease}
+#result-section.show{display:block}
+
+.result-hero{
+  text-align:center;
+  margin-bottom:24px;
+  padding:24px;
+  background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(6,182,212,.05));
+  border:1px solid rgba(139,92,246,.2);
+  border-radius:16px;
+}
+.result-hero .type-emoji{font-size:3.5rem;display:block;margin-bottom:8px}
+.result-hero .type-name{
+  font-size:1.6rem;
+  font-weight:800;
+  background:linear-gradient(135deg,#c4b5fd,#06b6d4);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.result-hero .type-desc{color:#a1a1aa;font-size:.9rem;margin-top:6px;line-height:1.5}
+
+/* ===== TOOL CARDS ===== */
+.tool-recs{margin-bottom:20px}
+.tool-recs h3{font-size:.95rem;color:#71717a;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;text-align:center}
+.tool-card{
+  background:#16161f;
+  border:1px solid #1e1e2a;
+  border-radius:12px;
+  padding:18px 20px;
+  margin-bottom:10px;
+  transition:all .25s ease;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.tool-card:hover{border-color:#8b5cf6;transform:translateX(4px)}
+.tool-card .rank{
+  font-size:1.4rem;
+  font-weight:800;
+  color:#8b5cf6;
+  min-width:36px;
+  text-align:center;
+}
+.tool-card .info{flex:1}
+.tool-card .info strong{color:#f4f4f5;font-size:.95rem}
+.tool-card .info p{color:#71717a;font-size:.8rem;margin-top:3px;line-height:1.4}
+.tool-card .match-badge{
+  background:rgba(16,185,129,.12);
+  color:#10b981;
+  font-size:.72rem;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:20px;
+  border:1px solid rgba(16,185,129,.2);
+  white-space:nowrap;
+}
+
+/* ===== CTA BLOCK ===== */
+.cta-block{
+  background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(139,92,246,.08));
+  border:1px solid rgba(245,158,11,.25);
+  border-radius:14px;
+  padding:22px 20px;
+  text-align:center;
+  margin:24px 0;
+  position:relative;
+  overflow:hidden;
+}
+.cta-block::before{
+  content:'';
+  position:absolute;
+  top:-50%;left:-50%;
+  width:200%;height:200%;
+  background:radial-gradient(circle,rgba(245,158,11,.06) 0%,transparent 60%);
+  animation:ctaGlow 3s ease-in-out infinite;
+}
+@keyframes ctaGlow{0%,100%{transform:translate(0,0)}50%{transform:translate(5%,5%)}}
+.cta-block .cta-emoji{font-size:1.5rem;margin-bottom:4px}
+.cta-block .cta-text{color:#f4f4f5;font-weight:700;font-size:1.05rem;margin-bottom:4px;position:relative}
+.cta-block .cta-sub{color:#a1a1aa;font-size:.82rem;margin-bottom:14px;position:relative}
+.cta-block .cta-btn{
+  display:inline-block;
+  background:linear-gradient(135deg,#f59e0b,#d97706);
+  color:#0a0a0f;
+  font-weight:700;
+  font-size:.95rem;
+  padding:12px 32px;
+  border-radius:10px;
+  text-decoration:none;
+  transition:all .25s ease;
+  position:relative;
+  box-shadow:0 4px 20px rgba(245,158,11,.3);
+}
+.cta-block .cta-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(245,158,11,.45);
+  color:#0a0a0f;
+}
+
+/* ===== SHARE ===== */
+.share-bar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:20px;
+}
+.share-btn{
+  padding:9px 16px;
+  border-radius:8px;
+  font-size:.8rem;
+  font-weight:600;
+  cursor:pointer;
+  border:1px solid #27272a;
+  background:#16161f;
+  color:#a1a1aa;
+  transition:all .2s ease;
+}
+.share-btn:hover{color:#f4f4f5;border-color:#8b5cf6;background:#1a1a26}
+.share-btn.copied{color:#10b981;border-color:#10b981;background:rgba(16,185,129,.08)}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;margin-top:24px}
+.footer a{color:#52525b;font-size:.82rem}
+.footer a:hover{color:#a78bfa}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:540px){
+  .container{padding:24px 18px;border-radius:14px}
+  .header h1{font-size:1.35rem}
+  .options{grid-template-columns:1fr}
+  .btn-row{flex-direction:column}
+  .result-hero .type-name{font-size:1.3rem}
+  .tool-card{flex-wrap:wrap}
+}
+
+/* ===== RELATED ===== */
+.related{
+  background:#0d0d14;
+  border:1px solid #1a1a2e;
+  border-radius:12px;
+  padding:22px 20px;
+  margin:24px 0;
+}
+.related h3{color:#d4a843;font-size:1rem;margin-bottom:14px}
+.related a{
+  display:block;
+  color:#71717a;
+  text-decoration:none;
+  padding:7px 10px;
+  border-radius:6px;
+  margin:4px 0;
+  transition:all .2s;
+  font-size:.85rem;
+}
+.related a:hover{background:#1a1a26;color:#d4a843;padding-left:16px}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="badge">⚡ KI-Quiz 2026</div>
+  <h1>Welches KI-Tool passt zu deinem Business?</h1>
+  <p>Beantworte 6 Fragen &mdash; wir matchen dich mit den perfekten KI-Tools für deinen Erfolg.</p>
+</div>
+
+<!-- PROGRESS STEPPER -->
+<div class="stepper" id="stepper">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<!-- QUIZ AREA -->
+<div id="quiz-area">
+  <div class="step active" data-step="1">
+    <h2><span class="emoji-intro">🎯</span>Wofür willst du KI hauptsächlich einsetzen?</h2>
+    <div class="options">
+      <div class="option" data-value="content" onclick="selectOption(this)"><span class="icon">✍️</span><span class="label">Content &amp; Texte</span><span class="desc">Blogs, Social Media, Copywriting, SEO-Texte</span></div>
+      <div class="option" data-value="visual" onclick="selectOption(this)"><span class="icon">🎨</span><span class="label">Bilder &amp; Design</span><span class="desc">Grafiken, Logos, Produktfotos, Kunst</span></div>
+      <div class="option" data-value="automation" onclick="selectOption(this)"><span class="icon">🤖</span><span class="label">Automatisierung</span><span class="desc">Workflows, E-Mails, Datenverarbeitung</span></div>
+      <div class="option" data-value="coding" onclick="selectOption(this)"><span class="icon">💻</span><span class="label">Code &amp; Entwicklung</span><span class="desc">Programmieren, Debugging, No-Code</span></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="2">
+    <h2><span class="emoji-intro">💰</span>Wie viel bist du bereit monatlich zu investieren?</h2>
+    <div class="options">
+      <div class="option" data-value="free" onclick="selectOption(this)"><span class="icon">🆓</span><span class="label">0 € &mdash; Nur Gratis-Tools</span><span class="desc">Ich starte mit kostenlosen Optionen</span></div>
+      <div class="option" data-value="low" onclick="selectOption(this)"><span class="icon">💵</span><span class="label">Bis 30 € / Monat</span><span class="desc">Kleines Budget für erste Investments</span></div>
+      <div class="option" data-value="mid" onclick="selectOption(this)"><span class="icon">💎</span><span class="label">30–100 € / Monat</span><span class="desc">Solides Setup für Profi-Tools</span></div>
+      <div class="option" data-value="high" onclick="selectOption(this)"><span class="icon">🚀</span><span class="label">100 €+ / Monat</span><span class="desc">Premium-Stack für maximalen Output</span></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="3">
+    <h2><span class="emoji-intro">🧠</span>Wie würdest du dein KI-Know-how beschreiben?</h2>
+    <div class="options">
+      <div class="option" data-value="beginner" onclick="selectOption(this)"><span class="icon">🌱</span><span class="label">Anfänger</span><span class="desc">Ich taste mich gerade an KI ran</span></div>
+      <div class="option" data-value="intermediate" onclick="selectOption(this)"><span class="icon">⚡</span><span class="label">Fortgeschritten</span><span class="desc">Nutze ChatGPT &amp; Co. regelmäßig</span></div>
+      <div class="option" data-value="pro" onclick="selectOption(this)"><span class="icon">🧙</span><span class="label">Profi / Power-User</span><span class="desc">Prompts, APIs, Workflows — alles dabei</span></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="4">
+    <h2><span class="emoji-intro">🏢</span>In welchem Bereich bist du tätig?</h2>
+    <div class="options">
+      <div class="option" data-value="solo" onclick="selectOption(this)"><span class="icon">🧑‍💻</span><span class="label">Solo-Selbstständig</span><span class="desc">Freelancer, Creator, Solopreneur</span></div>
+      <div class="option" data-value="small" onclick="selectOption(this)"><span class="icon">🏪</span><span class="label">Kleines Team / Agentur</span><span class="desc">2–10 Mitarbeiter, Dienstleister</span></div>
+      <div class="option" data-value="corp" onclick="selectOption(this)"><span class="icon">🏢</span><span class="label">Unternehmen / Corporate</span><span class="desc">Mittelstand, Konzern, Abteilungs-Lead</span></div>
+      <div class="option" data-value="side" onclick="selectOption(this)"><span class="icon">🌙</span><span class="label">Nebenprojekt / Sidehustle</span><span class="desc">Starte neben dem Hauptjob durch</span></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="5">
+    <h2><span class="emoji-intro">🎯</span>Was ist dein wichtigstes Ziel mit KI?</h2>
+    <div class="options">
+      <div class="option" data-value="save_time" onclick="selectOption(this)"><span class="icon">⏱️</span><span class="label">Zeit sparen</span><span class="desc">Prozesse automatisieren, effizienter arbeiten</span></div>
+      <div class="option" data-value="earn_more" onclick="selectOption(this)"><span class="icon">📈</span><span class="label">Mehr verdienen</span><span class="desc">Neue Einnahmequellen, skalieren</span></div>
+      <div class="option" data-value="quality" onclick="selectOption(this)"><span class="icon">✨</span><span class="label">Qualität steigern</span><span class="desc">Bessere Ergebnisse, professioneller Output</span></div>
+      <div class="option" data-value="learn" onclick="selectOption(this)"><span class="icon">📚</span><span class="label">Lernen &amp; Wachsen</span><span class="desc">KI-Kompetenz aufbauen für die Zukunft</span></div>
+    </div>
+  </div>
+
+  <div class="step" data-step="6">
+    <h2><span class="emoji-intro">🔮</span>Welches Ergebnis-Tool reizt dich am meisten?</h2>
+    <div class="options">
+      <div class="option" data-value="chat" onclick="selectOption(this)"><span class="icon">💬</span><span class="label">Chat-Assistent</span><span class="desc">All-in-One KI-Chat für Texte &amp; Ideen</span></div>
+      <div class="option" data-value="image" onclick="selectOption(this)"><span class="icon">🖼️</span><span class="label">Bildgenerator</span><span class="desc">Professionelle KI-Bilder auf Knopfdruck</span></div>
+      <div class="option" data-value="workflow" onclick="selectOption(this)"><span class="icon">⚙️</span><span class="label">Workflow-Automation</span><span class="desc">Multi-Tool-Ketten ohne Code bauen</span></div>
+      <div class="option" data-value="data" onclick="selectOption(this)"><span class="icon">📊</span><span class="label">Daten-Analyse-Tool</span><span class="desc">CSV, Reports, Insights in Sekunden</span></div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="btn-row">
+    <button class="btn btn-secondary" id="btn-back" onclick="prevStep()" style="display:none">← Zurück</button>
+    <button class="btn btn-primary" id="btn-next" onclick="nextStep()" disabled>Weiter →</button>
+  </div>
+</div>
+
+<!-- RESULT SECTION -->
+<div id="result-section">
+  <div class="result-hero" id="result-hero"></div>
+
+  <div class="tool-recs">
+    <h3>🎯 Deine Top-3 KI-Tool-Empfehlungen</h3>
+    <div id="tool-cards"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="cta-emoji">🔥</div>
+    <div class="cta-text">Bereit für den nächsten Schritt?</div>
+    <div class="cta-sub">Entdecke alle KI-Tools, Vorlagen &amp; Profi-Ressourcen in unserem Store.</div>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/store/" class="cta-btn" target="_blank" rel="noopener">
+      🚀 Zum KI-Tool Store
+    </a>
+  </div>
+
+  <!-- SHARE -->
+  <div class="share-bar">
+    <button class="share-btn" onclick="copyResultLink()" id="copy-btn">📋 Ergebnis-Link kopieren</button>
+    <button class="share-btn" onclick="shareTwitter()">𝕏 Tweet</button>
+    <button class="share-btn" onclick="shareWhatsApp()">📱 WhatsApp</button>
+  </div>
+
+  <button class="btn btn-secondary" onclick="restartQuiz()" style="width:100%;margin-top:8px">🔄 Quiz neu starten</button>
+
+  <!-- RELATED -->
+  <div class="related">
+    <h3>🔗 Mehr Tools für dein Business</h3>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/tools/startup-ideen-generator.html">🚀 Startup-Ideen-Generator – Finde deine Geschäftsidee</a>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/tools/passive-income-calculator.html">💰 Passive Income Calculator – Dein Einkommen berechnen</a>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/tools/seo-traffic-rechner.html">📈 SEO-Traffic-Rechner – Blog-Potential analysieren</a>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/tools/prompt-generator.html">✨ Prompt-Generator – Perfekte KI-Prompts erstellen</a>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/store/">🛒 KI-Tool Store – Alle Empfehlungen &amp; Deals</a>
+  </div>
+</div>
+
+<div class="footer">
+  <a href="https://affirmationpositiv-sudo.github.io/science-apps/tools/">← Zurück zur Tool-Übersicht</a>
+</div>
+
+</div><!-- /.container -->
+
+<script>
+// ===== STATE =====
+let currentStep = 1;
+const totalSteps = 6;
+const answers = {};
+
+// ===== TOOL DATABASE =====
+const toolDb = {
+  content: {
+    name: 'Content Creator',
+    emoji: '✍️',
+    desc: 'Du lebst von Worten. Perfekt abgestimmte Text-KI-Tools heben deine Content-Produktion auf das nächste Level — ob Blog, Social oder Copywriting.',
+    tools: [
+      {name:'ChatGPT / Claude', desc:'Universelle Text-KIs für alle Content-Formate', tags:['content','all'],match:98},
+      {name:'Jasper AI', desc:'Professionelles Copywriting-Tool für Marketing-Teams', tags:['content','mid','high'],match:94},
+      {name:'Writesonic', desc:'SEO-optimierte Langtexte & Landingpages', tags:['content','low','mid'],match:91},
+      {name:'Copy.ai', desc:'Schnelle Social-Media-Texte & Ads', tags:['content','free','low'],match:88},
+      {name:'Rytr', desc:'Budget-freundlicher Schreibassistent', tags:['content','free','low'],match:85}
+    ]
+  },
+  visual: {
+    name: 'Visual Artist',
+    emoji: '🎨',
+    desc: 'Deine Stärke liegt im Visuellen. KI-Bildtools geben dir kreative Superkräfte — für atemberaubende Grafiken in Minuten statt Stunden.',
+    tools: [
+      {name:'Midjourney', desc:'Beste KI-Bildqualität für künstlerische Projekte', tags:['visual','mid'],match:98},
+      {name:'DALL·E 3', desc:'Nahtlose ChatGPT-Integration für Bilder', tags:['visual','low','mid'],match:95},
+      {name:'Canva AI', desc:'All-in-One Design-Plattform mit KI-Features', tags:['visual','free','low'],match:92},
+      {name:'Leonardo.ai', desc:'Game-Assets & professionelle KI-Bilder', tags:['visual','free','low'],match:89},
+      {name:'Adobe Firefly', desc:'KI in Photoshop & Illustrator integriert', tags:['visual','mid','high'],match:86}
+    ]
+  },
+  automation: {
+    name: 'Automation Architect',
+    emoji: '🤖',
+    desc: 'Du denkst in Prozessen. No-Code-Automation-Tools lassen dich Workflows bauen, die früher ein Entwicklerteam gebraucht hätten.',
+    tools: [
+      {name:'Make (Integromat)', desc:'Visueller Workflow-Builder mit 2000+ Apps', tags:['automation','free','low'],match:98},
+      {name:'Zapier', desc:'Der Klassiker — 7000+ App-Integrationen', tags:['automation','low','mid'],match:95},
+      {name:'n8n', desc:'Open-Source-Alternative, self-hosted möglich', tags:['automation','free','coding'],match:92},
+      {name:'Relevance AI', desc:'KI-Agenten ohne Code bauen & deployen', tags:['automation','low','mid'],match:89},
+      {name:'Bardeen', desc:'Browser-Automation mit KI-Unterstützung', tags:['automation','free','low'],match:86}
+    ]
+  },
+  coding: {
+    name: 'Code Wizard',
+    emoji: '💻',
+    desc: 'Du sprichst die Sprache der Maschinen. KI-Coding-Tools beschleunigen deine Entwicklung um Faktor 10 — vom Prototyp bis zum Deployment.',
+    tools: [
+      {name:'GitHub Copilot', desc:'Der Standard — KI-Pair-Programmer in deiner IDE', tags:['coding','low','mid'],match:98},
+      {name:'Cursor', desc:'KI-native IDE, die deinen ganzen Codebase kennt', tags:['coding','free','low'],match:96},
+      {name:'v0 by Vercel', desc:'UI-Komponenten per Prompt generieren', tags:['coding','free','low'],match:93},
+      {name:'Replit AI', desc:'Komplette Apps im Browser bauen & deployen', tags:['coding','free','low'],match:90},
+      {name:'Claude Code', desc:'Agentic Coding — Claude plant & schreibt selbstständig', tags:['coding','mid','high'],match:87}
+    ]
+  }
+};
+
+// Map answers to a primary category
+function determineCategory(){
+  const a = answers;
+  // Weight: Q1 (usage) strongest, Q6 confirms, Q4 (context) refines
+  let primary = a.q1 || 'content';
+
+  // If Q6 strongly diverges and is image/coding, override partially
+  if(a.q6 === 'image' && a.q1 !== 'visual') primary = 'visual';
+  if(a.q6 === 'workflow' && a.q1 === 'automation') primary = 'automation';
+  if(a.q6 === 'data' && a.q1 === 'automation') primary = 'automation';
+
+  return primary;
+}
+
+// Score tools against answers
+function scoreTools(category){
+  const baseTools = toolDb[category]?.tools || toolDb['content'].tools;
+  const scored = baseTools.map(t => {
+    let score = t.match;
+    // Budget alignment
+    const budget = answers.q2;
+    if(budget === 'free' && t.tags.includes('free')) score += 5;
+    if(budget === 'low' && (t.tags.includes('free') || t.tags.includes('low'))) score += 3;
+    if(budget === 'high' && t.tags.includes('high')) score += 5;
+    if(budget === 'free' && t.tags.includes('high')) score -= 10;
+    // Skill level
+    if(answers.q3 === 'beginner' && t.tags.includes('free')) score += 3;
+    if(answers.q3 === 'pro' && (t.tags.includes('mid') || t.tags.includes('high'))) score += 3;
+    return {...t, score:Math.min(100,score)};
+  });
+  return scored.sort((a,b) => b.score - a.score).slice(0,3);
+}
+
+// ===== NAVIGATION =====
+function selectOption(el){
+  const parent = el.parentElement;
+  parent.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('btn-next').disabled = false;
+}
+
+function getSelectedValue(stepEl){
+  const selected = stepEl.querySelector('.option.selected');
+  return selected ? selected.dataset.value : null;
+}
+
+function nextStep(){
+  const stepEl = document.querySelector(`.step[data-step="${currentStep}"]`);
+  const val = getSelectedValue(stepEl);
+  if(!val) return;
+  answers['q'+currentStep] = val;
+
+  if(currentStep === totalSteps){
+    showResults();
+    return;
+  }
+
+  // Mark current dot as done
+  const dots = document.querySelectorAll('#stepper .dot');
+  dots[currentStep-1].classList.remove('active');
+  dots[currentStep-1].classList.add('done');
+
+  // Hide current, show next
+  stepEl.classList.remove('active');
+  currentStep++;
+  document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+  dots[currentStep-1].classList.add('active');
+
+  // Update buttons
+  document.getElementById('btn-back').style.display = 'inline-block';
+  document.getElementById('btn-next').disabled = !getSelectedValue(document.querySelector(`.step[data-step="${currentStep}"]`));
+  if(currentStep === totalSteps){
+    document.getElementById('btn-next').textContent = '✨ Ergebnisse zeigen';
+  }
+}
+
+function prevStep(){
+  if(currentStep <= 1) return;
+
+  const dots = document.querySelectorAll('#stepper .dot');
+  dots[currentStep-1].classList.remove('active');
+  document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+
+  currentStep--;
+  document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+  dots[currentStep-1].classList.add('active');
+  dots[currentStep-1].classList.remove('done');
+
+  document.getElementById('btn-next').textContent = 'Weiter →';
+  document.getElementById('btn-next').disabled = !getSelectedValue(document.querySelector(`.step[data-step="${currentStep}"]`));
+  if(currentStep === 1) document.getElementById('btn-back').style.display = 'none';
+}
+
+// ===== RESULTS =====
+function showResults(){
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('stepper').style.display = 'none';
+
+  const category = determineCategory();
+  const profile = toolDb[category];
+  const topTools = scoreTools(category);
+
+  // Hero
+  document.getElementById('result-hero').innerHTML = `
+    <span class="type-emoji">${profile.emoji}</span>
+    <div class="type-name">${profile.name}</div>
+    <p class="type-desc">${profile.desc}</p>
+  `;
+
+  // Tool cards
+  let cardsHtml = '';
+  topTools.forEach((t,i) => {
+    cardsHtml += `
+      <div class="tool-card">
+        <div class="rank">#${i+1}</div>
+        <div class="info">
+          <strong>${t.name}</strong>
+          <p>${t.desc}</p>
+        </div>
+        <div class="match-badge">${t.score}% Match</div>
+      </div>
+    `;
+  });
+  document.getElementById('tool-cards').innerHTML = cardsHtml;
+
+  // Show results
+  document.getElementById('result-section').classList.add('show');
+
+  // Build share URL
+  const shareParams = new URLSearchParams();
+  Object.entries(answers).forEach(([k,v]) => shareParams.set(k,v));
+  const shareUrl = `${window.location.origin}${window.location.pathname}?${shareParams.toString()}`;
+  window._shareUrl = shareUrl;
+  window.history.replaceState({}, '', shareUrl);
+
+  // Save to localStorage for analytics
+  try{
+    const completions = JSON.parse(localStorage.getItem('kitool_quiz_completions')||'[]');
+    completions.push({date:new Date().toISOString(),type:profile.name,category});
+    if(completions.length > 50) completions.shift();
+    localStorage.setItem('kitool_quiz_completions',JSON.stringify(completions));
+  }catch(e){}
+}
+
+function restartQuiz(){
+  currentStep = 1;
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  document.querySelectorAll('#stepper .dot').forEach((d,i) => {
+    d.classList.remove('active','done');
+    if(i===0) d.classList.add('active');
+  });
+  document.getElementById('quiz-area').style.display = '';
+  document.getElementById('stepper').style.display = '';
+  document.getElementById('result-section').classList.remove('show');
+  document.querySelector(`.step[data-step="1"]`).classList.add('active');
+  for(let i=2;i<=totalSteps;i++){
+    document.querySelector(`.step[data-step="${i}"]`).classList.remove('active');
+  }
+  document.getElementById('btn-back').style.display = 'none';
+  document.getElementById('btn-next').textContent = 'Weiter →';
+  document.getElementById('btn-next').disabled = true;
+  window.history.replaceState({}, '', window.location.pathname);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== SHARE =====
+function copyResultLink(){
+  const url = window._shareUrl || window.location.href;
+  navigator.clipboard.writeText(url).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Kopiert!';
+    btn.classList.add('copied');
+    setTimeout(() => {btn.textContent='📋 Ergebnis-Link kopieren';btn.classList.remove('copied')},2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ Kopiert!';
+    btn.classList.add('copied');
+    setTimeout(() => {btn.textContent='📋 Ergebnis-Link kopieren';btn.classList.remove('copied')},2000);
+  });
+}
+
+function shareTwitter(){
+  const url = window._shareUrl || window.location.href;
+  const typeName = toolDb[determineCategory()]?.name || 'KI-Typ';
+  const text = encodeURIComponent(`Ich bin "${typeName}" 🎯 Mach auch das KI-Tool-Quiz und finde dein perfektes Setup →`);
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${encodeURIComponent(url)}`,'_blank','noopener');
+}
+
+function shareWhatsApp(){
+  const url = window._shareUrl || window.location.href;
+  const typeName = toolDb[determineCategory()]?.name || 'KI-Typ';
+  const text = encodeURIComponent(`🤖 Ich bin "${typeName}" im KI-Tool-Quiz! Finde auch dein perfektes KI-Tool-Setup → ${url}`);
+  window.open(`https://wa.me/?text=${text}`,'_blank','noopener');
+}
+
+// ===== LOAD FROM URL PARAMS =====
+(function loadFromUrl(){
+  const params = new URLSearchParams(window.location.search);
+  if(!params.has('q1')) return; // No shared result to load
+  ['q1','q2','q3','q4','q5','q6'].forEach(k => {
+    if(params.has(k)) answers[k] = params.get(k);
+  });
+  if(Object.keys(answers).length === totalSteps){
+    // Skip to results
+    currentStep = totalSteps;
+    document.getElementById('quiz-area').style.display = 'none';
+    document.getElementById('stepper').style.display = 'none';
+    showResults();
+  }
+})();
+</script>
+
+</body>
+</html>
