@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licht und Schatten Verlag – eBooks & Ratgeber</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  
+  header { padding: 60px 0 40px; text-align: center; border-bottom: 1px solid #1a1a1a; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3em; font-weight: 700; color: #d4a843; letter-spacing: 2px; }
+  header p { color: #888; margin-top: 10px; font-size: 1.1em; }
+  
+  .hero { padding: 80px 0; text-align: center; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); }
+  .hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 2.2em; color: #fff; margin-bottom: 20px; }
+  .hero p { max-width: 600px; margin: 0 auto; color: #999; font-size: 1.1em; }
+  
+  .books { padding: 60px 0; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2em; color: #d4a843; text-align: center; margin-bottom: 50px; }
+  
+  .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+  
+  .book-card { background: #111; border: 1px solid #222; border-radius: 12px; overflow: hidden; transition: all .3s; }
+  .book-card:hover { border-color: #d4a843; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.4); }
+  
+  .book-cover { width: 100%; height: 380px; object-fit: cover; display: block; background: #1a1a1a; }
+  .book-info { padding: 20px; }
+  .book-info h3 { font-size: 1.15em; color: #fff; margin-bottom: 8px; font-weight: 600; }
+  .book-info p { color: #888; font-size: .9em; margin-bottom: 15px; }
+  .book-price { color: #d4a843; font-weight: 600; font-size: 1.1em; margin-bottom: 10px; }
+  .book-actions { display: flex; gap: 10px; }
+  .btn { padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: .9em; font-weight: 600; transition: all .3s; display: inline-block; }
+  .btn-primary { background: #d4a843; color: #0a0a0a; }
+  .btn-primary:hover { background: #e0b84f; }
+  .btn-secondary { background: #222; color: #e0e0e0; border: 1px solid #333; }
+  .btn-secondary:hover { background: #2a2a2a; }
+  
+  .coming-soon { background: #111; border: 1px solid #222; border-radius: 12px; padding: 40px; text-align: center; }
+  .coming-soon h3 { color: #d4a843; margin-bottom: 10px; }
+  .coming-soon p { color: #666; }
+  
+  .newsletter { padding: 60px 0; text-align: center; border-top: 1px solid #1a1a1a; }
+  .newsletter h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.8em; color: #fff; margin-bottom: 15px; }
+  .newsletter p { color: #888; margin-bottom: 25px; }
+  .newsletter-form { display: flex; max-width: 400px; margin: 0 auto; gap: 10px; }
+  .newsletter-form input { flex: 1; padding: 12px 15px; border-radius: 6px; border: 1px solid #333; background: #111; color: #fff; font-size: 1em; }
+  .newsletter-form button { padding: 12px 25px; border-radius: 6px; border: none; background: #d4a843; color: #0a0a0a; font-weight: 600; cursor: pointer; }
+  
+  footer { padding: 40px 0; text-align: center; border-top: 1px solid #1a1a1a; color: #555; font-size: .9em; }
+  
+  @media (max-width: 768px) {
+    header h1 { font-size: 2em; }
+    .book-grid { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+  }
+
+.related{background:#0d0d0d;border:1px solid #1a1a1a;border-radius:12px;padding:25px;margin:30px 0}
+.related h3{color:#d4a843;font-size:1.1em;margin-bottom:15px}
+.related a{display:block;color:#aaa;text-decoration:none;padding:8px 12px;border-radius:6px;margin:5px 0;transition:all .2s}
+.related a:hover{background:#1a1a1a;color:#d4a843;padding-left:18px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Licht &amp; Schatten Verlag</h1>
+    <p>Praktische Ratgeber f&uuml;r ein besseres Leben – mit und ohne KI</p>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <h2>Dein Wissen. Dein Erfolg. Deine Zukunft.</h2>
+    <p>Hochwertige eBooks zu den Themen KI, Finanzen, Minimalismus, Studium und pers&ouml;nliche Entwicklung – praxisnah, ehrlich, umsetzbar.</p>
+    <p style="margin-top:20px;">
+      <a class="btn btn-primary" href="skills/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#d4a843;color:#0a0a0a;font-weight:600;margin-right:10px;">🤖 KI-Skills kaufen</a>
+      <a class="btn btn-secondary" href="40projekte/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#1a3d1a;color:#4ade80;border:1px solid #22c55e;font-weight:600;margin-right:10px;">🛒 40 Geldquellen Shop</a>
+      <a class="btn btn-secondary" href="coach/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#222;color:#e0e0e0;border:1px solid #333;font-weight:600;">🎯 Coaching</a>
+      <a class="btn btn-secondary" href="bestellen/" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;background:#222;color:#e0e0e0;border:1px solid #333;font-weight:600;margin-top:10px;">🛒 Bestellen</a>
+    </p>
+    <p style="margin-top:10px;color:#888;">
+      📱 Telegram: @Yesaryour_bot | 💳 PayPal: affirmation.positiv@gmail.com
+    </p>
+  </div>
+</section>
+
+<section class="books">
+  <div class="container">
+    <h2 class="section-title">Unsere B&uuml;cher</h2>
+    <div class="book-grid" id="bookGrid">
+      <!-- Books injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="container">
+    <h2>Bleib auf dem Laufenden</h2>
+    <p>Erhalte kostenlose Tipps, neue Buchank&uuml;ndigungen und exklusive Rabatte.</p>
+    <form class="newsletter-form" action="mailto:affirmation.positiv@gmail.com" method="post" enctype="text/plain">
+      <input type="email" placeholder="Deine E-Mail-Adresse" required>
+      <button type="submit">Abonnieren</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 Licht und Schatten Verlag. Alle Rechte vorbehalten.</p>
+    <p style="margin-top: 5px;">Kontakt: affirmation.positiv@gmail.com</p>
+  </div>
+
+<div class="related">
+<h3>📚 Ähnliche Artikel</h3>
+<a href="bestellen/index.html">📄 Bestellung – Licht & Schatten Verlag</a>
+<a href="affiliate/index.html">📄 Affiliate-Shops – Licht & Schatten Verlag</a>
+<a href="products/index.html">📄 Digitale Produkte – Licht & Schatten Verlag</a>
+
+<p class="tag">Mehr zum Thema – von IKUNE Verlag</p>
+</div>
+</footer>
+
+<script>
+const books = [
+  {
+    title: 'Passives Einkommen mit KI 2026',
+    desc: 'Praktische Strategien f&uuml;r den Aufbau automatisierter Einkommensquellen mit K&uuml;nstlicher Intelligenz.',
+    cover: 'KDP_Books/cover_Passives_Einkommen_mit_KI_2026.png',
+    docx: 'KDP_Books/Passives_Einkommen_mit_KI_2026.docx',
+    price: '9,99 €',
+    category: 'KI &amp; Geld'
+  },
+  {
+    title: 'KI-Tools f&uuml;r Anf&auml;nger 2026',
+    desc: 'Der praktische Einstieg in die Welt der K&uuml;nstlichen Intelligenz – von ChatGPT bis Bildgenerierung.',
+    cover: 'KDP_Books/cover_KI_Tools_fuer_Anfaenger_2026.png',
+    docx: 'KDP_Books/KI_Tools_fuer_Anfaenger_2026.docx',
+    price: '8,99 €',
+    category: 'KI &amp; Technik'
+  },
+  {
+    title: 'Duales Studium 2026',
+    desc: 'Der komplette Guide f&uuml;r Studium &amp; Karriere – von der Bewerbung bis zum Berufseinstieg.',
+    cover: 'KDP_Books/cover_Duales_Studium_2026.png',
+    docx: 'KDP_Books/Duales_Studium_2026.docx',
+    price: '9,99 €',
+    category: 'Karriere'
+  },
+  {
+    title: 'Steuererkl&auml;rung 2026',
+    desc: 'F&uuml;r Freiberufler und Selbstst&auml;ndige – Schritt f&uuml;r Schritt zu mehr R&uuml;ckerstattung.',
+    cover: 'KDP_Books/cover_Steuererklaerung_2026_Freiberufler.png',
+    docx: 'KDP_Books/Steuererklaerung_2026_Freiberufler.docx',
+    price: '9,99 €',
+    category: 'Finanzen'
+  },
+  {
+    title: 'Notvorrat f&uuml;r Familien 2026',
+    desc: '14 Tage Autarkie mit Kindern – inkl. vegetarischer &amp; veganer Optionen. Der praktische Notfall-Plan.',
+    cover: 'KDP_Books/cover_Notvorrat_fuer_Familien_2026.png',
+    docx: 'KDP_Books/Notvorrat_fuer_Familien_2026.docx',
+    price: '7,99 €',
+    category: 'Leben'
+  },
+  {
+    title: 'Krypto f&uuml;r Anf&auml;nger 2026',
+    desc: 'Bitcoin, Ethereum, Altcoins &amp; KI-Trading verst&auml;ndlich erkl&auml;rt. Der sichere Einstieg.',
+    cover: 'KDP_Books/cover_notvorrat_fuer_familien_2026.png',
+    docx: 'KDP_Books/Krypto_fuer_Anfaenger_2026.docx',
+    price: '8,99 €',
+    category: 'Finanzen'
+  },
+  {
+    title: 'KI-Kunst 2026',
+    desc: 'Midjourney, DALL-E und Stable Diffusion – KI-Bilder erstellen und erfolgreich verkaufen.',
+    cover: 'KDP_Books/cover_KI_Tools_fuer_Anfaenger_2026.png',
+    docx: 'KDP_Books/ki_kunst_2026.docx',
+    price: '8,99 €',
+    category: 'KI &amp; Kreativ'
+  },
+  {
+    title: 'Passive Income That Actually Works',
+    desc: 'Real strategies. No scams. 2026 edition for the US market. AI content, print-on-demand, affiliate marketing.',
+    cover: 'KDP_Books/cover_Passive_Income_That_Works.png',
+    docx: 'KDP_Books/Passive_Income_That_Works_2026.docx',
+    price: '$9.99',
+    category: '🇺🇸 US Market'
+  },
+  {
+    title: 'Kosten senken in der Schweiz 2026',
+    desc: '500 CHF mehr im Monat. Miete, Krankenkasse, Steuern, Nebenverdienst – der Schweizer Ratgeber.',
+    cover: 'KDP_Books/cover_Kosten_senken_Schweiz.png',
+    docx: 'KDP_Books/Kosten_senken_Schweiz_2026.docx',
+    price: '9,90 CHF',
+    category: '🇨🇭 Schweiz'
+  },
+  {
+    title: 'ChatGPT für Handwerker 2026',
+    desc: 'Rechnungen, Angebote und Kundenkommunikation mit KI – der Praxisleitfaden.',
+    cover: 'KDP_Books/cover_ChatGPT_fuer_Handwerker_2026.png',
+    docx: 'KDP_Books/ChatGPT_fuer_Handwerker_2026.docx',
+    price: '8,99 €',
+    category: 'KI &amp; Handwerk'
+  },
+  {
+    title: 'AI Tools for Beginners 2026',
+    desc: 'Master ChatGPT, prompts, and AI productivity. The complete beginner-friendly guide to AI tools.',
+    cover: 'KDP_Books/cover_AI_Tools_for_Beginners.png',
+    docx: 'KDP_Books/AI_Tools_for_Beginners_2026.docx',
+    price: '$9.99',
+    category: '🇺🇸 US / Technology'
+  },
+  {
+    title: 'Minimalism for Men 2026',
+    desc: 'Less stuff. More life. The practical guide to decluttering your space, finances, and mind.',
+    cover: 'KDP_Books/cover_Minimalism_for_Men.png',
+    docx: 'KDP_Books/Minimalism_for_Men_2026.docx',
+    price: '$9.99',
+    category: '🇺🇸 US / Lifestyle'
+  },
+  {
+    title: 'Crypto for Beginners 2026',
+    desc: 'Bitcoin, Ethereum, and AI trading explained clearly. Start your crypto journey safely.',
+    cover: 'KDP_Books/cover_Crypto_for_Beginners.png',
+    docx: 'KDP_Books/Crypto_for_Beginners_2026.docx',
+    price: '$9.99',
+    category: '🇺🇸 US / Finance'
+  },
+  {
+    title: 'Digital Products for Passive Income',
+    desc: 'Create and sell digital products on Gumroad, Etsy, and your own site. Automate with AI.',
+    cover: 'KDP_Books/cover_Digital_Products_Passive_Income.png',
+    docx: 'KDP_Books/Digital_Products_Passive_Income_2026.docx',
+    price: '$9.99',
+    category: '🇺🇸 US / Business'
+  },
+  {
+    title: 'The No-Code AI Business 2026',
+    desc: 'Build an AI-powered business without coding. Chatbots, content agencies, and lead generation.',
+    cover: 'KDP_Books/cover_No_Code_AI_Business.png',
+    docx: 'KDP_Books/No_Code_AI_Business_2026.docx',
+    price: '$9.99',
+    category: '🇺🇸 US / Technology'
+  }
+];
+const grid = document.getElementById('bookGrid');
+books.forEach(b => {
+  const card = document.createElement('div');
+  card.className = 'book-card';
+  card.innerHTML = `
+    <img class="book-cover" src="${b.cover}" alt="${b.title}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22280%22 height=%22380%22><rect fill=%22%231a1a1a%22 width=%22280%22 height=%22380%22/><text x=%22140%22 y=%22190%22 text-anchor=%22middle%22 fill=%22%23d4a843%22 font-size=%2220%22 font-family=%22serif%22>${b.title}</text></svg>'">
+    <div class="book-info">
+      <div style="color:#666;font-size:.8em;margin-bottom:5px">${b.category}</div>
+      <h3>${b.title}</h3>
+      <p>${b.desc}</p>
+      <div class="book-price">${b.price}</div>
+      <div class="book-actions">
+        <a class="btn btn-primary" href="#" onclick="alert('Bald bei Amazon KDP verfuegbar!')">Jetzt kaufen</a>
+        <a class="btn btn-secondary" href="${b.docx}" download>PDF lesen</a>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+
+</body>
+</html>

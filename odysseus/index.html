@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Odysseus AI — Dein selbstgehosteter KI-Workspace | ChatGPT Alternative</title>
+<meta name="description" content="Odysseus ist dein selbstgehosteter KI-Workspace. Chatte mit KI-Modellen, automatisiere Aufgaben, verwalte E-Mails und mehr — alles auf deiner eigenen Hardware. Open Source, privacy-first.">
+<meta name="keywords" content="KI Workspace, ChatGPT Alternative, selbstgehostete KI, Open Source KI, AI Agent, lokale KI, Odysseus AI, Claude Alternative, OpenRouter, vLLM, Ollama">
+<meta property="og:title" content="Odysseus AI — Dein selbstgehosteter KI-Workspace">
+<meta property="og:description" content="Chat, Agent, Deep Research, Email, Kalender — alles lokal. Open Source. Privacy-first.">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/odysseus/">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Odysseus","applicationCategory":"AI Software","operatingSystem":"Windows, macOS, Linux","description":"Self-hosted AI workspace with chat, agents, research, email, and calendar.","url":"https://affirmationpositiv-sudo.github.io/science-apps/odysseus/","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:linear-gradient(135deg,#0a0a0f 0%,#111118 100%);color:#e2e8f0;line-height:1.6}
+.container{max-width:1100px;margin:0 auto;padding:60px 24px}
+.hero{text-align:center;margin-bottom:60px}
+.badge{display:inline-block;background:rgba(224,108,117,0.15);color:#e06c75;padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;margin-bottom:20px;border:1px solid rgba(224,108,117,0.3)}
+h1{font-size:clamp(36px,7vw,64px);background:linear-gradient(135deg,#e06c75 30%,#e5c07b 70%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:16px}
+.sub{font-size:20px;color:#94a3b8;max-width:700px;margin:0 auto 30px}
+.cta-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+.cta{display:inline-block;padding:16px 36px;border-radius:14px;font-weight:700;font-size:16px;text-decoration:none;transition:all .3s}
+.cta-primary{background:linear-gradient(135deg,#e06c75,#d55c66);color:#fff}
+.cta-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(224,108,117,0.3)}
+.cta-secondary{background:rgba(255,255,255,0.05);border:1px solid #334155;color:#e2e8f0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin:60px 0}
+.feat{background:#111118;border:1px solid #1e293b;border-radius:16px;padding:28px;transition:all .2s}
+.feat:hover{border-color:#334155;transform:translateY(-2px)}
+.feat .icon{font-size:32px;margin-bottom:12px}
+.feat h3{font-size:18px;color:#fff;margin-bottom:8px}
+.feat p{font-size:14px;color:#64748b}
+.comp-section{margin:80px 0}
+.comp-section h2{text-align:center;font-size:32px;margin-bottom:40px;color:#fff}
+.comp-table{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th,td{padding:12px 16px;text-align:left;border-bottom:1px solid #1e293b}
+th{color:#64748b;font-size:13px;font-weight:600;text-transform:uppercase}
+td{font-size:15px}
+.yes{color:#22c55e}
+.no{color:#ef4444}
+.install{margin:60px 0;background:#111118;border:1px solid #1e293b;border-radius:20px;padding:40px}
+.install h2{font-size:24px;color:#fff;margin-bottom:12px}
+.install p{color:#94a3b8;margin-bottom:20px}
+code{background:#0f0f17;padding:2px 8px;border-radius:6px;font-size:14px;color:#e06c75}
+pre{background:#0f0f17;padding:20px;border-radius:12px;overflow-x:auto;font-size:14px;color:#e2e8f0;border:1px solid #1e293b;line-height:1.8}
+footer{text-align:center;padding:40px;color:#475569;font-size:13px;border-top:1px solid #1e293b;margin-top:80px}
+footer a{color:#64748b}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="hero">
+  <div class="badge">🆓 OPEN SOURCE — KOSTENLOS</div>
+  <h1>Dein KI-Workspace. Deine Regeln.</h1>
+  <p class="sub">Odysseus ist der selbstgehostete KI-Workspace — Chat, Agenten, Deep Research, E-Mail und Kalender. Alles lokal. Privacy-first. Kein Abo.</p>
+  <div class="cta-group">
+    <a href="#install" class="cta cta-primary">🚀 Jetzt installieren</a>
+    <a href="https://github.com/pewdiepie-archdaemon/odysseus" class="cta cta-secondary">⭐ GitHub</a>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feat"><div class="icon">💬</div><h3>Chat mit jedem Modell</h3><p>OpenAI, OpenRouter, vLLM, Ollama, llama.cpp — ein Interface für alle. Du entscheidest, welches Modell läuft.</p></div>
+  <div class="feat"><div class="icon">🤖</div><h3>KI-Agenten</h3><p>Gib ihm Tools (Shell, Web, Dateien, MCP) und es erledigt ganze Aufgaben selbstständig.</p></div>
+  <div class="feat"><div class="icon">🔬</div><h3>Deep Research</h3><p>Mehrstufige Recherchen — Quellen sammeln, analysieren, zusammenfassen. Mit visuellem Report.</p></div>
+  <div class="feat"><div class="icon">📚</div><h3>Cookbook</h3><p>Scannt deine Hardware, empfiehlt passende Modelle. Download & Serve per Klick.</p></div>
+  <div class="feat"><div class="icon">📧</div><h3>E-Mail & Kalender</h3><p>IMAP/SMTP Inbox mit KI-Triage. CalDAV-Sync mit Apple, Nextcloud, Fastmail.</p></div>
+  <div class="feat"><div class="icon">📝</div><h3>Dokumente & Notizen</h3><p>Multi-Tab Editor mit KI-Assistenz. Notes mit Remindern und geplanten Tasks.</p></div>
+  <div class="feat"><div class="icon">📱</div><h3>Mobile-first</h3><p>Läuft auf deinem Handy wie auf dem Desktop. PWA — installierbar.</p></div>
+  <div class="feat"><div class="icon">🔒</div><h3>Privacy-first</h3><p>Alles lokal. Deine Daten verlassen nie deinen Rechner.</p></div>
+  <div class="feat"><div class="icon">🎨</div><h3>Theme-Editor</h3><p>Volle Kontrolle über Farben, Fonts, Blasen-Design. Mach es zu DEINEM Workspace.</p></div>
+</div>
+
+<div class="comp-section">
+  <h2>Odysseus vs. der Rest</h2>
+  <div class="comp-table">
+  <table>
+    <tr><th>Feature</th><th>Odysseus</th><th>ChatGPT</th><th>Claude</th></tr>
+    <tr><td>Self-hosted</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+    <tr><td>Open Source</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+    <tr><td>Alle Modelle</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+    <tr><td>Agenten</td><td class="yes">✅</td><td class="yes">✅</td><td class="yes">✅</td></tr>
+    <tr><td>E-Mail+Kalender</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+    <tr><td>Kostenlos</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+    <tr><td>Privacy (lokal)</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+    <tr><td>Kein Account nötig</td><td class="yes">✅</td><td class="no">❌</td><td class="no">❌</td></tr>
+  </table>
+  </div>
+</div>
+
+<div class="install" id="install">
+  <h2>🚀 LIVE DEMO</h2>
+  <p>Odysseus läuft live — probier's aus:</p>
+  <pre><code>https://dd574738589220.lhr.life</code></pre>
+  <p style="margin-top:12px;color:#94a3b8;font-size:14px">Login: <code>admin</code> / Passwort auf Anfrage</p>
+</div>
+
+<div class="install">
+  <h2>🖥️ Selbst hosten — in 3 Minuten</h2>
+  <p>Voraussetzung: Python 3.11+, Docker (optional)</p>
+  <pre><code>git clone https://github.com/pewdiepie-archdaemon/odysseus.git
+cd odysseus
+cp .env.example .env
+docker compose up -d --build</code></pre>
+  <p style="margin-top:16px">Oder nativ auf macOS:</p>
+  <pre><code>./start-macos.sh</code></pre>
+  <p style="margin-top:16px">Öffne <code>http://localhost:7860</code> — fertig.</p>
+</div>
+</div>
+<footer>
+  © 2026 Lux in Umbra · Odysseus ist Open Source · <a href="https://github.com/pewdiepie-archdaemon/odysseus">GitHub</a>
+</footer>
+</body>
+</html>

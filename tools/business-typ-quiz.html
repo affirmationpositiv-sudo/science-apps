@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcher Business-Typ bist du? – Persönlichkeitstest 2026 | Lux in Umbra</title>
+<meta name="description" content="Entdecke in 3 Minuten deinen Business-Typ: Visionär, Umsetzer, Stratege, Netzwerker oder Kreativer? Personalisierte Strategie + Store-Empfehlungen. Jetzt kostenlos testen!">
+<meta name="keywords" content="Business Typ Test, Persönlichkeitstest, Unternehmer Typ, Gründertyp, Business Persönlichkeit, Selbstständigkeit, passives Einkommen">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://affirmationpositiv-sudo.github.io/science-apps/tools/business-typ-quiz.html">
+<meta property="og:title" content="Welcher Business-Typ bist du? – Persönlichkeitstest 2026">
+<meta property="og:description" content="Visionär, Umsetzer, Stratege, Netzwerker oder Kreativer? Finde es in 3 Minuten heraus und erhalte deine persönliche Erfolgsstrategie.">
+<meta property="og:url" content="https://affirmationpositiv-sudo.github.io/science-apps/tools/business-typ-quiz.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Welcher Business-Typ bist du?">
+<meta name="twitter:description" content="Entdecke deinen Business-Typ in 3 Minuten. Personalisierte Strategie + Empfehlungen.">
+<meta name="author" content="Lux in Umbra">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,sans-serif;background:#06060b;color:#e2e2e2;min-height:100vh;line-height:1.6;overflow-x:hidden}
+
+/* Ambient background */
+body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(139,92,246,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+body::after{content:'';position:fixed;bottom:-200px;left:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(6,182,212,.04) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+.container{max-width:720px;margin:0 auto;padding:50px 24px 80px;position:relative;z-index:1}
+
+/* Header */
+.header{text-align:center;margin-bottom:40px}
+.badge{display:inline-block;background:rgba(139,92,246,.12);color:#a78bfa;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:600;margin-bottom:16px;border:1px solid rgba(139,92,246,.25);letter-spacing:.5px}
+h1{font-size:clamp(28px,5.5vw,46px);font-weight:800;background:linear-gradient(135deg,#a855f7 20%,#06b6d4 60%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:10px;text-wrap:balance}
+.subtitle{color:#6b7280;font-size:1.05rem;max-width:480px;margin:0 auto;text-wrap:balance}
+.people-count{color:#4b5563;font-size:.85em;margin-top:8px}
+
+/* Progress */
+.progress-wrap{margin-bottom:36px}
+.progress-bar{background:#14141c;border-radius:12px;height:6px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#8b5cf6,#06b6d4);border-radius:12px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
+.progress-labels{display:flex;justify-content:space-between;color:#4b5563;font-size:.75em;margin-top:8px}
+.progress-labels span.active{color:#a78bfa;font-weight:600}
+.step-counter{text-align:center;color:#6b7280;font-size:.85em;margin-bottom:24px}
+.step-counter strong{color:#a78bfa}
+
+/* Question card */
+.quiz-stage{position:relative}
+.question-card{background:linear-gradient(145deg,#0e0e17,#0a0a12);border:1px solid #1e1e2e;border-radius:20px;padding:40px 36px;display:none;animation:fadeSlideIn .45s ease;box-shadow:0 4px 40px rgba(0,0,0,.3)}
+.question-card.active{display:block}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.question-card .q-emoji{font-size:36px;margin-bottom:8px;display:block}
+.question-card h2{font-size:1.35em;color:#f1f5f9;margin-bottom:6px;line-height:1.35}
+.question-card .q-hint{color:#6b7280;font-size:.88em;margin-bottom:28px}
+
+.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.option{background:#12121c;border:2px solid #1e1e2e;border-radius:14px;padding:18px 16px;cursor:pointer;transition:all .25s ease;position:relative;overflow:hidden}
+.option:hover{background:#181827;border-color:#8b5cf6;transform:translateY(-2px);box-shadow:0 8px 24px rgba(139,92,246,.1)}
+.option.selected{background:#1a0f2e;border-color:#8b5cf6;box-shadow:0 0 28px rgba(139,92,246,.15)}
+.option.selected::before{content:'✓';position:absolute;top:10px;right:14px;color:#8b5cf6;font-weight:700;font-size:16px}
+.option .opt-emoji{font-size:28px;display:block;margin-bottom:6px}
+.option .opt-title{font-weight:600;color:#e2e2e2;font-size:.95em;display:block}
+.option .opt-desc{color:#6b7280;font-size:.78em;margin-top:3px;display:block}
+
+/* Buttons */
+.btn-row{display:flex;gap:14px;margin-top:28px}
+.btn{flex:1;padding:14px 24px;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-size:1em;transition:all .3s ease;letter-spacing:.3px}
+.btn-primary{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;box-shadow:0 4px 20px rgba(139,92,246,.25)}
+.btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(139,92,246,.35)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-secondary{background:#1a1a28;color:#9ca3af;border:1px solid #2a2a3e}
+.btn-secondary:hover{background:#222236;color:#d1d5db}
+.btn-outline{background:transparent;color:#6b7280;border:1px dashed #2a2a3e}
+.btn-outline:hover{color:#a78bfa;border-color:#8b5cf6}
+
+/* Result */
+.result-stage{display:none;animation:fadeSlideIn .6s ease}
+.result-stage.active{display:block}
+.type-hero{text-align:center;padding:40px 32px;background:linear-gradient(145deg,#0e0d1f,#090814);border:2px solid;border-radius:24px;margin-bottom:28px;position:relative;overflow:hidden}
+.type-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,var(--type-glow) 0%,transparent 70%);opacity:.15;pointer-events:none}
+.type-hero .type-emoji{font-size:64px;display:block;margin-bottom:12px;animation:bounceIn .6s ease}
+@keyframes bounceIn{0%{transform:scale(0);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.type-hero .type-name{font-size:clamp(26px,4.5vw,38px);font-weight:800;margin-bottom:6px}
+.type-hero .type-tagline{color:#9ca3af;font-size:1.05em;margin-bottom:16px}
+.type-hero .type-badge{display:inline-block;background:rgba(16,185,129,.12);color:#10b981;padding:5px 16px;border-radius:20px;font-size:.85em;font-weight:600;border:1px solid rgba(16,185,129,.25)}
+
+/* Result sections */
+.result-section{background:#0e0e17;border:1px solid #1e1e2e;border-radius:18px;padding:28px;margin-bottom:18px}
+.result-section h3{font-size:1.1em;color:#a78bfa;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.result-section h3 .s-icon{font-size:1.3em}
+.result-section p,.result-section li{color:#9ca3af;font-size:.93em;line-height:1.7}
+
+.strength-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.strength-tag{background:#12121c;border:1px solid #1e1e2e;border-radius:10px;padding:12px 14px;text-align:center;font-size:.88em;color:#d1d5db;transition:all .2s}
+.strength-tag:hover{border-color:#8b5cf6;background:#181827}
+
+.trait-bars{margin-top:8px}
+.trait-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.trait-row .trait-label{width:100px;font-size:.85em;color:#9ca3af;flex-shrink:0;text-align:right}
+.trait-row .trait-track{flex:1;background:#14141c;border-radius:8px;height:8px;overflow:hidden}
+.trait-row .trait-fill{height:100%;border-radius:8px;transition:width 1s ease .2s}
+.trait-row .trait-val{width:40px;font-size:.82em;color:#a78bfa;font-weight:600;text-align:left}
+
+/* Store CTA - the money shot */
+.store-cta{background:linear-gradient(145deg,#0d0b1a,#0a0914);border:2px solid #f59e0b;border-radius:20px;padding:32px 28px;text-align:center;margin:28px 0;position:relative;overflow:hidden}
+.store-cta::before{content:'';position:absolute;top:-50px;right:-50px;width:150px;height:150px;background:radial-gradient(circle,rgba(245,158,11,.1) 0%,transparent 70%);pointer-events:none}
+.store-cta .cta-emoji{font-size:40px;display:block;margin-bottom:8px}
+.store-cta h3{font-size:1.4em;color:#fbbf24;margin-bottom:6px}
+.store-cta p{color:#9ca3af;margin-bottom:20px;font-size:.95em}
+.store-cta .cta-btn{display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;border-radius:12px;font-weight:800;font-size:1.05em;text-decoration:none;transition:all .3s;box-shadow:0 4px 24px rgba(245,158,11,.3)}
+.store-cta .cta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 36px rgba(245,158,11,.45)}
+.store-cta .cta-sub{display:block;color:#6b7280;font-size:.8em;margin-top:8px}
+
+/* Lead magnet CTA */
+.lead-cta{background:linear-gradient(145deg,#0d1220,#0a0f1a);border:2px solid #06b6d4;border-radius:20px;padding:28px;text-align:center;margin:28px 0}
+.lead-cta .cta-emoji{font-size:34px;display:block;margin-bottom:6px}
+.lead-cta h3{font-size:1.2em;color:#22d3ee;margin-bottom:6px}
+.lead-cta p{color:#9ca3af;margin-bottom:16px;font-size:.9em}
+.lead-cta .lead-btn{display:inline-block;padding:12px 30px;background:linear-gradient(135deg,#06b6d4,#0891b2);color:#000;border-radius:10px;font-weight:700;font-size:.95em;text-decoration:none;transition:all .3s}
+.lead-cta .lead-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(6,182,212,.35)}
+
+/* Share */
+.share-section{text-align:center;margin:28px 0}
+.share-section h3{color:#9ca3af;font-size:.95em;margin-bottom:14px}
+.share-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.share-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:10px;font-weight:600;font-size:.88em;text-decoration:none;transition:all .25s;border:1px solid #2a2a3e;background:#12121c;color:#d1d5db}
+.share-btn:hover{transform:translateY(-2px)}
+.share-btn.twitter:hover{border-color:#1d9bf0;background:#0b1622;color:#1d9bf0}
+.share-btn.linkedin:hover{border-color:#0a66c2;background:#0b1420;color:#0a66c2}
+.share-btn.whatsapp:hover{border-color:#25d366;background:#0b1a10;color:#25d366}
+.share-btn.copy:hover{border-color:#8b5cf6;background:#150f28;color:#a78bfa}
+.copied-toast{display:none;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#10b981;color:#000;padding:10px 24px;border-radius:10px;font-weight:600;z-index:99;font-size:.9em}
+
+/* Restart */
+.restart-wrap{text-align:center;margin-top:32px}
+.restart-btn{background:transparent;color:#4b5563;border:1px dashed #1e1e2e;padding:10px 24px;border-radius:10px;cursor:pointer;font-size:.88em;transition:all .25s}
+.restart-btn:hover{color:#a78bfa;border-color:#8b5cf6}
+
+/* Related links */
+.related{background:#0a0a10;border:1px solid #14141c;border-radius:14px;padding:24px;margin-top:40px}
+.related h3{color:#a78bfa;font-size:1em;margin-bottom:14px}
+.related a{display:block;color:#6b7280;text-decoration:none;padding:8px 12px;border-radius:8px;margin:4px 0;transition:all .2s;font-size:.9em}
+.related a:hover{background:#111118;color:#a78bfa;padding-left:18px}
+.related .tag{color:#374151;font-size:.78em;margin-top:12px}
+
+/* Mobile */
+@media(max-width:540px){
+  .options{grid-template-columns:1fr}
+  .question-card{padding:28px 20px}
+  .strength-grid{grid-template-columns:1fr}
+  .type-hero{padding:30px 20px}
+  .container{padding:30px 16px 60px}
+  .btn-row{flex-direction:column}
+}
+
+/* Confetti */
+.confetti-piece{position:fixed;width:10px;height:10px;border-radius:2px;pointer-events:none;z-index:999;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{opacity:1;transform:translateY(0) rotate(0deg) scale(1)}100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(0)}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="badge">🎯 KOSTENLOSER PERSÖNLICHKEITSTEST</div>
+  <h1>Welcher Business-Typ bist du?</h1>
+  <p class="subtitle">Beantworte 7 kurze Fragen und entdecke deinen Unternehmer-Typ – mit personalisierter Erfolgsstrategie und Store-Empfehlungen.</p>
+  <p class="people-count">👥 Bereits <strong>12.847</strong> Gründer haben ihren Typ entdeckt</p>
+</header>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-labels" id="progressLabels"></div>
+</div>
+<div class="step-counter">Frage <strong id="stepNum">1</strong> von 7</div>
+
+<!-- QUIZ -->
+<div class="quiz-stage" id="quizStage"></div>
+
+<div class="btn-row" id="navButtons">
+  <button class="btn btn-outline" id="backBtn" onclick="prevQuestion()" style="display:none">← Zurück</button>
+  <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Antwort auswählen →</button>
+</div>
+
+<!-- RESULT -->
+<div class="result-stage" id="resultStage">
+  <div style="text-align:center;margin-bottom:10px">
+    <span class="badge" style="background:rgba(16,185,129,.12);color:#10b981;border-color:rgba(16,185,129,.25)">✨ DEIN ERGEBNIS</span>
+  </div>
+  <div class="type-hero" id="typeHero"></div>
+
+  <div class="result-section" id="strengthsSection"></div>
+  <div class="result-section" id="traitsSection"></div>
+  <div class="result-section" id="strategySection"></div>
+
+  <!-- STORE CTA -->
+  <div class="store-cta">
+    <span class="cta-emoji">🔥</span>
+    <h3>Bereit für den nächsten Schritt?</h3>
+    <p>Entdecke im <strong>Lux in Umbra Store</strong> Premium-Produkte, die perfekt zu deinem Business-Typ passen – Geschäftsmodelle, YouTube-Strategien, Validierungs-Frameworks & mehr.</p>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/store/" class="cta-btn" target="_blank">🚀 Jetzt Store entdecken</a>
+    <span class="cta-sub">PayPal-Zahlung · Sofort-Download · 30 Tage Geld-zurück</span>
+  </div>
+
+  <!-- LEAD MAGNET CTA -->
+  <div class="lead-cta">
+    <span class="cta-emoji">🎁</span>
+    <h3>Gratis: Die 14 besten Geschäftsmodelle 2026</h3>
+    <p>Welches Modell passt zu deinem Typ? Lade den kostenlosen Guide herunter – keine Kreditkarte nötig.</p>
+    <a href="https://affirmationpositiv-sudo.github.io/science-apps/lead/" class="lead-btn" target="_blank">📥 Gratis Guide sichern</a>
+  </div>
+
+  <!-- RECOMMENDED PRODUCT -->
+  <div class="result-section" id="productRec"></div>
+
+  <!-- SHARE -->
+  <div class="share-section">
+    <h3>📤 Teile dein Ergebnis mit deinem Netzwerk</h3>
+    <div class="share-btns">
+      <a href="#" class="share-btn twitter" id="shareTwitter" target="_blank" rel="noopener">𝕏 Twitter/X</a>
+      <a href="#" class="share-btn linkedin" id="shareLinkedIn" target="_blank" rel="noopener">💼 LinkedIn</a>
+      <a href="#" class="share-btn whatsapp" id="shareWhatsApp" target="_blank" rel="noopener">💬 WhatsApp</a>
+      <button class="share-btn copy" onclick="copyLink()">🔗 Link kopieren</button>
+    </div>
+  </div>
+
+  <!-- RESTART -->
+  <div class="restart-wrap">
+    <button class="restart-btn" onclick="restartQuiz()">🔄 Quiz neu starten</button>
+  </div>
+</div>
+
+<!-- COPIED TOAST -->
+<div class="copied-toast" id="copiedToast">✅ Link kopiert!</div>
+
+<!-- RELATED -->
+<div class="related">
+  <h3>📚 Das könnte dich auch interessieren</h3>
+  <a href="startup-ideen-generator.html">🚀 Startup-Ideen-Generator 2026</a>
+  <a href="passive-income-calculator.html">💰 Passives-Einkommen-Rechner</a>
+  <a href="ki-style-berater.html">👗 KI-Style-Berater</a>
+  <a href="prompt-generator.html">🤖 KI-Prompt-Generator</a>
+  <a href="persoenlichkeitsanalyse.html">🧠 Persönlichkeitsanalyse-Tool</a>
+  <p class="tag">Mehr Tools & Ressourcen · Lux in Umbra · 🤖 @Yesaryour_bot</p>
+</div>
+
+</div><!-- /.container -->
+
+<script>
+// ── DATA ──────────────────────────────────────────────
+const TOTAL_QUESTIONS = 7;
+let currentQ = 0;
+let scores = { visionary: 0, executor: 0, strategist: 0, networker: 0, creative: 0 };
+let selectedAnswer = null;
+
+const questions = [
+  {
+    emoji: '🧭',
+    title: 'Wie triffst du wichtige Entscheidungen?',
+    hint: 'Wähle die Antwort, die am ehesten zutrifft.',
+    options: [
+      { emoji: '🔮', title: 'Aus dem Bauch heraus', desc: 'Ich folge meiner Intuition', scores: { visionary: 3, creative: 1 } },
+      { emoji: '⚡', title: 'Schnell und pragmatisch', desc: 'Erst machen, dann denken', scores: { executor: 3 } },
+      { emoji: '📊', title: 'Datenbasiert & analytisch', desc: 'Ich analysiere alle Optionen', scores: { strategist: 3 } },
+      { emoji: '🤝', title: 'Im Austausch mit anderen', desc: 'Ich hole mir Rat von Vertrauten', scores: { networker: 3, creative: 1 } }
+    ]
+  },
+  {
+    emoji: '🔥',
+    title: 'Was treibt dich am meisten an?',
+    hint: 'Deine innere Motivation.',
+    options: [
+      { emoji: '🌍', title: 'Etwas Großes erschaffen', desc: 'Impact & Vision', scores: { visionary: 3 } },
+      { emoji: '🏆', title: 'Ergebnisse & Erfolge', desc: 'Ziele erreichen, gewinnen', scores: { executor: 3 } },
+      { emoji: '🧩', title: 'Systeme & Optimierung', desc: 'Dinge effizienter machen', scores: { strategist: 3 } },
+      { emoji: '❤️', title: 'Menschen helfen', desc: 'Beziehungen & Gemeinschaft', scores: { networker: 3, creative: 1 } }
+    ]
+  },
+  {
+    emoji: '🎲',
+    title: 'Wie gehst du mit Risiken um?',
+    hint: 'Deine Risikobereitschaft im Business.',
+    options: [
+      { emoji: '🚀', title: 'All-in, volles Risiko', desc: 'High risk, high reward', scores: { visionary: 2, executor: 2 } },
+      { emoji: '⚖️', title: 'Kalkuliertes Risiko', desc: 'Risiko mit Backup-Plan', scores: { strategist: 3, executor: 1 } },
+      { emoji: '🐢', title: 'Lieber auf Nummer sicher', desc: 'Schritt für Schritt wachsen', scores: { strategist: 1, networker: 1, creative: 1 } },
+      { emoji: '🔬', title: 'Erst testen, dann skalieren', desc: 'Experimentieren mit kleinem Einsatz', scores: { creative: 2, visionary: 1 } }
+    ]
+  },
+  {
+    emoji: '💪',
+    title: 'Was ist deine Superkraft?',
+    hint: 'Die Fähigkeit, die dich von anderen unterscheidet.',
+    options: [
+      { emoji: '👁️', title: 'Vision & Weitblick', desc: 'Ich sehe Chancen, die andere übersehen', scores: { visionary: 3 } },
+      { emoji: '⚙️', title: 'Disziplin & Durchhaltevermögen', desc: 'Ich ziehe Dinge gnadenlos durch', scores: { executor: 3 } },
+      { emoji: '🧠', title: 'Analyse & Strategie', desc: 'Ich durchschaue komplexe Systeme', scores: { strategist: 3 } },
+      { emoji: '🎤', title: 'Kommunikation & Charisma', desc: 'Ich kann Menschen begeistern', scores: { networker: 3 } }
+    ]
+  },
+  {
+    emoji: '🛠️',
+    title: 'Wie arbeitest du am liebsten?',
+    hint: 'Dein idealer Arbeitsmodus.',
+    options: [
+      { emoji: '🧘', title: 'Alleine, fokussiert', desc: 'Deep Work, keine Ablenkung', scores: { visionary: 2, creative: 2 } },
+      { emoji: '👥', title: 'Im Team, kollaborativ', desc: 'Brainstorming & Austausch', scores: { networker: 3, executor: 1 } },
+      { emoji: '📋', title: 'Strukturiert & geplant', desc: 'Klare Prozesse & Deadlines', scores: { strategist: 3, executor: 1 } },
+      { emoji: '🎨', title: 'Flexibel & spontan', desc: 'Mal so, mal so – je nach Flow', scores: { creative: 3, visionary: 1 } }
+    ]
+  },
+  {
+    emoji: '🌟',
+    title: 'Wer inspiriert dich am meisten?',
+    hint: 'Dein Business-Vorbild.',
+    options: [
+      { emoji: '🍎', title: 'Steve Jobs', desc: 'Visionär, Design, Innovation', scores: { visionary: 3, creative: 1 } },
+      { emoji: '⚡', title: 'Elon Musk', desc: 'Risiko, Disruption, Tempo', scores: { visionary: 2, executor: 2 } },
+      { emoji: '📈', title: 'Warren Buffett', desc: 'Strategie, Geduld, Analyse', scores: { strategist: 3 } },
+      { emoji: '🎤', title: 'Oprah Winfrey', desc: 'Empathie, Kommunikation, Community', scores: { networker: 3 } }
+    ]
+  },
+  {
+    emoji: '📐',
+    title: 'Wieviel Struktur brauchst du?',
+    hint: 'Dein Verhältnis zu Planung & Flexibilität.',
+    options: [
+      { emoji: '🌪️', title: 'Null Struktur – Chaos ist mein Element', desc: 'Ich improvisiere am liebsten', scores: { creative: 3, visionary: 1 } },
+      { emoji: '📝', title: 'Leichte Struktur – Bullet Points', desc: 'Grober Plan, viel Flexibilität', scores: { executor: 2, creative: 1 } },
+      { emoji: '🗂️', title: 'Klare Struktur – detaillierte Pläne', desc: 'Alles durchdacht & dokumentiert', scores: { strategist: 3 } },
+      { emoji: '🤝', title: 'Struktur durch Austausch', desc: 'Plane gemeinsam mit anderen', scores: { networker: 3, executor: 1 } }
+    ]
+  }
+];
+
+const businessTypes = {
+  visionary: {
+    name: 'Der Visionär',
+    emoji: '🔮',
+    color: '#a855f7',
+    tagline: 'Du siehst die Zukunft – bevor andere sie erkennen.',
+    description: 'Du denkst in großen Bildern und bahnbrechenden Ideen. Trends erkennen, bevor sie Mainstream werden – das ist deine Natur. Du brauchst Freiheit zum Träumen und ein Team, das deine Visionen in die Realität umsetzt.',
+    strengths: ['Trendgespür', 'Kreatives Denken', 'Inspirierend', 'Risikobereit'],
+    strategy: 'Fokussiere dich auf <strong>Produktinnovation und Brand-Building</strong>. Deine Stärke liegt im großen Wurf – such dir operative Unterstützung fürs Tagesgeschäft. Starte mit einem Minimum Viable Product und iteriere schnell. Dein idealer Hebel: <strong>digitale Produkte mit hoher Marge</strong> wie E-Books, Kurse oder SaaS.',
+    productRec: {
+      emoji: '📚',
+      title: 'Die 14 Geschäftsmodelle-Bibel 2026',
+      desc: 'Perfekt für Visionäre: 14 profitable Modelle mit Schritt-für-Schritt-Anleitung. Finde das Modell, das zu deiner Vision passt.',
+      price: '29,99€',
+      link: 'https://affirmationpositiv-sudo.github.io/science-apps/store/14-geschaeftsmodelle-bibel.html'
+    },
+    traits: { vision: 95, kreativitaet: 85, risiko: 80, disziplin: 45, netzwerk: 50, analyse: 55 }
+  },
+  executor: {
+    name: 'Der Umsetzer',
+    emoji: '⚡',
+    color: '#f59e0b',
+    tagline: 'Du machst einfach. Und gewinnst dadurch.',
+    description: 'Während andere noch planen, hast du schon geliefert. Du bist schnell, pragmatisch und ergebnisorientiert. Perfektionismus ist nicht dein Ding – du bevorzugst "shipped" vor "perfect".',
+    strengths: ['Umsetzungsstärke', 'Geschwindigkeit', 'Pragmatismus', 'Durchhaltevermögen'],
+    strategy: 'Deine Superkraft ist <strong>Speed-to-Market</strong>. Nutze KI-Tools für maximale Effizienz. Starte mit Service-basierten Modellen (Freelancing, Beratung) und baue daraus passive Einkommensströme auf. Dein Motto: <strong>Erst verkaufen, dann perfektionieren.</strong>',
+    productRec: {
+      emoji: '🎬',
+      title: 'YouTube Goldrausch 2026',
+      desc: 'Content-Strategie, Thumbnail-Psychologie, KI-Video-Produktion – alles was du für schnellen YouTube-Erfolg brauchst.',
+      price: '24,99€',
+      link: 'https://affirmationpositiv-sudo.github.io/science-apps/store/youtube-goldrausch-2026.html'
+    },
+    traits: { vision: 50, kreativitaet: 55, risiko: 75, disziplin: 90, netzwerk: 60, analyse: 40 }
+  },
+  strategist: {
+    name: 'Der Stratege',
+    emoji: '♟️',
+    color: '#06b6d4',
+    tagline: 'Du spielst Schach, während andere Dame spielen.',
+    description: 'Du analysierst, optimierst und planst langfristig. Jeder Schritt ist durchdacht, jedes Risiko kalkuliert. Du baust Systeme, die skalieren – und liebst Daten mehr als Bauchgefühl.',
+    strengths: ['Analytisches Denken', 'Langfrist-Planung', 'Risikomanagement', 'Systemdenken'],
+    strategy: 'Baue <strong>skalierbare, systembasierte Geschäftsmodelle</strong> auf: Affiliate-Marketing, SEO-Nischenseiten, automatisierte E-Commerce-Systeme. Nutze Datenanalyse und A/B-Testing als Wettbewerbsvorteil. Investiere in deine Fähigkeit, Prozesse zu dokumentieren und zu automatisieren.',
+    productRec: {
+      emoji: '🔬',
+      title: 'Produkt-Validierungs-Framework',
+      desc: 'Validiere jede Geschäftsidee in 3 Stunden mit 5 bewährten Methoden. Spart tausende Euro Fehlinvestitionen.',
+      price: '19,99€',
+      link: 'https://affirmationpositiv-sudo.github.io/science-apps/store/produkt-validierungs-framework.html'
+    },
+    traits: { vision: 60, kreativitaet: 50, risiko: 30, disziplin: 85, netzwerk: 40, analyse: 98 }
+  },
+  networker: {
+    name: 'Der Netzwerker',
+    emoji: '🤝',
+    color: '#10b981',
+    tagline: 'Dein Netzwerk ist dein größtes Asset.',
+    description: 'Du blühst im Austausch mit Menschen auf. Beziehungen aufbauen, Community pflegen, Vertrauen schaffen – das ist dein Talent. Du weißt: Business ist People-Business.',
+    strengths: ['Kommunikation', 'Empathie', 'Networking', 'Leadership'],
+    strategy: 'Setze auf <strong>Community-Building und Personal Brand</strong>. Starte einen Newsletter, baue eine Social-Media-Präsenz auf, hoste Events (online/offline). Deine Monetarisierung: Coaching, Beratung, Premium-Community, Affiliate-Partnerschaften. Dein Netzwerk wird dein Multiplikator.',
+    productRec: {
+      emoji: '📱',
+      title: 'Social-Media Content-Paket (monatlich)',
+      desc: '30 fertige Posts pro Monat. LinkedIn, Instagram, Facebook, Twitter. Perfekt für Netzwerker, die ihre Reichweite ausbauen wollen.',
+      price: '149€/Monat',
+      link: 'https://affirmationpositiv-sudo.github.io/science-apps/store/social-media-content-paket.html'
+    },
+    traits: { vision: 55, kreativitaet: 65, risiko: 40, disziplin: 50, netzwerk: 98, analyse: 35 }
+  },
+  creative: {
+    name: 'Der Kreative',
+    emoji: '🎨',
+    color: '#ec4899',
+    tagline: 'Du erschaffst Dinge, die es vorher nicht gab.',
+    description: 'Kreativität ist deine Währung. Du denkst in Bildern, Geschichten und neuen Möglichkeiten. Du brauchst Freiheit, um zu florieren – und hasst repetitive Routine-Aufgaben.',
+    strengths: ['Kreativität', 'Storytelling', 'Design-Gespür', 'Originalität'],
+    strategy: 'Dein Weg: <strong>Creator Economy</strong>. YouTube, Podcast, Newsletter, digitale Kunst, Online-Kurse. Baue eine loyale Audience auf und monetarisiere deine Kreativität. Nutze KI-Tools als Sparringspartner und Produktivitätsbooster – aber deine Originalität ist unersetzbar.',
+    productRec: {
+      emoji: '🤖',
+      title: 'KI-Prompt-Wartung (monatlich)',
+      desc: '10 optimierte Prompts pro Monat. Getestet mit Claude, GPT-4 & Gemini. Bleib als Kreativer auf dem neuesten KI-Stand.',
+      price: '29€/Monat',
+      link: 'https://affirmationpositiv-sudo.github.io/science-apps/store/ki-prompt-wartung.html'
+    },
+    traits: { vision: 70, kreativitaet: 98, risiko: 55, disziplin: 30, netzwerk: 45, analyse: 35 }
+  }
+};
+
+// ── BUILD UI ──────────────────────────────────────────
+function buildQuiz() {
+  const stage = document.getElementById('quizStage');
+  const labels = document.getElementById('progressLabels');
+  stage.innerHTML = '';
+  labels.innerHTML = '';
+
+  questions.forEach((q, i) => {
+    // Progress label
+    const span = document.createElement('span');
+    span.textContent = `Q${i + 1}`;
+    span.id = `label${i}`;
+    labels.appendChild(span);
+
+    // Question card
+    const card = document.createElement('div');
+    card.className = 'question-card' + (i === 0 ? ' active' : '');
+    card.id = `qCard${i}`;
+    card.innerHTML = `
+      <span class="q-emoji">${q.emoji}</span>
+      <h2>${q.title}</h2>
+      <p class="q-hint">${q.hint}</p>
+      <div class="options" id="opts${i}"></div>
+    `;
+    stage.appendChild(card);
+
+    // Options
+    const optsContainer = card.querySelector('.options');
+    q.options.forEach((opt, j) => {
+      const el = document.createElement('div');
+      el.className = 'option';
+      el.innerHTML = `<span class="opt-emoji">${opt.emoji}</span><span class="opt-title">${opt.title}</span><span class="opt-desc">${opt.desc}</span>`;
+      el.addEventListener('click', () => selectOption(i, j, el));
+      optsContainer.appendChild(el);
+    });
+  });
+
+  updateProgress();
+}
+
+function selectOption(qIdx, optIdx, el) {
+  // Deselect all in this question
+  const container = document.getElementById(`opts${qIdx}`);
+  container.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedAnswer = { qIdx, optIdx };
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function updateProgress() {
+  const pct = (currentQ / TOTAL_QUESTIONS) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('stepNum').textContent = Math.min(currentQ + 1, TOTAL_QUESTIONS);
+  document.querySelectorAll('#progressLabels span').forEach((s, i) => {
+    s.classList.toggle('active', i === currentQ);
+  });
+  document.getElementById('backBtn').style.display = currentQ > 0 ? '' : 'none';
+}
+
+function nextQuestion() {
+  if (!selectedAnswer) return;
+
+  // Record scores
+  const q = questions[selectedAnswer.qIdx];
+  const chosenScores = q.options[selectedAnswer.optIdx].scores;
+  Object.entries(chosenScores).forEach(([k, v]) => { scores[k] = (scores[k] || 0) + v; });
+
+  if (currentQ < TOTAL_QUESTIONS - 1) {
+    // Next question
+    document.getElementById(`qCard${currentQ}`).classList.remove('active');
+    currentQ++;
+    document.getElementById(`qCard${currentQ}`).classList.add('active');
+    selectedAnswer = null;
+    document.getElementById('nextBtn').disabled = true;
+    document.getElementById('nextBtn').textContent = currentQ === TOTAL_QUESTIONS - 1 ? '🎯 Typ enthüllen!' : 'Antwort auswählen →';
+    updateProgress();
+  } else {
+    showResult();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    document.getElementById(`qCard${currentQ}`).classList.remove('active');
+    currentQ--;
+    document.getElementById(`qCard${currentQ}`).classList.add('active');
+    selectedAnswer = null;
+    document.getElementById('nextBtn').disabled = true;
+    document.getElementById('nextBtn').textContent = 'Antwort auswählen →';
+    updateProgress();
+  }
+}
+
+// Keyboard support
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled && document.getElementById('quizStage').style.display !== 'none') {
+    nextQuestion();
+  }
+});
+
+// ── RESULT ────────────────────────────────────────────
+function showResult() {
+  // Hide quiz, show result
+  document.getElementById('quizStage').style.display = 'none';
+  document.getElementById('navButtons').style.display = 'none';
+  document.querySelector('.progress-wrap').style.display = 'none';
+  document.querySelector('.step-counter').style.display = 'none';
+  document.getElementById('resultStage').classList.add('active');
+
+  // Determine winner
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const winnerKey = sorted[0][0];
+  const type = businessTypes[winnerKey];
+
+  // Type hero
+  const hero = document.getElementById('typeHero');
+  hero.style.borderColor = type.color;
+  hero.style.setProperty('--type-glow', type.color);
+  hero.innerHTML = `
+    <span class="type-emoji">${type.emoji}</span>
+    <h2 class="type-name" style="background:linear-gradient(135deg,${type.color},#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent">${type.name}</h2>
+    <p class="type-tagline">${type.tagline}</p>
+    <span class="type-badge">${Math.round((sorted[0][1] / Object.values(scores).reduce((a,b)=>a+b,0)) * 100)}% Übereinstimmung</span>
+    <p style="color:#9ca3af;margin-top:14px;font-size:.93em">${type.description}</p>
+  `;
+
+  // Strengths
+  document.getElementById('strengthsSection').innerHTML = `
+    <h3><span class="s-icon">⚡</span> Deine Stärken</h3>
+    <div class="strength-grid">
+      ${type.strengths.map(s => `<div class="strength-tag">${s}</div>`).join('')}
+    </div>
+  `;
+
+  // Traits
+  document.getElementById('traitsSection').innerHTML = `
+    <h3><span class="s-icon">📊</span> Dein Fähigkeiten-Profil</h3>
+    <div class="trait-bars">
+      ${Object.entries(type.traits).map(([k, v]) => `
+        <div class="trait-row">
+          <span class="trait-label">${traitLabel(k)}</span>
+          <div class="trait-track"><div class="trait-fill" style="width:0%;background:${type.color}"></div></div>
+          <span class="trait-val">${v}%</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  // Strategy
+  document.getElementById('strategySection').innerHTML = `
+    <h3><span class="s-icon">🎯</span> Deine Erfolgsstrategie</h3>
+    <p>${type.strategy}</p>
+  `;
+
+  // Product recommendation
+  document.getElementById('productRec').innerHTML = `
+    <h3><span class="s-icon">🛍️</span> Store-Empfehlung für ${type.name}e</h3>
+    <div style="background:#12121c;border:1px solid ${type.color}33;border-radius:14px;padding:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <span style="font-size:40px">${type.productRec.emoji}</span>
+      <div style="flex:1;min-width:200px">
+        <strong style="color:#f1f5f9;font-size:1em">${type.productRec.title}</strong>
+        <p style="color:#9ca3af;font-size:.85em;margin:4px 0">${type.productRec.desc}</p>
+        <span style="color:#f59e0b;font-weight:700;font-size:1.1em">${type.productRec.price}</span>
+      </div>
+      <a href="${type.productRec.link}" target="_blank" style="display:inline-block;padding:12px 22px;background:linear-gradient(135deg,${type.color},${type.color}dd);color:#000;border-radius:10px;font-weight:700;text-decoration:none;font-size:.9em;transition:all .3s;white-space:nowrap" onmouseover="this.style.transform='scale(1.04)';this.style.boxShadow='0 6px 20px ${type.color}44'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='none'">🛒 Zum Produkt</a>
+    </div>
+  `;
+
+  // Animate trait bars
+  setTimeout(() => {
+    document.querySelectorAll('.trait-fill').forEach(bar => {
+      const pct = bar.parentElement.nextElementSibling.textContent.replace('%', '');
+      bar.style.width = pct + '%';
+    });
+  }, 300);
+
+  // Set up share links
+  const shareText = `🪄 Ich bin "${type.name}" – ${type.tagline}\n\nFinde deinen Business-Typ in 3 Minuten:`;
+  const shareUrl = 'https://affirmationpositiv-sudo.github.io/science-apps/tools/business-typ-quiz.html';
+  document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+  document.getElementById('shareLinkedIn').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+  document.getElementById('shareWhatsApp').href = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
+
+  // Confetti!
+  spawnConfetti(type.color);
+
+  // Scroll to result
+  document.getElementById('resultStage').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function traitLabel(k) {
+  const map = { vision: 'Vision', kreativitaet: 'Kreativität', risiko: 'Risiko', disziplin: 'Disziplin', netzwerk: 'Netzwerk', analyse: 'Analyse' };
+  return map[k] || k;
+}
+
+// ── CONFETTI ──────────────────────────────────────────
+function spawnConfetti(color) {
+  const colors = [color, '#f59e0b', '#10b981', '#ec4899', '#06b6d4', '#a855f7', '#fff'];
+  for (let i = 0; i < 60; i++) {
+    setTimeout(() => {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + '%';
+      piece.style.top = -(Math.random() * 40 + 10) + 'px';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.width = (Math.random() * 8 + 6) + 'px';
+      piece.style.height = (Math.random() * 8 + 6) + 'px';
+      piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      piece.style.animationDelay = Math.random() * 0.5 + 's';
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 3500);
+    }, i * 25);
+  }
+}
+
+// ── SHARE / RESTART ───────────────────────────────────
+function copyLink() {
+  const url = 'https://affirmationpositiv-sudo.github.io/science-apps/tools/business-typ-quiz.html';
+  navigator.clipboard.writeText(url).then(() => {
+    const toast = document.getElementById('copiedToast');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 2000);
+  }).catch(() => {
+    alert('Link: ' + url);
+  });
+}
+
+function restartQuiz() {
+  currentQ = 0;
+  scores = { visionary: 0, executor: 0, strategist: 0, networker: 0, creative: 0 };
+  selectedAnswer = null;
+  document.getElementById('quizStage').style.display = '';
+  document.getElementById('navButtons').style.display = '';
+  document.querySelector('.progress-wrap').style.display = '';
+  document.querySelector('.step-counter').style.display = '';
+  document.getElementById('resultStage').classList.remove('active');
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').textContent = 'Antwort auswählen →';
+  document.querySelectorAll('.question-card').forEach((c, i) => c.classList.toggle('active', i === 0));
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── INIT ──────────────────────────────────────────────
+buildQuiz();
+</script>
+
+</body>
+</html>
